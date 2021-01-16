@@ -16,7 +16,8 @@ export function Sidebar() {
         <input
           type="search"
           className="form-control"
-          placeholder="Search"
+          placeholder="Route or location"
+          aria-label="Route or location"
           accessKey="f"
           ref={inputRef}
         />
@@ -39,10 +40,10 @@ export function Sidebar() {
         href="?stop=ll"
         subtitle={
           <>
-            <span className="border rounded px-5" title="Intra Kona">
+            <span className="badge" title="Intra Kona">
               20
             </span>{' '}
-            <span className="border rounded px-5" title="Intra Hilo">
+            <span className="badge" title="Intra Hilo">
               150
             </span>
           </>
