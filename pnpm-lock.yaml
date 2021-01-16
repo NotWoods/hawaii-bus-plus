@@ -3,6 +3,7 @@ dependencies:
   halfmoon: 1.1.1
   react: 17.0.1
   react-dom: 17.0.1_react@17.0.1
+  react-hotkeys-hook: 3.0.3_react-dom@17.0.1+react@17.0.1
   spherical-geometry-js: 2.0.0
   tslib: 2.1.0
 devDependencies:
@@ -1992,6 +1993,10 @@ packages:
     dev: true
     resolution:
       integrity: sha512-f/wzC2QaWBs7t9IYqB4T3sR1xviIViXJRJTWBlx2Gf3g0Xi5vI7Yy4koXQ1c9OYDGHN9sBy1DQ2AB8fqZBWhUg==
+  /hotkeys-js/3.8.1:
+    dev: false
+    resolution:
+      integrity: sha512-YlhVQtyG9f1b7GhtzdhR0Pl+cImD1ZrKI6zYUa7QLd0zuThiL7RzZ+ANJyy7z+kmcCpNYBf5PjBa3CjiQ5PFpw==
   /http-cache-semantics/4.1.0:
     dev: true
     resolution:
@@ -3430,6 +3435,17 @@ packages:
       react: 17.0.1
     resolution:
       integrity: sha512-6eV150oJZ9U2t9svnsspTMrWNyHc6chX0KzDeAOXftRa8bNeOKTTfCJ7KorIwenkHd2xqVTBTCZd79yk/lx/Ug==
+  /react-hotkeys-hook/3.0.3_react-dom@17.0.1+react@17.0.1:
+    dependencies:
+      hotkeys-js: 3.8.1
+      react: 17.0.1
+      react-dom: 17.0.1_react@17.0.1
+    dev: false
+    peerDependencies:
+      react: '>=16.8.1'
+      react-dom: '>=16.8.1'
+    resolution:
+      integrity: sha512-kbnb820AUITXxK3qRHq612ivoNvMidIEaVAG7rUDuJMBTlJdSniJjjFl0jddL4iSKJK1d0Vqgn80uPW+spq6yQ==
   /react-refresh/0.9.0:
     dev: true
     engines:
@@ -4560,6 +4576,7 @@ specifiers:
   prettier: ^2.2.1
   react: ^17.0.0
   react-dom: ^17.0.0
+  react-hotkeys-hook: ^3.0.3
   spherical-geometry-js: ^2.0.0
   tslib: ^2.1.0
   type-fest: ^0.20.2

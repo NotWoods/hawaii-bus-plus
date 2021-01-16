@@ -18,6 +18,7 @@
     "halfmoon": "^1.1.1",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
+    "react-hotkeys-hook": "^3.0.3",
     "spherical-geometry-js": "^2.0.0",
     "tslib": "^2.1.0"
   },
