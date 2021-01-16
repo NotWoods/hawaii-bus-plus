@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import 'halfmoon/css/halfmoon-variables.css';
 import './index.css';
-import App from './App';
+import { App } from './App';
 
 ReactDOM.render(
   <React.StrictMode>

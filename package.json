@@ -10,7 +10,7 @@
     "build": "pnpm run tsc && vite build",
     "pretest": "pnpm run tsc",
     "test": "ava",
-    "prettier": "prettier \"*.{md,css,html}\" \"src/**/*.ts\" \"src/**/*.tsx\" \"!src/**/*.d.ts\" vite.config.ts **/tsconfig.json static/manifest.json",
+    "prettier": "prettier \"*.{md,html}\" \"src/**/*.{ts,tsx,css}\" \"!src/**/*.d.ts\" vite.config.ts **/tsconfig.json public/*.json",
     "format": "pnpm run prettier -- --write"
   },
   "dependencies": {
