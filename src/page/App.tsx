@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { StickyAlertsList, StickyAlertsProvider } from './alert/StickyAlerts';
 import { Navbar } from './Navbar';
-import { Sidebar } from './Sidebar';
+import { Sidebar } from './sidebar/Sidebar';
 
 export function App() {
   const [showSidebar, setShowSidebar] = useState(true);

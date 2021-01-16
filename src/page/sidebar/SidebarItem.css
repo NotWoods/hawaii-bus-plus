@@ -1,0 +1,21 @@
+.sidebar-link-multiline {
+  display: grid;
+  grid-template:
+    'icon title' auto
+    'icon subtitle' auto
+    / min-content auto;
+}
+.sidebar-icon {
+  grid-area: icon;
+}
+.sidebar-link-title,
+.sidebar-link-subtitle {
+  margin: 0;
+}
+.sidebar-link-title {
+  grid-area: title;
+}
+.sidebar-link-subtitle {
+  grid-area: subtitle;
+  font-size: 0.8em;
+}

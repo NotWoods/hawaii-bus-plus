@@ -1,7 +1,7 @@
 import React from 'react';
 import menuIcon from './icons/menu.svg';
-import searchIcon from './icons/search.svg';
 import darkModeIcon from './icons/dark_mode.svg';
+import './Navbar.css';
 
 interface Props {
   toggleSidebar(): void;
@@ -27,30 +27,6 @@ export function Navbar(props: Props) {
         <img src="/icon/transparent.png" alt="" />
         Hawaii Bus Plus
       </a>
-
-      <form className="form-inline ml-auto" action="..." method="...">
-        <div className="input-group">
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Search route or location"
-            required
-          />
-          <div className="input-group-append">
-            <button
-              className="btn"
-              type="submit"
-              title="Search route or location"
-            >
-              <img
-                className="icon"
-                src={searchIcon}
-                alt="Search route or location"
-              />
-            </button>
-          </div>
-        </div>
-      </form>
 
       <div className="navbar-content ml-auto">
         <button
