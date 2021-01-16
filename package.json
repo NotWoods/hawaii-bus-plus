@@ -1,0 +1,22 @@
+{
+  "name": "hawaii-bus-plus",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --build src && vite build"
+  },
+  "dependencies": {
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0",
+    "tslib": "^2.1.0"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^0.11.1",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "@vitejs/plugin-react-refresh": "^1.1.0",
+    "typescript": "^4.1.2",
+    "vite": "^2.0.0-beta.12"
+  }
+}
