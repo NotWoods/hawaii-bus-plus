@@ -9,7 +9,7 @@ test('zipFilesToObject', async (t) => {
   const input = new Map(
     Object.entries({
       routes: zip.file('routes.txt')!,
-    }),
+    })
   );
   const result = await zipFilesToObject(input);
 

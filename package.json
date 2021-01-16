@@ -1,15 +1,17 @@
 {
   "name": "hawaii-bus-plus",
-  "type": "module",
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "preapi": "tsc --build src",
+    "tsc": "tsc --build src",
+    "preapi": "pnpm run tsc",
     "api": "node src/lib/cli.js ../hawaii-gtfs/pipeline/11_zip/google_transit.zip ./",
     "dev": "vite",
-    "build": "tsc --build src && vite build",
-    "pretest": "tsc --build src",
-    "test": "ava"
+    "build": "pnpm run tsc && vite build",
+    "pretest": "pnpm run tsc",
+    "test": "ava",
+    "prettier": "prettier \"*.{md,css,html}\" \"src/**/*.ts\" \"src/**/*.tsx\" \"!src/**/*.d.ts\" vite.config.ts **/tsconfig.json static/manifest.json",
+    "format": "pnpm run prettier -- --write"
   },
   "dependencies": {
     "@react-google-maps/api": "^2.1.0",
@@ -34,5 +36,17 @@
     "type-fest": "^0.20.2",
     "typescript": "^4.1.2",
     "vite": "^2.0.0-beta.12"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "overrides": [
+      {
+        "files": "*.html",
+        "options": {
+          "printWidth": 120,
+          "tabWidth": 2
+        }
+      }
+    ]
   }
 }

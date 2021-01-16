@@ -34,7 +34,7 @@ export interface Calendar
     wednesday: boolean,
     thursday: boolean,
     friday: boolean,
-    saturday: boolean,
+    saturday: boolean
   ];
   readonly text_name: string;
 }

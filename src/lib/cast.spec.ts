@@ -7,7 +7,7 @@ import { cast } from './cast.js';
 async function* loadZipFile(path: string) {
   const zipData = await readFile(
     new URL('../../google_transit.zip', import.meta.url),
-    { encoding: null },
+    { encoding: null }
   );
   const zip = await JSZip.loadAsync(zipData);
 

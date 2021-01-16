@@ -13,12 +13,10 @@ function writeJson(path: string, json: unknown) {
  */
 export async function generateApi(
   gtfsZipPath: string,
-  apiFolder: string,
+  apiFolder: string
 ): Promise<void> {
   const zipData = await readFile(gtfsZipPath, { encoding: null });
   const api = await createApiData(zipData);
 
-  await Promise.all([
-    writeJson(join(apiFolder, 'api.json'), api),
-  ]);
+  await Promise.all([writeJson(join(apiFolder, 'api.json'), api)]);
 }

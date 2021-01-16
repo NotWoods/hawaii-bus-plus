@@ -27,14 +27,14 @@ export async function zipFilesToObject(zipFiles: Map<string, JSZipObject>) {
   const arrays = await from(zipFiles.values())
     .pipe(
       map((file) =>
-        file.nodeStream('nodebuffer').pipe(parse({ cast, columns: true })),
+        file.nodeStream('nodebuffer').pipe(parse({ cast, columns: true }))
       ),
-      map((stream) => toArray(stream)),
+      map((stream) => toArray(stream))
     )
     .pipe((source) => Promise.all(source));
 
   return zip(zipFiles.keys(), arrays).pipe((entry) =>
-    Object.fromEntries(entry),
+    Object.fromEntries(entry)
   );
 }
 
@@ -77,7 +77,7 @@ function makeCalendarTextName(days: Calendar['days']) {
  * @param gtfsZipData Buffer data for the GTFS zip file.
  */
 export async function createApiData(
-  gtfsZipData: Buffer | ArrayBuffer | Uint8Array,
+  gtfsZipData: Buffer | ArrayBuffer | Uint8Array
 ): Promise<ServerGTFSData> {
   const fileList = [
     'agency.txt',
@@ -102,7 +102,7 @@ export async function createApiData(
       filter((entry): entry is [string, JSZipObject] => {
         const [, file] = entry;
         return file != null;
-      }),
+      })
     )
     .pipe((source) => new Map(source));
 

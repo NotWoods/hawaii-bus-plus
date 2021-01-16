@@ -1,0 +1,27 @@
+{
+  "short_name": "Big Island Buses",
+  "name": "Big Island Buses",
+  "icons": [
+    {
+      "src": "/static/icon/transparent.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any"
+    },
+    {
+      "src": "/static/icon/maskable.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/static/icon/favicon.icon",
+      "type": "image/x-icon",
+      "sizes": "16x16 32x32 48x48"
+    }
+  ],
+  "start_url": ".",
+  "background_color": "#2d3039",
+  "display": "standalone",
+  "theme_color": "#4d74ab"
+}
