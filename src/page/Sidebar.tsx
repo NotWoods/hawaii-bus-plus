@@ -8,7 +8,7 @@ export function Sidebar() {
     <aside className="sidebar">
       <div className="sidebar-content">
         <input
-          type="text"
+          type="search"
           className="form-control"
           placeholder="Search"
           accessKey="f"
