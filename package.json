@@ -1,21 +1,37 @@
 {
   "name": "hawaii-bus-plus",
+  "type": "module",
   "private": true,
   "version": "0.0.0",
   "scripts": {
+    "preapi": "tsc --build src",
+    "api": "node src/lib/cli.js ../hawaii-gtfs/pipeline/11_zip/google_transit.zip ./",
     "dev": "vite",
-    "build": "tsc --build src && vite build"
+    "build": "tsc --build src && vite build",
+    "pretest": "tsc --build src",
+    "test": "ava"
   },
   "dependencies": {
+    "@react-google-maps/api": "^2.1.0",
+    "halfmoon": "^1.1.1",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
+    "spherical-geometry-js": "^2.0.0",
     "tslib": "^2.1.0"
   },
   "devDependencies": {
     "@11ty/eleventy": "^0.11.1",
+    "@types/node": "^14.14.21",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@vitejs/plugin-react-refresh": "^1.1.0",
+    "ava": "^3.15.0",
+    "csv-parse": "^4.14.2",
+    "eleventy-plugin-date": "^1.0.0",
+    "ix": "^4.0.0",
+    "jszip": "^3.5.0",
+    "prettier": "^2.2.1",
+    "type-fest": "^0.20.2",
     "typescript": "^4.1.2",
     "vite": "^2.0.0-beta.12"
   }
