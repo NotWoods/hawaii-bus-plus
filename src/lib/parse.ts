@@ -17,6 +17,7 @@ import type {
   StopTime,
   Trip,
   FeedInfo,
+  CsvTransfer,
 } from '../shared/gtfs-types.js';
 import { stringTime } from '../shared/utils/date.js';
 import { cast } from './cast.js';
@@ -88,6 +89,7 @@ export async function createApiData(
     'routes.txt',
     'stop_times.txt',
     'stops.txt',
+    'transfers.txt',
     'trips.txt',
   ];
 
@@ -113,7 +115,9 @@ export async function createApiData(
     calendar: CsvCalendar[];
     stop_times: CsvStopTime[];
     feed_info: FeedInfo[];
+    transfers: CsvTransfer[];
   };
+  const transfers = new Map<Stop['stop_id'], Stop['stop_id'][]>();
   const variable: ServerGTFSData = {
     routes: {},
     stops: {},
@@ -133,16 +137,26 @@ export async function createApiData(
     variable.routes[trip.route_id].trips[trip.trip_id] = trip;
     variable.trips[trip.trip_id] = trip.route_id;
   }
+  for (const csvTransfer of json.transfers) {
+    if (csvTransfer.transfer_type === 0) {
+      const otherStops = transfers.get(csvTransfer.from_stop_id) || [];
+      otherStops.push(csvTransfer.to_stop_id);
+      transfers.set(csvTransfer.from_stop_id, otherStops);
+    }
+  }
   for (const csvStop of json.stops) {
-    const stop = (csvStop as Partial<Stop>) as Mutable<Stop>;
-    stop.position = {
-      lat: csvStop.stop_lat,
-      lng: csvStop.stop_lon,
+    const stop: Stop = {
+      stop_id: csvStop.stop_id,
+      stop_name: csvStop.stop_name,
+      stop_desc: csvStop.stop_desc,
+      position: {
+        lat: csvStop.stop_lat,
+        lng: csvStop.stop_lon,
+      },
+      trips: [],
+      routes: [],
+      transfers: transfers.get(csvStop.stop_id) || [],
     };
-    stop.trips = [];
-    stop.routes = [];
-    delete (csvStop as Partial<CsvStop>).stop_lat;
-    delete (csvStop as Partial<CsvStop>).stop_lon;
     variable.stops[stop.stop_id] = stop;
   }
   for (const csvCalendar of json.calendar) {

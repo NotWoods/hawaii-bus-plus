@@ -6,8 +6,24 @@ import busIcon from '../icons/directions_bus.svg';
 import busStopIcon from '../icons/bus_stop.svg';
 import placeIcon from '../icons/place.svg';
 import './Sidebar.css';
+import { Stop } from '../../shared/gtfs-types';
 
-export function Sidebar() {
+const TEST_STOP = {
+  stop_id: 'll',
+  stop_name: 'Lakeland',
+  stop_desc: '(Mud Lane, bus shelter)',
+  position: {
+    lat: 20.042747082274264,
+    lng: -155.5970094640878,
+  },
+  routes: ['waimea'],
+} as Stop;
+
+interface Props {
+  onOpenStop(stop: Stop): void;
+}
+
+export function Sidebar(props: Props) {
   const inputRef = useAccessKey<HTMLInputElement>('shift+f');
 
   return (
@@ -38,6 +54,7 @@ export function Sidebar() {
         iconAlt="Bus stop"
         title="Lakeland"
         href="?stop=ll"
+        onClick={() => props.onOpenStop(TEST_STOP)}
         subtitle={
           <>
             <span className="badge" title="Intra Kona">

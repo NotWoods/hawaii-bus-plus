@@ -1,4 +1,4 @@
 {
   "files": [],
-  "references": [{ "path": "page" }, { "path": "shared" }]
+  "references": [{ "path": "lib" }, { "path": "page" }, { "path": "shared" }]
 }

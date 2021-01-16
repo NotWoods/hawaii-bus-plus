@@ -99,6 +99,7 @@ export interface Stop extends Readonly<Omit<CsvStop, 'stop_lat' | 'stop_lon'>> {
     readonly time: string;
   }[];
   readonly routes: Route['route_id'][];
+  readonly transfers: readonly Stop['stop_id'][];
 }
 
 export interface CsvStopTime {
@@ -118,6 +119,12 @@ export interface StopTime
   extends Readonly<
     Omit<CsvStopTime, 'continuous_drop_off' | 'drop_off_type'>
   > {}
+
+export interface CsvTransfer {
+  readonly from_stop_id: Stop['stop_id'];
+  readonly to_stop_id: Stop['stop_id'];
+  readonly transfer_type: number;
+}
 
 export interface FeedInfo {
   feed_publisher_name: string;

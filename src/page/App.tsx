@@ -12,6 +12,7 @@ export function App() {
   const [darkMode, setDarkMode] = useState(
     matchMedia('(prefers-color-scheme: dark)').matches
   );
+  const [openStop, setOpenStop] = useState<Stop | undefined>(undefined);
 
   function toggleSidebar() {
     setShowSidebar(!showSidebar);
@@ -35,29 +36,22 @@ export function App() {
         <StickyAlertsList />
         <Navbar toggleSidebar={toggleSidebar} toggleDarkMode={toggleDarkMode} />
         <div className="sidebar-overlay" onClick={toggleSidebar}></div>
-        <Sidebar />
+        <Sidebar onOpenStop={setOpenStop} />
         <div className="content-wrapper">
           <LoadScript googleMapsApiKey="AIzaSyAmRiFwEOokwUHYXK1MqYl5k2ngHoWGJBw">
             <GoogleMap
+              mapContainerClassName="map w-full h-full"
               center={{ lat: 19.6, lng: -155.56 }}
               zoom={10}
               options={{ streetViewControl: false }}
             >
-              <StopCard
-                stop={
-                  {
-                    stop_id: 'll',
-                    stop_name: 'Lakeland',
-                    stop_desc: '(Mud Lane, bus shelter)',
-                    position: {
-                      lat: 20.042747082274264,
-                      lng: -155.5970094640878,
-                    },
-                    routes: ['waimea'],
-                  } as Stop
-                }
-                onClose={() => {}}
-              />
+              <div></div>
+              {openStop ? (
+                <StopCard
+                  stop={openStop}
+                  onClose={() => setOpenStop(undefined)}
+                />
+              ) : null}
             </GoogleMap>
           </LoadScript>
         </div>

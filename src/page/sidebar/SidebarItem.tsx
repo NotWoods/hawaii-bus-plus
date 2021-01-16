@@ -8,6 +8,7 @@ export interface Props {
   iconBackgroundType?: string;
   title?: React.ReactNode;
   subtitle?: React.ReactNode;
+  onClick?(): void;
 }
 
 export function SidebarItem(props: Props) {
@@ -15,6 +16,10 @@ export function SidebarItem(props: Props) {
     <a
       href={props.href}
       className="sidebar-link sidebar-link-with-icon sidebar-link-multiline"
+      onClick={(evt) => {
+        evt.preventDefault();
+        props.onClick?.();
+      }}
     >
       <span className={`sidebar-icon ${props.iconBackgroundType}`}>
         <img
