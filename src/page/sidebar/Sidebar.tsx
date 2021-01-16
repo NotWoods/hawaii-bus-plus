@@ -3,6 +3,7 @@ import { useAccessKey } from '../hooks/useAccessKey';
 import { SidebarItem } from './SidebarItem';
 import { SidebarTitle } from './SidebarTitle';
 import busIcon from '../icons/directions_bus.svg';
+import busStopIcon from '../icons/bus_stop.svg';
 import placeIcon from '../icons/place.svg';
 import './Sidebar.css';
 
@@ -19,26 +20,33 @@ export function Sidebar() {
           accessKey="f"
           ref={inputRef}
         />
-        <div className="mt-10 font-size-12">
-          Press <kbd>shift</kbd> + <kbd>F</kbd> to focus
-        </div>
       </div>
 
       <SidebarTitle>Routes</SidebarTitle>
       <SidebarItem
         icon={busIcon}
         iconAlt="Bus route"
-        title="Intra Kona"
+        title="20 &middot; Intra Kona"
         subtitle="Hele-On"
         iconBackgroundType="bg-primary"
       />
 
       <SidebarTitle>Stops</SidebarTitle>
       <SidebarItem
-        icon={placeIcon}
+        icon={busStopIcon}
         iconAlt="Bus stop"
         title="Lakeland"
-        subtitle="..."
+        href="?stop=ll"
+        subtitle={
+          <>
+            <span className="border rounded px-5" title="Intra Kona">
+              20
+            </span>{' '}
+            <span className="border rounded px-5" title="Intra Hilo">
+              150
+            </span>
+          </>
+        }
       />
 
       <SidebarTitle>Other places</SidebarTitle>

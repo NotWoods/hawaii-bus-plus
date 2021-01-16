@@ -17,10 +17,16 @@ export function SidebarItem(props: Props) {
       className="sidebar-link sidebar-link-with-icon sidebar-link-multiline"
     >
       <span className={`sidebar-icon ${props.iconBackgroundType}`}>
-        <img className="icon" src={props.icon} alt={props.iconAlt} />
+        <img
+          className="icon"
+          src={props.icon}
+          alt={props.iconAlt}
+          width="24"
+          height="24"
+        />
       </span>
       <p className="sidebar-link-title">{props.title}</p>
-      <p className="sidebar-link-subtitle">{props.subtitle}</p>
+      <p className="sidebar-link-subtitle font-size-12">{props.subtitle}</p>
     </a>
   );
 }
