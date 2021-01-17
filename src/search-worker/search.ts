@@ -1,5 +1,7 @@
+import { dbReady } from '../data/database';
+import { searchWordsIndex } from '../data/search-db';
 import { Route, Stop } from '../shared/gtfs-types';
-import { fuseRoutes, fuseStops } from './gtfs-search';
+import { applyOffset } from './helpers';
 import { AutocompletionRequest } from './places-autocomplete';
 
 export interface SearchResults {
@@ -10,16 +12,26 @@ export interface SearchResults {
 
 export function search(request: AutocompletionRequest): Promise<SearchResults> {
   //const placeSearchReady = getPlacePredictions(request);
-  const placeSearchReady = Promise.resolve([]);
 
-  const routeSearch = fuseRoutes.search(request);
-  const stopSearch = fuseStops.search(request);
+  const searchTerm = applyOffset(request.input, request.offset);
+  const routeSearchReady = dbReady.then((db) => {
+    const { store } = db.transaction('routes');
+    return searchWordsIndex<Route>(store, searchTerm, 3);
+  });
+  const stopSearchReady = dbReady.then((db) => {
+    const { store } = db.transaction('stops');
+    return searchWordsIndex<Stop>(store, searchTerm, 3);
+  });
 
-  return placeSearchReady.then((placeSearch) => {
+  return Promise.all([
+    [], // placeSearchReady,
+    routeSearchReady,
+    stopSearchReady,
+  ]).then(([placeSearch, routeSearch, stopSearch]) => {
     return {
       places: placeSearch,
-      routes: routeSearch.map((result) => result.item),
-      stops: stopSearch.map((result) => result.item),
+      routes: routeSearch,
+      stops: stopSearch,
     };
   });
 }

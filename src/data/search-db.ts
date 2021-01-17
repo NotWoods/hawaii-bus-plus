@@ -7,7 +7,7 @@ export async function searchWordsIndex<T>(
 ) {
   const index = objectStore.index('words');
   const term = searchTerm.toLowerCase();
-  const keyRange = IDBKeyRange.only(term);
+  const keyRange = IDBKeyRange.bound(term, term + '\uffff', false, false);
 
   const results: T[] = [];
   let cursor = await index.openCursor(keyRange);
