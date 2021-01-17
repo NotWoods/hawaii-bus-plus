@@ -3,7 +3,6 @@ import React, {
   createContext,
   DetailedHTMLProps,
   Dispatch,
-  MouseEvent,
   ReactNode,
   useContext,
   useReducer,
@@ -21,7 +20,7 @@ export const RouterContext = createContext<RouterContext>({ dispatch() {} });
  * Top level provider for sticky alerts
  */
 export function Router(props: { children: ReactNode }) {
-  const [state, dispatch] = useReducer(routerReducer, {} as RouterState);
+  const [state, dispatch] = useReducer(routerReducer, {});
 
   return (
     <RouterContext.Provider value={{ ...state, dispatch }}>

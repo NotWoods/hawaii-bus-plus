@@ -1,5 +1,4 @@
 import React from 'react';
-import { Route } from '../../shared/gtfs-types';
 import { classNames } from '../hooks/classnames';
 import { RouterAction } from '../router/reducer';
 import { Link } from '../router/Router';
@@ -32,7 +31,8 @@ export function SidebarItem(props: SidebarItemProps) {
       <span
         className={classNames(
           'sidebar-icon',
-          props.iconDark ? 'text-dark' : 'text-white'
+          props.iconDark !== undefined &&
+            (props.iconDark ? 'text-dark' : 'text-white')
         )}
         style={{ backgroundColor: props.iconColor }}
       >

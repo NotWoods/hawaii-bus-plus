@@ -6,6 +6,8 @@ import placeIcon from '../icons/place.svg';
 import { SidebarItem, SidebarItemProps } from './SidebarItem';
 import { setRouteAction, setStopAction } from '../router/action';
 import { RouteBadge } from './RouteBadge';
+import { colorProps } from '../routes/props';
+import { routes } from '../../mock/api';
 
 type SearchItemProps = Pick<SidebarItemProps, 'className' | 'onClick'>;
 
@@ -15,6 +17,7 @@ interface RouteSearchItemProps extends SearchItemProps {
 
 export function RouteSearchItem({ route, ...props }: RouteSearchItemProps) {
   const action = setRouteAction(route);
+  const { backgroundColor, dark } = colorProps(route);
   return (
     <SidebarItem
       {...props}
@@ -22,8 +25,8 @@ export function RouteSearchItem({ route, ...props }: RouteSearchItemProps) {
       action={action}
       icon={busIcon}
       iconAlt="Bus route"
-      iconColor={`#${route.route_color}`}
-      iconDark={route.route_text_color === '000000'}
+      iconColor={backgroundColor}
+      iconDark={dark}
       title={`${route.route_short_name} · ${route.route_long_name}`}
       subtitle="Hele-On Bus"
     />
@@ -37,7 +40,9 @@ interface StopSearchItemProps extends SearchItemProps {
 export function StopSearchItem({ stop, ...props }: StopSearchItemProps) {
   const badges: ReactNode[] = [];
   for (const route of stop.routes) {
-    badges.push(<RouteBadge route_short_name="20" key={route} />);
+    badges.push(
+      <RouteBadge route={routes[route as keyof typeof routes]} key={route} />
+    );
     badges.push(' ');
   }
 

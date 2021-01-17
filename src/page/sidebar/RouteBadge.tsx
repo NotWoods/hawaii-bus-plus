@@ -1,14 +1,25 @@
 import React from 'react';
+import { Route } from '../../shared/gtfs-types';
+import { classNames } from '../hooks/classnames';
+import { colorProps } from '../routes/props';
 
 interface RouteBadgeProps {
-  route_short_name: string;
-  route_long_name?: string;
+  route?: Route;
 }
 
-export function RouteBadge(props: RouteBadgeProps) {
-  return (
-    <span className="badge" title={props.route_long_name}>
-      {props.route_short_name}
-    </span>
-  );
+export function RouteBadge({ route }: RouteBadgeProps) {
+  if (route) {
+    const { backgroundColor, dark } = colorProps(route);
+    return (
+      <span
+        className={classNames('badge', dark ? 'text-dark' : 'text-white')}
+        title={route.route_long_name}
+        style={{ backgroundColor }}
+      >
+        {route.route_short_name}
+      </span>
+    );
+  } else {
+    return <span className="badge">...</span>;
+  }
 }

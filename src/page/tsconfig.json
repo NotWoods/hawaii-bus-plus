@@ -1,7 +1,7 @@
 {
   "extends": "../tsconfig.base.json",
   "include": ["**/*"],
-  "references": [{ "path": "../shared" }],
+  "references": [{ "path": "../shared" }, { "path": "../mock" }],
   "compilerOptions": {
     "lib": ["esnext", "dom", "dom.iterable"],
     "noEmit": true

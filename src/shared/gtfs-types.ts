@@ -53,7 +53,7 @@ export interface CsvRoute {
   route_type: number;
   route_color: string;
   route_text_color: string;
-  agency_id: string;
+  agency_id?: string;
   route_url: string;
   route_sort_order: number;
 }

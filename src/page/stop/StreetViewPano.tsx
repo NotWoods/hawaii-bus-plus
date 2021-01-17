@@ -1,16 +1,17 @@
-import React, { ReactNode, useEffect, useRef } from 'react';
 import { useGoogleMap } from '@react-google-maps/api';
+import React, { ReactNode, useEffect, useRef } from 'react';
 
 interface Props {
   className?: string;
   children?: ReactNode;
   position: google.maps.LatLng | google.maps.LatLngLiteral;
+  visible: boolean;
   onClose(this: google.maps.StreetViewPanorama): void;
 }
 
 const options: google.maps.StreetViewPanoramaOptions = {
-  visible: true,
   pov: { heading: 34, pitch: 0 },
+  visible: true,
   clickToGo: false,
   motionTracking: false,
   panControl: false,
@@ -48,6 +49,9 @@ export function StreetViewPano(props: Props) {
   useEffect(() => {
     streetViewRef.current!.setPosition(props.position);
   }, [props.position]);
+  useEffect(() => {
+    streetViewRef.current!.setVisible(props.visible);
+  }, [props.visible]);
 
   return (
     <div className={props.className} ref={divRef}>

@@ -32,6 +32,7 @@ export function Navbar(props: Props) {
         <button
           className="btn btn-action mr-5"
           type="button"
+          title="Toggle dark mode"
           onClick={props.toggleDarkMode}
         >
           <img className="icon" src={darkModeIcon} alt="Toggle dark mode" />

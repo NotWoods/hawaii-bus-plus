@@ -9,4 +9,4 @@ dist-ssr
 *.map
 *.tsbuildinfo
 
-/api.json
+api.json
