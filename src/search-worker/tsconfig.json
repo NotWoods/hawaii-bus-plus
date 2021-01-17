@@ -3,12 +3,10 @@
   "include": ["**/*"],
   "references": [
     { "path": "../shared" },
-    { "path": "../mock" },
     { "path": "../data" },
-    { "path": "../search-worker" }
+    { "path": "../worker-base" }
   ],
   "compilerOptions": {
-    "lib": ["esnext", "dom", "dom.iterable"],
-    "noEmit": true
+    "lib": ["esnext", "WebWorker"]
   }
 }

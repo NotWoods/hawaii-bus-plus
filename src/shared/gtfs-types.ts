@@ -2,12 +2,12 @@ export interface GTFSData {
   routes: { [route_id: string]: Route };
   stops: { [stop_id: string]: Stop };
   calendar: { [service_id: string]: Calendar };
+  info: FeedInfo;
 }
 
 /* Server needs to iterate through all trips, client doesn't. */
 export interface ServerGTFSData extends GTFSData {
   trips: { [trip_id: string]: Route['route_id'] };
-  info: FeedInfo;
 }
 
 export interface CsvCalendar {

@@ -27,7 +27,7 @@ export function StopCard() {
       <div className="content">
         <h3 className="content-title">Nearby routes</h3>
         {nearbyRoutes.map((routeId) => (
-          <RouteSearchItem className="p-0" routeId={routeId} />
+          <RouteSearchItem key={routeId} className="px-0" routeId={routeId} />
         ))}
       </div>
     </PlaceCard>

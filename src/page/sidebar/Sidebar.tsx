@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode, useState } from 'react';
 import { stops, routes } from '../../mock/api';
 import { useAccessKey } from '../hooks/useAccessKey';
 import { SidebarTitle } from './SidebarTitle';
@@ -8,9 +8,19 @@ import {
   RouteSearchItem,
   StopSearchItem,
 } from './SearchItems';
+import { AllRoutes } from './AllRoutes';
+import { SidebarSearch } from './SidebarSearch';
 
 export function Sidebar() {
   const inputRef = useAccessKey<HTMLInputElement>('shift+f');
+  const [search, setSearch] = useState('');
+
+  let children: ReactNode;
+  if (search) {
+    children = <SidebarSearch search={search} />;
+  } else {
+    children = <AllRoutes />;
+  }
 
   return (
     <aside className="sidebar">
@@ -21,26 +31,13 @@ export function Sidebar() {
           placeholder="Route or location"
           aria-label="Route or location"
           accessKey="f"
+          value={search}
           ref={inputRef}
+          onChange={(evt) => setSearch(evt.currentTarget.value)}
         />
       </div>
 
-      <SidebarTitle>Routes</SidebarTitle>
-      <RouteSearchItem route={routes.kona} />
-
-      <SidebarTitle>Stops</SidebarTitle>
-      <StopSearchItem stop={stops.ll} />
-
-      <SidebarTitle>Other places</SidebarTitle>
-      <PlaceSearchItem
-        placeId=""
-        text={{
-          main_text: 'Hilo Cafe',
-          secondary_text: '123 Hwy 250',
-          main_text_matched_substrings: [],
-          secondary_text_matched_substrings: [],
-        }}
-      />
+      {children}
     </aside>
   );
 }
