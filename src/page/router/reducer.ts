@@ -22,7 +22,26 @@ export type RouterAction =
 
 const ROUTES_PREFIX = '/routes/';
 
+export function initStateFromUrl(url: URL) {
+  const newState: RouterState = {};
+
+  // If link opens route (and trip)
+  if (url.pathname.startsWith(ROUTES_PREFIX)) {
+    const [routeId, tripIdOrBlank] = url.pathname
+      .slice(ROUTES_PREFIX.length)
+      .split('/');
+    newState.route_id = routeId;
+    newState.trip_id = tripIdOrBlank || undefined;
+  }
+
+  // If link opens stop
+  newState.stop_id = url.searchParams.get('stop') || undefined;
+
+  return newState;
+}
+
 export function routerReducer(state: RouterState, action: RouterAction) {
+  console.log(action);
   switch (action.type) {
     case 'route':
       const { route } = action;
@@ -48,28 +67,12 @@ export function routerReducer(state: RouterState, action: RouterAction) {
       const { url } = action;
       if (url.hostname !== window.location.hostname) return state;
 
-      const newState = { ...state };
-
-      // If link opens route (and trip)
-      if (url.pathname.startsWith(ROUTES_PREFIX)) {
-        const [routeId, tripIdOrBlank] = url.pathname
-          .slice(ROUTES_PREFIX.length)
-          .split('/');
-        const tripId = tripIdOrBlank || undefined;
-        if (routeId !== state.route_id) {
-          newState.route_id = routeId;
-          newState.route = undefined;
-          newState.trip_id = tripId;
-        } else if (tripId !== state.trip_id) {
-          newState.trip_id = tripId;
-        }
+      const newState: RouterState = initStateFromUrl(url);
+      if (newState.route_id === state.route_id) {
+        newState.route = state.route;
       }
-
-      // If link opens stop
-      const stopId = url.searchParams.get('stop') || undefined;
-      if (stopId !== state.stop_id) {
-        newState.stop_id = stopId;
-        newState.stop = undefined;
+      if (newState.stop_id === state.stop_id) {
+        newState.stop = state.stop;
       }
 
       return newState;

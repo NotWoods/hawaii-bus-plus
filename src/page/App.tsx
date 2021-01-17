@@ -6,6 +6,7 @@ import { classNames } from './hooks/classnames';
 import { Navbar } from './Navbar';
 import { Router } from './router/Router';
 import { Sidebar } from './sidebar/Sidebar';
+import { StopMarkers } from './stop/Markers';
 import { StopCard } from './stop/Stop';
 
 const center = { lat: 19.6, lng: -155.56 };
@@ -49,10 +50,15 @@ export function App() {
               <GoogleMap
                 mapContainerClassName="map w-full h-full"
                 center={center}
-                zoom={10}
-                options={{ streetViewControl: false }}
+                zoom={9}
+                options={{
+                  streetViewControl: false,
+                  mapTypeControlOptions: {
+                    mapTypeIds: ['roadmap', 'hybrid'],
+                  },
+                }}
               >
-                <div></div>
+                <StopMarkers />
                 <StopCard />
               </GoogleMap>
             </LoadScript>
