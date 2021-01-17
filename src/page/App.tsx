@@ -12,6 +12,8 @@ import darkStyles from './map/dark-style.json';
 import { center, mapTypeControlOptions } from './map/options';
 import { ApiProvider } from './data/Api';
 import { RouteSheet } from './routes/Route';
+import { MapProvider } from './map/MapProvider';
+import { GoogleMapPortal } from './map/GoogleMap';
 
 export function App() {
   const [showSidebar, setShowSidebar] = useState(true);
@@ -32,25 +34,25 @@ export function App() {
   return (
     <Router>
       <ApiProvider>
-        <StickyAlertsProvider>
-          <div
-            className={classNames(
-              `page-wrapper with-transitions with-navbar with-sidebar`,
-              darkMode && 'dark-mode'
-            )}
-            data-sidebar-type="overlayed-sm-and-down"
-            data-sidebar-hidden={showSidebar ? undefined : 'hidden'}
-          >
-            <StickyAlertsList />
-            <Navbar
-              toggleSidebar={toggleSidebar}
-              toggleDarkMode={toggleDarkMode}
-            />
-            <div className="sidebar-overlay" onClick={toggleSidebar}></div>
-            <Sidebar />
-            <div className="content-wrapper">
-              <LoadScript googleMapsApiKey="AIzaSyAmRiFwEOokwUHYXK1MqYl5k2ngHoWGJBw">
-                <GoogleMap
+        <MapProvider>
+          <StickyAlertsProvider>
+            <div
+              className={classNames(
+                `page-wrapper with-transitions with-navbar with-sidebar`,
+                darkMode && 'dark-mode'
+              )}
+              data-sidebar-type="overlayed-sm-and-down"
+              data-sidebar-hidden={showSidebar ? undefined : 'hidden'}
+            >
+              <StickyAlertsList />
+              <Navbar
+                toggleSidebar={toggleSidebar}
+                toggleDarkMode={toggleDarkMode}
+              />
+              <div className="sidebar-overlay" onClick={toggleSidebar}></div>
+              <Sidebar />
+              <div className="content-wrapper">
+                <GoogleMapPortal
                   mapContainerClassName="map w-full h-full"
                   center={center}
                   zoom={9}
@@ -64,13 +66,13 @@ export function App() {
                   }}
                 >
                   <StopMarkers />
-                  <StopCard />
-                </GoogleMap>
-              </LoadScript>
+                </GoogleMapPortal>
+                <StopCard />
+              </div>
+              <RouteSheet />
             </div>
-            <RouteSheet />
-          </div>
-        </StickyAlertsProvider>
+          </StickyAlertsProvider>
+        </MapProvider>
       </ApiProvider>
     </Router>
   );

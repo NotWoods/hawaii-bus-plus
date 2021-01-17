@@ -9,7 +9,7 @@ interface Props extends StreetViewPanoProps {
 
 export function PlaceCard(props: Props) {
   return (
-    <div className="w-400">
+    <div className="w-400 position-absolute top-0 right-0">
       <aside className="card p-0 shadow" hidden={!props.visible}>
         <div className="aspect-ratio-container">
           <StreetViewPano
@@ -17,9 +17,7 @@ export function PlaceCard(props: Props) {
             position={props.position}
             visible={props.visible}
             onClose={props.onClose}
-          >
-            <img className="rounded-top" alt="Street view" />
-          </StreetViewPano>
+          />
         </div>
         <div className="content">
           <h2 className="card-title m-0">{props.title}</h2>

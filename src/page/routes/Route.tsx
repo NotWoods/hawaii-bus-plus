@@ -26,7 +26,6 @@ export function RouteSheet() {
 
   return (
     <div className="content-wrapper pointer-events-none">
-      <div className="h-three-quarter pointer-events-none" />
       <div
         className="route-sheet pointer-events-auto mx-10 border border-bottom-0 rounded-top bg-white bg-dark-light-dm"
         style={cssVars as any}
