@@ -1,11 +1,10 @@
 import React, { useContext } from 'react';
-import { Route } from '../../shared/gtfs-types';
+import { routes } from '../../mock/api';
 import { closeStopAction } from '../router/action';
 import { RouterContext } from '../router/Router';
 import { RouteSearchItem } from '../sidebar/SearchItems';
-import { StreetViewPano } from './StreetViewPano';
 import './Stop.css';
-import { routes } from '../../mock/api';
+import { StreetViewPano } from './StreetViewPano';
 
 export function StopCard() {
   const { stop_id, stop, dispatch } = useContext(RouterContext);

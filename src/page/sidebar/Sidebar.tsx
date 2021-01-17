@@ -3,7 +3,6 @@ import { stops, routes } from '../../mock/api';
 import { useAccessKey } from '../hooks/useAccessKey';
 import { SidebarTitle } from './SidebarTitle';
 import './Sidebar.css';
-import { Route } from '../../shared/gtfs-types';
 import {
   PlaceSearchItem,
   RouteSearchItem,

@@ -117,8 +117,13 @@ export interface CsvStopTime {
 
 export interface StopTime
   extends Readonly<
-    Omit<CsvStopTime, 'continuous_drop_off' | 'drop_off_type'>
-  > {}
+    Omit<
+      CsvStopTime,
+      'trip_id' | 'continuous_drop_off' | 'drop_off_type' | 'timepoint'
+    >
+  > {
+  readonly timepoint: boolean;
+}
 
 export interface CsvTransfer {
   readonly from_stop_id: Stop['stop_id'];

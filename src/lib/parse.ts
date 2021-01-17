@@ -179,21 +179,23 @@ export async function createApiData(
     variable.calendar[calendar.service_id] = calendar;
   }
   for (const csvStopTime of json.stop_times) {
-    const stopTime = csvStopTime as Mutable<StopTime>;
-    delete (stopTime as Partial<CsvStopTime>).continuous_drop_off;
-    delete (stopTime as Partial<CsvStopTime>).drop_off_type;
+    const stopTime = (csvStopTime as unknown) as Mutable<StopTime>;
+    delete (csvStopTime as Partial<CsvStopTime>).continuous_drop_off;
+    delete (csvStopTime as Partial<CsvStopTime>).drop_off_type;
 
     const stop = variable.stops[stopTime.stop_id];
-    const route_id = variable.trips[stopTime.trip_id];
+    const route_id = variable.trips[csvStopTime.trip_id];
     const route = variable.routes[route_id];
-    const trip = route.trips[stopTime.trip_id];
+    const trip = route.trips[csvStopTime.trip_id];
 
     trip.stop_times.push(stopTime);
 
-    const tripAdded = stop.trips.find(({ trip }) => trip === stopTime.trip_id);
+    const tripAdded = stop.trips.find(
+      ({ trip }) => trip === csvStopTime.trip_id
+    );
     if (!tripAdded) {
       stop.trips.push({
-        trip: stopTime.trip_id,
+        trip: csvStopTime.trip_id,
         dir: trip.direction_id,
         route: route_id,
         sequence: stopTime.stop_sequence,
@@ -203,6 +205,7 @@ export async function createApiData(
     if (!stop.routes.includes(route_id)) {
       stop.routes.push(route_id);
     }
+    delete (csvStopTime as Partial<CsvStopTime>).trip_id;
   }
 
   for (const route of Object.values(variable.routes)) {
@@ -212,10 +215,6 @@ export async function createApiData(
       if (!STARTS_WITH_TIME.test(trip.trip_short_name)) {
         const start = trip.stop_times[0].arrival_time;
         trip.trip_short_name = `${stringTime(start)} ${trip.trip_short_name}`;
-      }
-      for (const st of trip.stop_times) {
-        const stopTime = st as Partial<Mutable<StopTime>>;
-        delete stopTime.trip_id;
       }
     }
   }
