@@ -1,5 +1,5 @@
 import React from 'react';
-import './Stop.css';
+import './PlaceCard.css';
 import { StreetViewPano, StreetViewPanoProps } from './StreetViewPano';
 
 interface Props extends StreetViewPanoProps {
@@ -23,7 +23,9 @@ export function PlaceCard(props: Props) {
         </div>
         <div className="content">
           <h2 className="card-title m-0">{props.title}</h2>
-          <p className="text-muted m-0">{props.subtitle}</p>
+          {props.subtitle ? (
+            <p className="text-muted m-0">{props.subtitle}</p>
+          ) : null}
         </div>
         {props.children}
       </aside>

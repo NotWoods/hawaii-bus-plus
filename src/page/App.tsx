@@ -7,9 +7,10 @@ import { Navbar } from './Navbar';
 import { Router } from './router/Router';
 import { Sidebar } from './sidebar/Sidebar';
 import { StopMarkers } from './map/StopMarkers';
-import { StopCard } from './stop/Stop';
+import { StopCard } from './stop/StopCard';
 import darkStyles from './map/dark-style.json';
 import { center, mapTypeControlOptions } from './map/options';
+import { ApiProvider } from './data/Api';
 
 export function App() {
   const [showSidebar, setShowSidebar] = useState(true);
@@ -29,43 +30,46 @@ export function App() {
 
   return (
     <Router>
-      <StickyAlertsProvider>
-        <div
-          className={classNames(
-            `page-wrapper with-transitions with-navbar with-sidebar`,
-            darkMode && 'dark-mode'
-          )}
-          data-sidebar-type="overlayed-sm-and-down"
-          data-sidebar-hidden={showSidebar ? undefined : 'hidden'}
-        >
-          <StickyAlertsList />
-          <Navbar
-            toggleSidebar={toggleSidebar}
-            toggleDarkMode={toggleDarkMode}
-          />
-          <div className="sidebar-overlay" onClick={toggleSidebar}></div>
-          <Sidebar />
-          <div className="content-wrapper">
-            <LoadScript googleMapsApiKey="AIzaSyAmRiFwEOokwUHYXK1MqYl5k2ngHoWGJBw">
-              <GoogleMap
-                mapContainerClassName="map w-full h-full"
-                center={center}
-                zoom={9}
-                options={{
-                  streetViewControl: false,
-                  mapTypeControlOptions,
-                  styles: darkMode
-                    ? (darkStyles as google.maps.MapTypeStyle[])
-                    : undefined,
-                }}
-              >
-                <StopMarkers />
-                <StopCard />
-              </GoogleMap>
-            </LoadScript>
+      <ApiProvider>
+        <StickyAlertsProvider>
+          <div
+            className={classNames(
+              `page-wrapper with-transitions with-navbar with-sidebar`,
+              darkMode && 'dark-mode'
+            )}
+            data-sidebar-type="overlayed-sm-and-down"
+            data-sidebar-hidden={showSidebar ? undefined : 'hidden'}
+          >
+            <StickyAlertsList />
+            <Navbar
+              toggleSidebar={toggleSidebar}
+              toggleDarkMode={toggleDarkMode}
+            />
+            <div className="sidebar-overlay" onClick={toggleSidebar}></div>
+            <Sidebar />
+            <div className="content-wrapper">
+              <LoadScript googleMapsApiKey="AIzaSyAmRiFwEOokwUHYXK1MqYl5k2ngHoWGJBw">
+                <GoogleMap
+                  mapContainerClassName="map w-full h-full"
+                  center={center}
+                  zoom={9}
+                  options={{
+                    streetViewControl: false,
+                    mapTypeControlOptions,
+                    controlSize: 32,
+                    styles: darkMode
+                      ? (darkStyles as google.maps.MapTypeStyle[])
+                      : undefined,
+                  }}
+                >
+                  <StopMarkers />
+                  <StopCard />
+                </GoogleMap>
+              </LoadScript>
+            </div>
           </div>
-        </div>
-      </StickyAlertsProvider>
+        </StickyAlertsProvider>
+      </ApiProvider>
     </Router>
   );
 }

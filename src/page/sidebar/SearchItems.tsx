@@ -8,54 +8,85 @@ import { setRouteAction, setStopAction } from '../router/action';
 import { RouteBadge } from './RouteBadge';
 import { colorProps } from '../routes/props';
 import { routes } from '../../mock/api';
+import { useApi } from '../data/Api';
+
+const BLANK = ' ';
 
 type SearchItemProps = Pick<SidebarItemProps, 'className' | 'onClick'>;
 
 interface RouteSearchItemProps extends SearchItemProps {
-  route: Route;
+  routeId?: string;
+  route?: Route;
 }
 
-export function RouteSearchItem({ route, ...props }: RouteSearchItemProps) {
-  const action = setRouteAction(route);
-  const { backgroundColor, dark } = colorProps(route);
+export function RouteSearchItem({
+  routeId,
+  route: routeData,
+  ...props
+}: RouteSearchItemProps) {
+  const api = useApi();
+  const route = routeData || api?.routes?.[routeId!];
+
+  let routeProps: Omit<SidebarItemProps, 'icon' | 'iconAlt'>;
+  if (route) {
+    const { backgroundColor, dark } = colorProps(route);
+    routeProps = {
+      action: setRouteAction(route),
+      iconColor: backgroundColor,
+      iconDark: dark,
+      title: `${route.route_short_name} · ${route.route_long_name}`,
+      subtitle: 'Hele-On Bus',
+    };
+  } else {
+    routeProps = {
+      title: BLANK,
+      subtitle: BLANK,
+    };
+  }
   return (
     <SidebarItem
       {...props}
-      href={action.href}
-      action={action}
+      {...routeProps}
+      href={`/routes/${routeId || route!.route_id}/`}
       icon={busIcon}
       iconAlt="Bus route"
-      iconColor={backgroundColor}
-      iconDark={dark}
-      title={`${route.route_short_name} · ${route.route_long_name}`}
-      subtitle="Hele-On Bus"
     />
   );
 }
 
 interface StopSearchItemProps extends SearchItemProps {
-  stop: Stop;
+  stopId?: string;
+  stop?: Stop;
 }
 
-export function StopSearchItem({ stop, ...props }: StopSearchItemProps) {
+export function StopSearchItem({
+  stopId,
+  stop: stopData,
+  ...props
+}: StopSearchItemProps) {
+  const api = useApi();
+  const stop = stopData || api?.stops?.[stopId!];
+
   const badges: ReactNode[] = [];
-  for (const route of stop.routes) {
-    badges.push(
-      <RouteBadge route={routes[route as keyof typeof routes]} key={route} />
-    );
-    badges.push(' ');
+  if (stop) {
+    for (const route of stop.routes) {
+      badges.push(
+        <RouteBadge route={routes[route as keyof typeof routes]} key={route} />
+      );
+      badges.push(' ');
+    }
+    badges.pop();
   }
 
-  const action = setStopAction(stop);
   return (
     <SidebarItem
       {...props}
-      href={action.href}
-      action={action}
+      href={`?stop=${stopId || stop!.stop_id}`}
+      action={stop ? setStopAction(stop) : undefined}
       icon={busStopIcon}
       iconAlt="Bus stop"
-      title={stop.stop_name}
-      subtitle={badges.slice(0, -1)}
+      title={stop?.stop_name || BLANK}
+      subtitle={badges.length > 0 ? badges : BLANK}
     />
   );
 }

@@ -9,7 +9,7 @@ export interface StreetViewPanoProps {
   onClose(this: google.maps.StreetViewPanorama): void;
 }
 
-const options: google.maps.StreetViewPanoramaOptions = {
+const options = {
   pov: { heading: 34, pitch: 0 },
   visible: true,
   clickToGo: false,
@@ -17,6 +17,7 @@ const options: google.maps.StreetViewPanoramaOptions = {
   panControl: false,
   linksControl: false,
   enableCloseButton: true,
+  controlSize: 32,
 };
 
 export function StreetViewPano(props: StreetViewPanoProps) {

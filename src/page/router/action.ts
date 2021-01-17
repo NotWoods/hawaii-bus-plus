@@ -6,7 +6,7 @@ export function linkAction(href: string | URL) {
 }
 
 export function setRouteAction(route: Route) {
-  return { type: 'route', route, href: `/routes/${route.route_id}/` } as const;
+  return { type: 'route', route } as const;
 }
 
 export function setStopAction(stop: Stop) {
