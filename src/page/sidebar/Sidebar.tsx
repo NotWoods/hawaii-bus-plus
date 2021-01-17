@@ -2,11 +2,13 @@ import React from 'react';
 import { useAccessKey } from '../hooks/useAccessKey';
 import { SidebarItem } from './SidebarItem';
 import { SidebarTitle } from './SidebarTitle';
-import busIcon from '../icons/directions_bus.svg';
-import busStopIcon from '../icons/bus_stop.svg';
-import placeIcon from '../icons/place.svg';
 import './Sidebar.css';
-import { Stop } from '../../shared/gtfs-types';
+import { Route, Stop } from '../../shared/gtfs-types';
+import {
+  PlaceSearchItem,
+  RouteSearchItem,
+  StopSearchItem,
+} from './SearchItems';
 
 const TEST_STOP = {
   stop_id: 'll',
@@ -40,39 +42,38 @@ export function Sidebar(props: Props) {
       </div>
 
       <SidebarTitle>Routes</SidebarTitle>
-      <SidebarItem
-        icon={busIcon}
-        iconAlt="Bus route"
-        title="20 &middot; Intra Kona"
-        subtitle="Hele-On"
-        iconBackgroundType="bg-primary"
-      />
-
-      <SidebarTitle>Stops</SidebarTitle>
-      <SidebarItem
-        icon={busStopIcon}
-        iconAlt="Bus stop"
-        title="Lakeland"
-        href="?stop=ll"
-        onClick={() => props.onOpenStop(TEST_STOP)}
-        subtitle={
-          <>
-            <span className="badge" title="Intra Kona">
-              20
-            </span>{' '}
-            <span className="badge" title="Intra Hilo">
-              150
-            </span>
-          </>
+      <RouteSearchItem
+        route={
+          {
+            route_id: 'kona',
+            route_short_name: '',
+            route_long_name: 'Intra-Kona Combined Schedule',
+            route_desc:
+              "This route operates between Captain Cook and North Kona via Routes 11 19 and 190 traveling through Ali'i Drive.",
+            route_type: 3,
+            route_url:
+              'http://www.heleonbus.org/schedules-and-maps/intra-kona-7-1-2014',
+            route_color: '8400a8',
+            route_text_color: 'ffffff',
+          } as Route
         }
       />
 
+      <SidebarTitle>Stops</SidebarTitle>
+      <StopSearchItem
+        stop={TEST_STOP}
+        onClick={() => props.onOpenStop(TEST_STOP)}
+      />
+
       <SidebarTitle>Other places</SidebarTitle>
-      <SidebarItem
-        icon={placeIcon}
-        iconAlt="Place"
-        title="Hilo Cafe"
-        subtitle="123 Hwy 250"
+      <PlaceSearchItem
+        placeId=""
+        text={{
+          main_text: 'Hilo Cafe',
+          secondary_text: '123 Hwy 250',
+          main_text_matched_substrings: [],
+          secondary_text_matched_substrings: [],
+        }}
       />
     </aside>
   );

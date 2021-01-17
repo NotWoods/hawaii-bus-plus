@@ -1,4 +1,5 @@
 import React from 'react';
+import { classNames } from '../hooks/classnames';
 
 export interface AlertProps {
   children?: React.ReactNode;
@@ -19,7 +20,7 @@ export function Alert(props: AlertProps) {
     hasDismissButton = false,
   } = props;
   return (
-    <div className={`alert ${alertType} ${fillType} ${state}`}>
+    <div className={classNames(`alert`, alertType, fillType, state)}>
       {title ? <h4 className="alert-heading">{title}</h4> : null}
       {hasDismissButton ? (
         <button

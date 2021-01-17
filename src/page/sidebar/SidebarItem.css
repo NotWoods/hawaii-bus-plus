@@ -8,10 +8,6 @@
 .sidebar-icon {
   grid-area: icon;
 }
-.sidebar-link-title,
-.sidebar-link-subtitle {
-  margin: 0;
-}
 .sidebar-link-title {
   grid-area: title;
 }

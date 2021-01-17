@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { Stop } from '../shared/gtfs-types';
 import { StickyAlertsList, StickyAlertsProvider } from './alert/StickyAlerts';
+import { classNames } from './hooks/classnames';
 import { Navbar } from './Navbar';
 import { Sidebar } from './sidebar/Sidebar';
 import { StopCard } from './stop/Stop';
@@ -27,9 +28,10 @@ export function App() {
   return (
     <StickyAlertsProvider>
       <div
-        className={`page-wrapper with-transitions with-navbar with-sidebar ${
-          darkMode ? 'dark-mode' : ''
-        }`}
+        className={classNames(
+          `page-wrapper with-transitions with-navbar with-sidebar`,
+          darkMode && 'dark-mode'
+        )}
         data-sidebar-type="overlayed-sm-and-down"
         data-sidebar-hidden={showSidebar ? undefined : 'hidden'}
       >
