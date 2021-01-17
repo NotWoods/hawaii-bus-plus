@@ -2,6 +2,7 @@ import React from 'react';
 import menuIcon from './icons/menu.svg';
 import darkModeIcon from './icons/dark_mode.svg';
 import './Navbar.css';
+import { Icon } from './icons/Icon';
 
 interface Props {
   toggleSidebar(): void;
@@ -19,7 +20,7 @@ export function Navbar(props: Props) {
           onClick={props.toggleSidebar}
           accessKey="s"
         >
-          <img className="icon" src={menuIcon} alt="Toggle sidebar" />
+          <Icon src={menuIcon} alt="Toggle sidebar" />
         </button>
       </div>
 
@@ -35,7 +36,7 @@ export function Navbar(props: Props) {
           title="Toggle dark mode"
           onClick={props.toggleDarkMode}
         >
-          <img className="icon" src={darkModeIcon} alt="Toggle dark mode" />
+          <Icon src={darkModeIcon} alt="Toggle dark mode" />
         </button>
         <div
           className="btn-group"

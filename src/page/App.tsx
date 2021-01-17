@@ -6,10 +6,10 @@ import { classNames } from './hooks/classnames';
 import { Navbar } from './Navbar';
 import { Router } from './router/Router';
 import { Sidebar } from './sidebar/Sidebar';
-import { StopMarkers } from './stop/Markers';
+import { StopMarkers } from './map/StopMarkers';
 import { StopCard } from './stop/Stop';
-
-const center = { lat: 19.6, lng: -155.56 };
+import darkStyles from './map/dark-style.json';
+import { center, mapTypeControlOptions } from './map/options';
 
 export function App() {
   const [showSidebar, setShowSidebar] = useState(true);
@@ -53,9 +53,10 @@ export function App() {
                 zoom={9}
                 options={{
                   streetViewControl: false,
-                  mapTypeControlOptions: {
-                    mapTypeIds: ['roadmap', 'hybrid'],
-                  },
+                  mapTypeControlOptions,
+                  styles: darkMode
+                    ? (darkStyles as google.maps.MapTypeStyle[])
+                    : undefined,
                 }}
               >
                 <StopMarkers />

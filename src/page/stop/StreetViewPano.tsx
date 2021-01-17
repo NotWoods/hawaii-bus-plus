@@ -1,7 +1,7 @@
 import { useGoogleMap } from '@react-google-maps/api';
 import React, { ReactNode, useEffect, useRef } from 'react';
 
-interface Props {
+export interface StreetViewPanoProps {
   className?: string;
   children?: ReactNode;
   position: google.maps.LatLng | google.maps.LatLngLiteral;
@@ -19,7 +19,7 @@ const options: google.maps.StreetViewPanoramaOptions = {
   enableCloseButton: true,
 };
 
-export function StreetViewPano(props: Props) {
+export function StreetViewPano(props: StreetViewPanoProps) {
   const divRef = useRef(null);
   const streetViewRef = useRef<google.maps.StreetViewPanorama>(null);
   const map = useGoogleMap();

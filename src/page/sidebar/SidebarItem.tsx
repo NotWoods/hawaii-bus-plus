@@ -1,13 +1,14 @@
 import React from 'react';
 import { classNames } from '../hooks/classnames';
+import { Icon } from '../icons/Icon';
 import { RouterAction } from '../router/reducer';
 import { Link } from '../router/Router';
 import './SidebarItem.css';
 
 export interface SidebarItemProps {
   href?: string;
-  icon?: string;
-  iconAlt?: string;
+  icon: string;
+  iconAlt: string;
   iconColor?: string;
   iconDark?: boolean;
   title?: React.ReactNode;
@@ -36,13 +37,7 @@ export function SidebarItem(props: SidebarItemProps) {
         )}
         style={{ backgroundColor: props.iconColor }}
       >
-        <img
-          className="icon"
-          src={props.icon}
-          alt={props.iconAlt}
-          width="24"
-          height="24"
-        />
+        <Icon src={props.icon} alt={props.iconAlt} />
       </span>
       <p className="sidebar-link-title m-0">{props.title}</p>
       <p className="sidebar-link-subtitle m-0 font-size-12">{props.subtitle}</p>
