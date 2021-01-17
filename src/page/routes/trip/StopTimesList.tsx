@@ -1,6 +1,7 @@
-import React from 'react';
-import { Route, StopTime } from '../../../shared/gtfs-types';
+import React, { ReactNode } from 'react';
+import { Route, Stop, StopTime } from '../../../shared/gtfs-types';
 import { useApi } from '../../data/Api';
+import { classNames } from '../../hooks/classnames';
 import { setStopAction } from '../../router/action';
 import { Link } from '../../router/Router';
 import { BLANK, RouteBadges } from '../../stop/RouteBadge';
@@ -9,18 +10,24 @@ import { Time } from './Time';
 
 function Lines() {
   return (
-    <div className="lines">
-      <span className="lines__dot" />
-    </div>
+    <>
+      <div className="lines__start" />
+      <div className="lines__point">
+        <div className="lines__dot" />
+      </div>
+      <div className="lines__end" />
+    </>
   );
 }
 
 interface StopTimeItemProps {
   routeId: Route['route_id'];
   stopTime: StopTime;
+  first?: boolean;
+  last?: boolean;
 }
 
-function StopTimeItem({ routeId, stopTime }: StopTimeItemProps) {
+function StopTimeItem({ routeId, stopTime, first, last }: StopTimeItemProps) {
   const api = useApi();
   const stop = api?.stops?.[stopTime.stop_id];
 
@@ -29,7 +36,11 @@ function StopTimeItem({ routeId, stopTime }: StopTimeItemProps) {
       <Link
         action={stop ? setStopAction(stop) : undefined}
         href={`?stop=${stopTime.stop_id}`}
-        className="sidebar-link sidebar-link-with-icon p-0 stoptime"
+        className={classNames(
+          'sidebar-link sidebar-link-with-icon p-0 stoptime',
+          first && 'stoptime--first',
+          last && 'stoptime--last'
+        )}
       >
         <Lines />
         <p className="stoptime-name m-0 d-block">
@@ -52,18 +63,29 @@ function StopTimeItem({ routeId, stopTime }: StopTimeItemProps) {
 interface StopTimeListProps {
   routeId: Route['route_id'];
   stopTimes: readonly StopTime[];
+  skipToStop?: Stop['stop_id'];
 }
 
 export function StopTimesList(props: StopTimeListProps) {
-  return (
-    <ul className="">
-      {props.stopTimes.map((stopTime) => (
+  const lastIndex = props.stopTimes.length - 1;
+  const children: ReactNode[] = [];
+  let skipDone = !props.skipToStop;
+
+  for (const [i, stopTime] of props.stopTimes.entries()) {
+    // Skip until you reach the given stop
+    skipDone ||= stopTime.stop_id === props.skipToStop;
+    if (skipDone) {
+      children.push(
         <StopTimeItem
           key={stopTime.stop_id + stopTime.stop_sequence}
           routeId={props.routeId}
           stopTime={stopTime}
+          first={i === 0}
+          last={i === lastIndex}
         />
-      ))}
-    </ul>
-  );
+      );
+    }
+  }
+
+  return <ul>{children}</ul>;
 }
