@@ -13,6 +13,10 @@ export function setStopAction(stop: Stop) {
   return { type: 'stop', stop, href: `?stop=${stop.stop_id}` } as const;
 }
 
+export function closeRouteAction() {
+  return { type: 'close-route' } as const;
+}
+
 export function closeStopAction() {
   return { type: 'close-stop' } as const;
 }

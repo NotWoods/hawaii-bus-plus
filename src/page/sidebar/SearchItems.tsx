@@ -1,23 +1,23 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
+import { RequireAtLeastOne } from 'type-fest';
 import { Route, Stop } from '../../shared/gtfs-types';
-import busIcon from '../icons/directions_bus.svg';
-import busStopIcon from '../icons/bus_stop.svg';
-import placeIcon from '../icons/place.svg';
-import { SidebarItem, SidebarItemProps } from './SidebarItem';
-import { setRouteAction, setStopAction } from '../router/action';
-import { RouteBadge } from './RouteBadge';
-import { colorProps } from '../routes/props';
-import { routes } from '../../mock/api';
 import { useApi } from '../data/Api';
-
-const BLANK = ' ';
+import busStopIcon from '../icons/bus_stop.svg';
+import busIcon from '../icons/directions_bus.svg';
+import placeIcon from '../icons/place.svg';
+import { setRouteAction, setStopAction } from '../router/action';
+import { colorProps } from '../routes/props';
+import { RouteName } from '../routes/RouteName';
+import { BLANK, RouteBadges } from '../stop/RouteBadge';
+import { SidebarItem, SidebarItemProps } from './SidebarItem';
 
 type SearchItemProps = Pick<SidebarItemProps, 'className' | 'onClick'>;
 
-interface RouteSearchItemProps extends SearchItemProps {
-  routeId?: string;
-  route?: Route;
-}
+type RouteSearchItemProps = SearchItemProps &
+  RequireAtLeastOne<{
+    routeId: Route['route_id'];
+    route: Route;
+  }>;
 
 export function RouteSearchItem({
   routeId,
@@ -34,7 +34,7 @@ export function RouteSearchItem({
       action: setRouteAction(route),
       iconColor: backgroundColor,
       iconDark: dark,
-      title: `${route.route_short_name} · ${route.route_long_name}`,
+      title: <RouteName route={route} />,
       subtitle: 'Hele-On Bus',
     };
   } else {
@@ -54,10 +54,11 @@ export function RouteSearchItem({
   );
 }
 
-interface StopSearchItemProps extends SearchItemProps {
-  stopId?: string;
-  stop?: Stop;
-}
+type StopSearchItemProps = SearchItemProps &
+  RequireAtLeastOne<{
+    stopId: Stop['stop_id'];
+    stop: Stop;
+  }>;
 
 export function StopSearchItem({
   stopId,
@@ -67,17 +68,6 @@ export function StopSearchItem({
   const api = useApi();
   const stop = stopData || api?.stops?.[stopId!];
 
-  const badges: ReactNode[] = [];
-  if (stop) {
-    for (const route of stop.routes) {
-      badges.push(
-        <RouteBadge route={routes[route as keyof typeof routes]} key={route} />
-      );
-      badges.push(' ');
-    }
-    badges.pop();
-  }
-
   return (
     <SidebarItem
       {...props}
@@ -86,7 +76,7 @@ export function StopSearchItem({
       icon={busStopIcon}
       iconAlt="Bus stop"
       title={stop?.stop_name || BLANK}
-      subtitle={badges.length > 0 ? badges : BLANK}
+      subtitle={<RouteBadges routeIds={stop?.routes || []} />}
     />
   );
 }

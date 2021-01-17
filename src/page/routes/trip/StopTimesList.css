@@ -1,0 +1,62 @@
+.stoptime {
+  --line-width: 4px;
+  --dot-diameter: 16px;
+  --dot-radius: calc(var(--dot-diameter) / 2);
+
+  display: grid;
+  grid-template:
+    'lines . .' 1rem
+    'lines name time' auto
+    'lines desc time' auto
+    'lines routes .' auto
+    'lines . .' 1rem
+    / 32px auto min-content;
+}
+.stoptime-name {
+  grid-area: name;
+}
+.stoptime-desc {
+  grid-area: desc;
+}
+.stoptime-routes {
+  grid-area: routes;
+}
+.stoptime-time {
+  grid-area: time;
+}
+
+.lines {
+  position: relative;
+  height: 100%;
+  grid-area: lines;
+  margin-right: 8px;
+}
+.lines__dot,
+.lines::before,
+.lines::after {
+  display: block;
+  position: absolute;
+}
+.lines::before,
+.lines::after {
+  content: '';
+  width: var(--line-width);
+  left: calc(calc(100% - var(--line-width)) / 2);
+  background-color: var(--route-color);
+}
+.lines::before {
+  top: 0;
+  bottom: calc(50% + var(--dot-radius));
+}
+.lines::after {
+  top: calc(50% + var(--dot-radius));
+  bottom: 0;
+}
+.lines__dot {
+  width: var(--dot-diameter);
+  height: var(--dot-diameter);
+  border: var(--line-width) solid var(--route-color);
+  border-radius: 50%;
+  top: calc(50% - var(--dot-radius));
+  left: calc(50% - var(--dot-radius));
+}

@@ -1,5 +1,6 @@
 import { Route, Stop } from '../../shared/gtfs-types';
 import {
+  closeRouteAction,
   closeStopAction,
   linkAction,
   setRouteAction,
@@ -18,6 +19,7 @@ export type RouterAction =
   | ReturnType<typeof linkAction>
   | ReturnType<typeof setRouteAction>
   | ReturnType<typeof setStopAction>
+  | ReturnType<typeof closeRouteAction>
   | ReturnType<typeof closeStopAction>;
 
 const ROUTES_PREFIX = '/routes/';
@@ -41,7 +43,6 @@ export function initStateFromUrl(url: URL) {
 }
 
 export function routerReducer(state: RouterState, action: RouterAction) {
-  console.log(action);
   switch (action.type) {
     case 'route':
       const { route } = action;
@@ -56,6 +57,13 @@ export function routerReducer(state: RouterState, action: RouterAction) {
         ...state,
         stop_id: stop.stop_id,
         stop,
+      };
+    case 'close-route':
+      return {
+        ...state,
+        route_id: undefined,
+        trip_id: undefined,
+        route: undefined,
       };
     case 'close-stop':
       return {

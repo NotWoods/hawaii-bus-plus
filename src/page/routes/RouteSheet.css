@@ -1,0 +1,7 @@
+.route-sheet {
+  min-height: 25%;
+}
+.route-sheet__name {
+  background-color: var(--route-color);
+  color: var(--route-text-color);
+}

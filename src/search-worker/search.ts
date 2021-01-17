@@ -5,9 +5,9 @@ import { applyOffset } from './helpers';
 import { AutocompletionRequest } from './places-autocomplete';
 
 export interface SearchResults {
-  places: google.maps.places.AutocompletePrediction[];
-  routes: Route[];
-  stops: Stop[];
+  places: readonly google.maps.places.AutocompletePrediction[];
+  routes: readonly Route[];
+  stops: readonly Stop[];
 }
 
 export function search(request: AutocompletionRequest): Promise<SearchResults> {

@@ -1,7 +1,7 @@
 export interface GTFSData {
-  routes: { [route_id: string]: Route };
-  stops: { [stop_id: string]: Stop };
-  calendar: { [service_id: string]: Calendar };
+  routes: Record<Route['route_id'], Route>;
+  stops: Record<Stop['stop_id'], Stop>;
+  calendar: Record<Calendar['service_id'], Calendar>;
   info: FeedInfo;
 }
 
@@ -40,7 +40,7 @@ export interface Calendar
 }
 
 export interface CsvCalendarDates {
-  service_id: string;
+  service_id: Calendar['service_id'];
   date: string;
   exception_type: number;
 }
@@ -63,8 +63,8 @@ export interface Route extends Readonly<CsvRoute> {
 }
 
 export interface CsvTrip {
-  route_id: string;
-  service_id: string;
+  route_id: Route['route_id'];
+  service_id: Calendar['service_id'];
   trip_id: string;
   direction_id: number;
   trip_short_name: string;
@@ -103,10 +103,10 @@ export interface Stop extends Readonly<Omit<CsvStop, 'stop_lat' | 'stop_lon'>> {
 }
 
 export interface CsvStopTime {
-  trip_id: string;
+  trip_id: Trip['trip_id'];
   arrival_time: string;
   departure_time: string;
-  stop_id: string;
+  stop_id: Stop['stop_id'];
   stop_sequence: number;
   pickup_type: number;
   drop_off_type: number;

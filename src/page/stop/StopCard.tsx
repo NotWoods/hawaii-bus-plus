@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import { routes } from '../../mock/api';
 import { useApi } from '../data/Api';
 import { center } from '../map/options';
 import { closeStopAction } from '../router/action';
@@ -9,9 +8,9 @@ import { PlaceCard } from './PlaceCard';
 
 export function StopCard() {
   const { stop_id, stop: stopData, dispatch } = useContext(RouterContext);
+  const api = useApi();
 
   if (!stop_id) return null;
-  const api = useApi();
 
   const stop = stopData || api?.stops?.[stop_id];
   const nearbyRoutes = stop?.routes || [];

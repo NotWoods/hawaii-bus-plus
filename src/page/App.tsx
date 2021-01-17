@@ -11,6 +11,7 @@ import { StopCard } from './stop/StopCard';
 import darkStyles from './map/dark-style.json';
 import { center, mapTypeControlOptions } from './map/options';
 import { ApiProvider } from './data/Api';
+import { RouteSheet } from './routes/Route';
 
 export function App() {
   const [showSidebar, setShowSidebar] = useState(true);
@@ -67,6 +68,7 @@ export function App() {
                 </GoogleMap>
               </LoadScript>
             </div>
+            <RouteSheet />
           </div>
         </StickyAlertsProvider>
       </ApiProvider>

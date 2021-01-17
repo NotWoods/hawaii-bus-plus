@@ -1,9 +1,8 @@
 {
   "extends": "../tsconfig.base.json",
-  "include": ["**/*"],
+  "include": ["**/*", "map/*.json"],
   "references": [
     { "path": "../shared" },
-    { "path": "../mock" },
     { "path": "../data" },
     { "path": "../search-worker" }
   ],

@@ -1,14 +1,7 @@
 import React, { ReactNode, useState } from 'react';
-import { stops, routes } from '../../mock/api';
 import { useAccessKey } from '../hooks/useAccessKey';
-import { SidebarTitle } from './SidebarTitle';
-import './Sidebar.css';
-import {
-  PlaceSearchItem,
-  RouteSearchItem,
-  StopSearchItem,
-} from './SearchItems';
 import { AllRoutes } from './AllRoutes';
+import './Sidebar.css';
 import { SidebarSearch } from './SidebarSearch';
 
 export function Sidebar() {
