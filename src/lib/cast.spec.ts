@@ -3,12 +3,10 @@ import { readFile } from 'fs/promises';
 import parse from 'csv-parse';
 import JSZip from 'jszip';
 import { cast } from './cast.js';
+import { GTFS_ZIP_LOCATION } from './env.js';
 
 async function* loadZipFile(path: string) {
-  const zipData = await readFile(
-    new URL('../../google_transit.zip', import.meta.url),
-    { encoding: null }
-  );
+  const zipData = await readFile(GTFS_ZIP_LOCATION, { encoding: null });
   const zip = await JSZip.loadAsync(zipData);
 
   const file = zip.file(path);

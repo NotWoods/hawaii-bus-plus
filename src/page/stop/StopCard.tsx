@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
+import { center } from '../../react-google-maps';
 import { useApi } from '../data/Api';
-import { center } from '../map/options';
 import { closeStopAction } from '../router/action';
 import { RouterContext } from '../router/Router';
 import { RouteSearchItem } from '../sidebar/SearchItems';

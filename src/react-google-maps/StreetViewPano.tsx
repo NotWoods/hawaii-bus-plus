@@ -1,9 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import {
-  googleMapsApiKey,
-  useGoogleMap,
-  useLoadGoogleMaps,
-} from '../hooks/useGoogleMaps';
+import { googleMapsApiKey, useGoogleMap, useLoadGoogleMaps } from './hooks';
 
 export interface StreetViewPanoProps {
   className?: string;
@@ -23,6 +19,10 @@ const options = {
   controlSize: 32,
 };
 
+/**
+ * Build a street view panorama.
+ * Fallbacks to an image if the Google Maps API hasn't loaded.
+ */
 export function StreetViewPano(props: StreetViewPanoProps) {
   const divRef = useRef(null);
   const [streetView, setStreetView] = useState<

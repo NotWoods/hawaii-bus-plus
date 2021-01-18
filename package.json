@@ -2,6 +2,7 @@
   "name": "hawaii-bus-plus",
   "private": true,
   "version": "0.0.0",
+  "type": "module",
   "scripts": {
     "tsc": "tsc --build src",
     "preapi": "pnpm run tsc",
@@ -26,6 +27,8 @@
   },
   "devDependencies": {
     "@11ty/eleventy": "^0.11.1",
+    "@types/enzyme": "^3.10.8",
+    "@types/enzyme-adapter-react-16": "^1.0.6",
     "@types/googlemaps": "^3.43.2",
     "@types/node": "^14.14.21",
     "@types/react": "^17.0.0",
@@ -34,6 +37,8 @@
     "ava": "^3.15.0",
     "csv-parse": "^4.14.2",
     "eleventy-plugin-date": "^1.0.0",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.5",
     "ix": "^4.0.0",
     "jszip": "^3.5.0",
     "prettier": "^2.2.1",

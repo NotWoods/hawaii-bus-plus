@@ -1,4 +1,9 @@
 {
   "files": [],
-  "references": [{ "path": "lib" }, { "path": "page" }, { "path": "shared" }]
+  "references": [
+    { "path": "lib" },
+    { "path": "page" },
+    { "path": "shared" },
+    { "path": "react-google-maps" }
+  ]
 }

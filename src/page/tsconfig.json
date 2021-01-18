@@ -4,6 +4,7 @@
   "references": [
     { "path": "../shared" },
     { "path": "../data" },
+    { "path": "../react-google-maps" },
     { "path": "../search-worker" }
   ],
   "compilerOptions": {

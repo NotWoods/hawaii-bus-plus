@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
+import { StreetViewPano, StreetViewPanoProps } from '../../react-google-maps';
 import './PlaceCard.css';
-import { StreetViewPano, StreetViewPanoProps } from './StreetViewPano';
 
 interface Props extends StreetViewPanoProps {
   children?: ReactNode;

@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { SidebarTitle } from './SidebarTitle';
-import './Sidebar.css';
+import { center } from '../../react-google-maps';
+import SearchWorker from '../../search-worker/index?worker';
+import type { SearchResults } from '../../search-worker/search';
+import { PromiseWorker } from '../../shared/promise-worker';
+import { makeId } from '../alert/make';
 import {
   PlaceSearchItem,
   RouteSearchItem,
   StopSearchItem,
 } from './SearchItems';
-import { PromiseWorker } from '../../shared/promise-worker';
-import type { SearchResults } from '../../search-worker/search';
-import SearchWorker from '../../search-worker/index?worker';
-import { makeId } from '../alert/make';
-import { center } from '../map/options';
+import './Sidebar.css';
+import { SidebarTitle } from './SidebarTitle';
 
 interface Props {
   search: string;

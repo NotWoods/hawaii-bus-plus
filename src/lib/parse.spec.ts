@@ -1,10 +1,11 @@
 import test from 'ava';
 import { readFile } from 'fs/promises';
 import JSZip from 'jszip';
+import { GTFS_ZIP_LOCATION } from './env.js';
 import { zipFilesToObject } from './parse.js';
 
 test('zipFilesToObject', async (t) => {
-  const buffer = await readFile('google_transit.zip');
+  const buffer = await readFile(GTFS_ZIP_LOCATION);
   const zip = await JSZip.loadAsync(buffer);
   const input = new Map(
     Object.entries({

@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
+import {
+  center,
+  darkStyles,
+  GoogleMapPortal,
+  MapProvider,
+  mapTypeControlOptions,
+} from '../react-google-maps';
 import { StickyAlertsList, StickyAlertsProvider } from './alert/StickyAlerts';
 import { ApiProvider } from './data/Api';
 import { classNames } from './hooks/classnames';
-import darkStyles from './map/dark-style.json';
-import { GoogleMapPortal } from './map/GoogleMap';
-import { MapProvider } from './map/MapProvider';
-import { center, mapTypeControlOptions } from './map/options';
 import { StopMarkers } from './map/StopMarkers';
 import { Navbar } from './Navbar';
 import { Router } from './router/Router';
