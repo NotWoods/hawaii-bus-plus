@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { center } from '../../react-google-maps';
-import SearchWorker from '../../search-worker/index?worker';
-import type { SearchResults } from '../../search-worker/search';
-import { PromiseWorker } from '../../shared/promise-worker';
+import SearchWorker from '../../worker-search/index?worker';
+import type { SearchResults } from '../../worker-search/search';
 import { makeId } from '../alert/make';
+import { dbReady } from '../data/db-ready';
+import { useWorker } from '../hooks/useWorker';
 import {
   PlaceSearchItem,
   RouteSearchItem,
@@ -17,7 +18,6 @@ interface Props {
 }
 
 const sessiontoken = makeId(10);
-const searchWorker = new PromiseWorker(new SearchWorker());
 
 export function SidebarSearch(props: Props) {
   const [searchResults, setSearchResults] = useState<SearchResults>({
@@ -26,15 +26,19 @@ export function SidebarSearch(props: Props) {
     stops: [],
   });
 
+  const searchWorker = useWorker(SearchWorker)!;
+
   useEffect(() => {
-    searchWorker
-      .postMessage({
-        key: 'AIzaSyAmRiFwEOokwUHYXK1MqYl5k2ngHoWGJBw',
-        input: props.search,
-        offset: props.search.length,
-        sessiontoken,
-        location: center,
-      })
+    dbReady
+      .then(() =>
+        searchWorker.postMessage({
+          key: 'AIzaSyAmRiFwEOokwUHYXK1MqYl5k2ngHoWGJBw',
+          input: props.search,
+          offset: props.search.length,
+          sessiontoken,
+          location: center,
+        })
+      )
       .then((results) => setSearchResults(results as SearchResults));
   }, [props.search]);
 

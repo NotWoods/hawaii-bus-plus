@@ -43,4 +43,8 @@ export class PromiseWorker {
       this.worker.postMessage(messageToSend);
     });
   }
+
+  terminate() {
+    return this.worker.terminate();
+  }
 }

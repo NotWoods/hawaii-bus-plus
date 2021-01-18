@@ -5,7 +5,8 @@
     { "path": "../shared" },
     { "path": "../data" },
     { "path": "../react-google-maps" },
-    { "path": "../search-worker" }
+    { "path": "../worker-search" },
+    { "path": "../worker-init-db" }
   ],
   "compilerOptions": {
     "lib": ["esnext", "dom", "dom.iterable"],
