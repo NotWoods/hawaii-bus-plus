@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import './PlaceCard.css';
 import { StreetViewPano, StreetViewPanoProps } from './StreetViewPano';
 
 interface Props extends StreetViewPanoProps {
+  children?: ReactNode;
   title?: string;
   subtitle?: string;
 }

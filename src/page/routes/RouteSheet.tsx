@@ -1,11 +1,14 @@
 import React, { useContext } from 'react';
 import { useApi } from '../data/Api';
 import { RouterContext } from '../router/Router';
-import { colorProps } from '../routes/props';
+import { colorProps } from './props';
 import { RouteName } from './RouteName';
 import { StopTimesList } from './trip/StopTimesList';
 import './RouteSheet.css';
 import { closeRouteAction } from '../router/action';
+import { Icon } from '../icons/Icon';
+import swapIcon from '../icons/swap_horiz.svg';
+import { RouteDetails } from './RouteDetails';
 
 export function RouteSheet() {
   const { route_id, route: routeData, dispatch } = useContext(RouterContext);
@@ -45,7 +48,16 @@ export function RouteSheet() {
         <div className="row row-eq-spacing-lg">
           <div className="col-lg-8">
             <div className="content">
-              ...
+              <div className="">
+                <h3 className="content-title m-0">
+                  {firstTrip.trip_short_name}
+                </h3>
+                <p className="mt-0">{firstTrip.stop_times.length} stops</p>
+                <a className="btn btn-sm">
+                  <Icon src={swapIcon} alt="" /> Switch direction
+                </a>
+              </div>
+              <hr className="mt-10" />
               <StopTimesList
                 routeId={route.route_id}
                 stopTimes={firstTrip.stop_times}
@@ -53,7 +65,7 @@ export function RouteSheet() {
             </div>
           </div>
           <div className="col-lg-4">
-            <div className="card">...</div>
+            <RouteDetails route={route} />
           </div>
         </div>
       </div>

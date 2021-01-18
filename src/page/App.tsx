@@ -1,19 +1,18 @@
-import { GoogleMap, LoadScript } from '@react-google-maps/api';
 import React, { useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { StickyAlertsList, StickyAlertsProvider } from './alert/StickyAlerts';
+import { ApiProvider } from './data/Api';
 import { classNames } from './hooks/classnames';
+import darkStyles from './map/dark-style.json';
+import { GoogleMapPortal } from './map/GoogleMap';
+import { MapProvider } from './map/MapProvider';
+import { center, mapTypeControlOptions } from './map/options';
+import { StopMarkers } from './map/StopMarkers';
 import { Navbar } from './Navbar';
 import { Router } from './router/Router';
+import { RouteSheet } from './routes/RouteSheet';
 import { Sidebar } from './sidebar/Sidebar';
-import { StopMarkers } from './map/StopMarkers';
 import { StopCard } from './stop/StopCard';
-import darkStyles from './map/dark-style.json';
-import { center, mapTypeControlOptions } from './map/options';
-import { ApiProvider } from './data/Api';
-import { RouteSheet } from './routes/Route';
-import { MapProvider } from './map/MapProvider';
-import { GoogleMapPortal } from './map/GoogleMap';
 
 export function App() {
   const [showSidebar, setShowSidebar] = useState(true);

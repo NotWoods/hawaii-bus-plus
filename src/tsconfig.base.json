@@ -19,7 +19,8 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "importHelpers": true,
-    "jsx": "react"
+    "jsx": "react",
+    "skipDefaultLibCheck": true
   },
   "include": ["./src"]
 }

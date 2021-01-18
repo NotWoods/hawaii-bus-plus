@@ -18,8 +18,12 @@ import type {
   Trip,
   FeedInfo,
   CsvTransfer,
+  CsvAgency,
+  Agency,
 } from '../shared/gtfs-types.js';
 import { stringTime } from '../shared/utils/date.js';
+import { toInt } from '../shared/utils/num.js';
+import { compareAs } from '../shared/utils/sort.js';
 import { cast } from './cast.js';
 
 const STARTS_WITH_TIME = /^\d\d?:\d\d/;
@@ -116,6 +120,7 @@ export async function createApiData(
     stop_times: CsvStopTime[];
     feed_info: FeedInfo[];
     transfers: CsvTransfer[];
+    agency: CsvAgency[];
   };
   const transfers = new Map<Stop['stop_id'], Stop['stop_id'][]>();
   const variable: ServerGTFSData = {
@@ -123,11 +128,22 @@ export async function createApiData(
     stops: {},
     calendar: {},
     trips: {},
+    agency: {},
     info: json.feed_info[0],
   };
 
+  for (const csvAgency of json.agency) {
+    const agency: Agency & Partial<CsvAgency> = csvAgency;
+    delete agency.agency_timezone;
+    delete agency.agency_lang;
+    variable.agency[agency.agency_id] = agency;
+  }
+  const agencies = Object.keys(variable.agency);
+  const defaultRoute = agencies.length === 1 ? agencies[0] : undefined;
+  json.routes.sort(compareAs((route) => route.route_sort_order));
   for (const csvRoute of json.routes) {
     const route = csvRoute as Mutable<Route>;
+    route.agency_id ||= defaultRoute!;
     route.trips = {};
     variable.routes[route.route_id] = route;
   }
@@ -211,12 +227,17 @@ export async function createApiData(
   for (const route of Object.values(variable.routes)) {
     for (const t of Object.values(route.trips)) {
       const trip = t as Mutable<Trip>;
-      trip.stop_times.sort((a, b) => a.stop_sequence - b.stop_sequence);
+      trip.stop_times.sort(compareAs((st) => st.stop_sequence));
       if (!STARTS_WITH_TIME.test(trip.trip_short_name)) {
         const start = trip.stop_times[0].arrival_time;
         trip.trip_short_name = `${stringTime(start)} ${trip.trip_short_name}`;
       }
     }
+  }
+  for (const stop of Object.values(variable.stops)) {
+    stop.routes.sort(
+      compareAs((routeId) => toInt(variable.routes[routeId].route_short_name))
+    );
   }
 
   return variable;

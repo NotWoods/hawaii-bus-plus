@@ -2,6 +2,7 @@ export interface GTFSData {
   routes: Record<Route['route_id'], Route>;
   stops: Record<Stop['stop_id'], Stop>;
   calendar: Record<Calendar['service_id'], Calendar>;
+  agency: Record<Agency['agency_id'], Agency>;
   info: FeedInfo;
 }
 
@@ -59,6 +60,7 @@ export interface CsvRoute {
 }
 
 export interface Route extends Readonly<CsvRoute> {
+  agency_id: string;
   readonly trips: { [trip_id: string]: Trip };
 }
 
@@ -132,10 +134,24 @@ export interface CsvTransfer {
 }
 
 export interface FeedInfo {
-  feed_publisher_name: string;
-  feed_publisher_url: string;
-  feed_start_date: string;
-  feed_version: string;
-  feed_contact_email: string;
-  feed_contact_url: string;
+  readonly feed_publisher_name: string;
+  readonly feed_publisher_url: string;
+  readonly feed_start_date: string;
+  readonly feed_version: string;
+  readonly feed_contact_email: string;
+  readonly feed_contact_url: string;
 }
+
+export interface CsvAgency {
+  agency_id: string;
+  agency_name: string;
+  agency_url: string;
+  agency_timezone: string;
+  agency_lang: string;
+  agency_phone: string;
+  agency_email: string;
+  agency_fare_url: string;
+}
+
+export interface Agency
+  extends Readonly<Omit<CsvAgency, 'agency_timezone' | 'agency_lang'>> {}

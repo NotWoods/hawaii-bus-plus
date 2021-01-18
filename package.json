@@ -5,7 +5,7 @@
   "scripts": {
     "tsc": "tsc --build src",
     "preapi": "pnpm run tsc",
-    "api": "node src/lib/cli.js ../hawaii-gtfs/pipeline/11_zip/google_transit.zip ./src/mock",
+    "api": "node src/lib/cli.js ../hawaii-gtfs/pipeline/11_zip/google_transit.zip ./public",
     "dev": "vite",
     "build": "pnpm run tsc && vite build",
     "pretest": "pnpm run tsc",

@@ -8,6 +8,7 @@
   ],
   "compilerOptions": {
     "lib": ["esnext", "dom", "dom.iterable"],
+    "skipLibCheck": true,
     "noEmit": true
   }
 }

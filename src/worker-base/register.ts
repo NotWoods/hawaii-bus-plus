@@ -14,8 +14,8 @@ export function registerPromiseWorker(
     }
   }
 
-  self.onmessage = function onIncomingMessage(e) {
-    const payload = e.data;
+  self.onmessage = function onIncomingMessage(evt: MessageEvent<unknown>) {
+    const payload = evt.data;
     if (!Array.isArray(payload) || payload.length !== 2) {
       // message doens't match communication format; ignore
       return;
