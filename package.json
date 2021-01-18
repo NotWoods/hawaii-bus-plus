@@ -1,8 +1,7 @@
 {
   "name": "hawaii-bus-plus",
   "private": true,
-  "version": "0.0.0",
-  "type": "module",
+  "version": "5.0.0",
   "scripts": {
     "tsc": "tsc --build src",
     "preapi": "pnpm run tsc",

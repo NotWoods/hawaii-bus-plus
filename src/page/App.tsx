@@ -1,16 +1,10 @@
 import React, { useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
-import {
-  center,
-  darkStyles,
-  GoogleMapPortal,
-  MapProvider,
-  mapTypeControlOptions,
-} from '../react-google-maps';
+import { MapProvider } from '../react-google-maps';
 import { StickyAlertsList, StickyAlertsProvider } from './alert/StickyAlerts';
 import { ApiProvider } from './data/Api';
 import { classNames } from './hooks/classnames';
-import { StopMarkers } from './map/StopMarkers';
+import { MainMap } from './map/MainMap';
 import { Navbar } from './Navbar';
 import { Router } from './router/Router';
 import { RouteSheet } from './routes/RouteSheet';
@@ -54,21 +48,7 @@ export function App() {
               <div className="sidebar-overlay" onClick={toggleSidebar}></div>
               <Sidebar />
               <div className="content-wrapper">
-                <GoogleMapPortal
-                  mapContainerClassName="map w-full h-full"
-                  center={center}
-                  zoom={9}
-                  options={{
-                    streetViewControl: false,
-                    mapTypeControlOptions,
-                    controlSize: 32,
-                    styles: darkMode
-                      ? (darkStyles as google.maps.MapTypeStyle[])
-                      : undefined,
-                  }}
-                >
-                  <StopMarkers />
-                </GoogleMapPortal>
+                <MainMap />
                 <StopCard />
               </div>
               <RouteSheet />

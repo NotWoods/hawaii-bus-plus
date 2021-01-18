@@ -3,16 +3,33 @@ import {
   closeRouteAction,
   closeStopAction,
   linkAction,
+  openPlace,
+  setMarker,
   setRouteAction,
   setStopAction,
+  updateUserLocation,
 } from './action';
+
+export interface PlaceResult
+  extends Omit<google.maps.places.PlaceResult, 'name' | 'geometry'> {
+  name?: string;
+  place_id: string;
+  geometry: Pick<google.maps.places.PlaceGeometry, 'location'>;
+}
 
 export interface RouterState {
   route_id?: string;
   trip_id?: string;
   route?: Route;
+
+  focus?: 'stop' | 'user' | 'place';
   stop_id?: string;
   stop?: Stop;
+
+  user?: google.maps.LatLngLiteral;
+  place_id?: string;
+  place?: PlaceResult;
+  marker?: google.maps.LatLngLiteral;
 }
 
 export type RouterAction =
@@ -20,7 +37,10 @@ export type RouterAction =
   | ReturnType<typeof setRouteAction>
   | ReturnType<typeof setStopAction>
   | ReturnType<typeof closeRouteAction>
-  | ReturnType<typeof closeStopAction>;
+  | ReturnType<typeof closeStopAction>
+  | ReturnType<typeof setMarker>
+  | ReturnType<typeof openPlace>
+  | ReturnType<typeof updateUserLocation>;
 
 const ROUTES_PREFIX = '/routes/';
 
@@ -42,7 +62,10 @@ export function initStateFromUrl(url: URL) {
   return newState;
 }
 
-export function routerReducer(state: RouterState, action: RouterAction) {
+export function routerReducer(
+  state: RouterState,
+  action: RouterAction
+): RouterState {
   switch (action.type) {
     case 'route':
       const { route } = action;
@@ -55,6 +78,7 @@ export function routerReducer(state: RouterState, action: RouterAction) {
       const { stop } = action;
       return {
         ...state,
+        focus: 'stop',
         stop_id: stop.stop_id,
         stop,
       };
@@ -66,10 +90,51 @@ export function routerReducer(state: RouterState, action: RouterAction) {
         route: undefined,
       };
     case 'close-stop':
+      switch (state.focus) {
+        case 'stop':
+          return {
+            ...state,
+            focus: undefined,
+            stop_id: undefined,
+            stop: undefined,
+          };
+        case 'place':
+          return {
+            ...state,
+            focus: undefined,
+            place_id: undefined,
+            place: undefined,
+          };
+        case 'user':
+          return {
+            ...state,
+            focus: undefined,
+            user: undefined,
+          };
+        default:
+          return state;
+      }
+    case 'set-marker':
       return {
         ...state,
-        stop_id: undefined,
-        stop: undefined,
+        focus: state.focus === 'place' ? undefined : state.focus,
+        place_id: undefined,
+        place: undefined,
+        marker: action.location,
+      };
+    case 'open-place':
+      return {
+        ...state,
+        focus: 'place',
+        place_id: action.place.place_id,
+        place: action.place,
+        marker: undefined,
+      };
+    case 'update-user-location':
+      return {
+        ...state,
+        focus: action.silent ? state.focus : 'user',
+        user: action.location,
       };
     case 'link':
       const { url } = action;

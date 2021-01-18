@@ -95,6 +95,7 @@ export function PlaceSearchItem({
     <SidebarItem
       {...props}
       href={`?place=${placeId}`}
+      action={undefined}
       icon={placeIcon}
       iconAlt="Place"
       title={text.main_text}
