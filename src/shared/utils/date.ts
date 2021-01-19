@@ -1,3 +1,4 @@
+import { TimeString } from '../data-types';
 import { toInt } from './num';
 
 /**
@@ -22,7 +23,7 @@ export function plainTime(hours: number, minutes: number, seconds: number) {
  * @param  {string} date 24hr string in format 12:00:00 to convert to string in 12hr format
  * @return {string}    	String representation of time
  */
-export function stringTime(date: Date | string): string {
+export function stringTime(date: Date | TimeString): string {
   if (typeof date === 'string') {
     if (date.indexOf(':') > -1 && date.lastIndexOf(':') > date.indexOf(':')) {
       const [hour, min, second] = date.split(':').map(toInt);
@@ -33,10 +34,11 @@ export function stringTime(date: Date | string): string {
     throw new TypeError(`date must be Date or string, not ${typeof date}`);
   }
 
+  const d = date as Date;
   let m = 'AM';
   let displayHour = '';
-  const hr = date.getHours();
-  const min = date.getMinutes();
+  const hr = d.getHours();
+  const min = d.getMinutes();
 
   if (hr === 0) {
     displayHour = '12';
@@ -61,7 +63,7 @@ export function stringTime(date: Date | string): string {
  * @param  {string} string in format 13:00:00, from gtfs data
  * @return {Date}
  */
-export function gtfsArrivalToDate(string: string): Date {
+export function gtfsArrivalToDate(string: TimeString): Date {
   const [hour, min, second] = string.split(':').map((s) => toInt(s));
   return plainTime(hour, min, second);
 }
@@ -71,7 +73,7 @@ export function gtfsArrivalToDate(string: string): Date {
  * @param  {string} string in format 13:00:00, from gtfs data
  * @return {string}        String representation of time
  */
-export function gtfsArrivalToString(string: string) {
+export function gtfsArrivalToString(string: TimeString) {
   return stringTime(gtfsArrivalToDate(string));
 }
 

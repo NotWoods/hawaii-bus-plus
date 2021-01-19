@@ -1,4 +1,4 @@
-import { Temporal } from 'proposal-temporal/lib/index.mjs';
+import { Temporal } from 'proposal-temporal';
 import { Route } from '../shared/gtfs-types';
 import { gtfsArrivalToDate } from '../shared/utils/temporal';
 import { findClosestStops } from './closest-stops';
@@ -23,12 +23,17 @@ export async function directionsTo(
     }
   }
 
+  const singleTripCandidates = [];
   const departPlainTime = departTime.toPlainTime();
   for (const stop of depart) {
     for (const trip of stop.trips) {
       const { time } = gtfsArrivalToDate(trip.time);
       // If departure time is before trip time
       if (Temporal.PlainTime.compare(departPlainTime, time) < 1) {
+        // Might be able to reach destination in single trip
+        if (arriveRoutes.has(trip.route)) {
+          singleTripCandidates.push(trip);
+        }
       }
     }
   }

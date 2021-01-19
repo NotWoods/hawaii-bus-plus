@@ -1,8 +1,9 @@
 import React from 'react';
+import { TimeString } from '../../../shared/data-types';
 import { stringTime } from '../../../shared/utils/date';
 
 interface TimeProps {
-  time: string;
+  time: TimeString;
   approximate?: boolean;
   className?: string;
 }

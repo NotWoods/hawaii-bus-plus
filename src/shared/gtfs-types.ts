@@ -1,4 +1,5 @@
 import { Opaque } from 'type-fest';
+import { DateString, TimeString } from './data-types';
 
 export interface GTFSData {
   routes: { [route_id: string]: RouteWithTrips };
@@ -22,8 +23,8 @@ export interface CsvCalendar {
   friday: boolean;
   saturday: boolean;
   sunday: boolean;
-  start_date: string;
-  end_date: string;
+  start_date: DateString;
+  end_date: DateString;
 }
 
 export interface Calendar
@@ -44,7 +45,7 @@ export interface Calendar
 
 export interface CsvCalendarDates {
   service_id: Calendar['service_id'];
-  date: string;
+  date: DateString;
   exception_type: number;
 }
 
@@ -103,7 +104,7 @@ export interface Stop extends Readonly<Omit<CsvStop, 'stop_lat' | 'stop_lon'>> {
     readonly dir: number;
     readonly route: Route['route_id'];
     readonly sequence: number;
-    readonly time: string;
+    readonly time: TimeString;
   }[];
   readonly routes: Route['route_id'][];
   readonly transfers: readonly Stop['stop_id'][];
@@ -111,8 +112,8 @@ export interface Stop extends Readonly<Omit<CsvStop, 'stop_lat' | 'stop_lon'>> {
 
 export interface CsvStopTime {
   trip_id: Trip['trip_id'];
-  arrival_time: string;
-  departure_time: string;
+  arrival_time: TimeString;
+  departure_time: TimeString;
   stop_id: Stop['stop_id'];
   stop_sequence: number;
   pickup_type: number;

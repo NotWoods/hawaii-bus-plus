@@ -1,9 +1,15 @@
 {
   "files": [],
   "references": [
+    { "path": "data" },
     { "path": "lib" },
     { "path": "page" },
+    { "path": "react-google-maps" },
     { "path": "shared" },
-    { "path": "react-google-maps" }
+    { "path": "worker-base" },
+    { "path": "worker-info" },
+    { "path": "worker-init-db" },
+    { "path": "worker-nearby" },
+    { "path": "worker-search" }
   ]
 }

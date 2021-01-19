@@ -1,4 +1,5 @@
-import { Temporal } from 'proposal-temporal/lib/index.mjs';
+import { Temporal } from 'proposal-temporal';
+import { TimeString } from '../data-types';
 import { toInt } from './num';
 
 /**
@@ -27,7 +28,7 @@ export function plainTime(hours: number, minutes: number, seconds: number) {
  * @return {string}    	String representation of time
  */
 export function stringTime(
-  date: { days: number; time: Temporal.PlainTime } | string
+  date: { days: number; time: Temporal.PlainTime } | TimeString
 ): string {
   if (typeof date === 'string') {
     if (date.indexOf(':') > -1 && date.lastIndexOf(':') > date.indexOf(':')) {
@@ -41,8 +42,9 @@ export function stringTime(
 
   let m = 'AM';
   let displayHour = '';
-  const hr = date.time.hour;
-  const min = date.time.minute;
+  const { time } = date as ReturnType<typeof plainTime>;
+  const hr = time.hour;
+  const min = time.minute;
 
   if (hr === 0) {
     displayHour = '12';
@@ -67,7 +69,7 @@ export function stringTime(
  * @param  {string} string in format 13:00:00, from gtfs data
  * @return {Date}
  */
-export function gtfsArrivalToDate(string: string) {
+export function gtfsArrivalToDate(string: TimeString) {
   const [hour, min, second] = string.split(':').map((s) => toInt(s));
   return plainTime(hour, min, second);
 }
@@ -77,6 +79,6 @@ export function gtfsArrivalToDate(string: string) {
  * @param  {string} string in format 13:00:00, from gtfs data
  * @return {string}        String representation of time
  */
-export function gtfsArrivalToString(string: string) {
+export function gtfsArrivalToString(string: TimeString) {
   return stringTime(gtfsArrivalToDate(string));
 }

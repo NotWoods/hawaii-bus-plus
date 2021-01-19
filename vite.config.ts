@@ -3,4 +3,7 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
   plugins: [reactRefresh()],
+  alias: {
+    'proposal-temporal': 'proposal-temporal/lib/index.mjs',
+  },
 });
