@@ -21,9 +21,7 @@ interface RouterContext extends RouterState {
 }
 
 export const RouterContext = createContext<RouterContext>({
-  dispatch() {
-    throw new Error('Router not mounted');
-  },
+  dispatch() {},
 });
 
 function path(url: URL | Location) {

@@ -7,6 +7,7 @@ import {
 } from '../../react-google-maps';
 import { openPlace, setMarker } from '../router/action';
 import { RouterContext } from '../router/Router';
+import { PlaceMarker } from './PlaceMarker';
 import { StopMarkers } from './StopMarkers';
 
 interface Props {
@@ -20,11 +21,15 @@ export function MainMap(props: Props) {
 
   function handleClick(evt: MapMouseEvent) {
     const event = evt as MapMouseEvent & Partial<google.maps.IconMouseEvent>;
+    event.stop();
     if (event.placeId) {
       dispatch(
         openPlace({
+          name: '',
           place_id: event.placeId,
-          geometry: { location: event.latLng },
+          geometry: {
+            location: event.latLng,
+          } as google.maps.places.PlaceGeometry,
         })
       );
     } else {
@@ -34,7 +39,7 @@ export function MainMap(props: Props) {
 
   return (
     <GoogleMapPortal
-      mapContainerClassName="map w-full h-full"
+      mapContainerClassName="map w-full h-full position-fixed"
       center={center}
       zoom={9}
       options={{
@@ -48,6 +53,7 @@ export function MainMap(props: Props) {
       onClick={handleClick}
     >
       <StopMarkers />
+      <PlaceMarker />
     </GoogleMapPortal>
   );
 }

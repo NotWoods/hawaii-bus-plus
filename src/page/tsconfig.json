@@ -5,6 +5,7 @@
     { "path": "../shared" },
     { "path": "../data" },
     { "path": "../react-google-maps" },
+    { "path": "../worker-info" },
     { "path": "../worker-search" },
     { "path": "../worker-init-db" }
   ],

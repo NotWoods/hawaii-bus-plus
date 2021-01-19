@@ -17,7 +17,7 @@ interface Props {
   search: string;
 }
 
-const sessiontoken = makeId(10);
+export const sessionToken = makeId(10);
 
 export function SidebarSearch(props: Props) {
   const [searchResults, setSearchResults] = useState<SearchResults>({
@@ -35,7 +35,7 @@ export function SidebarSearch(props: Props) {
           key: 'AIzaSyAmRiFwEOokwUHYXK1MqYl5k2ngHoWGJBw',
           input: props.search,
           offset: props.search.length,
-          sessiontoken,
+          sessiontoken: sessionToken,
           location: center,
         })
       )

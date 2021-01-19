@@ -50,8 +50,8 @@ export function App() {
               <div className="content-wrapper">
                 <MainMap />
                 <StopCard />
+                <RouteSheet />
               </div>
-              <RouteSheet />
             </div>
           </StickyAlertsProvider>
         </MapProvider>

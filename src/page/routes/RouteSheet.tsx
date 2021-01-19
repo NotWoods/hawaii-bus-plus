@@ -17,7 +17,7 @@ export function RouteSheet() {
     routeData || (route_id && api ? api.routes[route_id] : undefined);
 
   if (!route) {
-    return <div className="content-wrapper pointer-events-none" />;
+    return null;
   }
 
   const { backgroundColor } = colorProps(route);
@@ -28,45 +28,41 @@ export function RouteSheet() {
   };
 
   return (
-    <div className="content-wrapper pointer-events-none">
-      <div
-        className="route-sheet pointer-events-auto mx-10 border border-bottom-0 rounded-top bg-white bg-dark-light-dm"
-        style={cssVars as any}
-      >
-        <div className="route-sheet__name px-card py-15 d-flex border-bottom rounded-top dark-mode">
-          <h2 className="m-0 font-size-24 font-weight-bold">
-            <RouteName route={route} />
-          </h2>
-          <button
-            className="btn btn-square ml-auto text-reset"
-            type="button"
-            onClick={() => dispatch(closeRouteAction())}
-          >
-            &times;
-          </button>
-        </div>
-        <div className="row row-eq-spacing-lg">
-          <div className="col-lg-8">
-            <div className="content">
-              <div className="">
-                <h3 className="content-title m-0">
-                  {firstTrip.trip_short_name}
-                </h3>
-                <p className="mt-0">{firstTrip.stop_times.length} stops</p>
-                <a className="btn btn-sm">
-                  <Icon src={swapIcon} alt="" /> Switch direction
-                </a>
-              </div>
-              <hr className="mt-10" />
-              <StopTimesList
-                routeId={route.route_id}
-                stopTimes={firstTrip.stop_times}
-              />
+    <div
+      className="route-sheet pointer-events-auto mx-10 border border-bottom-0 rounded-top bg-white bg-dark-light-dm"
+      style={cssVars as any}
+    >
+      <div className="route-sheet__name px-card py-15 d-flex border-bottom rounded-top dark-mode">
+        <h2 className="m-0 font-size-24 font-weight-bold">
+          <RouteName route={route} />
+        </h2>
+        <button
+          className="btn btn-square ml-auto text-reset"
+          type="button"
+          onClick={() => dispatch(closeRouteAction())}
+        >
+          &times;
+        </button>
+      </div>
+      <div className="row row-eq-spacing-lg">
+        <div className="col-lg-8">
+          <div className="content">
+            <div className="">
+              <h3 className="content-title m-0">{firstTrip.trip_short_name}</h3>
+              <p className="mt-0">{firstTrip.stop_times.length} stops</p>
+              <a className="btn btn-sm">
+                <Icon src={swapIcon} alt="" /> Switch direction
+              </a>
             </div>
+            <hr className="mt-10" />
+            <StopTimesList
+              routeId={route.route_id}
+              stopTimes={firstTrip.stop_times}
+            />
           </div>
-          <div className="col-lg-4">
-            <RouteDetails route={route} />
-          </div>
+        </div>
+        <div className="col-lg-4">
+          <RouteDetails route={route} />
         </div>
       </div>
     </div>

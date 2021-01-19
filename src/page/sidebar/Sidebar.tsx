@@ -1,10 +1,10 @@
 import React, { ReactNode, useState } from 'react';
 import { useAccessKey } from '../hooks/useAccessKey';
-import { DefaultRoutes, DefaultRoutesProps } from './DefaultRoutes';
+import { DefaultRoutes } from './DefaultRoutes';
 import './Sidebar.css';
 import { SidebarSearch } from './SidebarSearch';
 
-export function Sidebar(props: DefaultRoutesProps) {
+export function Sidebar() {
   const inputRef = useAccessKey<HTMLInputElement>('shift+f');
   const [search, setSearch] = useState('');
 
@@ -12,7 +12,7 @@ export function Sidebar(props: DefaultRoutesProps) {
   if (search) {
     children = <SidebarSearch search={search} />;
   } else {
-    children = <DefaultRoutes {...props} />;
+    children = <DefaultRoutes />;
   }
 
   return (

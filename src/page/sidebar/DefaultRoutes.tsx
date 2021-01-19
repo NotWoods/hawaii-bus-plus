@@ -5,9 +5,7 @@ import { SidebarTitle } from './SidebarTitle';
 import locationIcon from '../icons/gps_fixed.svg';
 import { Icon } from '../icons/Icon';
 
-export interface DefaultRoutesProps {}
-
-export function DefaultRoutes(props: DefaultRoutesProps) {
+export function DefaultRoutes() {
   const api = useApi();
   const routes = api ? Object.values(api.routes) : [];
 

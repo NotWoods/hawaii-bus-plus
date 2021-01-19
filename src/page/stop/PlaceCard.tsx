@@ -4,8 +4,6 @@ import './PlaceCard.css';
 
 interface Props extends StreetViewPanoProps {
   children?: ReactNode;
-  title?: string;
-  subtitle?: string;
 }
 
 export function PlaceCard(props: Props) {
@@ -19,12 +17,6 @@ export function PlaceCard(props: Props) {
             visible={props.visible}
             onClose={props.onClose}
           />
-        </div>
-        <div className="content">
-          <h2 className="card-title m-0">{props.title}</h2>
-          {props.subtitle ? (
-            <p className="text-muted m-0">{props.subtitle}</p>
-          ) : null}
         </div>
         {props.children}
       </aside>

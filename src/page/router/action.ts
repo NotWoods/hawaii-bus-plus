@@ -1,5 +1,4 @@
 import { Route, Stop } from '../../shared/gtfs-types';
-import { PlaceResult } from './reducer';
 
 export function linkAction(href: string | URL) {
   const url = typeof href === 'string' ? new URL(href) : href;
@@ -11,7 +10,7 @@ export function setRouteAction(route: Route) {
 }
 
 export function setStopAction(stop: Stop) {
-  return { type: 'stop', stop, href: `?stop=${stop.stop_id}` } as const;
+  return { type: 'stop', stop } as const;
 }
 
 export function closeRouteAction() {
@@ -26,7 +25,7 @@ export function setMarker(location: google.maps.LatLngLiteral) {
   return { type: 'set-marker', location } as const;
 }
 
-export function openPlace(place: PlaceResult) {
+export function openPlace(place: google.maps.places.PlaceResult) {
   return { type: 'open-place', place } as const;
 }
 

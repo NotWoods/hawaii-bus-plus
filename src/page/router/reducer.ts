@@ -10,25 +10,18 @@ import {
   updateUserLocation,
 } from './action';
 
-export interface PlaceResult
-  extends Omit<google.maps.places.PlaceResult, 'name' | 'geometry'> {
-  name?: string;
-  place_id: string;
-  geometry: Pick<google.maps.places.PlaceGeometry, 'location'>;
-}
-
 export interface RouterState {
   route_id?: string;
   trip_id?: string;
   route?: Route;
 
-  focus?: 'stop' | 'user' | 'place';
+  focus?: 'stop' | 'place' | 'user' | 'marker';
   stop_id?: string;
   stop?: Stop;
 
-  user?: google.maps.LatLngLiteral;
   place_id?: string;
-  place?: PlaceResult;
+  place?: google.maps.places.PlaceResult;
+  user?: google.maps.LatLngLiteral;
   marker?: google.maps.LatLngLiteral;
 }
 
@@ -111,13 +104,19 @@ export function routerReducer(
             focus: undefined,
             user: undefined,
           };
+        case 'marker':
+          return {
+            ...state,
+            focus: undefined,
+            marker: undefined,
+          };
         default:
           return state;
       }
     case 'set-marker':
       return {
         ...state,
-        focus: state.focus === 'place' ? undefined : state.focus,
+        focus: 'marker',
         place_id: undefined,
         place: undefined,
         marker: action.location,
