@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { center, googleMapsApiKey } from '../../react-google-maps';
 import { Stop } from '../../shared/gtfs-types';
 import InfoWorker from '../../worker-info/info?worker';

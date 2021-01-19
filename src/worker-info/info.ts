@@ -22,6 +22,7 @@ interface PlaceInfoMessage {
 type Message = RouteInfoMessage | StopInfoMessage | PlaceInfoMessage;
 
 registerPromiseWorker(async (message: Message) => {
+  console.log(message);
   switch (message.type) {
     case 'route': {
       const db = await dbReady;
