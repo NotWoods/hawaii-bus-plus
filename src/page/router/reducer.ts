@@ -1,4 +1,4 @@
-import { Route, RouteCore, Stop } from '../../shared/gtfs-types';
+import { Route, Stop } from '../../shared/gtfs-types';
 import {
   closeRouteAction,
   closeStopAction,
@@ -22,7 +22,7 @@ export interface PlaceResult
 export interface RouterState {
   route_id?: string;
   trip_id?: string;
-  route?: RouteCore | Route;
+  route?: Route;
 
   focus?: 'stop' | 'place' | 'user' | 'marker';
   stop_id?: string;

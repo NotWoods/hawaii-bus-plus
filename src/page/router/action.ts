@@ -1,4 +1,4 @@
-import { RouteCore, Stop } from '../../shared/gtfs-types';
+import { Route, Stop } from '../../shared/gtfs-types';
 import { PlaceResult } from './reducer';
 
 export function linkAction(href: string | URL) {
@@ -6,7 +6,7 @@ export function linkAction(href: string | URL) {
   return { type: 'link', url } as const;
 }
 
-export function setRouteAction(route: RouteCore) {
+export function setRouteAction(route: Route) {
   return { type: 'route', route } as const;
 }
 

@@ -5,21 +5,21 @@ import { filter, map } from 'ix/iterable/operators/index.js';
 import JSZip, { JSZipObject } from 'jszip';
 import type { Mutable } from 'type-fest';
 import type {
+  Agency,
   Calendar,
+  CsvAgency,
   CsvCalendar,
   CsvRoute,
   CsvStop,
   CsvStopTime,
+  CsvTransfer,
   CsvTrip,
+  FeedInfo,
+  RouteWithTrips,
   ServerGTFSData,
-  Route,
   Stop,
   StopTime,
   Trip,
-  FeedInfo,
-  CsvTransfer,
-  CsvAgency,
-  Agency,
 } from '../shared/gtfs-types.js';
 import { stringTime } from '../shared/utils/date.js';
 import { toInt } from '../shared/utils/num.js';
@@ -142,7 +142,7 @@ export async function createApiData(
   const defaultRoute = agencies.length === 1 ? agencies[0] : undefined;
   json.routes.sort(compareAs((route) => route.route_sort_order));
   for (const csvRoute of json.routes) {
-    const route = csvRoute as Mutable<Route>;
+    const route = csvRoute as Mutable<RouteWithTrips>;
     route.agency_id ||= defaultRoute!;
     route.trips = {};
     variable.routes[route.route_id] = route;

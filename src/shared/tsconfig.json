@@ -1,4 +1,4 @@
 {
   "extends": "../tsconfig.base.json",
-  "include": ["**/*"]
+  "include": ["**/*", "missing-types.d.ts"]
 }

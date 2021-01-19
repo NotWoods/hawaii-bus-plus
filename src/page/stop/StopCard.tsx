@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
 import { center, googleMapsApiKey } from '../../react-google-maps';
-import { Stop } from '../../shared/gtfs-types';
+import { Route, Stop } from '../../shared/gtfs-types';
 import InfoWorker from '../../worker-info/info?worker';
+import { useApi } from '../data/Api';
 import { usePromise } from '../hooks/usePromise';
 import { useWorker } from '../hooks/useWorker';
 import { closeStopAction, openPlace, setStopAction } from '../router/action';
@@ -77,7 +78,11 @@ export function StopCard() {
 }
 
 export function StopInfo({ stop }: { stop?: Stop }) {
+  const api = useApi();
   const nearbyRoutes = stop?.routes || [];
+  const loadedRoutes = api
+    ? new Map(nearbyRoutes.map((routeId) => [routeId, api.routes[routeId]]))
+    : new Map<Route['route_id'], Route>();
 
   return (
     <>
@@ -88,7 +93,12 @@ export function StopInfo({ stop }: { stop?: Stop }) {
       <div className="content">
         <h3 className="content-title">Nearby routes</h3>
         {nearbyRoutes.map((routeId) => (
-          <RouteSearchItem key={routeId} className="px-0" routeId={routeId} />
+          <RouteSearchItem
+            key={routeId}
+            className="px-0"
+            routeId={routeId}
+            route={loadedRoutes.get(routeId)}
+          />
         ))}
       </div>
     </>

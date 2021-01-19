@@ -1,6 +1,6 @@
 import React from 'react';
 import { RequireAtLeastOne } from 'type-fest';
-import { Route, RouteCore, Stop } from '../../shared/gtfs-types';
+import { Route, Stop } from '../../shared/gtfs-types';
 import { useApi } from '../data/Api';
 import busStopIcon from '../icons/bus_stop.svg';
 import busIcon from '../icons/directions_bus.svg';
@@ -16,17 +16,14 @@ type SearchItemProps = Pick<SidebarItemProps, 'className' | 'onClick'>;
 type RouteSearchItemProps = SearchItemProps &
   RequireAtLeastOne<{
     routeId: Route['route_id'];
-    route: RouteCore;
+    route: Route;
   }>;
 
 export function RouteSearchItem({
   routeId,
-  route: routeData,
+  route,
   ...props
 }: RouteSearchItemProps) {
-  const api = useApi();
-  const route = routeData || api?.routes?.[routeId!];
-
   let routeProps: Omit<SidebarItemProps, 'icon' | 'iconAlt'>;
   if (route) {
     const { backgroundColor, dark } = colorProps(route);
@@ -43,6 +40,7 @@ export function RouteSearchItem({
       subtitle: BLANK,
     };
   }
+
   return (
     <SidebarItem
       {...props}

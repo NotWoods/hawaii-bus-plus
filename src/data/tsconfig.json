@@ -3,6 +3,7 @@
   "include": ["**/*"],
   "references": [{ "path": "../shared" }],
   "compilerOptions": {
-    "lib": ["esnext"]
+    "lib": ["esnext"],
+    "emitDeclarationOnly": true
   }
 }

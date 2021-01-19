@@ -1,7 +1,7 @@
 import { openDB, DBSchema } from 'idb';
-import { GTFSData, Route, Stop } from '../shared/gtfs-types';
+import { GTFSData, Route, RouteWithTrips, Stop } from '../shared/gtfs-types';
 
-export interface SearchRoute extends Route {
+export interface SearchRoute extends RouteWithTrips {
   words: readonly string[];
 }
 

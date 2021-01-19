@@ -1,7 +1,7 @@
 import { Opaque } from 'type-fest';
 
 export interface GTFSData {
-  routes: { [route_id: string]: Route };
+  routes: { [route_id: string]: RouteWithTrips };
   stops: { [stop_id: string]: Stop };
   calendar: { [service_id: string]: Calendar };
   agency: { [agency_id: string]: Agency };
@@ -63,19 +63,11 @@ export interface CsvRoute {
 
 export interface Route extends Readonly<CsvRoute> {
   readonly agency_id: string;
-  readonly trips: { [trip_id: string]: Trip };
 }
 
-export type RouteCore = Pick<
-  Route,
-  | 'route_id'
-  | 'route_short_name'
-  | 'route_long_name'
-  | 'route_type'
-  | 'route_color'
-  | 'route_text_color'
-  | 'agency_id'
->;
+export interface RouteWithTrips extends Route {
+  readonly trips: { [trip_id: string]: Trip };
+}
 
 export interface CsvTrip {
   route_id: Route['route_id'];

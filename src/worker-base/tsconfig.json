@@ -3,6 +3,7 @@
   "include": ["**/*"],
   "references": [],
   "compilerOptions": {
-    "lib": ["esnext", "webworker"]
+    "lib": ["esnext", "webworker"],
+    "emitDeclarationOnly": true
   }
 }

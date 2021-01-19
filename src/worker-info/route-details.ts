@@ -1,9 +1,9 @@
 import { dbReady } from '../data/database';
-import type { Route, Stop, Trip } from '../shared/gtfs-types';
+import type { Route, RouteWithTrips, Stop, Trip } from '../shared/gtfs-types';
 import { gtfsArrivalToDate, plainTime } from '../shared/utils/date';
 
 export interface RouteDetails {
-  readonly route: Route;
+  readonly route: RouteWithTrips;
   readonly firstStop: Stop['stop_id'];
   readonly lastStop: Stop['stop_id'];
   readonly earliest: Date;

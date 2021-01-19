@@ -3,6 +3,7 @@
   "include": ["**/*", "*.json"],
   "references": [{ "path": "../shared" }],
   "compilerOptions": {
-    "lib": ["esnext", "dom", "dom.iterable"]
+    "lib": ["esnext", "dom", "dom.iterable"],
+    "emitDeclarationOnly": true
   }
 }

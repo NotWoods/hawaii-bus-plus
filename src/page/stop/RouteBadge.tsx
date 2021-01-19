@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { Route, RouteCore } from '../../shared/gtfs-types';
+import { Route } from '../../shared/gtfs-types';
 import { useApi } from '../data/Api';
 import { classNames } from '../hooks/classnames';
 import { colorProps } from '../routes/props';
@@ -7,7 +7,7 @@ import { colorProps } from '../routes/props';
 export const BLANK = ' ';
 
 interface RouteBadgeProps {
-  route?: RouteCore;
+  route?: Route;
 }
 
 export function RouteBadge({ route }: RouteBadgeProps) {
