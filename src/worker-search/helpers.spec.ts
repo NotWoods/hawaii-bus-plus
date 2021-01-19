@@ -1,5 +1,5 @@
 import test from 'ava';
-import { applyOffset } from './helpers.js';
+import { applyOffset } from './helpers';
 
 test('applyOffset', async (t) => {
   t.is(applyOffset('Google abc', 3), 'Goo abc');

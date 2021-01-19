@@ -1,4 +1,4 @@
-import { toInt } from './num.js';
+import { toInt } from './num';
 
 /**
  * Returns a special `Date` without an associated year or month.

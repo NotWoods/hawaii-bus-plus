@@ -6,6 +6,6 @@ const initWorker = new PromiseWorker(new InitDBWorker());
 /**
  * Resolves once the database has been set up.
  */
-export const dbReady = initWorker.postMessage(undefined).then(() => {
+export const dbInitialized = initWorker.postMessage(undefined).then(() => {
   initWorker.terminate();
 });

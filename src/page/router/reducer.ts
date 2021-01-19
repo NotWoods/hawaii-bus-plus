@@ -1,4 +1,4 @@
-import { Route, Stop } from '../../shared/gtfs-types';
+import { Route, RouteCore, Stop } from '../../shared/gtfs-types';
 import {
   closeRouteAction,
   closeStopAction,
@@ -10,17 +10,26 @@ import {
   updateUserLocation,
 } from './action';
 
+export interface PlaceResult
+  extends Pick<
+    google.maps.places.PlaceResult,
+    'formatted_address' | 'place_id'
+  > {
+  name?: string;
+  location?: google.maps.LatLngLiteral;
+}
+
 export interface RouterState {
   route_id?: string;
   trip_id?: string;
-  route?: Route;
+  route?: RouteCore | Route;
 
   focus?: 'stop' | 'place' | 'user' | 'marker';
   stop_id?: string;
   stop?: Stop;
 
   place_id?: string;
-  place?: google.maps.places.PlaceResult;
+  place?: PlaceResult;
   user?: google.maps.LatLngLiteral;
   marker?: google.maps.LatLngLiteral;
 }
@@ -65,7 +74,7 @@ export function routerReducer(
       return {
         ...state,
         route_id: route.route_id,
-        route,
+        route: route,
       };
     case 'stop':
       const { stop } = action;

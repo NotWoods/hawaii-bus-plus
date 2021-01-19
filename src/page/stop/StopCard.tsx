@@ -5,6 +5,7 @@ import InfoWorker from '../../worker-info/info?worker';
 import { usePromise } from '../hooks/usePromise';
 import { useWorker } from '../hooks/useWorker';
 import { closeStopAction, openPlace, setStopAction } from '../router/action';
+import { PlaceResult } from '../router/reducer';
 import { RouterContext } from '../router/Router';
 import { RouteSearchItem } from '../sidebar/SearchItems';
 import { sessionToken } from '../sidebar/SidebarSearch';
@@ -94,11 +95,7 @@ export function StopInfo({ stop }: { stop?: Stop }) {
   );
 }
 
-export function PlaceInfo({
-  place,
-}: {
-  place?: google.maps.places.PlaceResult;
-}) {
+export function PlaceInfo({ place }: { place?: PlaceResult }) {
   return (
     <>
       <div className="content">

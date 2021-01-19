@@ -1,7 +1,7 @@
 import { GoogleMap, GoogleMapProps } from '@react-google-maps/api';
 import React, { useContext } from 'react';
-import { useLoadGoogleMaps } from './hooks.js';
-import { MapSetterContext } from './MapProvider.js';
+import { useLoadGoogleMaps } from './hooks';
+import { MapSetterContext } from './MapProvider';
 
 /**
  * Displays a `GoogleMap` while linking it with the context of `MapProvider`.

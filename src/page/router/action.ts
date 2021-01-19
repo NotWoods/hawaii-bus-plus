@@ -1,11 +1,12 @@
-import { Route, Stop } from '../../shared/gtfs-types';
+import { RouteCore, Stop } from '../../shared/gtfs-types';
+import { PlaceResult } from './reducer';
 
 export function linkAction(href: string | URL) {
   const url = typeof href === 'string' ? new URL(href) : href;
   return { type: 'link', url } as const;
 }
 
-export function setRouteAction(route: Route) {
+export function setRouteAction(route: RouteCore) {
   return { type: 'route', route } as const;
 }
 
@@ -25,7 +26,7 @@ export function setMarker(location: google.maps.LatLngLiteral) {
   return { type: 'set-marker', location } as const;
 }
 
-export function openPlace(place: google.maps.places.PlaceResult) {
+export function openPlace(place: PlaceResult) {
   return { type: 'open-place', place } as const;
 }
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { RequireAtLeastOne } from 'type-fest';
-import { Route, Stop } from '../../shared/gtfs-types';
+import { Route, RouteCore, Stop } from '../../shared/gtfs-types';
 import { useApi } from '../data/Api';
 import busStopIcon from '../icons/bus_stop.svg';
 import busIcon from '../icons/directions_bus.svg';
@@ -16,7 +16,7 @@ type SearchItemProps = Pick<SidebarItemProps, 'className' | 'onClick'>;
 type RouteSearchItemProps = SearchItemProps &
   RequireAtLeastOne<{
     routeId: Route['route_id'];
-    route: Route;
+    route: RouteCore;
   }>;
 
 export function RouteSearchItem({

@@ -1,8 +1,10 @@
+import { Opaque } from 'type-fest';
+
 export interface GTFSData {
-  routes: Record<Route['route_id'], Route>;
-  stops: Record<Stop['stop_id'], Stop>;
-  calendar: Record<Calendar['service_id'], Calendar>;
-  agency: Record<Agency['agency_id'], Agency>;
+  routes: { [route_id: string]: Route };
+  stops: { [stop_id: string]: Stop };
+  calendar: { [service_id: string]: Calendar };
+  agency: { [agency_id: string]: Agency };
   info: FeedInfo;
 }
 
@@ -12,7 +14,7 @@ export interface ServerGTFSData extends GTFSData {
 }
 
 export interface CsvCalendar {
-  service_id: string;
+  service_id: Opaque<string, 'calendar'>;
   monday: boolean;
   tuesday: boolean;
   wednesday: boolean;
@@ -47,7 +49,7 @@ export interface CsvCalendarDates {
 }
 
 export interface CsvRoute {
-  route_id: string;
+  route_id: Opaque<string, 'route'>;
   route_short_name: string;
   route_long_name: string;
   route_desc: string;
@@ -60,9 +62,20 @@ export interface CsvRoute {
 }
 
 export interface Route extends Readonly<CsvRoute> {
-  agency_id: string;
+  readonly agency_id: string;
   readonly trips: { [trip_id: string]: Trip };
 }
+
+export type RouteCore = Pick<
+  Route,
+  | 'route_id'
+  | 'route_short_name'
+  | 'route_long_name'
+  | 'route_type'
+  | 'route_color'
+  | 'route_text_color'
+  | 'agency_id'
+>;
 
 export interface CsvTrip {
   route_id: Route['route_id'];
@@ -81,7 +94,7 @@ export interface Trip extends Readonly<CsvTrip> {
 }
 
 export interface CsvStop {
-  stop_id: string;
+  stop_id: Opaque<string, 'stop'>;
   stop_name: string;
   stop_desc: string;
   stop_lat: number;
@@ -143,7 +156,7 @@ export interface FeedInfo {
 }
 
 export interface CsvAgency {
-  agency_id: string;
+  agency_id: Opaque<string, 'agency'>;
   agency_name: string;
   agency_url: string;
   agency_timezone: string;

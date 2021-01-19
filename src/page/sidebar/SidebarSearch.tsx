@@ -3,7 +3,7 @@ import { center } from '../../react-google-maps';
 import SearchWorker from '../../worker-search/index?worker';
 import type { SearchResults } from '../../worker-search/search';
 import { makeId } from '../alert/make';
-import { dbReady } from '../data/db-ready';
+import { dbInitialized } from '../data/db-ready';
 import { useWorker } from '../hooks/useWorker';
 import {
   PlaceSearchItem,
@@ -26,12 +26,12 @@ export function SidebarSearch(props: Props) {
     stops: [],
   });
 
-  const searchWorker = useWorker(SearchWorker)!;
+  const searchWorker = useWorker(SearchWorker);
 
   useEffect(() => {
-    dbReady
+    dbInitialized
       .then(() =>
-        searchWorker.postMessage({
+        searchWorker?.postMessage({
           key: 'AIzaSyAmRiFwEOokwUHYXK1MqYl5k2ngHoWGJBw',
           input: props.search,
           offset: props.search.length,

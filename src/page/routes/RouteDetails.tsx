@@ -7,11 +7,16 @@ import webIcon from '../icons/web.svg';
 import fareIcon from '../icons/monetization_on.svg';
 
 interface Props {
-  route: Route;
+  route?: Route;
 }
 
-export function RouteDetails({ route }: Props) {
+export function RouteDetailsCard({ route }: Props) {
   const api = useApi();
+
+  if (!route) {
+    return <div className="card" />;
+  }
+
   const agency = api?.agency?.[route.agency_id];
 
   return (

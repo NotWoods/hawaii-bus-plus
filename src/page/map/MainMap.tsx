@@ -27,9 +27,7 @@ export function MainMap(props: Props) {
         openPlace({
           name: '',
           place_id: event.placeId,
-          geometry: {
-            location: event.latLng,
-          } as google.maps.places.PlaceGeometry,
+          location: event.latLng.toJSON(),
         })
       );
     } else {
