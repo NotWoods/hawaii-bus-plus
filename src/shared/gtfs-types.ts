@@ -125,19 +125,19 @@ export interface CsvStopTime {
 
 export interface StopTime
   extends Readonly<
-    Omit<
-      CsvStopTime,
-      'trip_id' | 'continuous_drop_off' | 'drop_off_type' | 'timepoint'
-    >
+    Omit<CsvStopTime, 'continuous_drop_off' | 'drop_off_type' | 'timepoint'>
   > {
   readonly timepoint: boolean;
 }
 
 export interface CsvTransfer {
-  readonly from_stop_id: Stop['stop_id'];
-  readonly to_stop_id: Stop['stop_id'];
-  readonly transfer_type: number;
+  from_stop_id: Stop['stop_id'];
+  to_stop_id: Stop['stop_id'];
+  transfer_type: number;
+  min_transfer_time?: number;
 }
+
+export type Transfer = Readonly<CsvTransfer>;
 
 export interface FeedInfo {
   readonly feed_publisher_name: string;

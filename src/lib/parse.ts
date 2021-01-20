@@ -21,9 +21,13 @@ import type {
   StopTime,
   Trip,
 } from '../shared/gtfs-types.js';
-import { stringTime } from '../shared/utils/date.js';
 import { toInt } from '../shared/utils/num.js';
 import { compareAs } from '../shared/utils/sort.js';
+import {
+  compare,
+  gtfsArrivalToDate,
+  stringTime,
+} from '../shared/utils/temporal.js';
 import { cast } from './cast.js';
 
 const STARTS_WITH_TIME = /^\d\d?:\d\d/;
@@ -215,13 +219,12 @@ export async function createApiData(
         dir: trip.direction_id,
         route: route_id,
         sequence: stopTime.stop_sequence,
-        time: stopTime.arrival_time,
+        time: stopTime.departure_time,
       });
     }
     if (!stop.routes.includes(route_id)) {
       stop.routes.push(route_id);
     }
-    delete (csvStopTime as Partial<CsvStopTime>).trip_id;
   }
 
   for (const route of Object.values(variable.routes)) {
@@ -238,6 +241,11 @@ export async function createApiData(
     stop.routes.sort(
       compareAs((routeId) => toInt(variable.routes[routeId].route_short_name))
     );
+    stop.trips.sort((a, b) => {
+      const aTime = gtfsArrivalToDate(a.time);
+      const bTime = gtfsArrivalToDate(b.time);
+      return compare(aTime, bTime);
+    });
   }
 
   return variable;

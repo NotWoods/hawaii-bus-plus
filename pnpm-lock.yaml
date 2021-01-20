@@ -2,7 +2,9 @@ dependencies:
   '@googlemaps/js-api-loader': 1.11.1
   '@react-google-maps/api': 2.1.0_react-dom@17.0.1+react@17.0.1
   halfmoon: 1.1.1
+  heap-js: 2.1.4
   idb: 6.0.0
+  mnemonist: 0.38.1
   react: 17.0.1
   react-dom: 17.0.1_react@17.0.1
   react-hotkeys-hook: 3.0.3_react-dom@17.0.1+react@17.0.1
@@ -2392,6 +2394,12 @@ packages:
       node: '>= 0.4.0'
     resolution:
       integrity: sha512-f2dvO0VU6Oej7RkWJGrehjbzMAjFp5/VKPp5tTpWIV4JHHZK1/BxbFRtf/siA2SWTe09caDmVtYYzWEIbBS4zw==
+  /heap-js/2.1.4:
+    dev: false
+    engines:
+      node: '>=10.0.0'
+    resolution:
+      integrity: sha512-BTqPQI5dN24wC+wiAEC3VWtHnGNH2fh64TGzlVr1a7Smp6bNdzezpybYUBw8/ZRvlh+qUylPE1YJbnWEx3Ge/g==
   /hosted-git-info/2.8.8:
     dev: true
     resolution:
@@ -3319,6 +3327,12 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==
+  /mnemonist/0.38.1:
+    dependencies:
+      obliterator: 1.6.1
+    dev: false
+    resolution:
+      integrity: sha512-I674bCCj9p87Re+gv15ynDrP14XjcmLR7tBO22l3UoxQLniyIXdD9vid2sSxYkyOr0fZwJTA+dXRvrwANgdnyg==
   /moo/0.5.1:
     dev: true
     resolution:
@@ -3502,6 +3516,10 @@ packages:
       node: '>= 0.4'
     resolution:
       integrity: sha512-MYC0jvJopr8EK6dPBiO8Nb9mvjdypOachO5REGk6MXzujbBrAisKo3HmdEI6kZDL6fC31Mwee/5YbtMebixeag==
+  /obliterator/1.6.1:
+    dev: false
+    resolution:
+      integrity: sha512-9WXswnqINnnhOG/5SLimUlzuU1hFJUc8zkwyD59Sd+dPOMf05PmnYG/d6Q7HZ+KmgkZJa1PxRso6QdM3sTNHig==
   /on-finished/2.3.0:
     dependencies:
       ee-first: 1.1.1
@@ -5361,9 +5379,11 @@ specifiers:
   enzyme: ^3.11.0
   enzyme-adapter-react-16: ^1.15.5
   halfmoon: ^1.1.1
+  heap-js: ^2.1.4
   idb: ^6.0.0
   ix: ^4.0.0
   jszip: ^3.5.0
+  mnemonist: ^0.38.1
   prettier: ^2.2.1
   proposal-temporal: ^0.6.0
   react: ^17.0.0

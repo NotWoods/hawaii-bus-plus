@@ -1,6 +1,11 @@
 import { Temporal } from 'proposal-temporal';
 import { TimeString } from '../data-types';
-import { toInt } from './num';
+import { toInt } from './num.js';
+
+export interface PlainTimeWithDate {
+  days: number;
+  time: Temporal.PlainTime;
+}
 
 /**
  * Returns a special `Date` without an associated year or month.
@@ -42,7 +47,7 @@ export function stringTime(
 
   let m = 'AM';
   let displayHour = '';
-  const { time } = date as ReturnType<typeof plainTime>;
+  const { time } = date as PlainTimeWithDate;
   const hr = time.hour;
   const min = time.minute;
 
@@ -81,4 +86,12 @@ export function gtfsArrivalToDate(string: TimeString) {
  */
 export function gtfsArrivalToString(string: TimeString) {
   return stringTime(gtfsArrivalToDate(string));
+}
+
+export function compare(a: PlainTimeWithDate, b: PlainTimeWithDate) {
+  if (a.days !== b.days) {
+    return a.days - b.days;
+  } else {
+    return Temporal.PlainTime.compare(a.time, b.time);
+  }
 }

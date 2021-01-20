@@ -1,5 +1,5 @@
-import { TimeString } from '../data-types';
-import { toInt } from './num';
+import type { TimeString } from '../data-types';
+import { toInt } from './num.js';
 
 /**
  * Returns a special `Date` without an associated year or month.
