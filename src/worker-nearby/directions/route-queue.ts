@@ -16,6 +16,11 @@ export function uniqueRouteId(trip: Trip) {
     .join(',') as DirectionRoute['id'];
 }
 
+export interface QueueValue {
+  stop_id: Stop['stop_id'];
+  info: StopRouteInfo;
+}
+
 /**
  * Construct queue Q for RAPTOR from the marked stops in the previous round.
  * Returns a map of routes that the given stops connect to.
@@ -25,14 +30,27 @@ export function buildQueue(
   data: Pick<DirectionsData, 'stops'>,
   markedStops: Iterable<Stop['stop_id']>
 ) {
-  const queue = new Map<DirectionRoute['id'], StopRouteInfo>();
+  const queue = new Map<DirectionRoute['id'], QueueValue>();
   for (const stopId of markedStops) {
     for (const routeInfo of data.stops[stopId].routes) {
       const existingStop = queue.get(routeInfo.route_id);
-      if (!existingStop || routeInfo.sequence < existingStop.sequence) {
-        queue.set(routeInfo.route_id, routeInfo);
+      if (!existingStop || routeInfo.sequence < existingStop.info.sequence) {
+        queue.set(routeInfo.route_id, { stop_id: stopId, info: routeInfo });
       }
     }
   }
   return queue;
+}
+
+export function* stopsBeginningWith(
+  route: DirectionRoute,
+  hopOnStop: QueueValue
+) {
+  let found = false;
+  for (const stopId of route.stops) {
+    found ||= stopId === hopOnStop.stop_id;
+    if (found) {
+      yield stopId;
+    }
+  }
 }

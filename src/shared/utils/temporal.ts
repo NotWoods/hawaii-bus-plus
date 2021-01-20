@@ -71,11 +71,18 @@ export class PlainDaysTime {
   static compare(one: PlainDaysTime, two: PlainDaysTime) {
     if (one.day !== two.day) {
       return one.day - two.day;
+    } else if (one.day === Infinity && two.day === Infinity) {
+      return 0;
     } else {
       return Temporal.PlainTime.compare(one.time, two.time);
     }
   }
 }
+
+export const InfinityPlainDaysTime = new PlainDaysTime(
+  Infinity,
+  new Temporal.PlainTime()
+);
 
 /**
  * Returns a special `Date` without an associated year or month.

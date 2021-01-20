@@ -10,12 +10,9 @@ export function getStopTime(trip: Trip, stopId: Stop['stop_id']) {
 export function getEarliestValidTrip(
   route: DirectionRoute,
   stopId: Stop['stop_id'],
-  lastRoundTime: PlainDaysTime | undefined
+  lastRoundTime: PlainDaysTime
 ) {
-  if (lastRoundTime == undefined) {
-    // undefined means infinity, can't find anything after that
-    return undefined;
-  } else if (!route.stops.has(stopId)) {
+  if (!route.stops.has(stopId)) {
     // this stop isn't even in this route
     return undefined;
   }

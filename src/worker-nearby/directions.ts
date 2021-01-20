@@ -2,11 +2,17 @@ import { DefaultMap } from 'mnemonist';
 import { Temporal } from 'proposal-temporal';
 import { dbReady } from '../data/database';
 import { Stop, Trip } from '../shared/gtfs-types';
-import { PlainDaysTime } from '../shared/utils/temporal';
+import { InfinityPlainDaysTime, PlainDaysTime } from '../shared/utils/temporal';
 import { footPathsLoader } from './directions/footpaths';
 import { generateDirectionsData } from './directions/generate-data';
-import { buildQueue } from './directions/route-queue';
+import { buildQueue, stopsBeginningWith } from './directions/route-queue';
 import { arrivalTime, getEarliestValidTrip } from './directions/trip-times';
+
+interface Path {
+  time: PlainDaysTime;
+  trip?: Trip['trip_id'];
+  transfer_from?: Stop['stop_id'];
+}
 
 /**
  * An implementation of the RAPTOR algorithm.
@@ -25,14 +31,14 @@ export async function raptorDirections(
   // The algorithm works in rounds.
   // Each round, k, computes the fastest way of getting to every stop with up to k trips.
   // Note that some stops may not be reachable at all.
-  const K = 2;
+  const K = Infinity;
 
   // Each stop, p, is associated with a multi-label (t_0(p), t_1(p), ...)
   // where t_i(p) represents the earliest known arrival time at p with up to i trips.
   // Initially every value is set to infinity, and t_0(p_s) is set to t.
-  const multiLabel = new DefaultMap<Stop['stop_id'], PlainDaysTime[]>(() => []);
+  const multiLabel = new DefaultMap<Stop['stop_id'], Path[]>(() => []);
   multiLabel.set(sourceStopId, [
-    new PlainDaysTime(0, departureTime.toPlainTime()),
+    { time: new PlainDaysTime(0, departureTime.toPlainTime()) },
   ]);
 
   // Local pruning: We keep a value representing the earliest known arrival time at each stop.
@@ -59,38 +65,41 @@ export async function raptorDirections(
 
     // Stage 2: Process each route in the timetable once.
     // When processing route r, consider journeys where the last trip taken is in route r.
-    for (const routeId of queue.keys()) {
+    for (const [routeId, hopOnStop] of queue) {
+      // hopOnStop: p
       // route: r
       const route = data.routes[routeId];
       // earliestTripId: et(r, p_i)
-      let earliestTrip = undefined;
-      for (const stopId of route.stops) {
+      let earliestTrip: Trip | undefined = undefined;
+      for (const stopId of stopsBeginningWith(route, hopOnStop)) {
         // stopId: p_i
 
         const existingLabels = multiLabel.get(stopId);
         const arrival = earliestTrip && arrivalTime(earliestTrip, stopId);
-        // undefined represents Infinity
-        const earliestArrival = earliestKnownArrival.get(stopId);
+
+        const earliestArrival =
+          earliestKnownArrival.get(stopId) || InfinityPlainDaysTime;
 
         // Can the label be improved in this round?
         // If earliestTrip is not undefined,
         // and arrival is less than the earliest known arrival time
-        if (
-          arrival &&
-          (earliestArrival == undefined ||
-            PlainDaysTime.compare(arrival, earliestArrival) < 0)
-        ) {
-          existingLabels[k] = arrival;
+        if (arrival && PlainDaysTime.compare(arrival, earliestArrival) < 0) {
+          existingLabels[k] = {
+            time: arrival,
+            trip: earliestTrip!.trip_id,
+            transfer_from: hopOnStop.stop_id,
+          };
           earliestKnownArrival.set(stopId, arrival);
           markedStops.add(stopId);
-        } else {
-          // Can we catch an earlier trip at p_i?
-          earliestTrip = getEarliestValidTrip(
+        }
+
+        // Can we catch an earlier trip at p_i?
+        earliestTrip =
+          getEarliestValidTrip(
             route,
             stopId,
-            existingLabels[k - 1]
-          );
-        }
+            existingLabels[k - 1]?.time || InfinityPlainDaysTime
+          ) || earliestTrip;
       }
     }
 
@@ -99,17 +108,23 @@ export async function raptorDirections(
     for (const fromStopId of markedStops) {
       const transfers = footPaths.get(fromStopId)!;
       for (const transfer of transfers) {
-        const fromTime = multiLabel.get(fromStopId)[k - 1];
+        const fromTime = multiLabel.get(fromStopId)[k - 1]?.time;
         const timeWithWalking =
           fromTime &&
           fromTime.add({ minutes: transfer.min_transfer_time || 0 });
         const existingLabels = multiLabel.get(transfer.to_stop_id);
 
-        if (
-          timeWithWalking &&
-          PlainDaysTime.compare(timeWithWalking, existingLabels[k]) < 0
-        ) {
-          existingLabels[k] = timeWithWalking;
+        const timeWithWalkingBeforeExistingTime =
+          PlainDaysTime.compare(
+            timeWithWalking || InfinityPlainDaysTime,
+            existingLabels[k]?.time || InfinityPlainDaysTime
+          ) < 0;
+
+        if (timeWithWalkingBeforeExistingTime) {
+          existingLabels[k] = {
+            time: timeWithWalking,
+            transfer_from: fromStopId,
+          };
           markedStops.add(transfer.to_stop_id);
         }
       }
@@ -119,5 +134,7 @@ export async function raptorDirections(
     if (markedStops.size === 0) break;
   }
 
-  return multiLabel;
+  return new Map(
+    Array.from(multiLabel).filter(([, value]) => value.length > 0)
+  );
 }
