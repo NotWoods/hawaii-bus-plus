@@ -32,21 +32,23 @@ export interface Calendar
     Pick<CsvCalendar, 'service_id' | 'start_date' | 'end_date'>
   > {
   readonly days: readonly [
-    sunday: boolean,
     monday: boolean,
     tuesday: boolean,
     wednesday: boolean,
     thursday: boolean,
     friday: boolean,
-    saturday: boolean
+    saturday: boolean,
+    sunday: boolean
   ];
   readonly text_name: string;
+  readonly added_dates: readonly DateString[];
+  readonly removed_dates: readonly DateString[];
 }
 
 export interface CsvCalendarDates {
   service_id: Calendar['service_id'];
   date: DateString;
-  exception_type: number;
+  exception_type: 1 | 2;
 }
 
 export interface CsvRoute {
@@ -54,7 +56,7 @@ export interface CsvRoute {
   route_short_name: string;
   route_long_name: string;
   route_desc: string;
-  route_type: number;
+  route_type: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
   route_color: string;
   route_text_color: string;
   agency_id?: string;
@@ -73,8 +75,8 @@ export interface RouteWithTrips extends Route {
 export interface CsvTrip {
   route_id: Route['route_id'];
   service_id: Calendar['service_id'];
-  trip_id: string;
-  direction_id: number;
+  trip_id: Opaque<string, 'trip'>;
+  direction_id: 0 | 1;
   trip_short_name: string;
   trip_headsign: string;
 }
@@ -101,13 +103,13 @@ export interface Stop extends Readonly<Omit<CsvStop, 'stop_lat' | 'stop_lon'>> {
   };
   readonly trips: {
     readonly trip: Trip['trip_id'];
-    readonly dir: number;
+    readonly dir: 0 | 1;
     readonly route: Route['route_id'];
     readonly sequence: number;
     readonly time: TimeString;
   }[];
   readonly routes: Route['route_id'][];
-  readonly transfers: readonly Stop['stop_id'][];
+  readonly transfers: readonly Transfer[];
 }
 
 export interface CsvStopTime {
@@ -116,24 +118,21 @@ export interface CsvStopTime {
   departure_time: TimeString;
   stop_id: Stop['stop_id'];
   stop_sequence: number;
-  pickup_type: number;
-  drop_off_type: number;
-  continuous_pickup: number;
-  continuous_drop_off: number;
-  timepoint: number;
+  pickup_type: 0 | 1 | 2 | 3;
+  drop_off_type: 0 | 1 | 2 | 3;
+  continuous_pickup: 0 | 1 | 2 | 3;
+  continuous_drop_off: 0 | 1 | 2 | 3;
+  timepoint: boolean;
 }
 
-export interface StopTime
-  extends Readonly<
-    Omit<CsvStopTime, 'continuous_drop_off' | 'drop_off_type' | 'timepoint'>
-  > {
-  readonly timepoint: boolean;
-}
+export type StopTime = Readonly<
+  Omit<CsvStopTime, 'continuous_drop_off' | 'drop_off_type'>
+>;
 
 export interface CsvTransfer {
   from_stop_id: Stop['stop_id'];
   to_stop_id: Stop['stop_id'];
-  transfer_type: number;
+  transfer_type: 0 | 1 | 2 | 3;
   min_transfer_time?: number;
 }
 

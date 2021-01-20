@@ -1,10 +1,80 @@
 import { Temporal } from 'proposal-temporal';
+import { Opaque } from 'type-fest';
 import { TimeString } from '../data-types';
 import { toInt } from './num.js';
 
-export interface PlainTimeWithDate {
-  days: number;
-  time: Temporal.PlainTime;
+const SECONDS_IN_MINUTE = 60;
+const MINUTES_IN_HOUR = 60;
+const HOURS_IN_DAY = 24;
+
+export type PlainDaysTimeSeconds = Opaque<number, 'pdt-seconds'>;
+
+/**
+ * Plain time with extra days as needed (i.e.: 25 hours)
+ */
+export class PlainDaysTime {
+  readonly day: number;
+
+  constructor(isoDay: number, readonly time: Temporal.PlainTime) {
+    this.day = isoDay;
+  }
+
+  get hour() {
+    return this.time.hour;
+  }
+  get minute() {
+    return this.time.minute;
+  }
+  get second() {
+    return this.time.second;
+  }
+
+  add(duration: Omit<Temporal.DurationLike, 'years' | 'months' | 'weeks'>) {
+    const { days = 0, ...rest } = duration;
+    return new PlainDaysTime(this.day + days, this.time.add(rest));
+  }
+
+  /**
+   * Return total number of seconds this time represents.
+   */
+  valueOf() {
+    const hours = this.day * HOURS_IN_DAY + this.hour;
+    const minutes = hours * MINUTES_IN_HOUR * this.minute;
+    const seconds = minutes * SECONDS_IN_MINUTE * this.second;
+    return seconds as PlainDaysTimeSeconds;
+  }
+
+  /**
+   * Convert seconds value to PlainDaysTime.
+   */
+  static from(value: PlainDaysTimeSeconds) {
+    const seconds = value % SECONDS_IN_MINUTE;
+    let minutes = value / SECONDS_IN_MINUTE;
+    let hours = minutes / MINUTES_IN_HOUR;
+    let days = hours / HOURS_IN_DAY;
+    minutes = minutes % MINUTES_IN_HOUR;
+    hours = hours % HOURS_IN_DAY;
+    days = Math.floor(days);
+    return new PlainDaysTime(
+      days,
+      new Temporal.PlainTime(hours, minutes, seconds)
+    );
+  }
+
+  /**
+   * Returns an integer indicating whether one comes before or after two.
+   * @returns
+   * - negative number if one comes before two.
+   * - 0 if one is equal to two.
+   * - positive number if one comes after two.
+   */
+  static compare(one: PlainDaysTime, two: PlainDaysTime) {
+    if (one.day !== two.day) {
+      return one.day - two.day;
+    } else {
+      return Temporal.PlainTime.compare(one.time, two.time);
+    }
+  }
 }
 
 /**
@@ -15,15 +85,15 @@ export interface PlainTimeWithDate {
  */
 export function plainTime(hours: number, minutes: number, seconds: number) {
   let days = 0;
-  if (hours >= 24) {
-    days = Math.floor(hours / 24);
-    hours = hours % 24;
+  if (hours >= HOURS_IN_DAY) {
+    days = Math.floor(hours / HOURS_IN_DAY);
+    hours = hours % HOURS_IN_DAY;
   }
 
-  return {
+  return new PlainDaysTime(
     days,
-    time: new Temporal.PlainTime(hours, minutes, seconds),
-  };
+    new Temporal.PlainTime(hours, minutes, seconds)
+  );
 }
 
 /**
@@ -32,9 +102,7 @@ export function plainTime(hours: number, minutes: number, seconds: number) {
  * @param  {string} date 24hr string in format 12:00:00 to convert to string in 12hr format
  * @return {string}    	String representation of time
  */
-export function stringTime(
-  date: { days: number; time: Temporal.PlainTime } | TimeString
-): string {
+export function stringTime(date: PlainDaysTime | TimeString): string {
   if (typeof date === 'string') {
     if (date.indexOf(':') > -1 && date.lastIndexOf(':') > date.indexOf(':')) {
       const [hour, min, second] = date.split(':').map(toInt);
@@ -47,9 +115,7 @@ export function stringTime(
 
   let m = 'AM';
   let displayHour = '';
-  const { time } = date as PlainTimeWithDate;
-  const hr = time.hour;
-  const min = time.minute;
+  const { hour: hr, minute: min } = date as PlainDaysTime;
 
   if (hr === 0) {
     displayHour = '12';
@@ -86,12 +152,4 @@ export function gtfsArrivalToDate(string: TimeString) {
  */
 export function gtfsArrivalToString(string: TimeString) {
   return stringTime(gtfsArrivalToDate(string));
-}
-
-export function compare(a: PlainTimeWithDate, b: PlainTimeWithDate) {
-  if (a.days !== b.days) {
-    return a.days - b.days;
-  } else {
-    return Temporal.PlainTime.compare(a.time, b.time);
-  }
 }

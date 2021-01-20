@@ -3,12 +3,15 @@ import { toArray } from 'ix/asynciterable/index.js';
 import { from, zip } from 'ix/iterable/index.js';
 import { filter, map } from 'ix/iterable/operators/index.js';
 import JSZip, { JSZipObject } from 'jszip';
+import { MultiMap } from 'mnemonist';
 import type { Mutable } from 'type-fest';
+import { DateString } from '../shared/data-types.js';
 import type {
   Agency,
   Calendar,
   CsvAgency,
   CsvCalendar,
+  CsvCalendarDates,
   CsvRoute,
   CsvStop,
   CsvStopTime,
@@ -19,12 +22,13 @@ import type {
   ServerGTFSData,
   Stop,
   StopTime,
+  Transfer,
   Trip,
 } from '../shared/gtfs-types.js';
 import { toInt } from '../shared/utils/num.js';
 import { compareAs } from '../shared/utils/sort.js';
 import {
-  compare,
+  PlainDaysTime,
   gtfsArrivalToDate,
   stringTime,
 } from '../shared/utils/temporal.js';
@@ -51,26 +55,26 @@ function makeCalendarTextName(days: Calendar['days']) {
   switch (days.join(', ')) {
     case 'true, true, true, true, true, true, true':
       return 'Daily';
-    case 'false, true, true, true, true, true, true':
+    case 'true, true, true, true, true, true, false':
       return 'Mon - Sat';
-    case 'false, true, true, true, true, true, false':
-      return 'Monday - Friday';
-    case 'true, false, false, false, false, false, true':
+    case 'true, true, true, true, true, false, false':
+      return 'Mon - Fri';
+    case 'false, false, false, false, false, true, true':
       return 'Sat - Sun';
-    case 'false, false, false, false, false, false, true':
+    case 'false, false, false, false, false, true, false':
       return 'Saturday';
     default:
       const firstDay = days.indexOf(true);
       const lastDay = days.lastIndexOf(true);
 
       const reference = [
-        'Sunday',
         'Monday',
         'Tuesday',
         'Wednesday',
         'Thursday',
         'Friday',
         'Saturday',
+        'Sunday',
       ];
       if (firstDay === lastDay) {
         return reference[firstDay];
@@ -121,12 +125,12 @@ export async function createApiData(
     trips: CsvTrip[];
     stops: CsvStop[];
     calendar: CsvCalendar[];
+    calendar_dates: CsvCalendarDates[];
     stop_times: CsvStopTime[];
     feed_info: FeedInfo[];
     transfers: CsvTransfer[];
     agency: CsvAgency[];
   };
-  const transfers = new Map<Stop['stop_id'], Stop['stop_id'][]>();
   const variable: ServerGTFSData = {
     routes: {},
     stops: {},
@@ -157,11 +161,10 @@ export async function createApiData(
     variable.routes[trip.route_id].trips[trip.trip_id] = trip;
     variable.trips[trip.trip_id] = trip.route_id;
   }
+  const transfers = new MultiMap<Stop['stop_id'], Transfer>();
   for (const csvTransfer of json.transfers) {
-    if (csvTransfer.transfer_type === 0) {
-      const otherStops = transfers.get(csvTransfer.from_stop_id) || [];
-      otherStops.push(csvTransfer.to_stop_id);
-      transfers.set(csvTransfer.from_stop_id, otherStops);
+    if (csvTransfer.transfer_type !== 3) {
+      transfers.set(csvTransfer.from_stop_id, csvTransfer);
     }
   }
   for (const csvStop of json.stops) {
@@ -179,6 +182,13 @@ export async function createApiData(
     };
     variable.stops[stop.stop_id] = stop;
   }
+  const calendarDates = new MultiMap<
+    Calendar['service_id'],
+    CsvCalendarDates
+  >();
+  for (const csvCalendarDate of json.calendar_dates) {
+    calendarDates.set(csvCalendarDate.service_id, csvCalendarDate);
+  }
   for (const csvCalendar of json.calendar) {
     const days: Calendar['days'] = [
       csvCalendar.sunday,
@@ -189,12 +199,26 @@ export async function createApiData(
       csvCalendar.friday,
       csvCalendar.saturday,
     ];
+    const added_dates: DateString[] = [];
+    const removed_dates: DateString[] = [];
+    for (const dates of calendarDates.get(csvCalendar.service_id) || []) {
+      switch (dates.exception_type) {
+        case 1:
+          added_dates.push(dates.date);
+          break;
+        case 2:
+          removed_dates.push(dates.date);
+          break;
+      }
+    }
     const calendar: Calendar = {
       service_id: csvCalendar.service_id,
       start_date: csvCalendar.start_date,
       end_date: csvCalendar.end_date,
       days,
       text_name: makeCalendarTextName(days),
+      added_dates,
+      removed_dates,
     };
     variable.calendar[calendar.service_id] = calendar;
   }
@@ -244,7 +268,7 @@ export async function createApiData(
     stop.trips.sort((a, b) => {
       const aTime = gtfsArrivalToDate(a.time);
       const bTime = gtfsArrivalToDate(b.time);
-      return compare(aTime, bTime);
+      return PlainDaysTime.compare(aTime, bTime);
     });
   }
 
