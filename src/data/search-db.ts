@@ -10,7 +10,7 @@ export async function searchWordsIndex<T>(
   const keyRange = IDBKeyRange.bound(term, term + '\uffff', false, false);
 
   const results: T[] = [];
-  let cursor = await index.openCursor(keyRange);
+  let cursor = await index.openCursor(keyRange, 'nextunique');
   for (let i = 0; i < max && cursor; i++) {
     results.push(cursor.value);
     cursor = await cursor.continue();

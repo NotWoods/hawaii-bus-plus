@@ -1,9 +1,14 @@
 import { computeDistanceBetween } from 'spherical-geometry-js';
-import { dbReady } from '../data/database';
+import { dbReady, SearchStop } from '../data/database';
+import { Stop } from '../shared/gtfs-types';
 import { compareAs } from '../shared/utils/sort';
 
 /** Approximate 5 kilometers to latitude longitude offset */
 const FIVE_KM_LAT_LNG = 0.05;
+
+export interface StopWithDistance extends Stop {
+  distance: number;
+}
 
 /**
  * Returns at most 5 stops near the given location.
@@ -28,6 +33,14 @@ export async function findClosestStops(location: google.maps.LatLngLiteral) {
 
   return latValues
     .filter((stop) => lngKeys.has(stop.stop_id))
-    .sort(compareAs((stop) => computeDistanceBetween(stop.position, location)))
+    .map((searchStop) => {
+      const stop: Stop & Partial<SearchStop> = searchStop;
+      delete stop.words;
+      const stopWithDist = stop as StopWithDistance;
+      stopWithDist.distance = computeDistanceBetween(stop.position, location);
+      return stopWithDist;
+    })
+    .filter((stop) => stop.distance < 5_000)
+    .sort(compareAs((stop) => stop.distance))
     .slice(0, 5);
 }

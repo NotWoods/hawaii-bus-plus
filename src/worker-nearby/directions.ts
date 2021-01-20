@@ -1,7 +1,32 @@
+import { IDBPDatabase } from 'idb';
 import { Temporal } from 'proposal-temporal';
-import { Route } from '../shared/gtfs-types';
+import { Opaque } from 'type-fest';
+import { dbReady, GTFSSchema } from '../data/database';
+import { TimeString } from '../shared/data-types';
+import { Route, Stop, Trip } from '../shared/gtfs-types';
 import { gtfsArrivalToDate } from '../shared/utils/temporal';
-import { findClosestStops } from './closest-stops';
+import { findClosestStops, StopWithDistance } from './closest-stops';
+
+type TripCandidate = Stop['trips'][number] & { depart_index: number };
+interface DirectionStepCandidate extends TripCandidate {
+  arrive_index: number;
+}
+
+interface Directions {
+  fromStop: StopWithDistance;
+  fromRank: number;
+  toStop: StopWithDistance;
+  toRank: number;
+
+  steps: {
+    depart: Stop;
+    depart_time: TimeString;
+    arrive: Stop;
+    arrive_time: TimeString;
+    trip_id: Trip['trip_id'];
+    route_id: Route['route_id'];
+  }[];
+}
 
 export async function directionsTo(
   from: google.maps.LatLngLiteral,
@@ -13,28 +38,99 @@ export async function directionsTo(
     findClosestStops(to),
   ]);
 
-  /** Route ID to priority */
-  const arriveRoutes = new Map<Route['route_id'], number>();
-  for (const [i, stop] of arrive.entries()) {
-    for (const routeId of stop.routes) {
-      if (!arriveRoutes.has(routeId)) {
-        arriveRoutes.set(routeId, i);
-      }
-    }
-  }
-
-  const singleTripCandidates = [];
+  const singleTripCandidates = new Map<
+    Route['route_id'],
+    DirectionStepCandidate
+  >();
+  const multiTripCandidates: TripCandidate[] = [];
   const departPlainTime = departTime.toPlainTime();
-  for (const stop of depart) {
+  for (const [i, stop] of depart.entries()) {
     for (const trip of stop.trips) {
       const { time } = gtfsArrivalToDate(trip.time);
       // If departure time is before trip time
       if (Temporal.PlainTime.compare(departPlainTime, time) < 1) {
+        const tripCandidate = {
+          depart_index: i,
+          ...trip,
+        };
+
         // Might be able to reach destination in single trip
-        if (arriveRoutes.has(trip.route)) {
-          singleTripCandidates.push(trip);
+        const arriveStop = arrive.findIndex((stop) =>
+          stop.trips.some(
+            (arriveTrip) =>
+              arriveTrip.trip === trip.trip &&
+              arriveTrip.sequence > trip.sequence
+          )
+        );
+        if (arriveStop > -1) {
+          if (!singleTripCandidates.has(trip.route)) {
+            singleTripCandidates.set(trip.route, {
+              ...tripCandidate,
+              arrive_index: arriveStop,
+            });
+          }
+        } else {
+          multiTripCandidates.push(tripCandidate);
         }
       }
     }
   }
+
+  Array.from(findNextStep(multiTripCandidates, arrive, departTime));
+}
+
+export async function directionsToStep(
+  depart: StopWithDistance[],
+  arrive: StopWithDistance[],
+  departTime: Temporal.PlainDateTime,
+  stepsLeft: number
+) {
+  if (stepsLeft < 0) return new Map();
+
+  const singleTripCandidates = new Map<
+    Route['route_id'],
+    DirectionStepCandidate
+  >();
+  const multiTripCandidates: TripCandidate[] = [];
+  const departPlainTime = departTime.toPlainTime();
+  for (const [i, stop] of depart.entries()) {
+    for (const trip of stop.trips) {
+      const { time } = gtfsArrivalToDate(trip.time);
+      // If departure time is before trip time
+      if (Temporal.PlainTime.compare(departPlainTime, time) < 1) {
+        const tripCandidate = {
+          depart_index: i,
+          ...trip,
+        };
+
+        // Might be able to reach destination in single trip
+        const arriveStop = arrive.findIndex((stop) =>
+          stop.trips.some(
+            (arriveTrip) =>
+              arriveTrip.trip === trip.trip &&
+              arriveTrip.sequence > trip.sequence
+          )
+        );
+        if (arriveStop > -1) {
+          if (!singleTripCandidates.has(trip.route)) {
+            singleTripCandidates.set(trip.route, {
+              ...tripCandidate,
+              arrive_index: arriveStop,
+            });
+          }
+        } else {
+          multiTripCandidates.push(tripCandidate);
+        }
+      }
+    }
+  }
+
+  const singleEntires = Array.from(
+    singleTripCandidates.values(),
+    (candidate) => [candidate, new Map()]
+  );
+  const multiEntries = Array.from(multiTripCandidates, (candidate) => [
+    candidate,
+    directionsToStep(candidate.depart_index),
+  ]);
 }
