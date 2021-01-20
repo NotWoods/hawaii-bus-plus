@@ -29,9 +29,12 @@ export class PlainDaysTime {
     return this.time.second;
   }
 
-  add(duration: Omit<Temporal.DurationLike, 'years' | 'months' | 'weeks'>) {
+  add(
+    duration: Omit<Temporal.DurationLike, 'years' | 'months' | 'weeks'>,
+    options?: Temporal.ArithmeticOptions
+  ) {
     const { days = 0, ...rest } = duration;
-    return new PlainDaysTime(this.day + days, this.time.add(rest));
+    return new PlainDaysTime(this.day + days, this.time.add(rest, options));
   }
 
   /**

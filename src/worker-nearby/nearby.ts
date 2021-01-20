@@ -1,13 +1,13 @@
 import { Temporal } from 'proposal-temporal';
-import { Stop } from '../shared/gtfs-types';
 import { registerPromiseWorker } from '../worker-base/register';
 import { findClosestStops } from './closest-stops';
-import { raptorDirections } from './directions';
+import { directions, Point } from './directions';
 
 interface DirectionsMessage {
   type: 'directions';
-  source: Stop['stop_id'];
-  departureTime?: string;
+  from: Point;
+  to: Point;
+  departureTime?: string | Temporal.PlainDateTime;
 }
 
 interface ClosestStopsMessage {
@@ -27,7 +27,7 @@ registerPromiseWorker(async (message: Message) => {
         ? Temporal.PlainDateTime.from(message.departureTime)
         : Temporal.now.plainDateTimeISO();
       console.log(departureTime);
-      const result = await raptorDirections(message.source, departureTime);
+      const result = await directions(message.from, message.to, departureTime);
       console.log(result);
       return result;
     }
