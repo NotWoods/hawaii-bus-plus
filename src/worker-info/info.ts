@@ -1,4 +1,5 @@
-import { dbReady, SearchStop } from '../data/database';
+import { dbReady } from '../data/database';
+import { removeWords } from '../data/format';
 import { Route, Stop } from '../shared/gtfs-types';
 import { registerPromiseWorker } from '../worker-base/register';
 import { placeApi, PlaceInfoMessage } from './place-api';
@@ -21,19 +22,17 @@ registerPromiseWorker(async (message: Message) => {
   console.log(message);
   switch (message.type) {
     case 'route': {
+      const db = await dbReady;
       return getRouteDetails(
+        db,
         message.id,
         message.time ? new Date(message.time) : new Date()
       );
     }
     case 'stop': {
       const db = await dbReady;
-      const stop: (Stop & Partial<SearchStop>) | undefined = await db.get(
-        'stops',
-        message.id
-      );
-      delete stop?.words;
-      return stop;
+      const stop = await db.get('stops', message.id);
+      return stop && removeWords(stop);
     }
     case 'place': {
       return placeApi(message);

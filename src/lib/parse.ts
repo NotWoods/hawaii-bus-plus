@@ -26,10 +26,10 @@ import type {
   Trip,
 } from '../shared/gtfs-types.js';
 import { toInt } from '../shared/utils/num.js';
-import { compareAs } from '../shared/utils/sort.js';
+import { compareAs, valueNotNull } from '../shared/utils/sort.js';
 import {
-  PlainDaysTime,
   gtfsArrivalToDate,
+  PlainDaysTime,
   stringTime,
 } from '../shared/utils/temporal.js';
 import { cast } from './cast.js';
@@ -114,10 +114,7 @@ export async function createApiData(
         const file = zip.file(fileName);
         return [name, file] as const;
       }),
-      filter((entry): entry is [string, JSZipObject] => {
-        const [, file] = entry;
-        return file != null;
-      })
+      filter(valueNotNull)
     )
     .pipe((source) => new Map(source));
 

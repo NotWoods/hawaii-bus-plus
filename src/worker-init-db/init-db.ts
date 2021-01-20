@@ -1,4 +1,4 @@
-import { initDatabase } from '../data/database';
+import { initDatabase } from '../data/init';
 import { downloadScheduleData } from '../data/fetch';
 import { registerPromiseWorker } from '../worker-base/register';
 

@@ -1,5 +1,7 @@
+import { IDBPDatabase } from 'idb';
 import { computeDistanceBetween } from 'spherical-geometry-js';
-import { dbReady, SearchStop } from '../data/database';
+import { GTFSSchema } from '../data/database';
+import { removeWords } from '../data/format';
 import { Stop } from '../shared/gtfs-types';
 import { compareAs } from '../shared/utils/sort';
 
@@ -13,9 +15,10 @@ export interface StopWithDistance extends Stop {
 /**
  * Returns at most 5 stops near the given location.
  */
-export async function findClosestStops(location: google.maps.LatLngLiteral) {
-  const db = await dbReady;
-
+export async function findClosestStops(
+  db: IDBPDatabase<GTFSSchema>,
+  location: google.maps.LatLngLiteral
+) {
   const latKeyRange = IDBKeyRange.bound(
     location.lat - FIVE_KM_LAT_LNG,
     location.lat + FIVE_KM_LAT_LNG
@@ -34,10 +37,11 @@ export async function findClosestStops(location: google.maps.LatLngLiteral) {
   return latValues
     .filter((stop) => lngKeys.has(stop.stop_id))
     .map((searchStop) => {
-      const stop: Stop & Partial<SearchStop> = searchStop;
-      delete stop.words;
-      const stopWithDist = stop as StopWithDistance;
-      stopWithDist.distance = computeDistanceBetween(stop.position, location);
+      const stopWithDist = removeWords(searchStop) as StopWithDistance;
+      stopWithDist.distance = computeDistanceBetween(
+        searchStop.position,
+        location
+      );
       return stopWithDist;
     })
     .filter((stop) => stop.distance < 5_000)

@@ -1,5 +1,7 @@
+import { IDBPDatabase } from 'idb';
 import { Mutable } from 'type-fest';
-import { dbReady, SearchRoute } from '../data/database';
+import { GTFSSchema } from '../data/database';
+import { removeWords } from '../data/format';
 import type { Route, RouteWithTrips, Stop, Trip } from '../shared/gtfs-types';
 import { gtfsArrivalToDate, plainTime } from '../shared/utils/date';
 
@@ -23,11 +25,10 @@ export interface RouteDetails {
  * @param trips All trips for a route.
  */
 export async function getRouteDetails(
+  db: IDBPDatabase<GTFSSchema>,
   route_id: Route['route_id'],
   now: Date
 ): Promise<RouteDetails | undefined> {
-  const db = await dbReady;
-
   const tx = db.transaction(['routes', 'trips']);
   const [route, trips] = await Promise.all([
     tx.objectStore('routes').get(route_id),
@@ -103,9 +104,7 @@ export async function getRouteDetails(
     }
   }
 
-  const routeNoWords = route as Route & Partial<Mutable<SearchRoute>>;
-  delete routeNoWords.words;
-  const routeWithTrips = routeNoWords as Mutable<RouteWithTrips>;
+  const routeWithTrips = removeWords(route) as Mutable<RouteWithTrips>;
   routeWithTrips.trips = tripsMap;
 
   return {
