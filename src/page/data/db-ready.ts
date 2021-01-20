@@ -8,4 +8,5 @@ const initWorker = new PromiseWorker(new InitDBWorker());
  */
 export const dbInitialized = initWorker.postMessage(undefined).then(() => {
   initWorker.terminate();
+  console.log('Database initialized');
 });

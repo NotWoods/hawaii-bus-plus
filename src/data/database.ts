@@ -1,4 +1,4 @@
-import { openDB, DBSchema } from 'idb';
+import { DBSchema, openDB } from 'idb';
 import { Mutable } from 'type-fest';
 import {
   Calendar,
@@ -9,9 +9,8 @@ import {
   Trip,
 } from '../shared/gtfs-types';
 import {
-  PlainDaysTimeSeconds,
-  PlainDaysTime,
   gtfsArrivalToDate,
+  PlainDaysTimeSeconds,
 } from '../shared/utils/temporal';
 
 export interface SearchRoute extends Route {
@@ -97,7 +96,10 @@ export const dbReady = openDB<GTFSSchema>('gtfs', 1, {
 export async function initDatabase(api: GTFSData) {
   const db = await dbReady;
 
-  const tx = db.transaction(['routes', 'stops', 'trips'], 'readwrite');
+  const tx = db.transaction(
+    ['routes', 'stops', 'trips', 'calendar'],
+    'readwrite'
+  );
   const jobs: Promise<unknown>[] = [];
 
   const tripStore = tx.objectStore('trips');
@@ -121,6 +123,11 @@ export async function initDatabase(api: GTFSData) {
     const stop = s as SearchStop;
     stop.words = getWords(stop.stop_name, stop.stop_desc);
     jobs.push(stopStore.put(stop));
+  }
+
+  const calendarStore = tx.objectStore('calendar');
+  for (const calendar of Object.values(api.calendar)) {
+    jobs.push(calendarStore.put(calendar));
   }
 
   await Promise.all(jobs);

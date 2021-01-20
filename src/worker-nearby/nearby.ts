@@ -7,7 +7,7 @@ import { raptorDirections } from './directions';
 interface DirectionsMessage {
   type: 'directions';
   source: Stop['stop_id'];
-  departureTime: string;
+  departureTime?: string;
 }
 
 interface ClosestStopsMessage {
@@ -17,14 +17,17 @@ interface ClosestStopsMessage {
 
 type Message = DirectionsMessage | ClosestStopsMessage;
 
+console.log('hello world');
+
 registerPromiseWorker(async (message: Message) => {
   console.log(message);
   switch (message.type) {
     case 'directions': {
-      const result = await raptorDirections(
-        message.source,
-        Temporal.PlainDateTime.from(message.departureTime)
-      );
+      const departureTime = message.departureTime
+        ? Temporal.PlainDateTime.from(message.departureTime)
+        : Temporal.now.plainDateTimeISO();
+      console.log(departureTime);
+      const result = await raptorDirections(message.source, departureTime);
       console.log(result);
       return result;
     }

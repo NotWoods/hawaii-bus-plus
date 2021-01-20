@@ -11,6 +11,11 @@ import {
 import { Calendar, Stop, Trip } from '../../shared/gtfs-types';
 import { uniqueRouteId } from './route-queue';
 
+async function loadCalendars(db: IDBPDatabase<GTFSSchema>) {
+  const data = await db.getAll('calendar');
+  return new Map(data.map((cal) => [cal.service_id, cal]));
+}
+
 function runsOn(calendar: Calendar | undefined, date: Temporal.PlainDate) {
   if (!calendar) {
     return false;
@@ -31,9 +36,7 @@ export async function generateDirectionsData(
   db: IDBPDatabase<GTFSSchema>,
   date: Temporal.PlainDate
 ): Promise<DirectionsData> {
-  const allCalendars = new Map(
-    (await db.getAll('calendar')).map((cal) => [cal.service_id, cal])
-  );
+  const allCalendars = await loadCalendars(db);
   let cursor = await db.transaction('trips').store.index('start').openCursor();
 
   const trips: Trip[] = [];

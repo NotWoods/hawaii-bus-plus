@@ -1,4 +1,5 @@
-import { dbReady } from '../data/database';
+import { Mutable } from 'type-fest';
+import { dbReady, SearchRoute } from '../data/database';
 import type { Route, RouteWithTrips, Stop, Trip } from '../shared/gtfs-types';
 import { gtfsArrivalToDate, plainTime } from '../shared/utils/date';
 
@@ -26,7 +27,12 @@ export async function getRouteDetails(
   now: Date
 ): Promise<RouteDetails | undefined> {
   const db = await dbReady;
-  const route = await db.get('routes', route_id);
+
+  const tx = db.transaction(['routes', 'trips']);
+  const [route, trips] = await Promise.all([
+    tx.objectStore('routes').get(route_id),
+    tx.objectStore('trips').index('route_id').getAll(route_id),
+  ]);
   if (!route) {
     return undefined;
   }
@@ -46,8 +52,10 @@ export async function getRouteDetails(
   let closestTripStop: Stop['stop_id'] | undefined;
 
   const routeStops = new Set<Stop['stop_id']>();
+  const tripsMap: RouteWithTrips['trips'] = {};
 
-  for (const trip of Object.values(route.trips)) {
+  for (const trip of trips) {
+    tripsMap[trip.trip_id] = trip;
     for (const stopTime of trip.stop_times) {
       const sequence = stopTime.stop_sequence;
       if (trip.direction_id === 0) {
@@ -95,8 +103,13 @@ export async function getRouteDetails(
     }
   }
 
+  const routeNoWords = route as Route & Partial<Mutable<SearchRoute>>;
+  delete routeNoWords.words;
+  const routeWithTrips = routeNoWords as Mutable<RouteWithTrips>;
+  routeWithTrips.trips = tripsMap;
+
   return {
-    route,
+    route: routeWithTrips,
     firstStop: firstStop!,
     lastStop: lastStop!,
     earliest,

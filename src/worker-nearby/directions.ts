@@ -1,7 +1,7 @@
 import { DefaultMap } from 'mnemonist';
 import { Temporal } from 'proposal-temporal';
 import { dbReady } from '../data/database';
-import { Stop } from '../shared/gtfs-types';
+import { Stop, Trip } from '../shared/gtfs-types';
 import { PlainDaysTime } from '../shared/utils/temporal';
 import { footPathsLoader } from './directions/footpaths';
 import { generateDirectionsData } from './directions/generate-data';
@@ -99,12 +99,16 @@ export async function raptorDirections(
     for (const fromStopId of markedStops) {
       const transfers = footPaths.get(fromStopId)!;
       for (const transfer of transfers) {
-        const timeWithWalking = multiLabel
-          .get(fromStopId)
-          [k - 1].add({ minutes: transfer.min_transfer_time || 0 });
+        const fromTime = multiLabel.get(fromStopId)[k - 1];
+        const timeWithWalking =
+          fromTime &&
+          fromTime.add({ minutes: transfer.min_transfer_time || 0 });
         const existingLabels = multiLabel.get(transfer.to_stop_id);
 
-        if (PlainDaysTime.compare(timeWithWalking, existingLabels[k]) < 0) {
+        if (
+          timeWithWalking &&
+          PlainDaysTime.compare(timeWithWalking, existingLabels[k]) < 0
+        ) {
           existingLabels[k] = timeWithWalking;
           markedStops.add(transfer.to_stop_id);
         }
@@ -115,5 +119,5 @@ export async function raptorDirections(
     if (markedStops.size === 0) break;
   }
 
-  return earliestKnownArrival;
+  return multiLabel;
 }

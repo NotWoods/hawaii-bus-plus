@@ -3,7 +3,7 @@ import { toArray } from 'ix/asynciterable/index.js';
 import { from, zip } from 'ix/iterable/index.js';
 import { filter, map } from 'ix/iterable/operators/index.js';
 import JSZip, { JSZipObject } from 'jszip';
-import { MultiMap } from 'mnemonist';
+import mnemonist from 'mnemonist';
 import type { Mutable } from 'type-fest';
 import { DateString } from '../shared/data-types.js';
 import type {
@@ -34,6 +34,7 @@ import {
 } from '../shared/utils/temporal.js';
 import { cast } from './cast.js';
 
+const { MultiMap } = mnemonist;
 const STARTS_WITH_TIME = /^\d\d?:\d\d/;
 
 export async function zipFilesToObject(zipFiles: Map<string, JSZipObject>) {
