@@ -2,8 +2,8 @@ import test from 'ava';
 import React, { useContext } from 'react';
 import enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import { MapProvider, MapSetterContext } from './MapProvider';
-import { useGoogleMap } from './hooks';
+import { MapProvider, MapSetterContext } from '../src/MapProvider.js';
+import { useGoogleMap } from '../src/hooks.js';
 
 const { shallow, configure } = enzyme;
 

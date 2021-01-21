@@ -83,6 +83,26 @@ importers:
       pseudo-worker: ^1.3.0
       tslib: ^2.1.0
       typescript: 4.1.3
+  packages/react-google-maps:
+    dependencies:
+      '@react-google-maps/api': 2.1.0
+      tslib: 2.1.0
+    devDependencies:
+      '@types/enzyme': 3.10.8
+      '@types/enzyme-adapter-react-16': 1.0.6
+      enzyme: 3.11.0
+      enzyme-adapter-react-16: 1.15.5_enzyme@3.11.0
+      prettier: 2.2.1
+      typescript: 4.1.3
+    specifiers:
+      '@react-google-maps/api': ^2.1.0
+      '@types/enzyme': ^3.10.8
+      '@types/enzyme-adapter-react-16': ^1.0.6
+      enzyme: ^3.11.0
+      enzyme-adapter-react-16: ^1.15.5
+      prettier: ^2.2.1
+      tslib: ^2.1.0
+      typescript: 4.1.3
   packages/utils:
     dependencies:
       '@hawaii-bus-plus/types': 'link:../types'
@@ -352,6 +372,18 @@ packages:
       node: '>= 8'
     resolution:
       integrity: sha512-8Broas6vTtW4GIXTAHDoE32hnN2M5ykgCpWGbuXHQ15vEMqr23pB76e/GZcYsZCHALv50ktd24qhEyKr6wBtow==
+  /@react-google-maps/api/2.1.0:
+    dependencies:
+      '@googlemaps/js-api-loader': 1.11.1
+      '@react-google-maps/infobox': 2.1.0
+      '@react-google-maps/marker-clusterer': 2.1.0
+      invariant: 2.2.4
+    dev: false
+    peerDependencies:
+      react: ^16.6.3 || ^17.0.0
+      react-dom: ^16.6.3 || ^17.0.0
+    resolution:
+      integrity: sha512-lpN6gzLeSoERbgSzgw5ZC8JN0QFJZsSJs8newntQVn5A56mhdSY0BVwdLKXEWIIOTTv1WDimAgWB0seagcLymg==
   /@react-google-maps/api/2.1.0_react-dom@17.0.1+react@17.0.1:
     dependencies:
       '@googlemaps/js-api-loader': 1.11.1
@@ -400,7 +432,7 @@ packages:
       integrity: sha512-xH2e58elpj1X4ynnKp9qSnWlsRTIs6n3tgLGNfwAGHwePw0mulHQllV34n0T25uYSu1k0hRKkWXF890B1yS47w==
   /@types/cheerio/0.22.23:
     dependencies:
-      '@types/node': 14.14.21
+      '@types/node': 14.14.22
     dev: true
     resolution:
       integrity: sha512-QfHLujVMlGqcS/ePSf3Oe5hK3H8wi/yN2JYuxSB1U10VvW1fO3K8C+mURQesFYS1Hn7lspOsTT75SKq/XtydQg==
@@ -542,6 +574,22 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-4I7Td01quW/RpocfNayFdFVk1qSuoh0E7JrbRJ16nH01HhKFQ88INq9Sd+nd72zqRySlr9BmDA8xlEJ6vJMrYA==
+  /airbnb-prop-types/2.16.0:
+    dependencies:
+      array.prototype.find: 2.1.1
+      function.prototype.name: 1.1.3
+      is-regex: 1.1.1
+      object-is: 1.1.4
+      object.assign: 4.1.2
+      object.entries: 1.1.3
+      prop-types: 15.7.2
+      prop-types-exact: 1.2.0
+      react-is: 16.13.1
+    dev: true
+    peerDependencies:
+      react: ^0.14 || ^15.0.0 || ^16.0.0-alpha
+    resolution:
+      integrity: sha512-7WHOFolP/6cS96PhKNrslCLMYAI8yB1Pp6u6XmxozQOiZbsI5ycglZr5cHhBFfuRcQQjzCMith5ZPZdYiJCxUg==
   /airbnb-prop-types/2.16.0_react@17.0.1:
     dependencies:
       array.prototype.find: 2.1.1
@@ -1880,6 +1928,39 @@ packages:
       react-dom: ^16.0.0-0
     resolution:
       integrity: sha512-33yUJGT1nHFQlbVI5qdo5Pfqvu/h4qPwi1o0a6ZZsjpiqq92a3HjynDhwd1IeED+Su60HDWV8mxJqkTnLYdGkw==
+  /enzyme-adapter-react-16/1.15.5_enzyme@3.11.0:
+    dependencies:
+      enzyme: 3.11.0
+      enzyme-adapter-utils: 1.14.0
+      enzyme-shallow-equal: 1.0.4
+      has: 1.0.3
+      object.assign: 4.1.2
+      object.values: 1.1.2
+      prop-types: 15.7.2
+      react-is: 16.13.1
+      react-test-renderer: 16.14.0
+      semver: 5.7.1
+    dev: true
+    peerDependencies:
+      enzyme: ^3.0.0
+      react: ^16.0.0-0
+      react-dom: ^16.0.0-0
+    resolution:
+      integrity: sha512-33yUJGT1nHFQlbVI5qdo5Pfqvu/h4qPwi1o0a6ZZsjpiqq92a3HjynDhwd1IeED+Su60HDWV8mxJqkTnLYdGkw==
+  /enzyme-adapter-utils/1.14.0:
+    dependencies:
+      airbnb-prop-types: 2.16.0
+      function.prototype.name: 1.1.3
+      has: 1.0.3
+      object.assign: 4.1.2
+      object.fromentries: 2.0.3
+      prop-types: 15.7.2
+      semver: 5.7.1
+    dev: true
+    peerDependencies:
+      react: 0.13.x || 0.14.x || ^15.0.0-0 || ^16.0.0-0
+    resolution:
+      integrity: sha512-F/z/7SeLt+reKFcb7597IThpDp0bmzcH1E9Oabqv+o01cID2/YInlqHbFl7HzWBl4h3OdZYedtwNDOmSKkk0bg==
   /enzyme-adapter-utils/1.14.0_react@17.0.1:
     dependencies:
       airbnb-prop-types: 2.16.0_react@17.0.1
@@ -4231,6 +4312,17 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha512-Gvzk7OZpiqKSkxsQvO/mbTN1poglhmAV7gR/DdIrRrSMXraRQQlfikRJOr3Nb9GTMPC5kof948Zy6jJZIFtDvQ==
+  /react-test-renderer/16.14.0:
+    dependencies:
+      object-assign: 4.1.1
+      prop-types: 15.7.2
+      react-is: 16.13.1
+      scheduler: 0.19.1
+    dev: true
+    peerDependencies:
+      react: ^16.14.0
+    resolution:
+      integrity: sha512-L8yPjqPE5CZO6rKsKXRO/rVPiaCOy0tQQJbC+UjPNlobl5mad59lvPjwFsQHTvL03caVDIVr9x9/OSgDe6I5Eg==
   /react-test-renderer/16.14.0_react@17.0.1:
     dependencies:
       object-assign: 4.1.1
