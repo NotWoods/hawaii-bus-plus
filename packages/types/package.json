@@ -1,0 +1,18 @@
+{
+  "name": "@hawaii-bus-plus/types",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc --build .",
+    "format": "prettier **/*.ts --write"
+  },
+  "dependencies": {
+    "tslib": "^2.1.0",
+    "type-fest": "^0.20.2"
+  },
+  "devDependencies": {
+    "prettier": "^2.2.1",
+    "typescript": "4.1.3"
+  }
+}
