@@ -1,37 +1,88 @@
-dependencies:
-  '@googlemaps/js-api-loader': 1.11.1
-  '@react-google-maps/api': 2.1.0_react-dom@17.0.1+react@17.0.1
-  halfmoon: 1.1.1
-  heap-js: 2.1.4
-  idb: 6.0.0
-  mnemonist: 0.38.1
-  react: 17.0.1
-  react-dom: 17.0.1_react@17.0.1
-  react-hotkeys-hook: 3.0.3_react-dom@17.0.1+react@17.0.1
-  spherical-geometry-js: 2.0.0
-  tslib: 2.1.0
-devDependencies:
-  '@11ty/eleventy': 0.11.1
-  '@types/enzyme': 3.10.8
-  '@types/enzyme-adapter-react-16': 1.0.6
-  '@types/googlemaps': 3.43.2
-  '@types/node': 14.14.21
-  '@types/react': 17.0.0
-  '@types/react-dom': 17.0.0
-  '@vitejs/plugin-react-refresh': 1.1.1
-  ava: 3.15.0
-  csv-parse: 4.14.2
-  del-cli: 3.0.1
-  eleventy-plugin-date: 1.0.0
-  enzyme: 3.11.0
-  enzyme-adapter-react-16: 1.15.5_ed988ebff08079c40ff9e87e2acc78b3
-  ix: 4.0.0
-  jszip: 3.5.0
-  prettier: 2.2.1
-  proposal-temporal: 0.6.0
-  type-fest: 0.20.2
-  typescript: 4.1.3
-  vite: 2.0.0-beta.34
+importers:
+  .:
+    dependencies:
+      '@googlemaps/js-api-loader': 1.11.1
+      '@react-google-maps/api': 2.1.0_react-dom@17.0.1+react@17.0.1
+      halfmoon: 1.1.1
+      heap-js: 2.1.4
+      idb: 6.0.0
+      mnemonist: 0.38.1
+      react: 17.0.1
+      react-dom: 17.0.1_react@17.0.1
+      react-hotkeys-hook: 3.0.3_react-dom@17.0.1+react@17.0.1
+      spherical-geometry-js: 2.0.0
+      tslib: 2.1.0
+    devDependencies:
+      '@11ty/eleventy': 0.11.1
+      '@types/enzyme': 3.10.8
+      '@types/enzyme-adapter-react-16': 1.0.6
+      '@types/googlemaps': 3.43.2
+      '@types/node': 14.14.21
+      '@types/react': 17.0.0
+      '@types/react-dom': 17.0.0
+      '@vitejs/plugin-react-refresh': 1.1.1
+      ava: 3.15.0
+      csv-parse: 4.14.2
+      del-cli: 3.0.1
+      eleventy-plugin-date: 1.0.0
+      enzyme: 3.11.0
+      enzyme-adapter-react-16: 1.15.5_ed988ebff08079c40ff9e87e2acc78b3
+      ix: 4.0.0
+      jszip: 3.5.0
+      prettier: 2.2.1
+      proposal-temporal: 0.6.0
+      type-fest: 0.20.2
+      typescript: 4.1.3
+      vite: 2.0.0-beta.34
+    specifiers:
+      '@11ty/eleventy': ^0.11.1
+      '@googlemaps/js-api-loader': ^1.11.1
+      '@react-google-maps/api': ^2.1.0
+      '@types/enzyme': ^3.10.8
+      '@types/enzyme-adapter-react-16': ^1.0.6
+      '@types/googlemaps': ^3.43.2
+      '@types/node': ^14.14.21
+      '@types/react': ^17.0.0
+      '@types/react-dom': ^17.0.0
+      '@vitejs/plugin-react-refresh': ^1.1.0
+      ava: ^3.15.0
+      csv-parse: ^4.14.2
+      del-cli: ^3.0.1
+      eleventy-plugin-date: ^1.0.0
+      enzyme: ^3.11.0
+      enzyme-adapter-react-16: ^1.15.5
+      halfmoon: ^1.1.1
+      heap-js: ^2.1.4
+      idb: ^6.0.0
+      ix: ^4.0.0
+      jszip: ^3.5.0
+      mnemonist: ^0.38.1
+      prettier: ^2.2.1
+      proposal-temporal: ^0.6.0
+      react: ^17.0.0
+      react-dom: ^17.0.0
+      react-hotkeys-hook: ^3.0.3
+      spherical-geometry-js: ^2.0.0
+      tslib: ^2.1.0
+      type-fest: ^0.20.2
+      typescript: ^4.1.3
+      vite: ^2.0.0-beta.34
+  packages/promise-worker:
+    dependencies:
+      tslib: 2.1.0
+    devDependencies:
+      '@types/node': 14.14.22
+      ava: 3.15.0
+      prettier: 2.2.1
+      pseudo-worker: 1.3.0
+      typescript: 4.1.3
+    specifiers:
+      '@types/node': ^14.14.22
+      ava: ^3.15.0
+      prettier: ^2.2.1
+      pseudo-worker: ^1.3.0
+      tslib: ^2.1.0
+      typescript: 4.1.3
 lockfileVersion: 5.2
 packages:
   /@11ty/dependency-tree/1.0.0:
@@ -381,6 +432,10 @@ packages:
     dev: true
     resolution:
       integrity: sha512-cHYfKsnwllYhjOzuC5q1VpguABBeecUp24yFluHpn/BQaVxB1CuQ1FSRZCzrPxrkIfWISXV2LbeoBthLWg0+0A==
+  /@types/node/14.14.22:
+    dev: true
+    resolution:
+      integrity: sha512-g+f/qj/cNcqKkc3tFqlXOYjrmZA+jNBiDzbP3kH+B+otKFqAdPgVTGP1IeKRdMml/aE69as5S4FqtxAbl+LaMw==
   /@types/normalize-package-data/2.4.0:
     dev: true
     resolution:
@@ -2255,7 +2310,7 @@ packages:
     dependencies:
       array-union: 2.1.0
       dir-glob: 3.0.1
-      fast-glob: 3.2.4
+      fast-glob: 3.2.5
       ignore: 5.1.8
       merge2: 1.4.1
       slash: 3.0.0
@@ -3958,6 +4013,10 @@ packages:
     dev: true
     resolution:
       integrity: sha1-0/wRS6BplaRexok/SEzrHXj19HY=
+  /pseudo-worker/1.3.0:
+    dev: true
+    resolution:
+      integrity: sha512-ZvjwWUZM/D2O4fwEmZd8sI1svcTbtJHf90hKXOhuLJeX5QPn3s9/zK0GJkhxTEE+7mQnjquPT+SWxtkJGj0ayw==
   /pseudomap/1.0.2:
     dev: true
     resolution:
@@ -5361,36 +5420,3 @@ packages:
     dev: true
     resolution:
       integrity: sha1-AI4G2AlDIMNy28L47XagymyKxBk=
-specifiers:
-  '@11ty/eleventy': ^0.11.1
-  '@googlemaps/js-api-loader': ^1.11.1
-  '@react-google-maps/api': ^2.1.0
-  '@types/enzyme': ^3.10.8
-  '@types/enzyme-adapter-react-16': ^1.0.6
-  '@types/googlemaps': ^3.43.2
-  '@types/node': ^14.14.21
-  '@types/react': ^17.0.0
-  '@types/react-dom': ^17.0.0
-  '@vitejs/plugin-react-refresh': ^1.1.0
-  ava: ^3.15.0
-  csv-parse: ^4.14.2
-  del-cli: ^3.0.1
-  eleventy-plugin-date: ^1.0.0
-  enzyme: ^3.11.0
-  enzyme-adapter-react-16: ^1.15.5
-  halfmoon: ^1.1.1
-  heap-js: ^2.1.4
-  idb: ^6.0.0
-  ix: ^4.0.0
-  jszip: ^3.5.0
-  mnemonist: ^0.38.1
-  prettier: ^2.2.1
-  proposal-temporal: ^0.6.0
-  react: ^17.0.0
-  react-dom: ^17.0.0
-  react-hotkeys-hook: ^3.0.3
-  spherical-geometry-js: ^2.0.0
-  tslib: ^2.1.0
-  type-fest: ^0.20.2
-  typescript: ^4.1.3
-  vite: ^2.0.0-beta.34

@@ -1,9 +1,9 @@
 {
   "extends": "../../tsconfig.base.json",
   "include": ["**/*"],
-  "references": [],
+  "references": [{ "path": "../page" }, { "path": "../worker" }],
   "compilerOptions": {
     "lib": ["esnext", "dom", "dom.iterable", "webworker"],
-    "types": []
+    "types": ["node"]
   }
 }
