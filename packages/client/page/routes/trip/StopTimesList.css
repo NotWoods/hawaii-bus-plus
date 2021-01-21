@@ -1,0 +1,75 @@
+.stoptime {
+  --line-width: 4px;
+  --dot-diameter: 16px;
+  --dot-radius: calc(var(--dot-diameter) / 2);
+
+  display: grid;
+  grid-template:
+    'lines-start .      .' 1rem
+    'lines-dot   name   time' auto
+    'lines-end   desc   time' auto
+    'lines-end   routes .' auto
+    'lines-end   .      .' 1rem
+    / 2rem auto min-content;
+  column-gap: 1rem;
+}
+.stoptime-name {
+  grid-area: name;
+}
+.stoptime-desc {
+  grid-area: desc;
+}
+.stoptime-routes {
+  grid-area: routes;
+}
+.stoptime-time {
+  grid-area: time;
+}
+
+.lines__point,
+.lines__start,
+.lines__end {
+  justify-self: center;
+}
+.lines__start,
+.lines__end,
+.lines__point::before,
+.lines__point::after {
+  width: var(--line-width);
+  height: 100%;
+  background-color: var(--route-color);
+}
+.lines__start {
+  grid-area: lines-start;
+}
+.lines__end {
+  grid-area: lines-end;
+}
+.lines__point {
+  grid-area: lines-dot;
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+  align-items: center;
+}
+.lines__dot {
+  width: var(--dot-diameter);
+  height: var(--dot-diameter);
+  border: var(--line-width) solid var(--route-color);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.lines__point::before,
+.lines__point::after {
+  content: '';
+  display: block;
+}
+
+.stoptime--first .lines__start,
+.stoptime--last .lines__end {
+  display: none;
+}
+.stoptime--first .lines__point::before,
+.stoptime--last .lines__point::after {
+  visibility: hidden;
+}

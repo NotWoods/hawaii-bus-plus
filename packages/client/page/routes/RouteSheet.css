@@ -1,0 +1,9 @@
+.route-sheet {
+  position: relative;
+  top: 75%;
+  min-height: 25%;
+}
+.route-sheet__name {
+  background-color: var(--route-color);
+  color: var(--route-text-color);
+}

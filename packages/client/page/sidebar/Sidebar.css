@@ -1,0 +1,9 @@
+.sidebar {
+  --lm-sidebar-bg-color: #f6f7f8;
+  --dm-sidebar-bg-color: #2d3039;
+}
+
+.directions-box {
+  padding: var(--sidebar-content-margin);
+  margin: 0;
+}
