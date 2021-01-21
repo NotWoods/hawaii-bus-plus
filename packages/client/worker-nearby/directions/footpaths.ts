@@ -1,5 +1,5 @@
-import { Repository } from '../../data/repository';
-import { Stop, Transfer } from '../../shared/gtfs-types';
+import { Repository } from '@hawaii-bus-plus/data';
+import { Stop, Transfer } from '@hawaii-bus-plus/types';
 
 export function footPathsLoader(repo: Pick<Repository, 'loadStops'>) {
   const loaded = new Map<Stop['stop_id'], readonly Transfer[]>();

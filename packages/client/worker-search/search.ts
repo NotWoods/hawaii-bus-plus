@@ -1,5 +1,5 @@
-import { Repository } from '../data/repository';
-import { Route, Stop } from '../shared/gtfs-types';
+import { Repository } from '@hawaii-bus-plus/data';
+import { Route, Stop } from '@hawaii-bus-plus/types';
 import { applyOffset } from './helpers';
 import { AutocompletionRequest } from './places-autocomplete';
 

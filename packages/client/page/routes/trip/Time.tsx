@@ -1,6 +1,6 @@
 import React from 'react';
-import { TimeString } from '../../../shared/data-types';
-import { stringTime } from '../../../shared/utils/date';
+import { TimeString } from '@hawaii-bus-plus/types';
+import { stringTime } from '@hawaii-bus-plus/utils';
 
 interface TimeProps {
   time: TimeString;

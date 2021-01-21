@@ -1,6 +1,6 @@
-import { makeRepository } from '../data/repository';
-import { Route, Stop } from '../shared/gtfs-types';
-import { registerPromiseWorker } from '../worker-base/register';
+import { makeRepository } from '@hawaii-bus-plus/data';
+import { Route, Stop } from '@hawaii-bus-plus/types';
+import { registerPromiseWorker } from '@hawaii-bus-plus/promise-worker/worker';
 import { placeApi, PlaceInfoMessage } from './place-api';
 import { getRouteDetails } from './route-details';
 import { loadStop } from './stop-details';

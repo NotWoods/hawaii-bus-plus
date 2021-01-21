@@ -91,6 +91,88 @@ importers:
       proposal-temporal: ^0.6.0
       tslib: ^2.1.0
       typescript: 4.1.3
+  packages/client:
+    dependencies:
+      '@hawaii-bus-plus/data': 'link:../data'
+      '@hawaii-bus-plus/promise-worker': 'link:../promise-worker'
+      '@hawaii-bus-plus/react-google-maps': 'link:../react-google-maps'
+      '@hawaii-bus-plus/types': 'link:../types'
+      '@hawaii-bus-plus/utils': 'link:../utils'
+      '@react-google-maps/api': 2.1.0_react-dom@17.0.1+react@17.0.1
+      halfmoon: 1.1.1
+      idb: 6.0.0
+      mnemonist: 0.38.1
+      proposal-temporal: 0.6.0
+      react: 17.0.1
+      react-dom: 17.0.1_react@17.0.1
+      react-hotkeys-hook: 3.0.3_react-dom@17.0.1+react@17.0.1
+      spherical-geometry-js: 2.0.0
+      tslib: 2.1.0
+    devDependencies:
+      '@types/googlemaps': 3.43.2
+      '@types/react': 17.0.0
+      '@types/react-dom': 17.0.0
+      '@vitejs/plugin-react-refresh': 1.1.1
+      prettier: 2.2.1
+      typescript: 4.1.3
+      vite: 2.0.0-beta.34
+    specifiers:
+      '@hawaii-bus-plus/data': '*'
+      '@hawaii-bus-plus/promise-worker': '*'
+      '@hawaii-bus-plus/react-google-maps': '*'
+      '@hawaii-bus-plus/types': '*'
+      '@hawaii-bus-plus/utils': '*'
+      '@react-google-maps/api': ^2.1.0
+      '@types/googlemaps': ^3.43.2
+      '@types/react': ^17.0.0
+      '@types/react-dom': ^17.0.0
+      '@vitejs/plugin-react-refresh': ^1.1.0
+      halfmoon: ^1.1.1
+      idb: ^6.0.0
+      mnemonist: ^0.38.1
+      prettier: ^2.2.1
+      proposal-temporal: ^0.6.0
+      react: ^17.0.0
+      react-dom: ^17.0.0
+      react-hotkeys-hook: ^3.0.3
+      spherical-geometry-js: ^2.0.0
+      tslib: ^2.1.0
+      typescript: 4.1.3
+      vite: ^2.0.0-beta.34
+  packages/data:
+    dependencies:
+      '@hawaii-bus-plus/types': 'link:../types'
+      '@hawaii-bus-plus/utils': 'link:../utils'
+      idb: 6.0.0
+      tslib: 2.1.0
+    devDependencies:
+      prettier: 2.2.1
+      type-fest: 0.20.2
+      typescript: 4.1.3
+    specifiers:
+      '@hawaii-bus-plus/types': '*'
+      '@hawaii-bus-plus/utils': '*'
+      idb: ^6.0.0
+      prettier: ^2.2.1
+      tslib: ^2.1.0
+      type-fest: ^0.20.2
+      typescript: 4.1.3
+  packages/node-web-worker:
+    dependencies:
+      event-target-shim: 6.0.2
+      tslib: 2.1.0
+    devDependencies:
+      '@types/node': 14.14.22
+      ava: 3.15.0
+      prettier: 2.2.1
+      typescript: 4.1.3
+    specifiers:
+      '@types/node': ^14.14.22
+      ava: ^3.15.0
+      event-target-shim: ^6.0.2
+      prettier: ^2.2.1
+      tslib: ^2.1.0
+      typescript: 4.1.3
   packages/promise-worker:
     dependencies:
       tslib: 2.1.0
@@ -114,6 +196,8 @@ importers:
     devDependencies:
       '@types/enzyme': 3.10.8
       '@types/enzyme-adapter-react-16': 1.0.6
+      '@types/googlemaps': 3.43.2
+      '@types/react': 17.0.0
       enzyme: 3.11.0
       enzyme-adapter-react-16: 1.15.5_enzyme@3.11.0
       prettier: 2.2.1
@@ -122,10 +206,24 @@ importers:
       '@react-google-maps/api': ^2.1.0
       '@types/enzyme': ^3.10.8
       '@types/enzyme-adapter-react-16': ^1.0.6
+      '@types/googlemaps': ^3.43.2
+      '@types/react': ^17.0.0
       enzyme: ^3.11.0
       enzyme-adapter-react-16: ^1.15.5
       prettier: ^2.2.1
       tslib: ^2.1.0
+      typescript: 4.1.3
+  packages/types:
+    dependencies:
+      tslib: 2.1.0
+      type-fest: 0.20.2
+    devDependencies:
+      prettier: 2.2.1
+      typescript: 4.1.3
+    specifiers:
+      prettier: ^2.2.1
+      tslib: ^2.1.0
+      type-fest: ^0.20.2
       typescript: 4.1.3
   packages/utils:
     dependencies:
@@ -2158,6 +2256,12 @@ packages:
       node: '>= 0.6'
     resolution:
       integrity: sha1-Qa4u62XvpiJorr/qg6x9eSmbCIc=
+  /event-target-shim/6.0.2:
+    dev: false
+    engines:
+      node: '>=10.13.0'
+    resolution:
+      integrity: sha512-8q3LsZjRezbFZ2PN+uP+Q7pnHUMmAOziU2vA2OwoFaKIXxlxl38IylhSSgUorWu/rf4er67w0ikBqjBFk/pomA==
   /eventemitter3/4.0.7:
     dev: true
     resolution:
@@ -5156,7 +5260,6 @@ packages:
     resolution:
       integrity: sha512-34R7HTnG0XIJcBSn5XhDd7nNFPRcXYRZrBB2O2jdKqYODldSzBAqzsWoZYYvduky73toYS/ESqxPvkDf/F0XMg==
   /type-fest/0.20.2:
-    dev: true
     engines:
       node: '>=10'
     resolution:

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { center } from '../../react-google-maps';
+import { center } from '@hawaii-bus-plus/react-google-maps';
 import SearchWorker from '../../worker-search/index?worker';
 import type { SearchResults } from '../../worker-search/search';
 import { makeId } from '../alert/make';

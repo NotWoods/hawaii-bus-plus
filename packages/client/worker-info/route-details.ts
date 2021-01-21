@@ -1,13 +1,18 @@
-import { Repository } from '../data/repository';
-import type { Route, RouteWithTrips, Stop, Trip } from '../shared/gtfs-types';
-import { gtfsArrivalToDate, plainTime } from '../shared/utils/date';
+import { Repository } from '@hawaii-bus-plus/data';
+import type { Route, RouteWithTrips, Stop, Trip } from '@hawaii-bus-plus/types';
+import {
+  gtfsArrivalToDate,
+  InfinityPlainDaysTime,
+  PlainDaysTime,
+  plainTime,
+} from '@hawaii-bus-plus/utils';
 
 export interface RouteDetails {
   readonly route: RouteWithTrips;
   readonly firstStop: Stop['stop_id'];
   readonly lastStop: Stop['stop_id'];
-  readonly earliest: Date;
-  readonly latest: Date;
+  readonly earliest: PlainDaysTime;
+  readonly latest: PlainDaysTime;
   readonly stops: Set<Stop['stop_id']>;
   readonly descParts: {
     type: 'text' | 'link';
@@ -42,7 +47,7 @@ export async function getRouteDetails(
   let smallestSequence = Infinity;
   let largestSequence = -1;
 
-  let earliest = plainTime(23, 59, 59);
+  let earliest = InfinityPlainDaysTime;
   let latest = plainTime(0, 0, 0);
 
   let earliestTrip: Trip['trip_id'] | undefined;
@@ -79,23 +84,19 @@ export async function getRouteDetails(
         earliestTripStop = stopTime.stop_id;
       }
 
+      // TODO change to use compare
       if (
-        timeDate.getTime() - now.getTime() < closestTripTime &&
-        timeDate.getTime() - now.getTime() > 0
+        timeDate.valueOf() - now.valueOf() < closestTripTime &&
+        timeDate.valueOf() - now.valueOf() > 0
       ) {
-        closestTripTime = timeDate.getTime() - now.getTime();
+        closestTripTime = timeDate.valueOf() - now.valueOf();
         closestTrip = trip.trip_id;
         closestTripStop = stopTime.stop_id;
       }
     }
     if (!closestTrip) {
       //Too late for all bus routes
-      closestTripTime =
-        plainTime(
-          earliest.getHours() + 24,
-          earliest.getMinutes(),
-          earliest.getSeconds()
-        ).getTime() - now.getTime();
+      closestTripTime = earliest.add({ days: 1 }).valueOf() - now.valueOf();
       closestTrip = earliestTrip;
       closestTripStop = earliestTripStop;
     }

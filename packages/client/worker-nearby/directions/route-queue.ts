@@ -1,9 +1,10 @@
 import {
   DirectionRoute,
   DirectionsData,
+  Stop,
   StopRouteInfo,
-} from '../../shared/directions-types';
-import { Stop, Trip } from '../../shared/gtfs-types';
+  Trip,
+} from '@hawaii-bus-plus/types';
 
 /**
  * In RAPTOR, routes are distinct if they go in different directions or have different stops.

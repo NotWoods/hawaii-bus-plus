@@ -1,5 +1,5 @@
-import { Repository } from '../data/repository';
-import { Stop } from '../shared/gtfs-types';
+import { Repository } from '@hawaii-bus-plus/data';
+import { Stop } from '@hawaii-bus-plus/types';
 
 export function loadStop(
   repo: Pick<Repository, 'loadStops'>,

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
-import { center, googleMapsApiKey } from '../../react-google-maps';
-import { Route, Stop } from '../../shared/gtfs-types';
+import { center, googleMapsApiKey } from '@hawaii-bus-plus/react-google-maps';
+import { Route, Stop } from '@hawaii-bus-plus/types';
 import InfoWorker from '../../worker-info/info?worker';
 import { useApi } from '../data/Api';
 import { usePromise } from '../hooks/usePromise';

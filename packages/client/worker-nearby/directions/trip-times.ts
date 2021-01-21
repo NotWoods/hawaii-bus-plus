@@ -1,6 +1,6 @@
-import { DirectionRoute } from '../../shared/directions-types';
-import { Stop, Trip } from '../../shared/gtfs-types';
-import { gtfsArrivalToDate, PlainDaysTime } from '../../shared/utils/temporal';
+import { DirectionRoute } from '@hawaii-bus-plus/types';
+import { Stop, Trip } from '@hawaii-bus-plus/types';
+import { gtfsArrivalToDate, PlainDaysTime } from '@hawaii-bus-plus/utils';
 
 export function getStopTime(trip: Trip, stopId: Stop['stop_id']) {
   // TODO optimize

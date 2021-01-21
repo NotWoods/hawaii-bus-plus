@@ -3,8 +3,8 @@
   "private": true,
   "version": "5.0.0",
   "scripts": {
-    "tsc": "tsc --build src",
-    "clean": "del-cli src/**/*.js src/**/*.d.ts src/**/*.map src/**/*.tsbuildinfo",
+    "tsc": "tsc --build .",
+    "clean": "del-cli packages/**/*.js packages/**/*.d.ts packages/**/*.map packages/**/*.tsbuildinfo",
     "preapi": "pnpm run tsc",
     "api": "node src/lib/cli.js ../hawaii-gtfs/pipeline/11_zip/google_transit.zip ./public",
     "dev": "vite",

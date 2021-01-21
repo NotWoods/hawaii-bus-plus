@@ -1,4 +1,4 @@
-import { Route, Stop } from '../../shared/gtfs-types';
+import { Route, Stop } from '@hawaii-bus-plus/types';
 import {
   closeRouteAction,
   closeStopAction,

@@ -1,7 +1,7 @@
 import { computeDistanceBetween } from 'spherical-geometry-js';
-import { Repository } from '../data/repository';
-import { Stop } from '../shared/gtfs-types';
-import { compareAs } from '../shared/utils/sort';
+import { Repository } from '@hawaii-bus-plus/data';
+import { Stop } from '@hawaii-bus-plus/types';
+import { compareAs } from '@hawaii-bus-plus/utils';
 
 export interface StopWithDistance extends Stop {
   distance: number;

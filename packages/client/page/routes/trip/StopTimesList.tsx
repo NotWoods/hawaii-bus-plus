@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { Route, Stop, StopTime } from '../../../shared/gtfs-types';
+import { Route, Stop, StopTime } from '@hawaii-bus-plus/types';
 import { useApi } from '../../data/Api';
 import { classNames } from '../../hooks/classnames';
 import { setStopAction } from '../../router/action';

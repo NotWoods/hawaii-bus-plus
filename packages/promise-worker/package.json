@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "main": "page/promise-worker.js",
+  "module": "page/promise-worker.js",
   "type": "module",
   "scripts": {
     "build": "tsc --build page worker",

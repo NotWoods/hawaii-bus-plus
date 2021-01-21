@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from '../../shared/gtfs-types';
+import { Route } from '@hawaii-bus-plus/types';
 
 interface Props {
   route: Pick<Route, 'route_short_name' | 'route_long_name'>;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { RequireAtLeastOne } from 'type-fest';
-import { Route, Stop } from '../../shared/gtfs-types';
+import { Route, Stop } from '@hawaii-bus-plus/types';
 import { useApi } from '../data/Api';
 import busStopIcon from '../icons/bus_stop.svg';
 import busIcon from '../icons/directions_bus.svg';

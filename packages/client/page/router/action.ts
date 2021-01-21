@@ -1,4 +1,4 @@
-import { Route, Stop } from '../../shared/gtfs-types';
+import { Route, Stop } from '@hawaii-bus-plus/types';
 import { PlaceResult } from './reducer';
 
 export function linkAction(href: string | URL) {

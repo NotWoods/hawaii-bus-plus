@@ -1,5 +1,5 @@
-import { makeRepository } from '../data/repository';
-import { registerPromiseWorker } from '../worker-base/register';
+import { makeRepository } from '@hawaii-bus-plus/data';
+import { registerPromiseWorker } from '@hawaii-bus-plus/promise-worker/worker';
 import { AutocompletionRequest } from './places-autocomplete';
 import { search } from './search';
 

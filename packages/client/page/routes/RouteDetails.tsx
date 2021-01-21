@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Route } from '../../shared/gtfs-types';
+import { Route } from '@hawaii-bus-plus/types';
 import { useApi } from '../data/Api';
 import { Icon } from '../icons/Icon';
 import './RouteSheet.css';

@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { Route } from '../../shared/gtfs-types';
+import { Route } from '@hawaii-bus-plus/types';
 import { useApi } from '../data/Api';
 import { classNames } from '../hooks/classnames';
 import { colorProps } from '../routes/props';

@@ -2,9 +2,11 @@
   "extends": "../../tsconfig.base.json",
   "include": ["**/*"],
   "references": [
-    { "path": "../../utils" },
+    { "path": "../../data/src" },
+    { "path": "../../utils/src" },
     { "path": "../../types" },
-    { "path": "../../react-google-maps" },
+    { "path": "../../react-google-maps/src" },
+    { "path": "../../promise-worker/page" },
     { "path": "../worker-info" },
     { "path": "../worker-nearby" },
     { "path": "../worker-search" },

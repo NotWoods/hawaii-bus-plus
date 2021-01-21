@@ -1,6 +1,6 @@
 import React, { createContext, ReactNode, useContext, useState } from 'react';
-import { downloadScheduleData } from '../../data/fetch';
-import { GTFSData, Route } from '../../shared/gtfs-types';
+import { downloadScheduleData } from '@hawaii-bus-plus/data';
+import { GTFSData, Route } from '@hawaii-bus-plus/types';
 import { usePromise } from '../hooks/usePromise';
 
 interface Api extends Omit<GTFSData, 'routes'> {

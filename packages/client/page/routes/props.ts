@@ -1,4 +1,4 @@
-import { Route } from '../../shared/gtfs-types';
+import { Route } from '@hawaii-bus-plus/types';
 
 export function colorProps(
   route: Pick<Route, 'route_color' | 'route_text_color'>

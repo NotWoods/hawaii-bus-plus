@@ -4,7 +4,7 @@ import {
   darkStyles,
   GoogleMapPortal,
   mapTypeControlOptions,
-} from '../../react-google-maps';
+} from '@hawaii-bus-plus/react-google-maps';
 import { openPlace, setMarker } from '../router/action';
 import { RouterContext } from '../router/Router';
 import { PlaceMarker } from './PlaceMarker';

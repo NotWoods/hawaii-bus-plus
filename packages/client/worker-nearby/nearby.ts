@@ -1,6 +1,6 @@
 import { Temporal } from 'proposal-temporal';
-import { makeRepository } from '../data/repository';
-import { registerPromiseWorker } from '../worker-base/register';
+import { makeRepository } from '@hawaii-bus-plus/data';
+import { registerPromiseWorker } from '@hawaii-bus-plus/promise-worker/worker';
 import { findClosestStops } from './closest-stops';
 import { directions, Point } from './directions';
 

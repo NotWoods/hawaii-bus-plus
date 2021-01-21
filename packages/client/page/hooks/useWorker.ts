@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { PromiseWorker } from '../../shared/promise-worker';
+import { PromiseWorker } from '@hawaii-bus-plus/promise-worker';
 
 /**
  * Set up a worker that lasts as long as the component is mounted.
