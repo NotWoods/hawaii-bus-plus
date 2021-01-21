@@ -1,9 +1,0 @@
-{
-  "extends": "../tsconfig.base.json",
-  "include": ["**/*", "*.json"],
-  "references": [{ "path": "../shared" }],
-  "compilerOptions": {
-    "lib": ["esnext", "dom", "dom.iterable"],
-    "emitDeclarationOnly": true
-  }
-}
