@@ -5,12 +5,8 @@
   "scripts": {
     "tsc": "tsc --build .",
     "clean": "del-cli packages/**/*.js packages/**/*.d.ts packages/**/*.map packages/**/*.tsbuildinfo",
-    "preapi": "pnpm run tsc",
-    "api": "node src/lib/cli.js ../hawaii-gtfs/pipeline/11_zip/google_transit.zip ./public",
     "dev": "vite",
     "build": "pnpm run tsc && vite build",
-    "pretest": "pnpm run tsc",
-    "test": "ava",
     "prettier": "prettier \"*.{md,html}\" \"src/**/*.{ts,tsx,css}\" \"!src/**/*.d.ts\" vite.config.ts **/tsconfig.json public/*.json",
     "format": "pnpm run prettier -- --write"
   },

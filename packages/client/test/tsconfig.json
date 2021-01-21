@@ -3,6 +3,7 @@
   "include": ["**/*"],
   "references": [{ "path": "../worker-search" }],
   "compilerOptions": {
-    "lib": ["esnext", "dom", "dom.iterable", "WebWorker"]
+    "lib": ["esnext", "dom", "dom.iterable", "WebWorker"],
+    "emitDeclarationOnly": true
   }
 }

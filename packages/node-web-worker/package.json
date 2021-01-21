@@ -6,9 +6,7 @@
   "type": "module",
   "scripts": {
     "build": "tsc --build src",
-    "format": "prettier **/*.ts --write",
-    "pretest": "tsc --build test",
-    "test": "ava"
+    "format": "prettier **/*.ts --write"
   },
   "dependencies": {
     "event-target-shim": "^6.0.2",

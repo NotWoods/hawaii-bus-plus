@@ -3,7 +3,6 @@
   "include": ["**/*"],
   "references": [{ "path": "../../types" }, { "path": "../../utils/src" }],
   "compilerOptions": {
-    "lib": ["esnext"],
-    "emitDeclarationOnly": true
+    "lib": ["esnext"]
   }
 }
