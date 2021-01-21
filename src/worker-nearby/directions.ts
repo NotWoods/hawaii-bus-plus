@@ -66,6 +66,11 @@ function traversePath(
   }
 }
 
+export interface Journey {
+  path: Path[];
+  lastStop: Stop['stop_id'];
+}
+
 export async function directions(
   repo: Pick<
     Repository,
@@ -74,12 +79,13 @@ export async function directions(
   from: Point,
   to: Point,
   departureTime: Temporal.PlainDateTime
-) {
+): Promise<Journey[]> {
   const arriveAtReady = pointToSources(repo, to, departureTime);
   const departFrom = await pointToSources(repo, from, departureTime);
 
   const departDate = departureTime.toPlainDate();
   const paths = await raptorDirections(repo, departFrom, departDate);
+  console.log(paths);
   const arriveAt = await arriveAtReady;
   const journeys = arriveAt
     .map((arrival) => ({

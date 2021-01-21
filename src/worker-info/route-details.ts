@@ -9,12 +9,18 @@ export interface RouteDetails {
   readonly earliest: Date;
   readonly latest: Date;
   readonly stops: Set<Stop['stop_id']>;
+  readonly descParts: {
+    type: 'text' | 'link';
+    value: string;
+  }[];
   readonly closestTrip: {
     readonly id: Trip['trip_id'];
     readonly minutes: number;
     readonly stop: Stop['stop_id'];
   };
 }
+
+const LINK_REGEX = /(https?:\/\/[.a-z\/]+)/g;
 
 /**
  * Find the best trip based on the current time of day,
@@ -95,6 +101,23 @@ export async function getRouteDetails(
     }
   }
 
+  let descLastIndex = 0;
+  const descParts: RouteDetails['descParts'] = [];
+  for (const match of route.route_desc.matchAll(LINK_REGEX)) {
+    const end = match.index! + match[0].length;
+    const textPart = route.route_desc.slice(descLastIndex, match.index);
+    const linkPart = route.route_desc.slice(match.index, end);
+    descParts.push(
+      { type: 'text', value: textPart },
+      { type: 'link', value: linkPart }
+    );
+    descLastIndex = end;
+  }
+  descParts.push({
+    type: 'text',
+    value: route.route_desc.slice(descLastIndex),
+  });
+
   return {
     route,
     firstStop: firstStop!,
@@ -102,6 +125,7 @@ export async function getRouteDetails(
     earliest,
     latest,
     stops: routeStops,
+    descParts,
     closestTrip: {
       id: closestTrip!,
       minutes: Math.floor(closestTripTime / 60000),

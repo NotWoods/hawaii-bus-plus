@@ -27,14 +27,7 @@ registerPromiseWorker(async (message: Message) => {
         ? Temporal.PlainDateTime.from(message.departureTime)
         : Temporal.now.plainDateTimeISO();
 
-      const result = await directions(
-        repo,
-        message.from,
-        message.to,
-        departureTime
-      );
-      console.log(result);
-      return result;
+      return directions(repo, message.from, message.to, departureTime);
     }
     case 'closest-stop': {
       return findClosestStops(repo, message.location);

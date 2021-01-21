@@ -6,6 +6,7 @@
     { "path": "../data" },
     { "path": "../react-google-maps" },
     { "path": "../worker-info" },
+    { "path": "../worker-nearby" },
     { "path": "../worker-search" },
     { "path": "../worker-init-db" }
   ],

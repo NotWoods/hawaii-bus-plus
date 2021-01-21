@@ -83,7 +83,10 @@ export function RouteSheet() {
           )}
         </div>
         <div className="col-lg-4">
-          <RouteDetailsCard route={details?.route} />
+          <RouteDetailsCard
+            route={details?.route}
+            descParts={details?.descParts}
+          />
         </div>
       </div>
     </div>

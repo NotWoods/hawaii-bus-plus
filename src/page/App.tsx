@@ -8,11 +8,13 @@ import { MainMap } from './map/MainMap';
 import { Navbar } from './Navbar';
 import { Router } from './router/Router';
 import { RouteSheet } from './routes/RouteSheet';
+import { DirectionsSidebar } from './sidebar/directions/DirectionsSidebar';
 import { Sidebar } from './sidebar/Sidebar';
 import { StopCard } from './stop/StopCard';
 
 export function App() {
   const [showSidebar, setShowSidebar] = useState(true);
+  const [directionsOpen, setDirectionsOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(
     matchMedia('(prefers-color-scheme: dark)').matches
   );
@@ -46,9 +48,13 @@ export function App() {
                 toggleDarkMode={toggleDarkMode}
               />
               <div className="sidebar-overlay" onClick={toggleSidebar}></div>
-              <Sidebar />
+              {directionsOpen ? (
+                <DirectionsSidebar onClose={() => setDirectionsOpen(false)} />
+              ) : (
+                <Sidebar onDirectionsClick={() => setDirectionsOpen(true)} />
+              )}
               <div className="content-wrapper">
-                <MainMap />
+                <MainMap darkMode={darkMode} />
                 <StopCard />
                 <RouteSheet />
               </div>

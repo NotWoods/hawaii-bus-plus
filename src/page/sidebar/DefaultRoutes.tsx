@@ -3,9 +3,14 @@ import { useApi } from '../data/Api';
 import { RouteSearchItem } from './SearchItems';
 import { SidebarTitle } from './SidebarTitle';
 import locationIcon from '../icons/gps_fixed.svg';
+import directionsIcon from '../icons/directions.svg';
 import { Icon } from '../icons/Icon';
 
-export function DefaultRoutes() {
+interface Props {
+  onDirectionsClick?(): void;
+}
+
+export function DefaultRoutes(props: Props) {
   const api = useApi();
   const routes = api ? Object.values(api.routes) : [];
 
@@ -14,6 +19,14 @@ export function DefaultRoutes() {
       <div className="sidebar-content">
         <button className="btn btn-sm" type="button">
           <Icon src={locationIcon} alt="" /> My location
+        </button>
+
+        <button
+          className="btn btn-sm"
+          type="button"
+          onClick={props.onDirectionsClick}
+        >
+          <Icon src={directionsIcon} alt="" /> Directions
         </button>
       </div>
 

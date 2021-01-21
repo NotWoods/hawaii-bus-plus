@@ -114,7 +114,7 @@ export async function raptorDirections(
     // Stage 3: consider foot-paths.
     const footPaths = await getFootPaths(markedStops);
     for (const fromStopId of markedStops) {
-      const transfers = footPaths.get(fromStopId)!;
+      const transfers = footPaths.get(fromStopId) || [];
       for (const transfer of transfers) {
         const fromTime = multiLabel.get(fromStopId)[k - 1]?.time;
         const timeWithWalking =

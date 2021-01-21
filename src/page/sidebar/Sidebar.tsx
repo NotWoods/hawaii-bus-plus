@@ -4,7 +4,11 @@ import { DefaultRoutes } from './DefaultRoutes';
 import './Sidebar.css';
 import { SidebarSearch } from './SidebarSearch';
 
-export function Sidebar() {
+interface Props {
+  onDirectionsClick?(): void;
+}
+
+export function Sidebar(props: Props) {
   const inputRef = useAccessKey<HTMLInputElement>('shift+f');
   const [search, setSearch] = useState('');
 
@@ -12,7 +16,7 @@ export function Sidebar() {
   if (search) {
     children = <SidebarSearch search={search} />;
   } else {
-    children = <DefaultRoutes />;
+    children = <DefaultRoutes onDirectionsClick={props.onDirectionsClick} />;
   }
 
   return (

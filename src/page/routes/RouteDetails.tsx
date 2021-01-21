@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Route } from '../../shared/gtfs-types';
 import { useApi } from '../data/Api';
 import { Icon } from '../icons/Icon';
@@ -8,9 +8,13 @@ import fareIcon from '../icons/monetization_on.svg';
 
 interface Props {
   route?: Route;
+  descParts?: readonly {
+    type: 'text' | 'link';
+    value: string;
+  }[];
 }
 
-export function RouteDetailsCard({ route }: Props) {
+export function RouteDetailsCard({ route, descParts }: Props) {
   const api = useApi();
 
   if (!route) {
@@ -32,7 +36,17 @@ export function RouteDetailsCard({ route }: Props) {
           <Icon src={fareIcon} alt="" /> Fare info
         </a>
       </div>
-      <p className="text-muted">{route.route_desc}</p>
+      <p className="text-muted text-break">
+        {descParts?.map((part, i) =>
+          part.type === 'link' ? (
+            <a key={i} href={part.value}>
+              {part.value}
+            </a>
+          ) : (
+            <Fragment key={i}>{part.value}</Fragment>
+          )
+        )}
+      </p>
     </div>
   );
 }

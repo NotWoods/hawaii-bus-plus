@@ -1,7 +1,7 @@
-import { initDatabase } from '../data/init';
-import { downloadScheduleData } from '../data/fetch';
+import { init } from '../data/db-repository/init';
+import { dbReady } from '../data/database';
 import { registerPromiseWorker } from '../worker-base/register';
 
-const apiReady = downloadScheduleData().then(initDatabase);
+const apiReady = dbReady.then(init);
 
 registerPromiseWorker(() => apiReady);
