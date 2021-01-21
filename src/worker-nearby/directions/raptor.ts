@@ -1,7 +1,6 @@
-import { IDBPDatabase } from 'idb';
 import { DefaultMap } from 'mnemonist';
 import { Temporal } from 'proposal-temporal';
-import { GTFSSchema } from '../../data/database';
+import { Repository } from '../../data/repository';
 import { Stop, Trip } from '../../shared/gtfs-types';
 import {
   InfinityPlainDaysTime,
@@ -30,12 +29,12 @@ export interface Path {
  * @param departureTime Departure time, corresponds to t in set II
  */
 export async function raptorDirections(
-  db: IDBPDatabase<GTFSSchema>,
+  repo: Pick<Repository, 'loadCalendars' | 'loadRoutes' | 'loadStops'>,
   sources: readonly Source[],
   departureDate: Temporal.PlainDate
 ) {
-  const data = await generateDirectionsData(db, departureDate);
-  const getFootPaths = footPathsLoader(db);
+  const data = await generateDirectionsData(repo, departureDate);
+  const getFootPaths = footPathsLoader(repo);
 
   // The algorithm works in rounds.
   // Each round, k, computes the fastest way of getting to every stop with up to k trips.

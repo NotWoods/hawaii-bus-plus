@@ -1,28 +1,12 @@
 import { DBSchema, openDB } from 'idb';
-import { Mutable } from 'type-fest';
-import {
-  Calendar,
-  GTFSData,
-  Route,
-  RouteWithTrips,
-  Stop,
-  Trip,
-} from '../shared/gtfs-types';
-import {
-  gtfsArrivalToDate,
-  PlainDaysTimeSeconds,
-} from '../shared/utils/temporal';
+import { Calendar, Route, RouteWithTrips, Stop } from '../shared/gtfs-types';
 
-export interface SearchRoute extends Route {
+export interface SearchRoute extends RouteWithTrips {
   words: readonly string[];
 }
 
 export interface SearchStop extends Stop {
   words: readonly string[];
-}
-
-export interface SearchTrip extends Trip {
-  start: PlainDaysTimeSeconds;
 }
 
 export interface GTFSSchema extends DBSchema {
@@ -39,14 +23,6 @@ export interface GTFSSchema extends DBSchema {
       routes: Route['route_id'][];
       stop_lat: number;
       stop_lon: number;
-    };
-  };
-  trips: {
-    value: SearchTrip;
-    key: Trip['trip_id'];
-    indexes: {
-      route_id: Route['route_id'];
-      start: PlainDaysTimeSeconds;
     };
   };
   calendar: {
@@ -84,11 +60,5 @@ export const dbReady = openDB<GTFSSchema>('gtfs', 1, {
     stopStore.createIndex('routes', 'routes', { multiEntry: true });
     stopStore.createIndex('stop_lat', ['position', 'lat']);
     stopStore.createIndex('stop_lon', ['position', 'lng']);
-
-    const tripStore = db.createObjectStore('trips', {
-      keyPath: 'trip_id',
-    });
-    tripStore.createIndex('route_id', 'route_id');
-    tripStore.createIndex('start', 'start');
   },
 });

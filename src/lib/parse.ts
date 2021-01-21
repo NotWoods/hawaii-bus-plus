@@ -174,7 +174,6 @@ export async function createApiData(
         lat: csvStop.stop_lat,
         lng: csvStop.stop_lon,
       },
-      trips: [],
       routes: [],
       transfers: transfers.get(csvStop.stop_id) || [],
     };
@@ -232,25 +231,15 @@ export async function createApiData(
 
     trip.stop_times.push(stopTime);
 
-    const tripAdded = stop.trips.find(
-      ({ trip }) => trip === csvStopTime.trip_id
-    );
-    if (!tripAdded) {
-      stop.trips.push({
-        trip: csvStopTime.trip_id,
-        dir: trip.direction_id,
-        route: route_id,
-        sequence: stopTime.stop_sequence,
-        time: stopTime.departure_time,
-      });
-    }
     if (!stop.routes.includes(route_id)) {
       stop.routes.push(route_id);
     }
   }
 
-  for (const route of Object.values(variable.routes)) {
-    for (const t of Object.values(route.trips)) {
+  for (const r of Object.values(variable.routes)) {
+    const route = r as Mutable<RouteWithTrips>;
+    const trips = Object.values(route.trips);
+    for (const t of trips) {
       const trip = t as Mutable<Trip>;
       trip.stop_times.sort(compareAs((st) => st.stop_sequence));
       if (!STARTS_WITH_TIME.test(trip.trip_short_name)) {
@@ -258,16 +247,17 @@ export async function createApiData(
         trip.trip_short_name = `${stringTime(start)} ${trip.trip_short_name}`;
       }
     }
+    trips.sort((a, b) => {
+      const aTime = gtfsArrivalToDate(a.stop_times[0].departure_time);
+      const bTime = gtfsArrivalToDate(b.stop_times[0].departure_time);
+      return PlainDaysTime.compare(aTime, bTime);
+    });
+    route.trips = Object.fromEntries(trips.map((trip) => [trip.trip_id, trip]));
   }
   for (const stop of Object.values(variable.stops)) {
     stop.routes.sort(
       compareAs((routeId) => toInt(variable.routes[routeId].route_short_name))
     );
-    stop.trips.sort((a, b) => {
-      const aTime = gtfsArrivalToDate(a.time);
-      const bTime = gtfsArrivalToDate(b.time);
-      return PlainDaysTime.compare(aTime, bTime);
-    });
   }
 
   return variable;

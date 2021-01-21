@@ -1,5 +1,5 @@
 import { Temporal } from 'proposal-temporal';
-import { dbReady } from '../data/database';
+import { makeRepository } from '../data/repository';
 import { registerPromiseWorker } from '../worker-base/register';
 import { findClosestStops } from './closest-stops';
 import { directions, Point } from './directions';
@@ -18,10 +18,9 @@ interface ClosestStopsMessage {
 
 type Message = DirectionsMessage | ClosestStopsMessage;
 
-console.log('hello world');
+const repo = makeRepository();
 
 registerPromiseWorker(async (message: Message) => {
-  const db = await dbReady;
   switch (message.type) {
     case 'directions': {
       const departureTime = message.departureTime
@@ -29,7 +28,7 @@ registerPromiseWorker(async (message: Message) => {
         : Temporal.now.plainDateTimeISO();
 
       const result = await directions(
-        db,
+        repo,
         message.from,
         message.to,
         departureTime
@@ -38,7 +37,7 @@ registerPromiseWorker(async (message: Message) => {
       return result;
     }
     case 'closest-stop': {
-      return findClosestStops(db, message.location);
+      return findClosestStops(repo, message.location);
     }
   }
 });

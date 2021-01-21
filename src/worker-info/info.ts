@@ -1,9 +1,9 @@
-import { dbReady } from '../data/database';
-import { removeWords } from '../data/format';
+import { makeRepository } from '../data/repository';
 import { Route, Stop } from '../shared/gtfs-types';
 import { registerPromiseWorker } from '../worker-base/register';
 import { placeApi, PlaceInfoMessage } from './place-api';
 import { getRouteDetails } from './route-details';
+import { loadStop } from './stop-details';
 
 interface RouteInfoMessage {
   type: 'route';
@@ -18,21 +18,20 @@ interface StopInfoMessage {
 
 type Message = RouteInfoMessage | StopInfoMessage | PlaceInfoMessage;
 
+const repo = makeRepository();
+
 registerPromiseWorker(async (message: Message) => {
   console.log(message);
   switch (message.type) {
     case 'route': {
-      const db = await dbReady;
       return getRouteDetails(
-        db,
+        repo,
         message.id,
         message.time ? new Date(message.time) : new Date()
       );
     }
     case 'stop': {
-      const db = await dbReady;
-      const stop = await db.get('stops', message.id);
-      return stop && removeWords(stop);
+      return loadStop(repo, message.id);
     }
     case 'place': {
       return placeApi(message);

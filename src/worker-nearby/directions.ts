@@ -1,6 +1,5 @@
-import { IDBPDatabase } from 'idb';
 import { Temporal } from 'proposal-temporal';
-import { GTFSSchema } from '../data/database';
+import { Repository } from '../data/repository';
 import { Stop } from '../shared/gtfs-types';
 import { nestedNotNull } from '../shared/utils/sort';
 import { PlainDaysTime } from '../shared/utils/temporal';
@@ -13,7 +12,7 @@ export interface Point {
 }
 
 async function pointToSources(
-  db: IDBPDatabase<GTFSSchema>,
+  repo: Pick<Repository, 'loadStopsSpatial'>,
   point: Point,
   departureTime: Temporal.PlainDateTime
 ): Promise<Source[]> {
@@ -26,7 +25,7 @@ async function pointToSources(
       },
     ];
   } else {
-    const closest = await findClosestStops(db, point.position);
+    const closest = await findClosestStops(repo, point.position);
     return closest.map((stop) => {
       // Rough walking speed is 1 meter per second
       const timeWithWalking = time.add({ seconds: stop.distance });
@@ -68,16 +67,19 @@ function traversePath(
 }
 
 export async function directions(
-  db: IDBPDatabase<GTFSSchema>,
+  repo: Pick<
+    Repository,
+    'loadStopsSpatial' | 'loadStops' | 'loadCalendars' | 'loadRoutes'
+  >,
   from: Point,
   to: Point,
   departureTime: Temporal.PlainDateTime
 ) {
-  const arriveAtReady = pointToSources(db, to, departureTime);
-  const departFrom = await pointToSources(db, from, departureTime);
+  const arriveAtReady = pointToSources(repo, to, departureTime);
+  const departFrom = await pointToSources(repo, from, departureTime);
 
   const departDate = departureTime.toPlainDate();
-  const paths = await raptorDirections(db, departFrom, departDate);
+  const paths = await raptorDirections(repo, departFrom, departDate);
   const arriveAt = await arriveAtReady;
   const journeys = arriveAt
     .map((arrival) => ({

@@ -101,13 +101,6 @@ export interface Stop extends Readonly<Omit<CsvStop, 'stop_lat' | 'stop_lon'>> {
     readonly lat: number;
     readonly lng: number;
   };
-  readonly trips: {
-    readonly trip: Trip['trip_id'];
-    readonly dir: 0 | 1;
-    readonly route: Route['route_id'];
-    readonly sequence: number;
-    readonly time: TimeString;
-  }[];
   readonly routes: Route['route_id'][];
   readonly transfers: readonly Transfer[];
 }

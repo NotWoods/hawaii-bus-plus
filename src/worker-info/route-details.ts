@@ -1,7 +1,4 @@
-import { IDBPDatabase } from 'idb';
-import { Mutable } from 'type-fest';
-import { GTFSSchema } from '../data/database';
-import { removeWords } from '../data/format';
+import { Repository } from '../data/repository';
 import type { Route, RouteWithTrips, Stop, Trip } from '../shared/gtfs-types';
 import { gtfsArrivalToDate, plainTime } from '../shared/utils/date';
 
@@ -25,15 +22,11 @@ export interface RouteDetails {
  * @param trips All trips for a route.
  */
 export async function getRouteDetails(
-  db: IDBPDatabase<GTFSSchema>,
+  repo: Pick<Repository, 'loadRoute'>,
   route_id: Route['route_id'],
   now: Date
 ): Promise<RouteDetails | undefined> {
-  const tx = db.transaction(['routes', 'trips']);
-  const [route, trips] = await Promise.all([
-    tx.objectStore('routes').get(route_id),
-    tx.objectStore('trips').index('route_id').getAll(route_id),
-  ]);
+  const route = await repo.loadRoute(route_id);
   if (!route) {
     return undefined;
   }
@@ -53,10 +46,8 @@ export async function getRouteDetails(
   let closestTripStop: Stop['stop_id'] | undefined;
 
   const routeStops = new Set<Stop['stop_id']>();
-  const tripsMap: RouteWithTrips['trips'] = {};
 
-  for (const trip of trips) {
-    tripsMap[trip.trip_id] = trip;
+  for (const trip of Object.values(route.trips)) {
     for (const stopTime of trip.stop_times) {
       const sequence = stopTime.stop_sequence;
       if (trip.direction_id === 0) {
@@ -104,11 +95,8 @@ export async function getRouteDetails(
     }
   }
 
-  const routeWithTrips = removeWords(route) as Mutable<RouteWithTrips>;
-  routeWithTrips.trips = tripsMap;
-
   return {
-    route: routeWithTrips,
+    route,
     firstStop: firstStop!,
     lastStop: lastStop!,
     earliest,
