@@ -76,6 +76,7 @@ export function RouteSheet() {
               <StopTimesList
                 routeId={route.route_id}
                 stopTimes={details?.closestTrip?.stopTimes || []}
+                timeZone={details?.timeZone}
               />
             </div>
           ) : (

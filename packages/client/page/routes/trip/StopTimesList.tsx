@@ -26,9 +26,16 @@ interface StopTimeItemProps {
   stopTime: TemporalStopTime;
   first?: boolean;
   last?: boolean;
+  timeZone?: string;
 }
 
-function StopTimeItem({ routeId, stopTime, first, last }: StopTimeItemProps) {
+function StopTimeItem({
+  routeId,
+  stopTime,
+  first,
+  last,
+  timeZone,
+}: StopTimeItemProps) {
   const api = useApi();
   const stop = api?.stops?.[stopTime.stop_id];
 
@@ -54,7 +61,8 @@ function StopTimeItem({ routeId, stopTime, first, last }: StopTimeItemProps) {
         <Time
           time={stopTime.arrival_time}
           approximate={!stopTime.timepoint}
-          className="stoptime-time"
+          timeZone={timeZone}
+          className="stoptime-time text-nowrap text-right"
         />
       </Link>
     </li>
@@ -65,6 +73,7 @@ interface StopTimeListProps {
   routeId: Route['route_id'];
   stopTimes: readonly TemporalStopTime[];
   skipToStop?: Stop['stop_id'];
+  timeZone?: string;
 }
 
 export function StopTimesList(props: StopTimeListProps) {
@@ -83,6 +92,7 @@ export function StopTimesList(props: StopTimeListProps) {
           stopTime={stopTime}
           first={i === 0}
           last={i === lastIndex}
+          timeZone={props.timeZone}
         />
       );
     }

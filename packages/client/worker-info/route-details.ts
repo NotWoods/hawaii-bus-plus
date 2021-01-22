@@ -12,8 +12,8 @@ import { Temporal } from 'proposal-temporal';
 
 export interface TemporalStopTime
   extends Omit<StopTime, 'arrival_time' | 'departure_time'> {
-  arrival_time: Temporal.ZonedDateTime;
-  departure_time: Temporal.ZonedDateTime;
+  arrival_time: { epochMilliseconds: number; string: string };
+  departure_time: { epochMilliseconds: number; string: string };
 }
 
 export interface RouteDetails {
@@ -27,6 +27,7 @@ export interface RouteDetails {
     type: 'text' | 'link';
     value: string;
   }[];
+  readonly timeZone: string;
   readonly closestTrip: {
     readonly id: Trip['trip_id'];
     readonly until: Temporal.Duration;
@@ -59,7 +60,8 @@ export async function getRouteDetails(
   }
 
   const agency = await repo.loadAgency(route.agency_id);
-  const nowZoned = now || nowInZone(agency!.agency_timezone);
+  const timeZone = agency!.agency_timezone;
+  const nowZoned = now || nowInZone(timeZone);
   const nowTime = nowZoned.toPlainTime();
   const nowDate = nowZoned.toPlainDate();
 
@@ -96,10 +98,10 @@ export async function getRouteDetails(
       routeStops.add(stopTime.stop_id);
 
       const arrivalTime = PlainDaysTime.from(stopTime.arrival_time);
-      if (arrivalTime > latest) {
+      if (PlainDaysTime.compare(arrivalTime, latest) > 0) {
         latest = arrivalTime;
       }
-      if (arrivalTime < earliest) {
+      if (PlainDaysTime.compare(arrivalTime, earliest) < 0) {
         earliest = arrivalTime;
         earliestTrip = trip.trip_id;
         earliestTripStop = stopTime.stop_id;
@@ -148,7 +150,8 @@ export async function getRouteDetails(
       .toPlainTime()
       .toPlainDateTime(nowDate)
       .add({ days: daysTime.day });
-    return dateTime.toZonedDateTime(agency!.agency_timezone);
+    const zoned = dateTime.toZonedDateTime(timeZone);
+    return { epochMilliseconds: zoned.epochMilliseconds, string: time };
   }
 
   return {
@@ -159,6 +162,7 @@ export async function getRouteDetails(
     latest,
     stops: routeStops,
     descParts,
+    timeZone,
     closestTrip: {
       id: closestTrip!,
       until: closestTripOffset,
