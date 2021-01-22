@@ -1,8 +1,8 @@
-import { DefaultMap } from 'mnemonist';
-import { Temporal } from 'proposal-temporal';
 import { Repository } from '@hawaii-bus-plus/data';
 import { Stop, Trip } from '@hawaii-bus-plus/types';
 import { InfinityPlainDaysTime, PlainDaysTime } from '@hawaii-bus-plus/utils';
+import { DefaultMap } from 'mnemonist';
+import { Temporal } from 'proposal-temporal';
 import { footPathsLoader } from './footpaths';
 import { generateDirectionsData } from './generate-data';
 import { buildQueue, stopsBeginningWith } from './route-queue';
@@ -26,7 +26,7 @@ export interface Path {
  * @param departureTime Departure time, corresponds to t in set II
  */
 export async function raptorDirections(
-  repo: Pick<Repository, 'loadCalendars' | 'loadRoutes' | 'loadStops'>,
+  repo: Pick<Repository, 'loadCalendars' | 'loadTrips' | 'loadStops'>,
   sources: readonly Source[],
   departureDate: Temporal.PlainDate
 ) {

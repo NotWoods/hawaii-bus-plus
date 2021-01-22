@@ -10,10 +10,6 @@ export function loadRoute(
   return db.get('routes', routeId).then((route) => route && removeWords(route));
 }
 
-export function loadRoutes(db: IDBPDatabase<GTFSSchema>) {
-  return db.getAll('routes').then((routes) => routes.map(removeWords));
-}
-
 export function loadAgency(
   db: IDBPDatabase<GTFSSchema>,
   agencyId: Agency['agency_id']

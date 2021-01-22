@@ -1,18 +1,23 @@
-import { DBSchema, openDB } from 'idb';
 import {
   Agency,
   Calendar,
   Route,
-  RouteWithTrips,
   Stop,
+  TimeString,
+  Trip,
 } from '@hawaii-bus-plus/types';
+import { DBSchema, openDB } from 'idb';
 
-export interface SearchRoute extends RouteWithTrips {
+export interface SearchRoute extends Route {
   words: readonly string[];
 }
 
 export interface SearchStop extends Stop {
   words: readonly string[];
+}
+
+export interface SearchTrip extends Trip {
+  start: TimeString;
 }
 
 export interface GTFSSchema extends DBSchema {
@@ -29,6 +34,14 @@ export interface GTFSSchema extends DBSchema {
       routes: Route['route_id'][];
       stop_lat: number;
       stop_lon: number;
+    };
+  };
+  trips: {
+    value: SearchTrip;
+    key: Trip['trip_id'];
+    indexes: {
+      start: TimeString;
+      route_id: Route['route_id'];
     };
   };
   calendar: {
@@ -71,5 +84,11 @@ export const dbReady = openDB<GTFSSchema>('gtfs', 1, {
     stopStore.createIndex('routes', 'routes', { multiEntry: true });
     stopStore.createIndex('stop_lat', ['position', 'lat']);
     stopStore.createIndex('stop_lon', ['position', 'lng']);
+
+    const tripStore = db.createObjectStore('trips', {
+      keyPath: 'trip_id',
+    });
+    tripStore.createIndex('route_id', 'route_id');
+    tripStore.createIndex('start', 'start');
   },
 });

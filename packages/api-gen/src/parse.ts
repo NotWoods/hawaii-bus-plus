@@ -14,6 +14,7 @@ import type {
   ServerGTFSData,
   Stop,
   StopTime,
+  TimeString,
   Transfer,
   Trip,
 } from '@hawaii-bus-plus/types';
@@ -83,6 +84,10 @@ function makeCalendarTextName(days: Calendar['days']) {
         return reference[firstDay] + ' - ' + reference[lastDay];
       }
   }
+}
+
+function fixTimeString(time: string) {
+  return time.padStart('00:00:00'.length, '0') as TimeString;
 }
 
 /**
@@ -220,6 +225,8 @@ export async function createApiData(
     const stopTime = (csvStopTime as unknown) as Mutable<StopTime>;
     delete (csvStopTime as Partial<CsvStopTime>).continuous_drop_off;
     delete (csvStopTime as Partial<CsvStopTime>).drop_off_type;
+    stopTime.arrival_time = fixTimeString(stopTime.arrival_time);
+    stopTime.departure_time = fixTimeString(stopTime.departure_time);
 
     const stop = variable.stops[stopTime.stop_id];
     const route_id = variable.trips[csvStopTime.trip_id];

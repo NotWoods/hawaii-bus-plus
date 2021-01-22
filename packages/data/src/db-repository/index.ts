@@ -1,17 +1,12 @@
-import {
-  Agency,
-  Calendar,
-  Route,
-  RouteWithTrips,
-  Stop,
-} from '@hawaii-bus-plus/types';
+import { Agency, Calendar, Route, Stop } from '@hawaii-bus-plus/types';
 import { dbReady } from '../database';
-import { Repository } from '../repository';
+import { Repository, TripCursor } from '../repository';
 import { loadCalendars } from './calendar';
 import { init } from './init';
-import { loadAgency, loadRoute, loadRoutes } from './routes';
+import { loadAgency, loadRoute } from './routes';
 import { searchRoutes, searchStops } from './search';
 import { loadStops, loadStopsSpatial } from './stops';
+import { loadTrips, loadTripsForRoute } from './trips';
 
 export class DBRepository implements Repository {
   private ready = dbReady;
@@ -20,12 +15,16 @@ export class DBRepository implements Repository {
     return this.ready.then((db) => init(db));
   }
 
-  loadRoute(routeId: Route['route_id']): Promise<RouteWithTrips | undefined> {
+  loadRoute(routeId: Route['route_id']): Promise<Route | undefined> {
     return this.ready.then((db) => loadRoute(db, routeId));
   }
 
-  loadRoutes(): Promise<RouteWithTrips[]> {
-    return this.ready.then((db) => loadRoutes(db));
+  loadTrips(): Promise<TripCursor | null> {
+    return this.ready.then((db) => loadTrips(db));
+  }
+
+  loadTripsForRoute(routeId: Route['route_id']): Promise<TripCursor | null> {
+    return this.ready.then((db) => loadTripsForRoute(db, routeId));
   }
 
   loadStops(

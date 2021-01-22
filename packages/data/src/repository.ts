@@ -1,19 +1,20 @@
-import {
-  Agency,
-  Calendar,
-  Route,
-  RouteWithTrips,
-  Stop,
-} from '@hawaii-bus-plus/types';
+import { Agency, Calendar, Route, Stop, Trip } from '@hawaii-bus-plus/types';
 import { DBRepository } from './db-repository';
 import { MemoryRepository } from './mem-repository';
+
+export interface TripCursor {
+  value: Trip;
+  continue(): Promise<TripCursor | null>;
+}
 
 export interface Repository {
   init(): Promise<void>;
 
-  loadRoute(routeId: Route['route_id']): Promise<RouteWithTrips | undefined>;
+  loadRoute(routeId: Route['route_id']): Promise<Route | undefined>;
 
-  loadRoutes(): Promise<RouteWithTrips[]>;
+  loadTrips(): Promise<TripCursor | null>;
+
+  loadTripsForRoute(routeId: Route['route_id']): Promise<TripCursor | null>;
 
   loadStops(
     stopIds: Iterable<Stop['stop_id']>

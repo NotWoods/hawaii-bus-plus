@@ -1,8 +1,7 @@
-import { Temporal } from 'proposal-temporal';
 import { Repository } from '@hawaii-bus-plus/data';
 import { Stop } from '@hawaii-bus-plus/types';
-import { nestedNotNull } from '@hawaii-bus-plus/utils';
-import { PlainDaysTime } from '@hawaii-bus-plus/utils';
+import { nestedNotNull, PlainDaysTime } from '@hawaii-bus-plus/utils';
+import { Temporal } from 'proposal-temporal';
 import { findClosestStops } from './closest-stops';
 import { Path, raptorDirections, Source } from './directions/raptor';
 
@@ -74,7 +73,7 @@ export interface Journey {
 export async function directions(
   repo: Pick<
     Repository,
-    'loadStopsSpatial' | 'loadStops' | 'loadCalendars' | 'loadRoutes'
+    'loadStopsSpatial' | 'loadStops' | 'loadCalendars' | 'loadTrips'
   >,
   from: Point,
   to: Point,

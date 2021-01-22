@@ -28,13 +28,10 @@ function runsOn(calendar: Calendar | undefined, date: Temporal.PlainDate) {
 }
 
 export async function generateDirectionsData(
-  repo: Pick<Repository, 'loadCalendars' | 'loadRoutes'>,
+  repo: Pick<Repository, 'loadCalendars' | 'loadTrips'>,
   date: Temporal.PlainDate
 ): Promise<DirectionsData> {
-  const [allCalendars, allRoutes] = await Promise.all([
-    repo.loadCalendars(),
-    repo.loadRoutes(),
-  ]);
+  const allCalendars = await repo.loadCalendars();
 
   const routes = new DefaultMap<DirectionRoute['id'], DirectionRoute>((id) => ({
     id,
@@ -46,24 +43,27 @@ export async function generateDirectionsData(
     routes: [],
   }));
 
-  for (const route of allRoutes) {
-    for (const trip of Object.values(route.trips)) {
-      const calendar = allCalendars.get(trip.service_id);
-      if (runsOn(calendar, date)) {
-        const routeId = uniqueRouteId(trip);
-        const route = routes.get(routeId);
-        route.trips.push(trip);
+  let cursor = await repo.loadTrips();
+  while (cursor) {
+    const trip = cursor.value;
 
-        for (const stopTime of trip.stop_times) {
-          const stop = stops.get(stopTime.stop_id);
-          stop.routes.push({
-            route_id: routeId,
-            sequence: stopTime.stop_sequence,
-          });
-          route.stops.add(stop.id);
-        }
+    const calendar = allCalendars.get(trip.service_id);
+    if (runsOn(calendar, date)) {
+      const routeId = uniqueRouteId(trip);
+      const route = routes.get(routeId);
+      route.trips.push(trip);
+
+      for (const stopTime of trip.stop_times) {
+        const stop = stops.get(stopTime.stop_id);
+        stop.routes.push({
+          route_id: routeId,
+          sequence: stopTime.stop_sequence,
+        });
+        route.stops.add(stop.id);
       }
     }
+
+    cursor = await cursor.continue();
   }
 
   return {

@@ -5,6 +5,7 @@
     { "path": "../../types" },
     { "path": "../../utils/src" },
     { "path": "../../data/src" },
+    { "path": "../../data/node" },
     { "path": "../../promise-worker/worker" }
   ],
   "compilerOptions": {

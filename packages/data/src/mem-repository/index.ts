@@ -7,8 +7,9 @@ import {
   Stop,
 } from '@hawaii-bus-plus/types';
 import { downloadScheduleData } from '../fetch';
-import { Repository } from '../repository';
+import { Repository, TripCursor } from '../repository';
 import { searchArray } from './search';
+import { memTripCursor } from './trips';
 
 export class MemoryRepository implements Repository {
   protected apiReady!: Promise<GTFSData>;
@@ -26,8 +27,19 @@ export class MemoryRepository implements Repository {
     return this.apiReady.then((api) => api.routes[routeId]);
   }
 
-  loadRoutes(): Promise<RouteWithTrips[]> {
-    return this.apiReady.then((api) => Object.values(api.routes));
+  loadTrips(): Promise<TripCursor | null> {
+    return this.apiReady.then((api) => {
+      const trips = Object.values(api.routes).flatMap((route) =>
+        Object.values(route.trips)
+      );
+      return memTripCursor(trips);
+    });
+  }
+
+  loadTripsForRoute(routeId: Route['route_id']): Promise<TripCursor | null> {
+    return this.apiReady.then((api) =>
+      memTripCursor(Object.values(api.routes[routeId].trips))
+    );
   }
 
   loadStops(

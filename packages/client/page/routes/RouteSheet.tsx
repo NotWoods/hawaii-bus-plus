@@ -38,7 +38,7 @@ export function RouteSheet() {
   }
 
   const { backgroundColor } = colorProps(route);
-  const trip = details && details.route.trips[details.closestTrip.id];
+  const trip = details?.closestTrip?.trip;
   const cssVars = {
     '--route-color': backgroundColor,
     '--route-text-color': `#${route.route_text_color}`,
@@ -63,7 +63,7 @@ export function RouteSheet() {
       </div>
       <div className="row row-eq-spacing-lg">
         <div className="col-lg-8">
-          {trip ? (
+          {details && trip ? (
             <div className="content">
               <div className="">
                 <h3 className="content-title m-0">{trip.trip_short_name}</h3>
@@ -75,8 +75,8 @@ export function RouteSheet() {
               <hr className="mt-10" />
               <StopTimesList
                 routeId={route.route_id}
-                stopTimes={details?.closestTrip?.stopTimes || []}
-                timeZone={details?.timeZone}
+                stopTimes={details.closestTrip.stopTimes}
+                timeZone={details.timeZone}
               />
             </div>
           ) : (
