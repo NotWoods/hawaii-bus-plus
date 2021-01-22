@@ -1,4 +1,5 @@
 import {
+  Agency,
   Calendar,
   GTFSData,
   Route,
@@ -49,6 +50,10 @@ export class MemoryRepository implements Repository {
           Object.entries(api.calendar) as [Calendar['service_id'], Calendar][]
       )
       .then((entries) => new Map(entries));
+  }
+
+  loadAgency(agencyId: Agency['agency_id']): Promise<Agency | undefined> {
+    return this.apiReady.then((api) => api.agency[agencyId]);
   }
 
   searchRoutes(term: string, max: number): Promise<Route[]> {

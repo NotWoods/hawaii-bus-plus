@@ -1,5 +1,6 @@
+import { Route, Stop } from '@hawaii-bus-plus/types';
 import React, { ReactNode } from 'react';
-import { Route, Stop, StopTime } from '@hawaii-bus-plus/types';
+import { TemporalStopTime } from '../../../worker-info/route-details';
 import { useApi } from '../../data/Api';
 import { classNames } from '../../hooks/classnames';
 import { setStopAction } from '../../router/action';
@@ -22,7 +23,7 @@ function Lines() {
 
 interface StopTimeItemProps {
   routeId: Route['route_id'];
-  stopTime: StopTime;
+  stopTime: TemporalStopTime;
   first?: boolean;
   last?: boolean;
 }
@@ -62,7 +63,7 @@ function StopTimeItem({ routeId, stopTime, first, last }: StopTimeItemProps) {
 
 interface StopTimeListProps {
   routeId: Route['route_id'];
-  stopTimes: readonly StopTime[];
+  stopTimes: readonly TemporalStopTime[];
   skipToStop?: Stop['stop_id'];
 }
 

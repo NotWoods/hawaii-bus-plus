@@ -8,7 +8,10 @@ export async function init(db: IDBPDatabase<GTFSSchema>) {
 }
 
 async function initDatabase(db: IDBPDatabase<GTFSSchema>, api: GTFSData) {
-  const tx = db.transaction(['routes', 'stops', 'calendar'], 'readwrite');
+  const tx = db.transaction(
+    ['routes', 'stops', 'calendar', 'agency'],
+    'readwrite'
+  );
   const jobs: Promise<unknown>[] = [];
 
   const routeStore = tx.objectStore('routes');
@@ -28,6 +31,11 @@ async function initDatabase(db: IDBPDatabase<GTFSSchema>, api: GTFSData) {
   const calendarStore = tx.objectStore('calendar');
   for (const calendar of Object.values(api.calendar)) {
     jobs.push(calendarStore.put(calendar));
+  }
+
+  const agencyStore = tx.objectStore('agency');
+  for (const agency of Object.values(api.agency)) {
+    jobs.push(agencyStore.put(agency));
   }
 
   await Promise.all(jobs);

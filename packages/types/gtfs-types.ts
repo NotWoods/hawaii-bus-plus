@@ -59,13 +59,13 @@ export interface CsvRoute {
   route_type: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
   route_color: string;
   route_text_color: string;
-  agency_id?: string;
+  agency_id?: Agency['agency_id'];
   route_url: string;
   route_sort_order: number;
 }
 
 export interface Route extends Readonly<CsvRoute> {
-  readonly agency_id: string;
+  readonly agency_id: Agency['agency_id'];
 }
 
 export interface RouteWithTrips extends Route {
@@ -151,5 +151,4 @@ export interface CsvAgency {
   agency_fare_url: string;
 }
 
-export interface Agency
-  extends Readonly<Omit<CsvAgency, 'agency_timezone' | 'agency_lang'>> {}
+export interface Agency extends Readonly<CsvAgency> {}

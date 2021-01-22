@@ -1,5 +1,5 @@
 import { IDBPDatabase } from 'idb';
-import { Route } from '@hawaii-bus-plus/types';
+import { Agency, Route } from '@hawaii-bus-plus/types';
 import { GTFSSchema } from '../database';
 import { removeWords } from '../format';
 
@@ -12,4 +12,11 @@ export function loadRoute(
 
 export function loadRoutes(db: IDBPDatabase<GTFSSchema>) {
   return db.getAll('routes').then((routes) => routes.map(removeWords));
+}
+
+export function loadAgency(
+  db: IDBPDatabase<GTFSSchema>,
+  agencyId: Agency['agency_id']
+) {
+  return db.get('agency', agencyId);
 }

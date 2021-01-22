@@ -1,11 +1,20 @@
 import { Repository } from '@hawaii-bus-plus/data';
-import type { Route, RouteWithTrips, Stop, Trip } from '@hawaii-bus-plus/types';
-import {
-  gtfsArrivalToDate,
-  InfinityPlainDaysTime,
-  PlainDaysTime,
-  plainTime,
-} from '@hawaii-bus-plus/utils';
+import type {
+  Route,
+  RouteWithTrips,
+  Stop,
+  StopTime,
+  TimeString,
+  Trip,
+} from '@hawaii-bus-plus/types';
+import { InfinityPlainDaysTime, PlainDaysTime } from '@hawaii-bus-plus/utils';
+import { Temporal } from 'proposal-temporal';
+
+export interface TemporalStopTime
+  extends Omit<StopTime, 'arrival_time' | 'departure_time'> {
+  arrival_time: Temporal.ZonedDateTime;
+  departure_time: Temporal.ZonedDateTime;
+}
 
 export interface RouteDetails {
   readonly route: RouteWithTrips;
@@ -20,12 +29,14 @@ export interface RouteDetails {
   }[];
   readonly closestTrip: {
     readonly id: Trip['trip_id'];
-    readonly minutes: number;
+    readonly until: Temporal.Duration;
     readonly stop: Stop['stop_id'];
+    readonly stopTimes: readonly TemporalStopTime[];
   };
 }
 
 const LINK_REGEX = /(https?:\/\/[.a-z\/]+)/g;
+const ZERO_DURATION = new Temporal.Duration();
 
 /**
  * Find the best trip based on the current time of day,
@@ -33,14 +44,16 @@ const LINK_REGEX = /(https?:\/\/[.a-z\/]+)/g;
  * @param trips All trips for a route.
  */
 export async function getRouteDetails(
-  repo: Pick<Repository, 'loadRoute'>,
+  repo: Pick<Repository, 'loadRoute' | 'loadAgency'>,
   route_id: Route['route_id'],
-  now: Date
+  now: Temporal.PlainDateTime
 ): Promise<RouteDetails | undefined> {
   const route = await repo.loadRoute(route_id);
   if (!route) {
     return undefined;
   }
+
+  const nowTime = now.toPlainTime();
 
   let firstStop: Stop['stop_id'] | undefined;
   let lastStop: Stop['stop_id'] | undefined;
@@ -48,12 +61,12 @@ export async function getRouteDetails(
   let largestSequence = -1;
 
   let earliest = InfinityPlainDaysTime;
-  let latest = plainTime(0, 0, 0);
+  let latest = new PlainDaysTime();
 
   let earliestTrip: Trip['trip_id'] | undefined;
   let earliestTripStop: Stop['stop_id'] | undefined;
   let closestTrip: Trip['trip_id'] | undefined;
-  let closestTripTime = Number.MAX_VALUE;
+  let closestTripOffset = new Temporal.Duration(1);
   let closestTripStop: Stop['stop_id'] | undefined;
 
   const routeStops = new Set<Stop['stop_id']>();
@@ -74,29 +87,31 @@ export async function getRouteDetails(
 
       routeStops.add(stopTime.stop_id);
 
-      const timeDate = gtfsArrivalToDate(stopTime.arrival_time);
-      if (timeDate > latest) {
-        latest = timeDate;
+      const arrivalTime = PlainDaysTime.from(stopTime.arrival_time);
+      if (arrivalTime > latest) {
+        latest = arrivalTime;
       }
-      if (timeDate < earliest) {
-        earliest = timeDate;
+      if (arrivalTime < earliest) {
+        earliest = arrivalTime;
         earliestTrip = trip.trip_id;
         earliestTripStop = stopTime.stop_id;
       }
 
       // TODO change to use compare
-      if (
-        timeDate.valueOf() - now.valueOf() < closestTripTime &&
-        timeDate.valueOf() - now.valueOf() > 0
-      ) {
-        closestTripTime = timeDate.valueOf() - now.valueOf();
-        closestTrip = trip.trip_id;
-        closestTripStop = stopTime.stop_id;
+      const timeUntil = nowTime.until(arrivalTime);
+      if (Temporal.Duration.compare(ZERO_DURATION, timeUntil) <= 0) {
+        if (Temporal.Duration.compare(timeUntil, closestTripOffset) < 0) {
+          closestTripOffset = timeUntil;
+          closestTrip = trip.trip_id;
+          closestTripStop = stopTime.stop_id;
+        }
       }
     }
     if (!closestTrip) {
-      //Too late for all bus routes
-      closestTripTime = earliest.add({ days: 1 }).valueOf() - now.valueOf();
+      // Too late for all bus routes
+      closestTripOffset = nowTime
+        .until(earliest.toPlainTime())
+        .add({ days: 1 });
       closestTrip = earliestTrip;
       closestTripStop = earliestTripStop;
     }
@@ -119,6 +134,17 @@ export async function getRouteDetails(
     value: route.route_desc.slice(descLastIndex),
   });
 
+  const nowDate = now.toPlainDate();
+  const agency = await repo.loadAgency(route.agency_id);
+  function zonedTime(time: TimeString) {
+    const daysTime = PlainDaysTime.from(time);
+    const dateTime = daysTime
+      .toPlainTime()
+      .toPlainDateTime(nowDate)
+      .add({ days: daysTime.day });
+    return dateTime.toZonedDateTime(agency!.agency_timezone);
+  }
+
   return {
     route,
     firstStop: firstStop!,
@@ -129,8 +155,13 @@ export async function getRouteDetails(
     descParts,
     closestTrip: {
       id: closestTrip!,
-      minutes: Math.floor(closestTripTime / 60000),
+      until: closestTripOffset,
       stop: closestTripStop!,
+      stopTimes: route.trips[closestTrip!].stop_times.map((st) => ({
+        ...st,
+        arrival_time: zonedTime(st.arrival_time),
+        departure_time: zonedTime(st.departure_time),
+      })),
     },
   };
 }

@@ -1,5 +1,11 @@
 import { DBSchema, openDB } from 'idb';
-import { Calendar, Route, RouteWithTrips, Stop } from '@hawaii-bus-plus/types';
+import {
+  Agency,
+  Calendar,
+  Route,
+  RouteWithTrips,
+  Stop,
+} from '@hawaii-bus-plus/types';
 
 export interface SearchRoute extends RouteWithTrips {
   words: readonly string[];
@@ -29,6 +35,10 @@ export interface GTFSSchema extends DBSchema {
     value: Calendar;
     key: Calendar['service_id'];
   };
+  agency: {
+    value: Agency;
+    key: Agency['agency_id'];
+  };
   keyval: {
     value: unknown;
     key: string;
@@ -47,6 +57,7 @@ export const dbReady = openDB<GTFSSchema>('gtfs', 1, {
   upgrade(db) {
     db.createObjectStore('keyval');
     db.createObjectStore('calendar', { keyPath: 'service_id' });
+    db.createObjectStore('agency', { keyPath: 'agency_id' });
 
     const routeStore = db.createObjectStore('routes', {
       keyPath: 'route_id',

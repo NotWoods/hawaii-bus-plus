@@ -1,4 +1,10 @@
-import { Calendar, Route, RouteWithTrips, Stop } from '@hawaii-bus-plus/types';
+import {
+  Agency,
+  Calendar,
+  Route,
+  RouteWithTrips,
+  Stop,
+} from '@hawaii-bus-plus/types';
 import { DBRepository } from './db-repository';
 import { MemoryRepository } from './mem-repository';
 
@@ -16,6 +22,8 @@ export interface Repository {
   loadStopsSpatial(center: google.maps.LatLngLiteral): Promise<Stop[]>;
 
   loadCalendars(): Promise<Map<Calendar['service_id'], Calendar>>;
+
+  loadAgency(agencyId: Agency['agency_id']): Promise<Agency | undefined>;
 
   searchRoutes(term: string, max: number): Promise<Route[]>;
 

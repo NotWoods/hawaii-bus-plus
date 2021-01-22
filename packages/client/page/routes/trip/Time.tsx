@@ -1,18 +1,34 @@
+import { Temporal } from 'proposal-temporal';
 import React from 'react';
-import { TimeString } from '@hawaii-bus-plus/types';
-import { stringTime } from '@hawaii-bus-plus/utils';
 
 interface TimeProps {
-  time: TimeString;
+  time: Temporal.ZonedDateTime;
   approximate?: boolean;
   className?: string;
+  timeZone?: string;
+}
+
+declare global {
+  namespace Intl {
+    interface DateTimeFormatOptions {
+      timeStyle?: string;
+    }
+  }
 }
 
 export function Time(props: TimeProps) {
+  const date = new Date(props.time.epochMilliseconds);
+  const formatter = new Intl.DateTimeFormat(undefined, {
+    timeStyle: 'short',
+    timeZone: props.timeZone,
+  });
   return (
-    <time dateTime={props.time} className={props.className}>
+    <time
+      dateTime={props.time.toPlainTime().toString()}
+      className={props.className}
+    >
       {props.approximate ? '~' : ''}
-      {stringTime(props.time)}
+      {formatter.format(date)}
     </time>
   );
 }

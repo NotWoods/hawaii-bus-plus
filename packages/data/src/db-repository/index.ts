@@ -1,9 +1,15 @@
-import { Calendar, Route, RouteWithTrips, Stop } from '@hawaii-bus-plus/types';
+import {
+  Agency,
+  Calendar,
+  Route,
+  RouteWithTrips,
+  Stop,
+} from '@hawaii-bus-plus/types';
 import { dbReady } from '../database';
 import { Repository } from '../repository';
 import { loadCalendars } from './calendar';
 import { init } from './init';
-import { loadRoute, loadRoutes } from './routes';
+import { loadAgency, loadRoute, loadRoutes } from './routes';
 import { searchRoutes, searchStops } from './search';
 import { loadStops, loadStopsSpatial } from './stops';
 
@@ -34,6 +40,10 @@ export class DBRepository implements Repository {
 
   loadCalendars(): Promise<Map<Calendar['service_id'], Calendar>> {
     return this.ready.then((db) => loadCalendars(db));
+  }
+
+  loadAgency(agencyId: Agency['agency_id']): Promise<Agency | undefined> {
+    return this.ready.then((db) => loadAgency(db, agencyId));
   }
 
   searchRoutes(term: string, max: number): Promise<Route[]> {

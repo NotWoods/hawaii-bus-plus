@@ -20,7 +20,6 @@ import type {
 import { DateString } from '@hawaii-bus-plus/types';
 import {
   compareAs,
-  gtfsArrivalToDate,
   PlainDaysTime,
   stringTime,
   toInt,
@@ -140,17 +139,14 @@ export async function createApiData(
   };
 
   for (const csvAgency of json.agency) {
-    const agency: Agency & Partial<CsvAgency> = csvAgency;
-    delete agency.agency_timezone;
-    delete agency.agency_lang;
-    variable.agency[agency.agency_id] = agency;
+    variable.agency[csvAgency.agency_id] = csvAgency;
   }
-  const agencies = Object.keys(variable.agency);
-  const defaultRoute = agencies.length === 1 ? agencies[0] : undefined;
+  const agencies = Object.keys(variable.agency) as Agency['agency_id'][];
+  const defaultAgency = agencies.length === 1 ? agencies[0] : undefined;
   json.routes.sort(compareAs((route) => route.route_sort_order));
   for (const csvRoute of json.routes) {
     const route = csvRoute as Mutable<RouteWithTrips>;
-    route.agency_id ||= defaultRoute!;
+    route.agency_id ||= defaultAgency!;
     route.trips = {};
     variable.routes[route.route_id] = route;
   }
@@ -249,8 +245,8 @@ export async function createApiData(
       }
     }
     trips.sort((a, b) => {
-      const aTime = gtfsArrivalToDate(a.stop_times[0].departure_time);
-      const bTime = gtfsArrivalToDate(b.stop_times[0].departure_time);
+      const aTime = PlainDaysTime.from(a.stop_times[0].departure_time);
+      const bTime = PlainDaysTime.from(b.stop_times[0].departure_time);
       return PlainDaysTime.compare(aTime, bTime);
     });
     route.trips = Object.fromEntries(trips.map((trip) => [trip.trip_id, trip]));
