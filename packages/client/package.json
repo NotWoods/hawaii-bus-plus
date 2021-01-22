@@ -4,15 +4,16 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "tsc --build src",
-    "format": "prettier **/*.ts **/*.json --write"
+    "build": "tsc --build page",
+    "format": "prettier **/*.ts **/*.json --write",
+    "test": "jest"
   },
   "dependencies": {
     "@hawaii-bus-plus/data": "*",
+    "@hawaii-bus-plus/promise-worker": "*",
+    "@hawaii-bus-plus/react-google-maps": "*",
     "@hawaii-bus-plus/types": "*",
     "@hawaii-bus-plus/utils": "*",
-    "@hawaii-bus-plus/react-google-maps": "*",
-    "@hawaii-bus-plus/promise-worker": "*",
     "@react-google-maps/api": "^2.1.0",
     "halfmoon": "^1.1.1",
     "idb": "^6.0.0",
@@ -25,16 +26,23 @@
     "tslib": "^2.1.0"
   },
   "devDependencies": {
+    "@testing-library/react": "^11.2.3",
     "@types/googlemaps": "^3.43.2",
+    "@types/jest": "^26.0.20",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@vitejs/plugin-react-refresh": "^1.1.0",
+    "esbuild": "^0.8.34",
+    "esbuild-jest": "^0.3.0",
+    "jest": "^26.6.3",
     "prettier": "^2.2.1",
-    "typescript": "4.1.3",
     "type-fest": "^0.20.2",
+    "typescript": "4.1.3",
     "vite": "^2.0.0-beta.34"
   },
-  "files": [
-    "src"
-  ]
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "esbuild-jest"
+    }
+  }
 }
