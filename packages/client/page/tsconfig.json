@@ -14,6 +14,7 @@
   ],
   "compilerOptions": {
     "lib": ["esnext", "dom", "dom.iterable"],
+    "types": ["vite/client", "googlemaps"],
     "noEmit": true
   }
 }

@@ -9,6 +9,7 @@
   ],
   "compilerOptions": {
     "lib": ["esnext", "WebWorker"],
-    "emitDeclarationOnly": true
+    "emitDeclarationOnly": true,
+    "skipLibCheck": true
   }
 }

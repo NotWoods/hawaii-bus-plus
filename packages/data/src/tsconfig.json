@@ -3,6 +3,8 @@
   "include": ["**/*"],
   "references": [{ "path": "../../types" }, { "path": "../../utils/src" }],
   "compilerOptions": {
-    "lib": ["esnext"]
+    "lib": ["esnext", "dom", "webworker"],
+    "types": ["googlemaps"],
+    "skipLibCheck": true
   }
 }

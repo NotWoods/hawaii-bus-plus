@@ -8,6 +8,7 @@
     { "path": "packages/client/worker-nearby" },
     { "path": "packages/client/worker-search" },
     { "path": "packages/data/src" },
+    { "path": "packages/data/node" },
     { "path": "packages/promise-worker/page" },
     { "path": "packages/promise-worker/worker" },
     { "path": "packages/react-google-maps/src" },

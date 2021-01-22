@@ -4,6 +4,7 @@
   "references": [{ "path": "../src" }],
   "compilerOptions": {
     "lib": ["esnext"],
-    "types": ["node"]
+    "types": ["node"],
+    "skipLibCheck": true
   }
 }

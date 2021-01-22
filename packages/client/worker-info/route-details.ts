@@ -38,6 +38,11 @@ export interface RouteDetails {
 const LINK_REGEX = /(https?:\/\/[.a-z\/]+)/g;
 const ZERO_DURATION = new Temporal.Duration();
 
+function nowInZone(timeZone: string | Temporal.TimeZoneProtocol) {
+  const now = Temporal.now.zonedDateTimeISO();
+  return now.withTimeZone(timeZone).toPlainDateTime();
+}
+
 /**
  * Find the best trip based on the current time of day,
  * along with other route details.
@@ -46,14 +51,17 @@ const ZERO_DURATION = new Temporal.Duration();
 export async function getRouteDetails(
   repo: Pick<Repository, 'loadRoute' | 'loadAgency'>,
   route_id: Route['route_id'],
-  now: Temporal.PlainDateTime
+  now?: Temporal.PlainDateTime
 ): Promise<RouteDetails | undefined> {
   const route = await repo.loadRoute(route_id);
   if (!route) {
     return undefined;
   }
 
-  const nowTime = now.toPlainTime();
+  const agency = await repo.loadAgency(route.agency_id);
+  const nowZoned = now || nowInZone(agency!.agency_timezone);
+  const nowTime = nowZoned.toPlainTime();
+  const nowDate = nowZoned.toPlainDate();
 
   let firstStop: Stop['stop_id'] | undefined;
   let lastStop: Stop['stop_id'] | undefined;
@@ -134,8 +142,6 @@ export async function getRouteDetails(
     value: route.route_desc.slice(descLastIndex),
   });
 
-  const nowDate = now.toPlainDate();
-  const agency = await repo.loadAgency(route.agency_id);
   function zonedTime(time: TimeString) {
     const daysTime = PlainDaysTime.from(time);
     const dateTime = daysTime

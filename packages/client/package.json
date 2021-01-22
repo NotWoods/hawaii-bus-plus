@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "build": "tsc --build page",
+    "predev": "tsc --build page",
+    "dev": "vite",
     "format": "prettier **/*.ts **/*.json --write",
     "test": "jest"
   },

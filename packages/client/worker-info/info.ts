@@ -1,6 +1,7 @@
 import { makeRepository } from '@hawaii-bus-plus/data';
-import { Route, Stop } from '@hawaii-bus-plus/types';
 import { registerPromiseWorker } from '@hawaii-bus-plus/promise-worker/worker';
+import { Route, Stop } from '@hawaii-bus-plus/types';
+import { Temporal } from 'proposal-temporal';
 import { placeApi, PlaceInfoMessage } from './place-api';
 import { getRouteDetails } from './route-details';
 import { loadStop } from './stop-details';
@@ -8,7 +9,7 @@ import { loadStop } from './stop-details';
 interface RouteInfoMessage {
   type: 'route';
   id: Route['route_id'];
-  time?: number;
+  time?: string;
 }
 
 interface StopInfoMessage {
@@ -24,11 +25,12 @@ registerPromiseWorker(async (message: Message) => {
   console.log(message);
   switch (message.type) {
     case 'route': {
-      return getRouteDetails(
-        repo,
-        message.id,
-        message.time ? new Date(message.time) : new Date()
-      );
+      let time: Temporal.PlainDateTime | undefined;
+      if (message.time) {
+        time = Temporal.PlainDateTime.from(message.time);
+      }
+
+      return getRouteDetails(repo, message.id, time);
     }
     case 'stop': {
       return loadStop(repo, message.id);

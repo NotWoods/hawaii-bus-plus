@@ -5,7 +5,7 @@
   "scripts": {
     "tsc": "tsc --build .",
     "clean": "del-cli packages/**/*.js packages/**/*.d.ts packages/**/*.map packages/**/*.tsbuildinfo",
-    "dev": "vite",
+    "dev": "pnpm run dev --filter @hawaii-bus-plus/client",
     "build": "pnpm run tsc && vite build",
     "prettier": "prettier \"*.{md,html}\" \"src/**/*.{ts,tsx,css}\" \"!src/**/*.d.ts\" vite.config.ts **/tsconfig.json public/*.json",
     "format": "pnpm run prettier -- --write"

@@ -75,7 +75,7 @@ export function RouteSheet() {
               <hr className="mt-10" />
               <StopTimesList
                 routeId={route.route_id}
-                stopTimes={trip.stop_times}
+                stopTimes={details?.closestTrip?.stopTimes || []}
               />
             </div>
           ) : (
