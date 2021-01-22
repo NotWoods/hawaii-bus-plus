@@ -32,6 +32,7 @@
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@vitejs/plugin-react-refresh": "^1.1.0",
+    "cross-env": "^7.0.3",
     "esbuild": "^0.8.34",
     "esbuild-jest": "^0.3.0",
     "jest": "^26.6.3",
@@ -42,7 +43,7 @@
   },
   "jest": {
     "transform": {
-      "^.+\\.tsx?$": "esbuild-jest"
+      "^.+\\.(j|t)sx?$": "esbuild-jest"
     }
   }
 }

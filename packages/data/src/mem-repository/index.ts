@@ -10,7 +10,7 @@ import { Repository } from '../repository';
 import { searchArray } from './search';
 
 export class MemoryRepository implements Repository {
-  private apiReady!: Promise<GTFSData>;
+  protected apiReady!: Promise<GTFSData>;
 
   constructor() {
     this.init();

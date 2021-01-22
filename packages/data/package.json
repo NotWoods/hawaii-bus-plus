@@ -6,7 +6,7 @@
   "main": "./src/index.js",
   "module": "./src/index.js",
   "scripts": {
-    "build": "tsc --build src",
+    "build": "tsc --build src node",
     "format": "prettier **/*.ts --write",
     "pretest": "tsc --build test",
     "test": "ava"
@@ -18,11 +18,13 @@
     "tslib": "^2.1.0"
   },
   "devDependencies": {
+    "@types/node": "^14.14.22",
     "prettier": "^2.2.1",
-    "typescript": "4.1.3",
-    "type-fest": "^0.20.2"
+    "type-fest": "^0.20.2",
+    "typescript": "4.1.3"
   },
   "files": [
-    "src"
+    "src",
+    "node"
   ]
 }

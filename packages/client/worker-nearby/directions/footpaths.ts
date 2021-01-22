@@ -10,6 +10,10 @@ export function footPathsLoader(repo: Pick<Repository, 'loadStops'>) {
       toLoad.delete(alreadyLoaded);
     }
 
+    if (toLoad.size === 0) {
+      return loaded;
+    }
+
     return repo.loadStops(toLoad).then((newStops) => {
       for (const [stopId, stop] of newStops) {
         loaded.set(stopId, stop.transfers);

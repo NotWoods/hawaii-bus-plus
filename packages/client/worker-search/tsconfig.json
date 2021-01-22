@@ -4,6 +4,7 @@
   "references": [
     { "path": "../../promise-worker/worker" },
     { "path": "../../data/src" },
+    { "path": "../../data/node" },
     { "path": "../../types" }
   ],
   "compilerOptions": {
