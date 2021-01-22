@@ -6,32 +6,79 @@ import type {
   TimeString,
   Trip,
 } from '@hawaii-bus-plus/types';
-import { InfinityPlainDaysTime, PlainDaysTime } from '@hawaii-bus-plus/utils';
+import {
+  InfinityPlainDaysTime,
+  PlainDaysTime,
+  serviceRunningOn,
+} from '@hawaii-bus-plus/utils';
 import { Temporal } from 'proposal-temporal';
+
+export interface ZonedTime {
+  /** Milliseconds since epoch, used to build Date object. */
+  epochMilliseconds: number;
+  /** ISO string usable in <time datetime=""> attribute. */
+  string: string;
+}
 
 export interface TemporalStopTime
   extends Omit<StopTime, 'arrival_time' | 'departure_time'> {
-  arrival_time: { epochMilliseconds: number; string: string };
-  departure_time: { epochMilliseconds: number; string: string };
+  arrival_time: ZonedTime;
+  departure_time: ZonedTime;
+}
+
+export interface DirectionDetails {
+  readonly firstStop: Stop['stop_id'];
+  readonly lastStop: Stop['stop_id'];
+  readonly earliest: ZonedTime;
+  readonly latest: ZonedTime;
+  readonly closestTrip: {
+    readonly trip: Trip;
+    readonly offset: string;
+    readonly stop: Stop['stop_id'];
+    readonly stopTimes: readonly TemporalStopTime[];
+  };
+}
+
+interface DirectionDetailsMutable {
+  firstStop?: Stop['stop_id'];
+  lastStop?: Stop['stop_id'];
+  smallestSequence: number;
+  largestSequence: number;
+
+  earliest: PlainDaysTime;
+  latest: PlainDaysTime;
+  earliestTrip: {
+    trip?: Trip;
+    stop?: Stop['stop_id'];
+  };
+  closestTrip: {
+    trip?: Trip;
+    // undefined represents Infinity
+    offset?: Temporal.Duration;
+    stop?: Stop['stop_id'];
+  };
 }
 
 export interface RouteDetails {
   readonly route: Route;
-  readonly firstStop: Stop['stop_id'];
-  readonly lastStop: Stop['stop_id'];
-  readonly earliest: PlainDaysTime;
-  readonly latest: PlainDaysTime;
-  readonly stops: Set<Stop['stop_id']>;
   readonly descParts: {
     type: 'text' | 'link';
     value: string;
   }[];
+  readonly stops: Set<Stop['stop_id']>;
   readonly timeZone: string;
-  readonly closestTrip: {
-    readonly trip: Trip;
-    readonly until: Temporal.Duration;
-    readonly stop: Stop['stop_id'];
-    readonly stopTimes: readonly TemporalStopTime[];
+
+  readonly directions: DirectionDetails[];
+}
+
+function emptyDirectionDetails(): DirectionDetailsMutable {
+  return {
+    smallestSequence: Infinity,
+    largestSequence: -1,
+    earliest: InfinityPlainDaysTime,
+    latest: new PlainDaysTime(),
+    closestTrip: {},
+    earliestTrip: {},
   };
 }
 
@@ -69,10 +116,14 @@ export function extractLinks(description: string) {
  * @param trips All trips for a route.
  */
 export async function getRouteDetails(
-  repo: Pick<Repository, 'loadRoute' | 'loadAgency' | 'loadTripsForRoute'>,
+  repo: Pick<
+    Repository,
+    'loadRoute' | 'loadAgency' | 'loadTripsForRoute' | 'loadCalendars'
+  >,
   route_id: Route['route_id'],
   now?: Temporal.PlainDateTime
 ): Promise<RouteDetails | undefined> {
+  const allCalendarsReady = repo.loadCalendars();
   const route = await repo.loadRoute(route_id);
   if (!route) {
     return undefined;
@@ -84,60 +135,58 @@ export async function getRouteDetails(
   const nowTime = nowZoned.toPlainTime();
   const nowDate = nowZoned.toPlainDate();
 
-  let firstStop: Stop['stop_id'] | undefined;
-  let lastStop: Stop['stop_id'] | undefined;
-  let smallestSequence = Infinity;
-  let largestSequence = -1;
-
-  let earliest = InfinityPlainDaysTime;
-  let latest = new PlainDaysTime();
-
-  let earliestTrip: Trip | undefined;
-  let earliestTripStop: Stop['stop_id'] | undefined;
-  let closestTrip: Trip | undefined;
-  let closestTripOffset: Temporal.Duration | undefined;
-  let closestTripStop: Stop['stop_id'] | undefined;
+  const directionDetails: DirectionDetailsMutable[] = [];
 
   const routeStops = new Set<Stop['stop_id']>();
 
+  const allCalendars = await allCalendarsReady;
   let cursor = await repo.loadTripsForRoute(route_id);
   while (cursor) {
     const trip = cursor.value;
-    for (const stopTime of trip.stop_times) {
-      const sequence = stopTime.stop_sequence;
-      if (trip.direction_id === 0) {
-        if (sequence < smallestSequence) {
-          firstStop = stopTime.stop_id;
-          smallestSequence = sequence;
+
+    if (serviceRunningOn(allCalendars, trip.service_id, nowDate)) {
+      for (const stopTime of trip.stop_times) {
+        const dirId = trip.direction_id;
+        if (!directionDetails[dirId]) {
+          directionDetails[dirId] = emptyDirectionDetails();
         }
-        if (sequence > largestSequence) {
-          lastStop = stopTime.stop_id;
-          largestSequence = sequence;
+        const dirDetails = directionDetails[dirId];
+
+        const sequence = stopTime.stop_sequence;
+        if (sequence < dirDetails.smallestSequence) {
+          dirDetails.firstStop = stopTime.stop_id;
+          dirDetails.smallestSequence = sequence;
         }
-      }
+        if (sequence > dirDetails.largestSequence) {
+          dirDetails.lastStop = stopTime.stop_id;
+          dirDetails.largestSequence = sequence;
+        }
 
-      routeStops.add(stopTime.stop_id);
+        routeStops.add(stopTime.stop_id);
 
-      const arrivalTime = PlainDaysTime.from(stopTime.arrival_time);
-      if (PlainDaysTime.compare(arrivalTime, latest) > 0) {
-        latest = arrivalTime;
-      }
-      if (PlainDaysTime.compare(arrivalTime, earliest) < 0) {
-        earliest = arrivalTime;
-        earliestTrip = trip;
-        earliestTripStop = stopTime.stop_id;
-      }
+        const arrivalTime = PlainDaysTime.from(stopTime.arrival_time);
+        if (PlainDaysTime.compare(arrivalTime, dirDetails.latest) > 0) {
+          dirDetails.latest = arrivalTime;
+        }
+        if (PlainDaysTime.compare(arrivalTime, dirDetails.earliest) < 0) {
+          dirDetails.earliest = arrivalTime;
+          dirDetails.earliestTrip.trip = trip;
+          dirDetails.earliestTrip.stop = stopTime.stop_id;
+        }
 
-      // TODO change to use compare
-      const timeUntil = nowTime.until(arrivalTime);
-      if (Temporal.Duration.compare(ZERO_DURATION, timeUntil) <= 0) {
-        if (
-          !closestTripOffset ||
-          Temporal.Duration.compare(timeUntil, closestTripOffset) < 0
-        ) {
-          closestTripOffset = timeUntil;
-          closestTrip = trip;
-          closestTripStop = stopTime.stop_id;
+        const timeUntil = nowTime.until(arrivalTime);
+        // If timeUntil is a positive duration
+        if (Temporal.Duration.compare(ZERO_DURATION, timeUntil) <= 0) {
+          // and timeUntil is less than closestTripOffset
+          const closest = dirDetails.closestTrip;
+          if (
+            !closest.offset ||
+            Temporal.Duration.compare(timeUntil, closest.offset) < 0
+          ) {
+            closest.offset = timeUntil;
+            closest.trip = trip;
+            closest.stop = stopTime.stop_id;
+          }
         }
       }
     }
@@ -145,41 +194,52 @@ export async function getRouteDetails(
     cursor = await cursor.continue();
   }
 
-  if (!closestTrip) {
-    // Too late for all bus routes
-    closestTripOffset = nowTime.until(earliest.toPlainTime()).add({ days: 1 });
-    closestTrip = earliestTrip;
-    closestTripStop = earliestTripStop;
-  }
-
-  function zonedTime(time: TimeString) {
+  function zonedTime(time: TimeString | PlainDaysTime): ZonedTime {
     const daysTime = PlainDaysTime.from(time);
     const dateTime = daysTime
       .toPlainTime()
       .toPlainDateTime(nowDate)
       .add({ days: daysTime.day });
     const zoned = dateTime.toZonedDateTime(timeZone);
-    return { epochMilliseconds: zoned.epochMilliseconds, string: time };
+
+    return {
+      epochMilliseconds: zoned.epochMilliseconds,
+      string: time.toString(),
+    };
   }
 
   return {
     route,
-    firstStop: firstStop!,
-    lastStop: lastStop!,
-    earliest,
-    latest,
-    stops: routeStops,
     descParts: extractLinks(route.route_desc),
+    stops: routeStops,
     timeZone,
-    closestTrip: {
-      trip: closestTrip!,
-      until: closestTripOffset!,
-      stop: closestTripStop!,
-      stopTimes: closestTrip!.stop_times.map((st) => ({
-        ...st,
-        arrival_time: zonedTime(st.arrival_time),
-        departure_time: zonedTime(st.departure_time),
-      })),
-    },
+    directions: directionDetails.map((dirDetails) => {
+      if (!dirDetails.closestTrip.trip) {
+        const { closestTrip, earliestTrip, earliest } = dirDetails;
+        // Too late for all bus routes
+        closestTrip.offset = nowTime
+          .until(earliest.toPlainTime())
+          .add({ days: 1 });
+        closestTrip.trip = earliestTrip.trip;
+        closestTrip.stop = earliestTrip.stop;
+      }
+
+      return {
+        firstStop: dirDetails.firstStop!,
+        lastStop: dirDetails.lastStop!,
+        earliest: zonedTime(dirDetails.earliest),
+        latest: zonedTime(dirDetails.latest),
+        closestTrip: {
+          trip: dirDetails.closestTrip.trip!,
+          offset: dirDetails.closestTrip.offset!.toString(),
+          stop: dirDetails.closestTrip.stop!,
+          stopTimes: dirDetails.closestTrip.trip!.stop_times.map((st) => ({
+            ...st,
+            arrival_time: zonedTime(st.arrival_time),
+            departure_time: zonedTime(st.departure_time),
+          })),
+        },
+      };
+    }),
   };
 }

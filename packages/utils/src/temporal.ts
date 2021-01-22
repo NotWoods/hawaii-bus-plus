@@ -15,7 +15,7 @@ export class PlainDaysTime {
 
   constructor(
     isoDay: number = 0,
-    readonly time: Temporal.PlainTime = new Temporal.PlainTime()
+    private readonly time: Temporal.PlainTime = new Temporal.PlainTime()
   ) {
     this.day = isoDay;
   }
@@ -34,6 +34,13 @@ export class PlainDaysTime {
     return this.time;
   }
 
+  toString() {
+    const hours = this.day * HOURS_IN_DAY + this.hour;
+    return [hours, this.minute, this.second]
+      .map((part) => part.toString().padStart(2, '0'))
+      .join(':') as TimeString;
+  }
+
   add(
     duration: Omit<Temporal.DurationLike, 'years' | 'months' | 'weeks'>,
     options?: Temporal.ArithmeticOptions
@@ -45,7 +52,11 @@ export class PlainDaysTime {
   /**
    * Convert seconds value to PlainDaysTime.
    */
-  static from(value: TimeString) {
+  static from(value: TimeString | PlainDaysTime) {
+    if (typeof value !== 'string') {
+      return value as PlainDaysTime;
+    }
+
     let [hours, min, second] = value.split(':').map((s) => toInt(s));
     let days = 0;
     if (hours >= HOURS_IN_DAY) {
