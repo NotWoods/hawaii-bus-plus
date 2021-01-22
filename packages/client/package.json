@@ -4,10 +4,11 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "tsc --build page",
+    "build": "tsc --build page && vite build",
     "predev": "tsc --build page",
     "dev": "vite",
-    "format": "prettier **/*.ts **/*.json --write",
+    "format": "prettier **/*.{ts,tsx} **/*.json --write",
+    "pretest": "tsc --build page",
     "test": "jest"
   },
   "dependencies": {

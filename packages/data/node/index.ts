@@ -3,7 +3,7 @@ import { resolve } from 'path';
 import { URL } from 'url';
 import { MemoryRepository } from '../src/mem-repository';
 
-let apiLocation: string | URL = '../../../public/api.json';
+let apiLocation: string | URL = '../../client/public/api.json';
 if (import.meta.url) {
   apiLocation = new URL(apiLocation, import.meta.url);
 } else {

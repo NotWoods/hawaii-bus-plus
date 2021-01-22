@@ -7,7 +7,7 @@
   "module": "./src/index.js",
   "scripts": {
     "build": "tsc --build src",
-    "format": "prettier **/*.ts --write",
+    "format": "prettier **/*.{ts,tsx} **/*.json --write",
     "pretest": "tsc --build test",
     "test": "ava"
   },
