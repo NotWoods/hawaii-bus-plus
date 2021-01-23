@@ -10,7 +10,7 @@ import type {
 import {
   InfinityPlainDaysTime,
   PlainDaysTime,
-  serviceRunningOn,
+  nextServiceDay,
 } from '@hawaii-bus-plus/utils';
 import { Temporal } from 'proposal-temporal';
 
@@ -110,7 +110,7 @@ export async function findBestTrips(
   allCalendars: Map<Calendar['service_id'], Calendar>,
   now: Temporal.PlainDateTime
 ) {
-  const nowTime = now.toPlainTime();
+  const nowTime = new PlainDaysTime(0, now.toPlainTime());
   const nowDate = now.toPlainDate();
 
   const directionDetails: DirectionDetailsMutable[] = [];
@@ -120,8 +120,11 @@ export async function findBestTrips(
   while (cursor) {
     const trip = cursor.value;
 
-    if (serviceRunningOn(allCalendars, trip.service_id, nowDate)) {
+    const calendar = allCalendars.get(trip.service_id);
+    if (calendar) {
       for (const stopTime of trip.stop_times) {
+        routeStops.add(stopTime.stop_id);
+
         const dirId = trip.direction_id;
         if (!directionDetails[dirId]) {
           directionDetails[dirId] = emptyDirectionDetails();
@@ -138,9 +141,11 @@ export async function findBestTrips(
           dirDetails.largestSequence = sequence;
         }
 
-        routeStops.add(stopTime.stop_id);
+        const { addedDays } = nextServiceDay(calendar, nowDate);
+        const arrivalTime = PlainDaysTime.from(stopTime.arrival_time).add({
+          days: addedDays,
+        });
 
-        const arrivalTime = PlainDaysTime.from(stopTime.arrival_time);
         if (PlainDaysTime.compare(arrivalTime, dirDetails.latest) > 0) {
           dirDetails.latest = arrivalTime;
         }

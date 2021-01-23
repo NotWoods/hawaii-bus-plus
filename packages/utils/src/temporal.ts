@@ -46,7 +46,17 @@ export class PlainDaysTime {
     options?: Temporal.ArithmeticOptions
   ) {
     const { days = 0, ...rest } = duration;
-    return new PlainDaysTime(this.day + days, this.time.add(rest, options));
+    const time =
+      Object.keys(rest).length > 0 ? this.time.add(rest, options) : this.time;
+    return new PlainDaysTime(this.day + days, time);
+  }
+
+  until(other: PlainDaysTime) {
+    let duration = this.time.until(other.time);
+    if (this.day !== other.day) {
+      duration = duration.add({ days: other.day - this.day });
+    }
+    return duration;
   }
 
   /**

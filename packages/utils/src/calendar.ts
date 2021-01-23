@@ -26,3 +26,16 @@ export function serviceRunningOn(
 
   return calendarRunsOn(calendar, date);
 }
+
+export function nextServiceDay(
+  calendar: Calendar,
+  startingFrom: Temporal.PlainDate
+) {
+  let date = startingFrom;
+  let addedDays = 0;
+  while (!calendarRunsOn(calendar, date)) {
+    date = date.add({ days: 1 });
+    addedDays++;
+  }
+  return { date, addedDays };
+}
