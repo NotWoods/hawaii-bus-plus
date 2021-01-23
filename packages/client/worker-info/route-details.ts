@@ -127,7 +127,7 @@ export async function getRouteDetails(
           stop: dirDetails.closestTrip.stop!,
           stopName: stops.get(dirDetails.closestTrip.stop!)!.stop_name,
           serviceDays: allCalendars.get(dirDetails.closestTrip.trip!.service_id)
-            ?.text_name,
+            ?.service_name,
           stopTimes: dirDetails.closestTrip.trip!.stop_times.map((st) => ({
             ...st,
             arrival_time: zonedTime(st.arrival_time, nowDate, timeZone),

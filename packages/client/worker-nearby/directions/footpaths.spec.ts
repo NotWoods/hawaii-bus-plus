@@ -5,7 +5,7 @@ import { footPathsLoader } from './footpaths';
 const WAIMEA_PARK = 'wp' as Stop['stop_id'];
 const HAWAIIAN_STYLE_CAFE = 'sc' as Stop['stop_id'];
 
-test('footPathsLoader', async () => {
+test.concurrent('footPathsLoader', async () => {
   const repo = new NodeRepository();
   const spy = jest.spyOn(repo, 'loadStops');
   const getFootPaths = footPathsLoader(repo);

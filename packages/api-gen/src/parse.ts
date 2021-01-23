@@ -53,39 +53,6 @@ export async function zipFilesToObject(zipFiles: Map<string, JSZipObject>) {
   );
 }
 
-function makeCalendarTextName(days: Calendar['days']) {
-  switch (days.join(', ')) {
-    case 'true, true, true, true, true, true, true':
-      return 'Daily';
-    case 'true, true, true, true, true, true, false':
-      return 'Mon - Sat';
-    case 'true, true, true, true, true, false, false':
-      return 'Mon - Fri';
-    case 'false, false, false, false, false, true, true':
-      return 'Sat - Sun';
-    case 'false, false, false, false, false, true, false':
-      return 'Saturday';
-    default:
-      const firstDay = days.indexOf(true);
-      const lastDay = days.lastIndexOf(true);
-
-      const reference = [
-        'Monday',
-        'Tuesday',
-        'Wednesday',
-        'Thursday',
-        'Friday',
-        'Saturday',
-        'Sunday',
-      ];
-      if (firstDay === lastDay) {
-        return reference[firstDay];
-      } else {
-        return reference[firstDay] + ' - ' + reference[lastDay];
-      }
-  }
-}
-
 function fixTimeString(time: string) {
   return time.padStart('00:00:00'.length, '0') as TimeString;
 }
@@ -190,13 +157,13 @@ export async function createApiData(
   }
   for (const csvCalendar of json.calendar) {
     const days: Calendar['days'] = [
-      csvCalendar.sunday,
       csvCalendar.monday,
       csvCalendar.tuesday,
       csvCalendar.wednesday,
       csvCalendar.thursday,
       csvCalendar.friday,
       csvCalendar.saturday,
+      csvCalendar.sunday,
     ];
     const added_dates: DateString[] = [];
     const removed_dates: DateString[] = [];
@@ -212,10 +179,10 @@ export async function createApiData(
     }
     const calendar: Calendar = {
       service_id: csvCalendar.service_id,
+      service_name: csvCalendar.service_name,
       start_date: csvCalendar.start_date,
       end_date: csvCalendar.end_date,
       days,
-      text_name: makeCalendarTextName(days),
       added_dates,
       removed_dates,
     };

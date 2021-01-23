@@ -6,7 +6,7 @@ import { Temporal } from 'proposal-temporal';
  */
 export function calendarRunsOn(calendar: Calendar, date: Temporal.PlainDate) {
   // Does the day of week match a valid day
-  const runsOnDayOfWeek = calendar.days[date.dayOfWeek];
+  const runsOnDayOfWeek = calendar.days[date.dayOfWeek - 1];
   const dateStr = date.toString() as DateString;
 
   if (runsOnDayOfWeek) {

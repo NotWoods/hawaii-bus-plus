@@ -3,7 +3,7 @@ import { Route } from '@hawaii-bus-plus/types';
 import { Temporal } from 'proposal-temporal';
 import { extractLinks, getRouteDetails } from './route-details';
 
-test('extractLinks separates link', async () => {
+test.concurrent('extractLinks separates link', async () => {
   const routeDesc =
     'For more information go to the Park website at; https: //www.nps.gov/havo/planyourvisit/fees.htm';
   const links = extractLinks(routeDesc);
@@ -16,7 +16,7 @@ test('extractLinks separates link', async () => {
   );
 });
 
-test('getRouteDetails when in service', async () => {
+test.concurrent('getRouteDetails when in service', async () => {
   const repo = new NodeRepository();
   const routeId = 'waimea' as Route['route_id'];
   const MONDAY = Temporal.PlainDate.from({ year: 2021, month: 1, day: 25 });

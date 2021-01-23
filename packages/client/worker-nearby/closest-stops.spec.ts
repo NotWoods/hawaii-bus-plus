@@ -4,7 +4,7 @@ import { findClosestStops } from './closest-stops';
 const WAIMEA = { lat: 20.022818482273284, lng: -155.67176568698534 };
 const VANCOUVER = { lat: 49.0878967367812, lng: -123.01349642409956 };
 
-test('findClosestStops to waimea', async () => {
+test.concurrent('findClosestStops to waimea', async () => {
   const repo = new NodeRepository();
   const stops = await findClosestStops(repo, WAIMEA);
 
@@ -23,19 +23,22 @@ test('findClosestStops to waimea', async () => {
   });
   expect(stops[3]).toMatchObject({
     stop_id: 'sc',
-    stop_name: 'Hawaiian Style Cafe',
+    stop_name: 'Hawaiian Style Café',
   });
   expect(stops[4]).toMatchObject({
     stop_id: 'sc-across',
-    stop_name: 'Hawaiian Style Cafe',
+    stop_name: 'Hawaiian Style Café',
   });
 
   expect(stops[0]).toHaveProperty('distance');
 });
 
-test('findClosestStops returns no results outside Hawaii', async () => {
-  const repo = new NodeRepository();
-  const stops = await findClosestStops(repo, VANCOUVER);
+test.concurrent(
+  'findClosestStops returns no results outside Hawaii',
+  async () => {
+    const repo = new NodeRepository();
+    const stops = await findClosestStops(repo, VANCOUVER);
 
-  expect(stops).toHaveLength(0);
-});
+    expect(stops).toHaveLength(0);
+  }
+);

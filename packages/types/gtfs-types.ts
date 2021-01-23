@@ -16,6 +16,7 @@ export interface ServerGTFSData extends GTFSData {
 
 export interface CsvCalendar {
   service_id: Opaque<string, 'calendar'>;
+  service_name: string;
   monday: boolean;
   tuesday: boolean;
   wednesday: boolean;
@@ -29,7 +30,7 @@ export interface CsvCalendar {
 
 export interface Calendar
   extends Readonly<
-    Pick<CsvCalendar, 'service_id' | 'start_date' | 'end_date'>
+    Pick<CsvCalendar, 'service_id' | 'service_name' | 'start_date' | 'end_date'>
   > {
   readonly days: readonly [
     monday: boolean,
@@ -40,7 +41,6 @@ export interface Calendar
     saturday: boolean,
     sunday: boolean
   ];
-  readonly text_name: string;
   readonly added_dates: readonly DateString[];
   readonly removed_dates: readonly DateString[];
 }
