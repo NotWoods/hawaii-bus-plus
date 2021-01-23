@@ -3,19 +3,7 @@ import {
   DirectionsData,
   Stop,
   StopRouteInfo,
-  Trip,
 } from '@hawaii-bus-plus/types';
-
-/**
- * In RAPTOR, routes are distinct if they go in different directions or have different stops.
- * Different route IDs are generated for use with the algorithm,
- * independent of normal GTFS route IDs.
- */
-export function uniqueRouteId(trip: Trip) {
-  return trip.stop_times
-    .map((st) => st.stop_id)
-    .join(',') as DirectionRoute['id'];
-}
 
 export interface QueueValue {
   stop_id: Stop['stop_id'];
