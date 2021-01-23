@@ -28,14 +28,18 @@ export interface TemporalStopTime
 
 export interface DirectionDetails {
   readonly firstStop: Stop['stop_id'];
+  readonly firstStopName: string;
   readonly lastStop: Stop['stop_id'];
+  readonly lastStopName: string;
   readonly earliest: ZonedTime;
   readonly latest: ZonedTime;
   readonly closestTrip: {
     readonly trip: Trip;
-    readonly offset: string;
+    readonly offset: { hours: number; minutes: number; seconds: number };
     readonly stop: Stop['stop_id'];
+    readonly stopName: string;
     readonly stopTimes: readonly TemporalStopTime[];
+    readonly serviceDays?: string;
   };
 }
 
@@ -118,7 +122,11 @@ export function extractLinks(description: string) {
 export async function getRouteDetails(
   repo: Pick<
     Repository,
-    'loadRoute' | 'loadAgency' | 'loadTripsForRoute' | 'loadCalendars'
+    | 'loadRoute'
+    | 'loadAgency'
+    | 'loadTripsForRoute'
+    | 'loadCalendars'
+    | 'loadStops'
   >,
   route_id: Route['route_id'],
   now?: Temporal.PlainDateTime
@@ -208,6 +216,14 @@ export async function getRouteDetails(
     };
   }
 
+  const stops = await repo.loadStops(
+    directionDetails.flatMap((dirDetails) => [
+      dirDetails.firstStop!,
+      dirDetails.lastStop!,
+      dirDetails.closestTrip.stop!,
+    ])
+  );
+
   return {
     route,
     descParts: extractLinks(route.route_desc),
@@ -224,15 +240,29 @@ export async function getRouteDetails(
         closestTrip.stop = earliestTrip.stop;
       }
 
+      const offset = dirDetails.closestTrip.offset!.round({
+        largestUnit: 'hour',
+        smallestUnit: 'second',
+      });
+
       return {
         firstStop: dirDetails.firstStop!,
+        firstStopName: stops.get(dirDetails.firstStop!)!.stop_name,
         lastStop: dirDetails.lastStop!,
+        lastStopName: stops.get(dirDetails.lastStop!)!.stop_name,
         earliest: zonedTime(dirDetails.earliest),
         latest: zonedTime(dirDetails.latest),
         closestTrip: {
           trip: dirDetails.closestTrip.trip!,
-          offset: dirDetails.closestTrip.offset!.toString(),
+          offset: {
+            hours: offset.hours,
+            minutes: offset.minutes,
+            seconds: offset.seconds,
+          },
           stop: dirDetails.closestTrip.stop!,
+          stopName: stops.get(dirDetails.closestTrip.stop!)!.stop_name,
+          serviceDays: allCalendars.get(dirDetails.closestTrip.trip!.service_id)
+            ?.text_name,
           stopTimes: dirDetails.closestTrip.trip!.stop_times.map((st) => ({
             ...st,
             arrival_time: zonedTime(st.arrival_time),

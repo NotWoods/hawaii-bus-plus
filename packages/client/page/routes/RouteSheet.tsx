@@ -4,15 +4,13 @@ import { RouteDetails } from '../../worker-info/route-details';
 import { dbInitialized } from '../data/db-ready';
 import { usePromise } from '../hooks/usePromise';
 import { useWorker } from '../hooks/useWorker';
-import { Icon } from '../icons/Icon';
-import swapIcon from '../icons/swap_horiz.svg';
 import { closeRouteAction } from '../router/action';
 import { RouterContext } from '../router/Router';
 import { colorProps } from './props';
 import { RouteDetailsCard } from './RouteDetails';
 import { RouteName } from './RouteName';
 import './RouteSheet.css';
-import { StopTimesList } from './trip/StopTimesList';
+import { TripDetails } from './trip/TripDetails';
 
 export function RouteSheet() {
   const { route_id, route: routeData, dispatch } = useContext(RouterContext);
@@ -38,9 +36,6 @@ export function RouteSheet() {
   }
 
   const { backgroundColor } = colorProps(route);
-  const dirDetails =
-    details && (details.directions[0] || details.directions[1]);
-  const trip = dirDetails?.closestTrip?.trip;
   const cssVars = {
     '--route-color': backgroundColor,
     '--route-text-color': `#${route.route_text_color}`,
@@ -65,25 +60,9 @@ export function RouteSheet() {
       </div>
       <div className="row row-eq-spacing-lg">
         <div className="col-lg-8">
-          {details && trip && dirDetails ? (
-            <div className="content">
-              <div className="">
-                <h3 className="content-title m-0">{trip.trip_short_name}</h3>
-                <p className="mt-0">{trip.stop_times.length} stops</p>
-                <a className="btn btn-sm">
-                  <Icon src={swapIcon} alt="" /> Switch direction
-                </a>
-              </div>
-              <hr className="mt-10" />
-              <StopTimesList
-                routeId={route.route_id}
-                stopTimes={dirDetails.closestTrip.stopTimes}
-                timeZone={details.timeZone}
-              />
-            </div>
-          ) : (
-            <div className="content" />
-          )}
+          <div className="content">
+            {details ? <TripDetails details={details} /> : null}
+          </div>
         </div>
         <div className="col-lg-4">
           <RouteDetailsCard
