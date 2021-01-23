@@ -1,0 +1,115 @@
+import { NodeRepository } from '@hawaii-bus-plus/data/node';
+import { Route } from '@hawaii-bus-plus/types';
+import { Temporal } from 'proposal-temporal';
+import { findBestTrips } from './trip-details';
+
+const SUNDAY = Temporal.PlainDate.from({ year: 2021, month: 1, day: 24 });
+const MONDAY = Temporal.PlainDate.from({ year: 2021, month: 1, day: 25 });
+
+test('findBestTrips before route is running that day', async () => {
+  const repo = new NodeRepository();
+  const routeId = 'waimea' as Route['route_id'];
+  const now = MONDAY.toPlainDateTime({ hour: 5 });
+  const allCalendars = await repo.loadCalendars();
+
+  const { directionDetails } = await findBestTrips(
+    repo,
+    routeId,
+    allCalendars,
+    now
+  );
+  expect(directionDetails).toHaveLength(2);
+  expect(directionDetails[0]).toBeDefined();
+  expect(directionDetails[1]).toBeDefined();
+
+  expect(directionDetails[0].closestTrip.offset).toMatchObject({
+    hours: 1,
+    minutes: 30,
+    seconds: 0,
+  });
+  expect(directionDetails[0].closestTrip.trip).toMatchObject({
+    trip_id: 'waimea-waimea-am-4',
+    trip_short_name: '6:30AM WAIMEA AM',
+  });
+  expect(directionDetails[1].closestTrip.offset).toMatchObject({
+    hours: 2,
+    minutes: 0,
+    seconds: 0,
+  });
+  expect(directionDetails[1].closestTrip.trip).toMatchObject({
+    trip_id: 'waimea-waimea-am',
+    trip_short_name: '7:00AM WAIMEA AM',
+  });
+});
+
+test('findBestTrips after route has run that day', async () => {
+  const repo = new NodeRepository();
+  const routeId = 'waimea' as Route['route_id'];
+  const now = MONDAY.toPlainDateTime({ hour: 20 });
+
+  const allCalendars = await repo.loadCalendars();
+  const { directionDetails } = await findBestTrips(
+    repo,
+    routeId,
+    allCalendars,
+    now
+  );
+  expect(directionDetails).toHaveLength(2);
+  expect(directionDetails[0]).toBeDefined();
+  expect(directionDetails[1]).toBeDefined();
+
+  expect(directionDetails[0].closestTrip.offset).toMatchObject({
+    hours: 10,
+    minutes: 30,
+    seconds: 0,
+  });
+  expect(directionDetails[0].closestTrip.trip).toMatchObject({
+    trip_id: 'waimea-waimea-am-4',
+    trip_short_name: '6:30AM WAIMEA AM',
+  });
+  expect(directionDetails[1].closestTrip.offset).toMatchObject({
+    hours: 11,
+    minutes: 0,
+    seconds: 0,
+  });
+  expect(directionDetails[1].closestTrip.trip).toMatchObject({
+    trip_id: 'waimea-waimea-am',
+    trip_short_name: '7:00AM WAIMEA AM',
+  });
+});
+
+test('getRouteDetails on a day when the route is not in service', async () => {
+  const repo = new NodeRepository();
+  const routeId = 'waimea' as Route['route_id'];
+  const now = SUNDAY.toPlainDateTime({ hour: 7 });
+  const allCalendars = await repo.loadCalendars();
+  const { directionDetails } = await findBestTrips(
+    repo,
+    routeId,
+    allCalendars,
+    now
+  );
+
+  expect(directionDetails).toHaveLength(2);
+  expect(directionDetails[0]).toBeDefined();
+  expect(directionDetails[1]).toBeDefined();
+
+  expect(directionDetails[0].closestTrip.offset).toMatchObject({
+    hours: 10,
+    minutes: 30,
+    seconds: 0,
+  });
+  expect(directionDetails[0].closestTrip.trip).toMatchObject({
+    trip_id: 'waimea-waimea-am-4',
+    trip_short_name: '6:30AM WAIMEA AM',
+  });
+  expect(directionDetails[1].closestTrip.offset).toMatchObject({
+    hours: 11,
+    minutes: 0,
+    seconds: 0,
+  });
+  expect(directionDetails[1].closestTrip.trip).toMatchObject({
+    trip_id: 'waimea-waimea-am',
+    trip_short_name: '7:00AM WAIMEA AM',
+  });
+});

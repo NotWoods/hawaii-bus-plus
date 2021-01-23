@@ -1,7 +1,7 @@
-import { extractLinks, getRouteDetails } from './route-details';
 import { NodeRepository } from '@hawaii-bus-plus/data/node';
 import { Route } from '@hawaii-bus-plus/types';
 import { Temporal } from 'proposal-temporal';
+import { extractLinks, getRouteDetails } from './route-details';
 
 test('extractLinks separates link', async () => {
   const routeDesc =
@@ -16,11 +16,10 @@ test('extractLinks separates link', async () => {
   );
 });
 
-const MONDAY = Temporal.PlainDate.from({ year: 2021, month: 1, day: 25 });
-
 test('getRouteDetails when in service', async () => {
   const repo = new NodeRepository();
   const routeId = 'waimea' as Route['route_id'];
+  const MONDAY = Temporal.PlainDate.from({ year: 2021, month: 1, day: 25 });
   const now = MONDAY.toPlainDateTime({ hour: 9 });
 
   const details = await getRouteDetails(repo, routeId, now);
@@ -67,7 +66,7 @@ test('getRouteDetails when in service', async () => {
       string: '17:00:00',
     },
     closestTrip: expect.objectContaining({
-      offset: { hours: 0, minutes: 0, seconds: 0 },
+      offset: { days: 0, hours: 0, minutes: 0, seconds: 0 },
       stop: 'kv',
       stopName: 'Kamuela View Estates',
       trip: expect.objectContaining({
@@ -90,7 +89,7 @@ test('getRouteDetails when in service', async () => {
       string: '17:30:00',
     },
     closestTrip: expect.objectContaining({
-      offset: { hours: 0, minutes: 0, seconds: 0 },
+      offset: { days: 0, hours: 0, minutes: 0, seconds: 0 },
       stop: 'kv',
       stopName: 'Kamuela View Estates',
       trip: expect.objectContaining({
@@ -98,63 +97,5 @@ test('getRouteDetails when in service', async () => {
         trip_short_name: '9:00AM WAIMEA AM',
       }),
     }),
-  });
-});
-
-test('getRouteDetails before route is running that day', async () => {
-  const repo = new NodeRepository();
-  const routeId = 'waimea' as Route['route_id'];
-  const now = MONDAY.toPlainDateTime({ hour: 5 });
-
-  const details = await getRouteDetails(repo, routeId, now);
-  expect(details!.directions[0]).toBeDefined();
-  expect(details!.directions[1]).toBeDefined();
-
-  expect(details!.directions[0].closestTrip.offset).toEqual({
-    hours: 1,
-    minutes: 30,
-    seconds: 0,
-  });
-  expect(details!.directions[0].closestTrip.trip).toMatchObject({
-    trip_id: 'waimea-waimea-am-4',
-    trip_short_name: '6:30AM WAIMEA AM',
-  });
-  expect(details!.directions[1].closestTrip.offset).toEqual({
-    hours: 2,
-    minutes: 0,
-    seconds: 0,
-  });
-  expect(details!.directions[1].closestTrip.trip).toMatchObject({
-    trip_id: 'waimea-waimea-am',
-    trip_short_name: '7:00AM WAIMEA AM',
-  });
-});
-
-test('getRouteDetails after route has run that day', async () => {
-  const repo = new NodeRepository();
-  const routeId = 'waimea' as Route['route_id'];
-  const now = MONDAY.toPlainDateTime({ hour: 20 });
-
-  const details = await getRouteDetails(repo, routeId, now);
-  expect(details!.directions[0]).toBeDefined();
-  expect(details!.directions[1]).toBeDefined();
-
-  expect(details!.directions[0].closestTrip.offset).toEqual({
-    hours: 10,
-    minutes: 30,
-    seconds: 0,
-  });
-  expect(details!.directions[0].closestTrip.trip).toMatchObject({
-    trip_id: 'waimea-waimea-am-4',
-    trip_short_name: '6:30AM WAIMEA AM',
-  });
-  expect(details!.directions[1].closestTrip.offset).toEqual({
-    hours: 11,
-    minutes: 0,
-    seconds: 0,
-  });
-  expect(details!.directions[1].closestTrip.trip).toMatchObject({
-    trip_id: 'waimea-waimea-am',
-    trip_short_name: '7:00AM WAIMEA AM',
   });
 });

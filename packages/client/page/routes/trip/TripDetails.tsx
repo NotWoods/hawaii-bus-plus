@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-import type {
-  DirectionDetails,
-  RouteDetails,
-} from '../../../worker-info/route-details';
+import type { DirectionDetails } from '../../../worker-info/trip-details';
+import type { RouteDetails } from '../../../worker-info/route-details';
 import { Icon } from '../../icons/Icon';
 import swapIcon from '../../icons/swap_horiz.svg';
 import { StopTimesList } from './StopTimesList';
@@ -55,7 +53,7 @@ export function TripDetails(props: Props) {
 }
 
 const formatter = new Intl.RelativeTimeFormat(undefined, {});
-const units = ['hours', 'minutes', 'seconds'] as const;
+const units = ['days', 'hours', 'minutes', 'seconds'] as const;
 
 export function TripOffset(
   props: Pick<DirectionDetails['closestTrip'], 'offset' | 'stopName'>

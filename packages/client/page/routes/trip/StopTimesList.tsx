@@ -1,6 +1,6 @@
 import { Route, Stop } from '@hawaii-bus-plus/types';
 import React, { ReactNode } from 'react';
-import { TemporalStopTime } from '../../../worker-info/route-details';
+import type { TemporalStopTime } from '../../../worker-info/trip-details';
 import { useApi } from '../../data/Api';
 import { classNames } from '../../hooks/classnames';
 import { setStopAction } from '../../router/action';
