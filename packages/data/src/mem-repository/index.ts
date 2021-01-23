@@ -3,7 +3,6 @@ import {
   Calendar,
   GTFSData,
   Route,
-  RouteWithTrips,
   Stop,
 } from '@hawaii-bus-plus/types';
 import { downloadScheduleData } from '../fetch';
@@ -23,22 +22,17 @@ export class MemoryRepository implements Repository {
     return this.apiReady.then(() => {});
   }
 
-  loadRoute(routeId: Route['route_id']): Promise<RouteWithTrips | undefined> {
+  loadRoute(routeId: Route['route_id']): Promise<Route | undefined> {
     return this.apiReady.then((api) => api.routes[routeId]);
   }
 
   loadTrips(): Promise<TripCursor | null> {
-    return this.apiReady.then((api) => {
-      const trips = Object.values(api.routes).flatMap((route) =>
-        Object.values(route.trips)
-      );
-      return memTripCursor(trips);
-    });
+    return this.apiReady.then((api) => memTripCursor(api.trips));
   }
 
   loadTripsForRoute(routeId: Route['route_id']): Promise<TripCursor | null> {
     return this.apiReady.then((api) =>
-      memTripCursor(Object.values(api.routes[routeId].trips))
+      memTripCursor(api.trips.filter((trip) => trip.route_id === routeId))
     );
   }
 

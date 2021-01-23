@@ -21,7 +21,7 @@ type Message = RouteInfoMessage | StopInfoMessage | PlaceInfoMessage;
 
 const repo = makeRepository();
 
-registerPromiseWorker(async (message: Message) => {
+registerPromiseWorker((message: Message) => {
   switch (message.type) {
     case 'route': {
       let time: Temporal.PlainDateTime | undefined;
@@ -29,9 +29,7 @@ registerPromiseWorker(async (message: Message) => {
         time = Temporal.PlainDateTime.from(message.time);
       }
 
-      const details = await getRouteDetails(repo, message.id, time);
-      console.log(details);
-      return details;
+      return getRouteDetails(repo, message.id, time);
     }
     case 'stop': {
       return loadStop(repo, message.id);

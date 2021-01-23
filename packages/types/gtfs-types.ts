@@ -2,16 +2,12 @@ import { Opaque } from 'type-fest';
 import { DateString, TimeString } from './data-types';
 
 export interface GTFSData {
-  routes: { [route_id: string]: RouteWithTrips };
+  routes: { [route_id: string]: Route };
   stops: { [stop_id: string]: Stop };
   calendar: { [service_id: string]: Calendar };
   agency: { [agency_id: string]: Agency };
+  trips: Trip[];
   info: FeedInfo;
-}
-
-/* Server needs to iterate through all trips, client doesn't. */
-export interface ServerGTFSData extends GTFSData {
-  trips: { [trip_id: string]: Route['route_id'] };
 }
 
 export interface CsvCalendar {
@@ -66,10 +62,6 @@ export interface CsvRoute {
 
 export interface Route extends Readonly<CsvRoute> {
   readonly agency_id: Agency['agency_id'];
-}
-
-export interface RouteWithTrips extends Route {
-  readonly trips: { [trip_id: string]: Trip };
 }
 
 export interface CsvTrip {

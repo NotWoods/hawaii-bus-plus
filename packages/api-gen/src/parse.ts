@@ -10,8 +10,8 @@ import type {
   CsvTransfer,
   CsvTrip,
   FeedInfo,
-  RouteWithTrips,
-  ServerGTFSData,
+  GTFSData,
+  Route,
   Stop,
   StopTime,
   TimeString,
@@ -64,7 +64,7 @@ function fixTimeString(time: string) {
  */
 export async function createApiData(
   gtfsZipData: Buffer | ArrayBuffer | Uint8Array
-): Promise<ServerGTFSData> {
+): Promise<GTFSData> {
   const fileList = [
     'agency.txt',
     'calendar.txt',
@@ -101,32 +101,32 @@ export async function createApiData(
     transfers: CsvTransfer[];
     agency: CsvAgency[];
   };
-  const variable: ServerGTFSData = {
+  const variable: GTFSData = {
     routes: {},
     stops: {},
     calendar: {},
-    trips: {},
     agency: {},
+    trips: [],
     info: json.feed_info[0],
   };
+  json.routes.sort(compareAs((route) => route.route_sort_order));
 
   for (const csvAgency of json.agency) {
     variable.agency[csvAgency.agency_id] = csvAgency;
   }
   const agencies = Object.keys(variable.agency) as Agency['agency_id'][];
   const defaultAgency = agencies.length === 1 ? agencies[0] : undefined;
-  json.routes.sort(compareAs((route) => route.route_sort_order));
   for (const csvRoute of json.routes) {
-    const route = csvRoute as Mutable<RouteWithTrips>;
+    const route = csvRoute as Mutable<Route>;
     route.agency_id ||= defaultAgency!;
-    route.trips = {};
     variable.routes[route.route_id] = route;
   }
+  const trips = new Map<Trip['trip_id'], Trip>();
   for (const csvTrip of json.trips) {
     const trip = csvTrip as Mutable<Trip>;
     trip.stop_times = [];
-    variable.routes[trip.route_id].trips[trip.trip_id] = trip;
-    variable.trips[trip.trip_id] = trip.route_id;
+    variable.trips.push(trip);
+    trips.set(trip.trip_id, trip);
   }
   const transfers = new MultiMap<Stop['stop_id'], Transfer>();
   for (const csvTransfer of json.transfers) {
@@ -196,35 +196,32 @@ export async function createApiData(
     stopTime.departure_time = fixTimeString(stopTime.departure_time);
 
     const stop = variable.stops[stopTime.stop_id];
-    const route_id = variable.trips[csvStopTime.trip_id];
-    const route = variable.routes[route_id];
-    const trip = route.trips[csvStopTime.trip_id];
+    const trip = trips.get(csvStopTime.trip_id)!;
+    const route = variable.routes[trip.route_id];
 
     trip.stop_times.push(stopTime);
 
-    if (!stop.routes.includes(route_id)) {
-      stop.routes.push(route_id);
+    if (!stop.routes.includes(route.route_id)) {
+      stop.routes.push(route.route_id);
     }
   }
 
-  for (const r of Object.values(variable.routes)) {
-    const route = r as Mutable<RouteWithTrips>;
-    const trips = Object.values(route.trips);
-    for (const t of trips) {
+  variable.trips = Array.from(trips.values())
+    .map((t) => {
       const trip = t as Mutable<Trip>;
       trip.stop_times.sort(compareAs((st) => st.stop_sequence));
       if (!STARTS_WITH_TIME.test(trip.trip_short_name)) {
         const start = trip.stop_times[0].arrival_time;
         trip.trip_short_name = `${stringTime(start)} ${trip.trip_short_name}`;
       }
-    }
-    trips.sort((a, b) => {
+      return trip;
+    })
+    .sort((a, b) => {
       const aTime = PlainDaysTime.from(a.stop_times[0].departure_time);
       const bTime = PlainDaysTime.from(b.stop_times[0].departure_time);
       return PlainDaysTime.compare(aTime, bTime);
     });
-    route.trips = Object.fromEntries(trips.map((trip) => [trip.trip_id, trip]));
-  }
+
   for (const stop of Object.values(variable.stops)) {
     stop.routes.sort(
       compareAs((routeId) => toInt(variable.routes[routeId].route_short_name))

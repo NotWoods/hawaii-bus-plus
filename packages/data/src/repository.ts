@@ -8,8 +8,6 @@ export interface TripCursor {
 }
 
 export interface Repository {
-  init(): Promise<void>;
-
   loadRoute(routeId: Route['route_id']): Promise<Route | undefined>;
 
   loadTrips(): Promise<TripCursor | null>;
