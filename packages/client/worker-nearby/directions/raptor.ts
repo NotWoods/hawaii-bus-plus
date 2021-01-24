@@ -34,6 +34,7 @@ function raptorFootpaths(
   markedStops: Set<Stop['stop_id']>,
   k: number,
   multiLabel: DefaultMap<Stop['stop_id'], Path[]>,
+  earliestKnownArrival: Map<Stop['stop_id'], PlainDaysTime>,
   getFootPaths: (marked: Iterable<Stop['stop_id']>) => Promise<Footpaths>
 ) {
   return getFootPaths(markedStops).then((footPaths) => {
@@ -62,6 +63,7 @@ function raptorFootpaths(
             time: timeWithWalking,
             transfer_from: fromStopId,
           };
+          earliestKnownArrival.set(to_stop_id, timeWithWalking);
           markedStops.add(to_stop_id);
         }
       }
@@ -101,7 +103,13 @@ export async function raptorDirections(
   const earliestKnownArrival = new Map<Stop['stop_id'], PlainDaysTime>();
 
   const markedStops = new Set(multiLabel.keys());
-  await raptorFootpaths(markedStops, 0, multiLabel, getFootPaths);
+  await raptorFootpaths(
+    markedStops,
+    0,
+    multiLabel,
+    earliestKnownArrival,
+    getFootPaths
+  );
 
   for (let k = 1; k <= K; k++) {
     // Invariant: at the beginning of round k,
@@ -164,7 +172,13 @@ export async function raptorDirections(
     }
 
     // Stage 3: consider foot-paths.
-    await raptorFootpaths(markedStops, k, multiLabel, getFootPaths);
+    await raptorFootpaths(
+      markedStops,
+      k,
+      multiLabel,
+      earliestKnownArrival,
+      getFootPaths
+    );
 
     // The algorithm can be stopped if no label t_k(p) was improved.
     if (markedStops.size === 0) break;
