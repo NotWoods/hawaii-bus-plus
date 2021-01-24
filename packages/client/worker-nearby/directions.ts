@@ -36,7 +36,7 @@ async function pointToSources(
   }
 }
 
-function traversePath(
+function traversePathRecurse(
   paths: ReadonlyMap<Stop['stop_id'], readonly Path[]>,
   stopId: Stop['stop_id'],
   pathSoFar: Path[]
@@ -47,7 +47,7 @@ function traversePath(
     pathSoFar.unshift(firstNonEmpty);
     if (firstNonEmpty.transfer_from) {
       // More of the path to follow
-      return traversePath(paths, firstNonEmpty.transfer_from, pathSoFar);
+      return traversePathRecurse(paths, firstNonEmpty.transfer_from, pathSoFar);
     } else {
       // We found a departure path
       return pathSoFar;
@@ -64,14 +64,45 @@ export interface Journey {
   lastStop: Stop['stop_id'];
 }
 
-export function traverseJourney(
+export function traversePath(
   paths: ReadonlyMap<Stop['stop_id'], readonly Path[]>,
   arrival: Pick<Source, 'stop_id'>
 ) {
   return {
-    path: traversePath(paths, arrival.stop_id, []),
+    path: traversePathRecurse(paths, arrival.stop_id, []),
     lastStop: arrival.stop_id,
   };
+}
+
+export async function journeyToDirections(
+  repo: Repository,
+  from: Point,
+  to: Point,
+  journey: ReturnType<typeof traversePath>
+) {
+  if (!journey.path) return undefined;
+
+  // Starting at (from)
+
+  // Walk 1 minute
+
+  // TRIP: waimea-waimea-pm-0-0
+  // 301 - Waimea
+  //   Start at Lakeland @ 12:30PM
+  //     After 1 stop
+  //   End at Parker Ranch @ 12:45PM
+
+  // Get off and wait for X minutes
+
+  // TRIP: kohala-kona-0645am-nkohala-waim-kona-1
+  // 75 - North Kohala / Waimea / Kailua-Kona
+  //   Start at Parker Ranch @ 3:25PM
+  //     After 1 stop
+  //   End at Hwy 12/250 Intersection @ 3:45PM
+
+  // Walk 1 minute
+
+  // Ending at (to)
 }
 
 export async function directions(
@@ -91,7 +122,7 @@ export async function directions(
 
   const arriveAt = await arriveAtReady;
   const journeys = arriveAt
-    .map((arrival) => traverseJourney(paths, arrival))
+    .map((arrival) => traversePath(paths, arrival))
     .filter(nestedNotNull('path'));
 
   console.log(journeys);
