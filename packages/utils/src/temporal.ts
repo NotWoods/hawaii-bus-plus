@@ -45,6 +45,8 @@ export class PlainDaysTime {
     duration: Omit<Temporal.DurationLike, 'years' | 'months' | 'weeks'>,
     options?: Temporal.ArithmeticOptions
   ) {
+    if (this.day === Infinity) return this;
+
     const { days = 0, ...rest } = duration;
     const time =
       Object.keys(rest).length > 0 ? this.time.add(rest, options) : this.time;
