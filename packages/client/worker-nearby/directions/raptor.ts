@@ -7,7 +7,7 @@ import {
 } from '@hawaii-bus-plus/utils';
 import { DefaultMap } from 'mnemonist';
 import { Temporal } from 'proposal-temporal';
-import { footPathsLoader } from './footpaths';
+import { Footpaths, footPathsLoader } from './footpaths';
 import { generateDirectionsData } from './generate-data';
 import { buildQueue } from './route-queue';
 import { arrivalTime, getEarliestValidTrip } from './trip-times';
@@ -21,6 +21,52 @@ export interface Path {
   time: PlainDaysTime;
   trip?: Trip['trip_id'];
   transfer_from?: Stop['stop_id'];
+}
+
+/**
+ * Compute footpaths for RAPTOR.
+ * @param markedStops Marked stops to check footpaths for. Will be modified.
+ * @param k Round number.
+ * @param multiLabel Map of stops to round numbers to paths.
+ * @param getFootPaths
+ */
+function raptorFootpaths(
+  markedStops: Set<Stop['stop_id']>,
+  k: number,
+  multiLabel: DefaultMap<Stop['stop_id'], Path[]>,
+  getFootPaths: (marked: Iterable<Stop['stop_id']>) => Promise<Footpaths>
+) {
+  return getFootPaths(markedStops).then((footPaths) => {
+    for (const fromStopId of markedStops) {
+      const transfers = footPaths.get(fromStopId) || [];
+      for (const { to_stop_id, min_transfer_time = 0 } of transfers) {
+        // fromStopId: p
+        // to_stop_id: p'
+        const existingFromLabels = multiLabel.get(fromStopId);
+        const existingToLabels = multiLabel.get(to_stop_id);
+
+        // currentTime: t_k(p')
+        const existingTime = existingToLabels[k]?.time;
+        // timeWithWalking: t_k(p) + l(p, p')
+        const timeWithWalking = existingFromLabels[k]?.time?.add({
+          minutes: min_transfer_time,
+        });
+
+        const timeWithWalkingBeforeExistingTime =
+          PlainDaysTime.compare(
+            timeWithWalking || InfinityPlainDaysTime,
+            existingTime || InfinityPlainDaysTime
+          ) < 0;
+        if (timeWithWalkingBeforeExistingTime) {
+          existingToLabels[k] = {
+            time: timeWithWalking,
+            transfer_from: fromStopId,
+          };
+          markedStops.add(to_stop_id);
+        }
+      }
+    }
+  });
 }
 
 /**
@@ -55,6 +101,7 @@ export async function raptorDirections(
   const earliestKnownArrival = new Map<Stop['stop_id'], PlainDaysTime>();
 
   const markedStops = new Set(multiLabel.keys());
+  await raptorFootpaths(markedStops, 0, multiLabel, getFootPaths);
 
   for (let k = 1; k <= K; k++) {
     // Invariant: at the beginning of round k,
@@ -117,36 +164,7 @@ export async function raptorDirections(
     }
 
     // Stage 3: consider foot-paths.
-    const footPaths = await getFootPaths(markedStops);
-    for (const fromStopId of markedStops) {
-      const transfers = footPaths.get(fromStopId) || [];
-      for (const { to_stop_id, min_transfer_time = 0 } of transfers) {
-        // fromStopId: p
-        // to_stop_id: p'
-        const existingFromLabels = multiLabel.get(fromStopId);
-        const existingToLabels = multiLabel.get(to_stop_id);
-
-        // currentTime: t_k(p')
-        const existingTime = existingToLabels[k]?.time;
-        // timeWithWalking: t_k(p) + l(p, p')
-        const timeWithWalking = existingFromLabels[k]?.time?.add({
-          minutes: min_transfer_time,
-        });
-
-        const timeWithWalkingBeforeExistingTime =
-          PlainDaysTime.compare(
-            timeWithWalking || InfinityPlainDaysTime,
-            existingTime || InfinityPlainDaysTime
-          ) < 0;
-        if (timeWithWalkingBeforeExistingTime) {
-          existingToLabels[k] = {
-            time: timeWithWalking,
-            transfer_from: fromStopId,
-          };
-          markedStops.add(to_stop_id);
-        }
-      }
-    }
+    await raptorFootpaths(markedStops, k, multiLabel, getFootPaths);
 
     // The algorithm can be stopped if no label t_k(p) was improved.
     if (markedStops.size === 0) break;

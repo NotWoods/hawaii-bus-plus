@@ -21,7 +21,7 @@ export function buildQueue(
 ) {
   const queue = new Map<DirectionRoute['id'], QueueValue>();
   for (const stopId of markedStops) {
-    for (const routeInfo of data.stops[stopId].routes) {
+    for (const routeInfo of data.stops[stopId]?.routes || []) {
       const existingStop = queue.get(routeInfo.route_id);
       if (!existingStop || routeInfo.sequence < existingStop.info.sequence) {
         queue.set(routeInfo.route_id, { stop_id: stopId, info: routeInfo });
