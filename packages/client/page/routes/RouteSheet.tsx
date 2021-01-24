@@ -15,16 +15,17 @@ import { TripDetails } from './trip/TripDetails';
 export function RouteSheet() {
   const { route_id, route: routeData, dispatch } = useContext(RouterContext);
   const [details, setDetails] = useState<RouteDetails | undefined>();
-  const infoWorker = useWorker(InfoWorker);
+  const postToInfoWorker = useWorker(InfoWorker);
 
   usePromise(async () => {
     if (!route_id) return;
 
     await dbInitialized;
-    const details = await infoWorker?.postMessage({
+    const details = await postToInfoWorker({
       type: 'route',
       id: route_id,
     });
+    console.log(details);
 
     setDetails(details as RouteDetails | undefined);
   }, [route_id]);

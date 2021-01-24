@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
 import { center } from '@hawaii-bus-plus/react-google-maps';
+import React, { useState } from 'react';
 import SearchWorker from '../../worker-search/index?worker';
 import type { SearchResults } from '../../worker-search/search';
 import { makeId } from '../alert/make';
 import { dbInitialized } from '../data/db-ready';
+import { usePromise } from '../hooks/usePromise';
 import { useWorker } from '../hooks/useWorker';
 import {
   PlaceSearchItem,
@@ -26,20 +27,19 @@ export function SidebarSearch(props: Props) {
     stops: [],
   });
 
-  const searchWorker = useWorker(SearchWorker);
+  const postToSearchWorker = useWorker(SearchWorker);
 
-  useEffect(() => {
-    dbInitialized
-      .then(() =>
-        searchWorker?.postMessage({
-          key: 'AIzaSyAmRiFwEOokwUHYXK1MqYl5k2ngHoWGJBw',
-          input: props.search,
-          offset: props.search.length,
-          sessiontoken: sessionToken,
-          location: center,
-        })
-      )
-      .then((results) => setSearchResults(results as SearchResults));
+  usePromise(async () => {
+    await dbInitialized;
+    const results = await postToSearchWorker({
+      key: 'AIzaSyAmRiFwEOokwUHYXK1MqYl5k2ngHoWGJBw',
+      input: props.search,
+      offset: props.search.length,
+      sessiontoken: sessionToken,
+      location: center,
+    });
+
+    setSearchResults(results as SearchResults);
   }, [props.search]);
 
   return (

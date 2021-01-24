@@ -29,6 +29,7 @@ export function TripDetails(props: Props) {
         <h3 className="content-title m-0">{trip.trip_short_name}</h3>
         <p className="mt-0">
           <span>{trip.stop_times.length} stops</span>
+          {' | '}
           <TripOffset
             stopName={dirDetails.closestTrip.stopName}
             offset={dirDetails.closestTrip.offset}

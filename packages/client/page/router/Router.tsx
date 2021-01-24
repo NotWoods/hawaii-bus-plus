@@ -51,7 +51,7 @@ export function Router(props: { children: ReactNode }) {
   useEffect(() => {
     const url = new URL('/', window.location.href);
     if (state.route_id) {
-      url.pathname = `/routes/${state.route_id}/${state.trip_id || ''}`;
+      url.pathname = `/routes/${state.route_id}/`;
     }
     if (state.stop_id) {
       url.searchParams.set('stop', state.stop_id);
@@ -59,7 +59,7 @@ export function Router(props: { children: ReactNode }) {
     if (path(url) !== path(window.location)) {
       history.pushState(state, '', path(url));
     }
-  }, [state.route_id, state.trip_id, state.stop_id]);
+  }, [state.route_id, state.stop_id]);
 
   useEffect(() => {
     if (state.route) {

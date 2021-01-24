@@ -16,7 +16,7 @@ export function StopCard() {
   const state = useContext(RouterContext);
   const { focus, stop_id, stop, place_id, place, dispatch } = state;
 
-  const worker = useWorker(InfoWorker)!;
+  const postToInfoWorker = useWorker(InfoWorker)!;
 
   function onClose() {
     dispatch(closeStopAction());
@@ -28,7 +28,7 @@ export function StopCard() {
         case 'stop':
         case 'place':
           if (!state[focus]) {
-            const result = await worker.postMessage({
+            const result = await postToInfoWorker({
               type: state[focus],
               id: focus === 'stop' ? stop_id : place_id,
               key: googleMapsApiKey,

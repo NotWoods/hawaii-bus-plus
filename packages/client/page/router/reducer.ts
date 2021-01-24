@@ -21,7 +21,6 @@ export interface PlaceResult
 
 export interface RouterState {
   route_id?: string;
-  trip_id?: string;
   route?: Route;
 
   focus?: 'stop' | 'place' | 'user' | 'marker';
@@ -32,6 +31,8 @@ export interface RouterState {
   place?: PlaceResult;
   user?: google.maps.LatLngLiteral;
   marker?: google.maps.LatLngLiteral;
+
+  directionsOpen?: boolean;
 }
 
 export type RouterAction =
@@ -45,22 +46,22 @@ export type RouterAction =
   | ReturnType<typeof updateUserLocation>;
 
 const ROUTES_PREFIX = '/routes/';
+const DIRECTIONS = '/directions/';
 
 export function initStateFromUrl(url: URL) {
   const newState: RouterState = {};
 
-  // If link opens route (and trip)
-  if (url.pathname.startsWith(ROUTES_PREFIX)) {
-    const [routeId, tripIdOrBlank] = url.pathname
-      .slice(ROUTES_PREFIX.length)
-      .split('/');
+  if (url.pathname.startsWith(DIRECTIONS)) {
+    newState.directionsOpen = true;
+  } else if (url.pathname.startsWith(ROUTES_PREFIX)) {
+    // If link opens route
+    const [routeId] = url.pathname.slice(ROUTES_PREFIX.length).split('/');
     newState.route_id = routeId;
-    newState.trip_id = tripIdOrBlank || undefined;
   }
 
   // If link opens stop
   newState.stop_id = url.searchParams.get('stop') || undefined;
-
+  console.log(newState);
   return newState;
 }
 
@@ -88,7 +89,6 @@ export function routerReducer(
       return {
         ...state,
         route_id: undefined,
-        trip_id: undefined,
         route: undefined,
       };
     case 'close-stop':

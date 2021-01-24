@@ -20,18 +20,13 @@ export function DirectionsSidebar(props: Props) {
   );
   const [results, setResults] = useState<Journey[]>([]);
 
-  const worker = useWorker(DirectionsWorker);
-
-  (window as any).debug = (depart: any, arrive: any) => {
-    setDepart(depart);
-    setArrive(arrive);
-  };
+  const postToDirectionsWorker = useWorker(DirectionsWorker);
 
   usePromise(
     async (signal) => {
       if (!depart || !arrive) return;
 
-      const results = await worker?.postMessage({
+      const results = await postToDirectionsWorker({
         type: 'directions',
         from: depart,
         to: arrive,
