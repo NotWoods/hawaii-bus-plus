@@ -1,4 +1,5 @@
 import { Repository } from '@hawaii-bus-plus/data';
+import { durationToData } from '@hawaii-bus-plus/presentation';
 import { Route, Stop } from '@hawaii-bus-plus/types';
 import { Temporal } from 'proposal-temporal';
 import { DirectionDetails, findBestTrips, zonedTime } from './trip-details';
@@ -104,11 +105,6 @@ export async function getRouteDetails(
         closestTrip.stop = earliestTrip.stop;
       }
 
-      const offset = dirDetails.closestTrip.offset!.round({
-        largestUnit: 'day',
-        smallestUnit: 'second',
-      });
-
       return {
         firstStop: dirDetails.firstStop!,
         firstStopName: stops.get(dirDetails.firstStop!)!.stop_name,
@@ -118,12 +114,7 @@ export async function getRouteDetails(
         latest: zonedTime(dirDetails.latest, nowDate, timeZone),
         closestTrip: {
           trip: dirDetails.closestTrip.trip!,
-          offset: {
-            days: offset.days,
-            hours: offset.hours,
-            minutes: offset.minutes,
-            seconds: offset.seconds,
-          },
+          offset: durationToData(dirDetails.closestTrip.offset!),
           stop: dirDetails.closestTrip.stop!,
           stopName: stops.get(dirDetails.closestTrip.stop!)!.stop_name,
           serviceDays: allCalendars.get(dirDetails.closestTrip.trip!.service_id)

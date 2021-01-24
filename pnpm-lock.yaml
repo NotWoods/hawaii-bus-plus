@@ -94,6 +94,7 @@ importers:
   packages/client:
     dependencies:
       '@hawaii-bus-plus/data': 'link:../data'
+      '@hawaii-bus-plus/presentation': 'link:../presentation'
       '@hawaii-bus-plus/promise-worker': 'link:../promise-worker'
       '@hawaii-bus-plus/react-google-maps': 'link:../react-google-maps'
       '@hawaii-bus-plus/types': 'link:../types'
@@ -125,6 +126,7 @@ importers:
       vite: 2.0.0-beta.34
     specifiers:
       '@hawaii-bus-plus/data': '*'
+      '@hawaii-bus-plus/presentation': '*'
       '@hawaii-bus-plus/promise-worker': '*'
       '@hawaii-bus-plus/react-google-maps': '*'
       '@hawaii-bus-plus/types': '*'

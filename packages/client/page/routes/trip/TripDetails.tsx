@@ -1,6 +1,7 @@
+import { formatDuration } from '@hawaii-bus-plus/presentation';
 import React, { useState } from 'react';
-import type { DirectionDetails } from '../../../worker-info/trip-details';
 import type { RouteDetails } from '../../../worker-info/route-details';
+import type { DirectionDetails } from '../../../worker-info/trip-details';
 import { Icon } from '../../icons/Icon';
 import swapIcon from '../../icons/swap_horiz.svg';
 import { StopTimesList } from './StopTimesList';
@@ -52,18 +53,15 @@ export function TripDetails(props: Props) {
   );
 }
 
-const formatter = new Intl.RelativeTimeFormat(undefined, {});
-const units = ['days', 'hours', 'minutes', 'seconds'] as const;
-
 export function TripOffset(
   props: Pick<DirectionDetails['closestTrip'], 'offset' | 'stopName'>
 ) {
-  const unit = units.find((unit) => props.offset[unit] > 0);
+  const duration = formatDuration(props.offset);
 
-  if (unit) {
+  if (duration) {
     return (
       <span>
-        Reaches {props.stopName} in {formatter.format(props.offset[unit], unit)}
+        Reaches {props.stopName} {duration}
       </span>
     );
   } else {

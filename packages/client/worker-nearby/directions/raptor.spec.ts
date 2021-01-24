@@ -26,52 +26,77 @@ test.concurrent.only('raptor', async () => {
   expect(directions.get(LAKELAND)).toEqual([
     { time: expect.any(PlainDaysTime) },
   ]);
-  expect(directions.get(LAKELAND)![0].time.toString()).toBe('12:00:00');
+  expect(directions.get(LAKELAND)![0]!.time.toString()).toBe('12:00:00');
 
   expect(directions.get(WAIMEA_PARK)).toEqual([
     undefined,
     {
       time: expect.any(PlainDaysTime),
-      transfer_from: LAKELAND,
+      transferFrom: LAKELAND,
       trip: 'waimea-waimea-pm-0-0',
+      stopTime: expect.objectContaining({
+        arrival_time: '12:47:00',
+        departure_time: '12:47:00',
+        stop_id: WAIMEA_PARK,
+        stop_sequence: 6,
+      }),
     },
   ]);
-  expect(directions.get(WAIMEA_PARK)![1].time.toString()).toBe('12:47:00');
+  expect(directions.get(WAIMEA_PARK)![1]!.time.toString()).toBe('12:47:00');
   expect(directions.get(WAIMEA_PARK_ACROSS)).toEqual([
     undefined,
     {
       time: expect.any(PlainDaysTime),
-      transfer_from: WAIMEA_PARK,
+      transferFrom: WAIMEA_PARK,
+      transferTo: WAIMEA_PARK_ACROSS,
+      transferTime: expect.any(Temporal.Duration),
     },
   ]);
-  expect(directions.get(WAIMEA_PARK_ACROSS)![1].time.toString()).toBe(
+  expect(directions.get(WAIMEA_PARK_ACROSS)![1]!.time.toString()).toBe(
     '12:47:00'
   );
 
   expect(directions.get(LAKELAND_ACROSS)).toEqual([
-    { time: expect.any(PlainDaysTime), transfer_from: LAKELAND },
+    {
+      time: expect.any(PlainDaysTime),
+      transferFrom: LAKELAND,
+      transferTo: LAKELAND_ACROSS,
+      transferTime: expect.any(Temporal.Duration),
+    },
   ]);
-  expect(directions.get(LAKELAND_ACROSS)![0].time.toString()).toBe('12:00:00');
+  expect(directions.get(LAKELAND_ACROSS)![0]!.time.toString()).toBe('12:00:00');
 
   expect(directions.get(PARKER_RANCH)).toEqual([
     undefined,
     {
       time: expect.any(PlainDaysTime),
-      transfer_from: LAKELAND,
+      transferFrom: LAKELAND,
       trip: 'waimea-waimea-pm-0-0',
+      stopTime: expect.objectContaining({
+        arrival_time: '12:45:00',
+        departure_time: '12:45:00',
+        stop_id: PARKER_RANCH,
+        stop_sequence: 5,
+      }),
     },
   ]);
-  expect(directions.get(PARKER_RANCH)![1].time.toString()).toBe('12:45:00');
+  expect(directions.get(PARKER_RANCH)![1]!.time.toString()).toBe('12:45:00');
   expect(directions.get(HWY_INTERSECTON)).toEqual([
     undefined,
     undefined,
     {
       time: expect.any(PlainDaysTime),
-      transfer_from: PARKER_RANCH,
+      transferFrom: PARKER_RANCH,
       trip: 'kohala-kona-0645am-nkohala-waim-kona-1',
+      stopTime: expect.objectContaining({
+        arrival_time: '15:45:00',
+        departure_time: '15:45:00',
+        stop_id: HWY_INTERSECTON,
+        stop_sequence: 12,
+      }),
     },
   ]);
-  expect(directions.get(HWY_INTERSECTON)![2].time.toString()).toBe('15:45:00');
+  expect(directions.get(HWY_INTERSECTON)![2]!.time.toString()).toBe('15:45:00');
 });
 
 test.concurrent.only('raptor weekend', async () => {
@@ -86,15 +111,20 @@ test.concurrent.only('raptor weekend', async () => {
   expect(directions.get(LAKELAND)).toEqual([
     { time: expect.any(PlainDaysTime) },
   ]);
-  expect(directions.get(LAKELAND)![0].time.toString()).toBe('12:00:00');
+  expect(directions.get(LAKELAND)![0]!.time.toString()).toBe('12:00:00');
 
   expect(directions.get(WAIMEA_PARK)).toBeUndefined();
   expect(directions.get(WAIMEA_PARK_ACROSS)).toBeUndefined();
 
   expect(directions.get(LAKELAND_ACROSS)).toEqual([
-    { time: expect.any(PlainDaysTime), transfer_from: LAKELAND },
+    {
+      time: expect.any(PlainDaysTime),
+      transferFrom: LAKELAND,
+      transferTo: LAKELAND_ACROSS,
+      transferTime: expect.any(Temporal.Duration),
+    },
   ]);
-  expect(directions.get(LAKELAND_ACROSS)![0].time.toString()).toBe('12:00:00');
+  expect(directions.get(LAKELAND_ACROSS)![0]!.time.toString()).toBe('12:00:00');
 
   expect(directions.get(PARKER_RANCH)).toBeUndefined();
   expect(directions.get(HWY_INTERSECTON)).toBeUndefined();

@@ -1,26 +1,19 @@
 import { Repository } from '@hawaii-bus-plus/data';
-import { Route, Stop, Trip } from '@hawaii-bus-plus/types';
-import { nestedNotNull, PlainDaysTime } from '@hawaii-bus-plus/utils';
+import { Stop } from '@hawaii-bus-plus/types';
+import { notNull, PlainDaysTime } from '@hawaii-bus-plus/utils';
 import { Temporal } from 'proposal-temporal';
 import { findClosestStops } from './closest-stops';
-import { Path, raptorDirections, Source } from './directions/raptor';
+import { Journey, journeyToDirections, Point } from './directions/format';
+import {
+  CompletePath,
+  Path,
+  PathSegment,
+  PathStart,
+  raptorDirections,
+  Source,
+} from './directions/raptor';
 
-/**
- * Starting or ending point for directions.
- * Includes some styling information for presentation in
- * text box & direction results.
- */
-export interface Point {
-  type: 'user' | 'stop' | 'place' | 'marker';
-  stop_id?: Stop['stop_id'];
-  name: string;
-  position: google.maps.LatLngLiteral;
-}
-
-export interface Walking {
-  time: { minutes: number };
-  distance: number;
-}
+export type { Point };
 
 async function pointToSources(
   repo: Pick<Repository, 'loadStopsSpatial'>,
@@ -49,20 +42,20 @@ async function pointToSources(
 }
 
 function traversePathRecurse(
-  paths: ReadonlyMap<Stop['stop_id'], readonly Path[]>,
+  paths: ReadonlyMap<Stop['stop_id'], Path>,
   stopId: Stop['stop_id'],
-  pathSoFar: Path[]
-): Path[] | undefined {
+  pathSoFar: (PathStart | PathSegment)[]
+): CompletePath | undefined {
   const firstNonEmpty = paths.get(stopId)?.find(Boolean);
 
   if (firstNonEmpty) {
     pathSoFar.unshift(firstNonEmpty);
-    if (firstNonEmpty.transfer_from) {
+    if (firstNonEmpty.transferFrom) {
       // More of the path to follow
-      return traversePathRecurse(paths, firstNonEmpty.transfer_from, pathSoFar);
+      return traversePathRecurse(paths, firstNonEmpty.transferFrom, pathSoFar);
     } else {
       // We found a departure path
-      return pathSoFar;
+      return pathSoFar as CompletePath;
     }
   } else {
     // This path goes nowhere!
@@ -72,72 +65,22 @@ function traversePathRecurse(
 }
 
 export function traversePath(
-  paths: ReadonlyMap<Stop['stop_id'], readonly Path[]>,
+  paths: ReadonlyMap<Stop['stop_id'], Path>,
   arrival: Pick<Source, 'stop_id'>
 ) {
-  return {
-    path: traversePathRecurse(paths, arrival.stop_id, []),
-    lastStop: arrival.stop_id,
-  };
-}
-
-export interface Journey {
-  depart?: {
-    point: Point;
-    walk: Walking;
-  };
-  trips: {
-    trip: Trip;
-    route: Route;
-    stopTimes: {
-      stop: Pick<Stop, 'stop_id' | 'stop_name' | 'stop_desc'>;
-      arrival_time: ZonedTime;
-      departure_time: ZonedTime;
-      timepoint: boolean;
-    }[];
-    transfer?: Walking;
-  }[];
-  arrive?: {
-    point: Point;
-    walk: Walking;
-  };
-}
-
-export async function journeyToDirections(
-  repo: Repository,
-  from: Point,
-  to: Point,
-  journey: ReturnType<typeof traversePath>
-) {
-  if (!journey.path) return undefined;
-
-  // Starting at (from)
-
-  // Walk 1 minute
-
-  // TRIP: waimea-waimea-pm-0-0
-  // 301 - Waimea
-  //   Start at Lakeland @ 12:30PM
-  //     After 1 stop
-  //   End at Parker Ranch @ 12:45PM
-
-  // Get off and wait for X minutes
-
-  // TRIP: kohala-kona-0645am-nkohala-waim-kona-1
-  // 75 - North Kohala / Waimea / Kailua-Kona
-  //   Start at Parker Ranch @ 3:25PM
-  //     After 1 stop
-  //   End at Hwy 12/250 Intersection @ 3:45PM
-
-  // Walk 1 minute
-
-  // Ending at (to)
+  return traversePathRecurse(paths, arrival.stop_id, []);
 }
 
 export async function directions(
   repo: Pick<
     Repository,
-    'loadStopsSpatial' | 'loadStops' | 'loadCalendars' | 'loadTrips'
+    | 'loadStopsSpatial'
+    | 'loadStops'
+    | 'loadCalendars'
+    | 'loadTrips'
+    | 'loadTrip'
+    | 'loadRoute'
+    | 'loadAgency'
   >,
   from: Point,
   to: Point,
@@ -150,10 +93,14 @@ export async function directions(
   const paths = await raptorDirections(repo, departFrom, departDate);
 
   const arriveAt = await arriveAtReady;
-  const journeys = arriveAt
-    .map((arrival) => traversePath(paths, arrival))
-    .filter(nestedNotNull('path'));
+  const journeys = await Promise.all(
+    arriveAt
+      .map((arrival) => traversePath(paths, arrival))
+      .map(
+        (path) =>
+          path && journeyToDirections(repo, from, to, departureTime, path)
+      )
+  );
 
-  console.log(journeys);
-  return journeys;
+  return journeys.filter(notNull);
 }

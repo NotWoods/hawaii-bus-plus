@@ -15,6 +15,7 @@
     "@hawaii-bus-plus/data": "*",
     "@hawaii-bus-plus/promise-worker": "*",
     "@hawaii-bus-plus/react-google-maps": "*",
+    "@hawaii-bus-plus/presentation": "*",
     "@hawaii-bus-plus/types": "*",
     "@hawaii-bus-plus/utils": "*",
     "@react-google-maps/api": "^2.1.0",

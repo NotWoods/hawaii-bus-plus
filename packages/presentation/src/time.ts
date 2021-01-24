@@ -1,8 +1,29 @@
+import type { PlainDaysTime } from '@hawaii-bus-plus/utils';
+import { memoize } from '@hawaii-bus-plus/utils';
+import type { Temporal } from 'proposal-temporal';
+
 export interface PlainTimeData {
   /** Milliseconds since epoch, used to build Date object. */
   epochMilliseconds: number;
   /** ISO string usable in <time datetime=""> attribute. */
   string: string;
+}
+
+export function plainTimeToData(
+  daysTime: PlainDaysTime,
+  serviceDate: Temporal.PlainDate,
+  timeZone: string | Temporal.TimeZoneProtocol
+): PlainTimeData {
+  const dateTime = daysTime
+    .toPlainTime()
+    .toPlainDateTime(serviceDate)
+    .add({ days: daysTime.day });
+  const zoned = dateTime.toZonedDateTime(timeZone);
+
+  return {
+    epochMilliseconds: zoned.epochMilliseconds,
+    string: daysTime.toString(),
+  };
 }
 
 declare global {
@@ -15,8 +36,13 @@ declare global {
 
 const localTimeFormatter = new Intl.DateTimeFormat([], { timeStyle: 'long' });
 
-let lastAgencyTimezone: string | undefined;
-let agencyTimeFormatter: Intl.DateTimeFormat | undefined;
+const agencyTimeFormatter = memoize(
+  (agencyTimezone: string, locale: string[]) =>
+    new Intl.DateTimeFormat(locale, {
+      timeStyle: 'short',
+      timeZone: agencyTimezone,
+    })
+);
 
 /**
  * Format the plain time data as a human readable string.
@@ -27,16 +53,8 @@ export function formatPlainTime(
 ) {
   const date = new Date(plainTime.epochMilliseconds);
 
-  if (agencyTimezone !== lastAgencyTimezone) {
-    lastAgencyTimezone = agencyTimezone;
-    agencyTimeFormatter = new Intl.DateTimeFormat([], {
-      timeStyle: 'short',
-      timeZone: agencyTimezone,
-    });
-  }
-
   return {
     localTime: localTimeFormatter.format(date),
-    agencyTime: agencyTimeFormatter!.format(date),
+    agencyTime: agencyTimeFormatter(agencyTimezone, []).format(date),
   };
 }

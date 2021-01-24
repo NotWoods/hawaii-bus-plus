@@ -10,6 +10,8 @@ export interface TripCursor {
 export interface Repository {
   loadRoute(routeId: Route['route_id']): Promise<Route | undefined>;
 
+  loadTrip(tripId: Trip['trip_id']): Promise<Trip | undefined>;
+
   loadTrips(): Promise<TripCursor | null>;
 
   loadTripsForRoute(routeId: Route['route_id']): Promise<TripCursor | null>;

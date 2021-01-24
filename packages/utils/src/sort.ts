@@ -2,9 +2,8 @@ export function compareAs<T>(fn: (item: T) => number) {
   return (a: T, b: T) => fn(a) - fn(b);
 }
 
-export function nestedNotNull<T extends object, K extends keyof T>(key: K) {
-  return (item: T): item is T & { [P in K]: NonNullable<T[P]> } =>
-    item[key] != undefined;
+export function notNull<T>(item: T): item is NonNullable<T> {
+  return item != undefined;
 }
 
 export function valueNotNull<K, V>(
@@ -21,4 +20,21 @@ export function* skipUntil<T>(list: Iterable<T>, cb: (item: T) => boolean) {
       yield item;
     }
   }
+}
+
+export function findIndexLast<T>(
+  list: readonly T[],
+  cb: (item: T) => boolean,
+  fromIndex = list.length - 1
+) {
+  for (let i = fromIndex; i >= 0; i--) {
+    if (cb(list[i])) {
+      return i;
+    }
+  }
+  return -1;
+}
+
+export function lastIndex(list: readonly unknown[]) {
+  return list.length - 1;
 }

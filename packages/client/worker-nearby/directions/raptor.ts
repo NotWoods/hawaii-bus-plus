@@ -1,5 +1,5 @@
 import { Repository } from '@hawaii-bus-plus/data';
-import { Stop, Trip } from '@hawaii-bus-plus/types';
+import { Stop, StopTime, Trip } from '@hawaii-bus-plus/types';
 import {
   InfinityPlainDaysTime,
   PlainDaysTime,
@@ -10,24 +10,41 @@ import { Temporal } from 'proposal-temporal';
 import { Footpaths, footPathsLoader } from './footpaths';
 import { generateDirectionsData } from './generate-data';
 import { buildQueue } from './route-queue';
-import { arrivalTime, getEarliestValidTrip } from './trip-times';
+import { getEarliestValidTrip, getStopTime } from './trip-times';
 
 export interface Source {
   stop_id: Stop['stop_id'];
   departure_time: PlainDaysTime;
 }
 
-export interface Path {
+export interface PathStart {
   time: PlainDaysTime;
-  trip?: Trip['trip_id'];
-  transfer_from?: Stop['stop_id'];
+  transferFrom?: Stop['stop_id'];
 }
+
+export interface PathWalkSegment extends PathStart {
+  transferFrom: Stop['stop_id'];
+  transferTo: Stop['stop_id'];
+  transferTime: Temporal.Duration;
+}
+
+export interface PathTripSegment extends PathStart {
+  transferFrom: Stop['stop_id'];
+  trip: Trip['trip_id'];
+  stopTime: StopTime;
+}
+
+export type PathSegment = PathWalkSegment | PathTripSegment;
+
+export type Path = [PathStart | undefined, ...(PathSegment | undefined)[]];
+
+export type CompletePath = [PathStart, ...PathSegment[]];
 
 function buildTimeLabels(sources: Iterable<Source>) {
   // Each stop, p, is associated with a multi-label (t_0(p), t_1(p), ...)
   // where t_i(p) represents the earliest known arrival time at p with up to i trips.
   // Initially every value is set to infinity, and t_0(p_s) is set to t.
-  const multiLabel = new DefaultMap<Stop['stop_id'], Path[]>(() => []);
+  const multiLabel = new DefaultMap<Stop['stop_id'], Path>(() => [undefined]);
   for (const { stop_id, departure_time } of sources) {
     multiLabel.set(stop_id, [{ time: departure_time }]);
   }
@@ -47,7 +64,7 @@ function buildTimeLabels(sources: Iterable<Source>) {
       const existingLabels = multiLabel.get(stopId);
       return existingLabels[round]?.time || InfinityPlainDaysTime;
     },
-    setPath(stopId: Stop['stop_id'], round: number, path: Path) {
+    setPath(stopId: Stop['stop_id'], round: number, path: PathSegment) {
       const existingLabels = multiLabel.get(stopId);
       existingLabels[round] = path;
       earliestKnownArrival.set(stopId, path.time);
@@ -80,18 +97,24 @@ function raptorFootpaths(
         // fromStopId: p
         // to_stop_id: p'
 
+        const walkingTime = Temporal.Duration.from({
+          minutes: min_transfer_time,
+        });
+
         // currentTime: t_k(p')
         const existingTime = timeLabels.getArrival(to_stop_id, k);
         // timeWithWalking: t_k(p) + l(p, p')
-        const timeWithWalking = timeLabels.getArrival(fromStopId, k).add({
-          minutes: min_transfer_time,
-        });
+        const timeWithWalking = timeLabels
+          .getArrival(fromStopId, k)
+          .add(walkingTime);
 
         // time with walking is before existing time
         if (PlainDaysTime.compare(timeWithWalking, existingTime) < 0) {
           timeLabels.setPath(to_stop_id, k, {
             time: timeWithWalking,
-            transfer_from: fromStopId,
+            transferFrom: fromStopId,
+            transferTo: to_stop_id,
+            transferTime: walkingTime,
           });
           markedStops.add(to_stop_id);
         }
@@ -158,7 +181,8 @@ export async function raptorDirections(
       for (const stopId of stopsBeginningWith) {
         // stopId: p_i
 
-        const arrival = earliestTrip && arrivalTime(earliestTrip, stopId);
+        const stopTime = earliestTrip && getStopTime(earliestTrip, stopId);
+        const arrival = stopTime && PlainDaysTime.from(stopTime.arrival_time);
         const earliestArrival = timeLabels.getEarliestArrival(stopId);
 
         // Can the label be improved in this round?
@@ -168,7 +192,8 @@ export async function raptorDirections(
           timeLabels.setPath(stopId, k, {
             time: arrival,
             trip: earliestTrip!.trip_id,
-            transfer_from: hopOnStop.stop_id,
+            stopTime: stopTime!,
+            transferFrom: hopOnStop.stop_id,
           });
           markedStops.add(stopId);
         }

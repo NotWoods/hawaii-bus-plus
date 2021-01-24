@@ -4,6 +4,7 @@
   "references": [
     { "path": "../../types" },
     { "path": "../../utils/src" },
+    { "path": "../../presentation/src" },
     { "path": "../../data/src" },
     { "path": "../../data/node" },
     { "path": "../../promise-worker/worker" }

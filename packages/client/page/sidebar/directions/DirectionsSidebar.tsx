@@ -1,6 +1,6 @@
 import { Temporal } from 'proposal-temporal';
 import React, { useState } from 'react';
-import type { Journey, Point } from '../../../worker-nearby/directions';
+import type { Journey, Point } from '../../../worker-nearby/directions/format';
 import DirectionsWorker from '../../../worker-nearby/nearby?worker';
 import { usePromise } from '../../hooks/usePromise';
 import { useWorker } from '../../hooks/useWorker';

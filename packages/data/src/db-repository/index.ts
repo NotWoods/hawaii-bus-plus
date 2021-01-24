@@ -1,17 +1,21 @@
-import { Agency, Calendar, Route, Stop } from '@hawaii-bus-plus/types';
+import { Agency, Calendar, Route, Stop, Trip } from '@hawaii-bus-plus/types';
 import { dbReady } from '../database';
 import { Repository, TripCursor } from '../repository';
 import { loadCalendars } from './calendar';
 import { loadAgency, loadRoute } from './routes';
 import { searchRoutes, searchStops } from './search';
 import { loadStops, loadStopsSpatial } from './stops';
-import { loadTrips, loadTripsForRoute } from './trips';
+import { loadTrip, loadTrips, loadTripsForRoute } from './trips';
 
 export class DBRepository implements Repository {
   private ready = dbReady;
 
   loadRoute(routeId: Route['route_id']): Promise<Route | undefined> {
     return this.ready.then((db) => loadRoute(db, routeId));
+  }
+
+  loadTrip(tripId: Trip['trip_id']): Promise<Trip | undefined> {
+    return this.ready.then((db) => loadTrip(db, tripId));
   }
 
   loadTrips(): Promise<TripCursor | null> {

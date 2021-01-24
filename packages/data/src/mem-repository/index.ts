@@ -4,6 +4,7 @@ import {
   GTFSData,
   Route,
   Stop,
+  Trip,
 } from '@hawaii-bus-plus/types';
 import { downloadScheduleData } from '../fetch';
 import { Repository, TripCursor } from '../repository';
@@ -24,6 +25,12 @@ export class MemoryRepository implements Repository {
 
   loadRoute(routeId: Route['route_id']): Promise<Route | undefined> {
     return this.apiReady.then((api) => api.routes[routeId]);
+  }
+
+  loadTrip(tripId: Trip['trip_id']): Promise<Trip | undefined> {
+    return this.apiReady.then((api) =>
+      api.trips.find((trip) => trip.trip_id === tripId)
+    );
   }
 
   loadTrips(): Promise<TripCursor | null> {

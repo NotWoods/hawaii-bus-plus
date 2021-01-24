@@ -3,6 +3,8 @@
   "version": "5.0.0",
   "private": true,
   "type": "module",
+  "main": "src/index.js",
+  "module": "src/index.js",
   "scripts": {
     "build": "tsc --build src",
     "format": "prettier **/*.ts --write",

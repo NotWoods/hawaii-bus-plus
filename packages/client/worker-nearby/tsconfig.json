@@ -3,6 +3,7 @@
   "include": ["**/*"],
   "references": [
     { "path": "../../promise-worker/worker" },
+    { "path": "../../presentation/src" },
     { "path": "../../data/src" },
     { "path": "../../data/node" },
     { "path": "../../types" }

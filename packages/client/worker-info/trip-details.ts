@@ -1,4 +1,9 @@
 import { Repository } from '@hawaii-bus-plus/data';
+import {
+  DurationData,
+  PlainTimeData,
+  plainTimeToData,
+} from '@hawaii-bus-plus/presentation';
 import type {
   Calendar,
   Route,
@@ -9,22 +14,15 @@ import type {
 } from '@hawaii-bus-plus/types';
 import {
   InfinityPlainDaysTime,
-  PlainDaysTime,
   nextServiceDay,
+  PlainDaysTime,
 } from '@hawaii-bus-plus/utils';
 import { Temporal } from 'proposal-temporal';
 
-export interface ZonedTime {
-  /** Milliseconds since epoch, used to build Date object. */
-  epochMilliseconds: number;
-  /** ISO string usable in <time datetime=""> attribute. */
-  string: string;
-}
-
 export interface TemporalStopTime
   extends Omit<StopTime, 'arrival_time' | 'departure_time'> {
-  arrival_time: ZonedTime;
-  departure_time: ZonedTime;
+  arrival_time: PlainTimeData;
+  departure_time: PlainTimeData;
 }
 
 export interface DirectionDetails {
@@ -32,16 +30,11 @@ export interface DirectionDetails {
   readonly firstStopName: string;
   readonly lastStop: Stop['stop_id'];
   readonly lastStopName: string;
-  readonly earliest: ZonedTime;
-  readonly latest: ZonedTime;
+  readonly earliest: PlainTimeData;
+  readonly latest: PlainTimeData;
   readonly closestTrip: {
     readonly trip: Trip;
-    readonly offset: {
-      days: number;
-      hours: number;
-      minutes: number;
-      seconds: number;
-    };
+    readonly offset: DurationData;
     readonly stop: Stop['stop_id'];
     readonly stopName: string;
     readonly stopTimes: readonly TemporalStopTime[];
@@ -86,18 +79,8 @@ export function zonedTime(
   time: TimeString | PlainDaysTime,
   serviceDate: Temporal.PlainDate,
   timeZone: string | Temporal.TimeZoneProtocol
-): ZonedTime {
-  const daysTime = PlainDaysTime.from(time);
-  const dateTime = daysTime
-    .toPlainTime()
-    .toPlainDateTime(serviceDate)
-    .add({ days: daysTime.day });
-  const zoned = dateTime.toZonedDateTime(timeZone);
-
-  return {
-    epochMilliseconds: zoned.epochMilliseconds,
-    string: time.toString(),
-  };
+): PlainTimeData {
+  return plainTimeToData(PlainDaysTime.from(time), serviceDate, timeZone);
 }
 
 /**
