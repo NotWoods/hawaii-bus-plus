@@ -70,7 +70,7 @@ test.concurrent('getRouteDetails when in service', async () => {
       stop: 'kv',
       stopName: 'Kamuela View Estates',
       trip: expect.objectContaining({
-        trip_id: 'waimea-waimea-am-6',
+        trip_id: expect.stringContaining('waimea-waimea-am'),
         trip_short_name: '8:30AM WAIMEA AM',
       }),
     }),
@@ -93,7 +93,7 @@ test.concurrent('getRouteDetails when in service', async () => {
       stop: 'kv',
       stopName: 'Kamuela View Estates',
       trip: expect.objectContaining({
-        trip_id: 'waimea-waimea-am-1',
+        trip_id: expect.stringContaining('waimea-waimea-am'),
         trip_short_name: '9:00AM WAIMEA AM',
       }),
     }),

@@ -5,13 +5,13 @@ import { Temporal } from 'proposal-temporal';
 import { raptorDirections } from './raptor';
 
 const LAKELAND = 'll' as Stop['stop_id'];
-//const LAKELAND_ACROSS = 'll-across' as Stop['stop_id'];
+const LAKELAND_ACROSS = 'll-across' as Stop['stop_id'];
 const WAIMEA_PARK = 'wp' as Stop['stop_id'];
-//const WAIMEA_PARK_ACROSS = 'wp-across' as Stop['stop_id'];
+const WAIMEA_PARK_ACROSS = 'wp-across' as Stop['stop_id'];
 const HWY_INTERSECTON = 'hw' as Stop['stop_id'];
 const PARKER_RANCH = 'pr' as Stop['stop_id'];
 
-test.concurrent('raptor', async () => {
+test.concurrent.only('raptor', async () => {
   const repo = new NodeRepository();
   const directions = await raptorDirections(
     repo,
@@ -27,6 +27,8 @@ test.concurrent('raptor', async () => {
   expect(directions.size).not.toBe(0);
   expect(directions.get(LAKELAND)).toEqual([
     { time: expect.any(PlainDaysTime) },
+    undefined,
+    { time: expect.any(PlainDaysTime), transfer_from: LAKELAND_ACROSS },
   ]);
   expect(directions.get(LAKELAND)![0].time.toString()).toBe('12:00:00');
 
@@ -35,21 +37,33 @@ test.concurrent('raptor', async () => {
     {
       time: expect.any(PlainDaysTime),
       transfer_from: LAKELAND,
-      trip: 'waimea-waimea-pm-5',
+      trip: expect.stringContaining('waimea-waimea-pm'),
+    },
+    {
+      time: expect.any(PlainDaysTime),
+      transfer_from: WAIMEA_PARK_ACROSS,
     },
   ]);
   expect(directions.get(WAIMEA_PARK)![1].time.toString()).toBe('12:47:00');
-  /*expect(directions.get(WAIMEA_PARK_ACROSS)).toEqual([
+  expect(directions.get(WAIMEA_PARK)![2].time.toString()).toBe('13:13:00');
+  expect(directions.get(WAIMEA_PARK_ACROSS)).toEqual([
     undefined,
     {
       time: expect.any(PlainDaysTime),
-      transfer_from: LAKELAND,
-      trip: 'waimea-waimea-pm-5',
+      transfer_from: WAIMEA_PARK,
+    },
+    {
+      time: expect.any(PlainDaysTime),
+      transfer_from: 'kv',
+      trip: expect.stringContaining('waimea-waimea-pm'),
     },
   ]);
   expect(directions.get(WAIMEA_PARK_ACROSS)![1].time.toString()).toBe(
     '12:47:00'
-  );*/
+  );
+  expect(directions.get(WAIMEA_PARK_ACROSS)![2].time.toString()).toBe(
+    '13:13:00'
+  );
 
   /*expect(directions.get(LAKELAND_ACROSS)).toEqual([
     undefined,
@@ -62,7 +76,7 @@ test.concurrent('raptor', async () => {
     {
       time: expect.any(PlainDaysTime),
       transfer_from: LAKELAND,
-      trip: 'waimea-waimea-pm-5',
+      trip: expect.stringContaining('waimea-waimea-pm'),
     },
   ]);
   expect(directions.get(PARKER_RANCH)![1].time.toString()).toBe('12:45:00');
@@ -72,7 +86,7 @@ test.concurrent('raptor', async () => {
     {
       time: expect.any(PlainDaysTime),
       transfer_from: PARKER_RANCH,
-      trip: 'kohala-kona-0645am-nkohala-waim-kona-1',
+      trip: expect.stringContaining('kohala-kona-0645am-nkohala-waim-kona'),
     },
   ]);
   expect(directions.get(HWY_INTERSECTON)![2].time.toString()).toBe('15:45:00');

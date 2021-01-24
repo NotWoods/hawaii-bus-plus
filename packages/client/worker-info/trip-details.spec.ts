@@ -29,7 +29,7 @@ test.concurrent('findBestTrips before route is running that day', async () => {
     seconds: 0,
   });
   expect(directionDetails[0].closestTrip.trip).toMatchObject({
-    trip_id: 'waimea-waimea-am-4',
+    trip_id: expect.stringContaining('waimea-waimea-am'),
     trip_short_name: '6:30AM WAIMEA AM',
   });
   expect(directionDetails[1].closestTrip.offset).toMatchObject({
@@ -38,7 +38,7 @@ test.concurrent('findBestTrips before route is running that day', async () => {
     seconds: 0,
   });
   expect(directionDetails[1].closestTrip.trip).toMatchObject({
-    trip_id: 'waimea-waimea-am',
+    trip_id: expect.stringContaining('waimea-waimea-am'),
     trip_short_name: '7:00AM WAIMEA AM',
   });
 });
@@ -62,11 +62,11 @@ test.concurrent('findBestTrips after route has run that day', async () => {
   expect(directionDetails[0].closestTrip).toEqual({});
   expect(directionDetails[1].closestTrip).toEqual({});
   expect(directionDetails[0].earliestTrip.trip).toMatchObject({
-    trip_id: 'waimea-waimea-am-4',
+    trip_id: expect.stringContaining('waimea-waimea-am'),
     trip_short_name: '6:30AM WAIMEA AM',
   });
   expect(directionDetails[1].earliestTrip.trip).toMatchObject({
-    trip_id: 'waimea-waimea-am',
+    trip_id: expect.stringContaining('waimea-waimea-am'),
     trip_short_name: '7:00AM WAIMEA AM',
   });
 });

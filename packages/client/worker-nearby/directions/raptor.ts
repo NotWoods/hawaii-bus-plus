@@ -89,9 +89,6 @@ export async function raptorDirections(
 
         const existingLabels = multiLabel.get(stopId);
         const arrival = earliestTrip && arrivalTime(earliestTrip, stopId);
-        if (stopId === 'kv') {
-          console.log(earliestTrip, arrival?.toString());
-        }
 
         const earliestArrival =
           earliestKnownArrival.get(stopId) || InfinityPlainDaysTime;
@@ -120,29 +117,33 @@ export async function raptorDirections(
     }
 
     // Stage 3: consider foot-paths.
-    // TODO not working
     const footPaths = await getFootPaths(markedStops);
     for (const fromStopId of markedStops) {
       const transfers = footPaths.get(fromStopId) || [];
-      for (const transfer of transfers) {
-        const fromTime = multiLabel.get(fromStopId)[k - 1]?.time;
-        const timeWithWalking =
-          fromTime &&
-          fromTime.add({ minutes: transfer.min_transfer_time || 0 });
-        const existingLabels = multiLabel.get(transfer.to_stop_id);
+      for (const { to_stop_id, min_transfer_time = 0 } of transfers) {
+        // fromStopId: p
+        // to_stop_id: p'
+        const existingFromLabels = multiLabel.get(fromStopId);
+        const existingToLabels = multiLabel.get(to_stop_id);
+
+        // currentTime: t_k(p')
+        const existingTime = existingToLabels[k]?.time;
+        // timeWithWalking: t_k(p) + l(p, p')
+        const timeWithWalking = existingFromLabels[k]?.time?.add({
+          minutes: min_transfer_time,
+        });
 
         const timeWithWalkingBeforeExistingTime =
           PlainDaysTime.compare(
             timeWithWalking || InfinityPlainDaysTime,
-            existingLabels[k]?.time || InfinityPlainDaysTime
+            existingTime || InfinityPlainDaysTime
           ) < 0;
-
         if (timeWithWalkingBeforeExistingTime) {
-          existingLabels[k] = {
+          existingToLabels[k] = {
             time: timeWithWalking,
             transfer_from: fromStopId,
           };
-          markedStops.add(transfer.to_stop_id);
+          markedStops.add(to_stop_id);
         }
       }
     }
