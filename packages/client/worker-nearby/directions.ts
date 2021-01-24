@@ -1,13 +1,25 @@
 import { Repository } from '@hawaii-bus-plus/data';
-import { Stop } from '@hawaii-bus-plus/types';
+import { Route, Stop, Trip } from '@hawaii-bus-plus/types';
 import { nestedNotNull, PlainDaysTime } from '@hawaii-bus-plus/utils';
 import { Temporal } from 'proposal-temporal';
 import { findClosestStops } from './closest-stops';
 import { Path, raptorDirections, Source } from './directions/raptor';
 
+/**
+ * Starting or ending point for directions.
+ * Includes some styling information for presentation in
+ * text box & direction results.
+ */
 export interface Point {
+  type: 'user' | 'stop' | 'place' | 'marker';
   stop_id?: Stop['stop_id'];
+  name: string;
   position: google.maps.LatLngLiteral;
+}
+
+export interface Walking {
+  time: { minutes: number };
+  distance: number;
 }
 
 async function pointToSources(
@@ -59,11 +71,6 @@ function traversePathRecurse(
   }
 }
 
-export interface Journey {
-  path: Path[];
-  lastStop: Stop['stop_id'];
-}
-
 export function traversePath(
   paths: ReadonlyMap<Stop['stop_id'], readonly Path[]>,
   arrival: Pick<Source, 'stop_id'>
@@ -71,6 +78,28 @@ export function traversePath(
   return {
     path: traversePathRecurse(paths, arrival.stop_id, []),
     lastStop: arrival.stop_id,
+  };
+}
+
+export interface Journey {
+  depart?: {
+    point: Point;
+    walk: Walking;
+  };
+  trips: {
+    trip: Trip;
+    route: Route;
+    stopTimes: {
+      stop: Pick<Stop, 'stop_id' | 'stop_name' | 'stop_desc'>;
+      arrival_time: ZonedTime;
+      departure_time: ZonedTime;
+      timepoint: boolean;
+    }[];
+    transfer?: Walking;
+  }[];
+  arrive?: {
+    point: Point;
+    walk: Walking;
   };
 }
 

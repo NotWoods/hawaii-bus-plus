@@ -1,6 +1,6 @@
 import React, { ReactNode, useState } from 'react';
-import { Stop } from '@hawaii-bus-plus/types';
-import { SearchResults } from '../../../worker-search/search';
+import type { Point } from '../../../worker-nearby/directions';
+import type { SearchResults } from '../../../worker-search/search';
 import stopIcon from '../../icons/bus_stop.svg';
 import locationIcon from '../../icons/gps_fixed.svg';
 import { Icon } from '../../icons/Icon';
@@ -10,15 +10,8 @@ import '../Sidebar.css';
 interface Props {
   id: string;
   label: ReactNode;
-  onChange(data: FieldData | undefined): void;
+  onChange(data: Point | undefined): void;
   onSearchResults?(results: SearchResults): void;
-}
-
-export interface FieldData {
-  type: 'user' | 'stop' | 'place' | 'marker';
-  stop_id?: Stop['stop_id'];
-  name: string;
-  position: google.maps.LatLngLiteral;
 }
 
 const icons = Object.freeze({
@@ -30,7 +23,7 @@ const icons = Object.freeze({
 
 export function DirectionsField(props: Props) {
   const [value, setValue] = useState('');
-  const [data, setData] = useState<FieldData | undefined>();
+  const [data, setData] = useState<Point | undefined>();
 
   return (
     <div className="form-group mb-0">

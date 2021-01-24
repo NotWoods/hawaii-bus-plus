@@ -1,11 +1,11 @@
 import { Temporal } from 'proposal-temporal';
 import React, { useState } from 'react';
-import type { Journey } from '../../../worker-nearby/directions';
+import type { Journey, Point } from '../../../worker-nearby/directions';
 import DirectionsWorker from '../../../worker-nearby/nearby?worker';
 import { usePromise } from '../../hooks/usePromise';
 import { useWorker } from '../../hooks/useWorker';
 import '../Sidebar.css';
-import { DirectionsField, FieldData } from './DirectionsField';
+import { DirectionsField } from './DirectionsField';
 import { DirectionsTime } from './DirectionsTime';
 
 interface Props {
@@ -13,8 +13,8 @@ interface Props {
 }
 
 export function DirectionsSidebar(props: Props) {
-  const [depart, setDepart] = useState<FieldData | undefined>();
-  const [arrive, setArrive] = useState<FieldData | undefined>();
+  const [depart, setDepart] = useState<Point | undefined>();
+  const [arrive, setArrive] = useState<Point | undefined>();
   const [departureTime, setDepartTime] = useState(
     Temporal.now.plainDateTimeISO()
   );

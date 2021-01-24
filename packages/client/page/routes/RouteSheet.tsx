@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import InfoWorker from '../../worker-info/info?worker';
-import { RouteDetails } from '../../worker-info/route-details';
+import type { RouteDetails } from '../../worker-info/route-details';
 import { dbInitialized } from '../data/db-ready';
 import { usePromise } from '../hooks/usePromise';
 import { useWorker } from '../hooks/useWorker';
