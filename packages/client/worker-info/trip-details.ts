@@ -107,7 +107,7 @@ export function zonedTime(
 export async function findBestTrips(
   repo: Pick<Repository, 'loadTripsForRoute'>,
   routeId: Route['route_id'],
-  allCalendars: Map<Calendar['service_id'], Calendar>,
+  allCalendars: ReadonlyMap<Calendar['service_id'], Calendar>,
   now: Temporal.PlainDateTime
 ) {
   const nowTime = new PlainDaysTime(0, now.toPlainTime());

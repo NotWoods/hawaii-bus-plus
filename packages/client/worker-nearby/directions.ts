@@ -39,16 +39,9 @@ async function pointToSources(
 function traversePath(
   paths: ReadonlyMap<Stop['stop_id'], readonly Path[]>,
   stopId: Stop['stop_id'],
-  pathSoFar: Path[] = []
+  pathSoFar: Path[]
 ): Path[] | undefined {
-  let firstNonEmpty: Path | undefined;
-  paths.get(stopId)?.some((path) => {
-    // .some and .forEach skip empty values
-    // Use .some and return true as a rough
-    // equivalent to breaking in a for loop.
-    firstNonEmpty = path;
-    return true;
-  });
+  const firstNonEmpty = paths.get(stopId)?.find(Boolean);
 
   if (firstNonEmpty) {
     pathSoFar.unshift(firstNonEmpty);
@@ -61,6 +54,7 @@ function traversePath(
     }
   } else {
     // This path goes nowhere!
+    console.log(pathSoFar, paths.get(stopId));
     return undefined;
   }
 }
@@ -68,6 +62,16 @@ function traversePath(
 export interface Journey {
   path: Path[];
   lastStop: Stop['stop_id'];
+}
+
+export function traverseJourney(
+  paths: ReadonlyMap<Stop['stop_id'], readonly Path[]>,
+  arrival: Pick<Source, 'stop_id'>
+) {
+  return {
+    path: traversePath(paths, arrival.stop_id, []),
+    lastStop: arrival.stop_id,
+  };
 }
 
 export async function directions(
@@ -84,13 +88,10 @@ export async function directions(
 
   const departDate = departureTime.toPlainDate();
   const paths = await raptorDirections(repo, departFrom, departDate);
-  console.log(paths);
+
   const arriveAt = await arriveAtReady;
   const journeys = arriveAt
-    .map((arrival) => ({
-      path: traversePath(paths, arrival.stop_id),
-      lastStop: arrival.stop_id,
-    }))
+    .map((arrival) => traverseJourney(paths, arrival))
     .filter(nestedNotNull('path'));
 
   console.log(journeys);

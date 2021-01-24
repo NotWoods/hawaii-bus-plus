@@ -1,11 +1,15 @@
 import { Repository } from '@hawaii-bus-plus/data';
 import { Stop, Trip } from '@hawaii-bus-plus/types';
-import { InfinityPlainDaysTime, PlainDaysTime } from '@hawaii-bus-plus/utils';
+import {
+  InfinityPlainDaysTime,
+  PlainDaysTime,
+  skipUntil,
+} from '@hawaii-bus-plus/utils';
 import { DefaultMap } from 'mnemonist';
 import { Temporal } from 'proposal-temporal';
 import { footPathsLoader } from './footpaths';
 import { generateDirectionsData } from './generate-data';
-import { buildQueue, stopsBeginningWith } from './route-queue';
+import { buildQueue } from './route-queue';
 import { arrivalTime, getEarliestValidTrip } from './trip-times';
 
 export interface Source {
@@ -76,11 +80,18 @@ export async function raptorDirections(
       const route = data.routes[routeId];
       // earliestTripId: et(r, p_i)
       let earliestTrip: Trip | undefined = undefined;
-      for (const stopId of stopsBeginningWith(route, hopOnStop)) {
+      const stopsBeginningWith = skipUntil(
+        route.stops,
+        (stopId) => stopId === hopOnStop.stop_id
+      );
+      for (const stopId of stopsBeginningWith) {
         // stopId: p_i
 
         const existingLabels = multiLabel.get(stopId);
         const arrival = earliestTrip && arrivalTime(earliestTrip, stopId);
+        if (stopId === 'kv') {
+          console.log(earliestTrip, arrival?.toString());
+        }
 
         const earliestArrival =
           earliestKnownArrival.get(stopId) || InfinityPlainDaysTime;
@@ -109,6 +120,7 @@ export async function raptorDirections(
     }
 
     // Stage 3: consider foot-paths.
+    // TODO not working
     const footPaths = await getFootPaths(markedStops);
     for (const fromStopId of markedStops) {
       const transfers = footPaths.get(fromStopId) || [];

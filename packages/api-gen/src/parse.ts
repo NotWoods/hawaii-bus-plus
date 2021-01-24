@@ -38,7 +38,9 @@ import { cast } from './cast.js';
 const { MultiMap } = mnemonist;
 const STARTS_WITH_TIME = /^\d\d?:\d\d/;
 
-export async function zipFilesToObject(zipFiles: Map<string, JSZipObject>) {
+export async function zipFilesToObject(
+  zipFiles: ReadonlyMap<string, JSZipObject>
+) {
   const arrays = await from(zipFiles.values())
     .pipe(
       map((file) =>

@@ -17,7 +17,7 @@ export function calendarRunsOn(calendar: Calendar, date: Temporal.PlainDate) {
 }
 
 export function serviceRunningOn(
-  allCalendars: Map<Calendar['service_id'], Calendar>,
+  allCalendars: ReadonlyMap<Calendar['service_id'], Calendar>,
   serviceId: Calendar['service_id'],
   date: Temporal.PlainDate
 ) {

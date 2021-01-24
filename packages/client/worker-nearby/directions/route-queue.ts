@@ -30,16 +30,3 @@ export function buildQueue(
   }
   return queue;
 }
-
-export function* stopsBeginningWith(
-  route: DirectionRoute,
-  hopOnStop: QueueValue
-) {
-  let found = false;
-  for (const stopId of route.stops) {
-    found ||= stopId === hopOnStop.stop_id;
-    if (found) {
-      yield stopId;
-    }
-  }
-}
