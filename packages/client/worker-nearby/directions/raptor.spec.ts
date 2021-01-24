@@ -11,18 +11,14 @@ const WAIMEA_PARK_ACROSS = 'wp-across' as Stop['stop_id'];
 const HWY_INTERSECTON = 'hw' as Stop['stop_id'];
 const PARKER_RANCH = 'pr' as Stop['stop_id'];
 
+const NOON = PlainDaysTime.from('12:00:00' as TimeString);
 const MONDAY = Temporal.PlainDate.from({ year: 2021, month: 1, day: 25 });
 
 test.concurrent.only('raptor', async () => {
   const repo = new NodeRepository();
   const directions = await raptorDirections(
     repo,
-    [
-      {
-        stop_id: LAKELAND,
-        departure_time: PlainDaysTime.from('12:00:00' as TimeString),
-      },
-    ],
+    [{ stop_id: LAKELAND, departure_time: NOON }],
     MONDAY
   );
 
@@ -37,7 +33,7 @@ test.concurrent.only('raptor', async () => {
     {
       time: expect.any(PlainDaysTime),
       transfer_from: LAKELAND,
-      trip: expect.stringContaining('waimea-waimea-pm'),
+      trip: 'waimea-waimea-pm-0-0',
     },
   ]);
   expect(directions.get(WAIMEA_PARK)![1].time.toString()).toBe('12:47:00');
@@ -62,7 +58,7 @@ test.concurrent.only('raptor', async () => {
     {
       time: expect.any(PlainDaysTime),
       transfer_from: LAKELAND,
-      trip: expect.stringContaining('waimea-waimea-pm'),
+      trip: 'waimea-waimea-pm-0-0',
     },
   ]);
   expect(directions.get(PARKER_RANCH)![1].time.toString()).toBe('12:45:00');
@@ -72,7 +68,7 @@ test.concurrent.only('raptor', async () => {
     {
       time: expect.any(PlainDaysTime),
       transfer_from: PARKER_RANCH,
-      trip: expect.stringContaining('kohala-kona-0645am-nkohala-waim-kona'),
+      trip: 'kohala-kona-0645am-nkohala-waim-kona-1',
     },
   ]);
   expect(directions.get(HWY_INTERSECTON)![2].time.toString()).toBe('15:45:00');
@@ -82,12 +78,7 @@ test.concurrent.only('raptor weekend', async () => {
   const repo = new NodeRepository();
   const directions = await raptorDirections(
     repo,
-    [
-      {
-        stop_id: LAKELAND,
-        departure_time: PlainDaysTime.from('12:00:00' as TimeString),
-      },
-    ],
+    [{ stop_id: LAKELAND, departure_time: NOON }],
     MONDAY.subtract({ days: 1 })
   );
 
