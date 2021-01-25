@@ -1,117 +1,95 @@
-import React, { useContext } from 'react';
-import { center, googleMapsApiKey } from '@hawaii-bus-plus/react-google-maps';
-import { Route, Stop } from '@hawaii-bus-plus/types';
+import { center } from '@hawaii-bus-plus/react-google-maps';
+import { Stop } from '@hawaii-bus-plus/types';
+import React, { useContext, useState } from 'react';
 import InfoWorker from '../../worker-info/info?worker';
-import { useApi } from '../data/Api';
+import type { StopDetails } from '../../worker-info/stop-details';
 import { usePromise } from '../hooks/usePromise';
 import { useWorker } from '../hooks/useWorker';
-import { closeStopAction, openPlace, setStopAction } from '../router/action';
+import { closeStopAction } from '../router/action';
 import { PlaceResult } from '../router/reducer';
 import { RouterContext } from '../router/Router';
-import { RouteSearchItem } from '../sidebar/SearchItems';
-import { sessionToken } from '../sidebar/SidebarSearch';
-import { PlaceCard } from './PlaceCard';
+import { PlaceInfo, StopInfo } from './StopInfo';
+import { StreetViewCard } from './StreetViewCard';
 
-export function StopCard() {
-  const state = useContext(RouterContext);
-  const { focus, stop_id, stop, place_id, place, dispatch } = state;
-
-  const postToInfoWorker = useWorker(InfoWorker)!;
+export function StopOrPlaceCard() {
+  const { focus, stop_id, place_id, marker, dispatch } = useContext(
+    RouterContext
+  );
 
   function onClose() {
     dispatch(closeStopAction());
   }
 
-  usePromise(
-    async function getDetails() {
-      switch (focus) {
-        case 'stop':
-        case 'place':
-          if (!state[focus]) {
-            const result = await postToInfoWorker({
-              type: state[focus],
-              id: focus === 'stop' ? stop_id : place_id,
-              key: googleMapsApiKey,
-              sessionToken,
-            });
-            console.log(result);
-
-            dispatch(
-              focus === 'stop'
-                ? setStopAction(result as Stop)
-                : openPlace(result as google.maps.places.PlaceResult)
-            );
-          }
-          return;
-      }
-    },
-    [focus, stop_id, place_id]
-  );
-
   switch (focus) {
     case 'stop':
-      return (
-        <PlaceCard
-          position={stop?.position ?? center}
-          visible={Boolean(stop)}
-          onClose={onClose}
-        >
-          <StopInfo stop={stop} />
-        </PlaceCard>
-      );
+      return <StopCard stopId={stop_id as Stop['stop_id']} onClose={onClose} />;
     case 'place':
-      return (
-        <PlaceCard
-          position={stop?.position ?? center}
-          visible={Boolean(place)}
-          onClose={onClose}
-        >
-          <PlaceInfo place={place} />
-        </PlaceCard>
-      );
+      return <PlaceCard placeId={place_id!} onClose={onClose} />;
     case 'user':
     case 'marker':
-      return <PlaceCard position={state[focus]!} visible onClose={onClose} />;
+      return <StreetViewCard position={marker!} visible onClose={onClose} />;
     case undefined:
       return null;
   }
 }
 
-export function StopInfo({ stop }: { stop?: Stop }) {
-  const api = useApi();
-  const nearbyRoutes = stop?.routes || [];
-  const loadedRoutes = api
-    ? new Map(nearbyRoutes.map((routeId) => [routeId, api.routes[routeId]]))
-    : new Map<Route['route_id'], Route>();
-
-  return (
-    <>
-      <div className="content">
-        <h2 className="card-title m-0">{stop?.stop_name || 'Loading'}</h2>
-        <p className="text-muted m-0">{stop?.stop_desc}</p>
-      </div>
-      <div className="content">
-        <h3 className="content-title">Nearby routes</h3>
-        {nearbyRoutes.map((routeId) => (
-          <RouteSearchItem
-            key={routeId}
-            className="px-0"
-            routeId={routeId}
-            route={loadedRoutes.get(routeId)}
-          />
-        ))}
-      </div>
-    </>
-  );
+interface BaseCardProps {
+  position?: google.maps.LatLngLiteral;
+  onClose(): void;
 }
 
-export function PlaceInfo({ place }: { place?: PlaceResult }) {
-  return (
-    <>
-      <div className="content">
-        <h2 className="card-title m-0">{place?.name || 'Loading'}</h2>
-        <p className="text-muted m-0">{place?.formatted_address}</p>
-      </div>
-    </>
-  );
+function StopCard(props: { stopId: Stop['stop_id'] } & BaseCardProps) {
+  const [details, setDetails] = useState<StopDetails | undefined>();
+  const postToInfoWorker = useWorker(InfoWorker)!;
+
+  usePromise(async () => {
+    const result = await postToInfoWorker({
+      type: 'stop',
+      id: props.stopId,
+    });
+    setDetails(result as StopDetails | undefined);
+  }, [props.stopId]);
+
+  const position = props.position || details?.position;
+  if (position) {
+    return (
+      <StreetViewCard
+        position={position || center}
+        visible={Boolean(position)}
+        onClose={props.onClose}
+      >
+        <StopInfo stop={details} />
+      </StreetViewCard>
+    );
+  } else {
+    return null;
+  }
+}
+
+function PlaceCard(props: { placeId: string } & BaseCardProps) {
+  const [details, setDetails] = useState<PlaceResult | undefined>();
+  const postToInfoWorker = useWorker(InfoWorker)!;
+
+  usePromise(async () => {
+    const result = await postToInfoWorker({
+      type: 'place',
+      id: props.placeId,
+    });
+    setDetails(result as PlaceResult | undefined);
+  }, [props.placeId]);
+
+  const position = props.position || details?.location;
+  if (position) {
+    return (
+      <StreetViewCard
+        position={position || center}
+        visible={Boolean(position)}
+        onClose={props.onClose}
+      >
+        <PlaceInfo place={details} />
+      </StreetViewCard>
+    );
+  } else {
+    return null;
+  }
 }

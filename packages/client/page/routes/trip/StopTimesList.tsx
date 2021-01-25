@@ -1,11 +1,11 @@
+import { StopTimeData } from '@hawaii-bus-plus/presentation';
 import { Route, Stop } from '@hawaii-bus-plus/types';
-import React, { ReactNode } from 'react';
-import type { TemporalStopTime } from '../../../worker-info/trip-details';
-import { useApi } from '../../data/Api';
+import { lastIndex, skipUntil } from '@hawaii-bus-plus/utils';
+import React from 'react';
 import { classNames } from '../../hooks/classnames';
 import { setStopAction } from '../../router/action';
 import { Link } from '../../router/Router';
-import { BLANK, RouteBadges } from '../../stop/RouteBadge';
+import { RouteBadges } from '../../stop/RouteBadge';
 import './StopTimesList.css';
 import { Time } from './Time';
 
@@ -23,7 +23,7 @@ function Lines() {
 
 interface StopTimeItemProps {
   routeId: Route['route_id'];
-  stopTime: TemporalStopTime;
+  stopTime: StopTimeData;
   first?: boolean;
   last?: boolean;
   timeZone?: string;
@@ -36,14 +36,11 @@ function StopTimeItem({
   last,
   timeZone,
 }: StopTimeItemProps) {
-  const api = useApi();
-  const stop = api?.stops?.[stopTime.stop_id];
-
   return (
     <li className="d-block m-0">
       <Link
-        action={stop ? setStopAction(stop) : undefined}
-        href={`?stop=${stopTime.stop_id}`}
+        action={setStopAction(stopTime.stop)}
+        href={`?stop=${stopTime.stop.stop_id}`}
         className={classNames(
           'sidebar-link sidebar-link-with-icon p-0 stoptime',
           first && 'stoptime--first',
@@ -52,14 +49,16 @@ function StopTimeItem({
       >
         <Lines />
         <p className="stoptime-name m-0 d-block">
-          {stop?.stop_name || BLANK}
+          {stopTime.stop.stop_name}
         </p>{' '}
-        <p className="stoptime-desc m-0 font-size-12">{stop?.stop_desc}</p>
+        <p className="stoptime-desc m-0 font-size-12">
+          {stopTime.stop.stop_desc}
+        </p>
         <p className="stoptime-routes mb-0 font-size-12">
-          <RouteBadges omit={routeId} clear routeIds={stop?.routes || []} />
+          <RouteBadges omit={routeId} clear routeIds={stopTime.stop.routes} />
         </p>
         <Time
-          time={stopTime.arrival_time}
+          time={stopTime.arrivalTime}
           approximate={!stopTime.timepoint}
           timeZone={timeZone}
           className="stoptime-time text-nowrap text-right"
@@ -71,32 +70,37 @@ function StopTimeItem({
 
 interface StopTimeListProps {
   routeId: Route['route_id'];
-  stopTimes: readonly TemporalStopTime[];
+  stopTimes: readonly StopTimeData[];
   skipToStop?: Stop['stop_id'];
   timeZone?: string;
 }
 
 export function StopTimesList(props: StopTimeListProps) {
-  const lastIndex = props.stopTimes.length - 1;
-  const children: ReactNode[] = [];
-  let skipDone = !props.skipToStop;
+  // Skip until you reach the given stop
+  const entries = skipUntil(
+    props.stopTimes.entries(),
+    ([, stopTime]) => stopTime.stop.stop_id === props.skipToStop
+  );
+  const keySoFar = new Map<Stop['stop_id'], number>();
 
-  for (const [i, stopTime] of props.stopTimes.entries()) {
-    // Skip until you reach the given stop
-    skipDone ||= stopTime.stop_id === props.skipToStop;
-    if (skipDone) {
-      children.push(
-        <StopTimeItem
-          key={stopTime.stop_id + stopTime.stop_sequence}
-          routeId={props.routeId}
-          stopTime={stopTime}
-          first={i === 0}
-          last={i === lastIndex}
-          timeZone={props.timeZone}
-        />
-      );
-    }
-  }
+  return (
+    <ul>
+      {Array.from(entries, ([i, stopTime]) => {
+        const stopId = stopTime.stop.stop_id;
+        const keySuffix = keySoFar.get(stopId) || 0;
+        keySoFar.set(stopId, keySuffix + 1);
 
-  return <ul>{children}</ul>;
+        return (
+          <StopTimeItem
+            key={`${stopId}${keySuffix}`}
+            routeId={props.routeId}
+            stopTime={stopTime}
+            first={i === 0}
+            last={i === lastIndex(props.stopTimes)}
+            timeZone={props.timeZone}
+          />
+        );
+      })}
+    </ul>
+  );
 }

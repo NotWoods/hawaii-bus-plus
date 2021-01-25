@@ -1,38 +1,32 @@
+import { Agency, Route } from '@hawaii-bus-plus/types';
 import React, { Fragment } from 'react';
-import { Route } from '@hawaii-bus-plus/types';
-import { useApi } from '../data/Api';
 import { Icon } from '../icons/Icon';
-import './RouteSheet.css';
-import webIcon from '../icons/web.svg';
 import fareIcon from '../icons/monetization_on.svg';
+import webIcon from '../icons/web.svg';
+import './RouteSheet.css';
 
 interface Props {
   route?: Route;
+  agency?: Agency;
   descParts?: readonly {
     type: 'text' | 'link';
     value: string;
   }[];
 }
 
-export function RouteDetailsCard({ route, descParts }: Props) {
-  const api = useApi();
-
-  if (!route) {
+export function RouteDetailsCard({ route, agency, descParts }: Props) {
+  if (!route || !agency) {
     return <div className="card" />;
   }
 
-  const agency = api?.agency?.[route.agency_id];
-
   return (
     <div className="card">
-      <p>
-        {agency ? `Bus route operated by ${agency.agency_name}` : 'Bus route'}
-      </p>
+      <p>{`Bus route operated by ${agency.agency_name}`}</p>
       <div className="btn-group flex-wrap" role="group">
-        <a className="btn" href={agency?.agency_url}>
+        <a className="btn" href={agency.agency_url}>
           <Icon src={webIcon} alt="" /> Route webpage
         </a>
-        <a className="btn" href={agency?.agency_fare_url}>
+        <a className="btn" href={agency.agency_fare_url}>
           <Icon src={fareIcon} alt="" /> Fare info
         </a>
       </div>

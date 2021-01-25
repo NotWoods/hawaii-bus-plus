@@ -20,19 +20,20 @@ export function TripDetails(props: Props) {
   const directionIds = validIndexes(props.details.directions);
   const [selectedIdIndex, setSelectedIdIndex] = useState(directionIds[0]);
   const selectedId = directionIds[selectedIdIndex % directionIds.length];
-  const dirDetails = props.details.directions[selectedId];
-  const trip = dirDetails.closestTrip.trip;
+  const { closestTrip } = props.details.directions[selectedId];
 
   return (
     <>
       <div>
-        <h3 className="content-title m-0">{trip.trip_short_name}</h3>
+        <h3 className="content-title m-0">
+          {closestTrip.trip.trip_short_name}
+        </h3>
         <p className="mt-0">
-          <span>{trip.stop_times.length} stops</span>
+          <span>{closestTrip.stopTimes.length} stops</span>
           {' | '}
           <TripOffset
-            stopName={dirDetails.closestTrip.stopName}
-            offset={dirDetails.closestTrip.offset}
+            stopName={closestTrip.stopName}
+            offset={closestTrip.offset}
           />
         </p>
         {directionIds.length > 1 ? (
@@ -47,8 +48,8 @@ export function TripDetails(props: Props) {
       <hr className="mt-10" />
       <StopTimesList
         routeId={props.details.route.route_id}
-        stopTimes={dirDetails.closestTrip.stopTimes}
-        timeZone={props.details.timeZone}
+        stopTimes={closestTrip.stopTimes}
+        timeZone={props.details.agency.agency_timezone}
       />
     </>
   );

@@ -1,17 +1,17 @@
 import { Repository } from '@hawaii-bus-plus/data';
-import { durationToData } from '@hawaii-bus-plus/presentation';
-import { Route, Stop } from '@hawaii-bus-plus/types';
+import { durationToData, StopTimeData } from '@hawaii-bus-plus/presentation';
+import { Agency, Route, Stop } from '@hawaii-bus-plus/types';
 import { Temporal } from 'proposal-temporal';
 import { DirectionDetails, findBestTrips, zonedTime } from './trip-details';
 
 export interface RouteDetails {
   readonly route: Route;
+  readonly agency: Agency;
   readonly descParts: {
     type: 'text' | 'link';
     value: string;
   }[];
-  readonly stops: Set<Stop['stop_id']>;
-  readonly timeZone: string;
+  readonly stops: ReadonlySet<Stop['stop_id']>;
 
   readonly directions: DirectionDetails[];
 }
@@ -82,18 +82,20 @@ export async function getRouteDetails(
   );
 
   const stops = await repo.loadStops(
-    directionDetails.flatMap((dirDetails) => [
-      dirDetails.firstStop!,
-      dirDetails.lastStop!,
-      dirDetails.closestTrip.stop!,
-    ])
+    new Set(
+      directionDetails.flatMap((dirDetails) =>
+        [dirDetails.firstStop, dirDetails.lastStop].concat(
+          dirDetails.closestTrip.trip.stop_times.map((st) => st.stop_id)
+        )
+      )
+    )
   );
 
   return {
     route,
+    agency: agency!,
     descParts: extractLinks(route.route_desc),
     stops: routeStops,
-    timeZone,
     directions: directionDetails.map((dirDetails) => {
       if (!dirDetails.closestTrip.trip) {
         const { closestTrip, earliestTrip, earliest } = dirDetails;
@@ -105,25 +107,30 @@ export async function getRouteDetails(
         closestTrip.stop = earliestTrip.stop;
       }
 
+      const stopTimes: StopTimeData[] = dirDetails.closestTrip.trip.stop_times.map(
+        (st) => ({
+          stop: stops.get(st.stop_id)!,
+          arrivalTime: zonedTime(st.arrival_time, nowDate, timeZone),
+          departureTime: zonedTime(st.departure_time, nowDate, timeZone),
+          timepoint: st.timepoint,
+        })
+      );
+
       return {
-        firstStop: dirDetails.firstStop!,
-        firstStopName: stops.get(dirDetails.firstStop!)!.stop_name,
-        lastStop: dirDetails.lastStop!,
-        lastStopName: stops.get(dirDetails.lastStop!)!.stop_name,
+        firstStop: dirDetails.firstStop,
+        firstStopName: stops.get(dirDetails.firstStop)!.stop_name,
+        lastStop: dirDetails.lastStop,
+        lastStopName: stops.get(dirDetails.lastStop)!.stop_name,
         earliest: zonedTime(dirDetails.earliest, nowDate, timeZone),
         latest: zonedTime(dirDetails.latest, nowDate, timeZone),
         closestTrip: {
-          trip: dirDetails.closestTrip.trip!,
-          offset: durationToData(dirDetails.closestTrip.offset!),
-          stop: dirDetails.closestTrip.stop!,
-          stopName: stops.get(dirDetails.closestTrip.stop!)!.stop_name,
-          serviceDays: allCalendars.get(dirDetails.closestTrip.trip!.service_id)
+          trip: dirDetails.closestTrip.trip,
+          offset: durationToData(dirDetails.closestTrip.offset),
+          stop: dirDetails.closestTrip.stop,
+          stopName: stops.get(dirDetails.closestTrip.stop)!.stop_name,
+          serviceDays: allCalendars.get(dirDetails.closestTrip.trip.service_id)
             ?.service_name,
-          stopTimes: dirDetails.closestTrip.trip!.stop_times.map((st) => ({
-            ...st,
-            arrival_time: zonedTime(st.arrival_time, nowDate, timeZone),
-            departure_time: zonedTime(st.departure_time, nowDate, timeZone),
-          })),
+          stopTimes,
         },
       };
     }),

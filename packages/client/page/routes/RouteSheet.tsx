@@ -18,16 +18,17 @@ export function RouteSheet() {
   const postToInfoWorker = useWorker(InfoWorker);
 
   usePromise(async () => {
-    if (!route_id) return;
+    if (route_id) {
+      await dbInitialized;
+      const details = await postToInfoWorker({
+        type: 'route',
+        id: route_id,
+      });
 
-    await dbInitialized;
-    const details = await postToInfoWorker({
-      type: 'route',
-      id: route_id,
-    });
-    console.log(details);
-
-    setDetails(details as RouteDetails | undefined);
+      setDetails(details as RouteDetails | undefined);
+    } else {
+      setDetails(undefined);
+    }
   }, [route_id]);
 
   const route = details?.route || routeData;
@@ -55,6 +56,7 @@ export function RouteSheet() {
           className="btn btn-square ml-auto text-reset"
           type="button"
           onClick={() => dispatch(closeRouteAction())}
+          aria-label="Close"
         >
           &times;
         </button>
@@ -68,6 +70,7 @@ export function RouteSheet() {
         <div className="col-lg-4">
           <RouteDetailsCard
             route={details?.route}
+            agency={details?.agency}
             descParts={details?.descParts}
           />
         </div>

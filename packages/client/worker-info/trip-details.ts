@@ -3,14 +3,15 @@ import {
   DurationData,
   PlainTimeData,
   plainTimeToData,
+  StopTimeData,
 } from '@hawaii-bus-plus/presentation';
 import type {
   Calendar,
   Route,
   Stop,
-  StopTime,
   TimeString,
   Trip,
+  TripWithoutTimes,
 } from '@hawaii-bus-plus/types';
 import {
   InfinityPlainDaysTime,
@@ -18,12 +19,6 @@ import {
   PlainDaysTime,
 } from '@hawaii-bus-plus/utils';
 import { Temporal } from 'proposal-temporal';
-
-export interface TemporalStopTime
-  extends Omit<StopTime, 'arrival_time' | 'departure_time'> {
-  arrival_time: PlainTimeData;
-  departure_time: PlainTimeData;
-}
 
 export interface DirectionDetails {
   readonly firstStop: Stop['stop_id'];
@@ -33,11 +28,11 @@ export interface DirectionDetails {
   readonly earliest: PlainTimeData;
   readonly latest: PlainTimeData;
   readonly closestTrip: {
-    readonly trip: Trip;
+    readonly trip: TripWithoutTimes;
     readonly offset: DurationData;
     readonly stop: Stop['stop_id'];
     readonly stopName: string;
-    readonly stopTimes: readonly TemporalStopTime[];
+    readonly stopTimes: readonly StopTimeData[];
     readonly serviceDays?: string;
   };
 }
@@ -60,6 +55,11 @@ interface DirectionDetailsMutable {
     offset?: Temporal.Duration;
     stop?: Stop['stop_id'];
   };
+}
+
+interface DirectionDetailsResult extends Required<DirectionDetailsMutable> {
+  earliestTrip: Required<DirectionDetailsMutable['earliestTrip']>;
+  closestTrip: Required<DirectionDetailsMutable['closestTrip']>;
 }
 
 function emptyDirectionDetails(): DirectionDetailsMutable {
@@ -158,5 +158,8 @@ export async function findBestTrips(
     cursor = await cursor.continue();
   }
 
-  return { directionDetails, routeStops };
+  return {
+    routeStops,
+    directionDetails: directionDetails as DirectionDetailsResult[],
+  };
 }

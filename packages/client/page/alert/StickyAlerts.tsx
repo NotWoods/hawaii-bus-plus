@@ -2,7 +2,7 @@ import React, { useContext, createContext, ReactNode, useState } from 'react';
 import { Alert, AlertProps } from './Alert';
 import { makeId } from './make';
 
-interface AlertData extends Omit<AlertProps, 'state' | 'onClick'> {}
+interface AlertData extends Omit<AlertProps, 'state' | 'onClose'> {}
 
 interface Context {
   alerts: ReadonlyMap<AlertData, string>;
@@ -89,4 +89,9 @@ export function StickyAlertsList() {
       ))}
     </div>
   );
+}
+
+export function useAlerts() {
+  const { toastAlert } = useContext(StickyAlertsContext);
+  return toastAlert;
 }

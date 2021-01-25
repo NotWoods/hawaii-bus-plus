@@ -18,6 +18,7 @@ export function App() {
   const [darkMode, setDarkMode] = useState(
     matchMedia('(prefers-color-scheme: dark)').matches
   );
+  const [position, setPosition] = useState<GeolocationPosition | undefined>();
 
   function toggleSidebar() {
     setShowSidebar(!showSidebar);
@@ -51,10 +52,13 @@ export function App() {
               {directionsOpen ? (
                 <DirectionsSidebar onClose={() => setDirectionsOpen(false)} />
               ) : (
-                <Sidebar onDirectionsClick={() => setDirectionsOpen(true)} />
+                <Sidebar
+                  setPosition={setPosition}
+                  onDirectionsClick={() => setDirectionsOpen(true)}
+                />
               )}
               <div className="content-wrapper">
-                <MainMap darkMode={darkMode} />
+                <MainMap darkMode={darkMode} position={position} />
                 <StopCard />
                 <RouteSheet />
               </div>

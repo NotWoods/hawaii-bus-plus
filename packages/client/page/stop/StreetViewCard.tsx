@@ -3,13 +3,13 @@ import {
   StreetViewPano,
   StreetViewPanoProps,
 } from '@hawaii-bus-plus/react-google-maps';
-import './PlaceCard.css';
+import './StreetViewCard.css';
 
 interface Props extends StreetViewPanoProps {
   children?: ReactNode;
 }
 
-export function PlaceCard(props: Props) {
+export function StreetViewCard(props: Props) {
   return (
     <div className="w-400 position-absolute top-0 right-0">
       <aside className="card p-0 shadow" hidden={!props.visible}>

@@ -73,7 +73,9 @@ export interface CsvTrip {
   trip_headsign: string;
 }
 
-export interface Trip extends Readonly<CsvTrip> {
+export type TripWithoutTimes = Readonly<CsvTrip>;
+
+export interface Trip extends TripWithoutTimes {
   /**
    * Stop times, sorted by `stop_sequence`.
    */

@@ -17,7 +17,7 @@ export function Alert(props: AlertProps) {
     alertType = '',
     fillType = '',
     state = '',
-    hasDismissButton = false,
+    hasDismissButton = true,
   } = props;
   return (
     <div className={classNames(`alert`, alertType, fillType, state)}>

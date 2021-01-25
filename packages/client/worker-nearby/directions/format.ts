@@ -1,6 +1,7 @@
-import { Repository } from '@hawaii-bus-plus/data';
+import { omitStopTimes, Repository } from '@hawaii-bus-plus/data';
 import {
   durationToData,
+  StopTimeData,
   PlainTimeData,
   plainTimeToData,
   Walking,
@@ -9,7 +10,6 @@ import { Route, Stop, Trip } from '@hawaii-bus-plus/types';
 import {
   findIndexLast,
   lastIndex,
-  pick,
   PlainDaysTime,
 } from '@hawaii-bus-plus/utils';
 import { Temporal } from 'proposal-temporal';
@@ -29,20 +29,17 @@ export interface Point {
   position: google.maps.LatLngLiteral;
 }
 
-export interface JourneyStopTime<Time, Keys extends keyof Stop = keyof Stop> {
-  readonly stop: Pick<Stop, Keys>;
-  readonly arrivalTime: Time;
-  readonly departureTime: Time;
+interface JourneyStopTime {
+  readonly stop: Stop;
+  readonly arrivalTime: PlainDaysTime;
+  readonly departureTime: PlainDaysTime;
   readonly timepoint: boolean;
 }
 
 export interface JourneyTripSegment {
   readonly trip: Omit<Trip, 'stop_times'>;
   readonly route: Route;
-  readonly stopTimes: readonly JourneyStopTime<
-    PlainTimeData,
-    'stop_id' | 'stop_name' | 'stop_desc'
-  >[];
+  readonly stopTimes: readonly StopTimeData[];
 }
 
 export interface Journey {
@@ -82,11 +79,6 @@ function isPathTripSegment(segment: PathSegment): segment is PathTripSegment {
   return (segment as PathTripSegment).trip != undefined;
 }
 
-function deleteStopTimes(trip: Trip): Omit<Trip, 'stop_times'> {
-  const { stop_times, ...rest } = trip;
-  return rest;
-}
-
 export async function journeyToDirections(
   repo: Pick<Repository, 'loadStops' | 'loadTrip' | 'loadRoute' | 'loadAgency'>,
   from: Point,
@@ -110,8 +102,8 @@ export async function journeyToDirections(
 
   const trips: (JourneyTripSegment | Walking)[] = [];
   let lastDepartureTime = departureDaysTime;
-  let startEntry: JourneyStopTime<PlainDaysTime> | undefined;
-  let endEntry: JourneyStopTime<PlainDaysTime> | undefined;
+  let startEntry: JourneyStopTime | undefined;
+  let endEntry: JourneyStopTime | undefined;
   for (const [i, current] of pathSegments.entries()) {
     if (isPathTripSegment(current)) {
       // Lookup trip and get stop times
@@ -134,14 +126,12 @@ export async function journeyToDirections(
       );
 
       const stops = await getStops(rawStopTimes.map((st) => st.stop_id));
-      const formattedStopTimes: JourneyStopTime<PlainDaysTime>[] = rawStopTimes.map(
-        (st) => ({
-          stop: stops.get(st.stop_id)!,
-          arrivalTime: PlainDaysTime.from(st.arrival_time),
-          departureTime: PlainDaysTime.from(st.departure_time),
-          timepoint: st.timepoint,
-        })
-      );
+      const formattedStopTimes: JourneyStopTime[] = rawStopTimes.map((st) => ({
+        stop: stops.get(st.stop_id)!,
+        arrivalTime: PlainDaysTime.from(st.arrival_time),
+        departureTime: PlainDaysTime.from(st.departure_time),
+        timepoint: st.timepoint,
+      }));
 
       lastDepartureTime = formattedStopTimes[0].departureTime;
       if (i === 0) {
@@ -154,10 +144,10 @@ export async function journeyToDirections(
       const agency = await repo.loadAgency(route!.agency_id);
 
       trips.push({
-        trip: deleteStopTimes(trip!),
+        trip: omitStopTimes(trip!),
         route: route!,
         stopTimes: formattedStopTimes.map((st) => ({
-          stop: pick(st.stop, ['stop_id', 'stop_name', 'stop_desc']),
+          stop: st.stop,
           arrivalTime: zonedTime(st.arrivalTime, agency!.agency_timezone),
           departureTime: zonedTime(st.departureTime, agency!.agency_timezone),
           timepoint: st.timepoint,

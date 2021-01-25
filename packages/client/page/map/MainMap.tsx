@@ -7,11 +7,12 @@ import {
 } from '@hawaii-bus-plus/react-google-maps';
 import { openPlace, setMarker } from '../router/action';
 import { RouterContext } from '../router/Router';
-import { PlaceMarker } from './PlaceMarker';
+import { PlaceMarker, UserMarker } from './PlaceMarker';
 import { StopMarkers } from './StopMarkers';
 
 interface Props {
   darkMode?: boolean;
+  position?: GeolocationPosition;
 }
 
 type MapMouseEvent = google.maps.MapMouseEvent;
@@ -52,6 +53,7 @@ export function MainMap(props: Props) {
     >
       <StopMarkers />
       <PlaceMarker />
+      {props.position ? <UserMarker position={props.position} /> : null}
     </GoogleMapPortal>
   );
 }
