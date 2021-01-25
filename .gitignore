@@ -10,5 +10,6 @@ dist-ssr
 *.tsbuildinfo
 
 api.json
+shapes/*.json
 
 !missing-types.d.ts

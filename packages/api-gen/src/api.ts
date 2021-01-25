@@ -1,4 +1,4 @@
-import { readFile, writeFile } from 'fs/promises';
+import { readFile, writeFile, mkdir } from 'fs/promises';
 import { join } from 'path';
 import { createApiData } from './parse.js';
 
@@ -16,7 +16,20 @@ export async function generateApi(
   apiFolder: string
 ): Promise<void> {
   const zipData = await readFile(gtfsZipPath, { encoding: null });
-  const api = await createApiData(zipData);
+  const [api, shapes] = await createApiData(zipData);
 
-  await Promise.all([writeJson(join(apiFolder, 'api.json'), api)]);
+  const jobs: Promise<unknown>[] = [
+    writeJson(join(apiFolder, 'api.json'), api),
+  ];
+  const shapeFolder = join(apiFolder, 'shapes');
+  try {
+    await mkdir(shapeFolder);
+  } catch (err) {
+    console.warn(err);
+  }
+  for (const shape of shapes.values()) {
+    jobs.push(writeJson(join(shapeFolder, `${shape.shape_id}.json`), shape));
+  }
+
+  await Promise.all(jobs);
 }

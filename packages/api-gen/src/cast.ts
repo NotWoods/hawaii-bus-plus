@@ -5,6 +5,9 @@ export function cast(value: string, context: CastingContext) {
   switch (context.column) {
     case 'stop_lat':
     case 'stop_lon':
+    case 'shape_pt_lat':
+    case 'shape_pt_lon':
+    case 'shape_dist_traveled':
       return parseFloat(value);
     case 'route_sort_order':
     case 'stop_sequence':
@@ -24,6 +27,7 @@ export function cast(value: string, context: CastingContext) {
     case 'payment_method':
     case 'transfers':
     case 'transfer_type':
+    case 'shape_pt_sequence':
       return toInt(value);
     case 'timepoint':
     case 'monday':

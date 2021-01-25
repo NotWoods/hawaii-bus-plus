@@ -5,6 +5,7 @@ import type {
   CsvCalendar,
   CsvCalendarDates,
   CsvRoute,
+  CsvShape,
   CsvStop,
   CsvStopTime,
   CsvTransfer,
@@ -12,6 +13,7 @@ import type {
   FeedInfo,
   GTFSData,
   Route,
+  Shape,
   Stop,
   StopTime,
   TimeString,
@@ -35,7 +37,7 @@ import mnemonist from 'mnemonist';
 import type { Mutable } from 'type-fest';
 import { cast } from './cast.js';
 
-const { MultiMap } = mnemonist;
+const { MultiMap, DefaultMap } = mnemonist;
 const STARTS_WITH_TIME = /^\d\d?:\d\d/;
 
 export async function zipFilesToObject(
@@ -66,7 +68,7 @@ function fixTimeString(time: string) {
  */
 export async function createApiData(
   gtfsZipData: Buffer | ArrayBuffer | Uint8Array
-): Promise<GTFSData> {
+): Promise<[GTFSData, ReadonlyMap<Shape['shape_id'], Shape>]> {
   const fileList = [
     'agency.txt',
     'calendar.txt',
@@ -78,6 +80,7 @@ export async function createApiData(
     'stops.txt',
     'transfers.txt',
     'trips.txt',
+    'shapes.txt',
   ];
 
   const zip = await JSZip.loadAsync(gtfsZipData);
@@ -102,6 +105,7 @@ export async function createApiData(
     feed_info: FeedInfo[];
     transfers: CsvTransfer[];
     agency: CsvAgency[];
+    shapes: CsvShape[];
   };
   const variable: GTFSData = {
     routes: {},
@@ -230,5 +234,17 @@ export async function createApiData(
     );
   }
 
-  return variable;
+  const shapes = new DefaultMap<Shape['shape_id'], Shape>((shape_id) => ({
+    shape_id,
+    points: [],
+  }));
+  for (const shapePoint of json.shapes) {
+    const shape = shapes.get(shapePoint.shape_id);
+    shape.points.push({
+      point: { lat: shapePoint.shape_pt_lat, lng: shapePoint.shape_pt_lon },
+      shape_dist_travelled: shapePoint.shape_dist_travelled,
+    });
+  }
+
+  return [variable, shapes];
 }
