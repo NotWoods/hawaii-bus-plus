@@ -10,7 +10,7 @@ import { Router } from './router/Router';
 import { RouteSheet } from './routes/RouteSheet';
 import { DirectionsSidebar } from './sidebar/directions/DirectionsSidebar';
 import { Sidebar } from './sidebar/Sidebar';
-import { StopCard } from './stop/StopCard';
+import { StopOrPlaceCard } from './stop/StopCard';
 
 export function App() {
   const [showSidebar, setShowSidebar] = useState(true);
@@ -59,7 +59,7 @@ export function App() {
               )}
               <div className="content-wrapper">
                 <MainMap darkMode={darkMode} position={position} />
-                <StopCard />
+                <StopOrPlaceCard />
                 <RouteSheet />
               </div>
             </div>

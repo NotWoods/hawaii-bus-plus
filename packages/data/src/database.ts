@@ -6,7 +6,7 @@ import {
   TimeString,
   Trip,
 } from '@hawaii-bus-plus/types';
-import { DBSchema, openDB } from 'idb';
+import { DBSchema, openDB, OpenDBCallbacks } from 'idb';
 
 export interface SearchRoute extends Route {
   words: readonly string[];
@@ -66,7 +66,7 @@ export function getWords(...strings: string[]) {
     .map((word) => word.toLowerCase());
 }
 
-export const dbReady = openDB<GTFSSchema>('gtfs', 1, {
+const callbacks: OpenDBCallbacks<GTFSSchema> = {
   upgrade(db) {
     db.createObjectStore('keyval');
     db.createObjectStore('calendar', { keyPath: 'service_id' });
@@ -91,4 +91,8 @@ export const dbReady = openDB<GTFSSchema>('gtfs', 1, {
     tripStore.createIndex('route_id', 'route_id');
     tripStore.createIndex('start', 'start');
   },
-});
+};
+
+export const dbReady = self.indexedDB
+  ? openDB<GTFSSchema>('gtfs', 1, callbacks)
+  : Promise.resolve(null as any);

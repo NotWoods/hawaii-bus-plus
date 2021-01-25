@@ -25,7 +25,7 @@ test.concurrent('getRouteDetails when in service', async () => {
   const details = await getRouteDetails(repo, routeId, now);
   expect(details).toEqual({
     route: expect.objectContaining({ route_id: 'waimea' }),
-    agency: expect.objectContaining({ timeZone: 'Pacific/Honolulu' }),
+    agency: expect.objectContaining({ agency_timezone: 'Pacific/Honolulu' }),
     descParts: expect.arrayContaining([
       expect.objectContaining({ type: 'text' }),
     ]),

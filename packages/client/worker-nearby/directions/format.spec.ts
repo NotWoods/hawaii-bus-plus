@@ -1,6 +1,6 @@
 import { NodeRepository } from '@hawaii-bus-plus/data/node';
 import { Stop, StopTime, TimeString, Trip } from '@hawaii-bus-plus/types';
-import { pick, PlainDaysTime } from '@hawaii-bus-plus/utils';
+import { PlainDaysTime } from '@hawaii-bus-plus/utils';
 import { Temporal } from 'proposal-temporal';
 import { journeyToDirections, JourneyTripSegment } from './format';
 import { CompletePath } from './raptor';
@@ -89,7 +89,7 @@ test('journeyToDirections no walking', async () => {
     {
       arrivalTime: expect.objectContaining({ string: '12:30:00' }),
       departureTime: expect.objectContaining({ string: '12:30:00' }),
-      stop: pick(lakeland, ['stop_id', 'stop_desc', 'stop_name']),
+      stop: lakeland,
       timepoint: true,
     },
     expect.objectContaining({
@@ -107,7 +107,7 @@ test('journeyToDirections no walking', async () => {
     {
       arrivalTime: expect.objectContaining({ string: '12:45:00' }),
       departureTime: expect.objectContaining({ string: '12:45:00' }),
-      stop: pick(parkerRanch, ['stop_id', 'stop_desc', 'stop_name']),
+      stop: parkerRanch,
       timepoint: true,
     },
   ]);
@@ -115,7 +115,7 @@ test('journeyToDirections no walking', async () => {
     {
       arrivalTime: expect.objectContaining({ string: '15:25:00' }),
       departureTime: expect.objectContaining({ string: '15:25:00' }),
-      stop: pick(parkerRanch, ['stop_id', 'stop_desc', 'stop_name']),
+      stop: parkerRanch,
       timepoint: true,
     },
     expect.objectContaining({
@@ -124,7 +124,7 @@ test('journeyToDirections no walking', async () => {
     {
       arrivalTime: expect.objectContaining({ string: '15:45:00' }),
       departureTime: expect.objectContaining({ string: '15:45:00' }),
-      stop: pick(hwyIntersection, ['stop_id', 'stop_desc', 'stop_name']),
+      stop: hwyIntersection,
       timepoint: true,
     },
   ]);
