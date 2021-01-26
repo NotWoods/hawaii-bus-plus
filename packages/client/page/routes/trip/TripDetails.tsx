@@ -1,5 +1,6 @@
 import { formatDuration } from '@hawaii-bus-plus/presentation';
-import React, { useState } from 'react';
+import { useGoogleMap } from '@hawaii-bus-plus/react-google-maps';
+import React, { useEffect, useState } from 'react';
 import type { RouteDetails } from '../../../worker-info/route-details';
 import type { DirectionDetails } from '../../../worker-info/trip-details';
 import { Icon } from '../../icons/Icon';
@@ -22,6 +23,11 @@ export function TripDetails(props: Props) {
   const [selectedIdIndex, setSelectedIdIndex] = useState(directionIds[0]);
   const selectedId = directionIds[selectedIdIndex % directionIds.length];
   const { closestTrip } = props.details.directions[selectedId];
+
+  const map = useGoogleMap();
+  useEffect(() => {
+    map?.fitBounds(props.details.bounds);
+  }, [map, props.details.bounds]);
 
   return (
     <>
