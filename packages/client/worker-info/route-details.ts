@@ -2,6 +2,7 @@ import { Repository } from '@hawaii-bus-plus/data';
 import { durationToData, StopTimeData } from '@hawaii-bus-plus/presentation';
 import { Agency, Route, Stop } from '@hawaii-bus-plus/types';
 import { Temporal } from 'proposal-temporal';
+import { LatLngBounds, LatLngBoundsLiteral } from 'spherical-geometry-js';
 import { DirectionDetails, findBestTrips, zonedTime } from './trip-details';
 
 export interface RouteDetails {
@@ -12,6 +13,7 @@ export interface RouteDetails {
     value: string;
   }[];
   readonly stops: ReadonlySet<Stop['stop_id']>;
+  readonly bounds: LatLngBoundsLiteral;
 
   readonly directions: DirectionDetails[];
 }
@@ -70,7 +72,6 @@ export async function getRouteDetails(
   const timeZone = agency!.agency_timezone;
 
   const nowZoned = now || nowInZone(timeZone);
-  const nowTime = nowZoned.toPlainTime();
   const nowDate = nowZoned.toPlainDate();
 
   const allCalendars = await allCalendarsReady;
@@ -81,21 +82,22 @@ export async function getRouteDetails(
     nowZoned
   );
 
-  const stops = await repo.loadStops(
-    new Set(
-      directionDetails.flatMap((dirDetails) =>
-        [dirDetails.firstStop, dirDetails.lastStop].concat(
-          dirDetails.closestTrip.trip.stop_times.map((st) => st.stop_id)
-        )
-      )
-    )
-  );
+  const stops = await repo.loadStops(routeStops);
+  let bounds: LatLngBounds | undefined;
+  for (const stop of stops.values()) {
+    if (bounds) {
+      bounds.extend(stop.position);
+    } else {
+      bounds = new LatLngBounds(stop.position, stop.position);
+    }
+  }
 
   return {
     route,
     agency: agency!,
     descParts: extractLinks(route.route_desc),
     stops: routeStops,
+    bounds: bounds!.toJSON(),
     directions: directionDetails.map((dirDetails) => {
       const stopTimes: StopTimeData[] = dirDetails.closestTrip.trip.stop_times.map(
         (st) => ({

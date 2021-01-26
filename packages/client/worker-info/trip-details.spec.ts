@@ -59,8 +59,12 @@ test.concurrent('findBestTrips after route has run that day', async () => {
   expect(directionDetails[0]).toBeDefined();
   expect(directionDetails[1]).toBeDefined();
 
-  expect(directionDetails[0].closestTrip).toEqual({});
-  expect(directionDetails[1].closestTrip).toEqual({});
+  expect(directionDetails[0].closestTrip.trip).toEqual(
+    directionDetails[0].earliestTrip.trip
+  );
+  expect(directionDetails[1].closestTrip.trip).toEqual(
+    directionDetails[1].earliestTrip.trip
+  );
   expect(directionDetails[0].earliestTrip.trip).toMatchObject({
     trip_id: expect.stringContaining('waimea-waimea-am'),
     trip_short_name: '6:30AM WAIMEA AM',

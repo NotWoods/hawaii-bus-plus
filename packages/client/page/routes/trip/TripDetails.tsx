@@ -4,6 +4,7 @@ import type { RouteDetails } from '../../../worker-info/route-details';
 import type { DirectionDetails } from '../../../worker-info/trip-details';
 import { Icon } from '../../icons/Icon';
 import swapIcon from '../../icons/swap_horiz.svg';
+import { ShapeLine } from '../../map/ShapeLine';
 import { StopTimesList } from './StopTimesList';
 
 interface Props {
@@ -24,6 +25,10 @@ export function TripDetails(props: Props) {
 
   return (
     <>
+      <ShapeLine
+        shapeId={closestTrip.trip.shape_id}
+        routeColor={props.details.route.route_color}
+      />
       <div>
         <h3 className="content-title m-0">
           {closestTrip.trip.trip_short_name}

@@ -30,7 +30,7 @@ const selectedStop = {
 } as google.maps.Icon;
 
 interface Props {
-  highlighted?: Set<Stop['stop_id']>;
+  highlighted?: ReadonlySet<Stop['stop_id']>;
 }
 
 export function StopMarkers(props: Props) {

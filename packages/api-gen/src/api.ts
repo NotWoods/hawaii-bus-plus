@@ -25,7 +25,11 @@ export async function generateApi(
   try {
     await mkdir(shapeFolder);
   } catch (err) {
-    console.warn(err);
+    if (err.code === 'EEXIST') {
+      // Folder already exists
+    } else {
+      throw err;
+    }
   }
   for (const shape of shapes.values()) {
     jobs.push(writeJson(join(shapeFolder, `${shape.shape_id}.json`), shape));

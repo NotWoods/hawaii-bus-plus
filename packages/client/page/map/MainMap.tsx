@@ -1,14 +1,13 @@
-import React, { useContext } from 'react';
 import {
   center,
   darkStyles,
   GoogleMapPortal,
   mapTypeControlOptions,
 } from '@hawaii-bus-plus/react-google-maps';
+import React, { useContext } from 'react';
 import { openPlace, setMarker } from '../router/action';
 import { RouterContext } from '../router/Router';
 import { PlaceMarker, UserMarker } from './PlaceMarker';
-import { StopMarkers } from './StopMarkers';
 
 interface Props {
   darkMode?: boolean;
@@ -51,7 +50,6 @@ export function MainMap(props: Props) {
       }}
       onClick={handleClick}
     >
-      <StopMarkers />
       <PlaceMarker />
       {props.position ? <UserMarker position={props.position} /> : null}
     </GoogleMapPortal>

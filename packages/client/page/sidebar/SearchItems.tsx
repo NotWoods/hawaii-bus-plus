@@ -7,7 +7,6 @@ import { Icon } from '../icons/Icon';
 import placeIcon from '../icons/place.svg';
 import { setRouteAction, setStopAction } from '../router/action';
 import { colorProps } from '../routes/props';
-import { RouteName } from '../routes/RouteName';
 import { BLANK, RouteBadges } from '../stop/RouteBadge';
 import { SidebarItem, SidebarItemProps } from './SidebarItem';
 

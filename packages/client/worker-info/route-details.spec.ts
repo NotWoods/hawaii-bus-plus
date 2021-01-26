@@ -30,6 +30,12 @@ test.concurrent('getRouteDetails when in service', async () => {
       expect.objectContaining({ type: 'text' }),
     ]),
     stops: expect.any(Set),
+    bounds: {
+      east: -155.59700946408782,
+      north: 20.042747082274264,
+      south: 20.01667313294159,
+      west: -155.72108057991983,
+    },
     directions: expect.any(Array),
   });
   expect(Array.from(details!.stops)).toEqual([
@@ -56,7 +62,7 @@ test.concurrent('getRouteDetails when in service', async () => {
     firstStop: 'll',
     firstStopName: 'Lakeland',
     lastStop: 'kvo',
-    lastStopName: 'Ohina St',
+    lastStopName: 'Ohina Street',
     earliest: {
       epochMilliseconds: expect.any(Number),
       string: '06:30:00',

@@ -5,9 +5,10 @@ import { usePromise } from '../hooks/usePromise';
 
 interface Props {
   shapeId?: Shape['shape_id'];
+  routeColor: string;
 }
 
-export function Shape(props: Props) {
+export function ShapeLine(props: Props) {
   const [shape, setShape] = useState<Shape | undefined>();
 
   usePromise(
@@ -30,5 +31,10 @@ export function Shape(props: Props) {
 
   if (!shape) return null;
 
-  return <Polyline path={shape.points.map((p) => p.position)} />;
+  return (
+    <Polyline
+      path={shape.points.map((p) => p.position)}
+      options={{ strokeColor: `#${props.routeColor}` }}
+    />
+  );
 }
