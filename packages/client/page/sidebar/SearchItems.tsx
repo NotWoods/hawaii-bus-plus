@@ -1,9 +1,9 @@
+import { Route, Stop } from '@hawaii-bus-plus/types';
 import React from 'react';
 import { RequireAtLeastOne } from 'type-fest';
-import { Route, Stop } from '@hawaii-bus-plus/types';
 import { useApi } from '../data/Api';
 import busStopIcon from '../icons/bus_stop.svg';
-import busIcon from '../icons/directions_bus.svg';
+import { Icon } from '../icons/Icon';
 import placeIcon from '../icons/place.svg';
 import { setRouteAction, setStopAction } from '../router/action';
 import { colorProps } from '../routes/props';
@@ -24,20 +24,22 @@ export function RouteSearchItem({
   route,
   ...props
 }: RouteSearchItemProps) {
-  let routeProps: Omit<SidebarItemProps, 'icon' | 'iconAlt'>;
+  let routeProps: SidebarItemProps;
   if (route) {
     const { backgroundColor, dark } = colorProps(route);
     routeProps = {
       action: setRouteAction(route),
       iconColor: backgroundColor,
       iconDark: dark,
-      title: <RouteName route={route} />,
+      title: route.route_long_name,
       subtitle: 'Hele-On Bus',
+      icon: route.route_short_name,
     };
   } else {
     routeProps = {
       title: BLANK,
       subtitle: BLANK,
+      icon: '',
     };
   }
 
@@ -46,8 +48,7 @@ export function RouteSearchItem({
       {...props}
       {...routeProps}
       href={`/routes/${routeId || route!.route_id}/`}
-      icon={busIcon}
-      iconAlt="Bus route"
+      iconClasses="font-size-14"
     />
   );
 }
@@ -71,8 +72,7 @@ export function StopSearchItem({
       {...props}
       href={`?stop=${stopId || stop!.stop_id}`}
       action={stop ? setStopAction(stop) : undefined}
-      icon={busStopIcon}
-      iconAlt="Bus stop"
+      icon={<Icon src={busStopIcon} alt="Bus stop" />}
       title={stop?.stop_name || BLANK}
       subtitle={<RouteBadges routeIds={stop?.routes || []} />}
     />
@@ -94,8 +94,7 @@ export function PlaceSearchItem({
       {...props}
       href={`?place=${placeId}`}
       action={undefined}
-      icon={placeIcon}
-      iconAlt="Place"
+      icon={<Icon src={placeIcon} alt="Place" />}
       title={text.main_text}
       subtitle={text.secondary_text}
     />

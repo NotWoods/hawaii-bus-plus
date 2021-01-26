@@ -77,10 +77,13 @@ interface StopTimeListProps {
 
 export function StopTimesList(props: StopTimeListProps) {
   // Skip until you reach the given stop
-  const entries = skipUntil(
-    props.stopTimes.entries(),
-    ([, stopTime]) => stopTime.stop.stop_id === props.skipToStop
-  );
+  let entries = props.stopTimes.entries();
+  if (props.skipToStop) {
+    entries = skipUntil(
+      props.stopTimes.entries(),
+      ([, stopTime]) => stopTime.stop.stop_id === props.skipToStop
+    );
+  }
   const keySoFar = new Map<Stop['stop_id'], number>();
 
   return (

@@ -97,16 +97,6 @@ export async function getRouteDetails(
     descParts: extractLinks(route.route_desc),
     stops: routeStops,
     directions: directionDetails.map((dirDetails) => {
-      if (!dirDetails.closestTrip.trip) {
-        const { closestTrip, earliestTrip, earliest } = dirDetails;
-        // Too late for all bus routes
-        closestTrip.offset = nowTime
-          .until(earliest.toPlainTime())
-          .add({ days: 1 });
-        closestTrip.trip = earliestTrip.trip;
-        closestTrip.stop = earliestTrip.stop;
-      }
-
       const stopTimes: StopTimeData[] = dirDetails.closestTrip.trip.stop_times.map(
         (st) => ({
           stop: stops.get(st.stop_id)!,

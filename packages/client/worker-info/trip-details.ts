@@ -160,6 +160,16 @@ export async function findBestTrips(
 
   return {
     routeStops,
-    directionDetails: directionDetails as DirectionDetailsResult[],
+    directionDetails: directionDetails.map((directionDetail) => {
+      if (!directionDetail.closestTrip.trip) {
+        const { closestTrip, earliestTrip, earliest } = directionDetail;
+        // Too late for all bus routes
+        closestTrip.offset = nowTime.until(earliest.add({ days: 1 }));
+        closestTrip.trip = earliestTrip.trip;
+        closestTrip.stop = earliestTrip.stop;
+      }
+
+      return directionDetail as DirectionDetailsResult;
+    }),
   };
 }

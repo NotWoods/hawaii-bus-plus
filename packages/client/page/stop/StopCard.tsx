@@ -3,6 +3,7 @@ import { Stop } from '@hawaii-bus-plus/types';
 import React, { useContext, useState } from 'react';
 import InfoWorker from '../../worker-info/info?worker';
 import type { StopDetails } from '../../worker-info/stop-details';
+import { dbInitialized } from '../data/db-ready';
 import { usePromise } from '../hooks/usePromise';
 import { useWorker } from '../hooks/useWorker';
 import { closeStopAction } from '../router/action';
@@ -43,6 +44,7 @@ function StopCard(props: { stopId: Stop['stop_id'] } & BaseCardProps) {
   const postToInfoWorker = useWorker(InfoWorker)!;
 
   usePromise(async () => {
+    await dbInitialized;
     const result = await postToInfoWorker({
       type: 'stop',
       id: props.stopId,
