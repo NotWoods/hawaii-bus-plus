@@ -241,8 +241,8 @@ export async function createApiData(
   for (const shapePoint of json.shapes) {
     const shape = shapes.get(shapePoint.shape_id);
     shape.points.push({
-      point: { lat: shapePoint.shape_pt_lat, lng: shapePoint.shape_pt_lon },
-      shape_dist_travelled: shapePoint.shape_dist_travelled,
+      position: { lat: shapePoint.shape_pt_lat, lng: shapePoint.shape_pt_lon },
+      shape_dist_traveled: shapePoint.shape_dist_traveled,
     });
   }
 

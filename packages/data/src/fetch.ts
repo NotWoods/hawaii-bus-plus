@@ -1,7 +1,7 @@
 import { GTFSData } from '@hawaii-bus-plus/types';
 
 export function downloadScheduleData(signal?: AbortSignal): Promise<GTFSData> {
-  return fetch('/api.json', { signal })
+  return fetch('/api/v1/api.json', { signal })
     .then((res) => {
       if (res.ok) return res.json();
       throw new Error(res.statusText);

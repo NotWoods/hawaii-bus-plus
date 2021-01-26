@@ -68,6 +68,8 @@ export interface CsvTrip {
   route_id: Route['route_id'];
   service_id: Calendar['service_id'];
   trip_id: Opaque<string, 'trip'>;
+  block_id: Opaque<string, 'block'>;
+  shape_id?: Shape['shape_id'];
   direction_id: 0 | 1;
   trip_short_name: string;
   trip_headsign: string;
@@ -90,11 +92,13 @@ export interface CsvStop {
   stop_lon: number;
 }
 
+export interface LatLngData {
+  readonly lat: number;
+  readonly lng: number;
+}
+
 export interface Stop extends Readonly<Omit<CsvStop, 'stop_lat' | 'stop_lon'>> {
-  readonly position: {
-    readonly lat: number;
-    readonly lng: number;
-  };
+  readonly position: LatLngData;
   readonly routes: Route['route_id'][];
   readonly transfers: readonly Transfer[];
 }
@@ -146,3 +150,21 @@ export interface CsvAgency {
 }
 
 export interface Agency extends Readonly<CsvAgency> {}
+
+export interface CsvShape {
+  shape_id: Opaque<string, 'shape'>;
+  shape_pt_lat: number;
+  shape_pt_lon: number;
+  shape_pt_sequence: number;
+  shape_dist_traveled: number;
+}
+
+export interface Shape {
+  readonly shape_id: CsvShape['shape_id'];
+  readonly points: ShapePoint[];
+}
+
+export interface ShapePoint {
+  readonly position: LatLngData;
+  readonly shape_dist_traveled: number;
+}

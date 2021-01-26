@@ -6,7 +6,7 @@
   "module": "./src/index.js",
   "scripts": {
     "preapi": "pnpm run build",
-    "api": "node src/cli.js ../../../hawaii-gtfs/pipeline/13_zip/google_transit.zip ../client/public",
+    "api": "node src/cli.js ../../../hawaii-gtfs/pipeline/13_zip/google_transit.zip ../client/public/api/v1/",
     "build": "tsc --build src",
     "format": "prettier **/*.ts --write",
     "pretest": "tsc --build test",
