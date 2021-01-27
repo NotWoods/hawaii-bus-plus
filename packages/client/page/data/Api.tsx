@@ -1,10 +1,12 @@
 import { downloadScheduleData } from '@hawaii-bus-plus/data';
-import { GTFSData } from '@hawaii-bus-plus/types';
-import { pick } from '@hawaii-bus-plus/utils';
+import { Route, Stop } from '@hawaii-bus-plus/types';
 import React, { createContext, ReactNode, useContext, useState } from 'react';
 import { usePromise } from '../hooks/usePromise';
 
-interface Api extends Pick<GTFSData, 'routes' | 'stops'> {}
+interface Api {
+  routes: readonly Route[];
+  stops: readonly Stop[];
+}
 
 const ApiContext = createContext<Api | undefined>(undefined);
 
@@ -14,7 +16,10 @@ export function ApiProvider(props: { children: ReactNode }) {
   usePromise(
     (signal) =>
       downloadScheduleData(signal).then((api) =>
-        setApi(pick(api, ['routes', 'stops']))
+        setApi({
+          routes: Object.values(api.routes),
+          stops: Object.values(api.stops),
+        })
       ),
     []
   );

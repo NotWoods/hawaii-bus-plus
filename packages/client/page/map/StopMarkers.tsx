@@ -36,7 +36,7 @@ interface Props {
 export function StopMarkers(props: Props) {
   const { dispatch, stop_id } = useContext(RouterContext);
   const api = useApi();
-  const stops = api ? Object.values(api.stops) : [];
+  const stops = api?.stops || [];
 
   return (
     <>

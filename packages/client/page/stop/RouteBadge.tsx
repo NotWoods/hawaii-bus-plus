@@ -1,6 +1,5 @@
 import React, { ReactNode } from 'react';
 import { Route } from '@hawaii-bus-plus/types';
-import { useApi } from '../data/Api';
 import { classNames } from '../hooks/classnames';
 import { colorProps } from '../routes/props';
 
@@ -35,27 +34,13 @@ export function RouteBadge({ route }: RouteBadgeProps) {
 }
 
 interface RouteBadgesProps {
-  routeIds?: readonly Route['route_id'][];
   routes?: readonly Pick<Route, RouteBadgeKeys>[];
   omit?: Route['route_id'];
   clear?: boolean;
 }
 
-export function RouteBadges({
-  routeIds,
-  routes,
-  omit,
-  clear,
-}: RouteBadgesProps) {
-  const api = useApi();
-
+export function RouteBadges({ routes, omit, clear }: RouteBadgesProps) {
   const badges: ReactNode[] = [];
-  for (const routeId of routeIds || []) {
-    if (routeId !== omit) {
-      badges.push(<RouteBadge key={routeId} route={api?.routes?.[routeId]} />);
-      badges.push(' ');
-    }
-  }
   for (const route of routes || []) {
     if (route.route_id !== omit) {
       badges.push(<RouteBadge key={route.route_id} route={route} />);
