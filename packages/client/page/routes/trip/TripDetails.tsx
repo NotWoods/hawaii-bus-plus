@@ -58,7 +58,6 @@ export function TripDetails(props: Props) {
       </div>
       <hr className="mt-10" />
       <StopTimesList
-        routeId={props.details.route.route_id}
         stopTimes={closestTrip.stopTimes}
         timeZone={props.details.agency.agency_timezone}
       />

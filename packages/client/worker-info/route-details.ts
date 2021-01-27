@@ -126,7 +126,9 @@ export async function getRouteDetails(
           const stop = stops.get(st.stop_id)!;
           return {
             stop,
-            routes: stop.routes.map((routeId) => routes.get(routeId)!),
+            routes: stop.routes
+              .filter((id) => id !== routeId)
+              .map((routeId) => routes.get(routeId)!),
             arrivalTime: zonedTime(st.arrival_time, nowDate, timeZone),
             departureTime: zonedTime(st.departure_time, nowDate, timeZone),
             timepoint: st.timepoint,
