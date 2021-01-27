@@ -1,0 +1,14 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "include": ["**/*"],
+  "references": [
+    { "path": "../../data/src" },
+    { "path": "../../utils/src" },
+    { "path": "../../types" },
+    { "path": "../../react-google-maps/src" }
+  ],
+  "compilerOptions": {
+    "lib": ["esnext", "dom", "dom.iterable"],
+    "types": ["vite/client", "googlemaps"]
+  }
+}

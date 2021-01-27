@@ -1,0 +1,10 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "include": ["**/*"],
+  "references": [{ "path": "../src" }],
+  "compilerOptions": {
+    "lib": ["esnext", "dom", "dom.iterable"],
+    "types": ["vite/client", "googlemaps"],
+    "noEmit": true
+  }
+}
