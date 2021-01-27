@@ -15,9 +15,10 @@
       "purpose": "maskable"
     },
     {
-      "src": "/icon/favicon.icon",
-      "type": "image/x-icon",
-      "sizes": "16x16 32x32 48x48"
+      "src": "/icon/small.png",
+      "type": "image/png",
+      "sizes": "48x48",
+      "purpose": "any"
     }
   ],
   "start_url": ".",
