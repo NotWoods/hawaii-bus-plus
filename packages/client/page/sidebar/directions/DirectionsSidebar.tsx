@@ -6,6 +6,7 @@ import DirectionsWorker from '../../../worker-nearby/nearby?worker';
 import { databaseInitialized } from '../../hooks/useDatabaseInitialized';
 import { usePromise } from '../../hooks/usePromise';
 import { useWorker } from '../../hooks/useWorker';
+import { SidebarContainer } from '../../page-wrapper/Containers';
 import '../Sidebar.css';
 import { DirectionsField } from './DirectionsField';
 import { DirectionsTime } from './DirectionsTime';
@@ -44,7 +45,7 @@ export function DirectionsSidebar(props: Props) {
   );
 
   return (
-    <aside className="sidebar">
+    <SidebarContainer>
       <form className="bg-white bg-dark-dm">
         <div className="sidebar-content directions-box">
           <div className="d-flex justify-content-end">
@@ -73,6 +74,6 @@ export function DirectionsSidebar(props: Props) {
       {results.map((journey) => (
         <p>{JSON.stringify(journey, undefined, 2)}</p>
       ))}
-    </aside>
+    </SidebarContainer>
   );
 }

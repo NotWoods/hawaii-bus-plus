@@ -1,7 +1,7 @@
 import React, { ReactNode, useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { StickyAlertsList, StickyAlertsProvider } from './alert/StickyAlerts';
-import { classNames } from './hooks/classnames';
+import { classNames } from '../hooks/classnames';
 
 interface Props {
   navbar(props: { toggleSidebar(): void; toggleDarkMode(): void }): ReactNode;

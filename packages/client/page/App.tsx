@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { ApiProvider } from './hooks/useApi';
 import { MainMap } from './map/MainMap';
 import { Navbar } from './Navbar';
-import { PageWrapper } from './PageWrapper';
+import { PageWrapper } from './page-wrapper/PageWrapper';
 import { Router } from './router/Router';
 import { RouteDetailProvider } from './routes/context';
 import { RouteSheet } from './routes/RouteSheet';

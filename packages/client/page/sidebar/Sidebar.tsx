@@ -1,5 +1,6 @@
 import React, { ReactNode, useState } from 'react';
 import { useAccessKey } from '../hooks/useAccessKey';
+import { SidebarContainer } from '../page-wrapper/Containers';
 import { DefaultRoutes } from './DefaultRoutes';
 import './Sidebar.css';
 import { SidebarSearch } from './SidebarSearch';
@@ -26,7 +27,7 @@ export function Sidebar(props: Props) {
   }
 
   return (
-    <aside className="sidebar">
+    <SidebarContainer>
       <div className="sidebar-content">
         <input
           type="search"
@@ -41,6 +42,6 @@ export function Sidebar(props: Props) {
       </div>
 
       {children}
-    </aside>
+    </SidebarContainer>
   );
 }

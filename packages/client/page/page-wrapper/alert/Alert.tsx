@@ -1,5 +1,5 @@
 import React from 'react';
-import { classNames } from '../hooks/classnames';
+import { classNames } from '../../hooks/classnames';
 
 export interface AlertProps {
   children?: React.ReactNode;

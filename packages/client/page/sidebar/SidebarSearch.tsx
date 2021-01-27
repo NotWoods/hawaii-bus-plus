@@ -2,7 +2,7 @@ import { center } from '@hawaii-bus-plus/react-google-maps';
 import React, { useState } from 'react';
 import SearchWorker from '../../worker-search/index?worker';
 import type { SearchResults } from '../../worker-search/search';
-import { makeId } from '../alert/make';
+import { makeId } from '../page-wrapper/alert/make';
 import { databaseInitialized } from '../hooks/useDatabaseInitialized';
 import { usePromise } from '../hooks/usePromise';
 import { useWorker } from '../hooks/useWorker';

@@ -1,8 +1,9 @@
 import React from 'react';
-import menuIcon from './icons/menu.svg';
 import darkModeIcon from './icons/dark_mode.svg';
-import './Navbar.css';
 import { Icon } from './icons/Icon';
+import menuIcon from './icons/menu.svg';
+import './Navbar.css';
+import { NavbarContainer } from './page-wrapper/Containers';
 
 interface Props {
   toggleSidebar(): void;
@@ -11,7 +12,7 @@ interface Props {
 
 export function Navbar(props: Props) {
   return (
-    <nav className="navbar">
+    <NavbarContainer>
       <div className="navbar-content">
         <button
           className="btn btn-action"
@@ -51,6 +52,6 @@ export function Navbar(props: Props) {
           </a>
         </div>
       </div>
-    </nav>
+    </NavbarContainer>
   );
 }
