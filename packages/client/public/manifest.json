@@ -19,6 +19,12 @@
       "type": "image/png",
       "sizes": "48x48",
       "purpose": "any"
+    },
+    {
+      "src": "/icon/logo.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "any"
     }
   ],
   "start_url": ".",

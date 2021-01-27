@@ -26,7 +26,7 @@ export function Navbar(props: Props) {
       </div>
 
       <a href="/" className="navbar-brand">
-        <img src="/icon/transparent.png" alt="" />
+        <img src="/icon/logo.svg" alt="" />
         Hawaii Bus Plus
       </a>
 
