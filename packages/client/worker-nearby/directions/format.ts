@@ -7,13 +7,13 @@ import {
   StopTimeData,
   Walking,
 } from '@hawaii-bus-plus/presentation';
-import { Route, Stop, Trip } from '@hawaii-bus-plus/types';
+import { Agency, Route, Stop, Trip } from '@hawaii-bus-plus/types';
 import {
   findIndexLast,
   lastIndex,
   PlainDaysTime,
 } from '@hawaii-bus-plus/utils';
-import { add } from 'mnemonist/set';
+import { set } from 'mnemonist';
 import { Temporal } from 'proposal-temporal';
 import { computeDistanceBetween } from 'spherical-geometry-js';
 import { stopsLoader } from './footpaths';
@@ -29,6 +29,7 @@ interface JourneyStopTime {
 export interface JourneyTripSegment {
   readonly trip: Omit<Trip, 'stop_times'>;
   readonly route: Route;
+  readonly agency: Agency;
   readonly stopTimes: readonly StopTimeData[];
 }
 
@@ -64,10 +65,7 @@ function formatDepartArrive(
     walk.waitUntil = durationToData(waitUntil);
   }
 
-  return {
-    point,
-    walk,
-  };
+  return { point, walk };
 }
 
 function isPathTripSegment(segment: PathSegment): segment is PathTripSegment {
@@ -126,7 +124,7 @@ export async function journeyToDirections(
       const routeIds = new Set([trip!.route_id]);
       const formattedStopTimes: JourneyStopTime[] = rawStopTimes.map((st) => {
         const stop = stops.get(st.stop_id)!;
-        add(routeIds, new Set(stop.routes));
+        set.add(routeIds, new Set(stop.routes));
 
         return {
           stop,
@@ -150,6 +148,7 @@ export async function journeyToDirections(
       trips.push({
         trip: omitStopTimes(trip!),
         route: route!,
+        agency: agency!,
         stopTimes: formattedStopTimes.map((st) => ({
           stop: st.stop,
           routes: st.stop.routes.map((routeId) => routes.get(routeId)!),

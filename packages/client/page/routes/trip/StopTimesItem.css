@@ -7,12 +7,26 @@
   grid-template:
     'lines-start .      .' 1rem
     'lines-dot   name   time' auto
-    'lines-end   desc   time' auto
+    'lines-end   desc   .' auto
     'lines-end   routes .' auto
     'lines-end   .      .' 1rem
     / 2rem auto min-content;
   column-gap: 1rem;
 }
+.stoptime--indented {
+  grid-template:
+    'lines-start .       .' 1rem
+    'lines-dot   chevron name' auto
+    'lines-end   .       .' min-content
+    'lines-end   .       .' auto
+    'lines-end   .       .' 1rem
+    / 2rem 2rem auto;
+}
+.stoptime--walking {
+  --route-color: gray;
+  border-style: dotted;
+}
+
 .stoptime-name {
   grid-area: name;
 }
@@ -72,4 +86,7 @@
 .stoptime--first .lines__point::before,
 .stoptime--last .lines__point::after {
   visibility: hidden;
+}
+.stoptime--small {
+  grid-template-rows: 0 auto min-content min-content 0;
 }

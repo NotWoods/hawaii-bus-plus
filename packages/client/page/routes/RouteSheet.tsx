@@ -7,7 +7,7 @@ import { useWorker } from '../hooks/useWorker';
 import { closeRouteAction } from '../router/action';
 import { RouterContext } from '../router/Router';
 import { RouteDetailContext } from './context';
-import { colorProps } from './props';
+import { colorVariables } from './props';
 import { RouteDetailsCard } from './RouteDetails';
 import { RouteName } from './RouteName';
 import './RouteSheet.css';
@@ -39,16 +39,10 @@ export function RouteSheet() {
     return null;
   }
 
-  const { backgroundColor } = colorProps(route);
-  const cssVars = {
-    '--route-color': backgroundColor,
-    '--route-text-color': `#${route.route_text_color}`,
-  };
-
   return (
     <div
       className="route-sheet pointer-events-auto mx-10 border border-bottom-0 rounded-top bg-white bg-dark-light-dm"
-      style={cssVars as any}
+      style={colorVariables(route)}
     >
       <div className="route-sheet__name px-card py-15 d-flex border-bottom rounded-top dark-mode">
         <h2 className="m-0 font-size-24 font-weight-bold">

@@ -65,6 +65,8 @@ test('journeyToDirections no walking', async () => {
     path
   );
 
+  console.log(JSON.stringify(journey));
+
   expect(journey).toEqual({
     depart: undefined,
     arrive: undefined,
@@ -74,6 +76,7 @@ test('journeyToDirections no walking', async () => {
   expect(journey.trips[0]).toEqual({
     route: expect.objectContaining({ route_id: 'waimea' }),
     trip: expect.objectContaining({ trip_id: 'waimea-waimea-pm-0-0' }),
+    agency: expect.objectContaining({ agency_id: 'HOB' }),
     stopTimes: expect.any(Array),
   });
   expect(journey.trips[1]).toEqual({
@@ -81,6 +84,7 @@ test('journeyToDirections no walking', async () => {
     trip: expect.objectContaining({
       trip_id: 'kohala-kona-0645am-nkohala-waim-kona-1',
     }),
+    agency: expect.objectContaining({ agency_id: 'HOB' }),
     stopTimes: expect.any(Array),
   });
 

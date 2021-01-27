@@ -1,0 +1,17 @@
+.directions__collapse {
+  cursor: pointer;
+  list-style: none;
+}
+.directions__collapse > summary {
+  overflow: hidden;
+}
+.directions__collapse > summary::-webkit-details-marker {
+  display: none;
+}
+.chevron {
+  grid-area: chevron;
+  transition: transform 0.3s ease;
+}
+.chevron--open {
+  transform: rotateZ(180deg);
+}

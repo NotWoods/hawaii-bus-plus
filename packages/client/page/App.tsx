@@ -1,5 +1,6 @@
 import { MapProvider } from '@hawaii-bus-plus/react-google-maps';
 import React, { useState } from 'react';
+import { DirectionsSheet } from './directions/DirectionsSheet';
 import { ApiProvider } from './hooks/useApi';
 import { MainMap } from './map/MainMap';
 import { Navbar } from './Navbar';
@@ -37,7 +38,7 @@ export function App() {
                 <div className="content-wrapper">
                   <MainMap darkMode={darkMode} position={position} />
                   <StopOrPlaceCard />
-                  <RouteSheet />
+                  {directionsOpen ? <DirectionsSheet /> : <RouteSheet />}
                 </div>
               )}
             </PageWrapper>

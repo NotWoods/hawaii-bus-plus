@@ -8,6 +8,7 @@ import React, { useContext } from 'react';
 import { openPlace, setMarker } from '../router/action';
 import { RouterContext } from '../router/Router';
 import { PlaceMarker, UserMarker } from './PlaceMarker';
+import { RouteGlyphs } from './RouteGlyphs';
 
 interface Props {
   darkMode?: boolean;
@@ -44,6 +45,7 @@ export function MainMap(props: Props) {
       }}
       onClick={handleClick}
     >
+      <RouteGlyphs />
       <PlaceMarker />
       {props.position ? <UserMarker position={props.position} /> : null}
     </GoogleMapPortal>
