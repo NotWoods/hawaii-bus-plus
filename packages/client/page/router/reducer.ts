@@ -1,13 +1,6 @@
-import {
-  closeRouteAction,
-  closeStopAction,
-  linkAction,
-  openPlace,
-  setMarker,
-  setRouteAction,
-  setStopAction,
-  updateUserLocation,
-} from './action';
+import { Point } from '@hawaii-bus-plus/presentation';
+import { Stop } from '@hawaii-bus-plus/types';
+import { RouterAction } from './action';
 
 export interface PlaceResult
   extends Pick<
@@ -19,28 +12,14 @@ export interface PlaceResult
 }
 
 export interface RouterState {
-  route_id?: string;
+  /** Open route */
+  routeId?: string;
 
-  focus?: 'stop' | 'place' | 'user' | 'marker';
-  stop_id?: string;
-
-  place_id?: string;
-  place?: PlaceResult;
-  user?: google.maps.LatLngLiteral;
-  marker?: google.maps.LatLngLiteral;
+  /** Open stop */
+  point?: Point;
 
   directionsOpen?: boolean;
 }
-
-export type RouterAction =
-  | ReturnType<typeof linkAction>
-  | ReturnType<typeof setRouteAction>
-  | ReturnType<typeof setStopAction>
-  | ReturnType<typeof closeRouteAction>
-  | ReturnType<typeof closeStopAction>
-  | ReturnType<typeof setMarker>
-  | ReturnType<typeof openPlace>
-  | ReturnType<typeof updateUserLocation>;
 
 const ROUTES_PREFIX = '/routes/';
 const DIRECTIONS = '/directions/';
@@ -53,12 +32,15 @@ export function initStateFromUrl(url: URL) {
   } else if (url.pathname.startsWith(ROUTES_PREFIX)) {
     // If link opens route
     const [routeId] = url.pathname.slice(ROUTES_PREFIX.length).split('/');
-    newState.route_id = routeId;
+    newState.routeId = routeId;
   }
 
   // If link opens stop
-  newState.stop_id = url.searchParams.get('stop') || undefined;
-  console.log(newState);
+  const stopId = url.searchParams.get('stop');
+  if (stopId) {
+    newState.point = { type: 'stop', stopId: stopId as Stop['stop_id'] };
+  }
+
   return newState;
 }
 
@@ -68,73 +50,19 @@ export function routerReducer(
 ): RouterState {
   switch (action.type) {
     case 'route':
-      return {
-        ...state,
-        route_id: action.routeId,
-      };
+      return { ...state, routeId: action.routeId };
     case 'stop':
-      return {
-        ...state,
-        focus: 'stop',
-        stop_id: action.stopId,
-      };
+      return { ...state, point: { type: 'stop', stopId: action.stopId } };
     case 'close-route':
-      return {
-        ...state,
-        route_id: undefined,
-      };
-    case 'close-stop':
-      switch (state.focus) {
-        case 'stop':
-          return {
-            ...state,
-            focus: undefined,
-            stop_id: undefined,
-          };
-        case 'place':
-          return {
-            ...state,
-            focus: undefined,
-            place_id: undefined,
-            place: undefined,
-          };
-        case 'user':
-          return {
-            ...state,
-            focus: undefined,
-            user: undefined,
-          };
-        case 'marker':
-          return {
-            ...state,
-            focus: undefined,
-            marker: undefined,
-          };
-        default:
-          return state;
-      }
+      return { ...state, routeId: undefined };
+    case 'close-point':
+      return { ...state, point: undefined };
     case 'set-marker':
-      return {
-        ...state,
-        focus: 'marker',
-        place_id: undefined,
-        place: undefined,
-        marker: action.location,
-      };
+      return { ...state, point: { type: 'marker', position: action.location } };
     case 'open-place':
-      return {
-        ...state,
-        focus: 'place',
-        place_id: action.place.place_id,
-        place: action.place,
-        marker: undefined,
-      };
+      return { ...state, point: action.point };
     case 'update-user-location':
-      return {
-        ...state,
-        focus: action.silent ? state.focus : 'user',
-        user: action.location,
-      };
+      return { ...state, point: { type: 'user', position: action.location } };
     case 'link':
       const { url } = action;
       if (url.hostname !== window.location.hostname) return state;

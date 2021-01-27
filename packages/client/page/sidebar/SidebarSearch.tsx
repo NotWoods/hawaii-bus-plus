@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import SearchWorker from '../../worker-search/index?worker';
 import type { SearchResults } from '../../worker-search/search';
 import { makeId } from '../alert/make';
-import { dbInitialized } from '../data/db-ready';
+import { databaseInitialized } from '../hooks/useDatabaseInitialized';
 import { usePromise } from '../hooks/usePromise';
 import { useWorker } from '../hooks/useWorker';
 import {
@@ -30,7 +30,7 @@ export function SidebarSearch(props: Props) {
   const postToSearchWorker = useWorker(SearchWorker);
 
   usePromise(async () => {
-    await dbInitialized;
+    await databaseInitialized;
     const results = await postToSearchWorker({
       key: 'AIzaSyAmRiFwEOokwUHYXK1MqYl5k2ngHoWGJBw',
       input: props.search,

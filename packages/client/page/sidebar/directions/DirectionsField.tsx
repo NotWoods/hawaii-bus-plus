@@ -1,5 +1,5 @@
+import { Point } from '@hawaii-bus-plus/presentation';
 import React, { ReactNode, useState } from 'react';
-import type { Point } from '../../../worker-nearby/directions';
 import type { SearchResults } from '../../../worker-search/search';
 import stopIcon from '../../icons/bus_stop.svg';
 import locationIcon from '../../icons/gps_fixed.svg';

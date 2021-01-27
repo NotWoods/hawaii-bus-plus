@@ -1,6 +1,6 @@
 import React from 'react';
 import { classNames } from '../hooks/classnames';
-import { RouterAction } from '../router/reducer';
+import { RouterAction } from '../router/action';
 import { Link } from '../router/Router';
 import './SidebarItem.css';
 

@@ -20,18 +20,28 @@ const userIcon = {
 } as google.maps.Icon;
 
 export function PlaceMarker() {
-  const { place, place_id, marker } = useContext(RouterContext);
+  const { point } = useContext(RouterContext);
 
-  const position = place?.location || marker;
-  if (!position) return null;
-
-  return (
-    <Marker
-      position={position}
-      icon={placeIcon}
-      title={place?.name || `Selected place ${place_id}`}
-    />
-  );
+  switch (point?.type) {
+    case 'place':
+      return (
+        <Marker
+          position={point.position}
+          icon={placeIcon}
+          title={point.name || `Selected point ${point.placeId}`}
+        />
+      );
+    case 'marker':
+      return (
+        <Marker
+          position={point.position}
+          icon={placeIcon}
+          title={point.name || 'Selected point'}
+        />
+      );
+    default:
+      return null;
+  }
 }
 
 export function UserMarker({ position }: { position: GeolocationPosition }) {

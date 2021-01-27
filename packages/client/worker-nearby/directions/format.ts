@@ -1,9 +1,10 @@
 import { omitStopTimes, Repository } from '@hawaii-bus-plus/data';
 import {
   durationToData,
-  StopTimeData,
   PlainTimeData,
   plainTimeToData,
+  Point,
+  StopTimeData,
   Walking,
 } from '@hawaii-bus-plus/presentation';
 import { Route, Stop, Trip } from '@hawaii-bus-plus/types';
@@ -12,22 +13,11 @@ import {
   lastIndex,
   PlainDaysTime,
 } from '@hawaii-bus-plus/utils';
+import { add } from 'mnemonist/set';
 import { Temporal } from 'proposal-temporal';
 import { computeDistanceBetween } from 'spherical-geometry-js';
 import { stopsLoader } from './footpaths';
 import { CompletePath, PathSegment, PathTripSegment } from './raptor';
-
-/**
- * Starting or ending point for directions.
- * Includes some styling information for presentation in
- * text box & direction results.
- */
-export interface Point {
-  type: 'user' | 'stop' | 'place' | 'marker';
-  stop_id?: Stop['stop_id'];
-  name: string;
-  position: google.maps.LatLngLiteral;
-}
 
 interface JourneyStopTime {
   readonly stop: Stop;
@@ -44,6 +34,11 @@ export interface JourneyTripSegment {
 
 export interface Journey {
   depart?: {
+    /**
+     * Starting or ending point for directions.
+     * Includes some styling information for presentation in
+     * text box & direction results.
+     */
     point: Point;
     walk: Walking;
   };
@@ -59,7 +54,7 @@ function formatDepartArrive(
   walkToFrom: google.maps.LatLngLiteral,
   waitUntil?: Temporal.Duration
 ) {
-  if (point.stop_id) return undefined;
+  if (point.type === 'stop') return undefined;
 
   const distance = computeDistanceBetween(point.position, walkToFrom);
   const time = Temporal.Duration.from({ seconds: distance });
@@ -131,9 +126,7 @@ export async function journeyToDirections(
       const routeIds = new Set([trip!.route_id]);
       const formattedStopTimes: JourneyStopTime[] = rawStopTimes.map((st) => {
         const stop = stops.get(st.stop_id)!;
-        for (const routeId of stop.routes) {
-          routeIds.add(routeId);
-        }
+        add(routeIds, new Set(stop.routes));
 
         return {
           stop,

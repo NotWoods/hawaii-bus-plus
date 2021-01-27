@@ -8,13 +8,8 @@ import React, {
   useEffect,
   useReducer,
 } from 'react';
-import { linkAction } from './action';
-import {
-  initStateFromUrl,
-  RouterAction,
-  routerReducer,
-  RouterState,
-} from './reducer';
+import { linkAction, RouterAction } from './action';
+import { initStateFromUrl, routerReducer, RouterState } from './reducer';
 
 interface RouterContext extends RouterState {
   dispatch: Dispatch<RouterAction>;
@@ -50,16 +45,18 @@ export function Router(props: { children: ReactNode }) {
 
   useEffect(() => {
     const url = new URL('/', window.location.href);
-    if (state.route_id) {
-      url.pathname = `/routes/${state.route_id}/`;
+    if (state.directionsOpen) {
+      url.pathname = '/directions/';
+    } else if (state.routeId) {
+      url.pathname = `/routes/${state.routeId}/`;
     }
-    if (state.stop_id) {
-      url.searchParams.set('stop', state.stop_id);
+    if (state.point?.type === 'stop') {
+      url.searchParams.set('stop', state.point.stopId);
     }
     if (path(url) !== path(window.location)) {
       history.pushState(state, '', path(url));
     }
-  }, [state.route_id, state.stop_id]);
+  }, [state.routeId, state.point, state.directionsOpen]);
 
   return (
     <RouterContext.Provider value={{ ...state, dispatch }}>

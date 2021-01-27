@@ -1,9 +1,9 @@
+import { MapProvider } from '@hawaii-bus-plus/react-google-maps';
 import React, { useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
-import { MapProvider } from '@hawaii-bus-plus/react-google-maps';
 import { StickyAlertsList, StickyAlertsProvider } from './alert/StickyAlerts';
-import { ApiProvider } from './data/Api';
 import { classNames } from './hooks/classnames';
+import { ApiProvider } from './hooks/useApi';
 import { MainMap } from './map/MainMap';
 import { Navbar } from './Navbar';
 import { Router } from './router/Router';

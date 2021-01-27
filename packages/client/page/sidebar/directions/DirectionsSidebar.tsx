@@ -1,8 +1,9 @@
+import { Point } from '@hawaii-bus-plus/presentation';
 import { Temporal } from 'proposal-temporal';
 import React, { useState } from 'react';
-import type { Journey, Point } from '../../../worker-nearby/directions/format';
+import type { Journey } from '../../../worker-nearby/directions/format';
 import DirectionsWorker from '../../../worker-nearby/nearby?worker';
-import { dbInitialized } from '../../data/db-ready';
+import { databaseInitialized } from '../../hooks/useDatabaseInitialized';
 import { usePromise } from '../../hooks/usePromise';
 import { useWorker } from '../../hooks/useWorker';
 import '../Sidebar.css';
@@ -27,7 +28,7 @@ export function DirectionsSidebar(props: Props) {
     async (signal) => {
       if (!depart || !arrive) return;
 
-      await dbInitialized;
+      await databaseInitialized;
       const results = await postToDirectionsWorker({
         type: 'directions',
         from: depart,

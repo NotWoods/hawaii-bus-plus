@@ -1,8 +1,9 @@
-import { Temporal } from 'proposal-temporal';
 import { makeRepository } from '@hawaii-bus-plus/data';
+import { Point } from '@hawaii-bus-plus/presentation';
 import { registerPromiseWorker } from '@hawaii-bus-plus/promise-worker/worker';
+import { Temporal } from 'proposal-temporal';
 import { findClosestStops } from './closest-stops';
-import { directions, Point } from './directions';
+import { directions } from './directions';
 
 interface DirectionsMessage {
   type: 'directions';

@@ -3,7 +3,7 @@ import { Stop } from '@hawaii-bus-plus/types';
 import React, { useContext, useState } from 'react';
 import InfoWorker from '../../worker-info/info?worker';
 import type { StopDetails } from '../../worker-info/stop-details';
-import { dbInitialized } from '../data/db-ready';
+import { databaseInitialized } from '../hooks/useDatabaseInitialized';
 import { usePromise } from '../hooks/usePromise';
 import { useWorker } from '../hooks/useWorker';
 import { closeStopAction } from '../router/action';
@@ -13,22 +13,22 @@ import { PlaceInfo, StopInfo } from './StopInfo';
 import { StreetViewCard } from './StreetViewCard';
 
 export function StopOrPlaceCard() {
-  const { focus, stop_id, place_id, marker, dispatch } = useContext(
-    RouterContext
-  );
+  const { dispatch, point } = useContext(RouterContext);
 
   function onClose() {
     dispatch(closeStopAction());
   }
 
-  switch (focus) {
+  switch (point?.type) {
     case 'stop':
-      return <StopCard stopId={stop_id as Stop['stop_id']} onClose={onClose} />;
+      return <StopCard stopId={point.stopId} onClose={onClose} />;
     case 'place':
-      return <PlaceCard placeId={place_id!} onClose={onClose} />;
+      return <PlaceCard placeId={point.placeId} onClose={onClose} />;
     case 'user':
     case 'marker':
-      return <StreetViewCard position={marker!} visible onClose={onClose} />;
+      return (
+        <StreetViewCard position={point.position} visible onClose={onClose} />
+      );
     case undefined:
       return null;
   }
@@ -44,7 +44,7 @@ function StopCard(props: { stopId: Stop['stop_id'] } & BaseCardProps) {
   const postToInfoWorker = useWorker(InfoWorker)!;
 
   usePromise(async () => {
-    await dbInitialized;
+    await databaseInitialized;
     const result = await postToInfoWorker({
       type: 'stop',
       id: props.stopId,

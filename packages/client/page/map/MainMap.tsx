@@ -23,13 +23,7 @@ export function MainMap(props: Props) {
     const event = evt as MapMouseEvent & Partial<google.maps.IconMouseEvent>;
     event.stop();
     if (event.placeId) {
-      dispatch(
-        openPlace({
-          name: '',
-          place_id: event.placeId,
-          location: event.latLng.toJSON(),
-        })
-      );
+      dispatch(openPlace(event.placeId, event.latLng.toJSON()));
     } else {
       dispatch(setMarker(event.latLng.toJSON()));
     }

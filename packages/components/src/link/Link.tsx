@@ -4,7 +4,7 @@ import React, {
   useContext,
 } from 'react';
 import { linkAction } from './action';
-import { LinkContext } from './context';
+import { LinkContext } from './Context';
 
 interface LinkProps
   extends DetailedHTMLProps<

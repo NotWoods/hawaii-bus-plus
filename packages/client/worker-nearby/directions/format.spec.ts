@@ -51,13 +51,13 @@ test('journeyToDirections no walking', async () => {
     repo,
     {
       type: 'stop',
-      stop_id: LAKELAND,
+      stopId: LAKELAND,
       name: lakeland.stop_name,
       position: lakeland.position,
     },
     {
       type: 'stop',
-      stop_id: HWY_INTERSECTON,
+      stopId: HWY_INTERSECTON,
       name: hwyIntersection.stop_name,
       position: hwyIntersection.position,
     },

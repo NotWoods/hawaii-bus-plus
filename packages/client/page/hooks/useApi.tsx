@@ -13,16 +13,13 @@ const ApiContext = createContext<Api | undefined>(undefined);
 export function ApiProvider(props: { children: ReactNode }) {
   const [api, setApi] = useState<Api | undefined>();
 
-  usePromise(
-    (signal) =>
-      downloadScheduleData(signal).then((api) =>
-        setApi({
-          routes: Object.values(api.routes),
-          stops: Object.values(api.stops),
-        })
-      ),
-    []
-  );
+  usePromise(async (signal) => {
+    const api = await downloadScheduleData(signal);
+    setApi({
+      routes: Object.values(api.routes),
+      stops: Object.values(api.stops),
+    });
+  }, []);
 
   return (
     <ApiContext.Provider value={api}>{props.children}</ApiContext.Provider>

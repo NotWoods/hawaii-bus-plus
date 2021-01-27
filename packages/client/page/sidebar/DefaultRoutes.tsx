@@ -1,7 +1,7 @@
 import { useGoogleMap } from '@hawaii-bus-plus/react-google-maps';
 import React from 'react';
 import { useAlerts } from '../alert/StickyAlerts';
-import { useApi } from '../data/Api';
+import { useApi } from '../hooks/useApi';
 import directionsIcon from '../icons/directions.svg';
 import locationIcon from '../icons/gps_fixed.svg';
 import { Icon } from '../icons/Icon';

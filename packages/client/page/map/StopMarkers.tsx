@@ -1,7 +1,7 @@
 import { Stop } from '@hawaii-bus-plus/types';
 import { Marker } from '@react-google-maps/api';
 import React, { useContext } from 'react';
-import { useApi } from '../data/Api';
+import { useApi } from '../hooks/useApi';
 import { setStopAction } from '../router/action';
 import { RouterContext } from '../router/Router';
 
@@ -34,14 +34,16 @@ interface Props {
 }
 
 export function StopMarkers(props: Props) {
-  const { dispatch, stop_id } = useContext(RouterContext);
+  const { dispatch, point } = useContext(RouterContext);
   const api = useApi();
   const stops = api?.stops || [];
+
+  const stopId = point?.type === 'stop' && point.stopId;
 
   return (
     <>
       {stops.map((stop) => {
-        const selected = stop.stop_id === stop_id;
+        const selected = stop.stop_id === stopId;
         return (
           <Marker
             key={stop.stop_id}

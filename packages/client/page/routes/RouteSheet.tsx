@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import InfoWorker from '../../worker-info/info?worker';
 import type { RouteDetails } from '../../worker-info/route-details';
-import { dbInitialized } from '../data/db-ready';
+import { databaseInitialized } from '../hooks/useDatabaseInitialized';
 import { usePromise } from '../hooks/usePromise';
 import { useWorker } from '../hooks/useWorker';
 import { StopMarkers } from '../map/StopMarkers';
@@ -14,23 +14,23 @@ import './RouteSheet.css';
 import { TripDetails } from './trip/TripDetails';
 
 export function RouteSheet() {
-  const { route_id, dispatch } = useContext(RouterContext);
+  const { dispatch, routeId } = useContext(RouterContext);
   const [details, setDetails] = useState<RouteDetails | undefined>();
   const postToInfoWorker = useWorker(InfoWorker);
 
   usePromise(async () => {
-    if (route_id) {
-      await dbInitialized;
+    if (routeId) {
+      await databaseInitialized;
       const details = await postToInfoWorker({
         type: 'route',
-        id: route_id,
+        id: routeId,
       });
 
       setDetails(details as RouteDetails | undefined);
     } else {
       setDetails(undefined);
     }
-  }, [route_id]);
+  }, [routeId]);
 
   const route = details?.route;
   if (!route) {

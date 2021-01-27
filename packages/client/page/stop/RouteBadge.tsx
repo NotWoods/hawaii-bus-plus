@@ -39,6 +39,9 @@ interface RouteBadgesProps {
   clear?: boolean;
 }
 
+/**
+ * Displays a list of badges representing routes that a stop connects to.
+ */
 export function RouteBadges({ routes, omit, clear }: RouteBadgesProps) {
   const badges: ReactNode[] = [];
   for (const route of routes || []) {
