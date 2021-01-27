@@ -6,12 +6,12 @@ export function linkAction(href: string | URL) {
   return { type: 'link', url } as const;
 }
 
-export function setRouteAction(route: Route) {
-  return { type: 'route', route } as const;
+export function setRouteAction(routeId: Route['route_id']) {
+  return { type: 'route', routeId } as const;
 }
 
-export function setStopAction(stop: Stop) {
-  return { type: 'stop', stop } as const;
+export function setStopAction(stopId: Stop['stop_id']) {
+  return { type: 'stop', stopId } as const;
 }
 
 export function closeRouteAction() {

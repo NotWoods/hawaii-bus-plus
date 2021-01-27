@@ -3,7 +3,6 @@ import { Route, Stop } from '@hawaii-bus-plus/types';
 import { lastIndex, skipUntil } from '@hawaii-bus-plus/utils';
 import React from 'react';
 import { classNames } from '../../hooks/classnames';
-import { setStopAction } from '../../router/action';
 import { Link } from '../../router/Router';
 import { RouteBadges } from '../../stop/RouteBadge';
 import './StopTimesList.css';
@@ -39,7 +38,6 @@ function StopTimeItem({
   return (
     <li className="d-block m-0">
       <Link
-        action={setStopAction(stopTime.stop)}
         href={`?stop=${stopTime.stop.stop_id}`}
         className={classNames(
           'sidebar-link sidebar-link-with-icon p-0 stoptime',
@@ -55,7 +53,7 @@ function StopTimeItem({
           {stopTime.stop.stop_desc}
         </p>
         <p className="stoptime-routes mb-0 font-size-12">
-          <RouteBadges omit={routeId} clear routeIds={stopTime.stop.routes} />
+          <RouteBadges omit={routeId} clear routes={stopTime.routes} />
         </p>
         <Time
           time={stopTime.arrivalTime}

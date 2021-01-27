@@ -1,13 +1,11 @@
 import { Route, Stop } from '@hawaii-bus-plus/types';
 import React from 'react';
 import { RequireAtLeastOne } from 'type-fest';
-import { useApi } from '../data/Api';
 import busStopIcon from '../icons/bus_stop.svg';
 import { Icon } from '../icons/Icon';
 import placeIcon from '../icons/place.svg';
-import { setRouteAction, setStopAction } from '../router/action';
 import { colorProps } from '../routes/props';
-import { BLANK, RouteBadges } from '../stop/RouteBadge';
+import { BLANK, RouteBadgeKeys, RouteBadges } from '../stop/RouteBadge';
 import { SidebarItem, SidebarItemProps } from './SidebarItem';
 
 type SearchItemProps = Pick<SidebarItemProps, 'className' | 'onClick'>;
@@ -27,7 +25,6 @@ export function RouteSearchItem({
   if (route) {
     const { backgroundColor, dark } = colorProps(route);
     routeProps = {
-      action: setRouteAction(route),
       iconColor: backgroundColor,
       iconDark: dark,
       title: route.route_long_name,
@@ -52,28 +49,25 @@ export function RouteSearchItem({
   );
 }
 
-type StopSearchItemProps = SearchItemProps &
-  RequireAtLeastOne<{
-    stopId: Stop['stop_id'];
-    stop: Stop;
-  }>;
+interface StopSearchItemProps extends SearchItemProps {
+  stopId: Stop['stop_id'];
+  stopName?: string;
+  routes?: readonly Pick<Route, RouteBadgeKeys>[];
+}
 
 export function StopSearchItem({
   stopId,
-  stop: stopData,
+  stopName = BLANK,
+  routes,
   ...props
 }: StopSearchItemProps) {
-  const api = useApi();
-  const stop = stopData || api?.stops?.[stopId!];
-
   return (
     <SidebarItem
       {...props}
-      href={`?stop=${stopId || stop!.stop_id}`}
-      action={stop ? setStopAction(stop) : undefined}
+      href={`?stop=${stopId}`}
       icon={<Icon src={busStopIcon} alt="Bus stop" />}
-      title={stop?.stop_name || BLANK}
-      subtitle={<RouteBadges routeIds={stop?.routes || []} />}
+      title={stopName}
+      subtitle={<RouteBadges routes={routes} />}
     />
   );
 }

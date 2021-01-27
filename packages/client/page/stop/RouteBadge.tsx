@@ -6,8 +6,15 @@ import { colorProps } from '../routes/props';
 
 export const BLANK = ' ';
 
+export type RouteBadgeKeys =
+  | 'route_id'
+  | 'route_color'
+  | 'route_short_name'
+  | 'route_long_name'
+  | 'route_text_color';
+
 interface RouteBadgeProps {
-  route?: Route;
+  route?: Pick<Route, RouteBadgeKeys>;
 }
 
 export function RouteBadge({ route }: RouteBadgeProps) {
@@ -28,18 +35,30 @@ export function RouteBadge({ route }: RouteBadgeProps) {
 }
 
 interface RouteBadgesProps {
-  routeIds: readonly Route['route_id'][];
+  routeIds?: readonly Route['route_id'][];
+  routes?: readonly Pick<Route, RouteBadgeKeys>[];
   omit?: Route['route_id'];
   clear?: boolean;
 }
 
-export function RouteBadges({ routeIds, omit, clear }: RouteBadgesProps) {
+export function RouteBadges({
+  routeIds,
+  routes,
+  omit,
+  clear,
+}: RouteBadgesProps) {
   const api = useApi();
 
   const badges: ReactNode[] = [];
-  for (const routeId of routeIds) {
+  for (const routeId of routeIds || []) {
     if (routeId !== omit) {
       badges.push(<RouteBadge key={routeId} route={api?.routes?.[routeId]} />);
+      badges.push(' ');
+    }
+  }
+  for (const route of routes || []) {
+    if (route.route_id !== omit) {
+      badges.push(<RouteBadge key={route.route_id} route={route} />);
       badges.push(' ');
     }
   }

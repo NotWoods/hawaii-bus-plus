@@ -1,4 +1,3 @@
-import { Route, Stop } from '@hawaii-bus-plus/types';
 import {
   closeRouteAction,
   closeStopAction,
@@ -21,11 +20,9 @@ export interface PlaceResult
 
 export interface RouterState {
   route_id?: string;
-  route?: Route;
 
   focus?: 'stop' | 'place' | 'user' | 'marker';
   stop_id?: string;
-  stop?: Stop;
 
   place_id?: string;
   place?: PlaceResult;
@@ -71,25 +68,20 @@ export function routerReducer(
 ): RouterState {
   switch (action.type) {
     case 'route':
-      const { route } = action;
       return {
         ...state,
-        route_id: route.route_id,
-        route: route,
+        route_id: action.routeId,
       };
     case 'stop':
-      const { stop } = action;
       return {
         ...state,
         focus: 'stop',
-        stop_id: stop.stop_id,
-        stop,
+        stop_id: action.stopId,
       };
     case 'close-route':
       return {
         ...state,
         route_id: undefined,
-        route: undefined,
       };
     case 'close-stop':
       switch (state.focus) {
@@ -98,7 +90,6 @@ export function routerReducer(
             ...state,
             focus: undefined,
             stop_id: undefined,
-            stop: undefined,
           };
         case 'place':
           return {
@@ -148,15 +139,7 @@ export function routerReducer(
       const { url } = action;
       if (url.hostname !== window.location.hostname) return state;
 
-      const newState: RouterState = initStateFromUrl(url);
-      if (newState.route_id === state.route_id) {
-        newState.route = state.route;
-      }
-      if (newState.stop_id === state.stop_id) {
-        newState.stop = state.stop;
-      }
-
-      return newState;
+      return initStateFromUrl(url);
     default:
       throw new Error(`Invalid action`);
   }

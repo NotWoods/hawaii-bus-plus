@@ -79,7 +79,7 @@ export async function directions(
     | 'loadCalendars'
     | 'loadTrips'
     | 'loadTrip'
-    | 'loadRoute'
+    | 'loadRoutes'
     | 'loadAgency'
   >,
   from: Point,

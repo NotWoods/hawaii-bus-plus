@@ -54,7 +54,7 @@ export function StopMarkers(props: Props) {
                 : otherStop
             }
             title={selected ? `(Selected) ${stop.stop_name}` : stop.stop_name}
-            onClick={() => dispatch(setStopAction(stop))}
+            onClick={() => dispatch(setStopAction(stop.stop_id))}
           />
         );
       })}

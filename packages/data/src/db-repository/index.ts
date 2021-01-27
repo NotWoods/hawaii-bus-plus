@@ -2,7 +2,7 @@ import { Agency, Calendar, Route, Stop, Trip } from '@hawaii-bus-plus/types';
 import { dbReady } from '../database';
 import { Repository, TripCursor } from '../repository';
 import { loadCalendars } from './calendar';
-import { loadAgency, loadRoute } from './routes';
+import { loadAgency, loadRoutes } from './routes';
 import { searchRoutes, searchStops } from './search';
 import { loadStops, loadStopsSpatial } from './stops';
 import { loadTrip, loadTrips, loadTripsForRoute } from './trips';
@@ -10,8 +10,10 @@ import { loadTrip, loadTrips, loadTripsForRoute } from './trips';
 export class DBRepository implements Repository {
   private ready = dbReady;
 
-  loadRoute(routeId: Route['route_id']): Promise<Route | undefined> {
-    return this.ready.then((db) => loadRoute(db, routeId));
+  loadRoutes(
+    routeIds: Iterable<Route['route_id']>
+  ): Promise<Map<Route['route_id'], Route>> {
+    return this.ready.then((db) => loadRoutes(db, routeIds));
   }
 
   loadTrip(tripId: Trip['trip_id']): Promise<Trip | undefined> {

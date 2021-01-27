@@ -80,7 +80,10 @@ function isPathTripSegment(segment: PathSegment): segment is PathTripSegment {
 }
 
 export async function journeyToDirections(
-  repo: Pick<Repository, 'loadStops' | 'loadTrip' | 'loadRoute' | 'loadAgency'>,
+  repo: Pick<
+    Repository,
+    'loadStops' | 'loadTrip' | 'loadRoutes' | 'loadAgency'
+  >,
   from: Point,
   to: Point,
   departureTime: Temporal.PlainDateTime,
@@ -108,7 +111,6 @@ export async function journeyToDirections(
     if (isPathTripSegment(current)) {
       // Lookup trip and get stop times
       const trip = await repo.loadTrip(current.trip);
-      const routeReady = repo.loadRoute(trip!.route_id);
 
       const lastSTIndex = trip!.stop_times.findIndex(
         (st) =>
@@ -126,12 +128,20 @@ export async function journeyToDirections(
       );
 
       const stops = await getStops(rawStopTimes.map((st) => st.stop_id));
-      const formattedStopTimes: JourneyStopTime[] = rawStopTimes.map((st) => ({
-        stop: stops.get(st.stop_id)!,
-        arrivalTime: PlainDaysTime.from(st.arrival_time),
-        departureTime: PlainDaysTime.from(st.departure_time),
-        timepoint: st.timepoint,
-      }));
+      const routeIds = new Set([trip!.route_id]);
+      const formattedStopTimes: JourneyStopTime[] = rawStopTimes.map((st) => {
+        const stop = stops.get(st.stop_id)!;
+        for (const routeId of stop.routes) {
+          routeIds.add(routeId);
+        }
+
+        return {
+          stop,
+          arrivalTime: PlainDaysTime.from(st.arrival_time),
+          departureTime: PlainDaysTime.from(st.departure_time),
+          timepoint: st.timepoint,
+        };
+      });
 
       lastDepartureTime = formattedStopTimes[0].departureTime;
       if (i === 0) {
@@ -140,7 +150,8 @@ export async function journeyToDirections(
         endEntry = formattedStopTimes[lastIndex(formattedStopTimes)];
       }
 
-      const route = await routeReady;
+      const routes = await repo.loadRoutes(routeIds);
+      const route = routes.get(trip!.route_id);
       const agency = await repo.loadAgency(route!.agency_id);
 
       trips.push({
@@ -148,6 +159,7 @@ export async function journeyToDirections(
         route: route!,
         stopTimes: formattedStopTimes.map((st) => ({
           stop: st.stop,
+          routes: st.stop.routes.map((routeId) => routes.get(routeId)!),
           arrivalTime: zonedTime(st.arrivalTime, agency!.agency_timezone),
           departureTime: zonedTime(st.departureTime, agency!.agency_timezone),
           timepoint: st.timepoint,

@@ -14,7 +14,7 @@ import './RouteSheet.css';
 import { TripDetails } from './trip/TripDetails';
 
 export function RouteSheet() {
-  const { route_id, route: routeData, dispatch } = useContext(RouterContext);
+  const { route_id, dispatch } = useContext(RouterContext);
   const [details, setDetails] = useState<RouteDetails | undefined>();
   const postToInfoWorker = useWorker(InfoWorker);
 
@@ -32,10 +32,9 @@ export function RouteSheet() {
     }
   }, [route_id]);
 
-  const route = details?.route || routeData;
-
+  const route = details?.route;
   if (!route) {
-    return null;
+    return <StopMarkers highlighted={details?.stops} />;
   }
 
   const { backgroundColor } = colorProps(route);

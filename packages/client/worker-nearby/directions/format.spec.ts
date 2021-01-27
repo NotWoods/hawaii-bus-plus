@@ -90,6 +90,7 @@ test('journeyToDirections no walking', async () => {
       arrivalTime: expect.objectContaining({ string: '12:30:00' }),
       departureTime: expect.objectContaining({ string: '12:30:00' }),
       stop: lakeland,
+      routes: expect.any(Array),
       timepoint: true,
     },
     expect.objectContaining({
@@ -108,6 +109,7 @@ test('journeyToDirections no walking', async () => {
       arrivalTime: expect.objectContaining({ string: '12:45:00' }),
       departureTime: expect.objectContaining({ string: '12:45:00' }),
       stop: parkerRanch,
+      routes: expect.any(Array),
       timepoint: true,
     },
   ]);
@@ -116,6 +118,7 @@ test('journeyToDirections no walking', async () => {
       arrivalTime: expect.objectContaining({ string: '15:25:00' }),
       departureTime: expect.objectContaining({ string: '15:25:00' }),
       stop: parkerRanch,
+      routes: expect.any(Array),
       timepoint: true,
     },
     expect.objectContaining({
@@ -125,6 +128,7 @@ test('journeyToDirections no walking', async () => {
       arrivalTime: expect.objectContaining({ string: '15:45:00' }),
       departureTime: expect.objectContaining({ string: '15:45:00' }),
       stop: hwyIntersection,
+      routes: expect.any(Array),
       timepoint: true,
     },
   ]);

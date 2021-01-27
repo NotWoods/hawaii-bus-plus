@@ -61,14 +61,6 @@ export function Router(props: { children: ReactNode }) {
     }
   }, [state.route_id, state.stop_id]);
 
-  useEffect(() => {
-    if (state.route) {
-      document.title = `${state.route.route_short_name} · ${state.route.route_long_name} | Hawaii Bus Plus`;
-    } else {
-      document.title = 'Hawaii Bus Plus | The ultimate Big Island transit app';
-    }
-  }, [state.route]);
-
   return (
     <RouterContext.Provider value={{ ...state, dispatch }}>
       {props.children}

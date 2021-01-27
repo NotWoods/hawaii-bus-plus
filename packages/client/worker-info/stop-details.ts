@@ -1,6 +1,5 @@
 import { Repository } from '@hawaii-bus-plus/data';
 import { Route, Stop } from '@hawaii-bus-plus/types';
-import { batch } from '@hawaii-bus-plus/utils';
 
 export interface StopDetails extends Omit<Stop, 'routes' | 'transfers'> {
   routes: readonly Route[];
@@ -12,7 +11,7 @@ export interface StopDetails extends Omit<Stop, 'routes' | 'transfers'> {
 }
 
 export async function loadStop(
-  repo: Pick<Repository, 'loadStops' | 'loadRoute'>,
+  repo: Pick<Repository, 'loadStops' | 'loadRoutes'>,
   stopId: Stop['stop_id']
 ): Promise<StopDetails | undefined> {
   const stop = (await repo.loadStops([stopId])).get(stopId);
@@ -20,7 +19,7 @@ export async function loadStop(
 
   const [transferStops, routes] = await Promise.all([
     repo.loadStops(stop.transfers.map((t) => t.from_stop_id)),
-    batch(stop.routes, (routeId) => repo.loadRoute(routeId)),
+    repo.loadRoutes(stop.routes),
   ]);
   const transfers = stop.transfers.map((t) => ({
     toStop: transferStops.get(t.to_stop_id)!,

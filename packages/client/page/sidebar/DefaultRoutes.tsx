@@ -1,12 +1,13 @@
+import { useGoogleMap } from '@hawaii-bus-plus/react-google-maps';
 import React from 'react';
+import { useAlerts } from '../alert/StickyAlerts';
 import { useApi } from '../data/Api';
-import { RouteSearchItem } from './SearchItems';
-import { SidebarTitle } from './SidebarTitle';
-import locationIcon from '../icons/gps_fixed.svg';
 import directionsIcon from '../icons/directions.svg';
+import locationIcon from '../icons/gps_fixed.svg';
 import { Icon } from '../icons/Icon';
 import { getCurrentPosition } from '../map/location/geolocation';
-import { useAlerts } from '../alert/StickyAlerts';
+import { RouteSearchItem } from './SearchItems';
+import { SidebarTitle } from './SidebarTitle';
 
 interface Props {
   setPosition(position: GeolocationPosition): void;
@@ -46,11 +47,13 @@ const errorMessages = {
 
 function MyLocationButton(props: Pick<Props, 'setPosition'>) {
   const toastAlert = useAlerts();
+  const map = useGoogleMap();
 
   async function handleClick() {
     try {
       const pos = await getCurrentPosition();
       props.setPosition(pos);
+      map?.setCenter({ lat: pos.coords.latitude, lng: pos.coords.longitude });
     } catch (err) {
       if (err.code) {
         toastAlert({

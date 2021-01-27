@@ -7,7 +7,7 @@ import {
 } from '@hawaii-bus-plus/utils';
 import { DefaultMap } from 'mnemonist';
 import { Temporal } from 'proposal-temporal';
-import { Footpaths, footPathsLoader } from './footpaths';
+import { stopsLoader } from './footpaths';
 import { generateDirectionsData } from './generate-data';
 import { buildQueue } from './route-queue';
 import { getEarliestValidTrip, getStopTime } from './trip-times';
@@ -88,11 +88,13 @@ function raptorFootpaths(
   markedStops: Set<Stop['stop_id']>,
   k: number,
   timeLabels: ReturnType<typeof buildTimeLabels>,
-  getFootPaths: (marked: Iterable<Stop['stop_id']>) => Promise<Footpaths>
+  loadStops: (
+    marked: Iterable<Stop['stop_id']>
+  ) => Promise<ReadonlyMap<Stop['stop_id'], Stop>>
 ) {
-  return getFootPaths(markedStops).then((footPaths) => {
+  return loadStops(markedStops).then((footPaths) => {
     for (const fromStopId of markedStops) {
-      const transfers = footPaths.get(fromStopId) || [];
+      const transfers = footPaths.get(fromStopId)?.transfers || [];
       for (const { to_stop_id, min_transfer_time = 0 } of transfers) {
         // fromStopId: p
         // to_stop_id: p'
@@ -135,7 +137,7 @@ export async function raptorDirections(
   departureDate: Temporal.PlainDate
 ) {
   const data = await generateDirectionsData(repo, departureDate);
-  const getFootPaths = footPathsLoader(repo);
+  const loadStops = stopsLoader(repo);
 
   // The algorithm works in rounds.
   // Each round, k, computes the fastest way of getting to every stop with up to k trips.
@@ -148,7 +150,7 @@ export async function raptorDirections(
   const timeLabels = buildTimeLabels(sources);
 
   const markedStops = new Set(timeLabels.keys());
-  await raptorFootpaths(markedStops, 0, timeLabels, getFootPaths);
+  await raptorFootpaths(markedStops, 0, timeLabels, loadStops);
 
   for (let k = 1; k <= K; k++) {
     // Invariant: at the beginning of round k,
@@ -209,7 +211,7 @@ export async function raptorDirections(
     }
 
     // Stage 3: consider foot-paths.
-    await raptorFootpaths(markedStops, k, timeLabels, getFootPaths);
+    await raptorFootpaths(markedStops, k, timeLabels, loadStops);
 
     // The algorithm can be stopped if no label t_k(p) was improved.
     if (markedStops.size === 0) break;

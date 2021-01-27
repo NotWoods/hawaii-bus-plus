@@ -2,14 +2,14 @@ import { IDBPDatabase } from 'idb';
 import { Stop } from '@hawaii-bus-plus/types';
 import { batch } from '@hawaii-bus-plus/utils';
 import { GTFSSchema } from '../database';
-import { removeWords } from '../format';
+import { removeWords, unique } from '../format';
 
 export function loadStops(
   db: IDBPDatabase<GTFSSchema>,
   stopIds: Iterable<Stop['stop_id']>
 ) {
   const { store } = db.transaction('stops');
-  return batch(Array.from(stopIds), (stopId) => store.get(stopId));
+  return batch(unique(stopIds), (stopId) => store.get(stopId));
 }
 
 /** Approximate 5 kilometers to latitude longitude offset */

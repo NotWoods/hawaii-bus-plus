@@ -51,7 +51,12 @@ export function SidebarSearch(props: Props) {
 
       <SidebarTitle>Stops</SidebarTitle>
       {searchResults.stops.map((stop) => (
-        <StopSearchItem key={stop.stop_id} stop={stop} />
+        <StopSearchItem
+          key={stop.stop_id}
+          stopId={stop.stop_id}
+          stopName={stop.stop_name}
+          routes={stop.routes}
+        />
       ))}
 
       <SidebarTitle>Other places</SidebarTitle>

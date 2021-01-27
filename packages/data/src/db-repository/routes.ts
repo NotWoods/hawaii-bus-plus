@@ -1,13 +1,15 @@
-import { IDBPDatabase } from 'idb';
 import { Agency, Route } from '@hawaii-bus-plus/types';
+import { batch } from '@hawaii-bus-plus/utils';
+import { IDBPDatabase } from 'idb';
 import { GTFSSchema } from '../database';
-import { removeWords } from '../format';
+import { unique } from '../format';
 
-export function loadRoute(
+export function loadRoutes(
   db: IDBPDatabase<GTFSSchema>,
-  routeId: Route['route_id']
+  routeIds: Iterable<Route['route_id']>
 ) {
-  return db.get('routes', routeId).then((route) => route && removeWords(route));
+  const { store } = db.transaction('routes');
+  return batch(unique(routeIds), (routeId) => store.get(routeId));
 }
 
 export function loadAgency(

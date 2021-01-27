@@ -45,6 +45,31 @@ export function extractLinks(description: string) {
   return descParts;
 }
 
+async function routeStopDetails(
+  repo: Pick<Repository, 'loadRoutes' | 'loadStops'>,
+  routeStops: Iterable<Stop['stop_id']>,
+  loadedRoute: Route['route_id']
+) {
+  const stops = await repo.loadStops(routeStops);
+
+  let bounds: LatLngBounds | undefined;
+  for (const stop of stops.values()) {
+    if (bounds) {
+      bounds.extend(stop.position);
+    } else {
+      bounds = new LatLngBounds(stop.position, stop.position);
+    }
+  }
+
+  const routeIds = new Set(
+    Array.from(stops.values()).flatMap((stop) => stop.routes)
+  );
+  routeIds.delete(loadedRoute);
+  const routes = await repo.loadRoutes(routeIds);
+
+  return { stops, bounds, routes };
+}
+
 /**
  * Find the best trip based on the current time of day,
  * along with other route details.
@@ -53,17 +78,17 @@ export function extractLinks(description: string) {
 export async function getRouteDetails(
   repo: Pick<
     Repository,
-    | 'loadRoute'
+    | 'loadRoutes'
     | 'loadAgency'
     | 'loadTripsForRoute'
     | 'loadCalendars'
     | 'loadStops'
   >,
-  route_id: Route['route_id'],
+  routeId: Route['route_id'],
   now?: Temporal.PlainDateTime
 ): Promise<RouteDetails | undefined> {
   const allCalendarsReady = repo.loadCalendars();
-  const route = await repo.loadRoute(route_id);
+  const route = (await repo.loadRoutes([routeId])).get(routeId);
   if (!route) {
     return undefined;
   }
@@ -77,20 +102,17 @@ export async function getRouteDetails(
   const allCalendars = await allCalendarsReady;
   const { directionDetails, routeStops } = await findBestTrips(
     repo,
-    route_id,
+    routeId,
     allCalendars,
     nowZoned
   );
 
-  const stops = await repo.loadStops(routeStops);
-  let bounds: LatLngBounds | undefined;
-  for (const stop of stops.values()) {
-    if (bounds) {
-      bounds.extend(stop.position);
-    } else {
-      bounds = new LatLngBounds(stop.position, stop.position);
-    }
-  }
+  const { stops, routes, bounds } = await routeStopDetails(
+    repo,
+    routeStops,
+    routeId
+  );
+  routes.set(routeId, route);
 
   return {
     route,
@@ -100,12 +122,16 @@ export async function getRouteDetails(
     bounds: bounds!.toJSON(),
     directions: directionDetails.map((dirDetails) => {
       const stopTimes: StopTimeData[] = dirDetails.closestTrip.trip.stop_times.map(
-        (st) => ({
-          stop: stops.get(st.stop_id)!,
-          arrivalTime: zonedTime(st.arrival_time, nowDate, timeZone),
-          departureTime: zonedTime(st.departure_time, nowDate, timeZone),
-          timepoint: st.timepoint,
-        })
+        (st) => {
+          const stop = stops.get(st.stop_id)!;
+          return {
+            stop,
+            routes: stop.routes.map((routeId) => routes.get(routeId)!),
+            arrivalTime: zonedTime(st.arrival_time, nowDate, timeZone),
+            departureTime: zonedTime(st.departure_time, nowDate, timeZone),
+            timepoint: st.timepoint,
+          };
+        }
       );
 
       return {

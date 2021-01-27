@@ -7,6 +7,7 @@ import {
   Trip,
 } from '@hawaii-bus-plus/types';
 import { downloadScheduleData } from '../fetch';
+import { unique } from '../format';
 import { Repository, TripCursor } from '../repository';
 import { searchArray } from './search';
 import { memTripCursor } from './trips';
@@ -23,8 +24,13 @@ export class MemoryRepository implements Repository {
     return this.apiReady.then(() => {});
   }
 
-  loadRoute(routeId: Route['route_id']): Promise<Route | undefined> {
-    return this.apiReady.then((api) => api.routes[routeId]);
+  loadRoutes(
+    routeIds: Iterable<Route['route_id']>
+  ): Promise<Map<Route['route_id'], Route>> {
+    return this.apiReady.then(
+      (api) =>
+        new Map(unique(routeIds, (routeId) => [routeId, api.routes[routeId]]))
+    );
   }
 
   loadTrip(tripId: Trip['trip_id']): Promise<Trip | undefined> {
@@ -47,8 +53,7 @@ export class MemoryRepository implements Repository {
     stopIds: Iterable<Stop['stop_id']>
   ): Promise<Map<Stop['stop_id'], Stop>> {
     return this.apiReady.then(
-      (api) =>
-        new Map(Array.from(stopIds, (stopId) => [stopId, api.stops[stopId]]))
+      (api) => new Map(unique(stopIds, (stopId) => [stopId, api.stops[stopId]]))
     );
   }
 
