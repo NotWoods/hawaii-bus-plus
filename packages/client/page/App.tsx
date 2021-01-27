@@ -5,6 +5,7 @@ import { MainMap } from './map/MainMap';
 import { Navbar } from './Navbar';
 import { PageWrapper } from './PageWrapper';
 import { Router } from './router/Router';
+import { RouteDetailProvider } from './routes/context';
 import { RouteSheet } from './routes/RouteSheet';
 import { DirectionsSidebar } from './sidebar/directions/DirectionsSidebar';
 import { Sidebar } from './sidebar/Sidebar';
@@ -18,27 +19,29 @@ export function App() {
     <Router>
       <ApiProvider>
         <MapProvider>
-          <PageWrapper
-            navbar={(props) => <Navbar {...props} />}
-            sidebar={
-              directionsOpen ? (
-                <DirectionsSidebar onClose={() => setDirectionsOpen(false)} />
-              ) : (
-                <Sidebar
-                  setPosition={setPosition}
-                  onDirectionsClick={() => setDirectionsOpen(true)}
-                />
-              )
-            }
-          >
-            {(darkMode) => (
-              <div className="content-wrapper">
-                <MainMap darkMode={darkMode} position={position} />
-                <StopOrPlaceCard />
-                <RouteSheet />
-              </div>
-            )}
-          </PageWrapper>
+          <RouteDetailProvider>
+            <PageWrapper
+              navbar={(props) => <Navbar {...props} />}
+              sidebar={
+                directionsOpen ? (
+                  <DirectionsSidebar onClose={() => setDirectionsOpen(false)} />
+                ) : (
+                  <Sidebar
+                    setPosition={setPosition}
+                    onDirectionsClick={() => setDirectionsOpen(true)}
+                  />
+                )
+              }
+            >
+              {(darkMode) => (
+                <div className="content-wrapper">
+                  <MainMap darkMode={darkMode} position={position} />
+                  <StopOrPlaceCard />
+                  <RouteSheet />
+                </div>
+              )}
+            </PageWrapper>
+          </RouteDetailProvider>
         </MapProvider>
       </ApiProvider>
     </Router>

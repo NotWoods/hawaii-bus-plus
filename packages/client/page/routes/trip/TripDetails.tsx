@@ -1,28 +1,20 @@
 import { formatDuration } from '@hawaii-bus-plus/presentation';
 import { useGoogleMap } from '@hawaii-bus-plus/react-google-maps';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import type { RouteDetails } from '../../../worker-info/route-details';
 import type { DirectionDetails } from '../../../worker-info/trip-details';
 import { Icon } from '../../icons/Icon';
 import swapIcon from '../../icons/swap_horiz.svg';
-import { ShapeLine } from '../../map/ShapeLine';
 import { StopTimesList } from './StopTimesList';
 
 interface Props {
   details: RouteDetails;
-}
-
-function validIndexes(directions: readonly unknown[]) {
-  const result: number[] = [];
-  directions.forEach((_, i) => result.push(i));
-  return result;
+  directionId: number;
+  switchDirection?(): void;
 }
 
 export function TripDetails(props: Props) {
-  const directionIds = validIndexes(props.details.directions);
-  const [selectedIdIndex, setSelectedIdIndex] = useState(directionIds[0]);
-  const selectedId = directionIds[selectedIdIndex % directionIds.length];
-  const { closestTrip } = props.details.directions[selectedId];
+  const { closestTrip } = props.details.directions[props.directionId];
 
   const map = useGoogleMap();
   useEffect(() => {
@@ -31,10 +23,6 @@ export function TripDetails(props: Props) {
 
   return (
     <>
-      <ShapeLine
-        shapeId={closestTrip.trip.shape_id}
-        routeColor={props.details.route.route_color}
-      />
       <div>
         <h3 className="content-title m-0">
           {closestTrip.trip.trip_short_name}
@@ -47,11 +35,8 @@ export function TripDetails(props: Props) {
             offset={closestTrip.offset}
           />
         </p>
-        {directionIds.length > 1 ? (
-          <a
-            className="btn btn-sm"
-            onClick={() => setSelectedIdIndex(selectedIdIndex + 1)}
-          >
+        {props.switchDirection ? (
+          <a className="btn btn-sm" onClick={props.switchDirection}>
             <Icon src={swapIcon} alt="" /> Switch direction
           </a>
         ) : null}
