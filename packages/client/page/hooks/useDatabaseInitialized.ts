@@ -1,3 +1,4 @@
+import { dbReady } from '@hawaii-bus-plus/data';
 import { PromiseWorker } from '@hawaii-bus-plus/promise-worker';
 import { useEffect, useState } from 'react';
 import InitDBWorker from '../../worker-init-db/init-db?worker';
@@ -20,3 +21,5 @@ export function useDatabaseInitialized() {
   }, []);
   return initialized;
 }
+
+(window as any).databaseInitialized = databaseInitialized.then(() => dbReady);

@@ -20,7 +20,7 @@
     "@hawaii-bus-plus/utils": "workspace:*",
     "@react-google-maps/api": "^2.1.1",
     "halfmoon": "^1.1.1",
-    "proposal-temporal": "^0.6.0",
+    "proposal-temporal": "^0.7.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-hotkeys-hook": "^3.0.3",

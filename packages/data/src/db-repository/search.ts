@@ -5,19 +5,20 @@ import { GTFSSchema } from '../database';
 export async function searchWordsIndex<T>(
   objectStore: IDBPObjectStore<any, any, any>,
   searchTerm: string,
-  max: number
+  max: number,
+  getKey: (item: T) => string
 ) {
   const index = objectStore.index('words');
   const term = searchTerm.toLowerCase();
   const keyRange = IDBKeyRange.bound(term, term + '\uffff', false, false);
 
-  const results: T[] = [];
-  let cursor = await index.openCursor(keyRange, 'nextunique');
-  for (let i = 0; i < max && cursor; i++) {
-    results.push(cursor.value);
+  const results = new Map<string, T>();
+  let cursor = await index.openCursor(keyRange, 'next');
+  while (results.size < max && cursor) {
+    results.set(getKey(cursor.value), cursor.value);
     cursor = await cursor.continue();
   }
-  return results;
+  return Array.from(results.values());
 }
 
 export function searchRoutes(
@@ -26,7 +27,7 @@ export function searchRoutes(
   max: number
 ) {
   const { store } = db.transaction('routes');
-  return searchWordsIndex<Route>(store, term, max);
+  return searchWordsIndex<Route>(store, term, max, (route) => route.route_id);
 }
 
 export function searchStops(
@@ -35,5 +36,5 @@ export function searchStops(
   max: number
 ) {
   const { store } = db.transaction('stops');
-  return searchWordsIndex<Stop>(store, term, max);
+  return searchWordsIndex<Stop>(store, term, max, (stop) => stop.stop_id);
 }

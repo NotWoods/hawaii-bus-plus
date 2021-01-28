@@ -23,7 +23,7 @@
     "halfmoon": "^1.1.1",
     "idb": "^6.0.0",
     "mnemonist": "^0.38.1",
-    "proposal-temporal": "^0.6.0",
+    "proposal-temporal": "^0.7.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-hotkeys-hook": "^3.0.3",

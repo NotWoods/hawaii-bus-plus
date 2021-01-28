@@ -10,9 +10,14 @@ export function useGoogleMap() {
   return useContext(MapContext);
 }
 
+const options: Parameters<typeof useLoadScript>[0] = {
+  googleMapsApiKey,
+  libraries: ['places'],
+};
+
 /**
  * Variant of `useLoadScript` that has the options all set.
  */
 export function useLoadGoogleMaps() {
-  return useLoadScript({ googleMapsApiKey });
+  return useLoadScript(options);
 }

@@ -1,13 +1,8 @@
-import { IDBPDatabase } from 'idb';
 import { GTFSData } from '@hawaii-bus-plus/types';
-import {
-  getWords,
-  GTFSSchema,
-  SearchRoute,
-  SearchStop,
-  SearchTrip,
-} from '../database';
+import { IDBPDatabase } from 'idb';
+import { GTFSSchema, SearchRoute, SearchStop, SearchTrip } from '../database';
 import { downloadScheduleData } from '../fetch';
+import { getWords } from '../words';
 
 export async function init(db: IDBPDatabase<GTFSSchema>) {
   return downloadScheduleData().then((api) => initDatabase(db, api));

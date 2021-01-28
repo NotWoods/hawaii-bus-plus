@@ -14,7 +14,7 @@
   "dependencies": {
     "@hawaii-bus-plus/types": "*",
     "@hawaii-bus-plus/utils": "*",
-    "proposal-temporal": "^0.6.0",
+    "proposal-temporal": "^0.7.0",
     "spherical-geometry-js": "^2.0.0",
     "tslib": "^2.1.0"
   },

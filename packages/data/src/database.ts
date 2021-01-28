@@ -58,14 +58,6 @@ export interface GTFSSchema extends DBSchema {
   };
 }
 
-export function getWords(...strings: string[]) {
-  return strings
-    .flatMap((str) => str.split(' '))
-    .flatMap((str) => str.split('-').concat([str]))
-    .filter(Boolean)
-    .map((word) => word.toLowerCase());
-}
-
 const callbacks: OpenDBCallbacks<GTFSSchema> = {
   upgrade(db) {
     db.createObjectStore('keyval');

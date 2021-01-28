@@ -1,10 +1,10 @@
 import { useGoogleMap } from '@hawaii-bus-plus/react-google-maps';
 import React, { useState } from 'react';
+import SearchWorker from '../../../worker-search/index?worker';
 import type { SearchResults } from '../../../worker-search/search';
 import { usePromise } from '../../hooks/usePromise';
 import { useWorker } from '../../hooks/useWorker';
 import { makeId } from '../../page-wrapper/alert/make';
-import SearchWorker from '../../worker-search/index?worker';
 import {
   PlaceSearchItem,
   RouteSearchItem,
@@ -12,7 +12,6 @@ import {
 } from '../SearchItems';
 import { SidebarTitle } from '../SidebarTitle';
 import { emptyResults, search } from './places-autocomplete';
-import './Sidebar.css';
 
 interface Props {
   search: string;
@@ -54,6 +53,7 @@ export function SidebarSearch(props: Props) {
       <SidebarTitle>Other places</SidebarTitle>
       {searchResults.places.map((place) => (
         <PlaceSearchItem
+          key={place.place_id}
           placeId={place.place_id}
           text={place.structured_formatting}
         />
