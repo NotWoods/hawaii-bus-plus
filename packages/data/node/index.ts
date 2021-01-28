@@ -11,10 +11,8 @@ if (import.meta.url) {
 }
 
 export class NodeRepository extends MemoryRepository {
-  init(): Promise<void> {
-    this.apiReady = readFile(apiLocation, 'utf8').then((data) =>
-      JSON.parse(data)
-    );
-    return this.apiReady.then(() => {});
+  async init() {
+    const data = await readFile(apiLocation, 'utf8');
+    return JSON.parse(data);
   }
 }

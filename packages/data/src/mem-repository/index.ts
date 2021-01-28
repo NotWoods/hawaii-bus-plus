@@ -16,12 +16,11 @@ export class MemoryRepository implements Repository {
   protected apiReady!: Promise<GTFSData>;
 
   constructor() {
-    this.init();
+    this.apiReady = this.init();
   }
 
-  init(): Promise<void> {
-    this.apiReady = downloadScheduleData();
-    return this.apiReady.then(() => {});
+  protected init(): Promise<GTFSData> {
+    return downloadScheduleData();
   }
 
   loadRoutes(
