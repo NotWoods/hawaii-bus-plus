@@ -13,7 +13,7 @@ import {
   lastIndex,
   PlainDaysTime,
 } from '@hawaii-bus-plus/utils';
-import { set } from 'mnemonist';
+import { add } from 'mnemonist/set';
 import { Temporal } from 'proposal-temporal';
 import { computeDistanceBetween } from 'spherical-geometry-js';
 import { stopsLoader } from './footpaths';
@@ -124,7 +124,7 @@ export async function journeyToDirections(
       const routeIds = new Set([trip!.route_id]);
       const formattedStopTimes: JourneyStopTime[] = rawStopTimes.map((st) => {
         const stop = stops.get(st.stop_id)!;
-        set.add(routeIds, new Set(stop.routes));
+        add(routeIds, new Set(stop.routes));
 
         return {
           stop,

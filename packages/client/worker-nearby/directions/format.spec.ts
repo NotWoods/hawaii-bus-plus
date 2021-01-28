@@ -65,8 +65,6 @@ test('journeyToDirections no walking', async () => {
     path
   );
 
-  console.log(JSON.stringify(journey));
-
   expect(journey).toEqual({
     depart: undefined,
     arrive: undefined,

@@ -6,4 +6,7 @@ export default defineConfig({
   alias: {
     'proposal-temporal': 'proposal-temporal/lib/index.mjs',
   },
+  optimizeDeps: {
+    include: ['mnemonist/set'],
+  },
 });
