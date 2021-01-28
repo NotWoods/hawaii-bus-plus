@@ -1,18 +1,18 @@
-import { center } from '@hawaii-bus-plus/react-google-maps';
+import { useGoogleMap } from '@hawaii-bus-plus/react-google-maps';
 import React, { useState } from 'react';
+import type { SearchResults } from '../../../worker-search/search';
+import { usePromise } from '../../hooks/usePromise';
+import { useWorker } from '../../hooks/useWorker';
+import { makeId } from '../../page-wrapper/alert/make';
 import SearchWorker from '../../worker-search/index?worker';
-import type { SearchResults } from '../../worker-search/search';
-import { makeId } from '../page-wrapper/alert/make';
-import { databaseInitialized } from '../hooks/useDatabaseInitialized';
-import { usePromise } from '../hooks/usePromise';
-import { useWorker } from '../hooks/useWorker';
 import {
   PlaceSearchItem,
   RouteSearchItem,
   StopSearchItem,
-} from './SearchItems';
+} from '../SearchItems';
+import { SidebarTitle } from '../SidebarTitle';
+import { emptyResults, search } from './places-autocomplete';
 import './Sidebar.css';
-import { SidebarTitle } from './SidebarTitle';
 
 interface Props {
   search: string;
@@ -21,22 +21,14 @@ interface Props {
 export const sessionToken = makeId(10);
 
 export function SidebarSearch(props: Props) {
-  const [searchResults, setSearchResults] = useState<SearchResults>({
-    places: [],
-    routes: [],
-    stops: [],
-  });
-
+  const map = useGoogleMap();
+  const [searchResults, setSearchResults] = useState(emptyResults);
   const postToSearchWorker = useWorker(SearchWorker);
 
   usePromise(async () => {
-    await databaseInitialized;
-    const results = await postToSearchWorker({
-      key: 'AIzaSyAmRiFwEOokwUHYXK1MqYl5k2ngHoWGJBw',
+    const results = await search(map, postToSearchWorker as any, {
       input: props.search,
       offset: props.search.length,
-      sessiontoken: sessionToken,
-      location: center,
     });
 
     setSearchResults(results as SearchResults);

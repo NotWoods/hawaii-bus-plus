@@ -2,8 +2,8 @@ import React, { ReactNode, useState } from 'react';
 import { useAccessKey } from '../hooks/useAccessKey';
 import { SidebarContainer } from '../page-wrapper/Containers';
 import { DefaultRoutes } from './DefaultRoutes';
+import { SidebarSearch } from './search/SidebarSearch';
 import './Sidebar.css';
-import { SidebarSearch } from './SidebarSearch';
 
 interface Props {
   setPosition(position: GeolocationPosition): void;

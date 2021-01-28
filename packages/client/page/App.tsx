@@ -10,7 +10,7 @@ import { RouteDetailProvider } from './routes/context';
 import { RouteSheet } from './routes/RouteSheet';
 import { DirectionsSidebar } from './sidebar/directions/DirectionsSidebar';
 import { Sidebar } from './sidebar/Sidebar';
-import { StopOrPlaceCard } from './stop/StopCard';
+import { PointCard } from './stop/PointCard';
 
 export function App() {
   const [directionsOpen, setDirectionsOpen] = useState(false);
@@ -37,7 +37,7 @@ export function App() {
               {(darkMode) => (
                 <div className="content-wrapper">
                   <MainMap darkMode={darkMode} position={position} />
-                  <StopOrPlaceCard />
+                  <PointCard />
                   {directionsOpen ? <DirectionsSheet /> : <RouteSheet />}
                 </div>
               )}

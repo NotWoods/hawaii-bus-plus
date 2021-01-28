@@ -2,7 +2,6 @@ import { makeRepository } from '@hawaii-bus-plus/data';
 import { registerPromiseWorker } from '@hawaii-bus-plus/promise-worker/worker';
 import { Route, Stop } from '@hawaii-bus-plus/types';
 import { Temporal } from 'proposal-temporal';
-import { placeApi, PlaceInfoMessage } from './place-api';
 import { getRouteDetails } from './route-details';
 import { loadStop } from './stop-details';
 
@@ -17,7 +16,7 @@ interface StopInfoMessage {
   id: Stop['stop_id'];
 }
 
-type Message = RouteInfoMessage | StopInfoMessage | PlaceInfoMessage;
+type Message = RouteInfoMessage | StopInfoMessage;
 
 const repo = makeRepository();
 
@@ -33,9 +32,6 @@ registerPromiseWorker((message: Message) => {
     }
     case 'stop': {
       return loadStop(repo, message.id);
-    }
-    case 'place': {
-      return placeApi(message);
     }
   }
 });

@@ -1,7 +1,6 @@
 import { Repository } from '@hawaii-bus-plus/data';
 import { Route, Stop } from '@hawaii-bus-plus/types';
-import { applyOffset } from './helpers';
-import { AutocompletionRequest } from './places-autocomplete';
+import { applyOffset, SearchRequest } from './helpers';
 
 interface StopSearchResult extends Pick<Stop, 'stop_id' | 'stop_name'> {
   routes: Route[];
@@ -15,7 +14,7 @@ export interface SearchResults {
 
 export function search(
   repo: Pick<Repository, 'loadRoutes' | 'searchRoutes' | 'searchStops'>,
-  request: AutocompletionRequest
+  request: SearchRequest
 ): Promise<SearchResults> {
   //const placeSearchReady = getPlacePredictions(request);
 

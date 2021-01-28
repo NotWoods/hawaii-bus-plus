@@ -1,5 +1,5 @@
 import React, { createContext, ReactNode, useState } from 'react';
-import { RouteDetails } from '../../worker-info/route-details';
+import type { RouteDetails } from '../../worker-info/route-details';
 
 interface RouteDetailContext {
   details?: RouteDetails;
