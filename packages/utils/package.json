@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@hawaii-bus-plus/types": "*",
+    "proposal-temporal": "^0.7.0",
     "tslib": "^2.1.0"
   },
   "devDependencies": {

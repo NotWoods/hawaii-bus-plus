@@ -19,13 +19,13 @@
     "@hawaii-bus-plus/types": "*",
     "@hawaii-bus-plus/utils": "*",
     "@react-aria/i18n": "^3.2.0",
-    "@react-google-maps/api": "^2.1.0",
+    "@react-google-maps/api": "^2.1.1",
     "halfmoon": "^1.1.1",
     "idb": "^6.0.0",
     "mnemonist": "^0.38.1",
     "proposal-temporal": "^0.6.0",
-    "react": "^17.0.0",
-    "react-dom": "^17.0.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
     "react-hotkeys-hook": "^3.0.3",
     "spherical-geometry-js": "^2.0.0",
     "tslib": "^2.1.0"
@@ -36,15 +36,15 @@
     "@types/jest": "^26.0.20",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
-    "@vitejs/plugin-react-refresh": "^1.1.0",
+    "@vitejs/plugin-react-refresh": "^1.1.2",
     "cross-env": "^7.0.3",
-    "esbuild": "^0.8.34",
+    "esbuild": "^0.8.36",
     "esbuild-jest": "^0.3.0",
     "jest": "^26.6.3",
     "prettier": "^2.2.1",
     "type-fest": "^0.20.2",
     "typescript": "4.1.3",
-    "vite": "^2.0.0-beta.34"
+    "vite": "2.0.0-beta.37"
   },
   "jest": {
     "transform": {

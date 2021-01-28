@@ -24,7 +24,7 @@ export function RouteDetailProvider(props: { children: ReactNode }) {
 
   const directionIds = validIndexes(details?.directions);
   const [selectedIdIndex, setSelectedIdIndex] = useState(directionIds[0]);
-  const directionId = directionIds[selectedIdIndex % directionIds.length];
+  const directionId = directionIds[selectedIdIndex % directionIds.length] || 0;
 
   function setDetails(details: RouteDetails | undefined) {
     setDetailState(details);
