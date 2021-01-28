@@ -3,7 +3,11 @@ import { RouteDetailContext } from '../routes/context';
 import { ShapeLine } from './ShapeLine';
 import { StopMarkers } from './StopMarkers';
 
-export function RouteGlyphs() {
+interface Props {
+  darkMode?: boolean;
+}
+
+export function RouteGlyphs({ darkMode }: Props) {
   const { details, directionId } = useContext(RouteDetailContext);
 
   let shape: ReactNode = null;
@@ -19,7 +23,13 @@ export function RouteGlyphs() {
 
   return (
     <>
-      <StopMarkers highlighted={details?.stops} />
+      <StopMarkers
+        highlighted={details?.stops}
+        highlightColor={
+          details?.route?.route_color && `#${details.route.route_color}`
+        }
+        darkMode={darkMode}
+      />
       {shape}
     </>
   );

@@ -45,7 +45,7 @@ export function MainMap(props: Props) {
       }}
       onClick={handleClick}
     >
-      <RouteGlyphs />
+      <RouteGlyphs darkMode={props.darkMode} />
       <PlaceMarker />
       {props.position ? <UserMarker position={props.position} /> : null}
     </GoogleMapPortal>
