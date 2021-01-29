@@ -14,7 +14,6 @@ import { PointCard } from './stop/PointCard';
 
 export function App() {
   const [directionsOpen, setDirectionsOpen] = useState(false);
-  const [position, setPosition] = useState<GeolocationPosition | undefined>();
 
   return (
     <Router>
@@ -27,16 +26,13 @@ export function App() {
                 directionsOpen ? (
                   <DirectionsSidebar onClose={() => setDirectionsOpen(false)} />
                 ) : (
-                  <Sidebar
-                    setPosition={setPosition}
-                    onDirectionsClick={() => setDirectionsOpen(true)}
-                  />
+                  <Sidebar onDirectionsClick={() => setDirectionsOpen(true)} />
                 )
               }
             >
               {(darkMode) => (
                 <div className="content-wrapper">
-                  <MainMap darkMode={darkMode} position={position} />
+                  <MainMap darkMode={darkMode} />
                   <PointCard />
                   {directionsOpen ? <DirectionsSheet /> : <RouteSheet />}
                 </div>

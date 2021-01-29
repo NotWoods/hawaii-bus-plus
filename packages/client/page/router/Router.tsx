@@ -16,6 +16,8 @@ interface RouterContext extends RouterState {
 }
 
 export const RouterContext = createContext<RouterContext>({
+  directionsOpen: false,
+  freshLoad: false,
   dispatch() {},
 });
 

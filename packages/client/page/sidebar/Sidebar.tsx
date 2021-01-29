@@ -6,7 +6,6 @@ import { SidebarSearch } from './search/SidebarSearch';
 import './Sidebar.css';
 
 interface Props {
-  setPosition(position: GeolocationPosition): void;
   onDirectionsClick?(): void;
 }
 
@@ -18,12 +17,7 @@ export function Sidebar(props: Props) {
   if (search) {
     children = <SidebarSearch search={search} />;
   } else {
-    children = (
-      <DefaultRoutes
-        setPosition={props.setPosition}
-        onDirectionsClick={props.onDirectionsClick}
-      />
-    );
+    children = <DefaultRoutes onDirectionsClick={props.onDirectionsClick} />;
   }
 
   return (

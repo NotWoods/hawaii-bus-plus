@@ -3,6 +3,7 @@
   "include": ["**/*", "*.json"],
   "references": [],
   "compilerOptions": {
-    "lib": ["esnext", "dom", "dom.iterable"]
+    "lib": ["esnext", "dom", "dom.iterable"],
+    "types": ["googlemaps"]
   }
 }

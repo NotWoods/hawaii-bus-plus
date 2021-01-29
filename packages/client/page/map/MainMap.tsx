@@ -7,12 +7,11 @@ import {
 import React, { useContext } from 'react';
 import { openPlace, setMarker } from '../router/action';
 import { RouterContext } from '../router/Router';
-import { PlaceMarker, UserMarker } from './PlaceMarker';
+import { PlaceMarker } from './PlaceMarker';
 import { RouteGlyphs } from './RouteGlyphs';
 
 interface Props {
   darkMode?: boolean;
-  position?: GeolocationPosition;
 }
 
 type MapMouseEvent = google.maps.MapMouseEvent;
@@ -47,7 +46,6 @@ export function MainMap(props: Props) {
     >
       <RouteGlyphs darkMode={props.darkMode} />
       <PlaceMarker />
-      {props.position ? <UserMarker position={props.position} /> : null}
     </GoogleMapPortal>
   );
 }

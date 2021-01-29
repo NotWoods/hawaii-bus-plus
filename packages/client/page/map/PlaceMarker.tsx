@@ -1,6 +1,5 @@
 import { Marker } from '@react-google-maps/api';
 import React, { useContext } from 'react';
-import { convertLatLng } from 'spherical-geometry-js';
 import { RouterContext } from '../router/Router';
 
 const placeIcon = {
@@ -44,14 +43,12 @@ export function PlaceMarker() {
   }
 }
 
-export function UserMarker({ position }: { position: GeolocationPosition }) {
+export function UserMarker({
+  position,
+}: {
+  position: google.maps.LatLngLiteral;
+}) {
   if (!position) return null;
 
-  return (
-    <Marker
-      position={convertLatLng(position.coords).toJSON()}
-      icon={userIcon}
-      title="My location"
-    />
-  );
+  return <Marker position={position} icon={userIcon} title="My location" />;
 }

@@ -1,7 +1,8 @@
 import { MapContext, useLoadScript } from '@react-google-maps/api';
 import { useContext } from 'react';
 
-export const googleMapsApiKey = 'AIzaSyAmRiFwEOokwUHYXK1MqYl5k2ngHoWGJBw';
+// @ts-ignore
+export const googleMapsApiKey: string = import.meta.env.VITE_GOOGLE_MAPS_KEY;
 
 /**
  * Variant of the react-google-map function that doesn't throw if map is null.

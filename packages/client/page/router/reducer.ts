@@ -18,14 +18,19 @@ export interface RouterState {
   /** Open stop */
   point?: Point;
 
-  directionsOpen?: boolean;
+  directionsOpen: boolean;
+
+  freshLoad: boolean;
 }
 
 const ROUTES_PREFIX = '/routes/';
 const DIRECTIONS = '/directions/';
 
 export function initStateFromUrl(url: URL) {
-  const newState: RouterState = {};
+  const newState: RouterState = {
+    freshLoad: false,
+    directionsOpen: false,
+  };
 
   if (url.pathname.startsWith(DIRECTIONS)) {
     newState.directionsOpen = true;
@@ -67,7 +72,9 @@ export function routerReducer(
       const { url } = action;
       if (url.hostname !== window.location.hostname) return state;
 
-      return initStateFromUrl(url);
+      const newState = initStateFromUrl(url);
+      newState.freshLoad = false;
+      return newState;
     default:
       throw new Error(`Invalid action`);
   }
