@@ -1,0 +1,9 @@
+.close {
+  cursor: pointer;
+  color: inherit;
+  padding: 0.4rem 0.6rem;
+  line-height: 1;
+  font-size: 1.6rem;
+  background-color: transparent;
+  border-color: transparent;
+}

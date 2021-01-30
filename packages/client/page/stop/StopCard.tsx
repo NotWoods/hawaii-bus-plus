@@ -1,6 +1,7 @@
 import { center } from '@hawaii-bus-plus/react-google-maps';
 import { Stop } from '@hawaii-bus-plus/types';
 import React, { useState } from 'react';
+import { InfoWorkerHandler } from '../../worker-info/info';
 import InfoWorker from '../../worker-info/info?worker';
 import type { StopDetails } from '../../worker-info/stop-details';
 import { databaseInitialized } from '../hooks/useDatabaseInitialized';
@@ -17,7 +18,7 @@ interface Props {
 
 export function StopCard(props: Props) {
   const [details, setDetails] = useState<StopDetails | undefined>();
-  const postToInfoWorker = useWorker(InfoWorker)!;
+  const postToInfoWorker = useWorker(InfoWorker) as InfoWorkerHandler;
 
   usePromise(async () => {
     await databaseInitialized;
@@ -25,7 +26,7 @@ export function StopCard(props: Props) {
       type: 'stop',
       id: props.stopId,
     });
-    setDetails(result as StopDetails | undefined);
+    setDetails(result);
   }, [props.stopId]);
 
   const position = props.position || details?.position;

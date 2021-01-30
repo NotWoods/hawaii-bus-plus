@@ -1,5 +1,6 @@
 import React from 'react';
 import { classNames } from '../../hooks/classnames';
+import { CloseButton } from './CloseButton';
 
 export interface AlertProps {
   children?: React.ReactNode;
@@ -22,17 +23,7 @@ export function Alert(props: AlertProps) {
   return (
     <div className={classNames(`alert`, alertType, fillType, state)}>
       {title ? <h4 className="alert-heading">{title}</h4> : null}
-      {hasDismissButton ? (
-        <button
-          className="close"
-          data-dismiss="alert"
-          type="button"
-          aria-label="Close"
-          onClick={props.onClose}
-        >
-          <span aria-hidden="true">&times;</span>
-        </button>
-      ) : null}
+      {hasDismissButton && <CloseButton onClick={props.onClose} />}
       {props.children}
     </div>
   );

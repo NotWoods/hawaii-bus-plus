@@ -2,8 +2,9 @@ import { makeRepository } from '@hawaii-bus-plus/data';
 import { Point } from '@hawaii-bus-plus/presentation';
 import { registerPromiseWorker } from '@hawaii-bus-plus/promise-worker/worker';
 import { Temporal } from 'proposal-temporal';
-import { findClosestStops } from './closest-stops';
+import { findClosestStops, StopWithDistance } from './closest-stops';
 import { directions } from './directions';
+import { Journey } from './directions/format';
 
 interface DirectionsMessage {
   type: 'directions';
@@ -18,6 +19,11 @@ interface ClosestStopsMessage {
 }
 
 type Message = DirectionsMessage | ClosestStopsMessage;
+
+export interface NearbyWorkerHandler {
+  (message: DirectionsMessage): Promise<Journey[]>;
+  (message: ClosestStopsMessage): Promise<StopWithDistance[]>;
+}
 
 const repo = makeRepository();
 

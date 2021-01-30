@@ -1,6 +1,7 @@
 import { Point } from '@hawaii-bus-plus/presentation';
 import { Temporal } from 'proposal-temporal';
 import React, { useState } from 'react';
+import type { NearbyWorkerHandler } from '../../../worker-nearby/nearby';
 import type { Journey } from '../../../worker-nearby/directions/format';
 import DirectionsWorker from '../../../worker-nearby/nearby?worker';
 import { databaseInitialized } from '../../hooks/useDatabaseInitialized';
@@ -23,7 +24,9 @@ export function DirectionsSidebar(props: Props) {
   );
   const [results, setResults] = useState<Journey[]>([]);
 
-  const postToDirectionsWorker = useWorker(DirectionsWorker);
+  const postToDirectionsWorker = useWorker(
+    DirectionsWorker
+  ) as NearbyWorkerHandler;
 
   usePromise(
     async (signal) => {
@@ -38,7 +41,7 @@ export function DirectionsSidebar(props: Props) {
       });
 
       if (results && !signal.aborted) {
-        setResults(results as Journey[]);
+        setResults(results);
       }
     },
     [depart, arrive, departureTime]

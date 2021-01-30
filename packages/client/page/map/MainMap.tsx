@@ -4,7 +4,7 @@ import {
   GoogleMapPortal,
   mapTypeControlOptions,
 } from '@hawaii-bus-plus/react-google-maps';
-import React, { useContext } from 'react';
+import React, { useContext, useMemo } from 'react';
 import { openPlace, setMarker } from '../router/action';
 import { RouterContext } from '../router/Router';
 import { PlaceMarker } from './PlaceMarker';
@@ -29,19 +29,22 @@ export function MainMap(props: Props) {
     }
   }
 
+  const options = useMemo(
+    () => ({
+      streetViewControl: false,
+      mapTypeControlOptions,
+      controlSize: 32,
+      styles: props.darkMode ? darkStyles : undefined,
+    }),
+    [props.darkMode]
+  );
+
   return (
     <GoogleMapPortal
       mapContainerClassName="map w-full h-full position-fixed"
       center={center}
       zoom={9}
-      options={{
-        streetViewControl: false,
-        mapTypeControlOptions,
-        controlSize: 32,
-        styles: props.darkMode
-          ? (darkStyles as google.maps.MapTypeStyle[])
-          : undefined,
-      }}
+      options={options}
       onClick={handleClick}
     >
       <RouteGlyphs darkMode={props.darkMode} />

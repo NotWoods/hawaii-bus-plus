@@ -1,9 +1,11 @@
-import React, { useContext } from 'react';
+import { Temporal } from 'proposal-temporal';
+import React, { useContext, useState } from 'react';
+import type { InfoWorkerHandler } from '../../worker-info/info';
 import InfoWorker from '../../worker-info/info?worker';
-import type { RouteDetails } from '../../worker-info/route-details';
 import { databaseInitialized } from '../hooks/useDatabaseInitialized';
 import { usePromise } from '../hooks/usePromise';
 import { useWorker } from '../hooks/useWorker';
+import { CloseButton } from '../page-wrapper/alert/CloseButton';
 import { closeRouteAction } from '../router/action';
 import { RouterContext } from '../router/Router';
 import { RouteDetailContext } from './context';
@@ -13,12 +15,18 @@ import { RouteName } from './RouteName';
 import './RouteSheet.css';
 import { TripDetails } from './trip/TripDetails';
 
+function nowInZone(timeZone: string | Temporal.TimeZoneProtocol) {
+  const now = Temporal.now.zonedDateTimeISO();
+  return now.withTimeZone(timeZone).toPlainDateTime();
+}
+
 export function RouteSheet() {
   const { dispatch, routeId } = useContext(RouterContext);
   const { details, directionId, setDetails, switchDirection } = useContext(
     RouteDetailContext
   );
-  const postToInfoWorker = useWorker(InfoWorker);
+  const [tripTime, setTripTime] = useState(nowInZone('Pacific/Honolulu'));
+  const postToInfoWorker = useWorker(InfoWorker) as InfoWorkerHandler;
 
   usePromise(async () => {
     if (routeId) {
@@ -26,13 +34,14 @@ export function RouteSheet() {
       const details = await postToInfoWorker({
         type: 'route',
         id: routeId,
+        time: tripTime.toString(),
       });
 
-      setDetails(details as RouteDetails | undefined);
+      setDetails(details);
     } else {
       setDetails(undefined);
     }
-  }, [routeId]);
+  }, [routeId, tripTime]);
 
   const route = details?.route;
   if (!route) {
@@ -48,14 +57,10 @@ export function RouteSheet() {
         <h2 className="m-0 font-size-24 font-weight-bold">
           <RouteName route={route} />
         </h2>
-        <button
-          className="btn btn-square ml-auto text-reset"
-          type="button"
+        <CloseButton
+          className="ml-auto"
           onClick={() => dispatch(closeRouteAction())}
-          aria-label="Close"
-        >
-          &times;
-        </button>
+        />
       </div>
       <div className="row row-eq-spacing-lg">
         <div className="col-lg-8">
@@ -64,7 +69,9 @@ export function RouteSheet() {
               <TripDetails
                 details={details}
                 directionId={directionId}
+                tripTime={tripTime}
                 switchDirection={switchDirection}
+                onChangeTripTime={setTripTime}
               />
             )}
           </div>

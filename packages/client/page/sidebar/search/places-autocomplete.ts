@@ -1,4 +1,5 @@
 import { memoize } from '@hawaii-bus-plus/utils';
+import type { SearchWorkerHandler } from '../../../worker-search';
 import type { SearchRequest } from '../../../worker-search/helpers';
 import type { SearchResults } from '../../../worker-search/search';
 import { databaseInitialized } from '../../hooks/useDatabaseInitialized';
@@ -36,7 +37,7 @@ export const emptyResults: SearchResults = {
 
 export async function search(
   map: google.maps.Map | null | undefined,
-  postMessage: (request: SearchRequest) => Promise<SearchResults>,
+  postMessage: SearchWorkerHandler,
   request: SearchRequest
 ): Promise<SearchResults> {
   const [places, gtfs] = await Promise.all([

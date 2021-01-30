@@ -2,8 +2,8 @@ import { makeRepository } from '@hawaii-bus-plus/data';
 import { registerPromiseWorker } from '@hawaii-bus-plus/promise-worker/worker';
 import { Route, Stop } from '@hawaii-bus-plus/types';
 import { Temporal } from 'proposal-temporal';
-import { getRouteDetails } from './route-details';
-import { loadStop } from './stop-details';
+import { getRouteDetails, RouteDetails } from './route-details';
+import { loadStop, StopDetails } from './stop-details';
 
 interface RouteInfoMessage {
   type: 'route';
@@ -19,6 +19,11 @@ interface StopInfoMessage {
 type Message = RouteInfoMessage | StopInfoMessage;
 
 const repo = makeRepository();
+
+export interface InfoWorkerHandler {
+  (message: RouteInfoMessage): Promise<RouteDetails | undefined>;
+  (message: StopInfoMessage): Promise<StopDetails | undefined>;
+}
 
 registerPromiseWorker((message: Message) => {
   switch (message.type) {

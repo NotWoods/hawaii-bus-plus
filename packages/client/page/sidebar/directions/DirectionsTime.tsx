@@ -43,7 +43,7 @@ function PlainDateInput(props: InputProps<Temporal.PlainDate>) {
   );
 }
 
-function PlainDateTimeInput(props: InputProps<Temporal.PlainDateTime>) {
+export function PlainDateTimeInput(props: InputProps<Temporal.PlainDateTime>) {
   return (
     <div className="form-row row-eq-spacing">
       <div className="col">

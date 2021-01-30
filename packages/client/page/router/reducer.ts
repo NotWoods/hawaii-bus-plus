@@ -1,5 +1,5 @@
 import { Point } from '@hawaii-bus-plus/presentation';
-import { Stop } from '@hawaii-bus-plus/types';
+import { Route, Stop } from '@hawaii-bus-plus/types';
 import { RouterAction } from './action';
 
 export interface PlaceResult
@@ -13,7 +13,7 @@ export interface PlaceResult
 
 export interface RouterState {
   /** Open route */
-  routeId?: string;
+  routeId?: Route['route_id'];
 
   /** Open stop */
   point?: Point;
@@ -37,7 +37,7 @@ export function initStateFromUrl(url: URL) {
   } else if (url.pathname.startsWith(ROUTES_PREFIX)) {
     // If link opens route
     const [routeId] = url.pathname.slice(ROUTES_PREFIX.length).split('/');
-    newState.routeId = routeId;
+    newState.routeId = routeId as Route['route_id'];
   }
 
   // If link opens stop

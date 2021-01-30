@@ -1,7 +1,7 @@
 import { useGoogleMap } from '@hawaii-bus-plus/react-google-maps';
 import React, { useState } from 'react';
+import type { SearchWorkerHandler } from '../../../worker-search/index';
 import SearchWorker from '../../../worker-search/index?worker';
-import type { SearchResults } from '../../../worker-search/search';
 import { usePromise } from '../../hooks/usePromise';
 import { useWorker } from '../../hooks/useWorker';
 import { makeId } from '../../page-wrapper/alert/make';
@@ -22,15 +22,15 @@ export const sessionToken = makeId(10);
 export function SidebarSearch(props: Props) {
   const map = useGoogleMap();
   const [searchResults, setSearchResults] = useState(emptyResults);
-  const postToSearchWorker = useWorker(SearchWorker);
+  const postToSearchWorker = useWorker(SearchWorker) as SearchWorkerHandler;
 
   usePromise(async () => {
-    const results = await search(map, postToSearchWorker as any, {
+    const results = await search(map, postToSearchWorker, {
       input: props.search,
       offset: props.search.length,
     });
 
-    setSearchResults(results as SearchResults);
+    setSearchResults(results);
   }, [props.search]);
 
   return (

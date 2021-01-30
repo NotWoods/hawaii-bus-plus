@@ -1,16 +1,20 @@
 import { formatDuration } from '@hawaii-bus-plus/presentation';
 import { useGoogleMap } from '@hawaii-bus-plus/react-google-maps';
+import { Temporal } from 'proposal-temporal';
 import React, { useEffect } from 'react';
 import type { RouteDetails } from '../../../worker-info/route-details';
 import type { DirectionDetails } from '../../../worker-info/trip-details';
 import { Icon } from '../../icons/Icon';
 import swapIcon from '../../icons/swap_horiz.svg';
+import { PlainDateTimeInput } from '../../sidebar/directions/DirectionsTime';
 import { StopTimesList } from './StopTimesList';
 
 interface Props {
   details: RouteDetails;
   directionId: number;
+  tripTime: Temporal.PlainDateTime;
   switchDirection?(): void;
+  onChangeTripTime(time: Temporal.PlainDateTime): void;
 }
 
 export function TripDetails(props: Props) {
@@ -35,11 +39,17 @@ export function TripDetails(props: Props) {
             offset={closestTrip.offset}
           />
         </p>
-        {props.switchDirection ? (
-          <a className="btn btn-sm" onClick={props.switchDirection}>
-            <Icon src={swapIcon} alt="" /> Switch direction
-          </a>
-        ) : null}
+        <form className="d-flex">
+          {props.switchDirection ? (
+            <a className="btn btn-sm mr-auto" onClick={props.switchDirection}>
+              <Icon src={swapIcon} alt="" /> Switch direction
+            </a>
+          ) : null}
+          <PlainDateTimeInput
+            value={props.tripTime}
+            onChange={props.onChangeTripTime}
+          />
+        </form>
       </div>
       <hr className="mt-10" />
       <StopTimesList
