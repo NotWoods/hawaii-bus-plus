@@ -18,9 +18,10 @@ export async function loadStop(
   if (!stop) return undefined;
 
   const [transferStops, routes] = await Promise.all([
-    repo.loadStops(stop.transfers.map((t) => t.from_stop_id)),
+    repo.loadStops(stop.transfers.map((t) => t.to_stop_id)),
     repo.loadRoutes(stop.routes),
   ]);
+
   const transfers = stop.transfers.map((t) => ({
     toStop: transferStops.get(t.to_stop_id)!,
     transfer_type: t.transfer_type,

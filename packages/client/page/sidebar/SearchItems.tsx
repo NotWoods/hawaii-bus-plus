@@ -52,12 +52,14 @@ export function RouteSearchItem({
 interface StopSearchItemProps extends SearchItemProps {
   stopId: Stop['stop_id'];
   stopName?: string;
+  stopDesc?: string;
   routes?: readonly Pick<Route, RouteBadgeKeys>[];
 }
 
 export function StopSearchItem({
   stopId,
   stopName = BLANK,
+  stopDesc,
   routes,
   ...props
 }: StopSearchItemProps) {
@@ -67,7 +69,7 @@ export function StopSearchItem({
       href={`?stop=${stopId}`}
       icon={<Icon src={busStopIcon} alt="Bus stop" />}
       title={stopName}
-      subtitle={<RouteBadges routes={routes} />}
+      subtitle={stopDesc || <RouteBadges routes={routes} />}
     />
   );
 }

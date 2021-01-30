@@ -1,9 +1,10 @@
 import React from 'react';
 import type { StopDetails } from '../../worker-info/stop-details';
 import { PlaceResult } from '../router/reducer';
-import { RouteSearchItem } from '../sidebar/SearchItems';
+import { RouteSearchItem, StopSearchItem } from '../sidebar/SearchItems';
 
 export function StopInfo({ stop }: { stop?: StopDetails }) {
+  const transfers = stop?.transfers || [];
   return (
     <>
       <div className="content">
@@ -21,6 +22,20 @@ export function StopInfo({ stop }: { stop?: StopDetails }) {
           />
         ))}
       </div>
+      {transfers.length > 0 && (
+        <div className="content">
+          <h3 className="content-title">Adjacent stops</h3>
+          {stop?.transfers?.map((transfer) => (
+            <StopSearchItem
+              key={transfer.toStop.stop_id}
+              className="px-0"
+              stopId={transfer.toStop.stop_id}
+              stopName={transfer.toStop.stop_name}
+              stopDesc={transfer.toStop.stop_desc}
+            />
+          ))}
+        </div>
+      )}
     </>
   );
 }

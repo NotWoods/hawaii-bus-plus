@@ -48,7 +48,7 @@ export function PlaceCard(props: Props) {
       });
       setDetails(details);
     }
-  }, [props.placeId]);
+  }, [map, props.placeId]);
 
   const position = props.position || details?.location;
   if (position) {

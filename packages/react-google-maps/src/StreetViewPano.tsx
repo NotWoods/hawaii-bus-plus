@@ -5,7 +5,8 @@ export interface StreetViewPanoProps {
   className?: string;
   position: google.maps.LatLngLiteral;
   visible: boolean;
-  onClose(this: google.maps.StreetViewPanorama): void;
+  onClose?(this: google.maps.StreetViewPanorama): void;
+  onStatusChange?(this: google.maps.StreetViewPanorama): void;
 }
 
 const options = {
@@ -17,7 +18,27 @@ const options = {
   linksControl: false,
   enableCloseButton: true,
   controlSize: 32,
+  mode: 'webgl' as const,
 };
+
+function useListener(
+  streetView: google.maps.StreetViewPanorama | undefined,
+  eventName: string,
+  onEvent: ((this: google.maps.StreetViewPanorama) => void) | undefined
+) {
+  useEffect(() => {
+    if (streetView && onEvent) {
+      const listener = google.maps.event.addListener(
+        streetView,
+        eventName,
+        onEvent
+      );
+      return () => listener.remove();
+    } else {
+      return undefined;
+    }
+  }, [streetView, onEvent]);
+}
 
 /**
  * Build a street view panorama.
@@ -28,31 +49,23 @@ export function StreetViewPano(props: StreetViewPanoProps) {
   const [streetView, setStreetView] = useState<
     google.maps.StreetViewPanorama | undefined
   >();
+
   const map = useGoogleMap();
   const { isLoaded, loadError } = useLoadGoogleMaps();
 
   useEffect(() => {
-    if (!isLoaded || loadError) return;
+    if (!isLoaded || loadError) return undefined;
 
     const streetView = new google.maps.StreetViewPanorama(
       divRef.current!,
       options
     );
 
-    const listener = google.maps.event.addListenerOnce(
-      streetView,
-      'closeclick',
-      props.onClose
-    );
     map?.setStreetView(streetView);
 
-    // @ts-ignore
     setStreetView(streetView);
 
-    return () => {
-      listener.remove();
-      map?.setStreetView(null);
-    };
+    return () => map?.setStreetView(null);
   }, [isLoaded, map]);
 
   useEffect(() => {
@@ -61,6 +74,9 @@ export function StreetViewPano(props: StreetViewPanoProps) {
   useEffect(() => {
     streetView?.setVisible(props.visible);
   }, [streetView, props.visible]);
+
+  useListener(streetView, 'closeclick', props.onClose);
+  useListener(streetView, 'status_changed', props.onStatusChange);
 
   if (loadError) {
     const url = new URL('https://maps.googleapis.com/maps/api/streetview');

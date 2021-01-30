@@ -16,7 +16,13 @@ export function PointCard() {
     case 'stop':
       return <StopCard stopId={point.stopId} onClose={onClose} />;
     case 'place':
-      return <PlaceCard placeId={point.placeId} onClose={onClose} />;
+      return (
+        <PlaceCard
+          placeId={point.placeId}
+          position={point.position}
+          onClose={onClose}
+        />
+      );
     case 'user':
     case 'marker':
       return (
