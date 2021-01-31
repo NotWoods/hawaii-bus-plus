@@ -1,6 +1,9 @@
-import { readFile } from 'fs/promises';
+import { readFile } from 'fs';
 import { join } from 'path';
+import { promisify } from 'util';
 import { NetlifyContext, NetlifyEvent, NetlifyResponse } from './types';
+
+const readFileAsync = promisify(readFile);
 
 export async function handler(
   event: NetlifyEvent,
@@ -8,7 +11,7 @@ export async function handler(
 ): Promise<NetlifyResponse> {
   if (event.headers.authorization === `Bearer ${process.env.API_KEY}`) {
     const path = join(__dirname, '../', event.path);
-    const file = await readFile(path, 'utf8');
+    const file = await readFileAsync(path, 'utf8');
     return { statusCode: 200, body: file };
   } else {
     return { statusCode: 401, body: 'Unauthorized' };
