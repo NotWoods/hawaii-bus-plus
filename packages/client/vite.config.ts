@@ -9,10 +9,15 @@ export default defineConfig({
   optimizeDeps: {
     include: ['mnemonist/set'],
   },
+  build: {
+    outDir: '../../dist',
+    emptyOutDir: true,
+    minify: false && process.env.NODE_ENV === 'production',
+  },
   server: {
     proxy: {
-      '/api/ipstack': {
-        target: `http://api.ipstack.com/check?access_key=${'4ab5e9207c5c5db9d7dd29604a7dd6dc'}&fields=latitude,longitude`,
+      '/api/v1/lookup_location': {
+        target: `http://api.ipstack.com/check?access_key=${process.env.IPSTACK_KEY}&fields=latitude,longitude`,
         changeOrigin: true,
         ignorePath: true,
       },

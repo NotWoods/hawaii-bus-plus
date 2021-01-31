@@ -4,6 +4,7 @@
   "version": "5.0.0",
   "scripts": {
     "api": "pnpm run api --filter @hawaii-bus-plus/api-gen",
+    "build": "pnpm run build --filter @hawaii-bus-plus/client",
     "clean": "del-cli packages/**/*.js packages/**/*.d.ts packages/**/*.map packages/**/*.tsbuildinfo packages/client/public/api/**/*.json",
     "dev": "pnpm run dev --filter @hawaii-bus-plus/client",
     "tsc": "tsc --build ."

@@ -10,3 +10,4 @@ dist-ssr
 *.tsbuildinfo
 
 !missing-types.d.ts
+.env

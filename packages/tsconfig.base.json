@@ -19,7 +19,8 @@
     "isolatedModules": true,
     "importHelpers": true,
     "jsx": "react",
-    "skipDefaultLibCheck": true
+    "skipDefaultLibCheck": true,
+    "sourceMap": true
   },
   "include": ["./src"]
 }
