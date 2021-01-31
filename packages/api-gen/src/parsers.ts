@@ -75,7 +75,7 @@ export async function parseRoutes(
   );
   for (const csvRoute of routes) {
     const route = csvRoute as Mutable<Route>;
-    route.agency_id ||= defaultAgency;
+    route.agency_id = route.agency_id || defaultAgency;
     variable.routes[route.route_id] = route;
   }
 }

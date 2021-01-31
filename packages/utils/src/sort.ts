@@ -15,7 +15,7 @@ export function valueNotNull<K, V>(
 export function* skipUntil<T>(list: Iterable<T>, cb: (item: T) => boolean) {
   let found = false;
   for (const item of list) {
-    found ||= cb(item);
+    found = found || cb(item);
     if (found) {
       yield item;
     }
