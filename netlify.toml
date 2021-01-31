@@ -1,17 +1,19 @@
 [build]
   publish = "dist/"
   command = "pnpm run build"
-  functions = "functions/"
+  functions = "dist/functions/"
   environment = { NODE_VERSION = "14.15.3" }
 
 # Production context: all deploys from the Production branch set in your site’s
 # deploy contexts will inherit these settings.
 [context.production]
+  command = 'sed -i "s|{IPSTACK_KEY}|${IPSTACK_KEY}|g" netlify.toml && pnpm run build'
   environment = { NODE_ENV = "production" }
 
 # Deploy Preview context: all deploys generated from a pull/merge request will
 # inherit these settings.
 [context.deploy-preview]
+  command = 'sed -i "s|{IPSTACK_KEY}|${IPSTACK_KEY}|g" netlify.toml && pnpm run build'
   environment = { NODE_ENV = "production" }
 
 # Branch Deploy context: all deploys that are not from a pull/merge request or
@@ -34,9 +36,15 @@
   from = "/api/v1/lookup_location"
   to = "http://api.ipstack.com/check?access_key={IPSTACK_KEY}&fields=latitude,longitude"
 
+  # When you assign an HTTP status code of 200 to a redirect rule, it becomes a rewrite.
+  # This means that the URL in the visitor’s address bar remains the same,
+  # while Netlify’s servers fetch the new location behind the scenes.
+  status = 200
+
 [[redirects]]
   from = "/api/v1/api.json"
   to = "/.netlify/functions/api"
+  status = 200
 
   # By default, redirects won’t be applied if there’s a file with the same
   # path as the one defined in the `from` property. Setting `force` to `true`
@@ -46,10 +54,7 @@
 [[redirects]]
   from = "/api/v1/shapes/*"
   to = "/.netlify/functions/api"
-
-  # By default, redirects won’t be applied if there’s a file with the same
-  # path as the one defined in the `from` property. Setting `force` to `true`
-  # will make the redirect rule take precedence over any existing files.
+  status = 200
   force = true
 
 # The following redirect is intended for use with most SPAs that handle

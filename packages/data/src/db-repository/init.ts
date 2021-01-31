@@ -1,50 +1,84 @@
-import { GTFSData } from '@hawaii-bus-plus/types';
+import {
+  Agency,
+  Calendar,
+  GTFSData,
+  Route,
+  Stop,
+  Trip,
+} from '@hawaii-bus-plus/types';
+import { batch } from '@hawaii-bus-plus/utils';
 import { IDBPDatabase } from 'idb';
-import { GTFSSchema, SearchRoute, SearchStop, SearchTrip } from '../database';
-import { downloadScheduleData } from '../fetch';
-import { getWords } from '../words';
+import { difference } from 'mnemonist/set';
+import {
+  GTFSSchema,
+  SearchRoute,
+  SearchStop,
+  SearchTrip,
+} from '../database.js';
+import { downloadScheduleData } from '../fetch.js';
+import { getWords } from '../words.js';
 
 export async function init(db: IDBPDatabase<GTFSSchema>) {
   return downloadScheduleData().then((api) => initDatabase(db, api));
 }
 
-async function initDatabase(db: IDBPDatabase<GTFSSchema>, api: GTFSData) {
-  const tx = db.transaction(
-    ['routes', 'stops', 'trips', 'calendar', 'agency'],
-    'readwrite'
-  );
-  const jobs: Promise<unknown>[] = [];
+type StoreName = keyof typeof transformers;
 
-  const routeStore = tx.objectStore('routes');
-  for (const r of Object.values(api.routes)) {
+const transformers = {
+  routes(r: Route) {
     const route = r as SearchRoute;
     route.words = getWords(route.route_short_name, route.route_long_name);
-    jobs.push(routeStore.put(route));
-  }
-
-  const tripStore = tx.objectStore('trips');
-  for (const t of api.trips) {
+    return route;
+  },
+  trips(t: Trip) {
     const trip = t as SearchTrip;
     trip.start = t.stop_times[0].departure_time;
-    jobs.push(tripStore.put(trip));
-  }
-
-  const stopStore = tx.objectStore('stops');
-  for (const s of Object.values(api.stops)) {
+    return trip;
+  },
+  stops(s: Stop) {
     const stop = s as SearchStop;
     stop.words = getWords(stop.stop_name, stop.stop_desc);
-    jobs.push(stopStore.put(stop));
+    return stop;
+  },
+  calendar: (calendar: Calendar) => calendar,
+  agency: (agency: Agency) => agency,
+};
+const storeNames = Object.keys(transformers) as StoreName[];
+
+export async function initDatabase(
+  db: IDBPDatabase<GTFSSchema>,
+  api: GTFSData
+) {
+  const tx = db.transaction(storeNames, 'readwrite');
+  const jobs: Promise<unknown>[] = [];
+
+  const existingKeysReady = batch(
+    storeNames,
+    async (storeName) => new Set(await tx.objectStore(storeName).getAllKeys())
+  );
+
+  for (const [storeName, transform] of Object.entries(transformers)) {
+    const name = storeName as StoreName;
+    const store = tx.objectStore(name);
+    for (const item of Object.values(api[name])) {
+      const transformed = transform(item);
+      jobs.push(store.put(transformed));
+    }
   }
 
-  const calendarStore = tx.objectStore('calendar');
-  for (const calendar of Object.values(api.calendar)) {
-    jobs.push(calendarStore.put(calendar));
-  }
+  const nonEmpty = Array.from(await existingKeysReady)
+    .filter(([, keys]) => keys.size > 0)
+    .map(([storeName]) => storeName);
+  const deleteTx = db.transaction(nonEmpty, 'readwrite');
 
-  const agencyStore = tx.objectStore('agency');
-  for (const agency of Object.values(api.agency)) {
-    jobs.push(agencyStore.put(agency));
+  for (const [storeName, existingKeys] of await existingKeysReady) {
+    const removed = difference(
+      existingKeys,
+      new Set(Object.keys(api[storeName]))
+    );
+    for (const key of removed) {
+      jobs.push(deleteTx.objectStore(storeName).delete(key as any));
+    }
   }
-
   await Promise.all(jobs);
 }
