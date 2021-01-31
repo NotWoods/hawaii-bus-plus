@@ -7,7 +7,7 @@ import { removeWords, unique } from '../format';
 export function loadStops(
   db: IDBPDatabase<GTFSSchema>,
   stopIds: Iterable<Stop['stop_id']>
-) {
+): Promise<Map<Stop['stop_id'], Stop>> {
   const { store } = db.transaction('stops');
   return batch(unique(stopIds), (stopId) => store.get(stopId));
 }
@@ -18,7 +18,7 @@ const FIVE_KM_LAT_LNG = 0.05;
 export function loadStopsSpatial(
   db: IDBPDatabase<GTFSSchema>,
   center: google.maps.LatLngLiteral
-) {
+): Promise<Stop[]> {
   const latKeyRange = IDBKeyRange.bound(
     center.lat - FIVE_KM_LAT_LNG,
     center.lat + FIVE_KM_LAT_LNG
