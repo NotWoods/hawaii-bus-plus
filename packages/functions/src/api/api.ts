@@ -13,6 +13,6 @@ export async function handler(
     const file = await readFileAsync(path, 'utf8');
     return { statusCode: 200, body: file };
   } else {
-    return { statusCode: 401, body: 'Unauthorized' };
+    return { statusCode: 401, body: JSON.stringify({ error: 'Unauthorized' }) };
   }
 }
