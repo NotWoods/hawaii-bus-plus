@@ -9,7 +9,7 @@ export async function handler(
   _context: NetlifyContext
 ): Promise<NetlifyResponse> {
   if (event.headers.authorization === `Bearer ${process.env.API_KEY}`) {
-    const path = require.resolve(event.path.replace('/api/', './'));
+    const path = require.resolve(event.path.replace('/api/v1/', './'));
     const file = await readFileAsync(path, 'utf8');
     return { statusCode: 200, body: file };
   } else {
