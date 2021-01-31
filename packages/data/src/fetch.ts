@@ -1,6 +1,8 @@
 import { GTFSData } from '@hawaii-bus-plus/types';
 
-export class UnauthorizedError extends Error {}
+export class UnauthorizedError extends Error {
+  code = 401;
+}
 
 export async function downloadScheduleData(
   apiKey: string,

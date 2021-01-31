@@ -10,6 +10,14 @@ const initWorker = new PromiseWorker(new InitDBWorker());
  */
 export const databaseInitialized = initWorker
   .postMessage(localStorage.getItem('api-key'))
+  .catch((err) => {
+    if (err.code === 401) {
+      // Unauthorized, delete bad API key
+      localStorage.removeItem('api-key');
+    } else {
+      console.error(err);
+    }
+  })
   .then(() => {
     initWorker.terminate();
   });

@@ -29,9 +29,9 @@ import {
   valueNotNull,
 } from '@hawaii-bus-plus/utils';
 import parse from 'csv-parse';
-import { toArray } from 'ix/asynciterable/index.js';
 import { from, zip } from 'ix/iterable/index.js';
 import { filter, map } from 'ix/iterable/operators/index.js';
+import { first, toArray } from 'ix/asynciterable';
 import JSZip, { JSZipObject } from 'jszip';
 import mnemonist from 'mnemonist';
 import type { Mutable } from 'type-fest';
@@ -48,7 +48,10 @@ export async function zipFilesToObject(
       map((file) =>
         file.nodeStream('nodebuffer').pipe(parse({ cast, columns: true }))
       ),
-      map((stream) => toArray(stream))
+      map((parser) => {
+        const iter: AsyncIterable<unknown> = parser;
+        return iter;
+      })
     )
     .pipe((source) => Promise.all(source));
 
@@ -96,16 +99,16 @@ export async function createApiData(
     .pipe((source) => new Map(source));
 
   const json = (await zipFilesToObject(zipFiles)) as {
-    routes: CsvRoute[];
-    trips: CsvTrip[];
-    stops: CsvStop[];
-    calendar: CsvCalendar[];
-    calendar_dates: CsvCalendarDates[];
-    stop_times: CsvStopTime[];
-    feed_info: FeedInfo[];
-    transfers: CsvTransfer[];
-    agency: CsvAgency[];
-    shapes: CsvShape[];
+    routes: AsyncIterable<CsvRoute>;
+    trips: AsyncIterable<CsvTrip>;
+    stops: AsyncIterable<CsvStop>;
+    calendar: AsyncIterable<CsvCalendar>;
+    calendar_dates: AsyncIterable<CsvCalendarDates>;
+    stop_times: AsyncIterable<CsvStopTime>;
+    feed_info: AsyncIterable<FeedInfo>;
+    transfers: AsyncIterable<CsvTransfer>;
+    agency: AsyncIterable<CsvAgency>;
+    shapes: AsyncIterable<CsvShape>;
   };
   const variable: GTFSData = {
     routes: {},
@@ -113,34 +116,49 @@ export async function createApiData(
     calendar: {},
     agency: {},
     trips: [],
-    info: json.feed_info[0],
+    info: undefined as any,
   };
-  json.routes.sort(compareAs((route) => route.route_sort_order));
 
-  for (const csvAgency of json.agency) {
+  // Feed Info
+  const info = await first(json.feed_info);
+  variable.info = info!;
+
+  // Agency
+  for await (const csvAgency of json.agency) {
     variable.agency[csvAgency.agency_id] = csvAgency;
   }
   const agencies = Object.keys(variable.agency) as Agency['agency_id'][];
   const defaultAgency = agencies.length === 1 ? agencies[0] : undefined;
-  for (const csvRoute of json.routes) {
+
+  // Routes
+  const routes = (await toArray(json.routes)).sort(
+    compareAs((route) => route.route_sort_order)
+  );
+  for (const csvRoute of routes) {
     const route = csvRoute as Mutable<Route>;
     route.agency_id ||= defaultAgency!;
     variable.routes[route.route_id] = route;
   }
+
+  // Trips
   const trips = new Map<Trip['trip_id'], Trip>();
-  for (const csvTrip of json.trips) {
+  for await (const csvTrip of json.trips) {
     const trip = csvTrip as Mutable<Trip>;
     trip.stop_times = [];
     variable.trips.push(trip);
     trips.set(trip.trip_id, trip);
   }
+
+  // Transfers
   const transfers = new MultiMap<Stop['stop_id'], Transfer>();
-  for (const csvTransfer of json.transfers) {
+  for await (const csvTransfer of json.transfers) {
     if (csvTransfer.transfer_type !== 3) {
       transfers.set(csvTransfer.from_stop_id, csvTransfer);
     }
   }
-  for (const csvStop of json.stops) {
+
+  // Stops
+  for await (const csvStop of json.stops) {
     const stop: Stop = {
       stop_id: csvStop.stop_id,
       stop_name: csvStop.stop_name,
@@ -154,14 +172,16 @@ export async function createApiData(
     };
     variable.stops[stop.stop_id] = stop;
   }
+
+  // Calendar
   const calendarDates = new MultiMap<
     Calendar['service_id'],
     CsvCalendarDates
   >();
-  for (const csvCalendarDate of json.calendar_dates) {
+  for await (const csvCalendarDate of json.calendar_dates) {
     calendarDates.set(csvCalendarDate.service_id, csvCalendarDate);
   }
-  for (const csvCalendar of json.calendar) {
+  for await (const csvCalendar of json.calendar) {
     const days: Calendar['days'] = [
       csvCalendar.monday,
       csvCalendar.tuesday,
@@ -194,7 +214,9 @@ export async function createApiData(
     };
     variable.calendar[calendar.service_id] = calendar;
   }
-  for (const csvStopTime of json.stop_times) {
+
+  // Stop Times
+  for await (const csvStopTime of json.stop_times) {
     const stopTime = (csvStopTime as unknown) as Mutable<StopTime>;
     delete (csvStopTime as Partial<CsvStopTime>).continuous_drop_off;
     delete (csvStopTime as Partial<CsvStopTime>).drop_off_type;
@@ -234,11 +256,12 @@ export async function createApiData(
     );
   }
 
+  // Shapes
   const shapes = new DefaultMap<Shape['shape_id'], Shape>((shape_id) => ({
     shape_id,
     points: [],
   }));
-  for (const shapePoint of json.shapes) {
+  for await (const shapePoint of json.shapes) {
     const shape = shapes.get(shapePoint.shape_id);
     shape.points.push({
       position: { lat: shapePoint.shape_pt_lat, lng: shapePoint.shape_pt_lon },
