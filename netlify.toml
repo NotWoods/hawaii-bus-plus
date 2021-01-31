@@ -4,6 +4,7 @@
   functions = "dist/functions/"
 [build.environment]
   NODE_VERSION = "14"
+  NODE_ENV = "development"
   NPM_FLAGS="--prefix=/"
 
 # Production context: all deploys from the Production branch set in your site’s
