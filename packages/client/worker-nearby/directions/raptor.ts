@@ -135,7 +135,7 @@ export async function raptorDirections(
   repo: Pick<Repository, 'loadCalendars' | 'loadTrips' | 'loadStops'>,
   sources: readonly Source[],
   departureDate: Temporal.PlainDate
-) {
+): Promise<Map<Stop['stop_id'], Path>> {
   const data = await generateDirectionsData(repo, departureDate);
   const loadStops = stopsLoader(repo);
 

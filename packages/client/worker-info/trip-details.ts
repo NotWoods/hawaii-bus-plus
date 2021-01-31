@@ -92,7 +92,10 @@ export async function findBestTrips(
   routeId: Route['route_id'],
   allCalendars: ReadonlyMap<Calendar['service_id'], Calendar>,
   now: Temporal.PlainDateTime
-) {
+): Promise<{
+  directionDetails: DirectionDetailsResult[];
+  routeStops: Set<Stop['stop_id']>;
+}> {
   const nowTime = new PlainDaysTime(0, now.toPlainTime());
   const nowDate = now.toPlainDate();
 

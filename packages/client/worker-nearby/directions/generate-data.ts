@@ -15,7 +15,7 @@ import { Temporal } from 'proposal-temporal';
  * Different route IDs are generated for use with the algorithm,
  * independent of normal GTFS route IDs.
  */
-export function uniqueRouteId(trip: Trip) {
+export function uniqueRouteId(trip: Trip): DirectionRoute['id'] {
   return trip.stop_times
     .map((st) => st.stop_id)
     .join(',') as DirectionRoute['id'];
