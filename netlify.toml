@@ -73,5 +73,10 @@
     X-XSS-Protection = "1; mode=block"
     Content-Security-Policy = '''frame-ancestors 'none';
     form-action 'none';
+    default-src 'self'
+    img-src 'self' data: *.googleapis.com *.ggpht.com maps.gstatic.com;
+    script-src 'self' maps.googleapis.com;
+    style-src 'self' fonts.googleapis.com;
+    font-src 'self' fonts.gstatic.com;
     manifest-src 'self';
-    base-uri 'none'''
+    base-uri 'none';'''

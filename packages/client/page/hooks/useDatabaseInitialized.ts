@@ -9,7 +9,7 @@ const initWorker = new PromiseWorker(new InitDBWorker());
  * Resolves once the database has been set up.
  */
 export const databaseInitialized = initWorker
-  .postMessage(undefined)
+  .postMessage(localStorage.getItem('api-key'))
   .then(() => {
     initWorker.terminate();
   });

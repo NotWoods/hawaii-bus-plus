@@ -14,7 +14,10 @@ export function ApiProvider(props: { children: ReactNode }) {
   const [api, setApi] = useState<Api | undefined>();
 
   usePromise(async (signal) => {
-    const api = await downloadScheduleData(signal);
+    const api = await downloadScheduleData(
+      localStorage.getItem('api-key')!,
+      signal
+    );
     setApi({
       routes: Object.values(api.routes),
       stops: Object.values(api.stops),

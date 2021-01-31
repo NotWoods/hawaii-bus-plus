@@ -18,8 +18,8 @@ import {
 import { downloadScheduleData } from '../fetch.js';
 import { getWords } from '../words.js';
 
-export async function init(db: IDBPDatabase<GTFSSchema>) {
-  return downloadScheduleData().then((api) => initDatabase(db, api));
+export async function init(apiKey: string, db: IDBPDatabase<GTFSSchema>) {
+  return downloadScheduleData(apiKey).then((api) => initDatabase(db, api));
 }
 
 type StoreName = keyof typeof transformers;
@@ -45,6 +45,12 @@ const transformers = {
 };
 const storeNames = Object.keys(transformers) as StoreName[];
 
+/**
+ * Initialize the database by storing values from the API data.
+ * Old data will be deleted.
+ * @param db Reference to loaded database
+ * @param api API data to store.
+ */
 export async function initDatabase(
   db: IDBPDatabase<GTFSSchema>,
   api: GTFSData
@@ -52,6 +58,7 @@ export async function initDatabase(
   const tx = db.transaction(storeNames, 'readwrite');
   const jobs: Promise<unknown>[] = [];
 
+  // Prepare to gather the existing keys before inserting new items
   const existingKeysReady = batch(
     storeNames,
     async (storeName) => new Set(await tx.objectStore(storeName).getAllKeys())
@@ -66,19 +73,24 @@ export async function initDatabase(
     }
   }
 
-  const nonEmpty = Array.from(await existingKeysReady)
-    .filter(([, keys]) => keys.size > 0)
-    .map(([storeName]) => storeName);
-  const deleteTx = db.transaction(nonEmpty, 'readwrite');
+  // Await here to load the stores that need to be deleted
+  const removedKeys = Array.from(await existingKeysReady)
+    .map(([storeName, keys]) => {
+      const removed = difference(keys, new Set(Object.keys(api[storeName])));
+      return [storeName, removed] as const;
+    })
+    .filter(([, keys]) => keys.size > 0);
+  if (removedKeys.length > 0) {
+    const nonEmpty = removedKeys.map(([storeName]) => storeName);
+    // New transaction because the previous one will be closed by now
+    const deleteTx = db.transaction(nonEmpty, 'readwrite');
 
-  for (const [storeName, existingKeys] of await existingKeysReady) {
-    const removed = difference(
-      existingKeys,
-      new Set(Object.keys(api[storeName]))
-    );
-    for (const key of removed) {
-      jobs.push(deleteTx.objectStore(storeName).delete(key as any));
+    for (const [storeName, removed] of removedKeys) {
+      for (const key of removed) {
+        jobs.push(deleteTx.objectStore(storeName).delete(key as any));
+      }
     }
   }
+
   await Promise.all(jobs);
 }

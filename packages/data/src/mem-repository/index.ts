@@ -20,7 +20,7 @@ export class MemoryRepository implements Repository {
   }
 
   protected init(): Promise<GTFSData> {
-    return downloadScheduleData();
+    return downloadScheduleData(localStorage.getItem('api-key')!);
   }
 
   loadRoutes(
