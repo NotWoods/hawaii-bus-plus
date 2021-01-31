@@ -8,8 +8,8 @@
     "hawaii-bus-plus-api-gen": "./src/cli.js"
   },
   "scripts": {
-    "preapi": "pnpm run build",
-    "api": "pnpm run api:client && pnpm run api:dist",
+    "preapi:client": "pnpm run build",
+    "preapi:dist": "pnpm run build",
     "api:client": "node src/cli.js ../../google_transit.zip ../client/public/api/v1/",
     "api:dist": "node src/cli.js ../../google_transit.zip ../../dist/functions/api/",
     "build": "tsc --build src",
