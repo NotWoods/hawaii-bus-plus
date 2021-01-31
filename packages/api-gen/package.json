@@ -4,11 +4,14 @@
   "private": true,
   "type": "module",
   "module": "./src/index.js",
+  "bin": {
+    "hawaii-bus-plus-api-gen": "./src/cli.js"
+  },
   "scripts": {
     "preapi": "pnpm run build",
     "api": "pnpm run api:client && pnpm run api:dist",
-    "api:client": "node src/cli.js ../../../hawaii-gtfs/pipeline/13_zip/google_transit.zip ../client/public/api/v1/",
-    "api:dist": "node src/cli.js ../../../hawaii-gtfs/pipeline/13_zip/google_transit.zip ../../dist/functions/api/",
+    "api:client": "node src/cli.js ../../google_transit.zip ../client/public/api/v1/",
+    "api:dist": "node src/cli.js ../../google_transit.zip ../../dist/functions/api/",
     "build": "tsc --build src",
     "format": "prettier **/*.ts --write",
     "pretest": "tsc --build test",

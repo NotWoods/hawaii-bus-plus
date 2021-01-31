@@ -6,6 +6,7 @@
   "module": "./src/index.js",
   "scripts": {
     "build": "tsc --build src",
+    "postbuild": "hawaii-bus-plus-api-gen ../../google_transit.zip ../../dist/functions/api",
     "format": "prettier **/*.ts --write",
     "pretest": "tsc --build test",
     "test": "ava"
@@ -16,6 +17,7 @@
     "tslib": "^2.1.0"
   },
   "devDependencies": {
+    "@hawaii-bus-plus/api-gen": "*",
     "@types/aws-lambda": "^8.10.71",
     "@types/node": "^14.14.22",
     "ava": "^3.15.0",

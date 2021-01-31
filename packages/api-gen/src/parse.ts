@@ -108,6 +108,7 @@ export async function createApiData(
   await parseStopTimes(json, variable, trips);
   await otherReady;
 
+  // Sorting and formatting at the end
   variable.trips = Array.from(trips.values())
     .map((t) => {
       const trip = t as Mutable<Trip>;
