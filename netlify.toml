@@ -1,27 +1,25 @@
 [build]
   publish = "dist/"
-  command = "pnpm run build"
+  command = ". netlify.sh"
   functions = "dist/functions/"
 [build.environment]
-  NODE_VERSION = "14.15.3"
+  NODE_VERSION = "14"
   NPM_FLAGS="--prefix=/"
 
 # Production context: all deploys from the Production branch set in your site’s
 # deploy contexts will inherit these settings.
 [context.production]
-  command = 'sed -i "s|{IPSTACK_KEY}|${IPSTACK_KEY}|g" netlify.toml && pnpm run build'
-  environment = { NODE_ENV = "production" }
+  environment = { NETLIFY_CONTEXT = "production" }
 
 # Deploy Preview context: all deploys generated from a pull/merge request will
 # inherit these settings.
 [context.deploy-preview]
-  command = 'sed -i "s|{IPSTACK_KEY}|${IPSTACK_KEY}|g" netlify.toml && pnpm run build'
-  environment = { NODE_ENV = "production" }
+  environment = { NETLIFY_CONTEXT = "deploy-preview" }
 
 # Branch Deploy context: all deploys that are not from a pull/merge request or
 # from the Production branch will inherit these settings.
 [context.branch-deploy]
-  environment = { NODE_ENV = "development" }
+  environment = { NETLIFY_CONTEXT = "branch-deploy" }
 
 # Specific branch context: all deploys from this specific branch will inherit
 # these settings.

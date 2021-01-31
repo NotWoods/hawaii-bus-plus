@@ -12,7 +12,7 @@ export default defineConfig({
   build: {
     outDir: '../../dist',
     emptyOutDir: true,
-    minify: false && process.env.NODE_ENV === 'production',
+    minify: process.env.NETLIFY_CONTEXT === 'production',
   },
   server: {
     proxy: {

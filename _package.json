@@ -4,7 +4,6 @@
   "version": "5.0.0",
   "scripts": {
     "api": "pnpm run api --filter @hawaii-bus-plus/api-gen",
-    "prebuild": "npx pnpm install -r --store=node_modules/.pnpm-store || echo skiping pnpm install",
     "build": "pnpm run build --filter @hawaii-bus-plus/client && pnpm run build --filter @hawaii-bus-plus/functions",
     "clean": "del-cli packages/**/*.js packages/**/*.d.ts packages/**/*.map packages/**/*.tsbuildinfo packages/client/public/api/**/*.json",
     "dev": "pnpm run dev --filter @hawaii-bus-plus/client",
