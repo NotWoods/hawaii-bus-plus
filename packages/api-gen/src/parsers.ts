@@ -10,6 +10,7 @@ import type {
   CsvStopTime,
   CsvTransfer,
   CsvTrip,
+  DateString,
   FeedInfo,
   GTFSData,
   Route,
@@ -20,11 +21,10 @@ import type {
   Transfer,
   Trip,
 } from '@hawaii-bus-plus/types';
-import { first, toArray } from 'ix/asynciterable';
-import { DateString } from '@hawaii-bus-plus/types';
+import { compareAs } from '@hawaii-bus-plus/utils';
+import { first, toArray } from 'ix/asynciterable/index.js';
 import mnemonist from 'mnemonist';
 import type { Mutable } from 'type-fest';
-import { compareAs } from '@hawaii-bus-plus/utils';
 
 const { MultiMap, DefaultMap } = mnemonist;
 
