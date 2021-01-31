@@ -2,7 +2,9 @@
   publish = "dist/"
   command = "pnpm run build"
   functions = "dist/functions/"
-  environment = { NODE_VERSION = "14.15.3" }
+[build.environment]
+  NODE_VERSION = "14.15.3"
+  NPM_FLAGS="--prefix=/"
 
 # Production context: all deploys from the Production branch set in your site’s
 # deploy contexts will inherit these settings.
