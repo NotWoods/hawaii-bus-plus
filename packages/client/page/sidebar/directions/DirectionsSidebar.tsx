@@ -1,6 +1,7 @@
 import { Point } from '@hawaii-bus-plus/presentation';
 import { Temporal } from 'proposal-temporal';
-import React, { useState } from 'react';
+import { h } from 'preact';
+import { useState } from 'preact/hooks';
 import type { NearbyWorkerHandler } from '../../../worker-nearby/nearby';
 import type { Journey } from '../../../worker-nearby/directions/format';
 import DirectionsWorker from '../../../worker-nearby/nearby?worker';

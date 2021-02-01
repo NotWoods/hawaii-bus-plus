@@ -1,5 +1,5 @@
 import type { PolylineProps } from '@react-google-maps/api';
-import { useEffect } from 'react';
+import { useEffect } from 'preact/hooks';
 import { useMap } from '../apply-changes';
 import { useGoogleMap } from '../hooks';
 

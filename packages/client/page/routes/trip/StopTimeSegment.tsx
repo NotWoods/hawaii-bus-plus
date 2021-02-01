@@ -1,6 +1,6 @@
 import { PlainTimeData } from '@hawaii-bus-plus/presentation';
 import { Route } from '@hawaii-bus-plus/types';
-import React, { ReactNode } from 'react';
+import { ComponentChild, h, Fragment } from 'preact';
 import { classNames } from '../../hooks/classnames';
 import { Link } from '../../router/Router';
 import { RouteBadges } from '../../stop/RouteBadge';
@@ -53,7 +53,7 @@ interface Props {
 export function StopTimeSegment(props: Props) {
   const { name, description, routes, first, last, time } = props;
 
-  const stopNotes: ReactNode[] = [];
+  const stopNotes: ComponentChild[] = [];
   if (name) {
     stopNotes.push(
       <p

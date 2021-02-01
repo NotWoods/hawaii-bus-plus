@@ -1,4 +1,5 @@
-import React, { ReactNode, useState } from 'react';
+import { h, ComponentChildren } from 'preact';
+import { useState } from 'preact/hooks';
 import {
   StreetViewPano,
   StreetViewPanoProps,
@@ -6,7 +7,7 @@ import {
 import './StreetViewCard.css';
 
 interface Props extends StreetViewPanoProps {
-  children?: ReactNode;
+  children?: ComponentChildren;
 }
 
 export function StreetViewCard(props: Props) {

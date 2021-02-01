@@ -1,18 +1,11 @@
-import React, {
-  AnchorHTMLAttributes,
-  createContext,
-  DetailedHTMLProps,
-  Dispatch,
-  ReactNode,
-  useContext,
-  useEffect,
-  useReducer,
-} from 'react';
+import { h, createContext, ComponentChildren } from 'preact';
+import { useContext, useEffect, useReducer } from 'preact/hooks';
+import { JSXInternal } from 'preact/src/jsx';
 import { linkAction, RouterAction } from './action';
 import { initStateFromUrl, routerReducer, RouterState } from './reducer';
 
 interface RouterContext extends RouterState {
-  dispatch: Dispatch<RouterAction>;
+  dispatch(action: RouterAction): void;
 }
 
 export const RouterContext = createContext<RouterContext>({
@@ -28,7 +21,7 @@ function path(url: URL | Location) {
 /**
  * Top level provider for sticky alerts
  */
-export function Router(props: { children: ReactNode }) {
+export function Router(props: { children: ComponentChildren }) {
   const [state, dispatch] = useReducer(
     routerReducer,
     new URL(window.location.href),
@@ -68,10 +61,7 @@ export function Router(props: { children: ReactNode }) {
 }
 
 interface LinkProps
-  extends DetailedHTMLProps<
-    AnchorHTMLAttributes<HTMLAnchorElement>,
-    HTMLAnchorElement
-  > {
+  extends Omit<JSXInternal.HTMLAttributes<HTMLAnchorElement>, 'action'> {
   action?: RouterAction;
 }
 
@@ -83,9 +73,9 @@ export function Link({ action, ...props }: LinkProps) {
   return (
     <a
       {...props}
-      onClick={(evt) => {
+      onClick={function (evt) {
         evt.preventDefault();
-        props.onClick?.(evt);
+        props.onClick?.call(this, evt);
         dispatch(action || linkAction(evt.currentTarget.href));
       }}
     />

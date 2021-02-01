@@ -1,10 +1,11 @@
 import { useGoogleMap } from '@hawaii-bus-plus/react-google-maps';
-import React, { useEffect, useState } from 'react';
+import { h } from 'preact';
+import { useEffect, useState } from 'preact/hooks';
 import { convertLatLng } from 'spherical-geometry-js';
 import { useGeolocation } from '../../hooks/useGeolocation';
 import { usePromise } from '../../hooks/usePromise';
-import { Icon } from '../../icons/Icon';
 import locationIcon from '../../icons/gps_fixed.svg';
+import { Icon } from '../../icons/Icon';
 import { UserMarker } from '../PlaceMarker';
 
 export function MyLocationButton() {

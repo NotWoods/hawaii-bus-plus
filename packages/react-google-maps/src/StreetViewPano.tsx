@@ -1,5 +1,6 @@
-import React, { useEffect, useRef } from 'react';
-import { useMap, useListener } from './apply-changes';
+import { h } from 'preact';
+import { useEffect, useRef } from 'preact/hooks';
+import { useListener, useMap } from './apply-changes';
 import { googleMapsApiKey, useGoogleMap, useLoadGoogleMaps } from './hooks';
 
 export interface StreetViewPanoProps {

@@ -1,5 +1,6 @@
 import { MapProvider } from '@hawaii-bus-plus/react-google-maps';
-import React, { useState } from 'react';
+import { h } from 'preact';
+import { useState } from 'preact/hooks';
 import { DirectionsSheet } from './directions/DirectionsSheet';
 import { ApiProvider } from './hooks/useApi';
 import { MainMap } from './map/MainMap';

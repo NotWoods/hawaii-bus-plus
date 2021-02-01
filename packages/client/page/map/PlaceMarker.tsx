@@ -1,5 +1,6 @@
 import { Marker } from '@hawaii-bus-plus/react-google-maps';
-import React, { useContext } from 'react';
+import { h } from 'preact';
+import { useContext } from 'preact/hooks';
 import { RouterContext } from '../router/Router';
 
 const placeIcon = {

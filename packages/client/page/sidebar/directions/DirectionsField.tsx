@@ -1,5 +1,6 @@
 import { Point } from '@hawaii-bus-plus/presentation';
-import React, { ReactNode, useState } from 'react';
+import { ComponentChildren, h } from 'preact';
+import { useState } from 'preact/hooks';
 import type { SearchResults } from '../../../worker-search/search-db';
 import stopIcon from '../../icons/bus_stop.svg';
 import locationIcon from '../../icons/gps_fixed.svg';
@@ -9,7 +10,7 @@ import '../Sidebar.css';
 
 interface Props {
   id: string;
-  label: ReactNode;
+  label: ComponentChildren;
   onChange(data: Point | undefined): void;
   onSearchResults?(results: SearchResults): void;
 }

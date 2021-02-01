@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef } from 'preact/hooks';
 import { useHotkeys } from 'react-hotkeys-hook';
 
 /**

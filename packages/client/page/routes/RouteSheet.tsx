@@ -1,5 +1,6 @@
+import { h } from 'preact';
 import { Temporal } from 'proposal-temporal';
-import React, { useContext, useState } from 'react';
+import { useContext, useState } from 'preact/hooks';
 import type { InfoWorkerHandler } from '../../worker-info/info';
 import InfoWorker from '../../worker-info/info?worker';
 import { databaseInitialized } from '../hooks/useDatabaseInitialized';
@@ -55,7 +56,7 @@ export function RouteSheet() {
     >
       <div className="route-sheet__name px-card py-15 d-flex border-bottom rounded-top dark-mode">
         <h2 className="m-0 font-size-24 font-weight-bold">
-          <RouteName route={route} />
+          {RouteName(route)}
         </h2>
         <CloseButton
           className="ml-auto"

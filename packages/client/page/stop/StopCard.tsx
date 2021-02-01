@@ -1,6 +1,7 @@
 import { center } from '@hawaii-bus-plus/react-google-maps';
 import { Stop } from '@hawaii-bus-plus/types';
-import React, { useState } from 'react';
+import { h } from 'preact';
+import { useState } from 'preact/hooks';
 import { InfoWorkerHandler } from '../../worker-info/info';
 import InfoWorker from '../../worker-info/info?worker';
 import type { StopDetails } from '../../worker-info/stop-details';

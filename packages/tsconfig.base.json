@@ -19,6 +19,8 @@
     "isolatedModules": true,
     "importHelpers": true,
     "jsx": "react",
+    "jsxFactory": "h",
+    "jsxFragmentFactory": "Fragment",
     "skipDefaultLibCheck": true,
     "sourceMap": true
   },

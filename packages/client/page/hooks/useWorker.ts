@@ -1,5 +1,5 @@
 import { PromiseWorker } from '@hawaii-bus-plus/promise-worker';
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'preact/hooks';
 
 /**
  * Set up a worker that lasts as long as the component is mounted.

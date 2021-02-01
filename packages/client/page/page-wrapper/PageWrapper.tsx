@@ -1,12 +1,16 @@
-import React, { ReactNode, useState } from 'react';
+import { ComponentChildren, h } from 'preact';
+import { useState } from 'preact/hooks';
 import { useHotkeys } from 'react-hotkeys-hook';
-import { StickyAlertsList, StickyAlertsProvider } from './alert/StickyAlerts';
 import { classNames } from '../hooks/classnames';
+import { StickyAlertsList, StickyAlertsProvider } from './alert/StickyAlerts';
 
 interface Props {
-  navbar(props: { toggleSidebar(): void; toggleDarkMode(): void }): ReactNode;
-  sidebar: ReactNode;
-  children(darkMode: boolean): ReactNode;
+  navbar(props: {
+    toggleSidebar(): void;
+    toggleDarkMode(): void;
+  }): ComponentChildren;
+  sidebar: ComponentChildren;
+  children(darkMode: boolean): ComponentChildren;
 }
 
 export function PageWrapper(props: Props) {

@@ -1,6 +1,7 @@
-import { Shape } from '@hawaii-bus-plus/types';
 import { Polyline } from '@hawaii-bus-plus/react-google-maps';
-import React, { useMemo, useState } from 'react';
+import { Shape } from '@hawaii-bus-plus/types';
+import { h } from 'preact';
+import { useMemo, useState } from 'preact/hooks';
 import { usePromise } from '../hooks/usePromise';
 
 interface Props {

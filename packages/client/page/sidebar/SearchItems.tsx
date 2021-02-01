@@ -1,5 +1,5 @@
 import { Route, Stop } from '@hawaii-bus-plus/types';
-import React from 'react';
+import { h } from 'preact';
 import { RequireAtLeastOne } from 'type-fest';
 import busStopIcon from '../icons/bus_stop.svg';
 import { Icon } from '../icons/Icon';

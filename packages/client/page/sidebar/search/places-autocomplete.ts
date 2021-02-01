@@ -1,5 +1,5 @@
 import { memoize } from '@hawaii-bus-plus/utils';
-import type { SearchWorkerHandler } from '../../../worker-search';
+import type { SearchWorkerHandler } from '../../../worker-search/search';
 import type { SearchRequest } from '../../../worker-search/helpers';
 import type { SearchResults } from '../../../worker-search/search-db';
 import { databaseInitialized } from '../../hooks/useDatabaseInitialized';

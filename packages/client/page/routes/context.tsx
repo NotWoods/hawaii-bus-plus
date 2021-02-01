@@ -1,4 +1,5 @@
-import React, { createContext, ReactNode, useState } from 'react';
+import { createContext, h, ComponentChildren } from 'preact';
+import { useState } from 'preact/hooks';
 import type { RouteDetails } from '../../worker-info/route-details';
 
 interface RouteDetailContext {
@@ -19,7 +20,7 @@ function validIndexes(directions?: readonly unknown[]) {
   return result;
 }
 
-export function RouteDetailProvider(props: { children: ReactNode }) {
+export function RouteDetailProvider(props: { children: ComponentChildren }) {
   const [details, setDetailState] = useState<RouteDetails | undefined>();
 
   const directionIds = validIndexes(details?.directions);

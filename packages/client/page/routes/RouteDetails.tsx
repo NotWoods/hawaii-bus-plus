@@ -1,5 +1,5 @@
 import { Agency, Route } from '@hawaii-bus-plus/types';
-import React, { Fragment } from 'react';
+import { Fragment, h } from 'preact';
 import { Icon } from '../icons/Icon';
 import fareIcon from '../icons/monetization_on.svg';
 import webIcon from '../icons/web.svg';

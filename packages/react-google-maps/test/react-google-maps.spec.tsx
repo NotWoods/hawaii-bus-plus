@@ -1,9 +1,10 @@
 import test from 'ava';
-import React, { useContext } from 'react';
 import enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import { MapProvider, MapSetterContext } from '../src/MapProvider.js';
+import { h, Fragment } from 'preact';
+import { useContext } from 'preact/hooks';
 import { useGoogleMap } from '../src/hooks.js';
+import { MapProvider, MapSetterContext } from '../src/MapProvider.js';
 
 const { shallow, configure } = enzyme;
 

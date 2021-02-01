@@ -1,4 +1,4 @@
-import React from 'react';
+import { h, Fragment } from 'preact';
 
 export interface Props {
   children: React.ReactNode;

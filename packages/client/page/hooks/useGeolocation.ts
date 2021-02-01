@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'preact/hooks';
 import { locationFromIp } from '../map/location/ipstack';
 
 function usePermission(permissionDesc: Parameters<Permissions['query']>[0]) {

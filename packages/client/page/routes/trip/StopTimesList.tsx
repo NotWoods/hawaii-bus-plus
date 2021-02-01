@@ -1,7 +1,7 @@
 import { StopTimeData } from '@hawaii-bus-plus/presentation';
 import { Stop } from '@hawaii-bus-plus/types';
 import { lastIndex, skipUntil } from '@hawaii-bus-plus/utils';
-import React from 'react';
+import { h } from 'preact';
 import { StopTimeItem } from './StopTimesItem';
 
 interface Props {

@@ -1,5 +1,5 @@
 import { formatPlainTime, PlainTimeData } from '@hawaii-bus-plus/presentation';
-import React from 'react';
+import { h } from 'preact';
 
 interface Props {
   time: PlainTimeData;

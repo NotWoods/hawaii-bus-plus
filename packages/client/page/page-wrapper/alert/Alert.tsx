@@ -1,4 +1,4 @@
-import React from 'react';
+import { h } from 'preact';
 import { classNames } from '../../hooks/classnames';
 import { CloseButton } from './CloseButton';
 

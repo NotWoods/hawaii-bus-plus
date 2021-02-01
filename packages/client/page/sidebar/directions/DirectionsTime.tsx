@@ -1,5 +1,6 @@
 import { Temporal } from 'proposal-temporal';
-import React, { useState } from 'react';
+import { h } from 'preact';
+import { useState } from 'preact/hooks';
 import '../Sidebar.css';
 
 interface InputProps<T> {

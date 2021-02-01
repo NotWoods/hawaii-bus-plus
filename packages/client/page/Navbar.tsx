@@ -1,4 +1,4 @@
-import React from 'react';
+import { h } from 'preact';
 import darkModeIcon from './icons/dark_mode.svg';
 import { Icon } from './icons/Icon';
 import menuIcon from './icons/menu.svg';

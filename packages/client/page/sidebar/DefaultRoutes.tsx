@@ -1,4 +1,4 @@
-import React from 'react';
+import { h, Fragment } from 'preact';
 import { useApi } from '../hooks/useApi';
 import directionsIcon from '../icons/directions.svg';
 import { Icon } from '../icons/Icon';

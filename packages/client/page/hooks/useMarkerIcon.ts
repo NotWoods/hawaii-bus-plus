@@ -1,10 +1,10 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'preact/hooks';
 
 const size = 104;
 
 export function useMarkerIcon(fillColor: string, ringColor: string = 'black') {
-  const canvasRef = useRef<HTMLCanvasElement>();
-  const ctxRef = useRef<CanvasRenderingContext2D | null>();
+  const canvasRef = useRef<HTMLCanvasElement | undefined>();
+  const ctxRef = useRef<CanvasRenderingContext2D | null | undefined>();
 
   useEffect(() => {
     const canvas = document.createElement('canvas');

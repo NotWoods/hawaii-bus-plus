@@ -1,6 +1,7 @@
 import { center, useGoogleMap } from '@hawaii-bus-plus/react-google-maps';
 import { memoize } from '@hawaii-bus-plus/utils';
-import React, { useState } from 'react';
+import { h } from 'preact';
+import { useState } from 'preact/hooks';
 import { usePromise } from '../hooks/usePromise';
 import { PlaceResult } from '../router/reducer';
 import { buildSessionToken } from '../sidebar/search/places-autocomplete';

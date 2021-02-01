@@ -1,5 +1,6 @@
-import React, { createContext, ReactNode, useState } from 'react';
-import { MapContext } from '@react-google-maps/api';
+import { ComponentChildren, createContext, h } from 'preact';
+import { useState } from 'preact/hooks';
+import { MapContext } from './hooks';
 
 type MapSetterContext = (map: google.maps.Map) => void;
 
@@ -10,7 +11,7 @@ export const MapSetterContext = createContext<MapSetterContext>(() => {});
  * This can be used with `GoogleMapsPortal` to expose a google map to sibling elements,
  * such as a street view panorama.
  */
-export function MapProvider(props: { children?: ReactNode }) {
+export function MapProvider(props: { children?: ComponentChildren }) {
   const [map, setMap] = useState<google.maps.Map | null>(null);
 
   return (

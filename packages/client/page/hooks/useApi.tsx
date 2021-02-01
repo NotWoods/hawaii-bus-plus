@@ -1,6 +1,7 @@
 import { downloadScheduleData } from '@hawaii-bus-plus/data';
 import { Route, Stop } from '@hawaii-bus-plus/types';
-import React, { createContext, ReactNode, useContext, useState } from 'react';
+import { ComponentChildren, createContext, h } from 'preact';
+import { useContext, useState } from 'preact/hooks';
 import { usePromise } from '../hooks/usePromise';
 
 interface Api {
@@ -8,9 +9,19 @@ interface Api {
   stops: readonly Stop[];
 }
 
+declare module 'preact/hooks' {
+  export function useState<S>(
+    initialState: S | (() => S)
+  ): [S, StateUpdater<S>];
+  export function useState<S = undefined>(): [
+    S | undefined,
+    StateUpdater<S | undefined>
+  ];
+}
+
 const ApiContext = createContext<Api | undefined>(undefined);
 
-export function ApiProvider(props: { children: ReactNode }) {
+export function ApiProvider(props: { children: ComponentChildren }) {
   const [api, setApi] = useState<Api | undefined>();
 
   usePromise(async (signal) => {

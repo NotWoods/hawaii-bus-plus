@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'preact/hooks';
 
 export function useMap<T>(
   map: google.maps.Map | null | undefined,
@@ -7,7 +7,7 @@ export function useMap<T>(
     map: google.maps.Map
   ) => () => void
 ) {
-  const [instance, setInstance] = useState<T | undefined>();
+  const [instance, setInstance] = useState<T | undefined>(undefined);
   useEffect(() => {
     if (!map) return undefined;
     const onUnmount = effect(setInstance, map);
@@ -21,7 +21,7 @@ export function useMap<T>(
 }
 
 export function useListener<T extends google.maps.MVCObject>(
-  target: T | undefined,
+  target: T | null | undefined,
   eventName: string,
   handler: ((this: T, ...args: any[]) => void) | undefined
 ) {

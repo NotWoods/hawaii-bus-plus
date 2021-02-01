@@ -4,7 +4,8 @@ import {
   GoogleMapPortal,
   mapTypeControlOptions,
 } from '@hawaii-bus-plus/react-google-maps';
-import React, { useContext, useMemo } from 'react';
+import { h } from 'preact';
+import { useContext, useMemo } from 'preact/hooks';
 import { openPlace, setMarker } from '../router/action';
 import { RouterContext } from '../router/Router';
 import { PlaceMarker } from './PlaceMarker';
@@ -42,8 +43,8 @@ export function MainMap(props: Props) {
   return (
     <GoogleMapPortal
       mapContainerClassName="map w-full h-full position-fixed"
-      center={center}
-      zoom={9}
+      defaultCenter={center}
+      defaultZoom={9}
       options={options}
       onClick={handleClick}
     >

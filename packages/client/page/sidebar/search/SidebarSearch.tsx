@@ -1,5 +1,6 @@
 import { useGoogleMap } from '@hawaii-bus-plus/react-google-maps';
-import React, { useState } from 'react';
+import { h, Fragment } from 'preact';
+import { useState } from 'preact/hooks';
 import type { SearchWorkerHandler } from '../../../worker-search/search';
 import SearchWorker from '../../../worker-search/search?worker';
 import { usePromise } from '../../hooks/usePromise';

@@ -1,7 +1,8 @@
 import { formatDuration } from '@hawaii-bus-plus/presentation';
 import { useGoogleMap } from '@hawaii-bus-plus/react-google-maps';
+import { h, Fragment } from 'preact';
+import { useEffect } from 'preact/hooks';
 import { Temporal } from 'proposal-temporal';
-import React, { useEffect } from 'react';
 import type { RouteDetails } from '../../../worker-info/route-details';
 import type { DirectionDetails } from '../../../worker-info/trip-details';
 import { Icon } from '../../icons/Icon';

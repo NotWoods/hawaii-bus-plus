@@ -1,4 +1,4 @@
-import React from 'react';
+import { h, Fragment } from 'preact';
 import type { StopDetails } from '../../worker-info/stop-details';
 import { PlaceResult } from '../router/reducer';
 import { RouteSearchItem, StopSearchItem } from '../sidebar/SearchItems';

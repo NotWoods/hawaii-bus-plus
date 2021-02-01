@@ -1,4 +1,5 @@
-import React, { ReactNode, useState } from 'react';
+import { ComponentChildren, h } from 'preact';
+import { useState } from 'preact/hooks';
 import { useAccessKey } from '../hooks/useAccessKey';
 import { SidebarContainer } from '../page-wrapper/Containers';
 import { DefaultRoutes } from './DefaultRoutes';
@@ -13,7 +14,7 @@ export function Sidebar(props: Props) {
   const inputRef = useAccessKey<HTMLInputElement>('shift+f');
   const [search, setSearch] = useState('');
 
-  let children: ReactNode;
+  let children: ComponentChildren;
   if (search) {
     children = <SidebarSearch search={search} />;
   } else {

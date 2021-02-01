@@ -1,5 +1,4 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import { h, render } from 'preact';
 import 'halfmoon/css/halfmoon-variables.css';
 import { App } from './App';
 
@@ -11,9 +10,4 @@ import { App } from './App';
   }
 }
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+render(<App />, document.getElementById('root')!);

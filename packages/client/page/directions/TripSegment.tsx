@@ -1,5 +1,6 @@
 import { StopTimeData } from '@hawaii-bus-plus/presentation';
-import React, { useState } from 'react';
+import { h } from 'preact';
+import { useState } from 'preact/hooks';
 import { JourneyTripSegment } from '../../worker-nearby/directions/format';
 import { classNames } from '../hooks/classnames';
 import expandIcon from '../icons/expand_more.svg';
@@ -24,7 +25,7 @@ export function TripSegment(props: Props) {
   return (
     <div className="card m-0 p-15" style={colorVariables(route)}>
       <h3 className="content-title font-size-16 m-0 font-weight-bold">
-        <RouteName route={route} />
+        {RouteName(route)}
       </h3>
       <h4 className="content-title font-size-16 m-0">{trip.trip_short_name}</h4>
       <StopTimeSegment

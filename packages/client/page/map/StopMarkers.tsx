@@ -1,6 +1,7 @@
-import { Stop } from '@hawaii-bus-plus/types';
 import { Marker } from '@hawaii-bus-plus/react-google-maps';
-import React, { useContext, useState } from 'react';
+import { Stop } from '@hawaii-bus-plus/types';
+import { h, Fragment } from 'preact';
+import { useContext, useState } from 'preact/hooks';
 import { useApi } from '../hooks/useApi';
 import { useMarkerIcon } from '../hooks/useMarkerIcon';
 import { usePromise } from '../hooks/usePromise';

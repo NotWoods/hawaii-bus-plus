@@ -1,4 +1,5 @@
-import React, { useContext } from 'react';
+import { h } from 'preact';
+import { useContext } from 'preact/hooks';
 import { closeStopAction } from '../router/action';
 import { RouterContext } from '../router/Router';
 import { PlaceCard } from './PlaceCard';

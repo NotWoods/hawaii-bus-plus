@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import { h, ComponentChild, Fragment } from 'preact';
 import { Route } from '@hawaii-bus-plus/types';
 import { classNames } from '../hooks/classnames';
 import { colorProps } from '../routes/props';
@@ -43,7 +43,7 @@ interface RouteBadgesProps {
  * Displays a list of badges representing routes that a stop connects to.
  */
 export function RouteBadges({ routes, omit, clear }: RouteBadgesProps) {
-  const badges: ReactNode[] = [];
+  const badges: ComponentChild[] = [];
   for (const route of routes || []) {
     if (route.route_id !== omit) {
       badges.push(<RouteBadge key={route.route_id} route={route} />);

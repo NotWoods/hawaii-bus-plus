@@ -1,5 +1,5 @@
 import { formatWalkingTime, Walking } from '@hawaii-bus-plus/presentation';
-import React from 'react';
+import { h } from 'preact';
 import { StopTimeSegment } from '../routes/trip/StopTimeSegment';
 
 interface Props {

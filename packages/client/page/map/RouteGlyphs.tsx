@@ -1,4 +1,5 @@
-import React, { ReactNode, useContext } from 'react';
+import { ComponentChildren, h, Fragment } from 'preact';
+import { useContext } from 'preact/hooks';
 import { RouteDetailContext } from '../routes/context';
 import { ShapeLine } from './ShapeLine';
 import { StopMarkers } from './StopMarkers';
@@ -10,7 +11,7 @@ interface Props {
 export function RouteGlyphs({ darkMode }: Props) {
   const { details, directionId } = useContext(RouteDetailContext);
 
-  let shape: ReactNode = null;
+  let shape: ComponentChildren = null;
   if (details) {
     const { trip } = details.directions[directionId].closestTrip;
     shape = (

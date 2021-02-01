@@ -1,4 +1,5 @@
-import React, { useContext, createContext, ReactNode, useState } from 'react';
+import { ComponentChildren, createContext, h } from 'preact';
+import { useContext, useState } from 'preact/hooks';
 import { Alert, AlertProps } from './Alert';
 import { makeId } from './make';
 
@@ -21,7 +22,7 @@ const StickyAlertsContext = createContext<Context>({
 /**
  * Top level provider for sticky alerts
  */
-export function StickyAlertsProvider(props: { children: ReactNode }) {
+export function StickyAlertsProvider(props: { children: ComponentChildren }) {
   const [alerts, setAlerts] = useState(new Map<AlertData, string>());
   const [keys, setKeys] = useState(new WeakMap<AlertData, string>());
 

@@ -1,8 +1,8 @@
-import { DependencyList, useEffect } from 'react';
+import { Inputs, useEffect } from 'preact/hooks';
 
 export function usePromise(
   effect: (signal: AbortSignal) => Promise<void>,
-  deps?: DependencyList
+  deps?: Inputs
 ) {
   useEffect(() => {
     const controller = new AbortController();

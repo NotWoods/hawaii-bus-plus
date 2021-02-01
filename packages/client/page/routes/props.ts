@@ -15,5 +15,5 @@ export function colorVariables(
   return {
     '--route-color': `#${route.route_color}`,
     '--route-text-color': `#${route.route_text_color}`,
-  } as React.CSSProperties;
+  };
 }
