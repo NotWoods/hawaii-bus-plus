@@ -18,7 +18,6 @@
     "@hawaii-bus-plus/react-google-maps": "*",
     "@hawaii-bus-plus/types": "*",
     "@hawaii-bus-plus/utils": "*",
-    "@react-google-maps/api": "^2.1.1",
     "halfmoon": "^1.1.1",
     "idb": "^6.0.0",
     "mnemonist": "^0.38.1",

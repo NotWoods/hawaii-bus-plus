@@ -1,7 +1,7 @@
 import { useGoogleMap } from '@hawaii-bus-plus/react-google-maps';
 import React, { useState } from 'react';
-import type { SearchWorkerHandler } from '../../../worker-search/index';
-import SearchWorker from '../../../worker-search/index?worker';
+import type { SearchWorkerHandler } from '../../../worker-search/search';
+import SearchWorker from '../../../worker-search/search?worker';
 import { usePromise } from '../../hooks/usePromise';
 import { useWorker } from '../../hooks/useWorker';
 import { makeId } from '../../page-wrapper/alert/make';

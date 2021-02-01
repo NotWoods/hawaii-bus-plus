@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
+import { useMap, useListener } from './apply-changes';
 import { googleMapsApiKey, useGoogleMap, useLoadGoogleMaps } from './hooks';
 
 export interface StreetViewPanoProps {
@@ -21,52 +22,31 @@ const options = {
   mode: 'webgl' as const,
 };
 
-function useListener(
-  streetView: google.maps.StreetViewPanorama | undefined,
-  eventName: string,
-  onEvent: ((this: google.maps.StreetViewPanorama) => void) | undefined
-) {
-  useEffect(() => {
-    if (streetView && onEvent) {
-      const listener = google.maps.event.addListener(
-        streetView,
-        eventName,
-        onEvent
-      );
-      return () => listener.remove();
-    } else {
-      return undefined;
-    }
-  }, [streetView, onEvent]);
-}
-
 /**
  * Build a street view panorama.
  * Fallbacks to an image if the Google Maps API hasn't loaded.
  */
 export function StreetViewPano(props: StreetViewPanoProps) {
   const divRef = useRef(null);
-  const [streetView, setStreetView] = useState<
-    google.maps.StreetViewPanorama | undefined
-  >();
 
   const map = useGoogleMap();
-  const { isLoaded, loadError } = useLoadGoogleMaps();
+  const { loadError } = useLoadGoogleMaps();
 
-  useEffect(() => {
-    if (!isLoaded || loadError) return undefined;
+  const streetView = useMap<google.maps.StreetViewPanorama>(
+    map,
+    (setInstance) => {
+      const streetView = new google.maps.StreetViewPanorama(
+        divRef.current!,
+        options
+      );
 
-    const streetView = new google.maps.StreetViewPanorama(
-      divRef.current!,
-      options
-    );
+      map!.setStreetView(streetView);
 
-    map?.setStreetView(streetView);
+      setInstance(streetView);
 
-    setStreetView(streetView);
-
-    return () => map?.setStreetView(null);
-  }, [isLoaded, map]);
+      return () => map!.setStreetView(null);
+    }
+  );
 
   useEffect(() => {
     streetView?.setPosition(props.position);

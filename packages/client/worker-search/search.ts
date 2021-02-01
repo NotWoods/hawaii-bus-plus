@@ -1,46 +1,12 @@
-import { Repository } from '@hawaii-bus-plus/data';
-import { Route, Stop } from '@hawaii-bus-plus/types';
-import { applyOffset, SearchRequest } from './helpers';
+import { makeRepository } from '@hawaii-bus-plus/data';
+import { registerPromiseWorker } from '@hawaii-bus-plus/promise-worker/worker';
+import { SearchRequest } from './helpers';
+import { search, SearchResults } from './search-db';
 
-interface StopSearchResult extends Pick<Stop, 'stop_id' | 'stop_name'> {
-  routes: Route[];
+const repo = makeRepository();
+
+export interface SearchWorkerHandler {
+  (message: SearchRequest): Promise<SearchResults>;
 }
 
-export interface SearchResults {
-  places: readonly google.maps.places.AutocompletePrediction[];
-  routes: readonly Route[];
-  stops: readonly StopSearchResult[];
-}
-
-export function search(
-  repo: Pick<Repository, 'loadRoutes' | 'searchRoutes' | 'searchStops'>,
-  request: SearchRequest
-): Promise<SearchResults> {
-  //const placeSearchReady = getPlacePredictions(request);
-
-  const searchTerm = applyOffset(request.input, request.offset);
-  const routeSearchReady = repo.searchRoutes(searchTerm, 3);
-  const stopSearchReady = repo.searchStops(searchTerm, 3).then(
-    async (stops): Promise<StopSearchResult[]> => {
-      const routeIds = new Set(stops.flatMap((stop) => stop.routes));
-      const routes = await repo.loadRoutes(routeIds);
-      return stops.map((stop) => ({
-        stop_id: stop.stop_id,
-        stop_name: stop.stop_name,
-        routes: stop.routes.map((routeId) => routes.get(routeId)!),
-      }));
-    }
-  );
-
-  return Promise.all([
-    [], // placeSearchReady,
-    routeSearchReady,
-    stopSearchReady,
-  ]).then(([placeSearch, routeSearch, stopSearch]) => {
-    return {
-      places: placeSearch,
-      routes: routeSearch,
-      stops: stopSearch,
-    };
-  });
-}
+registerPromiseWorker((message: SearchRequest) => search(repo, message));

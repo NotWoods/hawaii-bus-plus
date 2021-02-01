@@ -1,4 +1,4 @@
-import { Marker } from '@react-google-maps/api';
+import { Marker } from '@hawaii-bus-plus/react-google-maps';
 import React, { useContext } from 'react';
 import { RouterContext } from '../router/Router';
 

@@ -51,7 +51,6 @@ importers:
       '@hawaii-bus-plus/react-google-maps': 'link:../react-google-maps'
       '@hawaii-bus-plus/types': 'link:../types'
       '@hawaii-bus-plus/utils': 'link:../utils'
-      '@react-google-maps/api': 2.1.1_react-dom@17.0.1+react@17.0.1
       halfmoon: 1.1.1
       idb: 6.0.0
       mnemonist: 0.38.1
@@ -83,7 +82,6 @@ importers:
       '@hawaii-bus-plus/react-google-maps': '*'
       '@hawaii-bus-plus/types': '*'
       '@hawaii-bus-plus/utils': '*'
-      '@react-google-maps/api': ^2.1.1
       '@testing-library/react': ^11.2.3
       '@types/googlemaps': ^3.43.2
       '@types/jest': ^26.0.20
@@ -806,20 +804,6 @@ packages:
       node: '>= 8'
     resolution:
       integrity: sha512-8Broas6vTtW4GIXTAHDoE32hnN2M5ykgCpWGbuXHQ15vEMqr23pB76e/GZcYsZCHALv50ktd24qhEyKr6wBtow==
-  /@react-google-maps/api/2.1.1_react-dom@17.0.1+react@17.0.1:
-    dependencies:
-      '@googlemaps/js-api-loader': 1.11.1
-      '@react-google-maps/infobox': 2.1.1
-      '@react-google-maps/marker-clusterer': 2.1.1
-      invariant: 2.2.4
-      react: 17.0.1
-      react-dom: 17.0.1_react@17.0.1
-    dev: false
-    peerDependencies:
-      react: ^16.6.3 || ^17.0.0
-      react-dom: ^16.6.3 || ^17.0.0
-    resolution:
-      integrity: sha512-Z/dcaDDfZD4DFnE1GhdHOIFHZ+VocEt6Ixe82f0f9tL/J0CZBQvfJ3V8RogY9fVraxdKIwnQx75U0O1JVqqBnw==
   /@react-google-maps/api/2.1.1_react@17.0.1:
     dependencies:
       '@googlemaps/js-api-loader': 1.11.1

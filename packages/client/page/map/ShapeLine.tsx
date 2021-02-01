@@ -1,6 +1,6 @@
 import { Shape } from '@hawaii-bus-plus/types';
-import { Polyline } from '@react-google-maps/api';
-import React, { useState } from 'react';
+import { Polyline } from '@hawaii-bus-plus/react-google-maps';
+import React, { useMemo, useState } from 'react';
 import { usePromise } from '../hooks/usePromise';
 
 interface Props {
@@ -33,12 +33,13 @@ export function ShapeLine(props: Props) {
     [props.shapeId]
   );
 
+  const options = useMemo(() => ({ strokeColor: `#${props.routeColor}` }), [
+    props.routeColor,
+  ]);
+
   if (!shape) return null;
 
   return (
-    <Polyline
-      path={shape.points.map((p) => p.position)}
-      options={{ strokeColor: `#${props.routeColor}` }}
-    />
+    <Polyline path={shape.points.map((p) => p.position)} options={options} />
   );
 }
