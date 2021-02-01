@@ -79,8 +79,8 @@ importers:
       '@types/jest': 26.0.20
       '@types/react': 17.0.0
       cross-env: 7.0.3
-      esbuild: 0.8.36
-      esbuild-jest: 0.3.0_esbuild@0.8.36
+      esbuild: 0.8.39
+      esbuild-jest: 0.3.0_esbuild@0.8.39
       jest: 26.6.3
       prettier: 2.2.1
       type-fest: 0.20.2
@@ -98,7 +98,7 @@ importers:
       '@types/jest': ^26.0.20
       '@types/react': ^17.0.0
       cross-env: ^7.0.3
-      esbuild: ^0.8.36
+      esbuild: ^0.8.39
       esbuild-jest: ^0.3.0
       halfmoon: ^1.1.1
       idb: ^6.0.0
@@ -2480,26 +2480,26 @@ packages:
       node: '>= 0.4'
     resolution:
       integrity: sha512-QCOllgZJtaUo9miYBcLChTUaHNjJF3PYs1VidD7AwiEj1kYxKeQTctLAezAOH5ZKRH0g2IgPn6KwB4IT8iRpvA==
-  /esbuild-jest/0.3.0_esbuild@0.8.36:
+  /esbuild-jest/0.3.0_esbuild@0.8.39:
     dependencies:
-      esbuild: 0.8.36
+      esbuild: 0.8.39
     dev: true
     peerDependencies:
       esbuild: '>=0.8.16'
     resolution:
       integrity: sha512-J1ZHN4IbQiLJAsCMK2XkPYZsTrD8ius+1B09RVqfrvmT+BnwGdR6CLvRq6DGopOaEmdkr4AIk/J6LQUhRQDsSg==
-  /esbuild/0.8.36:
-    dev: true
-    hasBin: true
-    requiresBuild: true
-    resolution:
-      integrity: sha512-kcUQB61Tf8rLJ3mOwP2ruWi/iFufaQcEs4No+JA6e7W2kMOtFExOsbyeFpEF6zNacwk2RF5fYUz5jfZwgn/SJg==
   /esbuild/0.8.38:
     dev: true
     hasBin: true
     requiresBuild: true
     resolution:
       integrity: sha512-wSunJl8ujgBs9eVGubc8Y6fn/DkDjNyfQBVOFTY1E7sRxr8KTjmqyLIiE0M3Z4CjMnCu/rttCugwnOzY+HiwIw==
+  /esbuild/0.8.39:
+    dev: true
+    hasBin: true
+    requiresBuild: true
+    resolution:
+      integrity: sha512-/do5H74a5ChyeKRWfkDh3EpICXpsz6dWTtFFbotb7BlIHvWqnRrZYDb8IBubOHdEtKzuiksilRO19aBtp3/HHQ==
   /escalade/3.1.1:
     dev: true
     engines:

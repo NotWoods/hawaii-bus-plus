@@ -31,7 +31,8 @@ jobs:
         run: pnpm recursive install --frozen-lockfile
         if: steps.cache.outputs.cache-hit != 'true'
 
-      - run: pnpm recursive run format --no-bail
+      - name: pnpm run format
+        run: pnpm recursive run format --no-bail
 
   test:
     runs-on: ubuntu-latest
@@ -57,4 +58,5 @@ jobs:
         run: pnpm recursive install --frozen-lockfile
         if: steps.cache.outputs.cache-hit != 'true'
 
-      - run: pnpm recursive test --no-bail
+      - name: pnpm test
+        run: pnpm recursive test --no-bail
