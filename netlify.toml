@@ -1,6 +1,6 @@
 [build]
   publish = "dist/"
-  command = ". netlify.sh"
+  command = ". scripts/app.sh"
   functions = "dist/functions/"
 [build.environment]
   NODE_VERSION = "14"
@@ -21,12 +21,6 @@
 # from the Production branch will inherit these settings.
 [context.branch-deploy]
   environment = { NETLIFY_CONTEXT = "branch-deploy" }
-
-# Specific branch context: all deploys from this specific branch will inherit
-# these settings.
-[context.staging] # “staging” is a branch name
-  command = "echo 'staging'"
-  base = "staging"
 
 # Redirects and headers are GLOBAL for all builds – they do not get scoped to
 # contexts no matter where you define them in the file.
