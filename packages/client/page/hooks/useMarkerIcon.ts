@@ -1,10 +1,11 @@
-import { useEffect, useRef } from 'preact/hooks';
+import { useEffect, useRef, useState } from 'preact/hooks';
 
 const size = 104;
 
 export function useMarkerIcon(fillColor: string, ringColor: string = 'black') {
   const canvasRef = useRef<HTMLCanvasElement | undefined>();
   const ctxRef = useRef<CanvasRenderingContext2D | null | undefined>();
+  const [dataUrl, setDataUrl] = useState<string | undefined>();
 
   useEffect(() => {
     const canvas = document.createElement('canvas');
@@ -40,8 +41,10 @@ export function useMarkerIcon(fillColor: string, ringColor: string = 'black') {
       ctx.arc(size / 2, size / 2, 24, 0, Math.PI * 2);
       ctx.fill();
       ctx.stroke();
+
+      setDataUrl(canvasRef.current!.toDataURL());
     }
   }, [fillColor, ringColor]);
 
-  return canvasRef.current;
+  return dataUrl;
 }

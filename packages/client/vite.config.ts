@@ -1,15 +1,15 @@
-import preactRefresh from '@prefresh/vite/dist/index.js';
+// import preactRefresh from '@prefresh/vite';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-  plugins: [preactRefresh()],
+  // plugins: [preactRefresh()],
   alias: {
     'proposal-temporal': 'proposal-temporal/lib/index.mjs',
     react: 'preact/compat',
     'react-dom': 'preact/compat',
   },
   optimizeDeps: {
-    include: ['mnemonist/set', 'preact', 'preact/hooks'],
+    include: ['mnemonist/set', 'preact', 'preact/debug', 'preact/hooks'],
   },
   esbuild: {
     jsxFactory: 'h',

@@ -13,12 +13,10 @@ export function RouteGlyphs({ darkMode }: Props) {
 
   let shape: ComponentChildren = null;
   if (details) {
-    const { trip } = details.directions[directionId].closestTrip;
+    const shapeId =
+      details.directions[directionId]?.closestTrip?.trip?.shape_id;
     shape = (
-      <ShapeLine
-        shapeId={trip.shape_id}
-        routeColor={details.route.route_color}
-      />
+      <ShapeLine shapeId={shapeId} routeColor={details.route.route_color} />
     );
   }
 

@@ -19,12 +19,15 @@ interface Props {
 }
 
 export function TripDetails(props: Props) {
-  const { closestTrip } = props.details.directions[props.directionId];
+  const directionDetails = props.details.directions[props.directionId];
 
   const map = useGoogleMap();
   useEffect(() => {
-    map?.fitBounds(props.details.bounds);
+    map && props.details.bounds && map.fitBounds(props.details.bounds);
   }, [map, props.details.bounds]);
+
+  if (!directionDetails) return null;
+  const { closestTrip } = directionDetails;
 
   return (
     <>

@@ -13,11 +13,10 @@
   },
   "dependencies": {
     "@react-google-maps/api": "^2.1.1",
-    "preact": "^10.5.12",
     "tslib": "^2.1.0"
   },
   "peerDependencies": {
-    "react": "^17.0.0"
+    "preact": "^10.5.12"
   },
   "devDependencies": {
     "@types/enzyme": "^3.10.8",

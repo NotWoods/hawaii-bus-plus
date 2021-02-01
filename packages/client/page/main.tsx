@@ -1,3 +1,4 @@
+import 'preact/debug';
 import { h, render } from 'preact';
 import 'halfmoon/css/halfmoon-variables.css';
 import { App } from './App';

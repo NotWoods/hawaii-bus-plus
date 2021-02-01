@@ -9,7 +9,7 @@ export class PromiseWorker {
   constructor(private worker: Worker) {
     worker.addEventListener('message', (evt) => this.onMessage(evt.data));
     worker.addEventListener('error', (evt) =>
-      console.error('Worker Error', evt)
+      console.error('Worker Error', evt, worker)
     );
   }
 

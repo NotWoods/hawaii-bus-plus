@@ -13,7 +13,7 @@ export interface RouteDetails {
     value: string;
   }[];
   readonly stops: ReadonlySet<Stop['stop_id']>;
-  readonly bounds: LatLngBoundsLiteral;
+  readonly bounds?: LatLngBoundsLiteral;
 
   readonly directions: DirectionDetails[];
 }
@@ -119,7 +119,7 @@ export async function getRouteDetails(
     agency: agency!,
     descParts: extractLinks(route.route_desc),
     stops: routeStops,
-    bounds: bounds!.toJSON(),
+    bounds: bounds?.toJSON(),
     directions: directionDetails.map((dirDetails) => {
       const stopTimes: StopTimeData[] = dirDetails.closestTrip.trip.stop_times.map(
         (st) => {

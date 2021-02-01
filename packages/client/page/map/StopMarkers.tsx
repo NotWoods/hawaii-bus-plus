@@ -1,10 +1,9 @@
 import { Marker } from '@hawaii-bus-plus/react-google-maps';
 import { Stop } from '@hawaii-bus-plus/types';
 import { h, Fragment } from 'preact';
-import { useContext, useState } from 'preact/hooks';
+import { useContext } from 'preact/hooks';
 import { useApi } from '../hooks/useApi';
 import { useMarkerIcon } from '../hooks/useMarkerIcon';
-import { usePromise } from '../hooks/usePromise';
 import { setStopAction } from '../router/action';
 import { RouterContext } from '../router/Router';
 
@@ -32,25 +31,10 @@ interface Props {
 
 export function StopMarkers(props: Props) {
   const { dispatch, point } = useContext(RouterContext);
-  const highlightCanvas = useMarkerIcon(
+  const highlightIconUrl = useMarkerIcon(
     props.darkMode ? '#25282C' : '#fff',
     props.highlightColor
   );
-  const [highlightIconUrl, setHighlightIcon] = useState<string | undefined>();
-
-  usePromise(async () => {
-    if (highlightIconUrl) {
-      URL.revokeObjectURL(highlightIconUrl);
-    }
-    setHighlightIcon(undefined);
-
-    if (highlightCanvas) {
-      const blob = await new Promise((resolve) =>
-        highlightCanvas.toBlob(resolve)
-      );
-      setHighlightIcon(URL.createObjectURL(blob));
-    }
-  }, [props.darkMode, props.highlightColor]);
 
   const api = useApi();
   const stops = api?.stops || [];
