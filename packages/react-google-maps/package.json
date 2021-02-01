@@ -8,9 +8,7 @@
   "scripts": {
     "build": "tsc --build src",
     "format": "prettier **/*.{ts,tsx} **/*.json --write --ignore-path ../../.prettierignore",
-    "postformat": "eslint **/*.{ts,tsx} --fix",
-    "pretest": "tsc --build test",
-    "test": "ava"
+    "postformat": "eslint **/*.{ts,tsx} --fix"
   },
   "dependencies": {
     "@react-google-maps/api": "^2.1.1",
@@ -20,13 +18,8 @@
     "preact": "^10.5.12"
   },
   "devDependencies": {
-    "@types/enzyme": "^3.10.8",
-    "@types/enzyme-adapter-react-16": "^1.0.6",
     "@types/googlemaps": "^3.43.2",
-    "@types/react": "^17.0.0",
     "ava": "^3.15.0",
-    "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.6",
     "preact": "^10.5.12",
     "prettier": "^2.2.1",
     "typescript": "4.1.3"

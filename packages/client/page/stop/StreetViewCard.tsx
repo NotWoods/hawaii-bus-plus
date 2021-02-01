@@ -6,7 +6,7 @@ import {
 } from '@hawaii-bus-plus/react-google-maps';
 import './StreetViewCard.css';
 
-interface Props extends StreetViewPanoProps {
+interface Props extends Omit<StreetViewPanoProps, 'googleMapsApiKey'> {
   children?: ComponentChildren;
 }
 
@@ -23,6 +23,7 @@ export function StreetViewCard(props: Props) {
           hidden={status === 'ZERO_RESULTS'}
         >
           <StreetViewPano
+            googleMapsApiKey={import.meta.env.VITE_GOOGLE_MAPS_KEY as string}
             className="bg-very-dark aspect-ratio rounded-top"
             position={props.position}
             visible={props.visible}

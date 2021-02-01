@@ -11,7 +11,16 @@ $ npm install pnpm -g
 $ pnpm recursive install
 ```
 
-[hawaii-gtfs](https://github.com/NotWoods/hawaii-gtfs/) is required to be checked out as a sibling directory. The GTFS file will automatically be loaded from there to be used to generate the API.
+A `.env` file needs to be placed in the root directory, including variables from this template:
+
+```bash
+# IPStack API Key
+IPSTACK_KEY=xxxxxxxxxxxxxxxxxxxxx
+# Google Maps API Key
+VITE_GOOGLE_MAPS_KEY=xxxxxxxxxxxxxxxx
+# Password for the application
+API_KEY=xxxxxxxxxxxxxx
+```
 
 ### Running
 

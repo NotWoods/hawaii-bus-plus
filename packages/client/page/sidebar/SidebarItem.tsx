@@ -1,4 +1,4 @@
-import { h } from 'preact';
+import { h, ComponentChildren } from 'preact';
 import { classNames } from '../hooks/classnames';
 import { RouterAction } from '../router/action';
 import { Link } from '../router/Router';
@@ -6,11 +6,11 @@ import './SidebarItem.css';
 
 export interface SidebarItemProps {
   href?: string;
-  icon: React.ReactNode;
+  icon: ComponentChildren;
   iconColor?: string;
   iconDark?: boolean;
-  title?: React.ReactNode;
-  subtitle?: React.ReactNode;
+  title?: ComponentChildren;
+  subtitle?: ComponentChildren;
   className?: string;
   iconClasses?: string;
   action?: RouterAction;

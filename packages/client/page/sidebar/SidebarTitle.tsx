@@ -1,7 +1,7 @@
-import { h, Fragment } from 'preact';
+import { h, Fragment, ComponentChildren } from 'preact';
 
 export interface Props {
-  children: React.ReactNode;
+  children: ComponentChildren;
 }
 
 export function SidebarTitle(props: Props) {

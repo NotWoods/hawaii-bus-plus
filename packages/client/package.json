@@ -32,6 +32,7 @@
     "@prefresh/vite": "^2.0.3",
     "@types/googlemaps": "^3.43.2",
     "@types/jest": "^26.0.20",
+    "@types/react": "^17.0.0",
     "cross-env": "^7.0.3",
     "esbuild": "^0.8.36",
     "esbuild-jest": "^0.3.0",

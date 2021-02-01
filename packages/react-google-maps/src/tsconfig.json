@@ -4,6 +4,7 @@
   "references": [],
   "compilerOptions": {
     "lib": ["esnext", "dom", "dom.iterable"],
-    "types": ["googlemaps"]
+    "types": ["googlemaps"],
+    "skipLibCheck": true
   }
 }

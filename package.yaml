@@ -11,7 +11,7 @@ scripts:
     del-cli packages/**/*.js packages/**/*.d.ts packages/**/*.map
     packages/**/*.tsbuildinfo packages/client/public/api/**/*.json
   dev: pnpm run dev --filter @hawaii-bus-plus/client
-  format: prettier *.yaml --write
+  format: prettier *.yaml .github/**/*.yaml --write
   tsc: tsc --build .
 dependencies:
   tslib: ^2.1.0

@@ -3,6 +3,7 @@ import { readFile } from 'fs/promises';
 import JSZip from 'jszip';
 import { GTFS_ZIP_LOCATION } from '../src/env.js';
 import { zipFilesToObject } from '../src/parse.js';
+import { JsonStreams } from '../src/parsers.js';
 
 test('zipFilesToObject', async (t) => {
   const buffer = await readFile(GTFS_ZIP_LOCATION);
@@ -12,10 +13,9 @@ test('zipFilesToObject', async (t) => {
       routes: zip.file('routes.txt')!,
     })
   );
-  const result = await zipFilesToObject(input);
+  const result = (await zipFilesToObject(input)) as JsonStreams;
 
   t.deepEqual(Object.keys(result), ['routes']);
-  t.not(result.routes.length, 0);
 
   const expectedKeys = [
     'route_id',
@@ -28,7 +28,7 @@ test('zipFilesToObject', async (t) => {
     'route_text_color',
     'route_sort_order',
   ];
-  for (const route of result.routes) {
+  for await (const route of result.routes) {
     t.false(Array.isArray(route));
     t.deepEqual(Object.keys(route), expectedKeys);
   }

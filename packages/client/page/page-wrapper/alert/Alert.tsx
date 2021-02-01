@@ -1,9 +1,9 @@
-import { h } from 'preact';
+import { ComponentChildren, h } from 'preact';
 import { classNames } from '../../hooks/classnames';
 import { CloseButton } from './CloseButton';
 
 export interface AlertProps {
-  children?: React.ReactNode;
+  children?: ComponentChildren;
   title?: string;
   alertType?: string;
   fillType?: string;

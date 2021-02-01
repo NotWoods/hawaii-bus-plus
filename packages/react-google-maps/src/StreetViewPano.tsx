@@ -1,10 +1,11 @@
 import { h } from 'preact';
 import { useEffect, useRef } from 'preact/hooks';
 import { useListener, useMap } from './apply-changes';
-import { googleMapsApiKey, useGoogleMap, useLoadGoogleMaps } from './hooks';
+import { useGoogleMap, useLoadGoogleMaps } from './hooks';
 
 export interface StreetViewPanoProps {
   className?: string;
+  googleMapsApiKey: string;
   position: google.maps.LatLngLiteral;
   visible: boolean;
   onClose?(this: google.maps.StreetViewPanorama): void;
@@ -31,7 +32,7 @@ export function StreetViewPano(props: StreetViewPanoProps) {
   const divRef = useRef(null);
 
   const map = useGoogleMap();
-  const { loadError } = useLoadGoogleMaps();
+  const { loadError } = useLoadGoogleMaps(props.googleMapsApiKey);
 
   const streetView = useMap<google.maps.StreetViewPanorama>(
     map,
@@ -68,7 +69,7 @@ export function StreetViewPano(props: StreetViewPanoProps) {
     );
     url.searchParams.set('heading', options.pov.heading.toString());
     url.searchParams.set('pitch', options.pov.pitch.toString());
-    url.searchParams.set('key', googleMapsApiKey);
+    url.searchParams.set('key', props.googleMapsApiKey);
     // Fallback to static image
     return <img className={props.className} alt="Street view" src={url.href} />;
   } else {

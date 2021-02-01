@@ -42,6 +42,7 @@ export function MainMap(props: Props) {
 
   return (
     <GoogleMapPortal
+      googleMapsApiKey={import.meta.env.VITE_GOOGLE_MAPS_KEY as string}
       mapContainerClassName="map w-full h-full position-fixed"
       defaultCenter={center}
       defaultZoom={9}

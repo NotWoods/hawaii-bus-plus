@@ -7,9 +7,7 @@
   "scripts": {
     "build": "tsc --build src",
     "format": "prettier **/*.ts --write --ignore-path ../../.prettierignore",
-    "postformat": "eslint **/*.ts --fix",
-    "pretest": "tsc --build test",
-    "test": "ava"
+    "postformat": "eslint **/*.ts --fix"
   },
   "dependencies": {
     "@hawaii-bus-plus/types": "*",
