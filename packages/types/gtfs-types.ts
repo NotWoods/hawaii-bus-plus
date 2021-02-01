@@ -149,7 +149,7 @@ export interface CsvAgency {
   agency_fare_url: string;
 }
 
-export interface Agency extends Readonly<CsvAgency> {}
+export type Agency = Readonly<CsvAgency>;
 
 export interface CsvShape {
   shape_id: Opaque<string, 'shape'>;

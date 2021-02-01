@@ -41,7 +41,7 @@ export function PageWrapper(props: Props) {
       >
         <StickyAlertsList />
         {props.navbar({ toggleSidebar, toggleDarkMode })}
-        <div className="sidebar-overlay" onClick={toggleSidebar}></div>
+        <div className="sidebar-overlay" onClick={toggleSidebar} />
         {props.sidebar}
         {props.children(darkMode)}
       </div>

@@ -1,19 +1,30 @@
-name: 'hawaii-bus-plus'
+name: hawaii-bus-plus
 private: true
-version: '5.0.0'
-
+version: 5.0.0
 scripts:
   api: 'pnpm run api:client --filter @hawaii-bus-plus/api-gen'
-  build: 'pnpm run build --filter @hawaii-bus-plus/client && pnpm run build --filter @hawaii-bus-plus/functions && pnpm run api:dist --filter @hawaii-bus-plus/api-gen'
-  clean: 'del-cli packages/**/*.js packages/**/*.d.ts packages/**/*.map packages/**/*.tsbuildinfo packages/client/public/api/**/*.json'
-  dev: 'pnpm run dev --filter @hawaii-bus-plus/client'
-  tsc: 'tsc --build .'
-
+  build: >-
+    pnpm run build --filter @hawaii-bus-plus/client && pnpm run build --filter
+    @hawaii-bus-plus/functions && pnpm run api:dist --filter
+    @hawaii-bus-plus/api-gen
+  clean: >-
+    del-cli packages/**/*.js packages/**/*.d.ts packages/**/*.map
+    packages/**/*.tsbuildinfo packages/client/public/api/**/*.json
+  dev: pnpm run dev --filter @hawaii-bus-plus/client
+  format: prettier *.yaml --write
+  tsc: tsc --build .
 dependencies:
-  'tslib': '^2.1.0'
+  tslib: ^2.1.0
 devDependencies:
-  'del-cli': '^3.0.1'
-  'pnpm': '^5.16.0'
-  'prettier': '^2.2.1'
-  'type-fest': '^0.20.2'
-  'typescript': '^4.1.3'
+  '@typescript-eslint/eslint-plugin': ^4.14.2
+  '@typescript-eslint/parser': ^4.14.2
+  del-cli: ^3.0.1
+  eslint: ^7.19.0
+  eslint-config-preact: ^1.1.3
+  eslint-config-prettier: ^7.2.0
+  eslint-plugin-ava: ^11.0.0
+  eslint-plugin-react: ^7.22.0
+  pnpm: ^5.16.0
+  prettier: ^2.2.1
+  type-fest: ^0.20.2
+  typescript: ^4.1.3

@@ -1,5 +1,5 @@
 import { registerPromiseWorker } from '../../worker/register.js';
 
-registerPromiseWorker(function () {
+registerPromiseWorker(() => {
   throw new Error('busted!');
 });

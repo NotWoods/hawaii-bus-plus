@@ -11,6 +11,7 @@ interface Props {
   journey?: Journey;
 }
 
+// eslint-disable-next-line @typescript-eslint/ban-types
 function isJourneyTripSegment(segment: object): segment is JourneyTripSegment {
   return 'trip' in segment;
 }
@@ -45,7 +46,7 @@ export function DirectionsSheet(_props: Props) {
             })}
           </div>
         </div>
-        <div className="col-lg-4"></div>
+        <div className="col-lg-4">...</div>
       </div>
     </div>
   );

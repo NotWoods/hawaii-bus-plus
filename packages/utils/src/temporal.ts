@@ -14,7 +14,7 @@ export class PlainDaysTime {
   readonly day: number;
 
   constructor(
-    isoDay: number = 0,
+    isoDay = 0,
     private readonly time: Temporal.PlainTime = new Temporal.PlainTime()
   ) {
     this.day = isoDay;

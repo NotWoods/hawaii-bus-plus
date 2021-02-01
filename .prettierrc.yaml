@@ -1,0 +1,6 @@
+singleQuote: true
+overrides:
+  - files: '*.html'
+    options:
+      printWidth: 120
+      tabWidth: 2

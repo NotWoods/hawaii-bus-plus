@@ -175,7 +175,7 @@ export async function raptorDirections(
       // route: r
       const route = data.routes[routeId];
       // earliestTripId: et(r, p_i)
-      let earliestTrip: Trip | undefined = undefined;
+      let earliestTrip: Trip | undefined;
       const stopsBeginningWith = skipUntil(
         route.stops,
         (stopId) => stopId === hopOnStop.stop_id

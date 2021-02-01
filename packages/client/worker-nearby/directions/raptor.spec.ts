@@ -14,7 +14,7 @@ const PARKER_RANCH = 'pr' as Stop['stop_id'];
 const NOON = PlainDaysTime.from('12:00:00' as TimeString);
 const MONDAY = Temporal.PlainDate.from({ year: 2021, month: 1, day: 25 });
 
-test.concurrent.only('raptor', async () => {
+test.concurrent('raptor', async () => {
   const repo = new NodeRepository();
   const directions = await raptorDirections(
     repo,
@@ -99,7 +99,7 @@ test.concurrent.only('raptor', async () => {
   expect(directions.get(HWY_INTERSECTON)![2]!.time.toString()).toBe('15:45:00');
 });
 
-test.concurrent.only('raptor weekend', async () => {
+test.concurrent('raptor weekend', async () => {
   const repo = new NodeRepository();
   const directions = await raptorDirections(
     repo,

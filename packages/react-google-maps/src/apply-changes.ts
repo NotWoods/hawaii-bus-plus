@@ -16,7 +16,7 @@ export function useMap<T>(
       onUnmount();
       setInstance(undefined);
     };
-  }, [map]);
+  }, [map, effect]);
   return instance;
 }
 
@@ -36,5 +36,5 @@ export function useListener<T extends google.maps.MVCObject>(
     } else {
       return undefined;
     }
-  }, [target, handler]);
+  }, [target, eventName, handler]);
 }

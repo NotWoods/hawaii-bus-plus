@@ -4,7 +4,7 @@ import type {
   Context,
 } from 'aws-lambda';
 
-export interface NetlifyEvent extends APIGatewayEvent {}
+export type NetlifyEvent = APIGatewayEvent;
 
 export interface NetlifyContext extends Omit<Context, 'clientContext'> {
   clientContext: {
@@ -15,8 +15,8 @@ export interface NetlifyContext extends Omit<Context, 'clientContext'> {
       url: string;
       token: string;
     };
-    user?: object;
+    user?: unknown;
   };
 }
 
-export interface NetlifyResponse extends APIGatewayProxyResult {}
+export type NetlifyResponse = APIGatewayProxyResult;

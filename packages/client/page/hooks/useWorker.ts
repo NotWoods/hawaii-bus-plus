@@ -12,7 +12,7 @@ export function useWorker(workerConstructor: { new (): Worker }) {
 
   const generateWorker = useCallback(
     () => new PromiseWorker(new workerConstructor()),
-    []
+    [workerConstructor]
   );
 
   useEffect(() => {

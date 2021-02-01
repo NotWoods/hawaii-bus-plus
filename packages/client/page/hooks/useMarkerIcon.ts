@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'preact/hooks';
 
 const size = 104;
 
-export function useMarkerIcon(fillColor: string, ringColor: string = 'black') {
+export function useMarkerIcon(fillColor: string, ringColor = 'black') {
   const canvasRef = useRef<HTMLCanvasElement | undefined>();
   const ctxRef = useRef<CanvasRenderingContext2D | null | undefined>();
   const [dataUrl, setDataUrl] = useState<string | undefined>();

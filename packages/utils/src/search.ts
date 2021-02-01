@@ -17,7 +17,7 @@ export function splitString(
   }
 
   let offset = 0;
-  let result: Splits[] = [];
+  const result: Splits[] = [];
   for (const match of matched) {
     if (offset < match.offset) {
       result.push({ text: title.slice(offset, match.offset), match: false });

@@ -34,6 +34,7 @@ export function MyLocationButton() {
       map.panTo(latLng);
       setShouldCenter(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [shouldCenter, map]);
 
   return (

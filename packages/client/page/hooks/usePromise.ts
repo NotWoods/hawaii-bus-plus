@@ -9,5 +9,6 @@ export function usePromise(
     effect(controller.signal);
 
     return () => controller.abort();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps);
 }

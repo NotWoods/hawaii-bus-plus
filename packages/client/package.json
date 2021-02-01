@@ -7,7 +7,8 @@
     "build": "tsc --build page && vite build",
     "predev": "tsc --build page",
     "dev": "vite",
-    "format": "prettier **/*.{ts,tsx} **/*.json --write",
+    "format": "prettier **/*.{ts,tsx} *.html --write --ignore-path ../../.prettierignore",
+    "postformat": "eslint **/*.{ts,tsx} --fix",
     "pretest": "tsc --build page",
     "test": "jest"
   },

@@ -3,7 +3,7 @@ import { useContext, useState } from 'preact/hooks';
 import { Alert, AlertProps } from './Alert';
 import { makeId } from './make';
 
-interface AlertData extends Omit<AlertProps, 'state' | 'onClose'> {}
+type AlertData = Omit<AlertProps, 'state' | 'onClose'>;
 
 interface Context {
   alerts: ReadonlyMap<AlertData, string>;
@@ -32,7 +32,7 @@ export function StickyAlertsProvider(props: { children: ComponentChildren }) {
     setAlerts(update);
   }
 
-  function toastAlert(alert: AlertData, timeShown: number = 5000) {
+  function toastAlert(alert: AlertData, timeShown = 5000) {
     let state = 'alert-block';
     setAlerts(new Map(alerts).set(alert, state));
     setKeys(keys.set(alert, makeId(6)));
@@ -45,7 +45,7 @@ export function StickyAlertsProvider(props: { children: ComponentChildren }) {
     }, 250);
 
     // Wait some time (timeShown + 250) and fade out the alert
-    var timeToFade = timeShown + 250;
+    const timeToFade = timeShown + 250;
     setTimeout(() => {
       state += ' fade';
       setAlerts(new Map(alerts).set(alert, state));
@@ -54,14 +54,11 @@ export function StickyAlertsProvider(props: { children: ComponentChildren }) {
     // Wait some more time (timeToFade + 500) and dispose the alert (by removing the .alert-block class)
     // Again, the extra delay is for the animation
     // Remove the .show and .fade classes (so the alert can be toasted again)
-    var timeToDestroy = timeToFade + 500;
+    const timeToDestroy = timeToFade + 500;
     setTimeout(() => {
       dismissAlert(alert);
     }, timeToDestroy);
   }
-
-  // @ts-ignore
-  window.toastAlert = toastAlert;
 
   return (
     <StickyAlertsContext.Provider

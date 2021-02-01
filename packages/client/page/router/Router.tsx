@@ -51,6 +51,7 @@ export function Router(props: { children: ComponentChildren }) {
     if (path(url) !== path(window.location)) {
       history.pushState(state, '', path(url));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.routeId, state.point, state.directionsOpen]);
 
   return (

@@ -1,5 +1,3 @@
 import { registerPromiseWorker } from '../../worker/register.js';
 
-registerPromiseWorker(function (msg) {
-  return msg;
-});
+registerPromiseWorker((msg) => msg);

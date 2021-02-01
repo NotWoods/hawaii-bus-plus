@@ -18,18 +18,14 @@ export function ShapeLine(props: Props) {
       if (!props.shapeId) return;
 
       const apiKey = localStorage.getItem('api-key');
-      try {
-        const res = await fetch(`/api/v1/shapes/${props.shapeId}.json`, {
-          signal,
-          headers: {
-            Authorization: `Bearer ${apiKey}`,
-          },
-        });
-        const json = await res.json();
-        setShape(json as Shape);
-      } catch (err) {
-        throw err;
-      }
+      const res = await fetch(`/api/v1/shapes/${props.shapeId}.json`, {
+        signal,
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+        },
+      });
+      const json = await res.json();
+      setShape(json as Shape);
     },
     [props.shapeId]
   );

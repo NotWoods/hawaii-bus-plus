@@ -68,13 +68,14 @@ export function routerReducer(
       return { ...state, point: action.point };
     case 'update-user-location':
       return { ...state, point: { type: 'user', position: action.location } };
-    case 'link':
+    case 'link': {
       const { url } = action;
       if (url.hostname !== window.location.hostname) return state;
 
       const newState = initStateFromUrl(url);
       newState.freshLoad = false;
       return newState;
+    }
     default:
       throw new Error(`Invalid action`);
   }

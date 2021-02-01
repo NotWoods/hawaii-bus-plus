@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "build": "tsc --build .",
-    "format": "prettier **/*.ts --write"
+    "format": "prettier **/*.ts --write --ignore-path ../../.prettierignore",
+    "postformat": "eslint **/*.ts"
   },
   "dependencies": {
     "tslib": "^2.1.0",

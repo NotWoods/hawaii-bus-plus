@@ -10,7 +10,7 @@ export async function searchWordsIndex<T>(
 ) {
   const index = objectStore.index('words');
   const term = searchTerm.toLowerCase();
-  const keyRange = IDBKeyRange.bound(term, term + '\uffff', false, false);
+  const keyRange = IDBKeyRange.bound(term, `${term}\uffff`, false, false);
 
   const results = new Map<string, T>();
   let cursor = await index.openCursor(keyRange, 'next');

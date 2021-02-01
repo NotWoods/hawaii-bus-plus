@@ -18,7 +18,7 @@ export interface RouteDetails {
   readonly directions: DirectionDetails[];
 }
 
-const LINK_REGEX = /(https?:)\s?(\/\/[.a-z\/]+)/g;
+const LINK_REGEX = /(https?:)\s?(\/\/[.a-z/]+)/g;
 
 function nowInZone(timeZone: string | Temporal.TimeZoneProtocol) {
   const now = Temporal.now.zonedDateTimeISO();
