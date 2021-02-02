@@ -6,8 +6,8 @@ export function getCurrentPosition(options?: PositionOptions) {
   );
 }
 
-function isGeolocationError(error: unknown): error is GeolocationPositionError {
-  return (error as any).code > 0;
+function geolocationError(error: unknown): error is GeolocationPositionError {
+  return (error as GeolocationPositionError).code > 0;
 }
 
 /**
@@ -15,12 +15,12 @@ function isGeolocationError(error: unknown): error is GeolocationPositionError {
  * falling back to guessing it from the IP address.
  */
 export async function getPosition() {
-  navigator.permissions.query({ name: 'geolocation' });
+  // navigator.permissions.query({ name: 'geolocation' });
   try {
     const position = await getCurrentPosition();
     return position.coords;
   } catch (err: unknown) {
-    if (isGeolocationError(err)) {
+    if (geolocationError(err)) {
       const ipPosition = await locationFromIp();
       return ipPosition;
     } else {

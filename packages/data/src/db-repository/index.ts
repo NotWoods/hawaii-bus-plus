@@ -8,7 +8,7 @@ import { loadStops, loadStopsSpatial } from './stops';
 import { loadTrip, loadTrips, loadTripsForRoute } from './trips';
 
 export class DBRepository implements Repository {
-  private ready = dbReady;
+  private readonly ready = dbReady;
 
   loadRoutes(
     routeIds: Iterable<Route['route_id']>

@@ -30,5 +30,12 @@
   "files": [
     "src",
     "node"
-  ]
+  ],
+  "eslintConfig": {
+    "parserOptions": {
+      "project": [
+        "./packages/data/*/tsconfig.json"
+      ]
+    }
+  }
 }

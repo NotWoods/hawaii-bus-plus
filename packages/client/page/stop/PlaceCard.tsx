@@ -51,7 +51,7 @@ export function PlaceCard(props: Props) {
     }
   }, [map, props.placeId]);
 
-  const position = props.position || details?.location;
+  const position = props.position ?? details?.location;
   if (position) {
     return (
       <StreetViewCard

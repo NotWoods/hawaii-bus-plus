@@ -26,7 +26,7 @@ export function useWorker(workerConstructor: { new (): Worker }) {
       workerRef.current = generateWorker();
     }
 
-    return workerRef.current!.postMessage(message);
+    return workerRef.current.postMessage(message);
   }
 
   return postMessage;

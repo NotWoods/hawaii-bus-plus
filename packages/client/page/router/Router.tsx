@@ -77,7 +77,7 @@ export function Link({ action, ...props }: LinkProps) {
       onClick={function (evt) {
         evt.preventDefault();
         props.onClick?.call(this, evt);
-        dispatch(action || linkAction(evt.currentTarget.href));
+        dispatch(action ?? linkAction(evt.currentTarget.href));
       }}
     />
   );

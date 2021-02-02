@@ -12,7 +12,7 @@ interface Props {
 
 export function DefaultRoutes(props: Props) {
   const api = useApi();
-  const routes = api?.routes || [];
+  const routes = api?.routes ?? [];
 
   return (
     <>

@@ -27,5 +27,12 @@
   },
   "files": [
     "src"
-  ]
+  ],
+  "eslintConfig": {
+    "parserOptions": {
+      "project": [
+        "./packages/presentation/*/tsconfig.json"
+      ]
+    }
+  }
 }

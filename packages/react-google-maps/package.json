@@ -26,5 +26,12 @@
   },
   "files": [
     "src"
-  ]
+  ],
+  "eslintConfig": {
+    "parserOptions": {
+      "project": [
+        "./packages/react-google-maps/*/tsconfig.json"
+      ]
+    }
+  }
 }

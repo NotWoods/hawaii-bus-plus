@@ -1,3 +1,4 @@
+import { GTFSData } from '@hawaii-bus-plus/types';
 import { readFile } from 'fs/promises';
 import { resolve } from 'path';
 import { URL } from 'url';
@@ -11,8 +12,8 @@ if (import.meta.url) {
 }
 
 export class NodeRepository extends MemoryRepository {
-  async init() {
+  async init(): Promise<GTFSData> {
     const data = await readFile(apiLocation, 'utf8');
-    return JSON.parse(data);
+    return JSON.parse(data) as GTFSData;
   }
 }

@@ -30,7 +30,7 @@ export function StopCard(props: Props) {
     setDetails(result);
   }, [props.stopId]);
 
-  const position = props.position || details?.position;
+  const position = props.position ?? details?.position;
   if (position) {
     return (
       <StreetViewCard

@@ -8,7 +8,7 @@ async function requesterLookup(signal?: AbortSignal) {
     });
     const json = await res.json();
     return json as Pick<GeolocationCoordinates, 'latitude' | 'longitude'>;
-  } catch (err) {
+  } catch (err: unknown) {
     console.warn(err);
     throw err;
   }

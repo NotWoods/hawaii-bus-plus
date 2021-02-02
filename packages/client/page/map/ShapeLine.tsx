@@ -21,7 +21,7 @@ export function ShapeLine(props: Props) {
       const res = await fetch(`/api/v1/shapes/${props.shapeId}.json`, {
         signal,
         headers: {
-          Authorization: `Bearer ${apiKey}`,
+          Authorization: `Bearer ${apiKey!}`,
         },
       });
       const json = await res.json();

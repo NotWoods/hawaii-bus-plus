@@ -15,7 +15,7 @@ export function MyLocationButton() {
   const coords = useGeolocation(active);
   const latLng = coords && convertLatLng(coords).toJSON();
 
-  async function handleClick() {
+  function handleClick() {
     setShouldCenter(true);
     setActive(true);
   }

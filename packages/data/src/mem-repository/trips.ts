@@ -6,7 +6,7 @@ export function memTripCursor(trips: readonly Trip[]): TripCursor {
   let result = iter.next();
   return {
     get value() {
-      return result.value;
+      return result.value as Trip;
     },
     continue() {
       result = iter.next();

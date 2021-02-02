@@ -25,5 +25,12 @@
   "files": [
     "page",
     "worker"
-  ]
+  ],
+  "eslintConfig": {
+    "parserOptions": {
+      "project": [
+        "./packages/promise-worker/*/tsconfig.json"
+      ]
+    }
+  }
 }

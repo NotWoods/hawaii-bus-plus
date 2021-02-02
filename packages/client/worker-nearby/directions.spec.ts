@@ -13,7 +13,7 @@ const PARKER_RANCH = 'pr' as Stop['stop_id'];
 
 const NOON = PlainDaysTime.from('12:00:00' as TimeString);
 
-test.concurrent('traversePath', async () => {
+test.concurrent('traversePath', () => {
   const paths = new Map<Stop['stop_id'], Path>()
     .set(LAKELAND, [{ time: NOON }])
     .set(LAKELAND_ACROSS, [{ time: NOON, transferFrom: LAKELAND }])

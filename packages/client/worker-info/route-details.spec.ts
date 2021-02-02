@@ -3,7 +3,7 @@ import { Route } from '@hawaii-bus-plus/types';
 import { Temporal } from 'proposal-temporal';
 import { extractLinks, getRouteDetails } from './route-details';
 
-test.concurrent('extractLinks separates link', async () => {
+test.concurrent('extractLinks separates link', () => {
   const routeDesc =
     'For more information go to the Park website at; https: //www.nps.gov/havo/planyourvisit/fees.htm';
   const links = extractLinks(routeDesc);

@@ -46,5 +46,13 @@
     "transform": {
       "^.+\\.(j|t)sx?$": "esbuild-jest"
     }
+  },
+  "eslintConfig": {
+    "parserOptions": {
+      "project": [
+        "./tsconfig.json",
+        "./packages/client/*/tsconfig.json"
+      ]
+    }
   }
 }

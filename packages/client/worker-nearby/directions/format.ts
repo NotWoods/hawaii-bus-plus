@@ -159,7 +159,7 @@ export async function journeyToDirections(
       });
     } else {
       // Transfer by walking
-      const startStopId = current.transferFrom!;
+      const startStopId = current.transferFrom;
       const endStopId = current.transferTo;
       const reachedEndStop = current.time;
 

@@ -1,12 +1,12 @@
 let messageIds = 0;
 
 export class PromiseWorker {
-  private callbacks = new Map<
+  private readonly callbacks = new Map<
     number,
     (error: Error | null, result: unknown) => void
   >();
 
-  constructor(private worker: Worker) {
+  constructor(private readonly worker: Worker) {
     worker.addEventListener('message', (evt) => this.onMessage(evt.data));
     worker.addEventListener('error', (evt) =>
       console.error('Worker Error', evt, worker)

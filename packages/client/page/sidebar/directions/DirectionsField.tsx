@@ -42,7 +42,7 @@ export function DirectionsField(props: Props) {
           id={props.id}
           className="form-control"
           placeholder="Stop or location"
-          value={data?.name || value}
+          value={data?.name ?? value}
           onChange={(evt) => {
             setValue(evt.currentTarget.value);
             setData(undefined);

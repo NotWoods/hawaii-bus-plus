@@ -115,7 +115,7 @@ export async function parseStops(
         lng: csvStop.stop_lon,
       },
       routes: [],
-      transfers: transfers.get(csvStop.stop_id) || [],
+      transfers: transfers.get(csvStop.stop_id) ?? [],
     };
     variable.stops[stop.stop_id] = stop;
   }
@@ -145,7 +145,7 @@ export async function parseCalendar(
     ];
     const added_dates: DateString[] = [];
     const removed_dates: DateString[] = [];
-    for (const dates of calendarDates.get(csvCalendar.service_id) || []) {
+    for (const dates of calendarDates.get(csvCalendar.service_id) ?? []) {
       switch (dates.exception_type) {
         case 1:
           added_dates.push(dates.date);

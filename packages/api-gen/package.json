@@ -36,5 +36,12 @@
   },
   "files": [
     "src"
-  ]
+  ],
+  "eslintConfig": {
+    "parserOptions": {
+      "project": [
+        "./packages/api-gen/*/tsconfig.json"
+      ]
+    }
+  }
 }

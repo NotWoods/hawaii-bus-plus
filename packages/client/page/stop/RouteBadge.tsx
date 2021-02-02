@@ -44,7 +44,7 @@ interface RouteBadgesProps {
  */
 export function RouteBadges({ routes, omit, clear }: RouteBadgesProps) {
   const badges: ComponentChild[] = [];
-  for (const route of routes || []) {
+  for (const route of routes ?? []) {
     if (route.route_id !== omit) {
       badges.push(<RouteBadge key={route.route_id} route={route} />);
       badges.push(' ');

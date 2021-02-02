@@ -10,10 +10,13 @@ function usePermission(permissionDesc: Parameters<Permissions['query']>[0]) {
 
   useEffect(() => {
     let target: PermissionStatus | undefined;
-    navigator.permissions.query(permissionDesc).then((t) => {
-      target = t;
-      target.addEventListener('change', handleChange);
-    });
+    navigator.permissions
+      .query(permissionDesc)
+      .then((t) => {
+        target = t;
+        target.addEventListener('change', handleChange);
+      })
+      .catch((err) => console.error(err));
 
     return () => {
       target?.removeEventListener('change', handleChange);
@@ -41,8 +44,8 @@ export function useGeolocation(active: boolean) {
         function onGeolocationSuccess(pos) {
           setCoordinates(pos.coords);
         },
-        async function onGeolocationError() {
-          setCoordinates(await locationFromIp());
+        function onGeolocationError() {
+          locationFromIp().then(setCoordinates, (err) => console.error(err));
         }
       );
       return () => {

@@ -58,11 +58,11 @@ function buildTimeLabels(sources: Iterable<Source>) {
       return multiLabel.keys();
     },
     getEarliestArrival(stopId: Stop['stop_id']) {
-      return earliestKnownArrival.get(stopId) || InfinityPlainDaysTime;
+      return earliestKnownArrival.get(stopId) ?? InfinityPlainDaysTime;
     },
     getArrival(stopId: Stop['stop_id'], round: number) {
       const existingLabels = multiLabel.get(stopId);
-      return existingLabels[round]?.time || InfinityPlainDaysTime;
+      return existingLabels[round]?.time ?? InfinityPlainDaysTime;
     },
     setPath(stopId: Stop['stop_id'], round: number, path: PathSegment) {
       const existingLabels = multiLabel.get(stopId);
@@ -94,7 +94,7 @@ function raptorFootpaths(
 ) {
   return loadStops(markedStops).then((footPaths) => {
     for (const fromStopId of markedStops) {
-      const transfers = footPaths.get(fromStopId)?.transfers || [];
+      const transfers = footPaths.get(fromStopId)?.transfers ?? [];
       for (const { to_stop_id, min_transfer_time = 0 } of transfers) {
         // fromStopId: p
         // to_stop_id: p'
@@ -206,7 +206,7 @@ export async function raptorDirections(
             route,
             stopId,
             timeLabels.getArrival(stopId, k - 1)
-          ) || earliestTrip;
+          ) ?? earliestTrip;
       }
     }
 

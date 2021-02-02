@@ -96,7 +96,7 @@ export async function getRouteDetails(
   const agency = await repo.loadAgency(route.agency_id);
   const timeZone = agency!.agency_timezone;
 
-  const nowZoned = now || nowInZone(timeZone);
+  const nowZoned = now ?? nowInZone(timeZone);
   const nowDate = nowZoned.toPlainDate();
 
   const allCalendars = await allCalendarsReady;

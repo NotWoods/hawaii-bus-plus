@@ -5,13 +5,15 @@ import JSZip from 'jszip';
 import { cast } from '../src/cast.js';
 import { GTFS_ZIP_LOCATION } from '../src/env.js';
 
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+
 async function* loadZipFile(path: string) {
   const zipData = await readFile(GTFS_ZIP_LOCATION, { encoding: null });
   const zip = await JSZip.loadAsync(zipData);
 
   const file = zip.file(path);
   if (!file) {
-    throw new Error(`${file} is missing from zip`);
+    throw new Error(`${path} is missing from zip`);
   }
 
   const input = file.nodeStream('nodebuffer');
@@ -49,7 +51,8 @@ test('cast bool and date', async (t) => {
     t.is(typeof row.saturday, 'boolean');
     t.is(typeof row.sunday, 'boolean');
 
-    const date = row.start_date.split('-');
+    const startDate = row.start_date as string;
+    const date = startDate.split('-');
     t.is(date.length, 3);
     const [, month, day] = date;
     t.is(month.length, 2);

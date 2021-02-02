@@ -1,4 +1,4 @@
-interface MemoizeCacheEntry<Func extends (...args: any[]) => any> {
+interface MemoizeCacheEntry<Func extends (...args: unknown[]) => unknown> {
   readonly args: Parameters<Func>;
   readonly result: ReturnType<Func>;
 }
@@ -7,7 +7,7 @@ interface MemoizeCacheEntry<Func extends (...args: any[]) => any> {
  * Creates a copy of `fn` that caches the last result.
  * If called again with the same parameters, the cached result is returned.
  */
-export function memoize<Func extends (...args: any[]) => any>(
+export function memoize<Func extends (...args: any[]) => unknown>(
   fn: Func,
   cacheSize = 1
 ): Func {
@@ -20,7 +20,10 @@ export function memoize<Func extends (...args: any[]) => any>(
       }
     }
 
-    const entry: MemoizeCacheEntry<Func> = { args, result: fn(...args) };
+    const entry: MemoizeCacheEntry<Func> = {
+      args,
+      result: fn(...args) as ReturnType<Func>,
+    };
     cache.push(entry);
     while (cache.length > cacheSize) {
       cache.shift();

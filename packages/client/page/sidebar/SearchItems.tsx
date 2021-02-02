@@ -43,7 +43,7 @@ export function RouteSearchItem({
     <SidebarItem
       {...props}
       {...routeProps}
-      href={`/routes/${routeId || route!.route_id}/`}
+      href={`/routes/${routeId ?? route!.route_id}/`}
       iconClasses="font-size-14"
     />
   );
@@ -69,7 +69,7 @@ export function StopSearchItem({
       href={`?stop=${stopId}`}
       icon={<Icon src={busStopIcon} alt="Bus stop" />}
       title={stopName}
-      subtitle={stopDesc || <RouteBadges routes={routes} />}
+      subtitle={stopDesc ?? <RouteBadges routes={routes} />}
     />
   );
 }

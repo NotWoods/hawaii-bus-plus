@@ -7,10 +7,14 @@ import { MapContext } from './hooks';
 export interface GoogleMapProps
   extends Pick<
     OrigGoogleMapProps,
-    'children' | 'mapContainerClassName' | 'options' | 'onClick' | 'onLoad'
+    'children' | 'mapContainerClassName' | 'options' | 'onClick'
   > {
+  /** The initial Map center. */
   defaultCenter: google.maps.LatLng | google.maps.LatLngLiteral;
+  /** The initial Map zoom level. Required. Valid values: Integers between zero, and up to the supported maximum zoom level. */
   defaultZoom: number;
+  /** This callback is called when the map instance has loaded. It is called with the map instance. */
+  onLoad?(map: google.maps.Map): void;
 }
 
 /**

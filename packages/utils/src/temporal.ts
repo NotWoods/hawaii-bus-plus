@@ -107,7 +107,7 @@ export const InfinityPlainDaysTime = new PlainDaysTime(Infinity);
  */
 export function stringTime(date: PlainDaysTime | TimeString): string {
   if (typeof date === 'string') {
-    if (date.indexOf(':') > -1 && date.lastIndexOf(':') > date.indexOf(':')) {
+    if (date.includes(':') && date.lastIndexOf(':') > date.indexOf(':')) {
       date = PlainDaysTime.from(date);
     }
   }

@@ -25,7 +25,7 @@ export function StopTimesList(props: Props) {
     <ul>
       {Array.from(entries, ([i, stopTime]) => {
         const stopId = stopTime.stop.stop_id;
-        const keySuffix = keySoFar.get(stopId) || 0;
+        const keySuffix = keySoFar.get(stopId) ?? 0;
         keySoFar.set(stopId, keySuffix + 1);
 
         return (

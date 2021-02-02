@@ -7,6 +7,10 @@ function writeJson(path: string, json: unknown) {
   return writeFile(path, str, { encoding: 'utf8' });
 }
 
+function fileAlreadyExists(err: unknown): err is Error {
+  return (err as { code?: string }).code === 'EEXIST';
+}
+
 /**
  * Generate an API file from the given GTFS zip path.
  * @param gtfsZipPath
@@ -24,8 +28,8 @@ export async function generateApi(
   const shapeFolder = join(apiFolder, 'shapes');
   try {
     await mkdir(shapeFolder);
-  } catch (err) {
-    if (err.code === 'EEXIST') {
+  } catch (err: unknown) {
+    if (fileAlreadyExists(err)) {
       // Folder already exists
     } else {
       throw err;

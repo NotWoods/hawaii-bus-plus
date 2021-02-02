@@ -37,7 +37,7 @@ export function StopMarkers(props: Props) {
   );
 
   const api = useApi();
-  const stops = api?.stops || [];
+  const stops = api?.stops ?? [];
   const selectedStopId = point?.type === 'stop' && point.stopId;
 
   let highlightIcon: google.maps.Icon | undefined;
@@ -60,7 +60,7 @@ export function StopMarkers(props: Props) {
         if (selected) {
           icon = selectedStop;
         } else if (props.highlighted?.has(stop.stop_id)) {
-          icon = highlightIcon || otherIcon;
+          icon = highlightIcon ?? otherIcon;
         }
 
         return (

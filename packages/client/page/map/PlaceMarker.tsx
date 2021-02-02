@@ -28,7 +28,7 @@ export function PlaceMarker() {
         <Marker
           position={point.position}
           icon={placeIcon}
-          title={point.name || `Selected point ${point.placeId}`}
+          title={point.name ?? `Selected point ${point.placeId}`}
         />
       );
     case 'marker':
@@ -36,7 +36,7 @@ export function PlaceMarker() {
         <Marker
           position={point.position}
           icon={placeIcon}
-          title={point.name || 'Selected point'}
+          title={point.name ?? 'Selected point'}
         />
       );
     default:

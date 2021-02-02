@@ -24,12 +24,12 @@ export function formatWalkingTime(walk: Walking) {
     // TODO feet
     walkTime = distanceFormatter('meter', []).format(walk.distance);
   } else {
-    walkTime = formatDuration(walk.time);
+    walkTime = formatDuration(walk.time)!;
   }
   if (walk.waitUntil) {
     const unit = biggestUnit(walk.waitUntil);
     if (unit === 'days' || unit === 'hours' || walk.waitUntil.minutes! > 4) {
-      const until = formatDuration(walk.waitUntil);
+      const until = formatDuration(walk.waitUntil)!;
       return `Walk ${walkTime}, then wait for ${until}`;
     }
   }
