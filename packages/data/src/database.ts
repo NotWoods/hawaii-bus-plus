@@ -64,22 +64,16 @@ const callbacks: OpenDBCallbacks<GTFSSchema> = {
     db.createObjectStore('calendar', { keyPath: 'service_id' });
     db.createObjectStore('agency', { keyPath: 'agency_id' });
 
-    const routeStore = db.createObjectStore('routes', {
-      keyPath: 'route_id',
-    });
+    const routeStore = db.createObjectStore('routes', { keyPath: 'route_id' });
     routeStore.createIndex('words', 'words', { multiEntry: true });
 
-    const stopStore = db.createObjectStore('stops', {
-      keyPath: 'stop_id',
-    });
+    const stopStore = db.createObjectStore('stops', { keyPath: 'stop_id' });
     stopStore.createIndex('words', 'words', { multiEntry: true });
     stopStore.createIndex('routes', 'routes', { multiEntry: true });
     stopStore.createIndex('stop_lat', ['position', 'lat']);
     stopStore.createIndex('stop_lon', ['position', 'lng']);
 
-    const tripStore = db.createObjectStore('trips', {
-      keyPath: 'trip_id',
-    });
+    const tripStore = db.createObjectStore('trips', { keyPath: 'trip_id' });
     tripStore.createIndex('route_id', 'route_id');
     tripStore.createIndex('start', 'start');
   },

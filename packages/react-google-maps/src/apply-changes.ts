@@ -16,7 +16,8 @@ export function useMap<T>(
       onUnmount();
       setInstance(undefined);
     };
-  }, [map, effect]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [map]);
   return instance;
 }
 

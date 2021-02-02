@@ -23,6 +23,7 @@ export const databaseInitialized = initWorker
     }
   })
   .then(() => {
+    console.log('Database initialized');
     initWorker.terminate();
   });
 

@@ -19,7 +19,8 @@ import { downloadScheduleData } from '../fetch.js';
 import { getWords } from '../words.js';
 
 export async function init(apiKey: string, db: IDBPDatabase<GTFSSchema>) {
-  return downloadScheduleData(apiKey).then((api) => initDatabase(db, api));
+  const api = await downloadScheduleData(apiKey);
+  return initDatabase(db, api);
 }
 
 type StoreName = keyof typeof transformers;
@@ -44,6 +45,17 @@ const transformers = {
   agency: (agency: Agency) => agency,
 };
 const storeNames = Object.keys(transformers) as StoreName[];
+
+function keySet(api: GTFSData, name: StoreName) {
+  switch (name) {
+    case 'trips':
+      return new Set(api.trips.map((trip) => trip.trip_id));
+    default: {
+      const record: { [id: string]: unknown } = api[name];
+      return new Set(Object.keys(record));
+    }
+  }
+}
 
 /**
  * Initialize the database by storing values from the API data.
@@ -76,10 +88,11 @@ export async function initDatabase(
   // Await here to load the stores that need to be deleted
   const removedKeys = Array.from(await existingKeysReady)
     .map(([storeName, keys]) => {
-      const removed = difference(keys, new Set(Object.keys(api[storeName])));
+      const removed = difference(keys, keySet(api, storeName));
       return [storeName, removed] as const;
     })
     .filter(([, keys]) => keys.size > 0);
+
   if (removedKeys.length > 0) {
     const nonEmpty = removedKeys.map(([storeName]) => storeName);
     // New transaction because the previous one will be closed by now
@@ -87,6 +100,7 @@ export async function initDatabase(
 
     for (const [storeName, removed] of removedKeys) {
       for (const key of removed) {
+        console.log(removed, key);
         jobs.push(deleteTx.objectStore(storeName).delete(key as any));
       }
     }
