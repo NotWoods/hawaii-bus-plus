@@ -1,5 +1,5 @@
 {
-  "files": ["./eslintrc.cjs", "./packages/client/vite.config.ts"],
+  "files": [],
   "references": [
     { "path": "packages/api-gen/src" },
     { "path": "packages/client/page" },
@@ -15,8 +15,5 @@
     { "path": "packages/react-google-maps/src" },
     { "path": "packages/types" },
     { "path": "packages/utils/src" }
-  ],
-  "compilerOptions": {
-    "allowJs": true
-  }
+  ]
 }

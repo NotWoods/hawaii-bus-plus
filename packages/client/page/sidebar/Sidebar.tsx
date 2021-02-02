@@ -32,7 +32,7 @@ export function Sidebar(props: Props) {
           accessKey="f"
           value={search}
           ref={inputRef}
-          onChange={(evt) => setSearch(evt.currentTarget.value)}
+          onInput={(evt) => setSearch(evt.currentTarget.value)}
         />
       </div>
 

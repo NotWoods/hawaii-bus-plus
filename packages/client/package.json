@@ -50,9 +50,18 @@
   "eslintConfig": {
     "parserOptions": {
       "project": [
-        "./tsconfig.json",
         "./packages/client/*/tsconfig.json"
       ]
-    }
+    },
+    "overrides": [
+      {
+        "files": [
+          "**/vite.config.ts"
+        ],
+        "parserOptions": {
+          "project": []
+        }
+      }
+    ]
   }
 }

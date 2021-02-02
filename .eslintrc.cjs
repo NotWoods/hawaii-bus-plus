@@ -5,7 +5,6 @@ const config = {
   parser: '@typescript-eslint/parser',
   parserOptions: {
     tsconfigRootDir: __dirname,
-    project: ['./tsconfig.json'],
     extraFileExtensions: ['.cjs'],
   },
   plugins: ['@typescript-eslint', 'ava'],
@@ -89,6 +88,12 @@ const config = {
       rules: {
         'jest/expect-expect': 'off',
         'jest/no-test-callback': 'off',
+      },
+    },
+    {
+      files: ['**/*.cjs', '**/vite.config.ts'],
+      parserOptions: {
+        project: [],
       },
     },
   ],
