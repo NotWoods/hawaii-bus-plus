@@ -5,7 +5,7 @@ import { CloseButton } from './CloseButton';
 export interface AlertProps {
   children?: ComponentChildren;
   title?: string;
-  alertType?: string;
+  alertType?: `alert-${string & unknown}`;
   fillType?: string;
   hasDismissButton?: boolean;
   state?: string;
@@ -15,7 +15,7 @@ export interface AlertProps {
 export function Alert(props: AlertProps) {
   const {
     title,
-    alertType = '',
+    alertType,
     fillType = '',
     state = '',
     hasDismissButton = true,

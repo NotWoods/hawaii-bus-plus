@@ -10,10 +10,9 @@ import { useCallback, useEffect, useRef } from 'preact/hooks';
 export function useWorker(workerConstructor: { new (): Worker }) {
   const workerRef = useRef<PromiseWorker | undefined>();
 
-  const generateWorker = useCallback(
-    () => new PromiseWorker(new workerConstructor()),
-    [workerConstructor]
-  );
+  const generateWorker = useCallback(() => {
+    return new PromiseWorker(new workerConstructor());
+  }, [workerConstructor]);
 
   useEffect(() => {
     return () => {
@@ -21,12 +20,15 @@ export function useWorker(workerConstructor: { new (): Worker }) {
     };
   }, []);
 
-  function postMessage(message: unknown): Promise<unknown> {
+  async function postMessage(message: unknown): Promise<unknown> {
     if (!workerRef.current) {
       workerRef.current = generateWorker();
     }
 
-    return workerRef.current.postMessage(message);
+    console.log('WorkerRequest', message);
+    const result = await workerRef.current.postMessage(message);
+    console.log('WorkerResponse', result);
+    return result;
   }
 
   return postMessage;

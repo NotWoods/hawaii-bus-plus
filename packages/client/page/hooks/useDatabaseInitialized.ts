@@ -28,12 +28,14 @@ export const databaseInitialized = initWorker
 
 export function useDatabaseInitialized() {
   const [initialized, setInitialized] = useState(false);
+
   useEffect(() => {
     databaseInitialized.then(
       () => setInitialized(true),
       () => setInitialized(false)
     );
   }, []);
+
   return initialized;
 }
 

@@ -4,7 +4,6 @@ import { defineConfig } from 'vite';
 export default defineConfig({
   // plugins: [preactRefresh()],
   alias: {
-    'proposal-temporal': 'proposal-temporal/lib/index.mjs',
     react: 'preact/compat',
     'react-dom': 'preact/compat',
   },
