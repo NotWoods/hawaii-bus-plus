@@ -20,11 +20,11 @@ export class DBRepository implements Repository {
     return this.ready.then((db) => loadTrip(db, tripId));
   }
 
-  loadTrips(): Promise<TripCursor | null> {
+  loadTrips(): Promise<TripCursor> {
     return this.ready.then((db) => loadTrips(db));
   }
 
-  loadTripsForRoute(routeId: Route['route_id']): Promise<TripCursor | null> {
+  loadTripsForRoute(routeId: Route['route_id']): Promise<TripCursor> {
     return this.ready.then((db) => loadTripsForRoute(db, routeId));
   }
 

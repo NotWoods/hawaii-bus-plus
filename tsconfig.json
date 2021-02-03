@@ -1,5 +1,5 @@
 {
-  "files": [],
+  "files": ["./packages/client/vite.config.ts"],
   "references": [
     { "path": "packages/api-gen/src" },
     { "path": "packages/client/page" },
@@ -15,5 +15,8 @@
     { "path": "packages/react-google-maps/src" },
     { "path": "packages/types" },
     { "path": "packages/utils/src" }
-  ]
+  ],
+  "compilerOptions": {
+    "noEmit": true
+  }
 }

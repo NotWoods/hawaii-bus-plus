@@ -3,7 +3,7 @@ let messageIds = 0;
 export class PromiseWorker {
   private readonly callbacks = new Map<
     number,
-    (error: Error | null, result: unknown) => void
+    (error: Error | undefined, result: unknown) => void
   >();
 
   constructor(private readonly worker: Worker) {

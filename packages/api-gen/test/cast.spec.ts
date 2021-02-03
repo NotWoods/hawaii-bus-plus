@@ -8,7 +8,7 @@ import { GTFS_ZIP_LOCATION } from '../src/env.js';
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 
 async function* loadZipFile(path: string) {
-  const zipData = await readFile(GTFS_ZIP_LOCATION, { encoding: null });
+  const zipData = await readFile(GTFS_ZIP_LOCATION);
   const zip = await JSZip.loadAsync(zipData);
 
   const file = zip.file(path);

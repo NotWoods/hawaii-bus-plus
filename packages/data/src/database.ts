@@ -81,4 +81,4 @@ const callbacks: OpenDBCallbacks<GTFSSchema> = {
 
 export const dbReady: Promise<IDBPDatabase<GTFSSchema>> = self.indexedDB
   ? openDB<GTFSSchema>('gtfs', 1, callbacks)
-  : Promise.resolve(null as any);
+  : Promise.resolve(undefined as any);

@@ -19,7 +19,7 @@ export async function generateApi(
   gtfsZipPath: string,
   apiFolder: string
 ): Promise<void> {
-  const zipData = await readFile(gtfsZipPath, { encoding: null });
+  const zipData = await readFile(gtfsZipPath);
   const [api, shapes] = await createApiData(zipData);
 
   const jobs: Promise<unknown>[] = [

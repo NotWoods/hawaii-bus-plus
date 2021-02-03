@@ -14,6 +14,7 @@ const config = {
     'plugin:@typescript-eslint/recommended',
     'plugin:@typescript-eslint/recommended-requiring-type-checking',
     'plugin:jest/style',
+    'plugin:ava/recommended',
     'prettier',
     'prettier/@typescript-eslint',
   ],
@@ -69,6 +70,12 @@ const config = {
     '@typescript-eslint/prefer-string-starts-ends-with': 'error',
     '@typescript-eslint/unbound-method': 'off',
     '@typescript-eslint/unified-signatures': 'error',
+    'ava/no-ignored-test-files': [
+      'error',
+      {
+        extensions: ['ts', 'tsx'],
+      },
+    ],
     'jest/prefer-todo': 'error',
     'prefer-arrow-callback': [
       'error',
@@ -93,7 +100,7 @@ const config = {
       },
     },
     {
-      files: ['**/*.cjs', '**/vite.config.ts'],
+      files: ['**/*.cjs'],
       parserOptions: {
         project: [],
       },

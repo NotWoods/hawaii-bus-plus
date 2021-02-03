@@ -3,14 +3,14 @@ export function registerPromiseWorker(
 ) {
   function postOutgoingMessage(
     messageId: number,
-    error: Error | null,
+    error: Error | undefined,
     result?: unknown
   ) {
     if (error) {
       console.error('Worker caught an error:', error);
       self.postMessage([messageId, error]);
     } else {
-      self.postMessage([messageId, null, result]);
+      self.postMessage([messageId, undefined, result]);
     }
   }
 
@@ -24,7 +24,7 @@ export function registerPromiseWorker(
     const [messageId, message] = payload;
 
     Promise.resolve(callback(message)).then(
-      (result) => postOutgoingMessage(messageId, null, result),
+      (result) => postOutgoingMessage(messageId, undefined, result),
       (error) => postOutgoingMessage(messageId, error)
     );
   };

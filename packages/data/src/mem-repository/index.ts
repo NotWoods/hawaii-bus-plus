@@ -38,11 +38,11 @@ export class MemoryRepository implements Repository {
     );
   }
 
-  loadTrips(): Promise<TripCursor | null> {
+  loadTrips(): Promise<TripCursor> {
     return this.apiReady.then((api) => memTripCursor(api.trips));
   }
 
-  loadTripsForRoute(routeId: Route['route_id']): Promise<TripCursor | null> {
+  loadTripsForRoute(routeId: Route['route_id']): Promise<TripCursor> {
     return this.apiReady.then((api) =>
       memTripCursor(api.trips.filter((trip) => trip.route_id === routeId))
     );

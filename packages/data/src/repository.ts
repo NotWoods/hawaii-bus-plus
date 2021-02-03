@@ -2,10 +2,10 @@ import { Agency, Calendar, Route, Stop, Trip } from '@hawaii-bus-plus/types';
 import { DBRepository } from './db-repository';
 import { MemoryRepository } from './mem-repository';
 
-export interface TripCursor {
+export type TripCursor = {
   value: Trip;
-  continue(): Promise<TripCursor | null>;
-}
+  continue(): Promise<TripCursor>;
+} | null;
 
 export interface Repository {
   loadRoutes(
@@ -14,9 +14,9 @@ export interface Repository {
 
   loadTrip(tripId: Trip['trip_id']): Promise<Trip | undefined>;
 
-  loadTrips(): Promise<TripCursor | null>;
+  loadTrips(): Promise<TripCursor>;
 
-  loadTripsForRoute(routeId: Route['route_id']): Promise<TripCursor | null>;
+  loadTripsForRoute(routeId: Route['route_id']): Promise<TripCursor>;
 
   loadStops(
     stopIds: Iterable<Stop['stop_id']>
