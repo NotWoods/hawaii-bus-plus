@@ -61,7 +61,7 @@ test.concurrent('journeyToDirections no walking', async () => {
       name: hwyIntersection.stop_name,
       position: hwyIntersection.position,
     },
-    MONDAY.toPlainDateTime(NOON),
+    MONDAY.toPlainDateTime(NOON.toPlainTime()),
     path
   );
 

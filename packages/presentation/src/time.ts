@@ -13,10 +13,7 @@ export function plainTimeToData(
   serviceDate: Temporal.PlainDate,
   timeZone: string | Temporal.TimeZoneProtocol
 ): PlainTimeData {
-  const dateTime = daysTime
-    .toPlainTime()
-    .toPlainDateTime(serviceDate)
-    .add({ days: daysTime.day });
+  const dateTime = daysTime.toPlainDateTime(serviceDate);
   const zoned = dateTime.toZonedDateTime(timeZone);
 
   return {

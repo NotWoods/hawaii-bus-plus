@@ -17,16 +17,30 @@ import type {
   Shape,
   Stop,
   StopTime,
-  TimeString,
   Transfer,
   Trip,
 } from '@hawaii-bus-plus/types';
-import { compareAs } from '@hawaii-bus-plus/utils';
+import { compareAs, PlainDaysTime } from '@hawaii-bus-plus/utils';
 import { first, toArray } from 'ix/asynciterable/index.js';
 import mnemonist from 'mnemonist';
-import type { Mutable } from 'type-fest';
+import type { Merge, Mutable } from 'type-fest';
 
 const { MultiMap, DefaultMap } = mnemonist;
+
+export type StopTimeInflated = Merge<
+  StopTime,
+  {
+    readonly arrival_time: PlainDaysTime;
+    readonly departure_time: PlainDaysTime;
+  }
+>;
+
+export type TripInflated = Merge<
+  Trip,
+  { readonly stop_times: StopTimeInflated[] }
+>;
+
+export type ServerGTFSData = Merge<GTFSData, { trips: TripInflated[] }>;
 
 export type JsonStreams = {
   routes: AsyncIterable<CsvRoute>;
@@ -40,10 +54,6 @@ export type JsonStreams = {
   agency: AsyncIterable<CsvAgency>;
   shapes: AsyncIterable<CsvShape>;
 };
-
-function fixTimeString(time: string) {
-  return time.padStart('00:00:00'.length, '0') as TimeString;
-}
 
 export async function parseFeedInfo(
   json: Pick<JsonStreams, 'feed_info'>,
@@ -70,9 +80,8 @@ export async function parseRoutes(
   variable: Pick<GTFSData, 'routes'>,
   defaultAgency: Agency['agency_id']
 ) {
-  const routes = (await toArray(json.routes)).sort(
-    compareAs((route) => route.route_sort_order)
-  );
+  const routes = await toArray(json.routes);
+  routes.sort(compareAs((route) => route.route_sort_order));
   for (const csvRoute of routes) {
     const route = csvRoute as Mutable<Route>;
     route.agency_id = route.agency_id || defaultAgency;
@@ -82,11 +91,11 @@ export async function parseRoutes(
 
 export async function parseTrips(
   json: Pick<JsonStreams, 'trips'>,
-  variable: Pick<GTFSData, 'trips'>
+  variable: Pick<ServerGTFSData, 'trips'>
 ) {
-  const trips = new Map<Trip['trip_id'], Trip>();
+  const trips = new Map<Trip['trip_id'], TripInflated>();
   for await (const csvTrip of json.trips) {
-    const trip = csvTrip as Mutable<Trip>;
+    const trip = csvTrip as Mutable<TripInflated>;
     trip.stop_times = [];
     variable.trips.push(trip);
     trips.set(trip.trip_id, trip);
@@ -171,14 +180,19 @@ export async function parseCalendar(
 export async function parseStopTimes(
   json: Pick<JsonStreams, 'stop_times'>,
   variable: Pick<GTFSData, 'routes' | 'stops'>,
-  trips: ReadonlyMap<Trip['trip_id'], Trip>
+  trips: ReadonlyMap<Trip['trip_id'], TripInflated>
 ) {
   for await (const csvStopTime of json.stop_times) {
-    const stopTime = (csvStopTime as unknown) as Mutable<StopTime>;
-    delete (csvStopTime as Partial<CsvStopTime>).continuous_drop_off;
-    delete (csvStopTime as Partial<CsvStopTime>).drop_off_type;
-    stopTime.arrival_time = fixTimeString(stopTime.arrival_time);
-    stopTime.departure_time = fixTimeString(stopTime.departure_time);
+    const stopTime: StopTimeInflated = {
+      trip_id: csvStopTime.trip_id,
+      arrival_time: PlainDaysTime.from(csvStopTime.arrival_time),
+      departure_time: PlainDaysTime.from(csvStopTime.departure_time),
+      stop_id: csvStopTime.stop_id,
+      stop_sequence: csvStopTime.stop_sequence,
+      pickup_type: csvStopTime.pickup_type,
+      continuous_pickup: csvStopTime.continuous_pickup,
+      timepoint: csvStopTime.timepoint,
+    };
 
     const stop = variable.stops[stopTime.stop_id];
     const trip = trips.get(csvStopTime.trip_id)!;

@@ -31,6 +31,7 @@ jobs:
         run: pnpm recursive install --frozen-lockfile
         if: steps.cache.outputs.cache-hit != 'true'
 
+      - run: pnpm run tsc
       - name: pnpm run format
         run: pnpm recursive run format --no-bail
 

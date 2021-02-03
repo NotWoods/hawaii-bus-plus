@@ -1,17 +1,14 @@
-import { Temporal } from 'proposal-temporal';
-import { Opaque } from 'type-fest';
 import { TimeString } from '@hawaii-bus-plus/types';
+import { Temporal } from 'proposal-temporal';
 import { toInt } from './num.js';
 
 const HOURS_IN_DAY = 24;
-
-export type PlainDaysTimeSeconds = Opaque<number, 'pdt-seconds'>;
 
 /**
  * Plain time with extra days as needed (i.e.: 25 hours)
  */
 export class PlainDaysTime {
-  readonly day: number;
+  private readonly day: number;
 
   constructor(
     isoDay = 0,
@@ -20,25 +17,23 @@ export class PlainDaysTime {
     this.day = isoDay;
   }
 
-  get hour() {
-    return this.time.hour;
-  }
-  get minute() {
-    return this.time.minute;
-  }
-  get second() {
-    return this.time.second;
-  }
-
   toPlainTime() {
     return this.time;
   }
 
-  toString() {
-    const hours = this.day * HOURS_IN_DAY + this.hour;
-    return [hours, this.minute, this.second]
+  toPlainDateTime(date: Temporal.PlainDate | Temporal.DateLike | string) {
+    return this.toPlainTime().toPlainDateTime(date).add({ days: this.day });
+  }
+
+  toString(): TimeString {
+    const hours = this.day * HOURS_IN_DAY + this.time.hour;
+    return [hours, this.time.minute, this.time.second]
       .map((part) => part.toString().padStart(2, '0'))
       .join(':') as TimeString;
+  }
+
+  toJSON(): string {
+    return this.toString();
   }
 
   add(
@@ -69,7 +64,7 @@ export class PlainDaysTime {
       return value as PlainDaysTime;
     }
 
-    let [hours, min, second] = value.split(':').map((s) => toInt(s));
+    let [hours, min, second] = value.split(':').map(toInt);
     let days = 0;
     if (hours >= HOURS_IN_DAY) {
       days = Math.floor(hours / HOURS_IN_DAY);
@@ -98,41 +93,3 @@ export class PlainDaysTime {
 }
 
 export const InfinityPlainDaysTime = new PlainDaysTime(Infinity);
-
-/**
- * Turns a date into a string with hours, minutes.
- * @param  {Date} 	date Date to convert
- * @param  {string} date 24hr string in format 12:00:00 to convert to string in 12hr format
- * @return {string}    	String representation of time
- */
-export function stringTime(date: PlainDaysTime | TimeString): string {
-  if (typeof date === 'string') {
-    if (date.includes(':') && date.lastIndexOf(':') > date.indexOf(':')) {
-      date = PlainDaysTime.from(date);
-    }
-  }
-  if (typeof date != 'object') {
-    throw new TypeError(`date must be Date or string, not ${typeof date}`);
-  }
-
-  let m = 'AM';
-  let displayHour = '';
-  const { hour: hr, minute: min } = date as PlainDaysTime;
-
-  if (hr === 0) {
-    displayHour = '12';
-  } else if (hr === 12) {
-    displayHour = '12';
-    m = 'PM';
-  } else if (hr > 12) {
-    const mathHr = hr - 12;
-    displayHour = mathHr.toString();
-    m = 'PM';
-  } else {
-    displayHour = hr.toString();
-  }
-
-  const displayMinute = `:${min.toString().padStart(2, '0')}`;
-
-  return displayHour + displayMinute + m;
-}

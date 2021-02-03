@@ -1,5 +1,5 @@
-import { CastingContext } from 'csv-parse';
 import { toInt } from '@hawaii-bus-plus/utils';
+import { CastingContext } from 'csv-parse';
 
 export function cast(value: string, context: CastingContext) {
   switch (context.column) {

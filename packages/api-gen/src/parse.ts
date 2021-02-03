@@ -1,8 +1,7 @@
-import type { GTFSData, Shape, Trip } from '@hawaii-bus-plus/types';
+import type { Shape } from '@hawaii-bus-plus/types';
 import {
   compareAs,
   PlainDaysTime,
-  stringTime,
   toInt,
   valueNotNull,
 } from '@hawaii-bus-plus/utils';
@@ -10,6 +9,7 @@ import parse from 'csv-parse';
 import { from, zip } from 'ix/iterable/index.js';
 import { filter, map } from 'ix/iterable/operators/index.js';
 import JSZip, { JSZipObject } from 'jszip';
+import { Temporal } from 'proposal-temporal';
 import type { Mutable } from 'type-fest';
 import { cast } from './cast.js';
 import {
@@ -22,9 +22,17 @@ import {
   parseStops,
   parseStopTimes,
   parseTrips,
+  ServerGTFSData,
+  TripInflated,
 } from './parsers.js';
 
 const STARTS_WITH_TIME = /^\d\d?:\d\d/;
+
+function formatTime(time: Temporal.PlainTime) {
+  return time
+    .toLocaleString('en', { hour12: true, hour: 'numeric', minute: '2-digit' })
+    .replace(/\s/g, '');
+}
 
 export async function zipFilesToObject(
   zipFiles: ReadonlyMap<string, JSZipObject>
@@ -53,7 +61,7 @@ export async function zipFilesToObject(
  */
 export async function createApiData(
   gtfsZipData: Buffer | ArrayBuffer | Uint8Array
-): Promise<[GTFSData, ReadonlyMap<Shape['shape_id'], Shape>]> {
+): Promise<[ServerGTFSData, ReadonlyMap<Shape['shape_id'], Shape>]> {
   const fileList = [
     'agency.txt',
     'calendar.txt',
@@ -81,7 +89,7 @@ export async function createApiData(
     .pipe((source) => new Map(source));
 
   const json = (await zipFilesToObject(zipFiles)) as JsonStreams;
-  const variable: GTFSData = {
+  const variable: ServerGTFSData = {
     routes: {},
     stops: {},
     calendar: {},
@@ -111,17 +119,17 @@ export async function createApiData(
   // Sorting and formatting at the end
   variable.trips = Array.from(trips.values())
     .map((t) => {
-      const trip = t as Mutable<Trip>;
+      const trip = t as Mutable<TripInflated>;
       trip.stop_times.sort(compareAs((st) => st.stop_sequence));
       if (!STARTS_WITH_TIME.test(trip.trip_short_name)) {
-        const start = trip.stop_times[0].arrival_time;
-        trip.trip_short_name = `${stringTime(start)} ${trip.trip_short_name}`;
+        const start = trip.stop_times[0].arrival_time.toPlainTime();
+        trip.trip_short_name = `${formatTime(start)} ${trip.trip_short_name}`;
       }
       return trip;
     })
     .sort((a, b) => {
-      const aTime = PlainDaysTime.from(a.stop_times[0].departure_time);
-      const bTime = PlainDaysTime.from(b.stop_times[0].departure_time);
+      const aTime = a.stop_times[0].departure_time;
+      const bTime = b.stop_times[0].departure_time;
       return PlainDaysTime.compare(aTime, bTime);
     });
 
