@@ -12,7 +12,7 @@ const LAKELAND = 'll' as Stop['stop_id'];
 const HWY_INTERSECTON = 'hw' as Stop['stop_id'];
 const PARKER_RANCH = 'pr' as Stop['stop_id'];
 
-test('journeyToDirections no walking', async () => {
+test.concurrent('journeyToDirections no walking', async () => {
   const repo = new NodeRepository();
 
   const path: CompletePath = [

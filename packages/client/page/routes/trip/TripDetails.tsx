@@ -19,12 +19,14 @@ interface Props {
 }
 
 export function TripDetails(props: Props) {
-  const directionDetails = props.details.directions[props.directionId];
+  const { directions, bounds } = props.details;
+  const directionDetails = directions[props.directionId];
 
   const map = useGoogleMap();
   useEffect(() => {
-    map && props.details.bounds && map.fitBounds(props.details.bounds);
-  }, [map, props.details.bounds]);
+    map && bounds && map.fitBounds(bounds);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [map, bounds?.east, bounds?.north, bounds?.south, bounds?.west]);
 
   if (!directionDetails) return null;
   const { closestTrip } = directionDetails;

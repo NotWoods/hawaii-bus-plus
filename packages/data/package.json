@@ -13,8 +13,8 @@
     "test": "ava"
   },
   "dependencies": {
-    "@hawaii-bus-plus/types": "*",
-    "@hawaii-bus-plus/utils": "*",
+    "@hawaii-bus-plus/types": "workspace:*",
+    "@hawaii-bus-plus/utils": "workspace:*",
     "idb": "^6.0.0",
     "ix": "^4.2.0",
     "mnemonist": "^0.38.1",

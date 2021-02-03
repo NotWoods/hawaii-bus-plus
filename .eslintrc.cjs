@@ -13,6 +13,7 @@ const config = {
     'preact',
     'plugin:@typescript-eslint/recommended',
     'plugin:@typescript-eslint/recommended-requiring-type-checking',
+    'plugin:jest/style',
     'prettier',
     'prettier/@typescript-eslint',
   ],
@@ -68,6 +69,7 @@ const config = {
     '@typescript-eslint/prefer-string-starts-ends-with': 'error',
     '@typescript-eslint/unbound-method': 'off',
     '@typescript-eslint/unified-signatures': 'error',
+    'jest/prefer-todo': 'error',
     'prefer-arrow-callback': [
       'error',
       {

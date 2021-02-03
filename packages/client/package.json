@@ -13,12 +13,12 @@
     "test": "jest"
   },
   "dependencies": {
-    "@hawaii-bus-plus/data": "*",
-    "@hawaii-bus-plus/presentation": "*",
-    "@hawaii-bus-plus/promise-worker": "*",
-    "@hawaii-bus-plus/react-google-maps": "*",
-    "@hawaii-bus-plus/types": "*",
-    "@hawaii-bus-plus/utils": "*",
+    "@hawaii-bus-plus/data": "workspace:*",
+    "@hawaii-bus-plus/presentation": "workspace:*",
+    "@hawaii-bus-plus/promise-worker": "workspace:*",
+    "@hawaii-bus-plus/react-google-maps": "workspace:*",
+    "@hawaii-bus-plus/types": "workspace:*",
+    "@hawaii-bus-plus/utils": "workspace:*",
     "halfmoon": "^1.1.1",
     "idb": "^6.0.0",
     "mnemonist": "^0.38.1",
@@ -29,10 +29,10 @@
     "tslib": "^2.1.0"
   },
   "devDependencies": {
-    "@prefresh/vite": "^2.0.3",
+    "@prefresh/vite": "^2.0.4",
     "@types/googlemaps": "^3.43.2",
     "@types/jest": "^26.0.20",
-    "@types/react": "^17.0.0",
+    "@types/react": "^17.0.1",
     "cross-env": "^7.0.3",
     "esbuild": "^0.8.39",
     "esbuild-jest": "^0.3.0",

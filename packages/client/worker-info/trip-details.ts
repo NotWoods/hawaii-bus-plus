@@ -95,12 +95,14 @@ export async function findBestTrips(
 ): Promise<{
   directionDetails: DirectionDetailsResult[];
   routeStops: Set<Stop['stop_id']>;
+  routeService: Iterable<Calendar>;
 }> {
   const nowTime = new PlainDaysTime(0, now.toPlainTime());
   const nowDate = now.toPlainDate();
 
   const directionDetails: DirectionDetailsMutable[] = [];
   const routeStops = new Set<Stop['stop_id']>();
+  const routeService = new Map<Calendar['service_id'], Calendar>();
 
   let cursor = await repo.loadTripsForRoute(routeId);
   while (cursor) {
@@ -108,6 +110,7 @@ export async function findBestTrips(
 
     const calendar = allCalendars.get(trip.service_id);
     if (calendar) {
+      routeService.set(trip.service_id, calendar);
       for (const stopTime of trip.stop_times) {
         routeStops.add(stopTime.stop_id);
 
@@ -163,6 +166,7 @@ export async function findBestTrips(
 
   return {
     routeStops,
+    routeService: routeService.values(),
     directionDetails: directionDetails.map((directionDetail) => {
       if (!directionDetail.closestTrip.trip) {
         const { closestTrip, earliestTrip, earliest } = directionDetail;

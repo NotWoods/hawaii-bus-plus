@@ -19,9 +19,9 @@
     "test": "ava"
   },
   "dependencies": {
-    "@hawaii-bus-plus/types": "*",
-    "@hawaii-bus-plus/utils": "*",
-    "csv-parse": "^4.15.0",
+    "@hawaii-bus-plus/types": "workspace:*",
+    "@hawaii-bus-plus/utils": "workspace:*",
+    "csv-parse": "^4.15.1",
     "ix": "^4.2.0",
     "jszip": "^3.5.0",
     "mnemonist": "^0.38.1",

@@ -1,6 +1,6 @@
 import { applyOffset } from './helpers';
 
-test.concurrent('applyOffset', () => {
+test('applyOffset', () => {
   expect(applyOffset('Google abc', 3)).toBe('Goo abc');
   expect(applyOffset('Google abc', 8)).toBe('Google a');
 
