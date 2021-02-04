@@ -1,5 +1,6 @@
-import { PlacePoint } from '@hawaii-bus-plus/presentation';
+import { PlacePoint, Point } from '@hawaii-bus-plus/presentation';
 import { Route, Stop } from '@hawaii-bus-plus/types';
+import type { Journey } from '../../worker-nearby/directions/format';
 
 export type RouterAction =
   | ReturnType<typeof linkAction>
@@ -9,7 +10,8 @@ export type RouterAction =
   | ReturnType<typeof closeStopAction>
   | ReturnType<typeof setMarker>
   | ReturnType<typeof openPlace>
-  | ReturnType<typeof updateUserLocation>;
+  | ReturnType<typeof updateUserLocation>
+  | ReturnType<typeof openJourney>;
 
 export function linkAction(href: string | URL) {
   const url = typeof href === 'string' ? new URL(href) : href;
@@ -49,4 +51,19 @@ export function updateUserLocation(
   silent = false
 ) {
   return { type: 'update-user-location', location, silent } as const;
+}
+
+export function openJourney(
+  depart: Point,
+  arrive: Point,
+  departureTime: string,
+  journey: Journey
+) {
+  return {
+    type: 'open-journey',
+    depart,
+    arrive,
+    departureTime,
+    journey,
+  } as const;
 }

@@ -1,7 +1,8 @@
 import { NodeRepository } from '@hawaii-bus-plus/data/node';
 import { Point } from '@hawaii-bus-plus/presentation';
 import { Stop, StopTime, TimeString, Trip } from '@hawaii-bus-plus/types';
-import { lastIndex, PlainDaysTime } from '@hawaii-bus-plus/utils';
+import { PlainDaysTime } from '@hawaii-bus-plus/utils';
+import { last } from 'lodash-es';
 import { Temporal } from 'proposal-temporal';
 import { directions, traversePath } from './directions';
 import { JourneyTripSegment } from './directions/format';
@@ -144,7 +145,7 @@ test.concurrent('directions', async () => {
   });
   expect(segment.stopTimes).toHaveLength(10);
   expect(segment.stopTimes[0].stop).toMatchObject({ stop_id: ST_JOSEPH });
-  expect(segment.stopTimes[lastIndex(segment.stopTimes)].stop).toMatchObject({
+  expect(last(segment.stopTimes)!.stop).toMatchObject({
     stop_id: DA_STORE,
   });
 });

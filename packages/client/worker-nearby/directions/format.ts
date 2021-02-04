@@ -8,11 +8,8 @@ import {
   Walking,
 } from '@hawaii-bus-plus/presentation';
 import { Agency, Route, Stop, Trip } from '@hawaii-bus-plus/types';
-import {
-  findIndexLast,
-  lastIndex,
-  PlainDaysTime,
-} from '@hawaii-bus-plus/utils';
+import { PlainDaysTime } from '@hawaii-bus-plus/utils';
+import { findLastIndex, last } from 'lodash-es';
 import { add } from 'mnemonist/set';
 import { Temporal } from 'proposal-temporal';
 import { computeDistanceBetween } from 'spherical-geometry-js';
@@ -114,7 +111,7 @@ export async function journeyToDirections(
           current.stopTime.stop_id === st.stop_id &&
           current.stopTime.stop_sequence === st.stop_sequence
       );
-      const firstSTIndex = findIndexLast(
+      const firstSTIndex = findLastIndex(
         trip.stop_times,
         (st) => st.stop_id === current.transferFrom,
         lastSTIndex
@@ -137,7 +134,7 @@ export async function journeyToDirections(
 
       // Update every iteration so we only keep the last result
       lastDepartureTime = formattedStopTimes[0].departureTime;
-      endEntry = formattedStopTimes[lastIndex(formattedStopTimes)];
+      endEntry = last(formattedStopTimes);
       // Set on first iteration
       if (!startEntry) {
         startEntry = formattedStopTimes[0];

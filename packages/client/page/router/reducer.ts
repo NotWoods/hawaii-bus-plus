@@ -1,6 +1,8 @@
-import { Point } from '@hawaii-bus-plus/presentation';
+import { PlacePointPartial, Point } from '@hawaii-bus-plus/presentation';
 import { Route, Stop } from '@hawaii-bus-plus/types';
+import type { Journey } from '../../worker-nearby/directions/format';
 import { RouterAction } from './action';
+import { queryToPoint } from './url';
 
 export interface PlaceResult
   extends Pick<
@@ -11,6 +13,13 @@ export interface PlaceResult
   location?: google.maps.LatLngLiteral;
 }
 
+export interface DirectionsState {
+  depart: Point | PlacePointPartial;
+  arrive: Point | PlacePointPartial;
+  departureTime: string;
+  journey?: Journey;
+}
+
 export interface RouterState {
   /** Open route */
   routeId?: Route['route_id'];
@@ -18,22 +27,24 @@ export interface RouterState {
   /** Open stop */
   point?: Point;
 
-  directionsOpen: boolean;
+  directions?: DirectionsState;
 
   freshLoad: boolean;
 }
 
 const ROUTES_PREFIX = '/routes/';
-const DIRECTIONS = '/directions/';
+const DIRECTIONS = '/directions';
 
 export function initStateFromUrl(url: URL) {
-  const newState: RouterState = {
-    freshLoad: false,
-    directionsOpen: false,
-  };
+  const newState: RouterState = { freshLoad: false };
 
   if (url.pathname.startsWith(DIRECTIONS)) {
-    newState.directionsOpen = true;
+    const depart = queryToPoint(url.searchParams.get('from'));
+    const arrive = queryToPoint(url.searchParams.get('to'));
+    const departureTime = url.searchParams.get('departureTime');
+    if (depart && arrive && departureTime) {
+      newState.directions = { depart, arrive, departureTime };
+    }
   } else if (url.pathname.startsWith(ROUTES_PREFIX)) {
     // If link opens route
     const [routeId] = url.pathname.slice(ROUTES_PREFIX.length).split('/');
@@ -76,7 +87,7 @@ export function routerReducer(
       newState.freshLoad = false;
       return newState;
     }
-    default:
-      throw new Error(`Invalid action`);
+    case 'open-journey':
+      return { ...state, directions: action };
   }
 }

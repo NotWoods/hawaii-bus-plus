@@ -16,9 +16,13 @@ export interface StopPoint extends Partial<BasePoint> {
   stopId: Stop['stop_id'];
 }
 
-export interface PlacePoint extends BasePoint {
+export interface PlacePointPartial extends Partial<BasePoint> {
   type: 'place';
   placeId: string;
+}
+
+export interface PlacePoint extends PlacePointPartial {
+  position: LatLngLike;
 }
 
 export interface UserPoint extends BasePoint {

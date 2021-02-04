@@ -1,7 +1,7 @@
-import { center, useGoogleMap } from '@hawaii-bus-plus/react-google-maps';
-import { memoize } from '@hawaii-bus-plus/utils';
+import { center } from '@hawaii-bus-plus/react-google-maps';
 import { h } from 'preact';
 import { useState } from 'preact/hooks';
+import { usePlacesService } from '../hooks/usePlacesService';
 import { usePromise } from '../hooks/usePromise';
 import { PlaceResult } from '../router/reducer';
 import { buildSessionToken } from '../sidebar/search/places-autocomplete';
@@ -14,42 +14,21 @@ interface Props {
   onClose(): void;
 }
 
-export const buildPlacesService = memoize(
-  (map: google.maps.Map) => new google.maps.places.PlacesService(map)
-);
-
-export function getDetails(
-  service: google.maps.places.PlacesService,
-  request: google.maps.places.PlaceDetailsRequest
-) {
-  return new Promise<google.maps.places.PlaceResult>((resolve, reject) =>
-    service.getDetails(request, (result, status) => {
-      switch (status) {
-        case google.maps.places.PlacesServiceStatus.OK:
-          return resolve(result);
-        default:
-          return reject(status);
-      }
-    })
-  );
-}
-
 export function PlaceCard(props: Props) {
-  const map = useGoogleMap();
+  const getPlaceDetails = usePlacesService();
   const [details, setDetails] = useState<PlaceResult | undefined>();
 
   usePromise(async () => {
     setDetails(undefined);
-    if (map) {
-      const service = buildPlacesService(map);
-      const details = await getDetails(service, {
+    if (getPlaceDetails) {
+      const details = await getPlaceDetails({
         placeId: props.placeId,
         fields: ['formatted_address', 'name', 'geometry', 'place_id'],
         sessionToken: buildSessionToken(),
       });
       setDetails(details);
     }
-  }, [map, props.placeId]);
+  }, [getPlaceDetails, props.placeId]);
 
   const position = props.position ?? details?.location;
   if (position) {

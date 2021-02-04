@@ -3,13 +3,13 @@ import { useContext, useEffect, useReducer } from 'preact/hooks';
 import { JSXInternal } from 'preact/src/jsx';
 import { linkAction, RouterAction } from './action';
 import { initStateFromUrl, routerReducer, RouterState } from './reducer';
+import { directionsToParams } from './url';
 
 interface RouterContext extends RouterState {
   dispatch(action: RouterAction): void;
 }
 
 export const RouterContext = createContext<RouterContext>({
-  directionsOpen: false,
   freshLoad: false,
   dispatch() {},
 });
@@ -40,8 +40,9 @@ export function Router(props: { children: ComponentChildren }) {
 
   useEffect(() => {
     const url = new URL('/', window.location.href);
-    if (state.directionsOpen) {
-      url.pathname = '/directions/';
+    if (state.directions) {
+      url.pathname = '/directions';
+      directionsToParams(state.directions, url.searchParams);
     } else if (state.routeId) {
       url.pathname = `/routes/${state.routeId}/`;
     }
@@ -52,7 +53,7 @@ export function Router(props: { children: ComponentChildren }) {
       history.pushState(state, '', path(url));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state.routeId, state.point, state.directionsOpen]);
+  }, [state.routeId, state.point, state.directions]);
 
   return (
     <RouterContext.Provider value={{ ...state, dispatch }}>

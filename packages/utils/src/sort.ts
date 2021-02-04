@@ -22,19 +22,6 @@ export function* skipUntil<T>(list: Iterable<T>, cb: (item: T) => boolean) {
   }
 }
 
-export function findIndexLast<T>(
-  list: readonly T[],
-  cb: (item: T) => boolean,
-  fromIndex = list.length - 1
-) {
-  for (let i = fromIndex; i >= 0; i--) {
-    if (cb(list[i])) {
-      return i;
-    }
-  }
-  return -1;
-}
-
 export function lastIndex(list: readonly unknown[]) {
   return list.length - 1;
 }

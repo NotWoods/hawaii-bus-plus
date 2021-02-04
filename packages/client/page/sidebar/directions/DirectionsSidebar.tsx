@@ -1,5 +1,4 @@
 import { Point } from '@hawaii-bus-plus/presentation';
-import { useGoogleMap } from '@hawaii-bus-plus/react-google-maps';
 import { h } from 'preact';
 import { useState } from 'preact/hooks';
 import { Temporal } from 'proposal-temporal';
@@ -11,11 +10,11 @@ import { usePromise } from '../../hooks/usePromise';
 import { useWorker } from '../../hooks/useWorker';
 import { CloseButton } from '../../page-wrapper/alert/CloseButton';
 import { SidebarContainer } from '../../page-wrapper/Containers';
-import { buildPlacesService, getDetails } from '../../stop/PlaceCard';
 import { emptyResults } from '../search/places-autocomplete';
-import { SidebarSearchItems } from '../search/SidebarSearchItems';
 import '../Sidebar.css';
 import { DirectionsField } from './DirectionsField';
+import { DirectionsJourneyResults } from './DirectionsJourneyResult';
+import { DirectionsPointResults } from './DirectionsPointResults';
 import { DirectionsTime } from './DirectionsTime';
 
 interface Props {
@@ -28,42 +27,30 @@ export function DirectionsSidebar(props: Props) {
   const [departureTime, setDepartTime] = useState(
     Temporal.now.plainDateTimeISO()
   );
+
   const [searchResults, setSearchResults] = useState({
     field: 'depart' as 'depart' | 'arrive',
     results: emptyResults,
   });
   const [results, setResults] = useState<Journey[]>([]);
 
-  const map = useGoogleMap();
-  const placeService = map && buildPlacesService(map);
-
   const postToDirectionsWorker = useWorker(
     DirectionsWorker
   ) as NearbyWorkerHandler;
 
-  const fieldSetters = {
-    depart: setDepart,
-    arrive: setArrive,
-  };
+  usePromise(async () => {
+    if (!depart || !arrive) return;
 
-  usePromise(
-    async (signal) => {
-      if (!depart || !arrive) return;
+    await databaseInitialized;
+    const results = await postToDirectionsWorker({
+      type: 'directions',
+      from: depart,
+      to: arrive,
+      departureTime: departureTime.toString(),
+    });
 
-      await databaseInitialized;
-      const results = await postToDirectionsWorker({
-        type: 'directions',
-        from: depart,
-        to: arrive,
-        departureTime: departureTime.toString(),
-      });
-
-      if (results && !signal.aborted) {
-        setResults(results);
-      }
-    },
-    [depart, arrive, departureTime]
-  );
+    setResults(results);
+  }, [depart, arrive, departureTime]);
 
   return (
     <SidebarContainer>
@@ -103,43 +90,20 @@ export function DirectionsSidebar(props: Props) {
         <DirectionsTime onChange={setDepartTime} />
       </form>
 
-      <SidebarSearchItems
-        forceTitles={false}
-        favorites={searchResults.results.favorites}
-        routes={[]}
-        stops={searchResults.results.stops}
-        places={searchResults.results.places}
-        onStopClick={(stop) => {
-          fieldSetters[searchResults.field]({
-            type: 'stop',
-            stopId: stop.stop_id,
-            name: stop.stop_name,
-          });
-          setSearchResults({
-            field: searchResults.field,
-            results: emptyResults,
-          });
-        }}
-        onPlaceClick={async (place) => {
-          setSearchResults({
-            field: searchResults.field,
-            results: emptyResults,
-          });
-
-          const details = await getDetails(placeService!, {
-            placeId: place.place_id,
-            fields: ['geometry.location'],
-          });
-          fieldSetters[searchResults.field]({
-            type: 'place',
-            placeId: place.place_id,
-            name: place.structured_formatting.main_text,
-            position: details.geometry!.location.toJSON(),
-          });
-        }}
+      <DirectionsPointResults
+        {...searchResults}
+        setResults={setSearchResults}
+        setDepart={setDepart}
+        setArrive={setArrive}
       />
       {results.map((journey) => (
-        <p>{JSON.stringify(journey, undefined, 2)}</p>
+        <DirectionsJourneyResults
+          journey={journey}
+          from={depart!}
+          to={arrive!}
+          departureTime={departureTime}
+          onClick={props.onClose}
+        />
       ))}
     </SidebarContainer>
   );

@@ -5,10 +5,9 @@ import type {
 } from '../../worker-nearby/directions/format';
 import { TripSegment } from './TripSegment';
 import { WalkSegment } from './WalkSegment';
-import testJourney from './test.json';
 
 interface Props {
-  journey?: Journey;
+  journey: Journey;
 }
 
 // eslint-disable-next-line @typescript-eslint/ban-types
@@ -16,7 +15,7 @@ function isJourneyTripSegment(segment: object): segment is JourneyTripSegment {
   return 'trip' in segment;
 }
 
-export function DirectionsSheet(_props: Props) {
+export function DirectionsSheet(props: Props) {
   return (
     <div className="route-sheet pointer-events-auto mx-10 border border-bottom-0 rounded-top bg-white bg-dark-light-dm">
       <div className="route-sheet__name px-card py-15 d-flex border-bottom rounded-top dark-mode">
@@ -32,7 +31,7 @@ export function DirectionsSheet(_props: Props) {
       <div className="row row-eq-spacing-lg">
         <div className="col-lg-8">
           <div className="content">
-            {testJourney.trips.map((segment, i) => {
+            {props.journey.trips.map((segment, i) => {
               if (isJourneyTripSegment(segment)) {
                 return (
                   <TripSegment
@@ -41,7 +40,7 @@ export function DirectionsSheet(_props: Props) {
                   />
                 );
               } else {
-                return <WalkSegment key={`walk-${i}`} walk={segment as any} />;
+                return <WalkSegment key={`walk-${i}`} walk={segment} />;
               }
             })}
           </div>
