@@ -7,8 +7,8 @@ import type { RouteDetails } from '../../../worker-info/route-details';
 import type { DirectionDetails } from '../../../worker-info/trip-details';
 import { Icon } from '../../icons/Icon';
 import swapIcon from '../../icons/swap_horiz.svg';
-import { PlainDateTimeInput } from '../../sidebar/directions/DirectionsTime';
 import { StopTimesList } from './StopTimesList';
+import { TripSelector } from './TripSelector';
 
 interface Props {
   details: RouteDetails;
@@ -51,9 +51,10 @@ export function TripDetails(props: Props) {
               <Icon src={swapIcon} alt="" /> Switch direction
             </a>
           ) : null}
-          <PlainDateTimeInput
-            value={props.tripTime}
-            onChange={props.onChangeTripTime}
+          <TripSelector
+            details={directionDetails}
+            tripTime={props.tripTime}
+            onChangeTripTime={props.onChangeTripTime}
           />
         </form>
       </div>

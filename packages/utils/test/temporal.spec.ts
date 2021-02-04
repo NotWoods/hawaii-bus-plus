@@ -4,10 +4,11 @@ import { PlainDaysTime } from '../src/temporal.js';
 
 test('PlainDaysTime defaults to 0', (t) => {
   const daysTime = new PlainDaysTime();
+  const time = daysTime.toPlainTime();
   t.is(daysTime.day, 0);
-  t.is(daysTime.hour, 0);
-  t.is(daysTime.minute, 0);
-  t.is(daysTime.second, 0);
+  t.is(time.hour, 0);
+  t.is(time.minute, 0);
+  t.is(time.second, 0);
   t.is(daysTime.toString(), '00:00:00');
 });
 
@@ -16,8 +17,8 @@ test('PlainDaysTime returns new object when adding', (t) => {
   const nextDay = daysTime.add({ days: 2 });
   t.is(daysTime.day, 0);
   t.is(nextDay.day, 2);
-  t.is(daysTime.hour, 0);
-  t.is(nextDay.hour, 0);
+  t.is(daysTime.toPlainTime().hour, 0);
+  t.is(nextDay.toPlainTime().hour, 0);
   t.is(daysTime.toString(), '00:00:00');
   t.is(nextDay.toString(), '48:00:00');
 });

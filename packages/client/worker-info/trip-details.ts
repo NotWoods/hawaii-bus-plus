@@ -25,8 +25,15 @@ export interface DirectionDetails {
   readonly firstStopName: string;
   readonly lastStop: Stop['stop_id'];
   readonly lastStopName: string;
+
   readonly earliest: PlainTimeData;
   readonly latest: PlainTimeData;
+
+  readonly allTrips: readonly {
+    tripId: Trip['trip_id'];
+    shortName: string;
+    time: TimeString;
+  }[];
   readonly closestTrip: {
     readonly trip: TripWithoutTimes;
     readonly offset: DurationData;
@@ -42,6 +49,12 @@ interface DirectionDetailsMutable {
   lastStop?: Stop['stop_id'];
   smallestSequence: number;
   largestSequence: number;
+
+  allTrips: {
+    tripId: Trip['trip_id'];
+    shortName: string;
+    time: TimeString;
+  }[];
 
   earliest: PlainDaysTime;
   latest: PlainDaysTime;
@@ -68,6 +81,7 @@ function emptyDirectionDetails(): DirectionDetailsMutable {
     largestSequence: -1,
     earliest: InfinityPlainDaysTime,
     latest: new PlainDaysTime(),
+    allTrips: [],
     closestTrip: {},
     earliestTrip: {},
   };
@@ -111,14 +125,22 @@ export async function findBestTrips(
     const calendar = allCalendars.get(trip.service_id);
     if (calendar) {
       routeService.set(trip.service_id, calendar);
+
+      const dirId = trip.direction_id;
+      if (!directionDetails[dirId]) {
+        directionDetails[dirId] = emptyDirectionDetails();
+      }
+      const dirDetails = directionDetails[dirId];
+      dirDetails.allTrips.push({
+        tripId: trip.trip_id,
+        shortName: trip.trip_short_name,
+        time: trip.stop_times[0].arrival_time,
+      });
+
+      const { addedDays } = nextServiceDay(calendar, nowDate);
+
       for (const stopTime of trip.stop_times) {
         routeStops.add(stopTime.stop_id);
-
-        const dirId = trip.direction_id;
-        if (!directionDetails[dirId]) {
-          directionDetails[dirId] = emptyDirectionDetails();
-        }
-        const dirDetails = directionDetails[dirId];
 
         const sequence = stopTime.stop_sequence;
         if (sequence < dirDetails.smallestSequence) {
@@ -130,7 +152,6 @@ export async function findBestTrips(
           dirDetails.largestSequence = sequence;
         }
 
-        const { addedDays } = nextServiceDay(calendar, nowDate);
         const arrivalTime = PlainDaysTime.from(stopTime.arrival_time).add({
           days: addedDays,
         });

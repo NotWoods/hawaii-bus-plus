@@ -100,13 +100,12 @@ export async function getRouteDetails(
   const nowDate = nowZoned.toPlainDate();
 
   const allCalendars = await allCalendarsReady;
-  const { directionDetails, routeStops, routeService } = await findBestTrips(
+  const { directionDetails, routeStops } = await findBestTrips(
     repo,
     routeId,
     allCalendars,
     nowZoned
   );
-  console.log(Array.from(routeService));
 
   const { stops, routes, bounds } = await routeStopDetails(
     repo,
@@ -144,6 +143,7 @@ export async function getRouteDetails(
         lastStopName: stops.get(dirDetails.lastStop)!.stop_name,
         earliest: zonedTime(dirDetails.earliest, nowDate, timeZone),
         latest: zonedTime(dirDetails.latest, nowDate, timeZone),
+        allTrips: dirDetails.allTrips,
         closestTrip: {
           trip: dirDetails.closestTrip.trip,
           offset: durationToData(dirDetails.closestTrip.offset),

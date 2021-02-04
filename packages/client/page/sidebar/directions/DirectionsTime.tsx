@@ -4,6 +4,7 @@ import { useState } from 'preact/hooks';
 import '../Sidebar.css';
 
 interface InputProps<T> {
+  'aria-label'?: string;
   value: T;
   onChange(time: T): void;
 }
@@ -14,6 +15,7 @@ function PlainTimeInput(props: InputProps<Temporal.PlainTime>) {
       type="time"
       className="form-control form-control-sm"
       placeholder="12:00"
+      aria-label={props['aria-label']}
       value={props.value.toString({ smallestUnit: 'minutes' })}
       onChange={(evt) =>
         props.onChange(
@@ -26,12 +28,13 @@ function PlainTimeInput(props: InputProps<Temporal.PlainTime>) {
   );
 }
 
-function PlainDateInput(props: InputProps<Temporal.PlainDate>) {
+export function PlainDateInput(props: InputProps<Temporal.PlainDate>) {
   return (
     <input
       type="date"
       className="form-control form-control-sm"
       placeholder="2021-01-31"
+      aria-label={props['aria-label']}
       value={props.value.toString()}
       onChange={(evt) =>
         props.onChange(
@@ -49,6 +52,7 @@ export function PlainDateTimeInput(props: InputProps<Temporal.PlainDateTime>) {
     <div className="form-row row-eq-spacing">
       <div className="col">
         <PlainTimeInput
+          aria-label={props['aria-label']}
           value={props.value.toPlainTime()}
           onChange={(time) => props.onChange(props.value.withPlainTime(time))}
         />

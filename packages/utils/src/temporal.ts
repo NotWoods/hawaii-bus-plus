@@ -8,7 +8,7 @@ const HOURS_IN_DAY = 24;
  * Plain time with extra days as needed (i.e.: 25 hours)
  */
 export class PlainDaysTime {
-  private readonly day: number;
+  readonly day: number;
 
   constructor(
     isoDay = 0,

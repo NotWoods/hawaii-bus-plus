@@ -26,7 +26,7 @@ export function RouteSheet() {
   const { details, directionId, setDetails, switchDirection } = useContext(
     RouteDetailContext
   );
-  const [tripTime, setTripTime] = useState(nowInZone('Pacific/Honolulu'));
+  const [tripTime, setTripTime] = useState(() => nowInZone('Pacific/Honolulu'));
   const postToInfoWorker = useWorker(InfoWorker) as InfoWorkerHandler;
 
   usePromise(async () => {
