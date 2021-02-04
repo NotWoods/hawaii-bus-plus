@@ -105,6 +105,7 @@ export async function journeyToDirections(
       // Lookup trip and get stop times
       const trip = await repo.loadTrip(current.trip);
 
+      // TODO optimize
       const lastSTIndex = trip!.stop_times.findIndex(
         (st) =>
           current.stopTime.stop_id === st.stop_id &&

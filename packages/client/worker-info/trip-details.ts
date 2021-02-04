@@ -20,6 +20,12 @@ import {
 } from '@hawaii-bus-plus/utils';
 import { Temporal } from 'proposal-temporal';
 
+interface TripSlice {
+  tripId: Trip['trip_id'];
+  shortName: string;
+  time: TimeString;
+}
+
 export interface DirectionDetails {
   readonly firstStop: Stop['stop_id'];
   readonly firstStopName: string;
@@ -29,11 +35,7 @@ export interface DirectionDetails {
   readonly earliest: PlainTimeData;
   readonly latest: PlainTimeData;
 
-  readonly allTrips: readonly {
-    tripId: Trip['trip_id'];
-    shortName: string;
-    time: TimeString;
-  }[];
+  readonly allTrips: ReadonlyMap<Trip['trip_id'], TripSlice>;
   readonly closestTrip: {
     readonly trip: TripWithoutTimes;
     readonly offset: DurationData;
@@ -50,11 +52,7 @@ interface DirectionDetailsMutable {
   smallestSequence: number;
   largestSequence: number;
 
-  allTrips: {
-    tripId: Trip['trip_id'];
-    shortName: string;
-    time: TimeString;
-  }[];
+  allTrips: Map<Trip['trip_id'], TripSlice>;
 
   earliest: PlainDaysTime;
   latest: PlainDaysTime;
@@ -81,7 +79,7 @@ function emptyDirectionDetails(): DirectionDetailsMutable {
     largestSequence: -1,
     earliest: InfinityPlainDaysTime,
     latest: new PlainDaysTime(),
-    allTrips: [],
+    allTrips: new Map(),
     closestTrip: {},
     earliestTrip: {},
   };
@@ -131,7 +129,7 @@ export async function findBestTrips(
         directionDetails[dirId] = emptyDirectionDetails();
       }
       const dirDetails = directionDetails[dirId];
-      dirDetails.allTrips.push({
+      dirDetails.allTrips.set(trip.trip_id, {
         tripId: trip.trip_id,
         shortName: trip.trip_short_name,
         time: trip.stop_times[0].arrival_time,

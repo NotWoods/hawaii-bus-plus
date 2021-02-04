@@ -71,7 +71,7 @@ test.concurrent('getRouteDetails when in service', async () => {
       epochMilliseconds: expect.any(Number),
       string: '17:00:00',
     },
-    allTrips: expect.any(Array),
+    allTrips: expect.any(Map),
     closestTrip: expect.objectContaining({
       offset: { days: 0, hours: 0, minutes: 0, seconds: 0 },
       stop: 'kv',
@@ -95,7 +95,7 @@ test.concurrent('getRouteDetails when in service', async () => {
       epochMilliseconds: expect.any(Number),
       string: '17:30:00',
     },
-    allTrips: expect.any(Array),
+    allTrips: expect.any(Map),
     closestTrip: expect.objectContaining({
       offset: { days: 0, hours: 0, minutes: 0, seconds: 0 },
       stop: 'kv',

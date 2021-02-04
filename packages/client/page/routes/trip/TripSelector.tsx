@@ -34,13 +34,11 @@ export function TripSelector(props: Props) {
           value={closestTrip.trip.trip_id}
           onChange={(evt) => {
             const tripId = evt.currentTarget.value as Trip['trip_id'];
-            const trip = details.allTrips.find(
-              (trip) => trip.tripId === tripId
-            )!;
+            const trip = details.allTrips.get(tripId)!;
             onChangeTripTime(tripTime.withPlainTime(trip.time));
           }}
         >
-          {details.allTrips.map((trip) => (
+          {Array.from(details.allTrips.values(), (trip) => (
             <option key={trip.tripId} value={trip.tripId}>
               {trip.shortName}
             </option>
