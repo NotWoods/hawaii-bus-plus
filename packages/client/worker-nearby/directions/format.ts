@@ -100,29 +100,29 @@ export async function journeyToDirections(
   let lastDepartureTime = departureDaysTime;
   let startEntry: JourneyStopTime | undefined;
   let endEntry: JourneyStopTime | undefined;
-  for (const [i, current] of pathSegments.entries()) {
+  for (const current of pathSegments) {
     if (isPathTripSegment(current)) {
       // Lookup trip and get stop times
       const trip = await repo.loadTrip(current.trip);
+      if (!trip) {
+        throw new Error(`Invalid trip ID ${current.trip}`);
+      }
 
       // TODO optimize
-      const lastSTIndex = trip!.stop_times.findIndex(
+      const lastSTIndex = trip.stop_times.findIndex(
         (st) =>
           current.stopTime.stop_id === st.stop_id &&
           current.stopTime.stop_sequence === st.stop_sequence
       );
       const firstSTIndex = findIndexLast(
-        trip!.stop_times,
+        trip.stop_times,
         (st) => st.stop_id === current.transferFrom,
         lastSTIndex
       );
-      const rawStopTimes = trip!.stop_times.slice(
-        firstSTIndex,
-        lastSTIndex + 1
-      );
+      const rawStopTimes = trip.stop_times.slice(firstSTIndex, lastSTIndex + 1);
 
       const stops = await getStops(rawStopTimes.map((st) => st.stop_id));
-      const routeIds = new Set([trip!.route_id]);
+      const routeIds = new Set([trip.route_id]);
       const formattedStopTimes: JourneyStopTime[] = rawStopTimes.map((st) => {
         const stop = stops.get(st.stop_id)!;
         add(routeIds, new Set(stop.routes));
@@ -135,26 +135,34 @@ export async function journeyToDirections(
         };
       });
 
+      // Update every iteration so we only keep the last result
       lastDepartureTime = formattedStopTimes[0].departureTime;
-      if (i === 0) {
+      endEntry = formattedStopTimes[lastIndex(formattedStopTimes)];
+      // Set on first iteration
+      if (!startEntry) {
         startEntry = formattedStopTimes[0];
-      } else if (i === lastIndex(pathSegments)) {
-        endEntry = formattedStopTimes[lastIndex(formattedStopTimes)];
       }
 
       const routes = await repo.loadRoutes(routeIds);
-      const route = routes.get(trip!.route_id);
-      const agency = await repo.loadAgency(route!.agency_id);
+      const route = routes.get(trip.route_id);
+      if (!route) {
+        throw new Error(`Invalid route ID ${trip.route_id}`);
+      }
+
+      const agency = await repo.loadAgency(route.agency_id);
+      if (!agency) {
+        throw new Error(`Invalid agency ID ${route.agency_id}`);
+      }
 
       trips.push({
-        trip: omitStopTimes(trip!),
-        route: route!,
-        agency: agency!,
+        trip: omitStopTimes(trip),
+        route,
+        agency,
         stopTimes: formattedStopTimes.map((st) => ({
           stop: st.stop,
           routes: st.stop.routes.map((routeId) => routes.get(routeId)!),
-          arrivalTime: zonedTime(st.arrivalTime, agency!.agency_timezone),
-          departureTime: zonedTime(st.departureTime, agency!.agency_timezone),
+          arrivalTime: zonedTime(st.arrivalTime, agency.agency_timezone),
+          departureTime: zonedTime(st.departureTime, agency.agency_timezone),
           timepoint: st.timepoint,
         })),
       });

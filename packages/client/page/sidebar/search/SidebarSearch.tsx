@@ -1,64 +1,38 @@
 import { useGoogleMap } from '@hawaii-bus-plus/react-google-maps';
-import { h, Fragment } from 'preact';
+import { h } from 'preact';
 import { useState } from 'preact/hooks';
 import type { SearchWorkerHandler } from '../../../worker-search/search';
+import { SearchResults } from '../../../worker-search/search-db';
 import SearchWorker from '../../../worker-search/search?worker';
 import { usePromise } from '../../hooks/usePromise';
 import { useWorker } from '../../hooks/useWorker';
-import { makeId } from '../../page-wrapper/alert/make';
-import {
-  PlaceSearchItem,
-  RouteSearchItem,
-  StopSearchItem,
-} from '../SearchItems';
-import { SidebarTitle } from '../SidebarTitle';
 import { emptyResults, search } from './places-autocomplete';
+import { SidebarSearchItems } from './SidebarSearchItems';
 
 interface Props {
   search: string;
 }
 
-export const sessionToken = makeId(10);
-
-export function SidebarSearch(props: Props) {
+export function useSearch(
+  query: string,
+  onSearchResults: (results: SearchResults) => void
+) {
   const map = useGoogleMap();
-  const [searchResults, setSearchResults] = useState(emptyResults);
   const postToSearchWorker = useWorker(SearchWorker) as SearchWorkerHandler;
 
   usePromise(async () => {
     const results = await search(map, postToSearchWorker, {
-      input: props.search,
-      offset: props.search.length,
+      input: query,
+      offset: query.length,
     });
 
-    setSearchResults(results);
-  }, [props.search]);
+    onSearchResults(results);
+  }, [query]);
+}
 
-  return (
-    <>
-      <SidebarTitle>Routes</SidebarTitle>
-      {searchResults.routes.map((route) => (
-        <RouteSearchItem key={route.route_id} route={route} />
-      ))}
+export function SidebarSearch(props: Props) {
+  const [searchResults, setSearchResults] = useState(emptyResults);
+  useSearch(props.search, setSearchResults);
 
-      <SidebarTitle>Stops</SidebarTitle>
-      {searchResults.stops.map((stop) => (
-        <StopSearchItem
-          key={stop.stop_id}
-          stopId={stop.stop_id}
-          stopName={stop.stop_name}
-          routes={stop.routes}
-        />
-      ))}
-
-      <SidebarTitle>Other places</SidebarTitle>
-      {searchResults.places.map((place) => (
-        <PlaceSearchItem
-          key={place.place_id}
-          placeId={place.place_id}
-          text={place.structured_formatting}
-        />
-      ))}
-    </>
-  );
+  return <SidebarSearchItems {...searchResults} forceTitles />;
 }

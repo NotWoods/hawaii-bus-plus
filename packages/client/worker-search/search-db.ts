@@ -2,11 +2,12 @@ import { Repository } from '@hawaii-bus-plus/data';
 import { Route, Stop } from '@hawaii-bus-plus/types';
 import { applyOffset, SearchRequest } from './helpers';
 
-interface StopSearchResult extends Pick<Stop, 'stop_id' | 'stop_name'> {
+export interface StopSearchResult extends Pick<Stop, 'stop_id' | 'stop_name'> {
   routes: Route[];
 }
 
 export interface SearchResults {
+  favorites: readonly unknown[];
   places: readonly google.maps.places.AutocompletePrediction[];
   routes: readonly Route[];
   stops: readonly StopSearchResult[];
@@ -38,6 +39,7 @@ export function search(
     stopSearchReady,
   ]).then(([placeSearch, routeSearch, stopSearch]) => {
     return {
+      favorites: [],
       places: placeSearch,
       routes: routeSearch,
       stops: stopSearch,

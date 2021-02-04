@@ -14,7 +14,7 @@ export interface SidebarItemProps {
   className?: string;
   iconClasses?: string;
   action?: RouterAction;
-  onClick?(): void;
+  onClick?(evt: MouseEvent): void;
 }
 
 export function SidebarItem(props: SidebarItemProps) {

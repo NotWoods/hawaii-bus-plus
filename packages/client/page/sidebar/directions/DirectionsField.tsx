@@ -1,18 +1,20 @@
 import { Point } from '@hawaii-bus-plus/presentation';
 import { ComponentChildren, h } from 'preact';
-import { useState } from 'preact/hooks';
-import type { SearchResults } from '../../../worker-search/search-db';
+import { useEffect, useState } from 'preact/hooks';
+import { SearchResults } from '../../../worker-search/search-db';
 import stopIcon from '../../icons/bus_stop.svg';
 import locationIcon from '../../icons/gps_fixed.svg';
 import { Icon } from '../../icons/Icon';
 import placeIcon from '../../icons/place.svg';
+import { useSearch } from '../search/SidebarSearch';
 import '../Sidebar.css';
 
 interface Props {
   id: string;
+  point?: Point;
   label: ComponentChildren;
   onChange(data: Point | undefined): void;
-  onSearchResults?(results: SearchResults): void;
+  onSearchResults(results: SearchResults): void;
 }
 
 const icons = Object.freeze({
@@ -24,16 +26,26 @@ const icons = Object.freeze({
 
 export function DirectionsField(props: Props) {
   const [value, setValue] = useState('');
-  const [data, setData] = useState<Point | undefined>();
+
+  useEffect(() => {
+    if (props.point) {
+      setValue(props.point.name ?? '');
+    }
+  }, [props.point]);
+
+  useSearch(props.point ? '' : value, props.onSearchResults);
 
   return (
     <div className="form-group mb-0">
       <label htmlFor={props.id}>{props.label}</label>
       <div className="input-group">
-        {data ? (
+        {props.point ? (
           <div className="input-group-prepend">
             <span className="input-group-text">
-              <Icon src={icons[data.type].src} alt={icons[data.type].alt} />
+              <Icon
+                src={icons[props.point.type].src}
+                alt={icons[props.point.type].alt}
+              />
             </span>
           </div>
         ) : null}
@@ -42,10 +54,9 @@ export function DirectionsField(props: Props) {
           id={props.id}
           className="form-control"
           placeholder="Stop or location"
-          value={data?.name ?? value}
+          value={props.point?.name ?? value}
           onChange={(evt) => {
             setValue(evt.currentTarget.value);
-            setData(undefined);
             props.onChange(undefined);
           }}
         />

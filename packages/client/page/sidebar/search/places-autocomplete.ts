@@ -30,6 +30,7 @@ function getPlacePredictions(
 }
 
 export const emptyResults: SearchResults = {
+  favorites: [],
   places: [],
   routes: [],
   stops: [],
@@ -40,6 +41,8 @@ export async function search(
   postMessage: SearchWorkerHandler,
   request: SearchRequest
 ): Promise<SearchResults> {
+  if (!request.input) return emptyResults;
+
   const [places, gtfs] = await Promise.all([
     map
       ? getPlacePredictions({

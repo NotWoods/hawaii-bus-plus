@@ -1,7 +1,10 @@
+import { NodeRepository } from '@hawaii-bus-plus/data/node';
+import { Point } from '@hawaii-bus-plus/presentation';
 import { Stop, StopTime, TimeString, Trip } from '@hawaii-bus-plus/types';
-import { PlainDaysTime } from '@hawaii-bus-plus/utils';
+import { lastIndex, PlainDaysTime } from '@hawaii-bus-plus/utils';
 import { Temporal } from 'proposal-temporal';
-import { traversePath } from './directions';
+import { directions, traversePath } from './directions';
+import { JourneyTripSegment } from './directions/format';
 import { Path } from './directions/raptor';
 
 const LAKELAND = 'll' as Stop['stop_id'];
@@ -10,6 +13,8 @@ const WAIMEA_PARK = 'wp' as Stop['stop_id'];
 const WAIMEA_PARK_ACROSS = 'wp-across' as Stop['stop_id'];
 const HWY_INTERSECTON = 'hw' as Stop['stop_id'];
 const PARKER_RANCH = 'pr' as Stop['stop_id'];
+const ST_JOSEPH = 'st' as Stop['stop_id'];
+const DA_STORE = 'kahakai-da-store' as Stop['stop_id'];
 
 const NOON = PlainDaysTime.from('12:00:00' as TimeString);
 
@@ -103,4 +108,43 @@ test('traversePath', () => {
     '12:45:00',
     '15:45:00',
   ]);
+});
+
+test.concurrent('directions', async () => {
+  const repo = new NodeRepository();
+  const from: Point = {
+    name: 'Pomaikai Housing / St Joseph',
+    stopId: ST_JOSEPH,
+    type: 'stop',
+  };
+  const to: Point = {
+    name: 'Kahakai Boulevard & Da Store',
+    stopId: DA_STORE,
+    type: 'stop',
+  };
+  const departTime = Temporal.PlainDate.from('2021-02-04').toPlainDateTime(
+    '10:10:00'
+  );
+
+  const journeys = await directions(repo, from, to, departTime);
+  expect(journeys).toHaveLength(1);
+  expect(journeys[0]).toEqual({
+    depart: undefined,
+    arrive: undefined,
+    trips: expect.any(Array),
+  });
+  expect(journeys[0].trips).toHaveLength(1);
+
+  const segment = journeys[0].trips[0] as JourneyTripSegment;
+  expect(segment).toEqual({
+    trip: expect.objectContaining({ trip_id: 'hilo-pahala-pahoa-4-1' }),
+    route: expect.objectContaining({ route_id: 'hilo-pahala' }),
+    agency: expect.objectContaining({ agency_id: 'HOB' }),
+    stopTimes: expect.any(Array),
+  });
+  expect(segment.stopTimes).toHaveLength(10);
+  expect(segment.stopTimes[0].stop).toMatchObject({ stop_id: ST_JOSEPH });
+  expect(segment.stopTimes[lastIndex(segment.stopTimes)].stop).toMatchObject({
+    stop_id: DA_STORE,
+  });
 });

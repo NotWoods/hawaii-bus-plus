@@ -10,7 +10,7 @@ interface DirectionsMessage {
   type: 'directions';
   from: Point;
   to: Point;
-  departureTime?: string | Temporal.PlainDateTime;
+  departureTime?: string;
 }
 
 interface ClosestStopsMessage {

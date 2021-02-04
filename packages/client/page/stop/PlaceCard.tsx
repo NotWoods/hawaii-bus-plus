@@ -14,11 +14,11 @@ interface Props {
   onClose(): void;
 }
 
-const buildService = memoize(
+export const buildPlacesService = memoize(
   (map: google.maps.Map) => new google.maps.places.PlacesService(map)
 );
 
-function getDetails(
+export function getDetails(
   service: google.maps.places.PlacesService,
   request: google.maps.places.PlaceDetailsRequest
 ) {
@@ -41,7 +41,7 @@ export function PlaceCard(props: Props) {
   usePromise(async () => {
     setDetails(undefined);
     if (map) {
-      const service = buildService(map);
+      const service = buildPlacesService(map);
       const details = await getDetails(service, {
         placeId: props.placeId,
         fields: ['formatted_address', 'name', 'geometry', 'place_id'],
