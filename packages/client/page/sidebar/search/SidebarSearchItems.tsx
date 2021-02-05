@@ -21,7 +21,11 @@ export function SidebarSearchItems(props: Props) {
         <SidebarTitle>Routes</SidebarTitle>
       ) : null}
       {routes.map((route) => (
-        <RouteSearchItem key={route.route_id} route={route} />
+        <RouteSearchItem
+          key={route.route_id}
+          route={route}
+          agency={route.agency}
+        />
       ))}
 
       {forceTitles || stops.length > 0 ? (

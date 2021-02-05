@@ -1,9 +1,10 @@
 import { h } from 'preact';
-import darkModeIcon from './icons/dark_mode.svg';
-import { Icon } from './icons/Icon';
-import menuIcon from './icons/menu.svg';
+import darkModeIcon from '../icons/dark_mode.svg';
+import { Icon } from '../icons/Icon';
+import menuIcon from '../icons/menu.svg';
+import { NavbarContainer } from '../page-wrapper/Containers';
+import hawaiiLogo from './hawaii.svg';
 import './Navbar.css';
-import { NavbarContainer } from './page-wrapper/Containers';
 
 interface Props {
   toggleSidebar(): void;
@@ -26,8 +27,8 @@ export function Navbar(props: Props) {
       </div>
 
       <a href="/" className="navbar-brand">
-        <img src="/icon/logo.svg" alt="" />
-        Hawaii Bus Plus
+        <img src={hawaiiLogo} alt="Hawaii" />
+        Bus Plus
       </a>
 
       <div className="navbar-content ml-auto">

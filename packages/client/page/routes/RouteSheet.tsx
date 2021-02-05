@@ -55,9 +55,7 @@ export function RouteSheet() {
       style={colorVariables(route)}
     >
       <div className="route-sheet__name px-card py-15 d-flex border-bottom rounded-top dark-mode">
-        <h2 className="m-0 font-size-24 font-weight-bold">
-          {RouteName(route)}
-        </h2>
+        <h2 className="m-0 font-weight-medium">{RouteName(route)}</h2>
         <CloseButton
           className="ml-auto"
           onClick={() => dispatch(closeRouteAction())}

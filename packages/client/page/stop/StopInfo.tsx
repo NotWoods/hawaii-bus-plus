@@ -17,8 +17,8 @@ export function StopInfo({ stop }: { stop?: StopDetails }) {
           <RouteSearchItem
             key={route.route_id}
             className="px-0"
-            routeId={route.route_id}
             route={route}
+            agency={stop.agencies.get(route.agency_id)!}
           />
         ))}
       </div>

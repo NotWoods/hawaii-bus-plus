@@ -1,5 +1,5 @@
 import { downloadScheduleData } from '@hawaii-bus-plus/data';
-import { Route, Stop } from '@hawaii-bus-plus/types';
+import { Route, Stop, Agency } from '@hawaii-bus-plus/types';
 import { ComponentChildren, createContext, h } from 'preact';
 import { useContext, useState } from 'preact/hooks';
 import { usePromise } from '../hooks/usePromise';
@@ -7,6 +7,7 @@ import { usePromise } from '../hooks/usePromise';
 interface Api {
   routes: readonly Route[];
   stops: readonly Stop[];
+  agency: { [id: string]: Agency };
 }
 
 declare module 'preact/hooks' {
@@ -32,6 +33,7 @@ export function ApiProvider(props: { children: ComponentChildren }) {
     setApi({
       routes: Object.values(api.routes),
       stops: Object.values(api.stops),
+      agency: api.agency,
     });
   }, []);
 

@@ -67,8 +67,13 @@ export async function parseAgency(
   json: Pick<JsonStreams, 'agency'>,
   variable: Pick<GTFSData, 'agency'>
 ) {
+  let primary = true;
   for await (const csvAgency of json.agency) {
-    variable.agency[csvAgency.agency_id] = csvAgency;
+    variable.agency[csvAgency.agency_id] = {
+      ...csvAgency,
+      primary,
+    };
+    primary = false;
   }
 
   const agencies = Object.keys(variable.agency) as Agency['agency_id'][];

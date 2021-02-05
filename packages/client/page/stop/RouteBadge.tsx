@@ -21,7 +21,10 @@ export function RouteBadge({ route }: RouteBadgeProps) {
     const { backgroundColor, dark } = colorProps(route);
     return (
       <span
-        className={classNames('badge', dark ? 'text-dark' : 'text-white')}
+        className={classNames(
+          'badge badge--route',
+          dark ? 'text-dark' : 'text-white'
+        )}
         title={route.route_long_name}
         style={{ backgroundColor }}
       >
@@ -29,7 +32,7 @@ export function RouteBadge({ route }: RouteBadgeProps) {
       </span>
     );
   } else {
-    return <span className="badge">...</span>;
+    return <span className="badge badge--route">...</span>;
   }
 }
 

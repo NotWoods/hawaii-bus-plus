@@ -30,7 +30,11 @@ export function DefaultRoutes(props: Props) {
 
       <SidebarTitle>Routes</SidebarTitle>
       {routes.map((route) => (
-        <RouteSearchItem key={route.route_id} route={route} />
+        <RouteSearchItem
+          key={route.route_id}
+          route={route}
+          agency={api!.agency[route.agency_id]}
+        />
       ))}
     </>
   );

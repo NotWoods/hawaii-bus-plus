@@ -1,6 +1,5 @@
-import { Route, Stop } from '@hawaii-bus-plus/types';
+import { Agency, Route, Stop } from '@hawaii-bus-plus/types';
 import { h } from 'preact';
-import { RequireAtLeastOne } from 'type-fest';
 import busStopIcon from '../icons/bus_stop.svg';
 import { Icon } from '../icons/Icon';
 import placeIcon from '../icons/place.svg';
@@ -10,41 +9,27 @@ import { SidebarItem, SidebarItemProps } from './SidebarItem';
 
 type SearchItemProps = Pick<SidebarItemProps, 'className' | 'onClick'>;
 
-type RouteSearchItemProps = SearchItemProps &
-  RequireAtLeastOne<{
-    routeId: Route['route_id'];
-    route: Route;
-  }>;
+interface RouteSearchItemProps extends SearchItemProps {
+  route: Route;
+  agency: Pick<Agency, 'agency_name' | 'primary'>;
+}
 
 export function RouteSearchItem({
-  routeId,
   route,
+  agency,
   ...props
 }: RouteSearchItemProps) {
-  let routeProps: SidebarItemProps;
-  if (route) {
-    const { backgroundColor, dark } = colorProps(route);
-    routeProps = {
-      iconColor: backgroundColor,
-      iconDark: dark,
-      title: route.route_long_name,
-      subtitle: 'Hele-On Bus',
-      icon: route.route_short_name,
-    };
-  } else {
-    routeProps = {
-      title: BLANK,
-      subtitle: BLANK,
-      icon: '',
-    };
-  }
+  const { backgroundColor, dark } = colorProps(route);
 
   return (
     <SidebarItem
       {...props}
-      {...routeProps}
-      href={`/routes/${routeId ?? route!.route_id}/`}
-      iconClasses="font-size-14"
+      icon={route.route_short_name}
+      iconColor={backgroundColor}
+      iconDark={dark}
+      title={route.route_long_name}
+      subtitle={agency.primary ? undefined : agency.agency_name}
+      href={`/routes/${route.route_id}/`}
     />
   );
 }

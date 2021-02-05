@@ -3,7 +3,7 @@ import { h } from 'preact';
 import { useState } from 'preact/hooks';
 import { ApiProvider } from './hooks/useApi';
 import { MainMap } from './map/MainMap';
-import { Navbar } from './Navbar';
+import { Navbar } from './navbar/Navbar';
 import { PageWrapper } from './page-wrapper/PageWrapper';
 import { Router } from './router/Router';
 import { RouteDetailProvider } from './routes/context';
