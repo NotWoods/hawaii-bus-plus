@@ -22,6 +22,8 @@ function getPlacePredictions(
         switch (status) {
           case google.maps.places.PlacesServiceStatus.OK:
             return resolve(result);
+          case google.maps.places.PlacesServiceStatus.ZERO_RESULTS:
+            return resolve([]);
           default:
             return reject(status);
         }

@@ -1,40 +1,54 @@
-import { IDBPDatabase, IDBPObjectStore } from 'idb';
 import { Route, Stop } from '@hawaii-bus-plus/types';
+import { batch } from '@hawaii-bus-plus/utils';
+import { IDBPDatabase } from 'idb';
+import { intersection } from 'mnemonist/set';
 import { GTFSSchema } from '../database';
+import { removeWords } from '../format';
 
-export async function searchWordsIndex<T>(
-  objectStore: IDBPObjectStore<any, any, any>,
-  searchTerm: string,
-  max: number,
-  getKey: (item: T) => string
-) {
-  const index = objectStore.index('words');
-  const term = searchTerm.toLowerCase();
-  const keyRange = IDBKeyRange.bound(term, `${term}\uffff`, false, false);
-
-  const results = new Map<string, T>();
-  let cursor = await index.openCursor(keyRange, 'next');
-  while (results.size < max && cursor) {
-    results.set(getKey(cursor.value), cursor.value);
-    cursor = await cursor.continue();
+function interset<T>(sets: readonly Set<T>[]): Set<T> {
+  if (sets.length === 0) {
+    return new Set();
+  } else if (sets.length === 1) {
+    return sets[0];
+  } else {
+    return intersection(...sets);
   }
-  return Array.from(results.values());
+}
+
+export async function searchWordsIndex<Name extends 'routes' | 'stops'>(
+  db: IDBPDatabase<GTFSSchema>,
+  dbName: Name,
+  searchTerm: string,
+  max: number
+) {
+  const index = db.transaction(dbName).store.index('words');
+  const terms = searchTerm.toLowerCase().split(/\s/g);
+  const resultsPerTerm = await Promise.all(
+    terms.map(async (term) => {
+      const keyRange = IDBKeyRange.bound(term, `${term}\uffff`, false, false);
+      const keys = await index.getAllKeys(keyRange);
+      return new Set(keys);
+    })
+  );
+
+  const andQuery = Array.from(interset(resultsPerTerm)).slice(0, max);
+  const { store } = db.transaction(dbName);
+  const results = await batch(andQuery, (key) => store.get(key));
+  return Array.from(results.values(), removeWords);
 }
 
 export function searchRoutes(
   db: IDBPDatabase<GTFSSchema>,
   term: string,
   max: number
-) {
-  const { store } = db.transaction('routes');
-  return searchWordsIndex<Route>(store, term, max, (route) => route.route_id);
+): Promise<Route[]> {
+  return searchWordsIndex(db, 'routes', term, max);
 }
 
 export function searchStops(
   db: IDBPDatabase<GTFSSchema>,
   term: string,
   max: number
-) {
-  const { store } = db.transaction('stops');
-  return searchWordsIndex<Stop>(store, term, max, (stop) => stop.stop_id);
+): Promise<Stop[]> {
+  return searchWordsIndex(db, 'stops', term, max);
 }
