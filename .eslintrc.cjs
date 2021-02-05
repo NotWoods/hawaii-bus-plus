@@ -45,12 +45,7 @@ const config = {
       },
     ],
     '@typescript-eslint/no-explicit-any': 'off',
-    '@typescript-eslint/no-implicit-any-catch': [
-      'error',
-      {
-        allowExplicitAny: true,
-      },
-    ],
+    '@typescript-eslint/no-implicit-any-catch': 'error',
     '@typescript-eslint/no-namespace': [
       'error',
       {

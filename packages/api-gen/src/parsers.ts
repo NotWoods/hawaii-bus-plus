@@ -40,7 +40,10 @@ export type TripInflated = Merge<
   { readonly stop_times: StopTimeInflated[] }
 >;
 
-export type ServerGTFSData = Merge<GTFSData, { trips: TripInflated[] }>;
+export type ServerGTFSData = Merge<
+  GTFSData,
+  { trips: TripInflated[]; info?: FeedInfo }
+>;
 
 export type JsonStreams = {
   routes: AsyncIterable<CsvRoute>;
@@ -57,7 +60,7 @@ export type JsonStreams = {
 
 export async function parseFeedInfo(
   json: Pick<JsonStreams, 'feed_info'>,
-  variable: Pick<GTFSData, 'info'>
+  variable: Partial<Pick<GTFSData, 'info'>>
 ) {
   const info = await first(json.feed_info);
   variable.info = info!;

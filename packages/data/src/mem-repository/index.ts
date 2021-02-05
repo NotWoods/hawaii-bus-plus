@@ -7,7 +7,6 @@ import {
   Trip,
 } from '@hawaii-bus-plus/types';
 import { downloadScheduleData } from '../fetch';
-import { unique } from '../format';
 import { Repository, TripCursor } from '../repository';
 import { searchArray } from './search';
 import { memTripCursor } from './trips';
@@ -26,9 +25,10 @@ export class MemoryRepository implements Repository {
   loadRoutes(
     routeIds: Iterable<Route['route_id']>
   ): Promise<Map<Route['route_id'], Route>> {
+    const uniq = new Set(routeIds);
     return this.apiReady.then(
       (api) =>
-        new Map(unique(routeIds, (routeId) => [routeId, api.routes[routeId]]))
+        new Map(Array.from(uniq, (routeId) => [routeId, api.routes[routeId]]))
     );
   }
 
@@ -51,8 +51,10 @@ export class MemoryRepository implements Repository {
   loadStops(
     stopIds: Iterable<Stop['stop_id']>
   ): Promise<Map<Stop['stop_id'], Stop>> {
+    const uniq = new Set(stopIds);
     return this.apiReady.then(
-      (api) => new Map(unique(stopIds, (stopId) => [stopId, api.stops[stopId]]))
+      (api) =>
+        new Map(Array.from(uniq, (stopId) => [stopId, api.stops[stopId]]))
     );
   }
 

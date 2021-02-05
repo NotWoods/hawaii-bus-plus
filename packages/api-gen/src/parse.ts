@@ -95,7 +95,7 @@ export async function createApiData(
     calendar: {},
     agency: {},
     trips: [],
-    info: undefined as any,
+    info: undefined,
   };
 
   const shapesReady = parseShapes(json);

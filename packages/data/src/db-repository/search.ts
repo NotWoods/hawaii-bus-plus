@@ -1,5 +1,5 @@
 import { Route, Stop } from '@hawaii-bus-plus/types';
-import { batch } from '@hawaii-bus-plus/utils';
+import { batch, take } from '@hawaii-bus-plus/utils';
 import { IDBPDatabase } from 'idb';
 import { intersection } from 'mnemonist/set';
 import { GTFSSchema } from '../database';
@@ -31,7 +31,7 @@ export async function searchWordsIndex<Name extends 'routes' | 'stops'>(
     })
   );
 
-  const andQuery = Array.from(interset(resultsPerTerm)).slice(0, max);
+  const andQuery = take(interset(resultsPerTerm), max);
   const { store } = db.transaction(dbName);
   const results = await batch(andQuery, (key) => store.get(key));
   return Array.from(results.values(), removeWords);

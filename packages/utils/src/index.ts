@@ -1,5 +1,6 @@
 export * from './batch.js';
 export * from './calendar.js';
+export * from './iterable.js';
 export * from './memoize.js';
 export * from './num.js';
 export * from './pick.js';

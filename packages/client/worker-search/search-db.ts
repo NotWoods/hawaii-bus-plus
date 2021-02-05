@@ -30,9 +30,7 @@ export function search(
   const searchTerm = applyOffset(request.input, request.offset);
   const routeSearchReady = repo.searchRoutes(searchTerm, 3).then(
     async (routes): Promise<RouteSearchResult[]> => {
-      const agencyIds = Array.from(
-        new Set(routes.map((route) => route.agency_id))
-      );
+      const agencyIds = new Set(routes.map((route) => route.agency_id));
       const agencies = await batch(agencyIds, (id) => repo.loadAgency(id));
       return routes.map((route) => ({
         ...route,

@@ -23,7 +23,7 @@ export async function loadStop(
     stop.transfers.map((t) => t.to_stop_id)
   );
   const routes = Array.from((await repo.loadRoutes(stop.routes)).values());
-  const agencyIds = Array.from(new Set(routes.map((route) => route.agency_id)));
+  const agencyIds = new Set(routes.map((route) => route.agency_id));
   const agencies = await batch(agencyIds, (id) => repo.loadAgency(id));
   const transferStops = await transferStopsReady;
 
