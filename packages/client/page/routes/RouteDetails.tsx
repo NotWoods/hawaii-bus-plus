@@ -3,7 +3,6 @@ import { Fragment, h } from 'preact';
 import { Icon } from '../icons/Icon';
 import fareIcon from '../icons/monetization_on.svg';
 import webIcon from '../icons/web.svg';
-import './RouteSheet.css';
 
 interface Props {
   route?: Route;

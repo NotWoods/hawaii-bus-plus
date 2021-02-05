@@ -1,20 +1,20 @@
 import { h } from 'preact';
-import { Temporal } from 'proposal-temporal';
 import { useContext, useState } from 'preact/hooks';
+import { Temporal } from 'proposal-temporal';
 import type { InfoWorkerHandler } from '../../worker-info/info';
 import InfoWorker from '../../worker-info/info?worker';
 import { databaseInitialized } from '../hooks/useDatabaseInitialized';
+import { useDelay } from '../hooks/useDelay';
 import { usePromise } from '../hooks/usePromise';
 import { useWorker } from '../hooks/useWorker';
-import { CloseButton } from '../page-wrapper/alert/CloseButton';
-import { closeRouteAction } from '../router/action';
 import { RouterContext } from '../router/Router';
+import { BLANK } from '../stop/RouteBadge';
 import { RouteDetailContext } from './context';
 import { colorVariables } from './props';
-import { RouteDetailsCard } from './RouteDetails';
 import { RouteName } from './RouteName';
 import './RouteSheet.css';
-import { TripDetails } from './trip/TripDetails';
+import { RouteSheetContent } from './RouteSheetContent';
+import { RouteSheetHeader } from './RouteSheetHeader';
 
 function nowInZone(timeZone: string | Temporal.TimeZoneProtocol) {
   const now = Temporal.now.zonedDateTimeISO();
@@ -22,10 +22,9 @@ function nowInZone(timeZone: string | Temporal.TimeZoneProtocol) {
 }
 
 export function RouteSheet() {
-  const { dispatch, routeId } = useContext(RouterContext);
-  const { details, directionId, setDetails, switchDirection } = useContext(
-    RouteDetailContext
-  );
+  const { routeId } = useContext(RouterContext);
+  const delayDone = useDelay(500, [routeId]);
+  const { details, setDetails } = useContext(RouteDetailContext);
   const [tripTime, setTripTime] = useState(() => nowInZone('Pacific/Honolulu'));
   const postToInfoWorker = useWorker(InfoWorker) as InfoWorkerHandler;
 
@@ -46,7 +45,24 @@ export function RouteSheet() {
 
   const route = details?.route;
   if (!route) {
-    return null;
+    if (routeId && delayDone) {
+      return (
+        <div className="route-sheet pointer-events-auto mx-10 border border-bottom-0 rounded-top bg-white bg-dark-light-dm">
+          <RouteSheetHeader>{BLANK}</RouteSheetHeader>
+          <div class="progress m-15">
+            <div
+              class="progress-bar progress-bar-animated"
+              role="progressbar"
+              style="width: 100%"
+              aria-valuemin="0"
+              aria-valuemax="100"
+            />
+          </div>
+        </div>
+      );
+    } else {
+      return null;
+    }
   }
 
   return (
@@ -54,35 +70,8 @@ export function RouteSheet() {
       className="route-sheet pointer-events-auto mx-10 border border-bottom-0 rounded-top bg-white bg-dark-light-dm"
       style={colorVariables(route)}
     >
-      <div className="route-sheet__name px-card py-15 d-flex border-bottom rounded-top dark-mode">
-        <h2 className="m-0 font-weight-medium">{RouteName(route)}</h2>
-        <CloseButton
-          className="ml-auto"
-          onClick={() => dispatch(closeRouteAction())}
-        />
-      </div>
-      <div className="row row-eq-spacing-lg">
-        <div className="col-lg-8">
-          <div className="content">
-            {details && (
-              <TripDetails
-                details={details}
-                directionId={directionId}
-                tripTime={tripTime}
-                switchDirection={switchDirection}
-                onChangeTripTime={setTripTime}
-              />
-            )}
-          </div>
-        </div>
-        <div className="col-lg-4">
-          <RouteDetailsCard
-            route={details?.route}
-            agency={details?.agency}
-            descParts={details?.descParts}
-          />
-        </div>
-      </div>
+      <RouteSheetHeader>{RouteName(route)}</RouteSheetHeader>
+      <RouteSheetContent tripTime={tripTime} setTripTime={setTripTime} />
     </div>
   );
 }

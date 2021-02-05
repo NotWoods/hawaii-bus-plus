@@ -2,7 +2,7 @@ import { Polyline } from '@hawaii-bus-plus/react-google-maps';
 import { Shape } from '@hawaii-bus-plus/types';
 import { h } from 'preact';
 import { useMemo, useState } from 'preact/hooks';
-import { usePromise } from '../hooks/usePromise';
+import { usePromise, Warning } from '../hooks/usePromise';
 
 interface Props {
   shapeId?: Shape['shape_id'];
@@ -18,14 +18,26 @@ export function ShapeLine(props: Props) {
       if (!props.shapeId) return;
 
       const apiKey = localStorage.getItem('api-key');
-      const res = await fetch(`/api/v1/shapes/${props.shapeId}.json`, {
-        signal,
-        headers: {
-          Authorization: `Bearer ${apiKey!}`,
-        },
-      });
-      const json = await res.json();
-      setShape(json as Shape);
+      try {
+        const res = await fetch(`/api/v1/shapes/${props.shapeId}.json`, {
+          signal,
+          headers: {
+            Authorization: `Bearer ${apiKey!}`,
+          },
+        });
+        const json = await res.json();
+        setShape(json as Shape);
+      } catch (err: unknown) {
+        if (err instanceof TypeError) {
+          // fetching issue
+          throw new Warning(`Couldn't download route appearance data`);
+        } else if (err instanceof SyntaxError) {
+          // JSON issue
+          throw new Error(`Couldn't read route appearance data`);
+        } else {
+          throw err;
+        }
+      }
     },
     [props.shapeId]
   );

@@ -36,7 +36,7 @@ const ROUTES_PREFIX = '/routes/';
 const DIRECTIONS = '/directions';
 
 export function initStateFromUrl(url: URL) {
-  const newState: RouterState = { freshLoad: false };
+  const newState: RouterState = { freshLoad: true };
 
   if (url.pathname.startsWith(DIRECTIONS)) {
     const depart = queryToPoint(url.searchParams.get('from'));
@@ -66,13 +66,13 @@ export function routerReducer(
 ): RouterState {
   switch (action.type) {
     case 'route':
-      return { ...state, routeId: action.routeId };
+      return { ...state, routeId: action.routeId, freshLoad: false };
     case 'stop':
       return { ...state, point: { type: 'stop', stopId: action.stopId } };
     case 'close-route':
-      return { ...state, routeId: undefined };
+      return { ...state, routeId: undefined, freshLoad: false };
     case 'close-point':
-      return { ...state, point: undefined };
+      return { ...state, point: undefined, freshLoad: false };
     case 'set-marker':
       return { ...state, point: { type: 'marker', position: action.location } };
     case 'open-place':
@@ -88,6 +88,6 @@ export function routerReducer(
       return newState;
     }
     case 'open-journey':
-      return { ...state, directions: action };
+      return { ...state, directions: action, freshLoad: false };
   }
 }

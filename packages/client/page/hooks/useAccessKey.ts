@@ -6,7 +6,7 @@ import { useHotkeys } from 'react-hotkeys-hook';
  */
 export function useAccessKey<T extends HTMLElement>(
   keys: string,
-  deps?: any[]
+  deps?: unknown[]
 ) {
   const inputRef = useRef<T>(null);
 
