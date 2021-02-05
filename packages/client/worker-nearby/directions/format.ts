@@ -9,7 +9,7 @@ import {
 } from '@hawaii-bus-plus/presentation';
 import { Agency, Route, Stop, Trip } from '@hawaii-bus-plus/types';
 import { PlainDaysTime } from '@hawaii-bus-plus/utils';
-import { findLastIndex, last } from 'lodash-es';
+import { findLastIndex, last } from 'lodash';
 import { add } from 'mnemonist/set';
 import { Temporal } from 'proposal-temporal';
 import { computeDistanceBetween } from 'spherical-geometry-js';

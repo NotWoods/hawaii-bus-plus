@@ -1,5 +1,5 @@
 import { Point } from '@hawaii-bus-plus/presentation';
-import { last } from 'lodash-es';
+import { last } from 'lodash';
 import { h } from 'preact';
 import { Temporal } from 'proposal-temporal';
 import type {

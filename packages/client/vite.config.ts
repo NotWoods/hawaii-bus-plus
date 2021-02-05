@@ -4,6 +4,7 @@ import { defineConfig } from 'vite';
 export default defineConfig({
   // plugins: [preactRefresh()],
   alias: {
+    lodash: 'lodash-es',
     react: 'preact/compat',
     'react-dom': 'preact/compat',
   },

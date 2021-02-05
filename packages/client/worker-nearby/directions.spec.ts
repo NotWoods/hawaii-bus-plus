@@ -2,7 +2,7 @@ import { NodeRepository } from '@hawaii-bus-plus/data/node';
 import { Point } from '@hawaii-bus-plus/presentation';
 import { Stop, StopTime, TimeString, Trip } from '@hawaii-bus-plus/types';
 import { PlainDaysTime } from '@hawaii-bus-plus/utils';
-import { last } from 'lodash-es';
+import { last } from 'lodash';
 import { Temporal } from 'proposal-temporal';
 import { directions, traversePath } from './directions';
 import { JourneyTripSegment } from './directions/format';
