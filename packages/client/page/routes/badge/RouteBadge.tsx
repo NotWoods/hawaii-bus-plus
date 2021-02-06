@@ -1,7 +1,9 @@
 import { h, ComponentChild, Fragment } from 'preact';
 import { Route } from '@hawaii-bus-plus/types';
-import { classNames } from '../hooks/classnames';
-import { colorProps } from '../routes/props';
+import { classNames } from '../../hooks/classnames';
+import { colorProps, colorVariables } from '../props';
+import './RouteBadge.css';
+import { RouteIcon } from '../RouteIcon';
 
 export const BLANK = ' ';
 
@@ -18,21 +20,13 @@ interface RouteBadgeProps {
 
 export function RouteBadge({ route }: RouteBadgeProps) {
   if (route) {
-    const { backgroundColor, dark } = colorProps(route);
     return (
-      <span
-        className={classNames(
-          'badge badge--route',
-          dark ? 'text-dark' : 'text-white'
-        )}
-        title={route.route_long_name}
-        style={{ backgroundColor }}
-      >
+      <RouteIcon style={colorVariables(route)} class="route__icon--badge">
         {route.route_short_name}
-      </span>
+      </RouteIcon>
     );
   } else {
-    return <span className="badge badge--route">...</span>;
+    return <RouteIcon class="route__icon--badge">...</RouteIcon>;
   }
 }
 
@@ -46,18 +40,13 @@ interface RouteBadgesProps {
  * Displays a list of badges representing routes that a stop connects to.
  */
 export function RouteBadges({ routes, omit, clear }: RouteBadgesProps) {
-  const badges: ComponentChild[] = [];
-  for (const route of routes ?? []) {
-    if (route.route_id !== omit) {
-      badges.push(<RouteBadge key={route.route_id} route={route} />);
-      badges.push(' ');
-    }
-  }
-  badges.pop();
+  const badges = routes
+    ?.filter((route) => route.route_id !== omit)
+    ?.map((route) => <RouteBadge key={route.route_id} route={route} />);
 
-  if (badges.length === 0) {
-    return clear ? null : <>{BLANK}</>;
+  if (!badges || badges.length === 0) {
+    return clear ? null : <span class="route-link__badges">{BLANK}</span>;
   } else {
-    return <>{badges}</>;
+    return <span class="route-link__badges">{badges}</span>;
   }
 }

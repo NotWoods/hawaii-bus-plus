@@ -71,7 +71,9 @@ export function DirectionsTime(
   props: Pick<InputProps<Temporal.PlainDateTime>, 'onChange'>
 ) {
   const [mode, setMode] = useState('now');
-  const [dateTime, setDateTime] = useState(Temporal.now.plainDateTimeISO());
+  const [dateTime, setDateTime] = useState(() =>
+    Temporal.now.plainDateTimeISO()
+  );
 
   return (
     <div className="directions-box bg-light bg-very-dark-dm">

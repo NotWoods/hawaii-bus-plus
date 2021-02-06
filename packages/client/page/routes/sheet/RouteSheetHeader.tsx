@@ -4,7 +4,7 @@ import { useContext } from 'preact/hooks';
 import { CloseButton } from '../../page-wrapper/alert/CloseButton';
 import { closeRouteAction } from '../../router/action';
 import { RouterContext } from '../../router/Router';
-import { BLANK } from '../../stop/RouteBadge';
+import { BLANK } from '../badge/RouteBadge';
 import { RouteName } from '../RouteName';
 
 export function RouteSheetHeader(props: {

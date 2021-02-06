@@ -13,7 +13,7 @@ import { SidebarContainer } from '../../page-wrapper/Containers';
 import { emptyResults } from '../search/places-autocomplete';
 import '../Sidebar.css';
 import { DirectionsField } from './DirectionsField';
-import { DirectionsJourneyResults } from './DirectionsJourneyResult';
+import { DirectionsJourneys } from './DirectionsJourneys';
 import { DirectionsPointResults } from './DirectionsPointResults';
 import { DirectionsTime } from './DirectionsTime';
 
@@ -32,7 +32,7 @@ export function DirectionsSidebar(props: Props) {
     field: 'depart' as 'depart' | 'arrive',
     results: emptyResults,
   });
-  const [results, setResults] = useState<Journey[]>([]);
+  const [results, setResults] = useState<readonly Journey[] | undefined>();
 
   const postToDirectionsWorker = useWorker(
     DirectionsWorker
@@ -96,15 +96,16 @@ export function DirectionsSidebar(props: Props) {
         setDepart={setDepart}
         setArrive={setArrive}
       />
-      {results.map((journey) => (
-        <DirectionsJourneyResults
-          journey={journey}
-          from={depart!}
-          to={arrive!}
+
+      {results ? (
+        <DirectionsJourneys
+          results={results}
+          depart={depart!}
+          arrive={arrive!}
           departureTime={departureTime}
-          onClick={props.onClose}
+          setDepartTime={setDepartTime}
         />
-      ))}
+      ) : null}
     </SidebarContainer>
   );
 }

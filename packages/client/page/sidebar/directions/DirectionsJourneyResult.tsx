@@ -9,7 +9,7 @@ import type {
 import { openJourney } from '../../router/action';
 import { Link } from '../../router/Router';
 import { directionsToParams } from '../../router/url';
-import { RouteBadge } from '../../stop/RouteBadge';
+import { RouteBadge, RouteBadges } from '../../routes/badge/RouteBadge';
 import './DirectionsJourneyResult.css';
 
 interface Props {
@@ -64,13 +64,13 @@ export function DirectionsJourneyResults(props: Props) {
         onClick={props.onClick}
       >
         <p className="sidebar-link-title mt-0">
-          {journey.trips
-            .filter(
-              (segment): segment is JourneyTripSegment => 'trip' in segment
-            )
-            .map((segment) => (
-              <RouteBadge key={segment.trip.trip_id} route={segment.route} />
-            ))}
+          <RouteBadges
+            routes={journey.trips
+              .filter(
+                (segment): segment is JourneyTripSegment => 'trip' in segment
+              )
+              .map((segment) => segment.route)}
+          />
         </p>
         <p className="sidebar-link-subtitle m-0 font-size-12">
           {durationFormat.formatRange(startTime, endTime)}

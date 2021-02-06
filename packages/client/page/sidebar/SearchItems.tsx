@@ -4,7 +4,7 @@ import busStopIcon from '../icons/bus_stop.svg';
 import { Icon } from '../icons/Icon';
 import placeIcon from '../icons/place.svg';
 import { colorProps, colorVariables } from '../routes/props';
-import { BLANK, RouteBadgeKeys, RouteBadges } from '../stop/RouteBadge';
+import { BLANK, RouteBadgeKeys, RouteBadges } from '../routes/badge/RouteBadge';
 import { SidebarItem, SidebarItemProps } from './SidebarItem';
 
 type SearchItemProps = Pick<SidebarItemProps, 'className' | 'onClick'>;

@@ -3,7 +3,7 @@ import { Route } from '@hawaii-bus-plus/types';
 import { ComponentChild, h, Fragment } from 'preact';
 import { classNames } from '../../hooks/classnames';
 import { Link } from '../../router/Router';
-import { RouteBadges } from '../../stop/RouteBadge';
+import { RouteBadges } from '../badge/RouteBadge';
 import { ScheduleTime } from './ScheduleTime';
 import './StopTimesItem.css';
 

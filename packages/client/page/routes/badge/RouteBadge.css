@@ -1,0 +1,9 @@
+.badge--route {
+  font-family: 'Red Rose', serif;
+  font-weight: 500;
+}
+.route-link__badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
