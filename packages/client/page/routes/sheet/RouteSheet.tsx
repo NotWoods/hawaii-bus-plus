@@ -1,6 +1,6 @@
 import { h } from 'preact';
+import { nowWithZone } from '@hawaii-bus-plus/utils';
 import { useContext, useState } from 'preact/hooks';
-import { Temporal } from 'proposal-temporal';
 import type { InfoWorkerHandler } from '../../../worker-info/info';
 import InfoWorker from '../../../worker-info/info?worker';
 import { databaseInitialized } from '../../hooks/useDatabaseInitialized';
@@ -14,16 +14,13 @@ import './RouteSheet.css';
 import { RouteSheetContent } from './RouteSheetContent';
 import { RouteSheetHeader } from './RouteSheetHeader';
 
-function nowInZone(timeZone: string | Temporal.TimeZoneProtocol) {
-  const now = Temporal.now.zonedDateTimeISO();
-  return now.withTimeZone(timeZone).toPlainDateTime();
-}
-
 export function RouteSheet() {
   const { routeId } = useContext(RouterContext);
   const delayDone = useDelay(500, [routeId]);
   const { details, setDetails } = useContext(RouteDetailContext);
-  const [tripTime, setTripTime] = useState(() => nowInZone('Pacific/Honolulu'));
+  const [tripTime, setTripTime] = useState(() =>
+    nowWithZone('Pacific/Honolulu')
+  );
   const postToInfoWorker = useWorker(InfoWorker) as InfoWorkerHandler;
 
   usePromise(async () => {

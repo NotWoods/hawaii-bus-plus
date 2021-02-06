@@ -24,8 +24,20 @@ export function plainTimeToData(
 
 declare global {
   namespace Intl {
+    interface DateTimeFormat {
+      formatRange(startDate: Date | number, endDate: Date | number): string;
+      formatRangeToParts(
+        startDate: Date | number,
+        endDate: Date | number
+      ): DateTimeFormatRangePart[];
+    }
+
     interface DateTimeFormatOptions {
       timeStyle?: string;
+    }
+
+    interface DateTimeFormatRangePart extends DateTimeFormatPart {
+      source: 'shared' | 'startRange' | 'endRange';
     }
   }
 }
@@ -52,5 +64,19 @@ export function formatPlainTime(
   return {
     localTime: localTimeFormatter.format(date),
     agencyTime: agencyTimeFormatter(agencyTimezone, []).format(date),
+  };
+}
+
+export function formatPlainTimeRange(
+  startTime: PlainTimeData,
+  endTime: PlainTimeData,
+  agencyTimezone: string
+) {
+  const start = new Date(startTime.epochMilliseconds);
+  const end = new Date(endTime.epochMilliseconds);
+
+  return {
+    localTime: localTimeFormatter.formatRange(start, end),
+    agencyTime: agencyTimeFormatter(agencyTimezone, []).formatRange(start, end),
   };
 }

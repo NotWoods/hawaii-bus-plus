@@ -1,6 +1,5 @@
-import { Temporal } from 'proposal-temporal';
 import { h } from 'preact';
-import { useState } from 'preact/hooks';
+import { Temporal } from 'proposal-temporal';
 import '../Sidebar.css';
 
 interface InputProps<T> {
@@ -67,37 +66,31 @@ export function PlainDateTimeInput(props: InputProps<Temporal.PlainDateTime>) {
   );
 }
 
-export function DirectionsTime(
-  props: Pick<InputProps<Temporal.PlainDateTime>, 'onChange'>
-) {
-  const [mode, setMode] = useState('now');
-  const [dateTime, setDateTime] = useState(() =>
-    Temporal.now.plainDateTimeISO()
-  );
+interface Props extends InputProps<Temporal.PlainDateTime> {
+  now: Temporal.PlainDateTime;
+}
 
+export function DirectionsTime(props: Props) {
+  const leaveNow = props.now.equals(props.value);
   return (
     <div className="directions-box bg-light bg-very-dark-dm">
       <select
         className="form-control form-control-sm"
-        value={mode}
+        value={leaveNow ? 'now' : 'leave-at'}
         onChange={(evt) => {
           const mode = evt.currentTarget.value;
-          setMode(mode);
           if (mode === 'now') {
-            props.onChange(Temporal.now.plainDateTimeISO());
+            props.onChange(props.now);
           }
         }}
       >
         <option value="now">Leave now</option>
         <option value="leave-at">Leave at</option>
       </select>
-      {mode === 'leave-at' ? (
+      {!leaveNow ? (
         <PlainDateTimeInput
-          value={dateTime}
-          onChange={(dateTime) => {
-            setDateTime(dateTime);
-            props.onChange(dateTime);
-          }}
+          value={props.value}
+          onChange={(dateTime) => props.onChange(dateTime)}
         />
       ) : undefined}
     </div>

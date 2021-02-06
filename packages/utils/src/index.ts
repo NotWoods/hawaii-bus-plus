@@ -6,4 +6,5 @@ export * from './num.js';
 export * from './pick.js';
 export * from './search.js';
 export * from './sort.js';
+export * from './plain-days-time.js';
 export * from './temporal.js';

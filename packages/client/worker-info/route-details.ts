@@ -1,4 +1,5 @@
 import { Repository } from '@hawaii-bus-plus/data';
+import { nowWithZone } from '@hawaii-bus-plus/utils';
 import { durationToData, StopTimeData } from '@hawaii-bus-plus/presentation';
 import { Agency, Route, Stop } from '@hawaii-bus-plus/types';
 import { Temporal } from 'proposal-temporal';
@@ -19,11 +20,6 @@ export interface RouteDetails {
 }
 
 const LINK_REGEX = /(https?:)\s?(\/\/[.a-z/]+)/g;
-
-function nowInZone(timeZone: string | Temporal.TimeZoneProtocol) {
-  const now = Temporal.now.zonedDateTimeISO();
-  return now.withTimeZone(timeZone).toPlainDateTime();
-}
 
 export function extractLinks(description: string) {
   let descLastIndex = 0;
@@ -96,7 +92,7 @@ export async function getRouteDetails(
   const agency = await repo.loadAgency(route.agency_id);
   const timeZone = agency!.agency_timezone;
 
-  const nowZoned = now ?? nowInZone(timeZone);
+  const nowZoned = now ?? nowWithZone(timeZone);
   const nowDate = nowZoned.toPlainDate();
 
   const allCalendars = await allCalendarsReady;

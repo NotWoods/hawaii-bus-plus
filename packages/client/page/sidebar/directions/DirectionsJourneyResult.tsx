@@ -1,5 +1,4 @@
-import { Point } from '@hawaii-bus-plus/presentation';
-import { last } from 'lodash';
+import { formatPlainTimeRange, Point } from '@hawaii-bus-plus/presentation';
 import { h } from 'preact';
 import { Temporal } from 'proposal-temporal';
 import type {
@@ -9,7 +8,7 @@ import type {
 import { openJourney } from '../../router/action';
 import { Link } from '../../router/Router';
 import { directionsToParams } from '../../router/url';
-import { RouteBadge, RouteBadges } from '../../routes/badge/RouteBadge';
+import { RouteBadges } from '../../routes/badge/RouteBadge';
 import './DirectionsJourneyResult.css';
 
 interface Props {
@@ -20,18 +19,6 @@ interface Props {
   onClick?(): void;
 }
 
-declare global {
-  namespace Intl {
-    interface DateTimeFormat {
-      formatRange(startDate: Date | number, endDate: Date | number): string;
-    }
-  }
-}
-
-const durationFormat = new Intl.DateTimeFormat([], {
-  timeStyle: 'short',
-});
-
 export function DirectionsJourneyResults(props: Props) {
   const { journey } = props;
   const params = directionsToParams({
@@ -40,14 +27,10 @@ export function DirectionsJourneyResults(props: Props) {
     departureTime: props.departureTime.toString(),
   });
 
-  const startTime = new Date(
-    (journey
-      .trips[0] as JourneyTripSegment).stopTimes[0].departureTime.epochMilliseconds
-  );
-  const endTime = new Date(
-    last(
-      (last(journey.trips) as JourneyTripSegment).stopTimes
-    )!.arrivalTime.epochMilliseconds
+  const time = formatPlainTimeRange(
+    journey.departTime,
+    journey.arriveTime,
+    'Pacific/Honolulu'
   );
 
   return (
@@ -72,9 +55,13 @@ export function DirectionsJourneyResults(props: Props) {
               .map((segment) => segment.route)}
           />
         </p>
-        <p className="sidebar-link-subtitle m-0 font-size-12">
-          {durationFormat.formatRange(startTime, endTime)}
-        </p>
+        <time
+          className="sidebar-link-subtitle m-0 font-size-12"
+          title={time.localTime}
+          dateTime={`${journey.departTime.string}/${journey.arriveTime.string}`}
+        >
+          {time.agencyTime}
+        </time>
       </Link>
     </li>
   );

@@ -2,6 +2,7 @@ import { Point } from '@hawaii-bus-plus/presentation';
 import { ComponentChildren, h } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
 import { SearchResults } from '../../../worker-search/search-db';
+import { classNames } from '../../hooks/classnames';
 import stopIcon from '../../icons/bus_stop.svg';
 import locationIcon from '../../icons/gps_fixed.svg';
 import { Icon } from '../../icons/Icon';
@@ -26,6 +27,8 @@ const icons = Object.freeze({
 
 export function DirectionsField(props: Props) {
   const [value, setValue] = useState('');
+  const [edited, setEdited] = useState(false);
+  const invalid = !props.point && edited;
 
   useEffect(() => {
     if (props.point) {
@@ -36,7 +39,7 @@ export function DirectionsField(props: Props) {
   useSearch(props.point ? '' : value, props.onSearchResults);
 
   return (
-    <div className="form-group mb-0">
+    <div className={classNames('form-group mb-0', invalid && 'is-invalid')}>
       <label htmlFor={props.id}>{props.label}</label>
       <div className="input-group">
         {props.point ? (
@@ -59,6 +62,7 @@ export function DirectionsField(props: Props) {
             setValue(evt.currentTarget.value);
             props.onChange(undefined);
           }}
+          onBlur={() => setEdited(true)}
         />
       </div>
     </div>

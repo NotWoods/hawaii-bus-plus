@@ -1,5 +1,5 @@
 import { Route } from '@hawaii-bus-plus/types';
-import { ComponentChildren, h } from 'preact';
+import { h } from 'preact';
 import { useContext } from 'preact/hooks';
 import { CloseButton } from '../../page-wrapper/alert/CloseButton';
 import { closeRouteAction } from '../../router/action';

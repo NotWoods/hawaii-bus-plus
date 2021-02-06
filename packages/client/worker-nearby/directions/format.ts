@@ -31,6 +31,8 @@ export interface JourneyTripSegment {
 }
 
 export interface Journey {
+  departTime: PlainTimeData;
+  arriveTime: PlainTimeData;
   depart?: {
     /**
      * Starting or ending point for directions.
@@ -94,6 +96,9 @@ export async function journeyToDirections(
   const pathSegments = path.slice(1) as readonly PathSegment[];
 
   const trips: (JourneyTripSegment | Walking)[] = [];
+  let journeyStart: PlainDaysTime | undefined;
+  let journeyEnd: PlainDaysTime | undefined;
+
   let lastDepartureTime = departureDaysTime;
   let startEntry: JourneyStopTime | undefined;
   let endEntry: JourneyStopTime | undefined;
@@ -135,9 +140,13 @@ export async function journeyToDirections(
       // Update every iteration so we only keep the last result
       lastDepartureTime = formattedStopTimes[0].departureTime;
       endEntry = last(formattedStopTimes);
+      journeyEnd = endEntry!.arrivalTime;
       // Set on first iteration
       if (!startEntry) {
         startEntry = formattedStopTimes[0];
+      }
+      if (!journeyStart) {
+        journeyStart = formattedStopTimes[0].departureTime;
       }
 
       const routes = await repo.loadRoutes(routeIds);
@@ -172,6 +181,11 @@ export async function journeyToDirections(
       const stops = await getStops([startStopId, endStopId]);
       const startStop = stops.get(startStopId)!;
       const endStop = stops.get(endStopId)!;
+
+      journeyEnd = lastDepartureTime.add(current.transferTime);
+      if (!journeyStart) {
+        journeyStart = reachedEndStop;
+      }
 
       const distance = computeDistanceBetween(
         startStop.position,
@@ -208,6 +222,8 @@ export async function journeyToDirections(
   // Ending at (to)
 
   return {
+    departTime: zonedTime(journeyStart!, 'Pacific/Honolulu'),
+    arriveTime: zonedTime(journeyEnd!, 'Pacific/Honolulu'),
     depart: formatDepartArrive(
       from,
       startEntry!.stop.position,

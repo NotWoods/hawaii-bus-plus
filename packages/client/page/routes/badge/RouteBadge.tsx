@@ -1,9 +1,8 @@
-import { h, ComponentChild, Fragment } from 'preact';
 import { Route } from '@hawaii-bus-plus/types';
-import { classNames } from '../../hooks/classnames';
-import { colorProps, colorVariables } from '../props';
-import './RouteBadge.css';
+import { h } from 'preact';
+import { colorVariables } from '../props';
 import { RouteIcon } from '../RouteIcon';
+import './RouteBadge.css';
 
 export const BLANK = ' ';
 

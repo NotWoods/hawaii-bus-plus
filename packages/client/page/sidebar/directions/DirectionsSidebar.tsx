@@ -1,7 +1,7 @@
 import { Point } from '@hawaii-bus-plus/presentation';
+import { nowWithZone } from '@hawaii-bus-plus/utils';
 import { h } from 'preact';
-import { useState } from 'preact/hooks';
-import { Temporal } from 'proposal-temporal';
+import { useMemo, useState } from 'preact/hooks';
 import type { Journey } from '../../../worker-nearby/directions/format';
 import type { NearbyWorkerHandler } from '../../../worker-nearby/nearby';
 import DirectionsWorker from '../../../worker-nearby/nearby?worker';
@@ -24,9 +24,8 @@ interface Props {
 export function DirectionsSidebar(props: Props) {
   const [depart, setDepart] = useState<Point | undefined>();
   const [arrive, setArrive] = useState<Point | undefined>();
-  const [departureTime, setDepartTime] = useState(
-    Temporal.now.plainDateTimeISO()
-  );
+  const now = useMemo(() => nowWithZone('Pacific/Honolulu'), []);
+  const [departureTime, setDepartTime] = useState(now);
 
   const [searchResults, setSearchResults] = useState({
     field: 'depart' as 'depart' | 'arrive',
@@ -87,7 +86,11 @@ export function DirectionsSidebar(props: Props) {
             }
           />
         </div>
-        <DirectionsTime onChange={setDepartTime} />
+        <DirectionsTime
+          now={now}
+          value={departureTime}
+          onChange={setDepartTime}
+        />
       </form>
 
       <DirectionsPointResults
