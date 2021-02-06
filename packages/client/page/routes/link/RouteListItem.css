@@ -1,0 +1,56 @@
+.route-link {
+  display: grid;
+  grid-template:
+    'icon title' auto
+    'icon subtitle' min-content
+    / var(--sidebar-icon-width-height) auto;
+  column-gap: var(--sidebar-icon-margin-right);
+  min-height: 4rem;
+  align-items: center;
+}
+
+.font-size-36 {
+  font-size: 3.6rem !important;
+}
+
+.route__icon {
+  grid-area: icon;
+
+  font-family: 'Red Rose', serif;
+  font-weight: 500;
+  font-size: 1.15em;
+  color: var(--route-text-color);
+  text-align: center;
+
+  position: relative;
+  line-height: 1.4em;
+  height: auto;
+
+  --line-height: 0.125em;
+}
+.route__icon,
+.route__icon::before,
+.route__icon::after {
+  background: var(--route-color);
+}
+.route__icon::before,
+.route__icon::after {
+  content: '';
+  position: absolute;
+  display: block;
+  height: var(--line-height);
+  width: 0.25em;
+  top: calc(50% - 0.05em);
+}
+.route__icon::before {
+  right: 100%;
+  margin-right: 0.05em;
+  border-top-left-radius: calc(var(--line-height) / 2);
+  border-bottom-left-radius: calc(var(--line-height) / 2);
+}
+.route__icon::after {
+  left: 100%;
+  margin-left: 0.05em;
+  border-top-right-radius: calc(var(--line-height) / 2);
+  border-bottom-right-radius: calc(var(--line-height) / 2);
+}

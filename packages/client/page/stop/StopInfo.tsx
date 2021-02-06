@@ -1,7 +1,8 @@
 import { h, Fragment } from 'preact';
 import type { StopDetails } from '../../worker-info/stop-details';
 import { PlaceResult } from '../router/reducer';
-import { RouteSearchItem, StopSearchItem } from '../sidebar/SearchItems';
+import { RouteListItem } from '../routes/link/RouteListItem';
+import { StopSearchItem } from '../sidebar/SearchItems';
 
 export function StopInfo({ stop }: { stop?: StopDetails }) {
   const transfers = stop?.transfers ?? [];
@@ -14,7 +15,7 @@ export function StopInfo({ stop }: { stop?: StopDetails }) {
       <div className="content">
         <h3 className="content-title">Nearby routes</h3>
         {stop?.routes?.map((route) => (
-          <RouteSearchItem
+          <RouteListItem
             key={route.route_id}
             className="px-0"
             route={route}

@@ -1,17 +1,15 @@
 import { h } from 'preact';
 import { useContext, useState } from 'preact/hooks';
 import { Temporal } from 'proposal-temporal';
-import type { InfoWorkerHandler } from '../../worker-info/info';
-import InfoWorker from '../../worker-info/info?worker';
-import { databaseInitialized } from '../hooks/useDatabaseInitialized';
-import { useDelay } from '../hooks/useDelay';
-import { usePromise } from '../hooks/usePromise';
-import { useWorker } from '../hooks/useWorker';
-import { RouterContext } from '../router/Router';
-import { BLANK } from '../stop/RouteBadge';
+import type { InfoWorkerHandler } from '../../../worker-info/info';
+import InfoWorker from '../../../worker-info/info?worker';
+import { databaseInitialized } from '../../hooks/useDatabaseInitialized';
+import { useDelay } from '../../hooks/useDelay';
+import { usePromise } from '../../hooks/usePromise';
+import { useWorker } from '../../hooks/useWorker';
+import { RouterContext } from '../../router/Router';
+import { colorVariables } from '../props';
 import { RouteDetailContext } from './context';
-import { colorVariables } from './props';
-import { RouteName } from './RouteName';
 import './RouteSheet.css';
 import { RouteSheetContent } from './RouteSheetContent';
 import { RouteSheetHeader } from './RouteSheetHeader';
@@ -48,7 +46,7 @@ export function RouteSheet() {
     if (routeId && delayDone) {
       return (
         <div className="route-sheet pointer-events-auto mx-10 border border-bottom-0 rounded-top bg-white bg-dark-light-dm">
-          <RouteSheetHeader>{BLANK}</RouteSheetHeader>
+          <RouteSheetHeader />
           <div class="progress m-15">
             <div
               class="progress-bar progress-bar-animated"
@@ -70,7 +68,7 @@ export function RouteSheet() {
       className="route-sheet pointer-events-auto mx-10 border border-bottom-0 rounded-top bg-white bg-dark-light-dm"
       style={colorVariables(route)}
     >
-      <RouteSheetHeader>{RouteName(route)}</RouteSheetHeader>
+      <RouteSheetHeader route={route} />
       <RouteSheetContent tripTime={tripTime} setTripTime={setTripTime} />
     </div>
   );

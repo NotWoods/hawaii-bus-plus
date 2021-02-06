@@ -7,12 +7,14 @@ import './SidebarItem.css';
 export interface SidebarItemProps {
   href?: string;
   icon: ComponentChildren;
-  iconColor?: string;
+  iconClasses?: string;
+  iconStyle?: {
+    [key: string]: string | number | null | undefined;
+  };
   iconDark?: boolean;
   title?: ComponentChildren;
   subtitle?: ComponentChildren;
   className?: string;
-  iconClasses?: string;
   action?: RouterAction;
   onClick?(evt: MouseEvent): void;
 }
@@ -35,7 +37,7 @@ export function SidebarItem(props: SidebarItemProps) {
           props.iconDark !== undefined &&
             (props.iconDark ? 'text-dark' : 'text-white')
         )}
-        style={{ backgroundColor: props.iconColor }}
+        style={props.iconStyle}
       >
         {props.icon}
       </span>

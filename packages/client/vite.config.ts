@@ -1,15 +1,37 @@
 // import preactRefresh from '@prefresh/vite';
-import { defineConfig } from 'vite';
+import { AliasOptions, defineConfig, Plugin } from 'vite';
+
+function emptyPackage(name: string): Plugin {
+  return {
+    name: 'empty',
+    load(id) {
+      if (id === name) {
+        return 'export {}';
+      }
+      return undefined;
+    },
+  };
+}
+
+const productionMode = false && process.env.NETLIFY_CONTEXT === 'production';
+const alias: AliasOptions = {
+  lodash: 'lodash-es',
+  react: 'preact/compat',
+  'react-dom': 'preact/compat',
+};
+
+if (productionMode) {
+  alias['preact/debug'] = '@empty';
+}
 
 export default defineConfig({
-  // plugins: [preactRefresh()],
-  alias: {
-    lodash: 'lodash-es',
-    react: 'preact/compat',
-    'react-dom': 'preact/compat',
-  },
+  plugins: [emptyPackage('@empty')],
+  alias,
   optimizeDeps: {
     include: ['mnemonist/set', 'preact', 'preact/debug', 'preact/hooks'],
+  },
+  json: {
+    stringify: true,
   },
   esbuild: {
     jsxFactory: 'h',
@@ -25,7 +47,6 @@ export default defineConfig({
       '/api/v1/lookup_location': {
         target: `http://api.ipstack.com/check?access_key=${process.env.IPSTACK_KEY}&fields=latitude,longitude`,
         changeOrigin: true,
-        ignorePath: true,
       },
     },
   },

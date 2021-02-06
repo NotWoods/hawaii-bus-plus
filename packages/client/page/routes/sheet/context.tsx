@@ -1,6 +1,6 @@
 import { createContext, h, ComponentChildren } from 'preact';
 import { useState } from 'preact/hooks';
-import type { RouteDetails } from '../../worker-info/route-details';
+import type { RouteDetails } from '../../../worker-info/route-details';
 
 interface RouteDetailContext {
   details?: RouteDetails;

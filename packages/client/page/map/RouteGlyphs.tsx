@@ -1,6 +1,6 @@
 import { ComponentChildren, h, Fragment } from 'preact';
 import { useContext } from 'preact/hooks';
-import { RouteDetailContext } from '../routes/context';
+import { RouteDetailContext } from '../routes/sheet/context';
 import { ShapeLine } from './ShapeLine';
 import { StopMarkers } from './StopMarkers';
 

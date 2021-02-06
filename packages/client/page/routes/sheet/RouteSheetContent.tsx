@@ -3,7 +3,7 @@ import { useContext } from 'preact/hooks';
 import { Temporal } from 'proposal-temporal';
 import { RouteDetailContext } from './context';
 import { RouteDetailsCard } from './RouteDetails';
-import { TripDetails } from './trip/TripDetails';
+import { TripDetails } from '../trip/TripDetails';
 
 interface Props {
   tripTime: Temporal.PlainDateTime;

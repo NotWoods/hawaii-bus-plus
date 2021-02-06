@@ -3,12 +3,11 @@
   grid-template:
     'icon title' auto
     'icon subtitle' auto
-    / min-content auto;
+    / var(--sidebar-icon-width-height) auto;
+  column-gap: var(--sidebar-icon-margin-right);
 }
 .sidebar-icon {
   grid-area: icon;
-  font-family: 'Red Rose', serif;
-  font-weight: 500;
 }
 .sidebar-link-title {
   grid-area: title;
@@ -20,4 +19,30 @@
 .badge--route {
   font-family: 'Red Rose', serif;
   font-weight: 500;
+}
+
+.icon--route {
+  font-family: 'Red Rose', serif;
+  font-weight: 500;
+  position: relative;
+  line-height: 1.4em;
+  height: auto;
+  background-color: var(--route-color) !important;
+}
+.icon--route::before,
+.icon--route::after {
+  content: '';
+  position: absolute;
+  display: block;
+  background: var(--route-color);
+  height: 0.25rem;
+  width: 0.4rem;
+}
+.icon--route::before {
+  right: 100%;
+  margin-right: 0.1rem;
+}
+.icon--route::after {
+  left: 100%;
+  margin-left: 0.1rem;
 }

@@ -1,8 +1,8 @@
 import { Agency, Route } from '@hawaii-bus-plus/types';
 import { Fragment, h } from 'preact';
-import { Icon } from '../icons/Icon';
-import fareIcon from '../icons/monetization_on.svg';
-import webIcon from '../icons/web.svg';
+import { Icon } from '../../icons/Icon';
+import fareIcon from '../../icons/monetization_on.svg';
+import webIcon from '../../icons/web.svg';
 
 interface Props {
   route?: Route;

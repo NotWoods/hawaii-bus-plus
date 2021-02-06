@@ -1,10 +1,7 @@
 import { h, Fragment } from 'preact';
 import { SearchResults } from '../../../worker-search/search-db';
-import {
-  PlaceSearchItem,
-  RouteSearchItem,
-  StopSearchItem,
-} from '../SearchItems';
+import { RouteListItem } from '../../routes/link/RouteListItem';
+import { PlaceSearchItem, StopSearchItem } from '../SearchItems';
 import { SidebarTitle } from '../SidebarTitle';
 
 interface Props extends SearchResults {
@@ -21,7 +18,7 @@ export function SidebarSearchItems(props: Props) {
         <SidebarTitle>Routes</SidebarTitle>
       ) : null}
       {routes.map((route) => (
-        <RouteSearchItem
+        <RouteListItem
           key={route.route_id}
           route={route}
           agency={route.agency}

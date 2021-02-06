@@ -6,7 +6,7 @@ import { MainMap } from './map/MainMap';
 import { Navbar } from './navbar/Navbar';
 import { PageWrapper } from './page-wrapper/PageWrapper';
 import { Router } from './router/Router';
-import { RouteDetailProvider } from './routes/context';
+import { RouteDetailProvider } from './routes/sheet/context';
 import { Sheet } from './routes/Sheet';
 import { DirectionsSidebar } from './sidebar/directions/DirectionsSidebar';
 import { Sidebar } from './sidebar/Sidebar';

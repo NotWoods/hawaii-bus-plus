@@ -3,7 +3,7 @@ import { useApi } from '../hooks/useApi';
 import directionsIcon from '../icons/directions.svg';
 import { Icon } from '../icons/Icon';
 import { MyLocationButton } from '../map/location/MyLocationButton';
-import { RouteSearchItem } from './SearchItems';
+import { RouteListItem } from '../routes/link/RouteListItem';
 import { SidebarTitle } from './SidebarTitle';
 
 interface Props {
@@ -30,7 +30,7 @@ export function DefaultRoutes(props: Props) {
 
       <SidebarTitle>Routes</SidebarTitle>
       {routes.map((route) => (
-        <RouteSearchItem
+        <RouteListItem
           key={route.route_id}
           route={route}
           agency={api!.agency[route.agency_id]}
