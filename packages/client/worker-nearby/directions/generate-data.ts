@@ -1,6 +1,7 @@
 import { Repository } from '@hawaii-bus-plus/data';
 import {
   DirectionRoute,
+  DirectionRouteMutable,
   DirectionsData,
   DirectionStop,
   Stop,
@@ -27,11 +28,13 @@ export async function generateDirectionsData(
 ): Promise<DirectionsData> {
   const allCalendars = await repo.loadCalendars();
 
-  const routes = new DefaultMap<DirectionRoute['id'], DirectionRoute>((id) => ({
-    id,
-    trips: [],
-    stops: new Set(),
-  }));
+  const routes = new DefaultMap<DirectionRoute['id'], DirectionRouteMutable>(
+    (id) => ({
+      id,
+      trips: [],
+      stops: new Set(),
+    })
+  );
   const stops = new DefaultMap<Stop['stop_id'], DirectionStop>((id) => ({
     id,
     routes: [],

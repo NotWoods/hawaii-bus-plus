@@ -1,6 +1,6 @@
 import { TimeString } from '@hawaii-bus-plus/types';
 import test from 'ava';
-import { PlainDaysTime } from '../src/temporal.js';
+import { PlainDaysTime } from '../src/plain-days-time.js';
 
 test('PlainDaysTime defaults to 0', (t) => {
   const daysTime = new PlainDaysTime();

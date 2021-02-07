@@ -1,4 +1,5 @@
 import { NodeRepository } from '@hawaii-bus-plus/data/node';
+import { expectPlainTimeData } from '@hawaii-bus-plus/jest-utils';
 import { Stop, StopTime, TimeString, Trip } from '@hawaii-bus-plus/types';
 import { PlainDaysTime } from '@hawaii-bus-plus/utils';
 import { Temporal } from 'proposal-temporal';
@@ -68,6 +69,9 @@ test.concurrent('journeyToDirections no walking', async () => {
   expect(journey).toEqual({
     depart: undefined,
     arrive: undefined,
+    departTime: expectPlainTimeData(),
+    arriveTime: expectPlainTimeData(),
+    stops: expect.any(Map),
     trips: expect.any(Array),
   });
   expect(journey.trips).toHaveLength(2);
@@ -89,8 +93,8 @@ test.concurrent('journeyToDirections no walking', async () => {
   const [waimea, kohalaKona] = journey.trips as JourneyTripSegment[];
   expect(waimea.stopTimes).toEqual([
     {
-      arrivalTime: expect.objectContaining({ string: '12:30:00' }),
-      departureTime: expect.objectContaining({ string: '12:30:00' }),
+      arrivalTime: expectPlainTimeData('12:30:00'),
+      departureTime: expectPlainTimeData('12:30:00'),
       stop: lakeland,
       routes: expect.any(Array),
       timepoint: true,
@@ -108,8 +112,8 @@ test.concurrent('journeyToDirections no walking', async () => {
       stop: expect.objectContaining({ stop_id: 'hh-kuhio' }),
     }),
     {
-      arrivalTime: expect.objectContaining({ string: '12:45:00' }),
-      departureTime: expect.objectContaining({ string: '12:45:00' }),
+      arrivalTime: expectPlainTimeData('12:45:00'),
+      departureTime: expectPlainTimeData('12:45:00'),
       stop: parkerRanch,
       routes: expect.any(Array),
       timepoint: true,
@@ -117,8 +121,8 @@ test.concurrent('journeyToDirections no walking', async () => {
   ]);
   expect(kohalaKona.stopTimes).toEqual([
     {
-      arrivalTime: expect.objectContaining({ string: '15:25:00' }),
-      departureTime: expect.objectContaining({ string: '15:25:00' }),
+      arrivalTime: expectPlainTimeData('15:25:00'),
+      departureTime: expectPlainTimeData('15:25:00'),
       stop: parkerRanch,
       routes: expect.any(Array),
       timepoint: true,
@@ -127,8 +131,8 @@ test.concurrent('journeyToDirections no walking', async () => {
       stop: expect.objectContaining({ stop_id: 'wp' }),
     }),
     {
-      arrivalTime: expect.objectContaining({ string: '15:45:00' }),
-      departureTime: expect.objectContaining({ string: '15:45:00' }),
+      arrivalTime: expectPlainTimeData('15:45:00'),
+      departureTime: expectPlainTimeData('15:45:00'),
       stop: hwyIntersection,
       routes: expect.any(Array),
       timepoint: true,

@@ -1,4 +1,5 @@
 import { NodeRepository } from '@hawaii-bus-plus/data/node';
+import { expectPlainTimeData } from '@hawaii-bus-plus/jest-utils';
 import { Route } from '@hawaii-bus-plus/types';
 import { Temporal } from 'proposal-temporal';
 import { extractLinks, getRouteDetails } from './route-details';
@@ -29,7 +30,7 @@ test.concurrent('getRouteDetails when in service', async () => {
     descParts: expect.arrayContaining([
       expect.objectContaining({ type: 'text' }),
     ]),
-    stops: expect.any(Set),
+    stops: expect.any(Map),
     bounds: {
       east: -155.59700946408782,
       north: 20.042747082274264,
@@ -38,7 +39,7 @@ test.concurrent('getRouteDetails when in service', async () => {
     },
     directions: expect.any(Array),
   });
-  expect(Array.from(details!.stops)).toEqual([
+  expect(Array.from(details!.stops.keys())).toEqual([
     'll',
     'hh-kamamalu',
     'hh-hiiaka',
@@ -63,14 +64,8 @@ test.concurrent('getRouteDetails when in service', async () => {
     firstStopName: 'Lakeland',
     lastStop: 'kvo',
     lastStopName: 'Ohina Street',
-    earliest: {
-      epochMilliseconds: expect.any(Number),
-      string: '06:30:00',
-    },
-    latest: {
-      epochMilliseconds: expect.any(Number),
-      string: '17:00:00',
-    },
+    earliest: expectPlainTimeData('06:30:00'),
+    latest: expectPlainTimeData('17:00:00'),
     allTrips: expect.any(Map),
     closestTrip: expect.objectContaining({
       offset: { days: 0, hours: 0, minutes: 0, seconds: 0 },
@@ -87,14 +82,8 @@ test.concurrent('getRouteDetails when in service', async () => {
     firstStopName: 'Kamuela View Estates',
     lastStop: 'll-across',
     lastStopName: 'Lakeland',
-    earliest: {
-      epochMilliseconds: expect.any(Number),
-      string: '07:00:00',
-    },
-    latest: {
-      epochMilliseconds: expect.any(Number),
-      string: '17:30:00',
-    },
+    earliest: expectPlainTimeData('07:00:00'),
+    latest: expectPlainTimeData('17:30:00'),
     allTrips: expect.any(Map),
     closestTrip: expect.objectContaining({
       offset: { days: 0, hours: 0, minutes: 0, seconds: 0 },

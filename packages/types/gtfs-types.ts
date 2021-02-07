@@ -1,5 +1,5 @@
 import { Opaque } from 'type-fest';
-import { DateString, TimeString } from './data-types';
+import { ColorString, DateString, TimeString } from './data-types';
 
 export interface GTFSData {
   routes: { [route_id: string]: Route };
@@ -53,8 +53,8 @@ export interface CsvRoute {
   route_long_name: string;
   route_desc: string;
   route_type: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
-  route_color: string;
-  route_text_color: string;
+  route_color: ColorString;
+  route_text_color: ColorString;
   agency_id?: Agency['agency_id'];
   route_url: string;
   route_sort_order: number;
@@ -114,6 +114,7 @@ export interface CsvStopTime {
   continuous_pickup: 0 | 1 | 2 | 3;
   continuous_drop_off: 0 | 1 | 2 | 3;
   timepoint: boolean;
+  shape_dist_travelled?: number;
 }
 
 export type StopTime = Readonly<

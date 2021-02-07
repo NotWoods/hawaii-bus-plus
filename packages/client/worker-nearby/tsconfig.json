@@ -6,6 +6,7 @@
     { "path": "../../presentation/src" },
     { "path": "../../data/src" },
     { "path": "../../data/node" },
+    { "path": "../../jest-utils/src" },
     { "path": "../../types" }
   ],
   "compilerOptions": {

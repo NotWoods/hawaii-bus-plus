@@ -105,8 +105,8 @@ export async function findBestTrips(
   allCalendars: ReadonlyMap<Calendar['service_id'], Calendar>,
   now: Temporal.PlainDateTime
 ): Promise<{
-  directionDetails: DirectionDetailsResult[];
-  routeStops: Set<Stop['stop_id']>;
+  directionDetails: readonly DirectionDetailsResult[];
+  routeStops: ReadonlySet<Stop['stop_id']>;
   routeService: Iterable<Calendar>;
 }> {
   const nowTime = new PlainDaysTime(0, now.toPlainTime());

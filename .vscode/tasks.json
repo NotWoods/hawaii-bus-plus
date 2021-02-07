@@ -25,7 +25,8 @@
         "focus": false,
         "panel": "dedicated",
         "showReuseMessage": true
-      }
+      },
+      "problemMatcher": []
     },
     {
       "label": "vite: build",
@@ -71,6 +72,6 @@
         "clear": true
       },
       "problemMatcher": "$tsc"
-    },
+    }
   ]
 }

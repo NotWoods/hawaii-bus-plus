@@ -6,6 +6,7 @@ import { Temporal } from 'proposal-temporal';
 import { directions, traversePath } from './directions';
 import { JourneyTripSegment } from './directions/format';
 import { Path } from './directions/raptor';
+import { expectPlainTimeData } from '@hawaii-bus-plus/jest-utils';
 
 const LAKELAND = 'll' as Stop['stop_id'];
 const LAKELAND_ACROSS = 'll-across' as Stop['stop_id'];
@@ -131,6 +132,9 @@ test.concurrent('directions', async () => {
   expect(journeys[0]).toEqual({
     depart: undefined,
     arrive: undefined,
+    departTime: expectPlainTimeData('14:45:00'),
+    arriveTime: expectPlainTimeData('15:45:00'),
+    stops: expect.any(Map),
     trips: expect.any(Array),
   });
   expect(journeys[0].trips).toHaveLength(1);

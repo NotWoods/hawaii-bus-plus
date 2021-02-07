@@ -7,7 +7,7 @@ import {
   StopTimeData,
   Walking,
 } from '@hawaii-bus-plus/presentation';
-import { Agency, Route, Stop, Trip } from '@hawaii-bus-plus/types';
+import { Agency, ColorString, Route, Stop, Trip } from '@hawaii-bus-plus/types';
 import { last, findLastIndex, PlainDaysTime } from '@hawaii-bus-plus/utils';
 import { add } from 'mnemonist/set';
 import { Temporal } from 'proposal-temporal';
@@ -20,6 +20,7 @@ interface JourneyStopTime {
   readonly arrivalTime: PlainDaysTime;
   readonly departureTime: PlainDaysTime;
   readonly timepoint: boolean;
+  readonly shapeDistTravelled?: number;
 }
 
 export interface JourneyTripSegment {
@@ -46,6 +47,7 @@ export interface Journey {
     point: Point;
     walk: Walking;
   };
+  stops: ReadonlyMap<Stop['stop_id'], ColorString>;
 }
 
 function formatDepartArrive(
@@ -94,6 +96,7 @@ export async function journeyToDirections(
 
   const pathSegments = path.slice(1) as readonly PathSegment[];
 
+  const allStops = new Map<Stop['stop_id'], ColorString>();
   const trips: (JourneyTripSegment | Walking)[] = [];
   let journeyStart: PlainDaysTime | undefined;
   let journeyEnd: PlainDaysTime | undefined;
@@ -133,6 +136,7 @@ export async function journeyToDirections(
           arrivalTime: PlainDaysTime.from(st.arrival_time),
           departureTime: PlainDaysTime.from(st.departure_time),
           timepoint: st.timepoint,
+          shapeDistTravelled: st.shape_dist_travelled,
         };
       });
 
@@ -159,6 +163,10 @@ export async function journeyToDirections(
         throw new Error(`Invalid agency ID ${route.agency_id}`);
       }
 
+      for (const stop of stops.keys()) {
+        allStops.set(stop, route.route_color);
+      }
+
       trips.push({
         trip: omitStopTimes(trip),
         route,
@@ -169,6 +177,7 @@ export async function journeyToDirections(
           arrivalTime: zonedTime(st.arrivalTime, agency.agency_timezone),
           departureTime: zonedTime(st.departureTime, agency.agency_timezone),
           timepoint: st.timepoint,
+          shapeDistTravelled: st.shapeDistTravelled,
         })),
       });
     } else {
@@ -230,5 +239,6 @@ export async function journeyToDirections(
     ),
     arrive: formatDepartArrive(to, endEntry!.stop.position),
     trips,
+    stops: allStops,
   };
 }

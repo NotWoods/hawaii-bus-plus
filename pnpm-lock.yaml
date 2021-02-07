@@ -74,6 +74,7 @@ importers:
       spherical-geometry-js: 2.0.0
       tslib: 2.1.0
     devDependencies:
+      '@hawaii-bus-plus/jest-utils': link:../jest-utils
       '@prefresh/vite': 2.0.4_e400f90aee5454bc5f1507eabe7541b5
       '@types/googlemaps': 3.43.2
       '@types/jest': 26.0.20
@@ -88,6 +89,7 @@ importers:
       vite: 2.0.0-beta.65
     specifiers:
       '@hawaii-bus-plus/data': workspace:*
+      '@hawaii-bus-plus/jest-utils': workspace:*
       '@hawaii-bus-plus/presentation': workspace:*
       '@hawaii-bus-plus/promise-worker': workspace:*
       '@hawaii-bus-plus/react-google-maps': workspace:*
@@ -157,6 +159,22 @@ importers:
       '@types/aws-lambda': ^8.10.71
       '@types/node': ^14.14.25
       ava: ^3.15.0
+      prettier: ^2.2.1
+      tslib: ^2.1.0
+      type-fest: ^0.20.2
+      typescript: 4.1.3
+  packages/jest-utils:
+    dependencies:
+      '@hawaii-bus-plus/types': link:../types
+      tslib: 2.1.0
+    devDependencies:
+      jest: 26.6.3
+      prettier: 2.2.1
+      type-fest: 0.20.2
+      typescript: 4.1.3
+    specifiers:
+      '@hawaii-bus-plus/types': workspace:*
+      jest: ^26.6.3
       prettier: ^2.2.1
       tslib: ^2.1.0
       type-fest: ^0.20.2

@@ -44,6 +44,9 @@ export function cast(value: string, context: CastingContext) {
     case 'feed_start_date':
     case 'feed_end_date':
       return parseGtfsDate(value);
+    case 'route_color':
+    case 'route_text_color':
+      return `#${value}`;
     default:
       return value;
   }

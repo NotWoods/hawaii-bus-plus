@@ -1,5 +1,5 @@
 import { Marker } from '@hawaii-bus-plus/react-google-maps';
-import { Stop } from '@hawaii-bus-plus/types';
+import { ColorString, Stop } from '@hawaii-bus-plus/types';
 import { h, Fragment } from 'preact';
 import { useContext } from 'preact/hooks';
 import { useApi } from '../hooks/useApi';
@@ -24,16 +24,17 @@ const selectedStop = {
 } as google.maps.Icon;
 
 interface Props {
-  highlighted?: ReadonlySet<Stop['stop_id']>;
-  highlightColor?: string;
+  highlighted?: ReadonlyMap<Stop['stop_id'], ColorString>;
   darkMode?: boolean;
 }
 
 export function StopMarkers(props: Props) {
   const { dispatch, point } = useContext(RouterContext);
+  // TODO multiple colors
+  const [first] = props.highlighted?.values() ?? [];
   const highlightIconUrl = useMarkerIcon(
     props.darkMode ? '#25282C' : '#fff',
-    props.highlightColor
+    first
   );
 
   const api = useApi();

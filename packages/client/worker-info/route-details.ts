@@ -1,7 +1,7 @@
 import { Repository } from '@hawaii-bus-plus/data';
 import { nowWithZone } from '@hawaii-bus-plus/utils';
 import { durationToData, StopTimeData } from '@hawaii-bus-plus/presentation';
-import { Agency, Route, Stop } from '@hawaii-bus-plus/types';
+import { Agency, ColorString, Route, Stop } from '@hawaii-bus-plus/types';
 import { Temporal } from 'proposal-temporal';
 import { LatLngBounds, LatLngBoundsLiteral } from 'spherical-geometry-js';
 import { DirectionDetails, findBestTrips, zonedTime } from './trip-details';
@@ -13,7 +13,7 @@ export interface RouteDetails {
     type: 'text' | 'link';
     value: string;
   }[];
-  readonly stops: ReadonlySet<Stop['stop_id']>;
+  readonly stops: ReadonlyMap<Stop['stop_id'], ColorString>;
   readonly bounds?: LatLngBoundsLiteral;
 
   readonly directions: DirectionDetails[];
@@ -46,7 +46,9 @@ async function routeStopDetails(
   routeStops: Iterable<Stop['stop_id']>,
   loadedRoute: Route['route_id']
 ) {
-  const stops = await repo.loadStops(routeStops);
+  const stops: ReadonlyMap<Stop['stop_id'], Stop> = await repo.loadStops(
+    routeStops
+  );
 
   let bounds: LatLngBounds | undefined;
   for (const stop of stops.values()) {
@@ -114,7 +116,7 @@ export async function getRouteDetails(
     route,
     agency: agency!,
     descParts: extractLinks(route.route_desc),
-    stops: routeStops,
+    stops: new Map(Array.from(routeStops, (id) => [id, route.route_color])),
     bounds: bounds?.toJSON(),
     directions: directionDetails.map((dirDetails) => {
       const stopTimes: StopTimeData[] = dirDetails.closestTrip.trip.stop_times.map(

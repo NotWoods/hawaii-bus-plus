@@ -6,10 +6,15 @@ export interface DirectionsData {
   stops: { [id: string]: DirectionStop };
 }
 
-export interface DirectionRoute {
-  readonly id: Opaque<string, 'direction-route'>;
+export interface DirectionRouteMutable extends DirectionRoute {
   readonly trips: Trip[];
   readonly stops: Set<Stop['stop_id']>;
+}
+
+export interface DirectionRoute {
+  readonly id: Opaque<string, 'direction-route'>;
+  readonly trips: readonly Trip[];
+  readonly stops: ReadonlySet<Stop['stop_id']>;
 }
 
 export interface DirectionStop {

@@ -3,7 +3,7 @@ import { h } from 'preact';
 import busStopIcon from '../icons/bus_stop.svg';
 import { Icon } from '../icons/Icon';
 import placeIcon from '../icons/place.svg';
-import { colorProps, colorVariables } from '../routes/props';
+import { colorVariables } from '../routes/props';
 import { BLANK, RouteBadgeKeys, RouteBadges } from '../routes/badge/RouteBadge';
 import { SidebarItem, SidebarItemProps } from './SidebarItem';
 
@@ -19,13 +19,11 @@ export function RouteSearchItem({
   agency,
   ...props
 }: RouteSearchItemProps) {
-  const { dark } = colorProps(route);
-
   return (
     <SidebarItem
       {...props}
       icon={route.route_short_name}
-      iconDark={dark}
+      iconDark={route.route_text_color === '#000000'}
       iconClasses="icon--route"
       iconStyle={colorVariables(route)}
       title={route.route_long_name}
