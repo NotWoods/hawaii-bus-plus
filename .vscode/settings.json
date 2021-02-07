@@ -13,5 +13,10 @@
     },
     "**/*.d.ts": true,
   },
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "typescript.tsc.autoDetect": "off",
+  "grunt.autoDetect": "off",
+  "jake.autoDetect": "off",
+  "gulp.autoDetect": "off",
+  "npm.autoDetect": "off"
 }

@@ -1,0 +1,76 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "format",
+      "type": "shell",
+      "command": "pnpm run tsc && pnpm recursive run format",
+      "presentation": {
+        "reveal": "silent",
+        "panel": "dedicated",
+        "showReuseMessage": true,
+        "clear": true
+      },
+      "problemMatcher": "$eslint-stylish",
+      "dependsOn": [
+        "typescript: build"
+      ]
+    },
+    {
+      "label": "vite: dev",
+      "type": "shell",
+      "command": "pnpm run dev",
+      "presentation": {
+        "reveal": "always",
+        "focus": false,
+        "panel": "dedicated",
+        "showReuseMessage": true
+      }
+    },
+    {
+      "label": "vite: build",
+      "type": "shell",
+      "command": "pnpm run build",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true
+      }
+    },
+    {
+      "label": "test",
+      "type": "shell",
+      "command": "pnpm recursive test",
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "focus": false,
+        "panel": "dedicated",
+        "showReuseMessage": true,
+        "clear": true
+      }
+    },
+    {
+      "label": "typescript: build",
+      "type": "shell",
+      "command": "pnpm run tsc",
+      "group": "build",
+      "presentation": {
+        "reveal": "silent",
+        "focus": false,
+        "panel": "dedicated",
+        "showReuseMessage": true,
+        "clear": true
+      },
+      "problemMatcher": "$tsc"
+    },
+  ]
+}

@@ -12,6 +12,23 @@ export function valueNotNull<K, V>(
   return entry[1] != undefined;
 }
 
+export function findLastIndex<T>(
+  array: readonly T[],
+  predicate: (item: T) => boolean,
+  fromIndex: number = lastIndex(array)
+) {
+  for (let i = fromIndex; i >= 0; i--) {
+    if (predicate(array[i])) {
+      return i;
+    }
+  }
+  return -1;
+}
+
 export function lastIndex(list: readonly unknown[]) {
   return list.length - 1;
+}
+
+export function last<T>(list: readonly T[]) {
+  return list[lastIndex(list)];
 }

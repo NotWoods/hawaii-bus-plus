@@ -15,7 +15,6 @@ function emptyPackage(name: string): Plugin {
 
 const productionMode = false && process.env.NETLIFY_CONTEXT === 'production';
 const alias: AliasOptions = {
-  lodash: 'lodash-es',
   react: 'preact/compat',
   'react-dom': 'preact/compat',
 };
