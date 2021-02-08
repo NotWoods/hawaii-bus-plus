@@ -5,6 +5,23 @@ module.exports = {
     fontFamily: {
       display: ['Red Rose', 'serif'],
     },
+    backgroundColor: (theme) => ({
+      ...theme('colors'),
+      route: 'var(--route-color)',
+    }),
+    textColor: (theme) => ({
+      ...theme('colors'),
+      route: 'var(--route-text-color)',
+    }),
+    /*colors: {
+      transparent: 'transparent',
+      current: 'currentColor',
+      gray: {
+        dark: '#141518',
+        DEFAULT: '#322938',
+        light: '#766184',
+      },
+    },*/
     extend: {},
   },
   variants: {

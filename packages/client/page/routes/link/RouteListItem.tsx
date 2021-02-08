@@ -3,6 +3,7 @@ import { h } from 'preact';
 import { classNames } from '../../hooks/classnames';
 import { colorVariables } from '../props';
 import { RouteIcon } from '../RouteIcon';
+import { RouteIcon as RouteIconTw } from '../badge/RouteIcon';
 import { Link } from '../../router/Router';
 import './RouteListItem.css';
 
@@ -18,7 +19,10 @@ export function RouteListItem(props: Props) {
   return (
     <Link
       href={`/routes/${route.route_id}/`}
-      className={classNames('route-link sidebar-link py-2 grid gap-x-4 items-center', props.className)}
+      className={classNames(
+        'route-link sidebar-link py-2 grid gap-x-4 items-center',
+        props.className
+      )}
       onClick={props.onClick}
     >
       <RouteIcon style={colorVariables(route)}>
@@ -28,6 +32,27 @@ export function RouteListItem(props: Props) {
       <p className="sidebar-link-subtitle m-0 font-size-12">
         {agency.primary ? undefined : agency.agency_name}
       </p>
+    </Link>
+  );
+}
+
+export function RouteLinkVertical(props: Props) {
+  const { route, agency } = props;
+  return (
+    <Link
+      href={`/routes/${route.route_id}/`}
+      className={classNames(
+        'flex flex-col w-32 shadow-xl bg-white p-2 h-full',
+        props.className
+      )}
+      onClick={props.onClick}
+      style="scroll-snap-align: start"
+    >
+      <RouteIconTw style={colorVariables(route)}>
+        {route.route_short_name}
+      </RouteIconTw>
+      <p className="mt-2 text-sm">{route.route_long_name}</p>
+      <p className="mt-auto text-xs text-right">{agency.agency_name}</p>
     </Link>
   );
 }

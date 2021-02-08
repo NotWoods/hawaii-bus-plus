@@ -2,14 +2,15 @@
   grid-area: icon;
 
   font-weight: 500;
-  font-size: 1.15em;
   background: var(--route-color);
   color: var(--route-text-color);
+  margin: 0 var(--line-width);
 
-  line-height: 1.4em;
   height: auto;
 
-  --line-height: 0.125em;
+  --line-width: 0.5rem;
+  --line-gap: 0.05rem;
+  --line-height: 0.25rem;
 }
 .route__icon::before,
 .route__icon::after {
@@ -18,18 +19,18 @@
   display: block;
   background: var(--route-color);
   height: var(--line-height);
-  width: 0.25em;
-  top: calc(50% - 0.05em);
+  width: calc(var(--line-width) - var(--line-gap));
+  top: calc(50% - calc(var(--line-height) / 2));
 }
 .route__icon::before {
   right: 100%;
-  margin-right: 0.05em;
+  margin-right: var(--line-gap);
   border-top-left-radius: calc(var(--line-height) / 2);
   border-bottom-left-radius: calc(var(--line-height) / 2);
 }
 .route__icon::after {
   left: 100%;
-  margin-left: 0.05em;
+  margin-left: var(--line-gap);
   border-top-right-radius: calc(var(--line-height) / 2);
   border-bottom-right-radius: calc(var(--line-height) / 2);
 }
