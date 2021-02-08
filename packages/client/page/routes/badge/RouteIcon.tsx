@@ -9,13 +9,17 @@ interface Props {
 }
 
 export function RouteIcon(props: Props) {
+  const ring = 'ring-1 ring-gray-500 bg-route';
+  const line = `${ring} block w-8 h-2`;
   return (
     <div class="flex items-center" {...props}>
-      <span class="block w-8 h-2 rounded-l-full bg-route" />
-      <span class="text-xl flex-none w-12 mx-1 font-display font-medium text-center bg-route text-route">
+      <span class={`${line} rounded-l-full`} />
+      <span
+        class={`${ring} text-xl flex-none w-12 mx-1 font-display font-medium text-center text-route`}
+      >
         {props.children}
       </span>
-      <span class="block w-8 h-2 rounded-r-full bg-route" />
+      <span class={`${line} rounded-r-full`} />
     </div>
   );
 }

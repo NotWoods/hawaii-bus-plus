@@ -5,6 +5,7 @@ import './Icon.css';
 interface Props {
   src: string;
   alt: string;
+  class?: string;
   className?: string;
   small?: boolean;
 }
@@ -12,7 +13,7 @@ interface Props {
 export function IconTw(props: Props) {
   return (
     <img
-      className={classNames('w-6 h-6', props.className)}
+      class={props.class ?? 'w-6 h-6'}
       src={props.src}
       alt={props.alt}
       width="24"

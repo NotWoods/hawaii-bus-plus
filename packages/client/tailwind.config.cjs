@@ -1,6 +1,6 @@
 module.exports = {
   purge: ['./index.html', './page/**/*.tsx'],
-  darkMode: 'class',
+  darkMode: 'media',
   theme: {
     fontFamily: {
       display: ['Red Rose', 'serif'],

@@ -3,8 +3,8 @@ import { useApi } from '../hooks/useApi';
 import { IconTw } from '../icons/Icon';
 import { MenuIcon } from '../icons/MenuIcon';
 import searchIcon from '../icons/search.svg';
+import clearIcon from '../icons/clear.svg';
 import { RouteLinkVertical } from '../routes/link/RouteListItem';
-import background from './guille-pozzi-g3esK1uXCjM-unsplash.jpg';
 
 function SearchBar() {
   return (
@@ -12,12 +12,19 @@ function SearchBar() {
       <input
         type="search"
         class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pr-12 sm:text-sm border-gray-300"
+        placeholder="Where to?"
+        aria-label="Where to?"
+      />
+      <IconTw
+        src={searchIcon}
+        alt="Search"
+        class="absolute inset-y-0 right-0 h-full py-0 px-2 w-10"
       />
       <button
-        type="submit"
+        type="reset"
         class="absolute inset-y-0 right-0 focus:ring-indigo-500 focus:border-indigo-500 h-full py-0 px-2 border-transparent bg-transparent sm:text-sm"
       >
-        <IconTw src={searchIcon} alt="Search" />
+        <IconTw src={clearIcon} alt="Clear" />
       </button>
     </form>
   );
@@ -28,10 +35,7 @@ export function Home() {
   const routes = api?.routes ?? [];
 
   return (
-    <section
-      style={{ backgroundImage: `url('${background}')` }}
-      class="bg-center bg-no-repeat py-4"
-    >
+    <section class="bg-center bg-no-repeat py-4 bg-gray-800">
       <button type="button" class="w-12 h-12 p-3 text-white">
         <MenuIcon />
       </button>
