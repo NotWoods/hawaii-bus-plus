@@ -31,8 +31,8 @@ importers:
       typescript: ^4.1.3
   packages/api-gen:
     dependencies:
-      '@hawaii-bus-plus/types': link:../types
-      '@hawaii-bus-plus/utils': link:../utils
+      '@hawaii-bus-plus/types': 'link:../types'
+      '@hawaii-bus-plus/utils': 'link:../utils'
       csv-parse: 4.15.1
       ix: 4.2.0
       jszip: 3.5.0
@@ -45,8 +45,8 @@ importers:
       prettier: 2.2.1
       typescript: 4.1.3
     specifiers:
-      '@hawaii-bus-plus/types': workspace:*
-      '@hawaii-bus-plus/utils': workspace:*
+      '@hawaii-bus-plus/types': 'workspace:*'
+      '@hawaii-bus-plus/utils': 'workspace:*'
       '@types/node': ^14.14.25
       ava: ^3.15.0
       csv-parse: ^4.15.1
@@ -59,12 +59,12 @@ importers:
       typescript: 4.1.3
   packages/client:
     dependencies:
-      '@hawaii-bus-plus/data': link:../data
-      '@hawaii-bus-plus/presentation': link:../presentation
-      '@hawaii-bus-plus/promise-worker': link:../promise-worker
-      '@hawaii-bus-plus/react-google-maps': link:../react-google-maps
-      '@hawaii-bus-plus/types': link:../types
-      '@hawaii-bus-plus/utils': link:../utils
+      '@hawaii-bus-plus/data': 'link:../data'
+      '@hawaii-bus-plus/presentation': 'link:../presentation'
+      '@hawaii-bus-plus/promise-worker': 'link:../promise-worker'
+      '@hawaii-bus-plus/react-google-maps': 'link:../react-google-maps'
+      '@hawaii-bus-plus/types': 'link:../types'
+      '@hawaii-bus-plus/utils': 'link:../utils'
       halfmoon: 1.1.1
       idb: 6.0.0
       mnemonist: 0.38.1
@@ -74,8 +74,10 @@ importers:
       spherical-geometry-js: 2.0.0
       tslib: 2.1.0
     devDependencies:
-      '@hawaii-bus-plus/jest-utils': link:../jest-utils
+      '@hawaii-bus-plus/jest-utils': 'link:../jest-utils'
       '@prefresh/vite': 2.0.4_e400f90aee5454bc5f1507eabe7541b5
+      '@tailwindcss/aspect-ratio': 0.2.0
+      '@tailwindcss/forms': 0.2.1
       '@types/googlemaps': 3.43.2
       '@types/jest': 26.0.20
       '@types/react': 17.0.1
@@ -84,18 +86,21 @@ importers:
       esbuild-jest: 0.3.0_esbuild@0.8.42
       jest: 26.6.3
       prettier: 2.2.1
+      tailwindcss: 2.0.3
       type-fest: 0.20.2
       typescript: 4.1.3
       vite: 2.0.0-beta.65
     specifiers:
-      '@hawaii-bus-plus/data': workspace:*
-      '@hawaii-bus-plus/jest-utils': workspace:*
-      '@hawaii-bus-plus/presentation': workspace:*
-      '@hawaii-bus-plus/promise-worker': workspace:*
-      '@hawaii-bus-plus/react-google-maps': workspace:*
-      '@hawaii-bus-plus/types': workspace:*
-      '@hawaii-bus-plus/utils': workspace:*
+      '@hawaii-bus-plus/data': 'workspace:*'
+      '@hawaii-bus-plus/jest-utils': 'workspace:*'
+      '@hawaii-bus-plus/presentation': 'workspace:*'
+      '@hawaii-bus-plus/promise-worker': 'workspace:*'
+      '@hawaii-bus-plus/react-google-maps': 'workspace:*'
+      '@hawaii-bus-plus/types': 'workspace:*'
+      '@hawaii-bus-plus/utils': 'workspace:*'
       '@prefresh/vite': ^2.0.4
+      '@tailwindcss/aspect-ratio': ^0.2.0
+      '@tailwindcss/forms': ^0.2.1
       '@types/googlemaps': ^3.43.2
       '@types/jest': ^26.0.20
       '@types/react': ^17.0.1
@@ -111,14 +116,15 @@ importers:
       proposal-temporal: ^0.7.0
       react-hotkeys-hook: ^3.0.3
       spherical-geometry-js: ^2.0.0
+      tailwindcss: ^2.0.3
       tslib: ^2.1.0
       type-fest: ^0.20.2
       typescript: 4.1.3
       vite: ^2.0.0-beta.65
   packages/data:
     dependencies:
-      '@hawaii-bus-plus/types': link:../types
-      '@hawaii-bus-plus/utils': link:../utils
+      '@hawaii-bus-plus/types': 'link:../types'
+      '@hawaii-bus-plus/utils': 'link:../utils'
       idb: 6.0.0
       ix: 4.2.0
       mnemonist: 0.38.1
@@ -130,8 +136,8 @@ importers:
       type-fest: 0.20.2
       typescript: 4.1.3
     specifiers:
-      '@hawaii-bus-plus/types': workspace:*
-      '@hawaii-bus-plus/utils': workspace:*
+      '@hawaii-bus-plus/types': 'workspace:*'
+      '@hawaii-bus-plus/utils': 'workspace:*'
       '@types/node': ^14.14.25
       ava: ^3.15.0
       idb: ^6.0.0
@@ -143,8 +149,8 @@ importers:
       typescript: 4.1.3
   packages/functions:
     dependencies:
-      '@hawaii-bus-plus/types': link:../types
-      '@hawaii-bus-plus/utils': link:../utils
+      '@hawaii-bus-plus/types': 'link:../types'
+      '@hawaii-bus-plus/utils': 'link:../utils'
       tslib: 2.1.0
     devDependencies:
       '@types/aws-lambda': 8.10.71
@@ -154,8 +160,8 @@ importers:
       type-fest: 0.20.2
       typescript: 4.1.3
     specifiers:
-      '@hawaii-bus-plus/types': workspace:*
-      '@hawaii-bus-plus/utils': workspace:*
+      '@hawaii-bus-plus/types': 'workspace:*'
+      '@hawaii-bus-plus/utils': 'workspace:*'
       '@types/aws-lambda': ^8.10.71
       '@types/node': ^14.14.25
       ava: ^3.15.0
@@ -165,7 +171,7 @@ importers:
       typescript: 4.1.3
   packages/jest-utils:
     dependencies:
-      '@hawaii-bus-plus/types': link:../types
+      '@hawaii-bus-plus/types': 'link:../types'
       tslib: 2.1.0
     devDependencies:
       jest: 26.6.3
@@ -173,7 +179,7 @@ importers:
       type-fest: 0.20.2
       typescript: 4.1.3
     specifiers:
-      '@hawaii-bus-plus/types': workspace:*
+      '@hawaii-bus-plus/types': 'workspace:*'
       jest: ^26.6.3
       prettier: ^2.2.1
       tslib: ^2.1.0
@@ -181,8 +187,8 @@ importers:
       typescript: 4.1.3
   packages/presentation:
     dependencies:
-      '@hawaii-bus-plus/types': link:../types
-      '@hawaii-bus-plus/utils': link:../utils
+      '@hawaii-bus-plus/types': 'link:../types'
+      '@hawaii-bus-plus/utils': 'link:../utils'
       proposal-temporal: 0.7.0
       spherical-geometry-js: 2.0.0
       tslib: 2.1.0
@@ -192,8 +198,8 @@ importers:
       type-fest: 0.20.2
       typescript: 4.1.3
     specifiers:
-      '@hawaii-bus-plus/types': workspace:*
-      '@hawaii-bus-plus/utils': workspace:*
+      '@hawaii-bus-plus/types': 'workspace:*'
+      '@hawaii-bus-plus/utils': 'workspace:*'
       ava: ^3.15.0
       prettier: ^2.2.1
       proposal-temporal: ^0.7.0
@@ -249,7 +255,7 @@ importers:
       typescript: 4.1.3
   packages/utils:
     dependencies:
-      '@hawaii-bus-plus/types': link:../types
+      '@hawaii-bus-plus/types': 'link:../types'
       proposal-temporal: 0.7.0
       tslib: 2.1.0
     devDependencies:
@@ -258,7 +264,7 @@ importers:
       type-fest: 0.20.2
       typescript: 4.1.3
     specifiers:
-      '@hawaii-bus-plus/types': workspace:*
+      '@hawaii-bus-plus/types': 'workspace:*'
       ava: ^3.15.0
       prettier: ^2.2.1
       proposal-temporal: ^0.7.0
@@ -578,6 +584,12 @@ packages:
       node: ^10.12.0 || >=12.0.0
     resolution:
       integrity: sha512-1JTKgrOKAHVivSvOYw+sJOunkBjUOvjqWk1DPja7ZFhIS2mX/4EgTT8M7eTK9jrKhL/FvXXEbQwIs3pg1xp3dg==
+  /@fullhuman/postcss-purgecss/3.1.3:
+    dependencies:
+      purgecss: 3.1.3
+    dev: true
+    resolution:
+      integrity: sha512-kwOXw8fZ0Lt1QmeOOrd+o4Ibvp4UTEBFQbzvWldjlKv5n+G9sXfIPn1hh63IQIL8K8vbvv1oYMJiIUbuy9bGaA==
   /@googlemaps/js-api-loader/1.11.1:
     dependencies:
       fast-deep-equal: 3.1.3
@@ -892,6 +904,16 @@ packages:
       node: '>=6'
     resolution:
       integrity: sha512-XIB2XbzHTN6ieIjfIMV9hlVcfPU26s2vafYWQcZHWXHOxiaRZYEDKEwdl129Zyg50+foYV2jCgtrqSA6qNuNSA==
+  /@tailwindcss/aspect-ratio/0.2.0:
+    dev: true
+    resolution:
+      integrity: sha512-v5LyHkwXj/4lI74B06zUrmWEdmSqS43+jw717pkt3fAXqb7ALwu77A8t7j+Bej+ZbdlIIqNMYheGN7wSGV1A6w==
+  /@tailwindcss/forms/0.2.1:
+    dependencies:
+      mini-svg-data-uri: 1.2.3
+    dev: true
+    resolution:
+      integrity: sha512-czfvEdY+J2Ogfd6RUSr/ZSUmDxTujr34M++YLnp2cCPC3oJ4kFvFMaRXA6cEXKw7F1hJuapdjXRjsXIEXGgORg==
   /@types/aws-lambda/8.10.71:
     dev: true
     resolution:
@@ -1178,6 +1200,14 @@ packages:
       acorn: ^6.0.0 || ^7.0.0 || ^8.0.0
     resolution:
       integrity: sha512-K0Ptm/47OKfQRpNQ2J/oIN/3QYiK6FwW+eJbILhsdxh2WTLdl+30o8aGdTbm5JbffpFFAg/g+zi1E+jvJha5ng==
+  /acorn-node/1.8.2:
+    dependencies:
+      acorn: 7.4.1
+      acorn-walk: 7.2.0
+      xtend: 4.0.2
+    dev: true
+    resolution:
+      integrity: sha512-8mt+fslDufLYntIoPAaIMUe/lrbrehIiwmR3t2k9LljIzoigEPF27eLk2hy8zSGzmR/ogr7zbRKINMo1u0yh5A==
   /acorn-walk/7.2.0:
     dev: true
     engines:
@@ -1416,6 +1446,12 @@ packages:
     dev: true
     resolution:
       integrity: sha1-x57Zf380y48robyXkLzDZkdLS3k=
+  /at-least-node/1.0.0:
+    dev: true
+    engines:
+      node: '>= 4.0.0'
+    resolution:
+      integrity: sha512-+q/t7Ekv1EDY2l6Gda6LLiX14rU9TV20Wa3ofeQmwPFZbOMo9DXrLbOjFaaclkXKWidIaopwAObQDqwWtGUjqg==
   /atob/2.1.2:
     dev: true
     engines:
@@ -1724,6 +1760,12 @@ packages:
     dev: true
     resolution:
       integrity: sha512-EHcyIPBQ4BSGlvjB16k5KgAJ27CIsHY/2JBmCRReo48y9rQ3MaUzWX3KVlBa4U7MyX02HdVj0K7C3WaB3ju7FQ==
+  /bytes/3.1.0:
+    dev: true
+    engines:
+      node: '>= 0.8'
+    resolution:
+      integrity: sha512-zauLjrfCG+xvoyaqLoV8bLVXXNGC4JqlxFCutSDWA6fJrTo2ZuvLYTqZ7aHBLZSMOopbzwv8f+wZcVzfVTI2Dg==
   /cache-base/1.0.1:
     dependencies:
       collection-visit: 1.0.0
@@ -1766,6 +1808,12 @@ packages:
       node: '>=6'
     resolution:
       integrity: sha512-P8BjAsXvZS+VIDUI11hHCQEv74YT67YUi5JJFNWIqL235sBmjX4+qx9Muvls5ivyNENctx46xQLQ3aTuE7ssaQ==
+  /camelcase-css/2.0.1:
+    dev: true
+    engines:
+      node: '>= 6'
+    resolution:
+      integrity: sha512-QOSvevhslijgYwRx6Rv7zKdMF8lbRmx+uQGx2+vDc+KI/eBnsy9kit5aj23AgGu3pa4t9AgwbnXWqS+iOY+2aA==
   /camelcase-keys/6.2.2:
     dependencies:
       camelcase: 5.3.1
@@ -1991,6 +2039,20 @@ packages:
     dev: true
     resolution:
       integrity: sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==
+  /color-string/1.5.4:
+    dependencies:
+      color-name: 1.1.4
+      simple-swizzle: 0.2.2
+    dev: true
+    resolution:
+      integrity: sha512-57yF5yt8Xa3czSEW1jfQDE79Idk0+AkN/4KWad6tbdxUmAs3MvjxlWSWD4deYytcRfoZ9nhKyFl1kj5tBvidbw==
+  /color/3.1.3:
+    dependencies:
+      color-convert: 1.9.3
+      color-string: 1.5.4
+    dev: true
+    resolution:
+      integrity: sha512-xgXAcTHa2HeFCGLE9Xs/R82hujGtu9Jd9x4NW3T34+OMs7VoPsjwzRczKHvTAHeJwWFwX5j15+MgAppE8ztObQ==
   /colorette/1.2.1:
     dev: true
     resolution:
@@ -2003,6 +2065,12 @@ packages:
       node: '>= 0.8'
     resolution:
       integrity: sha512-FQN4MRfuJeHf7cBbBMJFXhKSDq+2kAArBlmRBvcvFE5BB1HZKXtSFASDhdlz9zOYwxh8lDdnvmMOe/+5cdoEdg==
+  /commander/6.2.1:
+    dev: true
+    engines:
+      node: '>= 6'
+    resolution:
+      integrity: sha512-U7VdrJFnJgo4xjrHpTzu0yrHPGImdsmD95ZlgYSEajAn2JKzDhDTPG9kBTefmObL2w/ngeZnilk+OV9CG3d7UA==
   /common-path-prefix/3.0.0:
     dev: true
     resolution:
@@ -2117,6 +2185,17 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-v1plID3y9r/lPhviJ1wrXpLeyUIGAZ2SHNYTEapm7/8A9nLPoyvVp3RK/EPFqn5kEznyWgYZNsRtYYIWbuG8KA==
+  /css-unit-converter/1.1.2:
+    dev: true
+    resolution:
+      integrity: sha512-IiJwMC8rdZE0+xiEZHeru6YoONC4rfPMqGm2W85jMIbkFvv5nFTwJVFHam2eFrN6txmoUYFAFXiv8ICVeTO0MA==
+  /cssesc/3.0.0:
+    dev: true
+    engines:
+      node: '>=4'
+    hasBin: true
+    resolution:
+      integrity: sha512-/Tb/JcjK111nNScGob5MNtsntNM1aCNUDipB/TkwZFhyDrrE47SOx/18wF2bbjgc3ZzCSKW1T5nt5EbFoAz/Vg==
   /cssom/0.3.8:
     dev: true
     resolution:
@@ -2293,6 +2372,10 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha512-jwK2UV4cnPpbcG7+VRARKTZPUWowwXA8bzH5NP6ud0oeAxyYPuGZUAC7hMugpCdz4BeSZl2Dl9k66CHJ/46ZYQ==
+  /defined/1.0.0:
+    dev: true
+    resolution:
+      integrity: sha1-yY2bzvdWdBiOEQlpFRGZ45sfppM=
   /del-cli/3.0.1:
     dependencies:
       del: 5.1.0
@@ -2345,6 +2428,21 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-TLz+x/vEXm/Y7P7wn1EJFNLxYpUD4TgMosxY6fAVJUnJMbupHBOncxyWUG9OpTaH9EBD7uFI5LfEgmMOc54DsA==
+  /detective/5.2.0:
+    dependencies:
+      acorn-node: 1.8.2
+      defined: 1.0.0
+      minimist: 1.2.5
+    dev: true
+    engines:
+      node: '>=0.8.0'
+    hasBin: true
+    resolution:
+      integrity: sha512-6SsIx+nUUbuK0EthKjv0zrdnajCCXVYGmbYYiYjFVpzcjwEs/JMDZ8tPRG29J/HhN56t3GJp2cGSWDRjjot8Pg==
+  /didyoumean/1.2.1:
+    dev: true
+    resolution:
+      integrity: sha1-6S7f2tplN9SE1zwBcv0eugxJdv8=
   /diff-sequences/26.6.2:
     dev: true
     engines:
@@ -3021,6 +3119,17 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-QpD60n8T6Jvn8zeZxrxaCr//DRk=
+  /fs-extra/9.1.0:
+    dependencies:
+      at-least-node: 1.0.0
+      graceful-fs: 4.2.5
+      jsonfile: 6.1.0
+      universalify: 2.0.0
+    dev: true
+    engines:
+      node: '>=10'
+    resolution:
+      integrity: sha512-hcg3ZmepS30/7BSFqRvoo3DOMQu7IjqxO5nCDt+zM9XWjb33Wg7ziNT+Qvqbuc3+gWpzO02JubVyk2G4Zvo1OQ==
   /fs.realpath/1.0.0:
     dev: true
     resolution:
@@ -3311,6 +3420,12 @@ packages:
     dev: true
     resolution:
       integrity: sha512-H2iMtd0I4Mt5eYiapRdIDjp+XzelXQ0tFE4JS7YFwFevXXMmOp9myNrUvCg0D6ws8iqkRPBfKHgbwig1SmlLfg==
+  /html-tags/3.1.0:
+    dev: true
+    engines:
+      node: '>=8'
+    resolution:
+      integrity: sha512-1qYz89hW3lFDEazhjW0yVAV87lw8lVkrJocr72XmBkMKsoSVJCQx3W8BXsC7hO2qAt8BoVjYjtAcZ9perqGnNg==
   /http-cache-semantics/4.1.0:
     dev: true
     resolution:
@@ -3413,6 +3528,10 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-EdDDZu4A2OyIK7Lr/2zG+w5jmbuk1DVBnEwREQvBzspBJkCEbRa8GxU1lghYcaGJCnRWibjDXlq779X1/y5xwg==
+  /indexes-of/1.0.1:
+    dev: true
+    resolution:
+      integrity: sha1-8w9xbI4r00bHtn0985FVZqfAVgc=
   /inflight/1.0.6:
     dependencies:
       once: 1.4.0
@@ -3481,6 +3600,10 @@ packages:
     dev: true
     resolution:
       integrity: sha1-d8mYQFJ6qOyxqLppe4BkWnqSap0=
+  /is-arrayish/0.3.2:
+    dev: true
+    resolution:
+      integrity: sha512-eVRqCvVlZbuw3GrM63ovNSNAeA1K16kaR/LRY/92w0zxQ5/1YzwblUX652i4Xs9RwAGjW9d9y6X88t8OaAJfWQ==
   /is-binary-path/2.1.0:
     dependencies:
       binary-extensions: 2.2.0
@@ -4353,6 +4476,14 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-f+8cldu7X/y7RAJurMEJmdoKXGB/X550w2Nr3tTbezL6RwEE/iMcm+tZnXeoZtKuOq6ft8+CqzEkrIgx1fPoQA==
+  /jsonfile/6.1.0:
+    dependencies:
+      universalify: 2.0.0
+    dev: true
+    optionalDependencies:
+      graceful-fs: 4.2.5
+    resolution:
+      integrity: sha512-5dgndWOriYSm5cnYaJNhalLNDKOqFwyDB/rr1E9ZsGciGvKPs8R2xYGCacuf3z6K1YKDz182fd+fY3cn3pMqXQ==
   /jsprim/1.4.1:
     dependencies:
       assert-plus: 1.0.0
@@ -4501,6 +4632,10 @@ packages:
     dev: true
     resolution:
       integrity: sha1-7dFMgk4sycHgsKG0K7UhBRakJDg=
+  /lodash.toarray/4.4.0:
+    dev: true
+    resolution:
+      integrity: sha1-JMS/zWsvuji/0FlNsRedjptlZWE=
   /lodash/4.17.20:
     dev: true
     resolution:
@@ -4711,6 +4846,10 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha512-I9jwMn07Sy/IwOj3zVkVik2JTvgpaykDZEigL6Rx6N9LbMywwUSMtxET+7lVoDLLd3O3IXwJwvuuns8UB/HeAg==
+  /mini-svg-data-uri/1.2.3:
+    dev: true
+    resolution:
+      integrity: sha512-zd6KCAyXgmq6FV1mR10oKXYtvmA9vRoB6xPSTUJTbFApCtkefDnYueVR1gkof3KcdLZo1Y8mjF2DFmQMIxsHNQ==
   /minimatch/3.0.4:
     dependencies:
       brace-expansion: 1.1.11
@@ -4746,6 +4885,12 @@ packages:
     dev: false
     resolution:
       integrity: sha512-I674bCCj9p87Re+gv15ynDrP14XjcmLR7tBO22l3UoxQLniyIXdD9vid2sSxYkyOr0fZwJTA+dXRvrwANgdnyg==
+  /modern-normalize/1.0.0:
+    dev: true
+    engines:
+      node: '>=6'
+    resolution:
+      integrity: sha512-1lM+BMLGuDfsdwf3rsgBSrxJwAZHFIrQ8YR61xIqdHo0uNKI9M52wNpHSrliZATJp51On6JD0AfRxd4YGSU0lw==
   /ms/2.0.0:
     dev: true
     resolution:
@@ -4791,6 +4936,12 @@ packages:
     dev: true
     resolution:
       integrity: sha512-1nh45deeb5olNY7eX82BkPO7SSxR5SSYJiPTrTdFUVYwAl8CKMA5N9PjTYkHiRjisVcxcQ1HXdLhx2qxxJzLNQ==
+  /node-emoji/1.10.0:
+    dependencies:
+      lodash.toarray: 4.4.0
+    dev: true
+    resolution:
+      integrity: sha512-Yt3384If5H6BYGVHiHwTL+99OzJKHhgp82S8/dktEK73T26BazdgZ4JZh92xSVtGNJvz9UbXdNAc5hcrXV42vw==
   /node-int64/0.4.0:
     dev: true
     resolution:
@@ -4886,6 +5037,12 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-fn2Fi3gb18mRpBupde04EnVOmYw=
+  /object-hash/2.1.1:
+    dev: true
+    engines:
+      node: '>= 6'
+    resolution:
+      integrity: sha512-VOJmgmS+7wvXf8CjbQmimtCnEx3IAoLxI3fp2fbWehxrWBcAQFbk+vcwb6vzR0VZv/eNCJ/27j151ZTwqW/JeQ==
   /object-inspect/1.9.0:
     resolution:
       integrity: sha512-i3Bp9iTqwhaLZBxGkRfo5ZbE07BQRT7MGu8+nNgwW9ItGp1TzCTw2DLEoWwjClxBjOFI/hWljTAmYGCEwmtnOw==
@@ -5259,6 +5416,63 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-AerA/jta9xoqbAL+q7jB/vfgDqs=
+  /postcss-functions/3.0.0:
+    dependencies:
+      glob: 7.1.6
+      object-assign: 4.1.1
+      postcss: 6.0.23
+      postcss-value-parser: 3.3.1
+    dev: true
+    resolution:
+      integrity: sha1-DpTQFERwCkgd4g3k1V+yZAVkJQ4=
+  /postcss-js/3.0.3:
+    dependencies:
+      camelcase-css: 2.0.1
+      postcss: 8.2.5
+    dev: true
+    engines:
+      node: '>=10.0'
+    resolution:
+      integrity: sha512-gWnoWQXKFw65Hk/mi2+WTQTHdPD5UJdDXZmX073EY/B3BWnYjO4F4t0VneTCnCGQ5E5GsCdMkzPaTXwl3r5dJw==
+  /postcss-nested/5.0.3:
+    dependencies:
+      postcss-selector-parser: 6.0.4
+    dev: true
+    engines:
+      node: '>=10.0'
+    peerDependencies:
+      postcss: ^8.1.13
+    resolution:
+      integrity: sha512-R2LHPw+u5hFfDgJG748KpGbJyTv7Yr33/2tIMWxquYuHTd9EXu27PYnKi7BxMXLtzKC0a0WVsqHtd7qIluQu/g==
+  /postcss-selector-parser/6.0.4:
+    dependencies:
+      cssesc: 3.0.0
+      indexes-of: 1.0.1
+      uniq: 1.0.1
+      util-deprecate: 1.0.2
+    dev: true
+    engines:
+      node: '>=4'
+    resolution:
+      integrity: sha512-gjMeXBempyInaBqpp8gODmwZ52WaYsVOsfr4L4lDQ7n3ncD6mEyySiDtgzCT+NYC0mmeOLvtsF8iaEf0YT6dBw==
+  /postcss-value-parser/3.3.1:
+    dev: true
+    resolution:
+      integrity: sha512-pISE66AbVkp4fDQ7VHBwRNXzAAKJjw4Vw7nWI/+Q3vuly7SNfgYXvm6i5IgFylHGK5sP/xHAbB7N49OS4gWNyQ==
+  /postcss-value-parser/4.1.0:
+    dev: true
+    resolution:
+      integrity: sha512-97DXOFbQJhk71ne5/Mt6cOu6yxsSfM0QGQyl0L25Gca4yGWEGJaig7l7gbCX623VqTBNGLRLaVUCnNkcedlRSQ==
+  /postcss/6.0.23:
+    dependencies:
+      chalk: 2.4.2
+      source-map: 0.6.1
+      supports-color: 5.5.0
+    dev: true
+    engines:
+      node: '>=4.0.0'
+    resolution:
+      integrity: sha512-soOk1h6J3VMTZtVeVpv15/Hpdl2cBLX3CAw4TAbkpTJiNPk9YP/zWcD1ND+xEtvyuuvKzbxliTOIyvkSeSJ6ag==
   /postcss/8.2.5:
     dependencies:
       colorette: 1.2.1
@@ -5308,6 +5522,12 @@ packages:
       node: '>= 10'
     resolution:
       integrity: sha512-7AeGuCYNGmycyQbCqd/3PWH4eOoX/OiCa0uphp57NVTeAGdJGaAliecxwBDHYQCIvrW7aDBZCYeNTP/WX69mkg==
+  /pretty-hrtime/1.0.3:
+    dev: true
+    engines:
+      node: '>= 0.8'
+    resolution:
+      integrity: sha1-t+PqQkNaTJsnWdmeDyAesZWALuE=
   /pretty-ms/7.0.1:
     dependencies:
       parse-ms: 2.1.0
@@ -5381,6 +5601,16 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-l1jNAspIBSFqbT+y+5FosojNpVpF94nlI+wDUpqP9enwOTfHx9f0gh5nB96vl+6yTpsJsypeNrwfzPrKuHB41A==
+  /purgecss/3.1.3:
+    dependencies:
+      commander: 6.2.1
+      glob: 7.1.6
+      postcss: 8.2.5
+      postcss-selector-parser: 6.0.4
+    dev: true
+    hasBin: true
+    resolution:
+      integrity: sha512-hRSLN9mguJ2lzlIQtW4qmPS2kh6oMnA9RxdIYK8sz18QYqd6ePp4GNDl18oWHA1f2v2NEQIh51CO8s/E3YGckQ==
   /qs/6.5.2:
     dev: true
     engines:
@@ -5480,6 +5710,13 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-6tDA8g98We0zd0GvVeMT9arEOnTw9qM03L9cJXaCjrip1OO764RDBLBfrB4cwzNGDj5OA5ioymC9GkizgWJDUg==
+  /reduce-css-calc/2.1.8:
+    dependencies:
+      css-unit-converter: 1.1.2
+      postcss-value-parser: 3.3.1
+    dev: true
+    resolution:
+      integrity: sha512-8liAVezDmUcH+tdzoEGrhfbGcP7nOV4NkGE3a74+qqvE7nt9i4sKLGBuZNOnpI4WiGksiNPklZxva80061QiPg==
   /regex-not/1.0.2:
     dependencies:
       extend-shallow: 3.0.2
@@ -5553,7 +5790,7 @@ packages:
       request-promise-core: 1.1.4_request@2.88.2
       stealthy-require: 1.1.1
       tough-cookie: 2.5.0
-    deprecated: request-promise-native has been deprecated because it extends the now deprecated request package, see https://github.com/request/request/issues/3142
+    deprecated: 'request-promise-native has been deprecated because it extends the now deprecated request package, see https://github.com/request/request/issues/3142'
     dev: true
     engines:
       node: '>=0.12.0'
@@ -5583,7 +5820,7 @@ packages:
       tough-cookie: 2.5.0
       tunnel-agent: 0.6.0
       uuid: 3.4.0
-    deprecated: request has been deprecated, see https://github.com/request/request/issues/3142
+    deprecated: 'request has been deprecated, see https://github.com/request/request/issues/3142'
     dev: true
     engines:
       node: '>= 6'
@@ -5626,7 +5863,7 @@ packages:
     resolution:
       integrity: sha512-qYg9KP24dD5qka9J47d0aVky0N+b4fTU89LN9iDnjB5waksiC49rvMB0PrUJQGoTmH50XPiqOvAjDfaijGxYZw==
   /resolve-url/0.2.1:
-    deprecated: https://github.com/lydell/resolve-url#deprecated
+    deprecated: 'https://github.com/lydell/resolve-url#deprecated'
     dev: true
     resolution:
       integrity: sha1-LGN/53yJOv0qZj/iGqkIAGjiBSo=
@@ -5841,6 +6078,12 @@ packages:
     dev: true
     resolution:
       integrity: sha512-VUJ49FC8U1OxwZLxIbTTrDvLnf/6TDgxZcK8wxR8zs13xpx7xbG60ndBlhNrFi2EMuFRoeDoJO7wthSLq42EjA==
+  /simple-swizzle/0.2.2:
+    dependencies:
+      is-arrayish: 0.3.2
+    dev: true
+    resolution:
+      integrity: sha1-pNprY1/8zMoz9w0Xy5JZLeleVXo=
   /sisteransi/1.0.5:
     dev: true
     resolution:
@@ -6198,6 +6441,37 @@ packages:
       node: '>=10.0.0'
     resolution:
       integrity: sha512-rxZevLGTUzWna/qBLObOe16kB2RTnnbhciwgPbMMlazz1yZGVEgnZK762xyVdVznhqxrfCeBMmMkgOOaPwjH7g==
+  /tailwindcss/2.0.3:
+    dependencies:
+      '@fullhuman/postcss-purgecss': 3.1.3
+      bytes: 3.1.0
+      chalk: 4.1.0
+      color: 3.1.3
+      detective: 5.2.0
+      didyoumean: 1.2.1
+      fs-extra: 9.1.0
+      html-tags: 3.1.0
+      lodash: 4.17.20
+      modern-normalize: 1.0.0
+      node-emoji: 1.10.0
+      object-hash: 2.1.1
+      postcss-functions: 3.0.0
+      postcss-js: 3.0.3
+      postcss-nested: 5.0.3
+      postcss-selector-parser: 6.0.4
+      postcss-value-parser: 4.1.0
+      pretty-hrtime: 1.0.3
+      reduce-css-calc: 2.1.8
+      resolve: 1.19.0
+    dev: true
+    engines:
+      node: '>=12.13.0'
+    hasBin: true
+    peerDependencies:
+      autoprefixer: ^10.0.2
+      postcss: ^8.0.9
+    resolution:
+      integrity: sha512-s8NEqdLBiVbbdL0a5XwTb8jKmIonOuI4RMENEcKLR61jw6SdKvBss7NWZzwCaD+ZIjlgmesv8tmrjXEp7C0eAQ==
   /temp-dir/2.0.0:
     dev: true
     engines:
@@ -6442,6 +6716,10 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha512-tJfXmxMeWYnczCVs7XAEvIV7ieppALdyepWMkHkwciRpZraG/xwT+s2JN8+pr1+8jCRf80FFzvr+MpQeeoF4Xg==
+  /uniq/1.0.1:
+    dev: true
+    resolution:
+      integrity: sha1-sxxa6CVIRKOoKBVBzisEuGWnNP8=
   /unique-string/2.0.0:
     dependencies:
       crypto-random-string: 2.0.0
@@ -6450,6 +6728,12 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-uNaeirEPvpZWSgzwsPGtU2zVSTrn/8L5q/IexZmH0eH6SA73CmAA5U4GwORTxQAZs95TAXLNqeLoPPNO5gZfWg==
+  /universalify/2.0.0:
+    dev: true
+    engines:
+      node: '>= 10.0.0'
+    resolution:
+      integrity: sha512-hAZsKq7Yy11Zu1DE0OzWjw7nnLZmJZYTDZZyEFHZdUhV8FkH5MCfoU1XMaxXovpyW5nq5scPqq0ZDP9Zyl04oQ==
   /unset-value/1.0.0:
     dependencies:
       has-value: 0.3.1
@@ -6487,7 +6771,7 @@ packages:
     resolution:
       integrity: sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==
   /urix/0.1.0:
-    deprecated: Please see https://github.com/lydell/urix#deprecated
+    deprecated: 'Please see https://github.com/lydell/urix#deprecated'
     dev: true
     resolution:
       integrity: sha1-2pN/emLiH+wf0Y1Js1wpNQZ6bHI=
@@ -6723,6 +7007,12 @@ packages:
     dev: true
     resolution:
       integrity: sha512-JZnDKK8B0RCDw84FNdDAIpZK+JuJw+s7Lz8nksI7SIuU3UXJJslUthsi+uWBUYOwPFwW7W7PRLRfUKpxjtjFCw==
+  /xtend/4.0.2:
+    dev: true
+    engines:
+      node: '>=0.4'
+    resolution:
+      integrity: sha512-LKYU1iAXJXUgAXn9URjiu+MWhyUXHsvfp7mcuYm9dSUKK0/CjtrUwFAxD82/mCWbtLsGjFIad0wIsod4zrTAEQ==
   /y18n/4.0.1:
     dev: true
     resolution:

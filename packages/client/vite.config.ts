@@ -1,3 +1,4 @@
+/* eslint-disable */
 // import preactRefresh from '@prefresh/vite';
 import { AliasOptions, defineConfig, Plugin } from 'vite';
 
