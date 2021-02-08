@@ -35,7 +35,7 @@ export function Home() {
   const routes = api?.routes ?? [];
 
   return (
-    <section class="bg-center bg-no-repeat py-4 bg-gray-800">
+    <section class="bg-center bg-no-repeat py-4 bg-gray-800 md:w-80">
       <button type="button" class="w-12 h-12 p-3 text-white">
         <MenuIcon />
       </button>
@@ -44,7 +44,7 @@ export function Home() {
       </h2>
       <SearchBar />
       <ul
-        class="mt-12 grid grid-flow-col gap-4 overflow-x-auto px-4 scroll-snap-x scroll-pl-8 overscroll-contain"
+        class="mt-12 grid grid-flow-col md:grid-flow-row md:grid-cols-2 gap-4 overflow-auto px-4 scroll-snap scroll-pl-8 overscroll-contain"
         style="scroll-padding-inline-start: 2rem; scroll-snap-type: x mandatory"
       >
         {routes.map((route) => (

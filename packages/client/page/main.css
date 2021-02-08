@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 @layer utilities {
+  .scroll-snap {
+    scroll-snap-type: both mandatory;
+  }
   .scroll-snap-x {
     scroll-snap-type: x mandatory;
   }
