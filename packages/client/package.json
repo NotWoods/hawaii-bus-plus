@@ -34,6 +34,7 @@
     "@prefresh/vite": "^2.0.4",
     "@tailwindcss/aspect-ratio": "^0.2.0",
     "@tailwindcss/forms": "^0.2.1",
+    "@tailwindcss/typography": "^0.4.0",
     "@types/googlemaps": "^3.43.2",
     "@types/jest": "^26.0.20",
     "@types/react": "^17.0.1",

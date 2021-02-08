@@ -19,7 +19,7 @@ export function RouteDetailsCard({ route, agency, descParts }: Props) {
   }
 
   return (
-    <div className="card">
+    <div className="card prose">
       <p>{`Bus route operated by ${agency.agency_name}`}</p>
       <div className="btn-group flex-wrap" role="group">
         <a className="btn" href={agency.agency_url}>

@@ -18,7 +18,7 @@ export function RouteListItem(props: Props) {
   return (
     <Link
       href={`/routes/${route.route_id}/`}
-      className={classNames('route-link sidebar-link', props.className)}
+      className={classNames('route-link sidebar-link py-2 grid gap-x-4 items-center', props.className)}
       onClick={props.onClick}
     >
       <RouteIcon style={colorVariables(route)}>

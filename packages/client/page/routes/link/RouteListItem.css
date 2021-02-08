@@ -4,11 +4,5 @@
     'icon title' auto
     'icon subtitle' min-content
     / var(--sidebar-icon-width-height) auto;
-  column-gap: var(--sidebar-icon-margin-right);
   min-height: 4rem;
-  align-items: center;
-}
-
-.font-size-36 {
-  font-size: 3.6rem !important;
 }

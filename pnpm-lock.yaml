@@ -79,6 +79,7 @@ importers:
       '@prefresh/vite': 2.0.4_e400f90aee5454bc5f1507eabe7541b5
       '@tailwindcss/aspect-ratio': 0.2.0
       '@tailwindcss/forms': 0.2.1
+      '@tailwindcss/typography': 0.4.0_tailwindcss@2.0.3
       '@types/googlemaps': 3.43.2
       '@types/jest': 26.0.20
       '@types/react': 17.0.1
@@ -103,6 +104,7 @@ importers:
       '@prefresh/vite': ^2.0.4
       '@tailwindcss/aspect-ratio': ^0.2.0
       '@tailwindcss/forms': ^0.2.1
+      '@tailwindcss/typography': ^0.4.0
       '@types/googlemaps': ^3.43.2
       '@types/jest': ^26.0.20
       '@types/react': ^17.0.1
@@ -938,6 +940,18 @@ packages:
     dev: true
     resolution:
       integrity: sha512-czfvEdY+J2Ogfd6RUSr/ZSUmDxTujr34M++YLnp2cCPC3oJ4kFvFMaRXA6cEXKw7F1hJuapdjXRjsXIEXGgORg==
+  /@tailwindcss/typography/0.4.0_tailwindcss@2.0.3:
+    dependencies:
+      lodash.castarray: 4.4.0
+      lodash.isplainobject: 4.0.6
+      lodash.merge: 4.6.2
+      lodash.uniq: 4.5.0
+      tailwindcss: 2.0.3
+    dev: true
+    peerDependencies:
+      tailwindcss: 2.0.0-alpha.24 || ^2.0.0
+    resolution:
+      integrity: sha512-3BfOYT5MYNEq81Ism3L2qu/HRP2Q5vWqZtZRQqQrthHuaTK9qpuPfbMT5WATjAM5J1OePKBaI5pLoX4S1JGNMQ==
   /@types/aws-lambda/8.10.71:
     dev: true
     resolution:
@@ -4636,10 +4650,22 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-t7hw9pI+WvuwNJXwk5zVHpyhIqzg2qTlklJOf0mVxGSbe3Fp2VieZcduNYjaLDoy6p9uGpQEGWG87WpMKlNq8g==
+  /lodash.castarray/4.4.0:
+    dev: true
+    resolution:
+      integrity: sha1-wCUTUV4wna3dTCTGDP3c9ZdtkRU=
+  /lodash.isplainobject/4.0.6:
+    dev: true
+    resolution:
+      integrity: sha1-fFJqUtibRcRcxpC4gWO+BJf1UMs=
   /lodash.memoize/4.1.2:
     dev: true
     resolution:
       integrity: sha1-vMbEmkKihA7Zl/Mj6tpezRguC/4=
+  /lodash.merge/4.6.2:
+    dev: true
+    resolution:
+      integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==
   /lodash.sortby/4.7.0:
     dev: true
     resolution:
@@ -4648,6 +4674,10 @@ packages:
     dev: true
     resolution:
       integrity: sha1-JMS/zWsvuji/0FlNsRedjptlZWE=
+  /lodash.uniq/4.5.0:
+    dev: true
+    resolution:
+      integrity: sha1-0CJTc662Uq3BvILklFM5qEJ1R3M=
   /lodash/4.17.20:
     resolution:
       integrity: sha512-PlhdFcillOINfeV7Ni6oF1TAEayyZBoZ8bcshTHqOYJYlrqzRK5hagpagky5o4HfCzzd1TRkXPMFq6cKk9rGmA==
