@@ -9,7 +9,7 @@ export function StopInfo({ stop }: { stop?: StopDetails }) {
   return (
     <>
       <div className="content">
-        <h2 className="card-title m-0">{stop?.stop_name ?? 'Loading'}</h2>
+        <h2 className="card-title font-display m-0">{stop?.stop_name ?? 'Loading'}</h2>
         <p className="text-muted m-0">{stop?.stop_desc}</p>
       </div>
       <div className="content">
@@ -45,7 +45,7 @@ export function PlaceInfo({ place }: { place?: PlaceResult }) {
   return (
     <>
       <div className="content">
-        <h2 className="card-title m-0">{place?.name ?? 'Loading'}</h2>
+        <h2 className="card-title font-display m-0">{place?.name ?? 'Loading'}</h2>
         <p className="text-muted m-0">{place?.formatted_address}</p>
       </div>
     </>
