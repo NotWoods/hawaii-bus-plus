@@ -1,14 +1,11 @@
 .route__icon {
   grid-area: icon;
 
-  font-family: 'Red Rose', serif;
   font-weight: 500;
   font-size: 1.15em;
   background: var(--route-color);
   color: var(--route-text-color);
-  text-align: center;
 
-  position: relative;
   line-height: 1.4em;
   height: auto;
 

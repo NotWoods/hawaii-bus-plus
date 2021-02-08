@@ -48,7 +48,7 @@ export function TripDetails(props: Props) {
         <form className="d-flex">
           {props.switchDirection ? (
             <a className="btn btn-sm mr-auto" onClick={props.switchDirection}>
-              <Icon src={swapIcon} alt="" /> Switch direction
+              <Icon small src={swapIcon} alt="" /> Switch direction
             </a>
           ) : null}
           <TripSelector

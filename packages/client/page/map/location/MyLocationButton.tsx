@@ -39,7 +39,7 @@ export function MyLocationButton() {
 
   return (
     <button className="btn btn-sm" type="button" onClick={handleClick}>
-      <Icon src={locationIcon} alt="" /> My location
+      <Icon small src={locationIcon} alt="" /> My location
       {latLng ? <UserMarker position={latLng} /> : null}
     </button>
   );

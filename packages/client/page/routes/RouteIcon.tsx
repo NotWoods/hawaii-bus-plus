@@ -13,7 +13,7 @@ interface Props {
 
 export function RouteIcon(props: Props) {
   return (
-    <span {...props} class={classNames('route__icon', props.class)}>
+    <span {...props} class={classNames('route__icon font-display text-center relative', props.class)}>
       {props.children}
     </span>
   );

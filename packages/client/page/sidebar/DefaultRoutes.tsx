@@ -24,7 +24,7 @@ export function DefaultRoutes(props: Props) {
           type="button"
           onClick={props.onDirectionsClick}
         >
-          <Icon src={directionsIcon} alt="" /> Directions
+          <Icon small src={directionsIcon} alt="" /> Directions
         </button>
       </div>
 

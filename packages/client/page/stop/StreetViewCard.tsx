@@ -1,9 +1,9 @@
-import { h, ComponentChildren } from 'preact';
-import { useState } from 'preact/hooks';
 import {
   StreetViewPano,
-  StreetViewPanoProps,
+  StreetViewPanoProps
 } from '@hawaii-bus-plus/react-google-maps';
+import { ComponentChildren, h } from 'preact';
+import { useState } from 'preact/hooks';
 
 interface Props extends Omit<StreetViewPanoProps, 'googleMapsApiKey'> {
   children?: ComponentChildren;
@@ -16,7 +16,7 @@ export function StreetViewCard(props: Props) {
 
   return (
     <div className="w-400 absolute top-0 right-0">
-      <aside className="card p-0 shadow" hidden={!props.visible}>
+      <aside className="m-8 p-0 shadow-lg bg-gray-50 dark:bg-gray-800 text-black dark:text-white" hidden={!props.visible}>
         <div
           className="aspect-w-16 aspect-h-9"
           hidden={status === 'ZERO_RESULTS'}

@@ -1,7 +1,5 @@
 .icon {
   vertical-align: sub;
-  width: 2rem;
-  height: 2rem;
 }
 .dark-mode .icon,
 .text-white .icon {
@@ -13,10 +11,4 @@
   /* Expect fill to be black */
   opacity: 0.7;
   filter: none;
-}
-
-.btn-sm .icon {
-  vertical-align: baseline;
-  width: 1.4rem;
-  height: 1.4rem;
 }
