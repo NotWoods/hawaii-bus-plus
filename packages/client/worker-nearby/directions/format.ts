@@ -20,7 +20,7 @@ interface JourneyStopTime {
   readonly arrivalTime: PlainDaysTime;
   readonly departureTime: PlainDaysTime;
   readonly timepoint: boolean;
-  readonly shapeDistTravelled?: number;
+  readonly shapeDistTraveled?: number;
 }
 
 export interface JourneyTripSegment {
@@ -136,7 +136,7 @@ export async function journeyToDirections(
           arrivalTime: PlainDaysTime.from(st.arrival_time),
           departureTime: PlainDaysTime.from(st.departure_time),
           timepoint: st.timepoint,
-          shapeDistTravelled: st.shape_dist_travelled,
+          shapeDistTraveled: st.shape_dist_traveled,
         };
       });
 
@@ -177,7 +177,7 @@ export async function journeyToDirections(
           arrivalTime: zonedTime(st.arrivalTime, agency.agency_timezone),
           departureTime: zonedTime(st.departureTime, agency.agency_timezone),
           timepoint: st.timepoint,
-          shapeDistTravelled: st.shapeDistTravelled,
+          shapeDistTraveled: st.shapeDistTraveled,
         })),
       });
     } else {

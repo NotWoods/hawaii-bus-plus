@@ -25,8 +25,8 @@ export function RouteGlyphs({ darkMode }: Props) {
         .filter(isJourneyTripSegment)
         .map((segment) => {
           const shapeId = segment.trip.shape_id;
-          const start = segment.stopTimes[0].shapeDistTravelled;
-          const end = last(segment.stopTimes).shapeDistTravelled;
+          const start = segment.stopTimes[0].shapeDistTraveled;
+          const end = last(segment.stopTimes).shapeDistTraveled;
           const edges =
             start != undefined && end != undefined
               ? ([start, end] as const)

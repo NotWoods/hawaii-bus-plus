@@ -7,5 +7,5 @@ export interface StopTimeData {
   readonly arrivalTime: PlainTimeData;
   readonly departureTime: PlainTimeData;
   readonly timepoint: boolean;
-  readonly shapeDistTravelled?: number;
+  readonly shapeDistTraveled?: number;
 }

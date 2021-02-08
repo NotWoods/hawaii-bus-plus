@@ -200,7 +200,7 @@ export async function parseStopTimes(
       pickup_type: csvStopTime.pickup_type,
       continuous_pickup: csvStopTime.continuous_pickup,
       timepoint: csvStopTime.timepoint,
-      shape_dist_travelled: csvStopTime.shape_dist_travelled,
+      shape_dist_traveled: csvStopTime.shape_dist_traveled ?? undefined,
     };
 
     const stop = variable.stops[stopTime.stop_id];

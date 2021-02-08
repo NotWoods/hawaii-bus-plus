@@ -114,7 +114,7 @@ export interface CsvStopTime {
   continuous_pickup: 0 | 1 | 2 | 3;
   continuous_drop_off: 0 | 1 | 2 | 3;
   timepoint: boolean;
-  shape_dist_travelled?: number;
+  shape_dist_traveled?: number;
 }
 
 export type StopTime = Readonly<

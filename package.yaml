@@ -9,7 +9,7 @@ scripts:
     @hawaii-bus-plus/api-gen
   clean: >-
     del-cli packages/**/*.js packages/**/*.d.ts packages/**/*.map
-    packages/**/*.tsbuildinfo packages/client/public/api/**/*.json
+    packages/**/*.tsbuildinfo
   dev: pnpm run dev --filter @hawaii-bus-plus/client
   format: prettier *.yaml *.cjs *.json .github/**/*.yaml --write
   tsc: tsc --build .

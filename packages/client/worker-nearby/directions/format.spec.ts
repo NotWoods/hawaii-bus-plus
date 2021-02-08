@@ -98,6 +98,7 @@ test.concurrent('journeyToDirections no walking', async () => {
       stop: lakeland,
       routes: expect.any(Array),
       timepoint: true,
+      shapeDistTraveled: expect.any(Number),
     },
     expect.objectContaining({
       stop: expect.objectContaining({ stop_id: 'hh-kamamalu' }),
@@ -117,6 +118,7 @@ test.concurrent('journeyToDirections no walking', async () => {
       stop: parkerRanch,
       routes: expect.any(Array),
       timepoint: true,
+      shapeDistTraveled: expect.any(Number),
     },
   ]);
   expect(kohalaKona.stopTimes).toEqual([
@@ -126,6 +128,7 @@ test.concurrent('journeyToDirections no walking', async () => {
       stop: parkerRanch,
       routes: expect.any(Array),
       timepoint: true,
+      shapeDistTraveled: expect.any(Number)
     },
     expect.objectContaining({
       stop: expect.objectContaining({ stop_id: 'wp' }),
@@ -136,6 +139,7 @@ test.concurrent('journeyToDirections no walking', async () => {
       stop: hwyIntersection,
       routes: expect.any(Array),
       timepoint: true,
+      shapeDistTraveled: expect.any(Number)
     },
   ]);
 });
