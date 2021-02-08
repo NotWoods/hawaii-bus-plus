@@ -1,5 +1,5 @@
 import { ComponentChildren, h } from 'preact';
-import { useState } from 'preact/hooks';
+import { useState, useEffect } from 'preact/hooks';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { classNames } from '../hooks/classnames';
 import { StickyAlertsList, StickyAlertsProvider } from './alert/StickyAlerts';
@@ -28,6 +28,10 @@ export function PageWrapper(props: Props) {
 
   useHotkeys('shift+s', toggleSidebar, [showSidebar]);
   useHotkeys('shift+d', toggleDarkMode, [darkMode]);
+
+  useEffect(() => {
+    document.documentElement.classList.toggle('dark', darkMode);
+  }, [darkMode]);
 
   return (
     <StickyAlertsProvider>

@@ -1,18 +1,5 @@
-/* eslint-disable */
-// import preactRefresh from '@prefresh/vite';
-import { AliasOptions, defineConfig, Plugin } from 'vite';
-
-function emptyPackage(name: string): Plugin {
-  return {
-    name: 'empty',
-    load(id) {
-      if (id === name) {
-        return 'export {}';
-      }
-      return undefined;
-    },
-  };
-}
+import { emptyPackage, prefreshPlus } from '@hawaii-bus-plus/vite-plugins';
+import { AliasOptions, defineConfig } from 'vite';
 
 const productionMode = false && process.env.NETLIFY_CONTEXT === 'production';
 const alias: AliasOptions = {
@@ -25,7 +12,7 @@ if (productionMode) {
 }
 
 export default defineConfig({
-  plugins: [emptyPackage('@empty')],
+  plugins: [emptyPackage('@empty'), prefreshPlus()],
   alias,
   optimizeDeps: {
     include: ['mnemonist/set', 'preact', 'preact/debug', 'preact/hooks'],

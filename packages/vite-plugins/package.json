@@ -1,0 +1,41 @@
+{
+  "name": "@hawaii-bus-plus/vite-plugins",
+  "version": "1.0.0",
+  "private": true,
+  "main": "./src/index.js",
+  "module": "./src/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc --build src",
+    "format": "prettier **/*.ts --write --ignore-path ../../.prettierignore",
+    "postformat": "eslint **/*.ts --fix"
+  },
+  "dependencies": {
+    "@babel/core": "^7.9.6",
+    "@prefresh/babel-plugin": "0.4.0",
+    "@prefresh/vite": "^2.0.4",
+    "tslib": "^2.1.0"
+  },
+  "peerDependencies": {
+    "vite": "^2.0.0-beta.65"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.25",
+    "ava": "^3.15.0",
+    "prettier": "^2.2.1",
+    "type-fest": "^0.20.2",
+    "typescript": "4.1.3",
+    "vite": "^2.0.0-beta.65"
+  },
+  "files": [
+    "src",
+    "node"
+  ],
+  "eslintConfig": {
+    "parserOptions": {
+      "project": [
+        "./packages/vite-plugins/*/tsconfig.json"
+      ]
+    }
+  }
+}

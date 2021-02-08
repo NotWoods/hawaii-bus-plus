@@ -13,7 +13,8 @@
     { "path": "packages/promise-worker/worker" },
     { "path": "packages/react-google-maps/src" },
     { "path": "packages/types" },
-    { "path": "packages/utils/src" }
+    { "path": "packages/utils/src" },
+    { "path": "packages/vite-plugins/src" }
   ],
   "compilerOptions": {
     "noEmit": true,
