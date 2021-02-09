@@ -40,7 +40,7 @@ export function TripSelector(props: Props) {
         >
           {Array.from(details.allTrips.values(), (trip) => (
             <option key={trip.tripId} value={trip.tripId}>
-              {trip.time}
+              {trip.shortName}
             </option>
           ))}
         </select>

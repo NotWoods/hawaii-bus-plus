@@ -1,9 +1,9 @@
 import { h, Fragment } from 'preact';
 import { Temporal } from 'proposal-temporal';
 import { RouteDetails } from '../../../worker-info/route-details';
-import { TripSelector } from '../trip/TripSelector';
 import { SwitchDirectionButton } from './info/SwitchDirectionButton';
 import { TimetableDetails } from './info/TimetableDetails';
+import { TripSelector } from './info/TripSelector';
 import { StopTimeSegmentList } from './stop-time/StopTimeSegmentList';
 
 interface Props {

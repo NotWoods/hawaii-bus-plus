@@ -9,6 +9,7 @@ import { useDelay } from '../hooks/useDelay';
 import { usePromise } from '../hooks/usePromise';
 import { useWorker } from '../hooks/useWorker';
 import { RouterContext } from '../router/Router';
+import { colorVariables } from './props';
 import { RouteHeader } from './RouteHeader';
 import { RouteDetailContext } from './sheet/context';
 import { Timetable } from './timetable/Timetable';
@@ -42,7 +43,7 @@ export function RouteTimetable() {
   const route = details?.route;
   if (route) {
     return (
-      <article>
+      <article class="bg-gray-50" style={colorVariables(route)}>
         <RouteHeader route={route} />
         <Timetable
           details={details!}
@@ -55,7 +56,7 @@ export function RouteTimetable() {
     );
   } else if (routeId && delayDone) {
     return (
-      <article>
+      <article class="bg-gray-50">
         <RouteHeader />
         <LoadingBar />
       </article>

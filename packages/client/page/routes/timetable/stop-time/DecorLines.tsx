@@ -1,4 +1,5 @@
 import { h } from 'preact';
+import { classNames } from '../../../hooks/classnames';
 import './DecorLines.css';
 
 export function TripDecorDot() {
@@ -7,11 +8,22 @@ export function TripDecorDot() {
   );
 }
 
-export function TripDecorLine(props: { gridArea: string }) {
+interface Props {
+  gridArea: string;
+  rounded?: boolean;
+  horizontal?: 'md';
+}
+
+export function TripDecorLine({ gridArea, rounded, horizontal }: Props) {
   return (
     <div
-      class="bg-route w-2 h-full md:w-full md:h-2 rounded-b-full md:rounded-r-full"
-      style={props}
+      class={classNames(
+        'bg-route w-2 h-full',
+        horizontal === 'md' && 'md:w-full md:h-2',
+        rounded && 'rounded-b-full',
+        horizontal === 'md' && rounded && 'md:rounded-r-full'
+      )}
+      style={{ gridArea }}
     />
   );
 }

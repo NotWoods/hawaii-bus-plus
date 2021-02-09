@@ -63,7 +63,7 @@ export function JourneyDirectionsResultItem(props: Props) {
                 {route.route_short_name}
               </SmallRouteIcon>
               <TripDecorDot />
-              <TripDecorLine gridArea="line" />
+              <TripDecorLine gridArea="line" horizontal="md" rounded />
             </li>
           ))}
       </ul>

@@ -1,10 +1,10 @@
-import { formatDuration } from '@hawaii-bus-plus/presentation';
 import { last } from '@hawaii-bus-plus/utils';
 import { h } from 'preact';
 import { Temporal } from 'proposal-temporal';
 import type { RouteDetails } from '../../../../worker-info/route-details';
-import { Link } from '../../../router/Router';
-import { EndedAt, StartedFrom } from './StartedFrom';
+import { IconTw } from '../../../icons/Icon';
+import timeIcon from '../../../icons/access_time.svg';
+import { EndedAt, ReachesAt, StartedFrom } from './StartedFrom';
 
 interface Props {
   details: RouteDetails;
@@ -21,14 +21,9 @@ export function TimetableDetails(props: Props) {
 
   // TODO add string property to duration
   return (
-    <aside>
-      <p class="text-lg">
-        {'Reaches '}
-        <Link href={`?stop=${closestTrip.stop}`}>
-          {closestTrip.stopName}
-        </Link>{' '}
-        <time>{formatDuration(closestTrip.offset)}</time>
-      </p>
+    <aside class="shadow m-4 mb-0 p-4 pl-12 bg-white relative">
+      <IconTw src={timeIcon} alt="" class="absolute top-5 left-4" />
+      <ReachesAt closestTrip={closestTrip} />
       <StartedFrom
         stopTime={closestTrip.stopTimes[0]}
         agency={props.details.agency}

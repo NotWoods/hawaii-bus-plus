@@ -1,0 +1,5 @@
+.route__header {
+  grid-template:
+    'icon name close' auto
+    / 7.5rem 1fr 3rem;
+}

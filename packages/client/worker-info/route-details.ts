@@ -1,6 +1,10 @@
 import { Repository } from '@hawaii-bus-plus/data';
 import { nowWithZone } from '@hawaii-bus-plus/utils';
-import { durationToData, StopTimeData } from '@hawaii-bus-plus/presentation';
+import {
+  durationToData,
+  formatPlainTime,
+  StopTimeData,
+} from '@hawaii-bus-plus/presentation';
 import { Agency, ColorString, Route, Stop } from '@hawaii-bus-plus/types';
 import { Temporal } from 'proposal-temporal';
 import { LatLngBounds, LatLngBoundsLiteral } from 'spherical-geometry-js';
@@ -133,6 +137,11 @@ export async function getRouteDetails(
           };
         }
       );
+
+      for (const slice of dirDetails.allTrips.values()) {
+        const data = zonedTime(slice.time, nowDate, timeZone);
+        slice.shortName = formatPlainTime(data, timeZone).agencyTime;
+      }
 
       return {
         firstStop: dirDetails.firstStop,

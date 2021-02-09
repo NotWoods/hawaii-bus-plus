@@ -7,11 +7,16 @@ const formatter = new Intl.RelativeTimeFormat([], { numeric: 'auto' });
 /**
  * Balanced duration into
  */
-export type DurationData = Partial<Record<typeof units[number], number>>;
+export interface DurationData
+  extends Partial<Record<typeof units[number], number>> {
+  string: string;
+}
 
 export function durationToData(duration: Temporal.Duration): DurationData {
   const time = duration.round({ largestUnit: 'days', smallestUnit: 'seconds' });
-  return pick(time, units);
+  const data = pick(time, units) as DurationData;
+  data.string = time.toString();
+  return data;
 }
 
 export function biggestUnit(duration: DurationData) {

@@ -2,14 +2,16 @@ import { PlainTimeData } from '@hawaii-bus-plus/presentation';
 import { h, Fragment } from 'preact';
 import { classNames } from '../../../hooks/classnames';
 import { Link } from '../../../router/Router';
-import { ScheduleTime } from '../../trip/ScheduleTime';
+import { PlainTimeElement } from '../../../time/PlainTimeElement';
 import { TripDecorDot, TripDecorLine } from './DecorLines';
 
 const gridTemplate = `
-  'line-top .      .' 1rem
-  'dot      name   time' auto
-  'line     desc   .' auto
-  'line     .      .' 1rem
+  'line-top .      .'    1rem
+  'line-top name   time' 0.5rem
+  'dot      name   time' 0.5rem
+  'line     name   time' auto
+  'line     desc   .'    auto
+  'line     .      .'    1rem
   / 2rem auto min-content
 `;
 
@@ -30,15 +32,20 @@ function BaseSegmentContent({ name, desc, time }: ContentProps) {
       <TripDecorLine gridArea="line-top" />
       <TripDecorDot />
       <TripDecorLine gridArea="line" />
-      <p>{name}</p>
+      <p style={{ gridArea: 'name' }}>{name}</p>
       {desc && ' '}
-      {desc && <p class="text-sm">{desc}</p>}
+      {desc && (
+        <p class="text-sm" style={{ gridArea: 'desc' }}>
+          {desc}
+        </p>
+      )}
       {time && (
-        <ScheduleTime
+        <PlainTimeElement
           time={time.arrivalTime}
           approximate={!time.timepoint}
           agencyTimezone={time.timeZone}
           class="whitespace-nowrap text-right"
+          style={{ gridArea: 'time' }}
         />
       )}
     </>

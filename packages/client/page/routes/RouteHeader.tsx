@@ -6,7 +6,7 @@ import { closeRouteAction } from '../router/action';
 import { RouterContext } from '../router/Router';
 import { BLANK } from './badge/RouteBadge';
 import { RouteIcon } from './badge/RouteIcon';
-import { colorVariables } from './props';
+import './RouteHeader.css';
 
 interface Props {
   route?: Pick<
@@ -19,9 +19,9 @@ export function RouteHeader({ route }: Props) {
   const { dispatch } = useContext(RouterContext);
 
   return (
-    <header style={route ? colorVariables(route) : undefined}>
-      <RouteIcon>{route?.route_short_name ?? '...'}</RouteIcon>
-      <h2>{route?.route_long_name ?? BLANK}</h2>
+    <header class="route__header grid gap-4 items-center px-4 border-b">
+      <RouteIcon>{route?.route_short_name ?? BLANK}</RouteIcon>
+      <h2 class="font-display text-3xl">{route?.route_long_name ?? BLANK}</h2>
       <CloseButton onClick={() => dispatch(closeRouteAction())} />
     </header>
   );

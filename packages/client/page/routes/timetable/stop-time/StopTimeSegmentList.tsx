@@ -13,18 +13,20 @@ export function StopTimeSegmentList(props: Props) {
   const keySoFar = new Map<Stop['stop_id'], number>();
 
   return (
-    <ul>
+    <ul class="px-8">
       {props.stopTimes.map((stopTime) => {
         const stopId = stopTime.stop.stop_id;
         const keySuffix = keySoFar.get(stopId) ?? 0;
         keySoFar.set(stopId, keySuffix + 1);
 
         return (
-          <StopTimeSegment
-            key={`${stopId}${keySuffix}`}
-            stopTime={stopTime}
-            timeZone={props.timeZone}
-          />
+          <li>
+            <StopTimeSegment
+              key={`${stopId}${keySuffix}`}
+              stopTime={stopTime}
+              timeZone={props.timeZone}
+            />
+          </li>
         );
       })}
     </ul>
