@@ -41,7 +41,7 @@ export function RouteLinkVertical(props: Props) {
   return (
     <Link
       href={`/routes/${route.route_id}/`}
-      className={classNames(
+      class={classNames(
         'flex flex-col w-32 shadow-xl p-2 h-full bg-gray-50 dark:bg-gray-700 dark:text-white',
         props.className
       )}

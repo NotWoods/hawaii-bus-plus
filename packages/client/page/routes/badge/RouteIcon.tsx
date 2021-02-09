@@ -1,6 +1,32 @@
 import { ComponentChildren, h } from 'preact';
+import { classNames } from '../../hooks/classnames';
 
-interface Props {
+const ring = 'ring-1 ring-gray-500 bg-route';
+const line = `${ring} block w-8 h-2`;
+
+interface SmallIconProps {
+  children: ComponentChildren;
+  class?: string;
+  title?: string;
+  style?: {
+    [key: string]: string | number | null | undefined;
+  };
+}
+
+export function SmallRouteIcon(props: SmallIconProps) {
+  return (
+    <span
+      {...props}
+      class={classNames(
+        ring,
+        'font-display font-medium text-center text-route px-1',
+        props.class
+      )}
+    />
+  );
+}
+
+interface IconProps {
   children: ComponentChildren;
   title?: string;
   style?: {
@@ -8,17 +34,13 @@ interface Props {
   };
 }
 
-export function RouteIcon(props: Props) {
-  const ring = 'ring-1 ring-gray-500 bg-route';
-  const line = `${ring} block w-8 h-2`;
+export function RouteIcon(props: IconProps) {
   return (
     <div class="flex items-center" {...props}>
       <span class={`${line} rounded-l-full`} />
-      <span
-        class={`${ring} text-xl flex-none w-12 mx-1 font-display font-medium text-center text-route`}
-      >
+      <SmallRouteIcon class={`text-xl w-12 flex-none mx-1`}>
         {props.children}
-      </span>
+      </SmallRouteIcon>
       <span class={`${line} rounded-r-full`} />
     </div>
   );

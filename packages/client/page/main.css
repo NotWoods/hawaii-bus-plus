@@ -13,7 +13,7 @@
     scroll-snap-type: y mandatory;
   }
 
-  .scroll-pl-8 {
-    scroll-padding-inline-start: 8rem;
+  .scroll-px-8 {
+    scroll-padding-inline: 8rem;
   }
 }

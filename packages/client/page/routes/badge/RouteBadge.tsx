@@ -1,8 +1,8 @@
 import { Route } from '@hawaii-bus-plus/types';
 import { h } from 'preact';
 import { colorVariables } from '../props';
-import { RouteIcon } from '../RouteIcon';
 import './RouteBadge.css';
+import { SmallRouteIcon } from './RouteIcon';
 
 export const BLANK = ' ';
 
@@ -20,12 +20,15 @@ interface RouteBadgeProps {
 export function RouteBadge({ route }: RouteBadgeProps) {
   if (route) {
     return (
-      <RouteIcon style={colorVariables(route)} class="route__icon--badge">
+      <SmallRouteIcon
+        style={colorVariables(route)}
+        title={route.route_long_name}
+      >
         {route.route_short_name}
-      </RouteIcon>
+      </SmallRouteIcon>
     );
   } else {
-    return <RouteIcon class="route__icon--badge">...</RouteIcon>;
+    return <SmallRouteIcon>...</SmallRouteIcon>;
   }
 }
 
