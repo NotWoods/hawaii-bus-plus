@@ -4,9 +4,9 @@ import { Journey } from '../../../worker-nearby/directions/format';
 import { isJourneyTripSegment } from '../../directions/DirectionsSheet';
 import { openJourney } from '../../router/action';
 import { Link } from '../../router/Router';
-import { RouteBadge } from '../../routes/badge/RouteBadge';
 import { SmallRouteIcon } from '../../routes/badge/RouteIcon';
 import { colorVariables } from '../../routes/props';
+import './JourneyDirectionsResultItem.css';
 
 interface Props {
   journey: Journey;
@@ -14,15 +14,6 @@ interface Props {
   href: string;
   onClick?(): void;
 }
-
-const gridTemplate = `
-  'short fare' auto
-  'long long' auto
-  / auto min-content`;
-const lineGridTemplate = `
-  'badge dot' auto
-  'badge line' 1fr
-  / auto min-content`;
 
 export function JourneyDirectionsResultItem(props: Props) {
   const { journey } = props;
@@ -36,18 +27,15 @@ export function JourneyDirectionsResultItem(props: Props) {
     <Link
       action={props.action}
       href={props.href}
-      class="flex flex-col w-32 shadow-xl h-full dark:text-white bg-gray-200 dark:bg-gray-700"
+      class="flex flex-col w-32 md:w-auto shadow-xl h-full text-black dark:text-white bg-gray-200 dark:bg-gray-700"
       onClick={props.onClick}
       style="scroll-snap-align: start"
     >
-      <div
-        class="grid items-center bg-gray-50 dark:bg-gray-600"
-        style={{ gridTemplate }}
-      >
+      <div class="journey-item__header grid items-center bg-white bg-opacity-20">
         <time class="block font-medium p-2">
           <span class="text-2xl">20</span> <span>min</span>
         </time>
-        <span class="bg-black px-1">$2.00</span>
+        <span class="bg-black px-1 text-white">$2.00</span>
         <time
           class="block text-sm p-2 pt-0"
           title={durationRange.localTime}
@@ -57,29 +45,27 @@ export function JourneyDirectionsResultItem(props: Props) {
           {durationRange.agencyTime}
         </time>
       </div>
-      <ul class="p-4">
+      <ul class="p-4 flex flex-col md:flex-row">
         {journey.trips
           .filter(isJourneyTripSegment)
           .map((segment) => segment.route)
           .map((route) => (
             <li
-              class="flex justify-end h-12"
+              class="journey-item__route grid justify-end md:justify-start h-12 md:h-auto md:w-12 gap-x-3 pr-6 md:p-0 md:gap-x-0 md:gap-y-3"
               style={colorVariables(route)}
               title={route.route_long_name}
             >
-              <SmallRouteIcon class="self-start">
+              <SmallRouteIcon class="journey-item__badge self-start justify-self-start">
                 {route.route_short_name}
               </SmallRouteIcon>
-              <div class="flex flex-col ml-3 mr-6">
-                <div
-                  class="bg-white rounded-full ring-4 w-2 h-2 flex-none"
-                  style={{ '--tw-ring-color': 'var(--route-color)' }}
-                />
-                <div
-                  class="bg-route w-2 h-full rounded-b-full"
-                  style={{ gridArea: 'line' }}
-                />
-              </div>
+              <div
+                class="journey-item__dot bg-white rounded-full ring-4 w-2 h-2 flex-none"
+                style={{ '--tw-ring-color': 'var(--route-color)' }}
+              />
+              <div
+                class="journey-item__line bg-route w-2 h-full md:w-full md:h-2 rounded-b-full md:rounded-r-full"
+                style={{ gridArea: 'line' }}
+              />
             </li>
           ))}
       </ul>
