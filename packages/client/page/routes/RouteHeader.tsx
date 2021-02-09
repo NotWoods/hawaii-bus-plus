@@ -19,9 +19,11 @@ export function RouteHeader({ route }: Props) {
   const { dispatch } = useContext(RouterContext);
 
   return (
-    <header class="route__header grid gap-4 items-center px-4 border-b">
+    <header class="route__header grid gap-x-4 items-center px-4 pb-2 md:pb-0 border-b">
       <RouteIcon>{route?.route_short_name ?? BLANK}</RouteIcon>
-      <h2 class="font-display text-3xl">{route?.route_long_name ?? BLANK}</h2>
+      <h2 class="font-display text-3xl" style={{ gridArea: 'name' }}>
+        {route?.route_long_name ?? BLANK}
+      </h2>
       <CloseButton onClick={() => dispatch(closeRouteAction())} />
     </header>
   );

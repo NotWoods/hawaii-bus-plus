@@ -8,7 +8,7 @@ interface Props {
 
 export function SwitchDirectionButton(props: Props) {
   return (
-    <Button icon={swapIcon} onClick={props.switchDirection}>
+    <Button class="mx-4" icon={swapIcon} onClick={props.switchDirection}>
       Switch direction
     </Button>
   );

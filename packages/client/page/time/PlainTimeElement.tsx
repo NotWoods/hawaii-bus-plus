@@ -1,5 +1,6 @@
 import { formatPlainTime, PlainTimeData } from '@hawaii-bus-plus/presentation';
 import { h } from 'preact';
+import { classNames } from '../hooks/classnames';
 
 interface Props {
   time: PlainTimeData;
@@ -28,7 +29,7 @@ export function PlainTimeElement(props: Props) {
 
   return (
     <time
-      class={props.class}
+      class={classNames('whitespace-nowrap', props.class)}
       style={props.style}
       dateTime={props.time.string}
       title={`${prefix}${localTime}`}

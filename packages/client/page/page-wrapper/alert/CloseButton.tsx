@@ -16,6 +16,7 @@ export function CloseButton(props: Props) {
       dark={props.dark}
       aria-label="Close"
       onClick={props.onClick}
+      style={{ gridArea: 'close' }}
     >
       <IconTw
         src={clearIcon}

@@ -1,5 +1,6 @@
 import { DurationData, formatDuration } from '@hawaii-bus-plus/presentation';
 import { h } from 'preact';
+import { classNames } from '../hooks/classnames';
 
 interface Props {
   duration: DurationData;
@@ -14,7 +15,7 @@ export function DurationElement(props: Props) {
 
   return (
     <time
-      class={props.class}
+      class={classNames('whitespace-nowrap', props.class)}
       style={props.style}
       dateTime={props.duration.string}
     >
@@ -28,7 +29,7 @@ export function RelativeDurationElement(props: Props) {
 
   return (
     <time
-      class={props.class}
+      class={classNames('whitespace-nowrap', props.class)}
       style={props.style}
       dateTime={props.duration.string}
     >
