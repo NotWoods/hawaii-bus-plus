@@ -4,7 +4,11 @@ import { h } from 'preact';
 interface Props {
   time: PlainTimeData;
   approximate?: boolean;
+  class?: string;
   className?: string;
+  style?: {
+    [key: string]: string | number | null | undefined;
+  };
   agencyTimezone: string;
 }
 
@@ -25,7 +29,8 @@ export function ScheduleTime(props: Props) {
 
   return (
     <time
-      className={props.className}
+      class={props.class ?? props.className}
+      style={props.style}
       dateTime={props.time.string}
       title={`${prefix}${localTime}`}
     >

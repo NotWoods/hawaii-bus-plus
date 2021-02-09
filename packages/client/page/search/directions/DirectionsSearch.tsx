@@ -48,6 +48,7 @@ export function DirectionsSearch(props: Props) {
     setResults(results);
   }, [depart, arrive, departureTime]);
 
+  // TODO overlay results on top of map
   return (
     <SearchBase title="Directions" onClose={props.onClose}>
       <DirectionsField

@@ -4,7 +4,7 @@ import { classNames } from '../../hooks/classnames';
 const ring = 'ring-1 ring-gray-500 bg-route';
 const line = `${ring} block w-8 h-2`;
 
-interface SmallIconProps {
+interface Props {
   children: ComponentChildren;
   class?: string;
   title?: string;
@@ -13,7 +13,10 @@ interface SmallIconProps {
   };
 }
 
-export function SmallRouteIcon(props: SmallIconProps) {
+/**
+ * Displays the route icon as a single box, good for small badges.
+ */
+export function SmallRouteIcon(props: Props) {
   return (
     <span
       {...props}
@@ -26,15 +29,11 @@ export function SmallRouteIcon(props: SmallIconProps) {
   );
 }
 
-interface IconProps {
-  children: ComponentChildren;
-  title?: string;
-  style?: {
-    [key: string]: string | number | null | undefined;
-  };
-}
-
-export function RouteIcon(props: IconProps) {
+/**
+ * Displays the route icon as a large box with a crossroad line,
+ * good for representing the route individually.
+ */
+export function RouteIcon(props: Props) {
   return (
     <div class="flex items-center" {...props}>
       <span class={`${line} rounded-l-full`} />

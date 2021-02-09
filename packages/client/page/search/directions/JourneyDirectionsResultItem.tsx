@@ -6,6 +6,10 @@ import { openJourney } from '../../router/action';
 import { Link } from '../../router/Router';
 import { SmallRouteIcon } from '../../routes/badge/RouteIcon';
 import { colorVariables } from '../../routes/props';
+import {
+  TripDecorDot,
+  TripDecorLine,
+} from '../../routes/timetable/stop-time/DecorLines';
 import './JourneyDirectionsResultItem.css';
 
 interface Props {
@@ -58,14 +62,8 @@ export function JourneyDirectionsResultItem(props: Props) {
               <SmallRouteIcon class="journey-item__badge self-start justify-self-start">
                 {route.route_short_name}
               </SmallRouteIcon>
-              <div
-                class="journey-item__dot bg-white rounded-full ring-4 w-2 h-2 flex-none"
-                style={{ '--tw-ring-color': 'var(--route-color)' }}
-              />
-              <div
-                class="journey-item__line bg-route w-2 h-full md:w-full md:h-2 rounded-b-full md:rounded-r-full"
-                style={{ gridArea: 'line' }}
-              />
+              <TripDecorDot />
+              <TripDecorLine gridArea="line" />
             </li>
           ))}
       </ul>

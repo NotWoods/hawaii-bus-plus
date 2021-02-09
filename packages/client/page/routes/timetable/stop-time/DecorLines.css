@@ -1,0 +1,10 @@
+.ring-route {
+  --tw-ring-color: var(--route-color);
+}
+
+.grid-area-dot {
+  grid-area: dot;
+}
+.grid-area-line {
+  grid-area: line;
+}

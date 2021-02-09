@@ -14,12 +14,6 @@
 .journey-item__badge {
   grid-area: badge;
 }
-.journey-item__dot {
-  grid-area: dot;
-}
-.journey-item__line {
-  grid-area: line;
-}
 @screen md {
   .journey-item__route {
     grid-template:
