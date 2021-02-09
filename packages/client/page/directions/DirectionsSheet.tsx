@@ -1,22 +1,17 @@
 import { h } from 'preact';
-import type {
-  Journey,
-  JourneyTripSegment,
-} from '../../worker-nearby/directions/format';
+import type { Journey } from '../../worker-nearby/directions/format';
 import { TripSegment } from './TripSegment';
 import { WalkSegment } from './WalkSegment';
+import { isJourneyTripSegment } from './JourneySheet';
 
 interface Props {
   journey: Journey;
+  timeZone: string;
 }
 
-export function isJourneyTripSegment(
-  segment: object // eslint-disable-line @typescript-eslint/ban-types
-): segment is JourneyTripSegment {
-  return 'trip' in segment;
-}
+export { isJourneyTripSegment };
 
-export function DirectionsSheet(props: Props) {
+export function DirectionsSheet2(props: Props) {
   return (
     <div className="route-sheet pointer-events-auto mx-10 border border-bottom-0 rounded-top bg-white bg-dark-light-dm">
       <div className="route-sheet__name px-card py-15 d-flex border-bottom rounded-top dark-mode">

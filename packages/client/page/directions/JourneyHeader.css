@@ -1,0 +1,6 @@
+.journey__header {
+  grid-template:
+    'short fare close' auto
+    'long  long close' auto
+    / auto min-content 3rem;
+}

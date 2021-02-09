@@ -8,12 +8,14 @@ interface Props {
   class?: string;
   className?: string;
   small?: boolean;
+  style?: { gridArea?: string };
 }
 
 export function IconTw(props: Props) {
   return (
     <img
       class={props.class ?? 'w-6 h-6'}
+      style={props.style}
       src={props.src}
       alt={props.alt}
       width="24"

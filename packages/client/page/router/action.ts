@@ -34,6 +34,10 @@ export function closeStopAction() {
   return { type: 'close-point' } as const;
 }
 
+export function closeJourneyAction() {
+  return { type: 'close-point' } as const;
+}
+
 export function setMarker(location: google.maps.LatLngLiteral) {
   return { type: 'set-marker', location } as const;
 }

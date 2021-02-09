@@ -1,9 +1,9 @@
 import { MapProvider } from '@hawaii-bus-plus/react-google-maps';
 import { h } from 'preact';
+import { Sheet } from './directions/Sheet';
 import { HomeOverlay } from './home/HomeOverlay';
 import { ApiProvider } from './hooks/useApi';
 import { Router } from './router/Router';
-import { RouteTimetable } from './routes/RouteTimetable';
 import { RouteDetailProvider } from './routes/sheet/context';
 
 export function App() {
@@ -13,7 +13,7 @@ export function App() {
         <MapProvider>
           <RouteDetailProvider>
             <HomeOverlay />
-            <RouteTimetable />
+            <Sheet />
           </RouteDetailProvider>
         </MapProvider>
       </ApiProvider>
