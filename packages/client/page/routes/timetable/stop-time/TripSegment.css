@@ -5,13 +5,3 @@ details > summary {
 details > summary::-webkit-details-marker {
   display: none;
 }
-
-.journey__trip {
-  grid-template:
-    'badge line     route' auto
-    'badge line     trip' auto
-    '.     first    first' auto
-    '.     collapse collapse' auto
-    '.     last     last' auto
-    / 3rem 0.5rem 1fr;
-}
