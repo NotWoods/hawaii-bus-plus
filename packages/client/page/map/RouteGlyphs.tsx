@@ -2,7 +2,7 @@ import { ColorString, Stop } from '@hawaii-bus-plus/types';
 import { last } from '@hawaii-bus-plus/utils';
 import { ComponentChildren, h, Fragment } from 'preact';
 import { useContext } from 'preact/hooks';
-import { isJourneyTripSegment } from '../directions/DirectionsSheet';
+import { isJourneyTripSegment } from '../directions/JourneySegment';
 import { RouterContext } from '../router/Router';
 import { RouteDetailContext } from '../routes/sheet/context';
 import { ShapeLine } from './ShapeLine';

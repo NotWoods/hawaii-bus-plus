@@ -2,14 +2,12 @@ import { h } from 'preact';
 import type { Journey } from '../../worker-nearby/directions/format';
 import { TripSegment } from './TripSegment';
 import { WalkSegment } from './WalkSegment';
-import { isJourneyTripSegment } from './JourneySheet';
+import { isJourneyTripSegment } from './JourneySegment';
 
 interface Props {
   journey: Journey;
   timeZone: string;
 }
-
-export { isJourneyTripSegment };
 
 export function DirectionsSheet2(props: Props) {
   return (

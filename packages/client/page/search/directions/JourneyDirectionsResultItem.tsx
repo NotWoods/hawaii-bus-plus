@@ -1,7 +1,7 @@
 import { h } from 'preact';
 import { Journey } from '../../../worker-nearby/directions/format';
 import { JourneyHeader } from '../../directions/JourneyHeader';
-import { isJourneyTripSegment } from '../../directions/DirectionsSheet';
+import { isJourneyTripSegment } from '../../directions/JourneySegment';
 import { openJourney } from '../../router/action';
 import { Link } from '../../router/Router';
 import { SmallRouteIcon } from '../../routes/badge/RouteIcon';
