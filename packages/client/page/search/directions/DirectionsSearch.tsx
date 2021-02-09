@@ -1,20 +1,25 @@
+import { Point } from '@hawaii-bus-plus/presentation';
+import { nowWithZone } from '@hawaii-bus-plus/utils';
 import { h } from 'preact';
 import { useMemo, useState } from 'preact/hooks';
+import type { Journey } from '../../../worker-nearby/directions/format';
+import type { NearbyWorkerHandler } from '../../../worker-nearby/nearby';
+import DirectionsWorker from '../../../worker-nearby/nearby?worker';
+import { databaseInitialized } from '../../hooks/useDatabaseInitialized';
+import { usePromise } from '../../hooks/usePromise';
+import { useWorker } from '../../hooks/useWorker';
+import { CloseButton } from '../../page-wrapper/alert/CloseButton';
 import { emptyResults } from '../../sidebar/search/places-autocomplete';
 import { SearchBase } from '../SearchBase';
 import { DirectionsField } from './DirectionsField';
-import { nowWithZone } from '@hawaii-bus-plus/utils';
-import { Point } from '@hawaii-bus-plus/presentation';
-import type { Journey } from '../../../worker-nearby/directions/format';
-import DirectionsWorker from '../../../worker-nearby/nearby?worker';
-import { useWorker } from '../../hooks/useWorker';
-import type { NearbyWorkerHandler } from '../../../worker-nearby/nearby';
-import { usePromise } from '../../hooks/usePromise';
-import { databaseInitialized } from '../../hooks/useDatabaseInitialized';
-import { DirectionsPointResults } from './DirectionsPointResults';
 import { DirectionsJourneys } from './DirectionsJourneys';
+import { DirectionsPointResults } from './DirectionsPointResults';
 
-export function DirectionsSearch() {
+interface Props {
+  onClose?(): void;
+}
+
+export function DirectionsSearch(props: Props) {
   const [depart, setDepart] = useState<Point | undefined>();
   const [arrive, setArrive] = useState<Point | undefined>();
   const now = useMemo(() => nowWithZone('Pacific/Honolulu'), []);
@@ -46,7 +51,10 @@ export function DirectionsSearch() {
 
   return (
     <SearchBase>
-      <h2 class="font-display font-medium text-2xl mx-4">Directions</h2>
+      <header class="flex mx-4 items-center">
+        <h2 class="font-display font-medium text-2xl mr-auto">Directions</h2>
+        <CloseButton dark onClick={props.onClose} />
+      </header>
       <DirectionsField
         id="directionsDepart"
         label="Departing from"

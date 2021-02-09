@@ -1,22 +1,27 @@
 import { h } from 'preact';
-import { classNames } from '../../hooks/classnames';
-import './CloseButton.css';
+import { IconButton } from '../../buttons/IconButton';
+import { IconTw } from '../../icons/Icon';
+import clearIcon from '../../icons/clear.svg';
 
 interface Props {
+  dark?: boolean;
   className?: string;
   onClick?(): void;
 }
 
 export function CloseButton(props: Props) {
   return (
-    <button
-      className={classNames('close', props.className)}
-      data-dismiss="alert"
-      type="button"
+    <IconButton
+      class="w-12 h-12 p-3"
+      dark={props.dark}
       aria-label="Close"
       onClick={props.onClick}
     >
-      <span aria-hidden="true">&times;</span>
-    </button>
+      <IconTw
+        src={clearIcon}
+        alt="Clear"
+        class={props.dark ? 'filter-invert' : undefined}
+      />
+    </IconButton>
   );
 }
