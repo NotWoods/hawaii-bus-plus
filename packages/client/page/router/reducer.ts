@@ -73,6 +73,8 @@ export function routerReducer(
       return { ...state, routeId: undefined, freshLoad: false };
     case 'close-point':
       return { ...state, point: undefined, freshLoad: false };
+    case 'close-journey':
+      return { ...state, directions: undefined, freshLoad: false };
     case 'set-marker':
       return { ...state, point: { type: 'marker', position: action.location } };
     case 'open-place':

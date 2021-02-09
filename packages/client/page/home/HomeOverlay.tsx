@@ -1,26 +1,25 @@
-import { h, Fragment } from 'preact';
+import { h } from 'preact';
 import { useState } from 'preact/hooks';
-import { Home } from './Home';
 import { DirectionsSearch } from '../search/directions/DirectionsSearch';
 import { SimpleSearch } from '../search/simple/SimpleSearch';
+import { Home } from './Home';
 
 export function HomeOverlay() {
   const [screen, setScreen] = useState<'home' | 'search' | 'directions'>(
     'home'
   );
 
-  return (
-    <>
-      {screen === 'home' ? <Home onSearch={() => setScreen('search')} /> : null}
-      {screen === 'search' ? (
+  switch (screen) {
+    case 'home':
+      return <Home onSearch={() => setScreen('search')} />;
+    case 'search':
+      return (
         <SimpleSearch
           onClose={() => setScreen('home')}
           onDirections={() => setScreen('directions')}
         />
-      ) : null}
-      {screen === 'directions' ? (
-        <DirectionsSearch onClose={() => setScreen('home')} />
-      ) : null}
-    </>
-  );
+      );
+    case 'directions':
+      return <DirectionsSearch onClose={() => setScreen('home')} />;
+  }
 }

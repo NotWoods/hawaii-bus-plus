@@ -11,7 +11,7 @@ import { useWorker } from '../hooks/useWorker';
 import { RouterContext } from '../router/Router';
 import { colorVariables } from './props';
 import { RouteHeader } from './RouteHeader';
-import { RouteDetailContext } from './sheet/context';
+import { RouteDetailContext } from './timetable/context';
 import { Timetable } from './timetable/Timetable';
 
 export function RouteTimetable() {

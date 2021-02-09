@@ -21,34 +21,22 @@ export function TripSegment(props: Props) {
   const last = stopTimes.pop()!;
 
   return (
-    <div class="journey__trip grid gap-x-4" style={colorVariables(route)}>
-      <SmallRouteIcon style={{ gridArea: 'badge' }}>
-        {route.route_short_name}
-      </SmallRouteIcon>
-      <h3
-        class="font-display font-medium text-xl"
-        style={{ gridArea: 'route' }}
-      >
-        {route.route_long_name}
-      </h3>
-      <h4
-        className="font-display font-medium text-lg"
-        style={{ gridArea: 'trip' }}
-      >
-        {trip.trip_short_name}
-      </h4>
-      <StopTimeSegment
-        stopTime={first}
-        timeZone={agency.agency_timezone}
-        gridArea="first"
-      />
+    <section style={colorVariables(route)}>
+      <header class="relative pl-6">
+        <SmallRouteIcon class="absolute left-0 -ml-5 mt-3">
+          {route.route_short_name}
+        </SmallRouteIcon>
+        <h3 class="font-display font-medium text-xl">
+          {route.route_long_name}
+        </h3>
+        <h4 className="font-display font-medium text-lg">
+          {trip.trip_short_name}
+        </h4>
+      </header>
+      <StopTimeSegment stopTime={first} timeZone={agency.agency_timezone} />
       {stopTimes.length > 0 ? <TripCollapse stopTimes={stopTimes} /> : null}
-      <StopTimeSegment
-        stopTime={last}
-        timeZone={agency.agency_timezone}
-        gridArea="last"
-      />
-    </div>
+      <StopTimeSegment stopTime={last} timeZone={agency.agency_timezone} />
+    </section>
   );
 }
 
@@ -63,7 +51,7 @@ function TripCollapse({ stopTimes }: TripCollapseProps) {
     <details
       class=""
       open={open}
-      style={{ '--segment-padding': '0.125rem', gridArea: 'collapse' }}
+      style={{ '--segment-padding': '0.125rem' }}
       onToggle={() => setOpen(!open)}
     >
       <summary class="flex -mx-2 overflow-hidden">

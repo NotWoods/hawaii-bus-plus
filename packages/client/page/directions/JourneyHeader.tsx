@@ -19,7 +19,7 @@ export function JourneyHeader({ journey, timeZone, onClose }: Props) {
 
   return (
     <header class="journey__header grid relative items-center bg-white bg-opacity-20 border-b">
-      <time class="block font-medium p-2">
+      <time class="block font-display font-medium p-2">
         <span class="text-2xl">20</span> <span>min</span>
       </time>
       <span class="bg-black px-1 text-white">$2.00</span>

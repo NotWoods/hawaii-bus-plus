@@ -2,8 +2,8 @@ import { Point } from '@hawaii-bus-plus/presentation';
 import { h } from 'preact';
 import { SearchResults } from '../../../worker-search/search-db';
 import { usePlacesService } from '../../hooks/usePlacesService';
-import { emptyResults } from '../../sidebar/search/places-autocomplete';
 import { SearchResultsList } from '../items/SearchResultsList';
+import { emptyResults } from '../simple/places-autocomplete';
 
 interface Props {
   field: 'depart' | 'arrive';

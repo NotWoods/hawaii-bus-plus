@@ -2,7 +2,7 @@ import { Trip } from '@hawaii-bus-plus/types';
 import { h } from 'preact';
 import { Temporal } from 'proposal-temporal';
 import { DirectionDetails } from '../../../../worker-info/trip-details';
-import { PlainDateInput } from '../../../sidebar/directions/DirectionsTime';
+import { PlainDateInput } from '../../../time/input/PlainTimeInput';
 
 interface Props {
   details: DirectionDetails;

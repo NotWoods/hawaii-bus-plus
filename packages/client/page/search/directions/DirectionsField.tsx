@@ -6,8 +6,8 @@ import { classNames } from '../../hooks/classnames';
 import stopIcon from '../../icons/bus_stop.svg';
 import locationIcon from '../../icons/gps_fixed.svg';
 import placeIcon from '../../icons/place.svg';
-import { useSearch } from '../../sidebar/search/SidebarSearch';
 import { LeadingInputIcon, SearchInput } from '../SearchInput';
+import { useSearch } from '../simple/useSearch';
 
 interface Props {
   id: string;

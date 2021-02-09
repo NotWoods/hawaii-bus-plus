@@ -4,7 +4,7 @@ import { ComponentChildren, h, Fragment } from 'preact';
 import { useContext } from 'preact/hooks';
 import { isJourneyTripSegment } from '../directions/JourneySegment';
 import { RouterContext } from '../router/Router';
-import { RouteDetailContext } from '../routes/sheet/context';
+import { RouteDetailContext } from '../routes/timetable/context';
 import { ShapeLine } from './ShapeLine';
 import { StopMarkers } from './StopMarkers';
 

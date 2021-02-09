@@ -2,11 +2,11 @@ import { h } from 'preact';
 import { useState } from 'preact/hooks';
 import { Button } from '../../buttons/Button';
 import directionsIcon from '../../icons/directions.svg';
-import { emptyResults } from '../../sidebar/search/places-autocomplete';
-import { useSearch } from '../../sidebar/search/SidebarSearch';
 import { SearchResultsList } from '../items/SearchResultsList';
 import { SearchBar } from '../SearchBar';
 import { SearchBase } from '../SearchBase';
+import { emptyResults } from './places-autocomplete';
+import { useSearch } from './useSearch';
 
 interface Props {
   onClose?(): void;

@@ -8,6 +8,7 @@ export type RouterAction =
   | ReturnType<typeof setStopAction>
   | ReturnType<typeof closeRouteAction>
   | ReturnType<typeof closeStopAction>
+  | ReturnType<typeof closeJourneyAction>
   | ReturnType<typeof setMarker>
   | ReturnType<typeof openPlace>
   | ReturnType<typeof updateUserLocation>
@@ -35,7 +36,7 @@ export function closeStopAction() {
 }
 
 export function closeJourneyAction() {
-  return { type: 'close-point' } as const;
+  return { type: 'close-journey' } as const;
 }
 
 export function setMarker(location: google.maps.LatLngLiteral) {

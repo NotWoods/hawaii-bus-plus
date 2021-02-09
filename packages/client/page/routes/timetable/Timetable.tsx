@@ -5,6 +5,7 @@ import { SwitchDirectionButton } from './info/SwitchDirectionButton';
 import { TimetableDetails } from './info/TimetableDetails';
 import { TripSelector } from './info/TripSelector';
 import { StopTimeSegmentList } from './stop-time/StopTimeSegmentList';
+import { useTripBounds } from './useTripBounds';
 
 interface Props {
   details: RouteDetails;
@@ -17,6 +18,8 @@ interface Props {
 export function Timetable(props: Props) {
   const { details, tripTime, directionId } = props;
   const directionDetails = details.directions[directionId];
+
+  useTripBounds(details.bounds);
 
   return (
     <>
