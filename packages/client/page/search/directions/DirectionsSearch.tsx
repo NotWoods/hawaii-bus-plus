@@ -8,7 +8,6 @@ import DirectionsWorker from '../../../worker-nearby/nearby?worker';
 import { databaseInitialized } from '../../hooks/useDatabaseInitialized';
 import { usePromise } from '../../hooks/usePromise';
 import { useWorker } from '../../hooks/useWorker';
-import { CloseButton } from '../../page-wrapper/alert/CloseButton';
 import { emptyResults } from '../../sidebar/search/places-autocomplete';
 import { SearchBase } from '../SearchBase';
 import { DirectionsField } from './DirectionsField';
@@ -50,11 +49,7 @@ export function DirectionsSearch(props: Props) {
   }, [depart, arrive, departureTime]);
 
   return (
-    <SearchBase>
-      <header class="flex mx-4 items-center">
-        <h2 class="font-display font-medium text-2xl mr-auto">Directions</h2>
-        <CloseButton dark onClick={props.onClose} />
-      </header>
+    <SearchBase title="Directions" onClose={props.onClose}>
       <DirectionsField
         id="directionsDepart"
         label="Departing from"
