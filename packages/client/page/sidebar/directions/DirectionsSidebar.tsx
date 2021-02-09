@@ -63,7 +63,7 @@ export function DirectionsSidebar(props: Props) {
           </div>
           <DirectionsField
             id="directionsDepart"
-            label="Departing"
+            label="Departing from"
             point={depart}
             onChange={setDepart}
             onSearchResults={(results) =>

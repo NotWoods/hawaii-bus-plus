@@ -8,7 +8,7 @@ interface Props {
 
 export function SearchBase(props: Props) {
   return (
-    <section class="bg-center bg-no-repeat py-4 bg-gray-800 md:w-80 md:h-screen">
+    <section class="bg-center bg-no-repeat py-4 bg-gray-800 md:w-80 md:h-screen text-white">
       <IconButton class="w-12 h-12 p-3 text-white" dark>
         <MenuIcon />
       </IconButton>

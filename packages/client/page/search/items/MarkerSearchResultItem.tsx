@@ -70,7 +70,7 @@ export function StopSearchResultItem({
     <MarkerSearchResultItem
       {...props}
       href={`?stop=${stopId}`}
-      icon={<IconTw src={busStopIcon} alt="Bus stop" />}
+      icon={<IconTw src={busStopIcon} alt="Bus stop" class="filter-invert" />}
       title={stopName}
       subtitle={stopDesc ?? <RouteBadges routes={routes} />}
     />
@@ -87,7 +87,7 @@ export function PlaceSearchResultItem({ placeId, text, ...props }: PlaceProps) {
     <MarkerSearchResultItem
       {...props}
       href={`?place=${placeId}`}
-      icon={<IconTw src={placeIcon} alt="Place" />}
+      icon={<IconTw src={placeIcon} alt="Place" class="filter-invert" />}
       title={text.main_text}
       subtitle={text.secondary_text}
     />

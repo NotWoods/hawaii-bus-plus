@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 @layer utilities {
+  .filter-invert {
+    filter: invert(100%);
+  }
+
   .scroll-snap {
     scroll-snap-type: both mandatory;
   }

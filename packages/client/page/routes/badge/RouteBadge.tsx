@@ -15,14 +15,17 @@ export type RouteBadgeKeys =
 
 interface RouteBadgeProps {
   route?: Pick<Route, RouteBadgeKeys>;
+  class?: string;
 }
 
-export function RouteBadge({ route }: RouteBadgeProps) {
+export function RouteBadge(props: RouteBadgeProps) {
+  const { route } = props;
   if (route) {
     return (
       <SmallRouteIcon
         style={colorVariables(route)}
         title={route.route_long_name}
+        class={props.class}
       >
         {route.route_short_name}
       </SmallRouteIcon>

@@ -11,7 +11,7 @@ import { directionsToParams } from '../../router/url';
 import { RouteBadges } from '../../routes/badge/RouteBadge';
 import './DirectionsJourneyResult.css';
 
-interface Props {
+interface ItemProps {
   journey: Journey;
   from: Point;
   to: Point;
@@ -19,7 +19,7 @@ interface Props {
   onClick?(): void;
 }
 
-export function DirectionsJourneyResults(props: Props) {
+export function DirectionsJourneyResults(props: ItemProps) {
   const { journey } = props;
   const params = directionsToParams({
     depart: props.from,

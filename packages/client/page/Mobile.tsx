@@ -3,7 +3,7 @@ import { h } from 'preact';
 import { ApiProvider } from './hooks/useApi';
 import { Router } from './router/Router';
 import { RouteDetailProvider } from './routes/sheet/context';
-import { SimpleSearch } from './search/simple/SimpleSearch';
+import { DirectionsSearch } from './search/directions/DirectionsSearch';
 
 export function App() {
   return (
@@ -11,7 +11,7 @@ export function App() {
       <ApiProvider>
         <MapProvider>
           <RouteDetailProvider>
-            <SimpleSearch />
+            <DirectionsSearch />
           </RouteDetailProvider>
         </MapProvider>
       </ApiProvider>
