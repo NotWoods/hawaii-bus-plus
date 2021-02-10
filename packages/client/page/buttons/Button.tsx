@@ -9,12 +9,15 @@ interface Props extends JSX.HTMLAttributes<HTMLButtonElement> {
   children: ComponentChildren;
 }
 
+const buttonClasses =
+  'flex p-2 border hover:bg-black hover:bg-opacity-10 transition-colors';
+
 export function Button({ icon, iconClass, ...props }: Props) {
   return (
     <button
       type="button"
       {...props}
-      class={classNames('flex p-2 border', props.class)}
+      class={classNames(buttonClasses, props.class)}
     >
       <Icon class={classNames('mr-2', iconClass)} src={icon} alt="" />
       {props.children}
@@ -31,7 +34,7 @@ interface PropsLink extends JSX.HTMLAttributes<HTMLAnchorElement> {
 
 export function ButtonLink({ icon, iconClass, ...props }: PropsLink) {
   return (
-    <a {...props} class={classNames('flex p-2 border', props.class)}>
+    <a {...props} class={classNames(buttonClasses, props.class)}>
       <Icon class={classNames('mr-2', iconClass)} src={icon} alt="" />
       {props.children}
     </a>

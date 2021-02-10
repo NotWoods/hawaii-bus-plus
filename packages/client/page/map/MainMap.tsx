@@ -3,6 +3,7 @@ import {
   darkStyles,
   GoogleMapPortal,
   mapTypeControlOptions,
+  useLoadGoogleMaps,
 } from '@hawaii-bus-plus/react-google-maps';
 import { h } from 'preact';
 import { useContext, useMemo } from 'preact/hooks';
@@ -17,8 +18,11 @@ interface Props {
 
 type MapMouseEvent = google.maps.MapMouseEvent;
 
+const googleMapsApiKey = import.meta.env.VITE_GOOGLE_MAPS_KEY as string;
+
 export function MainMap(props: Props) {
   const { dispatch } = useContext(RouterContext);
+  const { isLoaded } = useLoadGoogleMaps(googleMapsApiKey);
 
   function handleClick(evt: MapMouseEvent) {
     const event = evt as MapMouseEvent & Partial<google.maps.IconMouseEvent>;
@@ -35,21 +39,20 @@ export function MainMap(props: Props) {
       streetViewControl: false,
       fullscreenControl: false,
       zoomControlOptions: {
-        position: window.google
-          ? google.maps.ControlPosition.TOP_RIGHT
-          : undefined,
+        position: isLoaded ? google.maps.ControlPosition.TOP_RIGHT : undefined,
       },
       mapTypeControlOptions,
       controlSize: 32,
       styles: props.darkMode ? darkStyles : undefined,
+      gestureHandling: 'greedy',
     }),
-    [props.darkMode]
+    [isLoaded, props.darkMode]
   );
 
   return (
     <section class="fixed sheet h-full inset-x-0 md:ml-80">
       <GoogleMapPortal
-        googleMapsApiKey={import.meta.env.VITE_GOOGLE_MAPS_KEY as string}
+        googleMapsApiKey={googleMapsApiKey}
         mapContainerClassName="w-full h-full"
         defaultCenter={center}
         defaultZoom={9}

@@ -33,7 +33,10 @@ function MarkerSearchResultItem(props: MarkerProps) {
       <Link
         action={props.action}
         href={props.href}
-        class={classNames('grid gap-x-2 gap-y-1 py-1 text-white', props.class)}
+        class={classNames(
+          'group grid gap-x-2 gap-y-1 py-1 text-white',
+          props.class
+        )}
         onClick={props.onClick}
         style={{ gridTemplate }}
       >
@@ -43,7 +46,7 @@ function MarkerSearchResultItem(props: MarkerProps) {
         >
           {props.icon}
         </span>
-        <p className="text-sm">{props.title}</p>
+        <p className="text-sm group-hover:underline">{props.title}</p>
         <p className="text-xs">{props.subtitle}</p>
       </Link>
     </li>

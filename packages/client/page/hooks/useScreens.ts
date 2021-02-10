@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'preact/hooks';
 // @ts-expect-error test
 import resolveConfig from 'tailwindcss/resolveConfig';
+import { useMatchMedia } from './useMatchMedia';
 
 type Breakpoint = 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 
@@ -10,23 +10,9 @@ interface Config {
   };
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unsafe-call
 const config = resolveConfig({}) as Config;
 
 export function useScreens(breakpoint: Breakpoint) {
-  const [matches, setMatches] = useState(false);
-  useEffect(() => {
-    const mql = window.matchMedia(
-      `(max-width: ${config.theme.screens[breakpoint]})`
-    );
-    setMatches(mql.matches);
-
-    function listener() {
-      setMatches(mql.matches);
-    }
-
-    mql.addEventListener('change', listener);
-    return () => mql.removeEventListener('change', listener);
-  }, [breakpoint]);
-
-  return matches;
+  return useMatchMedia(`(max-width: ${config.theme.screens[breakpoint]})`);
 }

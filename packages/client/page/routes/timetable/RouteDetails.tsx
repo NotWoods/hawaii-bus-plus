@@ -19,20 +19,28 @@ export function RouteDetailsCard({ route, agency, descParts }: Props) {
   }
 
   return (
-    <>
-      <p class="m-4">
-        {'Bus route operated by '}
-        {agency.agency_name}
-      </p>
-      <div class="m-4" role="group">
-        <ButtonLink icon={webIcon} href={agency.agency_url}>
-          Route webpage
-        </ButtonLink>
-        <ButtonLink icon={fareIcon} href={agency.agency_fare_url}>
+    <aside class="bg-white dark:bg-gray-700 shadow-inner px-4 pt-6 pb-8">
+      <div class="flex flex-wrap gap-1 justify-center mb-4">
+        <ButtonLink
+          icon={fareIcon}
+          iconClass="dark:filter-invert"
+          href={agency.agency_fare_url}
+        >
           Fare info
         </ButtonLink>
+        <ButtonLink
+          icon={webIcon}
+          iconClass="dark:filter-invert"
+          href={agency.agency_url}
+        >
+          Route webpage
+        </ButtonLink>
       </div>
-      <p class="prose m-4 max-w-none text-black dark:text-white text-opacity-75 break-words">
+      <p class="prose max-w-none text-black dark:text-white">
+        {'Bus route operated by '}
+        {agency.agency_name}.
+      </p>
+      <p class="prose max-w-none text-black dark:text-white text-opacity-75 break-words">
         {descParts?.map((part, i) =>
           part.type === 'link' ? (
             <a key={i} href={part.value}>
@@ -43,6 +51,6 @@ export function RouteDetailsCard({ route, agency, descParts }: Props) {
           )
         )}
       </p>
-    </>
+    </aside>
   );
 }

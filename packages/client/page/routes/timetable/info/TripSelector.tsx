@@ -1,5 +1,5 @@
 import { Trip } from '@hawaii-bus-plus/types';
-import { h } from 'preact';
+import { h, Fragment } from 'preact';
 import { Temporal } from 'proposal-temporal';
 import { DirectionDetails } from '../../../../worker-info/trip-details';
 import { PlainDateInput } from '../../../time/input/PlainTimeInput';
@@ -16,9 +16,9 @@ export function TripSelector(props: Props) {
 
   // TODO format trip time
   return (
-    <div class="mx-4">
+    <div class="flex flex-wrap justify-end gap-1">
       <PlainDateInput
-        aria-label="Date"
+        aria-label="Departure date"
         value={tripTime.toPlainDate()}
         onChange={(date) =>
           onChangeTripTime(
@@ -27,7 +27,7 @@ export function TripSelector(props: Props) {
         }
       />
       <select
-        class="bg-transparent"
+        class="dark:bg-gray-800"
         aria-label="Bus trip"
         value={closestTrip.trip.trip_id}
         onChange={(evt) => {

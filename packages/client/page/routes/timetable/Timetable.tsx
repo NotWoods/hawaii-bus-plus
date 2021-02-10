@@ -24,12 +24,17 @@ export function Timetable(props: Props) {
 
   return (
     <>
-      <TripSelector
-        details={directionDetails}
-        tripTime={tripTime}
-        onChangeTripTime={props.onChangeTripTime}
-      />
-      <SwitchDirectionButton switchDirection={props.switchDirection} />
+      <div class="flex flex-wrap-reverse gap-4 m-4">
+        <SwitchDirectionButton
+          class="mr-auto"
+          switchDirection={props.switchDirection}
+        />
+        <TripSelector
+          details={directionDetails}
+          tripTime={tripTime}
+          onChangeTripTime={props.onChangeTripTime}
+        />
+      </div>
       <TimetableDetails
         details={details}
         directionId={directionId}

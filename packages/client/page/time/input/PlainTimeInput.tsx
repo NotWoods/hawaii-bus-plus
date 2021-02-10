@@ -4,6 +4,7 @@ import { Temporal } from 'proposal-temporal';
 interface InputProps<T> {
   'aria-label'?: string;
   value: T;
+  forceDark?: boolean;
   onChange(time: T): void;
 }
 
@@ -11,7 +12,7 @@ function PlainTimeInput(props: InputProps<Temporal.PlainTime>) {
   return (
     <input
       type="time"
-      className="bg-transparent"
+      class={props.forceDark ? 'bg-gray-800' : 'dark:bg-gray-800'}
       placeholder="12:00"
       aria-label={props['aria-label']}
       value={props.value.toString({ smallestUnit: 'minutes' })}
@@ -30,7 +31,7 @@ export function PlainDateInput(props: InputProps<Temporal.PlainDate>) {
   return (
     <input
       type="date"
-      className="bg-transparent"
+      class={props.forceDark ? 'bg-gray-800' : 'dark:bg-gray-800'}
       placeholder="2021-01-31"
       aria-label={props['aria-label']}
       value={props.value.toString()}
@@ -50,6 +51,7 @@ export function PlainDateTimeInput(props: InputProps<Temporal.PlainDateTime>) {
     <div className="">
       <div className="">
         <PlainTimeInput
+          forceDark={props.forceDark}
           aria-label={props['aria-label']}
           value={props.value.toPlainTime()}
           onChange={(time) => props.onChange(props.value.withPlainTime(time))}
@@ -57,6 +59,7 @@ export function PlainDateTimeInput(props: InputProps<Temporal.PlainDateTime>) {
       </div>
       <div className="">
         <PlainDateInput
+          forceDark={props.forceDark}
           value={props.value.toPlainDate()}
           onChange={(date) => props.onChange(props.value.withPlainDate(date))}
         />

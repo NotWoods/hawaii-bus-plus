@@ -21,7 +21,7 @@ export function Home(props: Props) {
       </h2>
       <SearchBar onClick={props.onSearch} />
       <NearbyRoutes
-        class="mt-12"
+        class="mt-12 overflow-auto"
         routes={routes}
         agencies={
           api

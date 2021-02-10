@@ -11,7 +11,7 @@ interface Props {
 
 export function SearchBase(props: Props) {
   return (
-    <section class="overlay fixed flex flex-col bg-center bg-no-repeat shadow py-4 bg-gray-800 w-full md:w-80 md:h-screen text-white">
+    <section class="overlay fixed flex flex-col bg-center bg-no-repeat shadow py-4 bg-gray-800 w-full md:w-80 md:h-screen text-white md:overflow-y-auto">
       <header class="flex items-center">
         <IconButton
           class="w-12 h-12 p-3 text-white"
