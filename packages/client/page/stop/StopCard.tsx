@@ -1,5 +1,4 @@
-import { center } from '@hawaii-bus-plus/react-google-maps';
-import { Stop } from '@hawaii-bus-plus/types';
+import { StopPoint } from '@hawaii-bus-plus/presentation';
 import { h } from 'preact';
 import { useState } from 'preact/hooks';
 import { InfoWorkerHandler } from '../../worker-info/info';
@@ -8,16 +7,16 @@ import type { StopDetails } from '../../worker-info/stop-details';
 import { databaseInitialized } from '../hooks/useDatabaseInitialized';
 import { usePromise } from '../hooks/usePromise';
 import { useWorker } from '../hooks/useWorker';
+import { PointBase } from './PointBase';
+import { PointHeader } from './PointInfo';
 import { StopInfo } from './StopInfo';
-import { StreetViewCard } from './StreetViewCard';
 
 interface Props {
-  position?: google.maps.LatLngLiteral;
-  stopId: Stop['stop_id'];
+  point: StopPoint;
   onClose(): void;
 }
 
-export function StopCard(props: Props) {
+export function StopCard({ point, onClose }: Props) {
   const [details, setDetails] = useState<StopDetails | undefined>();
   const postToInfoWorker = useWorker(InfoWorker) as InfoWorkerHandler;
 
@@ -25,21 +24,18 @@ export function StopCard(props: Props) {
     await databaseInitialized;
     const result = await postToInfoWorker({
       type: 'stop',
-      id: props.stopId,
+      id: point.stopId,
     });
     setDetails(result);
-  }, [props.stopId]);
+  }, [point.stopId]);
 
-  const position = props.position ?? details?.position;
+  const position = point.position ?? details?.position;
   if (position) {
     return (
-      <StreetViewCard
-        position={position || center}
-        visible={Boolean(position)}
-        onClose={props.onClose}
-      >
-        <StopInfo stop={details} />
-      </StreetViewCard>
+      <PointBase position={position} onClose={onClose}>
+        <PointHeader>{details?.stop_name}</PointHeader>
+        {details ? <StopInfo stop={details} /> : null}
+      </PointBase>
     );
   } else {
     return null;

@@ -1,9 +1,10 @@
+import { Agency } from '@hawaii-bus-plus/types';
 import { h } from 'preact';
 import { useApi } from '../hooks/useApi';
 import { MenuIcon } from '../icons/MenuIcon';
-import { RouteLinkVertical } from '../routes/link/RouteListItem';
 import { SearchBar } from '../search/SearchBar';
 import { SearchBase } from '../search/SearchBase';
+import { NearbyRoutes } from '../stop/NearbyRoutes';
 
 interface Props {
   onSearch?(): void;
@@ -19,19 +20,17 @@ export function Home(props: Props) {
         Aloha kakahiaka
       </h2>
       <SearchBar onClick={props.onSearch} />
-      <ul
-        class="mt-12 grid grid-flow-col md:grid-flow-row md:grid-cols-2 gap-4 overflow-auto px-4 scroll-snap scroll-px-8 overscroll-contain"
-        style="scroll-padding-inline: 2rem; scroll-snap-type: both mandatory"
-      >
-        {routes.map((route) => (
-          <li key={route.route_id}>
-            <RouteLinkVertical
-              route={route}
-              agency={api!.agency[route.agency_id]}
-            />
-          </li>
-        ))}
-      </ul>
+      <NearbyRoutes
+        class="mt-12"
+        routes={routes}
+        agencies={
+          api
+            ? new Map(
+                Object.entries(api.agency) as [Agency['agency_id'], Agency][]
+              )
+            : new Map()
+        }
+      />
     </SearchBase>
   );
 }

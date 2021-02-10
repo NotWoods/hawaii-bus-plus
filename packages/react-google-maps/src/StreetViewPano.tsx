@@ -4,11 +4,9 @@ import { useListener, useMap } from './apply-changes';
 import { useGoogleMap, useLoadGoogleMaps } from './hooks';
 
 export interface StreetViewPanoProps {
-  className?: string;
+  class?: string;
   googleMapsApiKey: string;
   position: google.maps.LatLngLiteral;
-  visible: boolean;
-  onClose?(this: google.maps.StreetViewPanorama): void;
   onStatusChange?(this: google.maps.StreetViewPanorama): void;
 }
 
@@ -19,7 +17,7 @@ const options = {
   motionTracking: false,
   panControl: false,
   linksControl: false,
-  enableCloseButton: true,
+  enableCloseButton: false,
   controlSize: 32,
   mode: 'webgl' as const,
 };
@@ -53,11 +51,7 @@ export function StreetViewPano(props: StreetViewPanoProps) {
   useEffect(() => {
     streetView?.setPosition(props.position);
   }, [streetView, props.position]);
-  useEffect(() => {
-    streetView?.setVisible(props.visible);
-  }, [streetView, props.visible]);
 
-  useListener(streetView, 'closeclick', props.onClose);
   useListener(streetView, 'status_changed', props.onStatusChange);
 
   if (loadError) {
@@ -71,8 +65,8 @@ export function StreetViewPano(props: StreetViewPanoProps) {
     url.searchParams.set('pitch', options.pov.pitch.toString());
     url.searchParams.set('key', props.googleMapsApiKey);
     // Fallback to static image
-    return <img className={props.className} alt="Street view" src={url.href} />;
+    return <img class={props.class} alt="Street view" src={url.href} />;
   } else {
-    return <div className={props.className} ref={divRef} />;
+    return <div class={props.class} ref={divRef} />;
   }
 }
