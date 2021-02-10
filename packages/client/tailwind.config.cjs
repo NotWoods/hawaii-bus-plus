@@ -1,3 +1,5 @@
+const colors = require('tailwindcss/colors');
+
 module.exports = {
   purge: ['./index.html', './page/**/*.tsx'],
   darkMode: 'media',
@@ -13,24 +15,25 @@ module.exports = {
       ...theme('colors'),
       route: 'var(--route-text-color)',
     }),
-    /*colors: {
-      transparent: 'transparent',
-      current: 'currentColor',
-      gray: {
-        dark: '#141518',
-        DEFAULT: '#322938',
-        light: '#766184',
+    extend: {
+      inset: {
+        '3/4-screen': '75vh',
       },
-    },*/
-    extend: {},
-  },
-  variants: {
-    extend: {},
+      minHeight: {
+        '1/4-screen': '25vh',
+      },
+      colors: {
+        gray: colors.trueGray,
+        blue: colors.coolGray,
+      },
+      zIndex: {
+        '-1': '-1',
+      },
+    },
   },
   plugins: [
     require('@tailwindcss/aspect-ratio'),
     require('@tailwindcss/forms'),
-    require('@tailwindcss/typography'),
     require('tailwindcss-scroll-snap'),
   ],
 };

@@ -1,4 +1,5 @@
 import { h } from 'preact';
+import { useState } from 'preact/hooks';
 import { Temporal } from 'proposal-temporal';
 import { PlainDateTimeInput } from '../time/input/PlainTimeInput';
 
@@ -8,15 +9,21 @@ interface Props {
   onChange(time: Temporal.PlainDateTime): void;
 }
 
+type Selected = 'now' | 'leave-at';
+
 export function DirectionsTime(props: Props) {
-  const leaveNow = props.now.equals(props.value);
+  const [selected, setSelected] = useState<Selected>(
+    props.now.equals(props.value) ? 'now' : 'leave-at'
+  );
+
   return (
-    <div className="directions-box bg-light bg-very-dark-dm">
+    <div class="bg-blue-900 p-4 mt-2">
       <select
-        className="form-control form-control-sm"
-        value={leaveNow ? 'now' : 'leave-at'}
+        class="border-current bg-blue-900 w-full"
+        value={selected}
         onChange={(evt) => {
-          const mode = evt.currentTarget.value;
+          const mode = evt.currentTarget.value as Selected;
+          setSelected(mode);
           if (mode === 'now') {
             props.onChange(props.now);
           }
@@ -25,8 +32,9 @@ export function DirectionsTime(props: Props) {
         <option value="now">Leave now</option>
         <option value="leave-at">Leave at</option>
       </select>
-      {!leaveNow ? (
+      {selected === 'leave-at' ? (
         <PlainDateTimeInput
+          class="text-xs bg-blue-900 flex-1"
           value={props.value}
           onChange={(dateTime) => props.onChange(dateTime)}
         />

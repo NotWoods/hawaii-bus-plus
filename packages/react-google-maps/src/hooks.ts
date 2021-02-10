@@ -1,6 +1,6 @@
-import { useJsApiLoader } from '@react-google-maps/api';
+export { useJsApiLoader } from '@react-google-maps/api';
 import { createContext } from 'preact';
-import { useContext, useMemo } from 'preact/hooks';
+import { useContext } from 'preact/hooks';
 
 export const MapContext = createContext<google.maps.Map | null>(null);
 
@@ -9,19 +9,4 @@ export const MapContext = createContext<google.maps.Map | null>(null);
  */
 export function useGoogleMap() {
   return useContext(MapContext);
-}
-
-/**
- * Variant of `useLoadScript` that has the options all set.
- */
-export function useLoadGoogleMaps(googleMapsApiKey: string) {
-  const options = useMemo(
-    () => ({
-      googleMapsApiKey,
-      libraries: ['places' as const],
-    }),
-    [googleMapsApiKey]
-  );
-
-  return useJsApiLoader(options);
 }

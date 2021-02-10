@@ -36,14 +36,17 @@ export function RouteDetailsCard({ route, agency, descParts }: Props) {
           Route webpage
         </ButtonLink>
       </div>
-      <p class="prose max-w-none text-black dark:text-white">
+      <p class="mb-2 text-black dark:text-white">
         {'Bus route operated by '}
-        {agency.agency_name}.
+        <a href={agency.agency_url} class="text-current hover:underline">
+          {agency.agency_name}
+        </a>
+        .
       </p>
-      <p class="prose max-w-none text-black dark:text-white text-opacity-75 break-words">
+      <p class="text-sm leading-relaxed max-w-none text-black dark:text-white text-opacity-75 break-words">
         {descParts?.map((part, i) =>
           part.type === 'link' ? (
-            <a key={i} href={part.value}>
+            <a key={i} href={part.value} class="hover:underline">
               {part.value}
             </a>
           ) : (

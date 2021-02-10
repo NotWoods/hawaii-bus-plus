@@ -1,6 +1,7 @@
 import { formatPlainTimeRange } from '@hawaii-bus-plus/presentation';
 import { h } from 'preact';
 import { Journey } from '../../worker-nearby/directions/format';
+import { classNames } from '../hooks/classnames';
 import { CloseButton } from '../page-wrapper/alert/CloseButton';
 import './JourneyHeader.css';
 
@@ -18,7 +19,12 @@ export function JourneyHeader({ journey, timeZone, onClose }: Props) {
   );
 
   return (
-    <header class="journey__header grid relative items-center bg-white bg-opacity-20 border-b">
+    <header
+      class={classNames(
+        'journey__header grid relative items-center bg-white bg-opacity-20 border-b',
+        onClose && 'journey__header--close'
+      )}
+    >
       <time class="block font-display font-medium p-2">
         <span class="text-2xl">20</span> <span>min</span>
       </time>

@@ -22,8 +22,8 @@ function BaseSegmentContent(props: ContentProps) {
   const { name, desc, time } = props;
   return (
     <>
-      <TripDecorLine gridArea="line-top" />
       <TripDecorDot />
+      <TripDecorLine gridArea="line-top" />
       <TripDecorLine gridArea="line" />
       <p
         class={classNames('group-hover:underline', props.small && 'text-sm')}

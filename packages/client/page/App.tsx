@@ -1,6 +1,6 @@
 import { MapProvider } from '@hawaii-bus-plus/react-google-maps';
 import { h } from 'preact';
-import { MainContent } from './home/Main';
+import { MainContent } from './home/MainContent';
 import { ApiProvider } from './hooks/useApi';
 import { MainMap } from './map/MainMap';
 import { Router } from './router/Router';

@@ -57,7 +57,7 @@ function TripCollapse({ stopTimes }: TripCollapseProps) {
       <summary class="flex -mx-2 overflow-hidden">
         <Icon
           class={classNames(
-            'transform transition-transform',
+            'transform transition-transform dark:filter-invert',
             open && 'rotate-180'
           )}
           style={{ gridArea: 'dot' }}

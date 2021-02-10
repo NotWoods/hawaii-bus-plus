@@ -17,13 +17,15 @@ export function RouteSearchResultItem(props: Props) {
   return (
     <Link
       href={`/routes/${route.route_id}/`}
-      class={classNames('block p-2 text-white', props.className)}
+      class={classNames('group block p-2 text-white', props.className)}
       onClick={props.onClick}
     >
       <RouteIcon style={colorVariables(route)}>
         {route.route_short_name}
       </RouteIcon>
-      <p className="mt-2 text-sm">{route.route_long_name}</p>
+      <p className="mt-2 text-sm group-hover:underline">
+        {route.route_long_name}
+      </p>
       {agency.primary ? undefined : (
         <p className="text-xs">{agency.agency_name}</p>
       )}

@@ -1,21 +1,16 @@
 import { PlacePoint, Point, StopPoint } from '@hawaii-bus-plus/presentation';
 import { h, Fragment } from 'preact';
-import { useContext, useState } from 'preact/hooks';
+import { useContext } from 'preact/hooks';
 import { JourneySheet } from '../directions/JourneySheet';
 import { useScreens } from '../hooks/useScreens';
 import { RouterContext } from '../router/Router';
 import { RouteTimetable } from '../routes/RouteTimetable';
-import { DirectionsSearch } from '../search/directions/DirectionsSearch';
-import { SimpleSearch } from '../search/simple/SimpleSearch';
 import { PointDetails } from '../stop/PointDetails';
-import { Home } from './Home';
+import { HomeOverlay } from './HomeOverlay';
 
 export function MainContent() {
-  const smMatches = useScreens('sm');
+  const mdMatches = useScreens('md');
   const { point, directions, routeId } = useContext(RouterContext);
-  const [screen, setScreen] = useState<'home' | 'search' | 'directions'>(
-    'home'
-  );
   const sheetOpen = directions != undefined || routeId != undefined;
 
   function pointDetailsOpen(
@@ -34,19 +29,7 @@ export function MainContent() {
     if (pointDetailsOpen(point)) {
       return <PointDetails point={point} />;
     } else {
-      switch (screen) {
-        case 'home':
-          return <Home onSearch={() => setScreen('search')} />;
-        case 'search':
-          return (
-            <SimpleSearch
-              onClose={() => setScreen('home')}
-              onDirections={() => setScreen('directions')}
-            />
-          );
-        case 'directions':
-          return <DirectionsSearch onClose={() => setScreen('home')} />;
-      }
+      return <HomeOverlay />;
     }
   }
 
@@ -58,12 +41,7 @@ export function MainContent() {
     );
   }
 
-  if (smMatches) {
-    // Small screen
-    return pointDetailsOpen(point) || !sheetOpen
-      ? renderOverlay()
-      : renderSheet();
-  } else {
+  if (mdMatches) {
     // Medium or bigger
     return (
       <>
@@ -71,5 +49,10 @@ export function MainContent() {
         {renderSheet()}
       </>
     );
+  } else {
+    // Small screen
+    return pointDetailsOpen(point) || !sheetOpen
+      ? renderOverlay()
+      : renderSheet();
   }
 }

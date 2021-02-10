@@ -44,7 +44,7 @@ export function RouteTimetable() {
   const route = details?.route;
   if (route) {
     return (
-      <BaseSheet style={colorVariables(route)}>
+      <BaseSheet style={colorVariables(route)} loaded>
         <RouteHeader route={route} />
         <Timetable
           details={details!}

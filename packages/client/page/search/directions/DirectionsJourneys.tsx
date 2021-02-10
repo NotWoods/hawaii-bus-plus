@@ -60,11 +60,12 @@ export function DirectionsJourneys(props: Props) {
   }
 
   return (
-    <>
+    <div class="fixed bottom-0 md:static overflow-x-auto snap snap-both snap-mandatory snap-px-32 overscroll-contain">
       <SearchResultsSubList
         forceTitles
         list={results}
         title="By bus"
+        titleClass="hidden md:block"
         child={(journey) => (
           <DirectionsJourneyItem
             journey={journey}
@@ -80,6 +81,6 @@ export function DirectionsJourneys(props: Props) {
           No results found. Try searching for trips starting tomorrow?
         </button>
       ) : null}
-    </>
+    </div>
   );
 }

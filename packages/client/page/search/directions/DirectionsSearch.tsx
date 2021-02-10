@@ -5,6 +5,7 @@ import { useMemo, useState } from 'preact/hooks';
 import type { Journey } from '../../../worker-nearby/directions/format';
 import type { NearbyWorkerHandler } from '../../../worker-nearby/nearby';
 import DirectionsWorker from '../../../worker-nearby/nearby?worker';
+import { DirectionsTime } from '../../directions/DirectionsTime';
 import { databaseInitialized } from '../../hooks/useDatabaseInitialized';
 import { usePromise } from '../../hooks/usePromise';
 import { useWorker } from '../../hooks/useWorker';
@@ -74,6 +75,11 @@ export function DirectionsSearch(props: Props) {
             results,
           })
         }
+      />
+      <DirectionsTime
+        now={now}
+        value={departureTime}
+        onChange={setDepartTime}
       />
 
       <DirectionsPointResults

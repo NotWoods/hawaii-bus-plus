@@ -1,7 +1,7 @@
 import { h } from 'preact';
 import { useEffect, useRef } from 'preact/hooks';
 import { useListener, useMap } from './apply-changes';
-import { useGoogleMap, useLoadGoogleMaps } from './hooks';
+import { useGoogleMap } from './hooks';
 
 export interface StreetViewPanoProps {
   class?: string;
@@ -24,13 +24,13 @@ const options = {
 
 /**
  * Build a street view panorama.
- * Fallbacks to an image if the Google Maps API hasn't loaded.
  */
-export function StreetViewPano(props: StreetViewPanoProps) {
+export function StreetViewPano(
+  props: Omit<StreetViewPanoProps, 'googleMapsApiKey'>
+) {
   const divRef = useRef(null);
 
   const map = useGoogleMap();
-  const { loadError } = useLoadGoogleMaps(props.googleMapsApiKey);
 
   const streetView = useMap<google.maps.StreetViewPanorama>(
     map,
@@ -54,19 +54,24 @@ export function StreetViewPano(props: StreetViewPanoProps) {
 
   useListener(streetView, 'status_changed', props.onStatusChange);
 
-  if (loadError) {
-    const url = new URL('https://maps.googleapis.com/maps/api/streetview');
-    url.searchParams.set('size', '474x266');
-    url.searchParams.set(
-      'location',
-      `${props.position.lat},${props.position.lng}`
-    );
-    url.searchParams.set('heading', options.pov.heading.toString());
-    url.searchParams.set('pitch', options.pov.pitch.toString());
-    url.searchParams.set('key', props.googleMapsApiKey);
-    // Fallback to static image
-    return <img class={props.class} alt="Street view" src={url.href} />;
-  } else {
-    return <div class={props.class} ref={divRef} />;
-  }
+  return <div class={props.class} ref={divRef} />;
+}
+
+/**
+ * Street view static image
+ */
+export function StreetViewStatic(
+  props: Omit<StreetViewPanoProps, 'onStatusChange'>
+) {
+  const url = new URL('https://maps.googleapis.com/maps/api/streetview');
+  url.searchParams.set('size', '474x266');
+  url.searchParams.set(
+    'location',
+    `${props.position.lat},${props.position.lng}`
+  );
+  url.searchParams.set('heading', options.pov.heading.toString());
+  url.searchParams.set('pitch', options.pov.pitch.toString());
+  url.searchParams.set('key', props.googleMapsApiKey);
+
+  return <img class={props.class} alt="Street view" src={url.href} />;
 }

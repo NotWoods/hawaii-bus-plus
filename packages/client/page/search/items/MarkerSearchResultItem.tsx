@@ -1,16 +1,14 @@
 import { Route, Stop } from '@hawaii-bus-plus/types';
 import { ComponentChildren, h } from 'preact';
-import busStopIcon from '../../icons/bus_stop.svg';
-import placeIcon from '../../icons/place.svg';
 import { classNames } from '../../hooks/classnames';
-import { RouterAction } from '../../router/action';
-import { Link } from '../../router/Router';
+import busStopIcon from '../../icons/bus_stop.svg';
+import { Icon } from '../../icons/Icon';
+import placeIcon from '../../icons/place.svg';
 import {
   BLANK,
   RouteBadgeKeys,
   RouteBadges,
 } from '../../routes/badge/RouteBadge';
-import { Icon } from '../../icons/Icon';
 
 interface MarkerProps {
   href?: string;
@@ -18,7 +16,6 @@ interface MarkerProps {
   title?: ComponentChildren;
   subtitle?: ComponentChildren;
   class?: string;
-  action?: RouterAction;
   onClick?(evt: MouseEvent): void;
 }
 
@@ -30,8 +27,7 @@ const gridTemplate = `
 function MarkerSearchResultItem(props: MarkerProps) {
   return (
     <li>
-      <Link
-        action={props.action}
+      <a
         href={props.href}
         class={classNames(
           'group grid gap-x-2 gap-y-1 py-1 text-white',
@@ -41,19 +37,19 @@ function MarkerSearchResultItem(props: MarkerProps) {
         style={{ gridTemplate }}
       >
         <span
-          class="rounded bg-gray-900 self-start p-1"
+          class="rounded bg-blue-900 self-start p-1"
           style={{ gridArea: 'icon' }}
         >
           {props.icon}
         </span>
         <p className="text-sm group-hover:underline">{props.title}</p>
         <p className="text-xs">{props.subtitle}</p>
-      </Link>
+      </a>
     </li>
   );
 }
 
-type BaseProps = Pick<MarkerProps, 'class' | 'action' | 'onClick'>;
+type BaseProps = Pick<MarkerProps, 'class' | 'onClick'>;
 
 interface StopProps extends BaseProps {
   stopId: Stop['stop_id'];

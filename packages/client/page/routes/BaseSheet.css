@@ -1,7 +1,12 @@
-.sheet__container {
-  top: 75vh;
+.animate-enter--sheet {
+  animation: enterSheet 0.3s;
 }
 
-.sheet {
-  min-height: 25vh;
+@keyframes enterSheet {
+  from {
+    transform: translateY(25vh);
+  }
+  to {
+    transform: translateY(0);
+  }
 }

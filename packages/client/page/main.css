@@ -6,6 +6,15 @@
   color-scheme: light dark;
 }
 
+@media (prefers-color-scheme: dark) {
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus {
+    font-family: inherit;
+    -webkit-box-shadow: 0 0 0px 1000px theme('colors.blue.900') inset;
+  }
+}
+
 @layer utilities {
   @variants dark {
     .filter-none {
@@ -14,5 +23,12 @@
     .filter-invert {
       filter: invert(100%);
     }
+  }
+
+  .animate-run {
+    animation-play-state: running;
+  }
+  .animate-pause {
+    animation-play-state: paused;
   }
 }

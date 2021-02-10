@@ -26,7 +26,7 @@ export function SimpleSearch(props: Props) {
       />
       <Button
         icon={directionsIcon}
-        class="mx-4"
+        class="mx-4 mb-4"
         iconClass="filter-invert"
         onClick={props.onDirections}
       >

@@ -3,26 +3,23 @@ import {
   darkStyles,
   GoogleMapPortal,
   mapTypeControlOptions,
-  useLoadGoogleMaps,
 } from '@hawaii-bus-plus/react-google-maps';
 import { h } from 'preact';
 import { useContext, useMemo } from 'preact/hooks';
+import { useLoadGoogleMaps } from '../hooks/useLoadGoogleMaps';
+import { useDarkMode } from '../hooks/useMatchMedia';
+import { useScreens } from '../hooks/useScreens';
 import { openPlace, setMarker } from '../router/action';
 import { RouterContext } from '../router/Router';
 import { PlaceMarker } from './PlaceMarker';
 import { RouteGlyphs } from './RouteGlyphs';
 
-interface Props {
-  darkMode?: boolean;
-}
-
 type MapMouseEvent = google.maps.MapMouseEvent;
 
-const googleMapsApiKey = import.meta.env.VITE_GOOGLE_MAPS_KEY as string;
-
-export function MainMap(props: Props) {
+function MapContent() {
+  const mdMatches = useScreens('md');
+  const darkMode = useDarkMode();
   const { dispatch } = useContext(RouterContext);
-  const { isLoaded } = useLoadGoogleMaps(googleMapsApiKey);
 
   function handleClick(evt: MapMouseEvent) {
     const event = evt as MapMouseEvent & Partial<google.maps.IconMouseEvent>;
@@ -34,34 +31,53 @@ export function MainMap(props: Props) {
     }
   }
 
-  const options = useMemo<google.maps.MapOptions>(
-    () => ({
+  const options = useMemo<google.maps.MapOptions>(() => {
+    const options: google.maps.MapOptions = {
       streetViewControl: false,
       fullscreenControl: false,
-      zoomControlOptions: {
-        position: isLoaded ? google.maps.ControlPosition.TOP_RIGHT : undefined,
-      },
       mapTypeControlOptions,
       controlSize: 32,
-      styles: props.darkMode ? darkStyles : undefined,
       gestureHandling: 'greedy',
-    }),
-    [isLoaded, props.darkMode]
-  );
+    };
+
+    if (darkMode) {
+      options.styles = darkStyles;
+    }
+    if (mdMatches) {
+      options.zoomControlOptions = {
+        position: google.maps.ControlPosition.TOP_RIGHT,
+      };
+    } else {
+      options.mapTypeControlOptions!.position =
+        google.maps.ControlPosition.BOTTOM_CENTER;
+      options.zoomControlOptions = {
+        position: google.maps.ControlPosition.RIGHT_BOTTOM,
+      };
+    }
+
+    return options;
+  }, [darkMode, mdMatches]);
 
   return (
-    <section class="fixed sheet h-full inset-x-0 md:ml-80">
-      <GoogleMapPortal
-        googleMapsApiKey={googleMapsApiKey}
-        mapContainerClassName="w-full h-full"
-        defaultCenter={center}
-        defaultZoom={9}
-        options={options}
-        onClick={handleClick}
-      >
-        <RouteGlyphs darkMode={props.darkMode} />
-        <PlaceMarker />
-      </GoogleMapPortal>
+    <GoogleMapPortal
+      mapContainerClassName="w-full h-full"
+      defaultCenter={center}
+      defaultZoom={9}
+      options={options}
+      onClick={handleClick}
+    >
+      <RouteGlyphs darkMode={darkMode} />
+      <PlaceMarker />
+    </GoogleMapPortal>
+  );
+}
+
+export function MainMap() {
+  const { isLoaded } = useLoadGoogleMaps();
+
+  return (
+    <section class="fixed sheet inset-0 top-52 md:top-0 md:ml-80">
+      {isLoaded ? <MapContent /> : null}
     </section>
   );
 }

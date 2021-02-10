@@ -1,6 +1,13 @@
-import { StreetViewPano } from '@hawaii-bus-plus/react-google-maps';
+import {
+  StreetViewPano,
+  StreetViewStatic,
+} from '@hawaii-bus-plus/react-google-maps';
 import { ComponentChildren, h } from 'preact';
 import { useState } from 'preact/hooks';
+import {
+  googleMapsApiKey,
+  useLoadGoogleMaps,
+} from '../hooks/useLoadGoogleMaps';
 import { SearchBase } from '../search/SearchBase';
 
 interface Props {
@@ -13,6 +20,7 @@ export function PointBase(props: Props) {
   const [status, setStatus] = useState<
     google.maps.StreetViewStatus | undefined
   >();
+  const { loadError } = useLoadGoogleMaps();
 
   return (
     <SearchBase onClose={props.onClose}>
@@ -21,14 +29,21 @@ export function PointBase(props: Props) {
         hidden={status === 'ZERO_RESULTS'}
       >
         {props.position ? (
-          <StreetViewPano
-            googleMapsApiKey={import.meta.env.VITE_GOOGLE_MAPS_KEY as string}
-            class="bg-very-dark"
-            position={props.position}
-            onStatusChange={function () {
-              setStatus(this.getStatus());
-            }}
-          />
+          loadError ? (
+            <StreetViewStatic
+              googleMapsApiKey={googleMapsApiKey}
+              class="bg-very-dark"
+              position={props.position}
+            />
+          ) : (
+            <StreetViewPano
+              class="bg-very-dark"
+              position={props.position}
+              onStatusChange={function () {
+                setStatus(this.getStatus());
+              }}
+            />
+          )
         ) : null}
       </div>
       {props.children}

@@ -14,5 +14,5 @@ interface Config {
 const config = resolveConfig({}) as Config;
 
 export function useScreens(breakpoint: Breakpoint) {
-  return useMatchMedia(`(max-width: ${config.theme.screens[breakpoint]})`);
+  return useMatchMedia(`(min-width: ${config.theme.screens[breakpoint]})`);
 }
