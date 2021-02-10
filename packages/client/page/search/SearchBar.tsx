@@ -17,12 +17,14 @@ export function SearchBar(props: JSX.HTMLAttributes<HTMLInputElement>) {
         accessKey="f"
       />
       <LeadingInputIcon src={searchIcon} alt="Search" />
-      <IconButton
-        type="reset"
-        class="absolute inset-y-0 right-0 h-full py-0 px-2"
-      >
-        <IconTw src={clearIcon} alt="Clear" class="opacity-60" />
-      </IconButton>
+      {typeof props.value === 'string' && props.value.length > 0 ? (
+        <IconButton
+          type="reset"
+          class="absolute inset-y-0 right-0 h-full py-0 px-2"
+        >
+          <IconTw src={clearIcon} alt="Clear" class="opacity-60" />
+        </IconButton>
+      ) : null}
     </form>
   );
 }

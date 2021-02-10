@@ -1,6 +1,6 @@
 import { Agency, Route } from '@hawaii-bus-plus/types';
 import { Fragment, h } from 'preact';
-import { Icon } from '../../icons/Icon';
+import { ButtonLink } from '../../buttons/Button';
 import fareIcon from '../../icons/monetization_on.svg';
 import webIcon from '../../icons/web.svg';
 
@@ -15,21 +15,24 @@ interface Props {
 
 export function RouteDetailsCard({ route, agency, descParts }: Props) {
   if (!route || !agency) {
-    return <div className="card" />;
+    return null;
   }
 
   return (
-    <div className="card prose">
-      <p>{`Bus route operated by ${agency.agency_name}`}</p>
-      <div className="btn-group flex-wrap" role="group">
-        <a className="btn" href={agency.agency_url}>
-          <Icon src={webIcon} alt="" /> Route webpage
-        </a>
-        <a className="btn" href={agency.agency_fare_url}>
-          <Icon src={fareIcon} alt="" /> Fare info
-        </a>
+    <>
+      <p class="m-4">
+        {'Bus route operated by '}
+        {agency.agency_name}
+      </p>
+      <div class="m-4" role="group">
+        <ButtonLink icon={webIcon} href={agency.agency_url}>
+          Route webpage
+        </ButtonLink>
+        <ButtonLink icon={fareIcon} href={agency.agency_fare_url}>
+          Fare info
+        </ButtonLink>
       </div>
-      <p className="text-muted text-break">
+      <p class="prose m-4 max-w-none text-black dark:text-white text-opacity-75 break-words">
         {descParts?.map((part, i) =>
           part.type === 'link' ? (
             <a key={i} href={part.value}>
@@ -40,6 +43,6 @@ export function RouteDetailsCard({ route, agency, descParts }: Props) {
           )
         )}
       </p>
-    </div>
+    </>
   );
 }

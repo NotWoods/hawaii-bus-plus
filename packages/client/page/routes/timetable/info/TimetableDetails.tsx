@@ -21,8 +21,12 @@ export function TimetableDetails(props: Props) {
 
   // TODO add string property to duration
   return (
-    <aside class="shadow m-4 mb-0 p-4 pl-12 bg-white relative">
-      <IconTw src={timeIcon} alt="" class="absolute top-5 left-4" />
+    <aside class="shadow m-4 mb-0 p-4 pl-12 bg-white dark:bg-gray-700 relative">
+      <IconTw
+        src={timeIcon}
+        alt=""
+        class="absolute top-5 left-3 dark:filter-invert"
+      />
       <ReachesAt closestTrip={closestTrip} />
       <StartedFrom
         stopTime={closestTrip.stopTimes[0]}

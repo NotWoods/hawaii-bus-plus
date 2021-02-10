@@ -4,7 +4,7 @@ import './DecorLines.css';
 
 export function TripDecorDot() {
   return (
-    <div class="grid-area-dot bg-white rounded-full ring-route ring-4 w-2 h-2 flex-none" />
+    <div class="grid-area-dot bg-transparent rounded-full ring-route ring-4 w-2 h-2 flex-none" />
   );
 }
 

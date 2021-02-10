@@ -26,9 +26,8 @@ export function JourneyDirectionsResultItem(props: Props) {
     <Link
       action={props.action}
       href={props.href}
-      class="flex flex-col w-32 md:w-auto shadow-xl h-full text-black dark:text-white bg-gray-200 dark:bg-gray-700"
+      class="flex flex-col snap-start w-32 md:w-auto shadow-xl h-full text-black dark:text-white bg-gray-200 dark:bg-gray-700"
       onClick={props.onClick}
-      style="scroll-snap-align: start"
     >
       <JourneyHeader journey={journey} timeZone="Pacific/Honolulu" />
       <ul class="p-4 flex flex-col md:flex-row">

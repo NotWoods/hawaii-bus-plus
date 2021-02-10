@@ -1,6 +1,4 @@
 import { ComponentChildren, h } from 'preact';
-import { classNames } from '../hooks/classnames';
-import './Icon.css';
 
 interface Props {
   src: string;
@@ -35,21 +33,5 @@ export function BaseIcon(props: { children: ComponentChildren }) {
     >
       {props.children}
     </svg>
-  );
-}
-
-export function Icon(props: Props) {
-  return (
-    <img
-      className={classNames(
-        'icon inline-block m-0',
-        props.small ? 'align-baseline w-6 h-6' : 'w-8 h-8',
-        props.className
-      )}
-      src={props.src}
-      alt={props.alt}
-      width="24"
-      height="24"
-    />
   );
 }

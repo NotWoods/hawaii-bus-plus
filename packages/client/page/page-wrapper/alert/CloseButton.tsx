@@ -23,8 +23,8 @@ export function CloseButton(props: Props) {
     >
       <IconTw
         src={clearIcon}
-        alt="Clear"
-        class={props.dark ? 'filter-invert' : undefined}
+        alt="Close"
+        class={props.dark ? 'dark:filter-invert' : undefined}
       />
     </IconButton>
   );

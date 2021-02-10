@@ -30,9 +30,15 @@ export function MainMap(props: Props) {
     }
   }
 
-  const options = useMemo(
+  const options = useMemo<google.maps.MapOptions>(
     () => ({
       streetViewControl: false,
+      fullscreenControl: false,
+      zoomControlOptions: {
+        position: window.google
+          ? google.maps.ControlPosition.TOP_RIGHT
+          : undefined,
+      },
       mapTypeControlOptions,
       controlSize: 32,
       styles: props.darkMode ? darkStyles : undefined,
@@ -41,16 +47,18 @@ export function MainMap(props: Props) {
   );
 
   return (
-    <GoogleMapPortal
-      googleMapsApiKey={import.meta.env.VITE_GOOGLE_MAPS_KEY as string}
-      mapContainerClassName="map w-full h-full position-fixed"
-      defaultCenter={center}
-      defaultZoom={9}
-      options={options}
-      onClick={handleClick}
-    >
-      <RouteGlyphs darkMode={props.darkMode} />
-      <PlaceMarker />
-    </GoogleMapPortal>
+    <section class="fixed sheet h-full inset-x-0 ml-80">
+      <GoogleMapPortal
+        googleMapsApiKey={import.meta.env.VITE_GOOGLE_MAPS_KEY as string}
+        mapContainerClassName="w-full h-full"
+        defaultCenter={center}
+        defaultZoom={9}
+        options={options}
+        onClick={handleClick}
+      >
+        <RouteGlyphs darkMode={props.darkMode} />
+        <PlaceMarker />
+      </GoogleMapPortal>
+    </section>
   );
 }

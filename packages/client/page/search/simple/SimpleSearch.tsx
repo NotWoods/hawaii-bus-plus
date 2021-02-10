@@ -24,7 +24,12 @@ export function SimpleSearch(props: Props) {
         value={search}
         onInput={(evt) => setSearch(evt.currentTarget.value)}
       />
-      <Button icon={directionsIcon} class="mx-4" onClick={props.onDirections}>
+      <Button
+        icon={directionsIcon}
+        class="mx-4"
+        iconClass="filter-invert"
+        onClick={props.onDirections}
+      >
         Directions
       </Button>
 

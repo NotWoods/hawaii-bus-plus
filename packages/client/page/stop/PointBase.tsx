@@ -17,13 +17,13 @@ export function PointBase(props: Props) {
   return (
     <SearchBase onClose={props.onClose}>
       <div
-        className="aspect-w-16 aspect-h-9"
+        className="aspect-w-16 aspect-h-9 mb-4"
         hidden={status === 'ZERO_RESULTS'}
       >
         {props.position ? (
           <StreetViewPano
             googleMapsApiKey={import.meta.env.VITE_GOOGLE_MAPS_KEY as string}
-            class="bg-very-dark rounded-t"
+            class="bg-very-dark"
             position={props.position}
             onStatusChange={function () {
               setStatus(this.getStatus());

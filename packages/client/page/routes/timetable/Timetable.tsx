@@ -4,6 +4,7 @@ import { RouteDetails } from '../../../worker-info/route-details';
 import { SwitchDirectionButton } from './info/SwitchDirectionButton';
 import { TimetableDetails } from './info/TimetableDetails';
 import { TripSelector } from './info/TripSelector';
+import { RouteDetailsCard } from './RouteDetails';
 import { StopTimeSegmentList } from './stop-time/StopTimeSegmentList';
 import { useTripBounds } from './useTripBounds';
 
@@ -37,6 +38,11 @@ export function Timetable(props: Props) {
       <StopTimeSegmentList
         stopTimes={directionDetails.closestTrip.stopTimes}
         timeZone={details.agency.agency_timezone}
+      />
+      <RouteDetailsCard
+        route={details.route}
+        agency={details.agency}
+        descParts={details.descParts}
       />
     </>
   );

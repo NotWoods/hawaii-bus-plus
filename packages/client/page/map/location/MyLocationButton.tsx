@@ -2,10 +2,10 @@ import { useGoogleMap } from '@hawaii-bus-plus/react-google-maps';
 import { h } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
 import { convertLatLng } from 'spherical-geometry-js';
+import { Button } from '../../buttons/Button';
 import { useGeolocation } from '../../hooks/useGeolocation';
 import { usePromise } from '../../hooks/usePromise';
 import locationIcon from '../../icons/gps_fixed.svg';
-import { Icon } from '../../icons/Icon';
 import { UserMarker } from '../PlaceMarker';
 
 export function MyLocationButton() {
@@ -38,9 +38,9 @@ export function MyLocationButton() {
   }, [shouldCenter, map]);
 
   return (
-    <button className="btn btn-sm" type="button" onClick={handleClick}>
-      <Icon small src={locationIcon} alt="" /> My location
+    <Button icon={locationIcon} onClick={handleClick}>
+      My location
       {latLng ? <UserMarker position={latLng} /> : null}
-    </button>
+    </Button>
   );
 }

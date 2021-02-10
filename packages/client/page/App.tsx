@@ -1,7 +1,6 @@
 import { MapProvider } from '@hawaii-bus-plus/react-google-maps';
 import { h } from 'preact';
-import { Sheet } from './directions/JourneySheet';
-import { Overlay } from './home/Overlay';
+import { Main } from './home/Main';
 import { ApiProvider } from './hooks/useApi';
 import { Router } from './router/Router';
 import { RouteDetailProvider } from './routes/timetable/context';
@@ -12,10 +11,7 @@ export function App() {
       <ApiProvider>
         <MapProvider>
           <RouteDetailProvider>
-            <main>
-              <Overlay />
-              <Sheet />
-            </main>
+            <Main />
           </RouteDetailProvider>
         </MapProvider>
       </ApiProvider>

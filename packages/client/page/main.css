@@ -3,21 +3,12 @@
 @tailwind utilities;
 
 @layer utilities {
-  .filter-invert {
-    filter: invert(100%);
-  }
-
-  .scroll-snap {
-    scroll-snap-type: both mandatory;
-  }
-  .scroll-snap-x {
-    scroll-snap-type: x mandatory;
-  }
-  .scroll-snap-y {
-    scroll-snap-type: y mandatory;
-  }
-
-  .scroll-px-8 {
-    scroll-padding-inline: 8rem;
+  @variants dark {
+    .filter-none {
+      filter: invert(100%);
+    }
+    .filter-invert {
+      filter: invert(100%);
+    }
   }
 }
