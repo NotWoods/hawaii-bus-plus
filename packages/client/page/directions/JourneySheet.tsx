@@ -4,7 +4,6 @@ import type { Journey } from '../../worker-nearby/directions/format';
 import { closeJourneyAction } from '../router/action';
 import { RouterContext } from '../router/Router';
 import { BaseSheet } from '../routes/BaseSheet';
-import { RouteTimetable } from '../routes/RouteTimetable';
 import { JourneyHeader } from './JourneyHeader';
 import { isJourneyTripSegment, JourneySegment } from './JourneySegment';
 
@@ -36,15 +35,5 @@ export function JourneySheet(props: Props) {
         })}
       </ul>
     </BaseSheet>
-  );
-}
-
-export function Sheet() {
-  const { directions } = useContext(RouterContext);
-
-  return directions?.journey ? (
-    <JourneySheet journey={directions.journey} timeZone="Pacific/Honolulu" />
-  ) : (
-    <RouteTimetable />
   );
 }

@@ -47,7 +47,7 @@ export function MainMap(props: Props) {
   );
 
   return (
-    <section class="fixed sheet h-full inset-x-0 ml-80">
+    <section class="fixed sheet h-full inset-x-0 md:ml-80">
       <GoogleMapPortal
         googleMapsApiKey={import.meta.env.VITE_GOOGLE_MAPS_KEY as string}
         mapContainerClassName="w-full h-full"

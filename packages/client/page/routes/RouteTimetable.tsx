@@ -59,7 +59,7 @@ export function RouteTimetable() {
     return (
       <BaseSheet>
         <RouteHeader />
-        <LoadingBar />
+        <LoadingBar class="m-4" />
       </BaseSheet>
     );
   } else {

@@ -4,7 +4,7 @@ import { useState } from 'preact/hooks';
 import type { JourneyTripSegment } from '../../../../worker-nearby/directions/format';
 import { classNames } from '../../../hooks/classnames';
 import expandIcon from '../../../icons/expand_more.svg';
-import { IconTw } from '../../../icons/Icon';
+import { Icon } from '../../../icons/Icon';
 import { SmallRouteIcon } from '../../badge/RouteIcon';
 import { colorVariables } from '../../props';
 import { BaseSegment } from './BaseSegment';
@@ -55,7 +55,7 @@ function TripCollapse({ stopTimes }: TripCollapseProps) {
       onToggle={() => setOpen(!open)}
     >
       <summary class="flex -mx-2 overflow-hidden">
-        <IconTw
+        <Icon
           class={classNames(
             'transform transition-transform',
             open && 'rotate-180'

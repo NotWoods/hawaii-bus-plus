@@ -1,0 +1,10 @@
+.segment {
+  grid-template:
+    'line-top .      .' var(--segment-padding, 0.75rem)
+    'line-top name   time' 0.5rem
+    'dot      name   time' min-content
+    'line     name   time' auto
+    'line     desc   .' auto
+    'line     .      .' var(--segment-padding, 0.75rem)
+    / 0.5rem auto min-content;
+}

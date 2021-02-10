@@ -4,16 +4,7 @@ import { classNames } from '../../../hooks/classnames';
 import { Link } from '../../../router/Router';
 import { PlainTimeElement } from '../../../time/PlainTimeElement';
 import { TripDecorDot, TripDecorLine } from './DecorLines';
-
-const gridTemplate = `
-  'line-top .      .'    var(--segment-padding, 1rem)
-  'line-top name   time' 0.5rem
-  'dot      name   time' min-content
-  'line     name   time' auto
-  'line     desc   .'    auto
-  'line     .      .'    var(--segment-padding, 1rem)
-  / 0.5rem auto min-content
-`;
+import './BaseSegment.css';
 
 interface ContentProps {
   name: string;
@@ -27,13 +18,17 @@ interface ContentProps {
   small?: boolean;
 }
 
-function BaseSegmentContent({ name, desc, time, small }: ContentProps) {
+function BaseSegmentContent(props: ContentProps) {
+  const { name, desc, time } = props;
   return (
     <>
       <TripDecorLine gridArea="line-top" />
       <TripDecorDot />
       <TripDecorLine gridArea="line" />
-      <p class={small ? 'text-sm' : undefined} style={{ gridArea: 'name' }}>
+      <p
+        class={classNames('group-hover:underline', props.small && 'text-sm')}
+        style={{ gridArea: 'name' }}
+      >
         {name}
       </p>
       {desc && ' '}
@@ -63,12 +58,16 @@ interface Props extends ContentProps {
 
 export function BaseSegment(props: Props) {
   const { gridArea } = props;
-  const linkClasses = classNames('grid gap-x-4', props.class);
-  const style = { gridTemplate, gridArea };
+  const linkClasses = classNames('segment grid gap-x-4', props.class);
+  const style = { gridArea };
 
   if (props.href) {
     return (
-      <Link href={props.href} class={linkClasses} style={style}>
+      <Link
+        href={props.href}
+        class={classNames(linkClasses, 'group')}
+        style={style}
+      >
         <BaseSegmentContent {...props} />
       </Link>
     );

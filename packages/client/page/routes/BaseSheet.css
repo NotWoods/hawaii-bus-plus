@@ -1,4 +1,7 @@
 .sheet__container {
   top: 75vh;
+}
+
+.sheet {
   min-height: 25vh;
 }

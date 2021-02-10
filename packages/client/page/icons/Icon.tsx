@@ -9,7 +9,7 @@ interface Props {
   style?: { gridArea?: string };
 }
 
-export function IconTw(props: Props) {
+export function Icon(props: Props) {
   return (
     <img
       class={props.class ?? 'w-6 h-6'}

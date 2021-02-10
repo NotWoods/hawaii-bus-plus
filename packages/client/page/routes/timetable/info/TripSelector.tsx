@@ -27,6 +27,7 @@ export function TripSelector(props: Props) {
         }
       />
       <select
+        class="bg-transparent"
         aria-label="Bus trip"
         value={closestTrip.trip.trip_id}
         onChange={(evt) => {

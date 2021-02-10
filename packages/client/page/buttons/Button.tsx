@@ -1,7 +1,7 @@
 import { ComponentChildren, h } from 'preact';
 import type { JSXInternal as JSX } from 'preact/src/jsx';
 import { classNames } from '../hooks/classnames';
-import { IconTw } from '../icons/Icon';
+import { Icon } from '../icons/Icon';
 
 interface Props extends JSX.HTMLAttributes<HTMLButtonElement> {
   icon: string;
@@ -16,7 +16,7 @@ export function Button({ icon, iconClass, ...props }: Props) {
       {...props}
       class={classNames('flex p-2 border', props.class)}
     >
-      <IconTw class={classNames('mr-2', iconClass)} src={icon} alt="" />
+      <Icon class={classNames('mr-2', iconClass)} src={icon} alt="" />
       {props.children}
     </button>
   );
@@ -32,7 +32,7 @@ interface PropsLink extends JSX.HTMLAttributes<HTMLAnchorElement> {
 export function ButtonLink({ icon, iconClass, ...props }: PropsLink) {
   return (
     <a {...props} class={classNames('flex p-2 border', props.class)}>
-      <IconTw class={classNames('mr-2', iconClass)} src={icon} alt="" />
+      <Icon class={classNames('mr-2', iconClass)} src={icon} alt="" />
       {props.children}
     </a>
   );

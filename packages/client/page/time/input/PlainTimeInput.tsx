@@ -11,7 +11,7 @@ function PlainTimeInput(props: InputProps<Temporal.PlainTime>) {
   return (
     <input
       type="time"
-      className="form-control form-control-sm"
+      className="bg-transparent"
       placeholder="12:00"
       aria-label={props['aria-label']}
       value={props.value.toString({ smallestUnit: 'minutes' })}
@@ -30,7 +30,7 @@ export function PlainDateInput(props: InputProps<Temporal.PlainDate>) {
   return (
     <input
       type="date"
-      className="form-control form-control-sm"
+      className="bg-transparent"
       placeholder="2021-01-31"
       aria-label={props['aria-label']}
       value={props.value.toString()}
@@ -47,15 +47,15 @@ export function PlainDateInput(props: InputProps<Temporal.PlainDate>) {
 
 export function PlainDateTimeInput(props: InputProps<Temporal.PlainDateTime>) {
   return (
-    <div className="form-row row-eq-spacing">
-      <div className="col">
+    <div className="">
+      <div className="">
         <PlainTimeInput
           aria-label={props['aria-label']}
           value={props.value.toPlainTime()}
           onChange={(time) => props.onChange(props.value.withPlainTime(time))}
         />
       </div>
-      <div className="col">
+      <div className="">
         <PlainDateInput
           value={props.value.toPlainDate()}
           onChange={(date) => props.onChange(props.value.withPlainDate(date))}
