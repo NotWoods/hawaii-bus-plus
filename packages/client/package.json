@@ -19,7 +19,6 @@
     "@hawaii-bus-plus/react-google-maps": "workspace:*",
     "@hawaii-bus-plus/types": "workspace:*",
     "@hawaii-bus-plus/utils": "workspace:*",
-    "@hawaii-bus-plus/vite-plugins": "workspace:*",
     "halfmoon": "^1.1.1",
     "idb": "^6.0.0",
     "mnemonist": "^0.38.1",
@@ -31,6 +30,7 @@
   },
   "devDependencies": {
     "@hawaii-bus-plus/jest-utils": "workspace:*",
+    "@hawaii-bus-plus/vite-plugins": "workspace:*",
     "@prefresh/vite": "^2.0.4",
     "@tailwindcss/aspect-ratio": "^0.2.0",
     "@tailwindcss/forms": "^0.2.1",

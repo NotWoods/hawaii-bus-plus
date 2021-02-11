@@ -7,6 +7,7 @@
     { "path": "../../types" },
     { "path": "../../react-google-maps/src" },
     { "path": "../../promise-worker/page" },
+    { "path": "../../vite-plugins/src" },
     { "path": "../worker-info" },
     { "path": "../worker-nearby" },
     { "path": "../worker-search" },
