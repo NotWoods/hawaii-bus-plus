@@ -1,5 +1,7 @@
 import { ComponentChildren, h } from 'preact';
 import { IconButton } from '../buttons/IconButton';
+import { classNames } from '../hooks/classnames';
+import { useLoadGoogleMaps } from '../hooks/useLoadGoogleMaps';
 import { UpIcon } from '../icons/MenuIcon';
 
 interface Props {
@@ -10,8 +12,14 @@ interface Props {
 }
 
 export function SearchBase(props: Props) {
+  const { loadError } = useLoadGoogleMaps();
   return (
-    <section class="overlay fixed flex flex-col bg-center bg-no-repeat shadow py-4 bg-blue-800 w-full md:w-80 md:h-screen text-white md:overflow-y-auto">
+    <section
+      class={classNames(
+        'overlay fixed flex flex-col bg-center bg-no-repeat shadow py-4 bg-blue-800 w-full md:w-80 md:h-screen text-white md:overflow-y-auto',
+        loadError && 'h-screen'
+      )}
+    >
       <header class="flex items-center">
         <IconButton
           class="w-12 h-12 p-3 text-white"

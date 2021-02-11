@@ -1,5 +1,5 @@
 import { Point } from '@hawaii-bus-plus/presentation';
-import { h, Fragment } from 'preact';
+import { h } from 'preact';
 import { Temporal } from 'proposal-temporal';
 import type { Journey } from '../../../worker-nearby/directions/format';
 import { openJourney } from '../../router/action';
