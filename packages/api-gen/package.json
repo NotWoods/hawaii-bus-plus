@@ -23,7 +23,7 @@
     "@hawaii-bus-plus/utils": "workspace:*",
     "csv-parse": "^4.15.1",
     "ix": "^4.2.0",
-    "jszip": "^3.5.0",
+    "jszip": "^3.6.0",
     "mnemonist": "^0.38.1",
     "proposal-temporal": "^0.7.0",
     "tslib": "^2.1.0"

@@ -10,7 +10,7 @@ interface Props extends JSX.HTMLAttributes<HTMLButtonElement> {
 }
 
 const buttonClasses =
-  'flex p-2 border hover:bg-black hover:bg-opacity-10 transition-colors';
+  'flex p-2 font-medium border hover:bg-red hover:bg-opacity-20 transition-colors';
 
 export function Button({ icon, iconClass, ...props }: Props) {
   return (

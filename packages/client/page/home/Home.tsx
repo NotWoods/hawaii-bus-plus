@@ -34,23 +34,28 @@ export function Home(props: Props) {
   const [results, setResults] = useState(emptyClosestResults);
   const postToNearbyWorker = useWorker(NearbyWorker) as NearbyWorkerHandler;
 
-  usePromise(async () => {
-    await databaseInitialized;
+  usePromise(
+    async (signal) => {
+      await databaseInitialized;
 
-    let location: google.maps.LatLngLiteral | undefined;
-    if (point && (point.type === 'marker' || point.type === 'user')) {
-      location = point.position;
-    } else {
-      location = coords;
-    }
+      let location: google.maps.LatLngLiteral | undefined;
+      if (point && (point.type === 'marker' || point.type === 'user')) {
+        location = point.position;
+      } else {
+        location = coords;
+      }
 
-    const results = await postToNearbyWorker({
-      type: 'closest-stop',
-      location,
-      fallbackToAll: true,
-    });
-    setResults(results);
-  }, [coords?.lat, coords?.lng, point]);
+      const results = await postToNearbyWorker({
+        type: 'closest-stop',
+        location,
+        fallbackToAll: true,
+      });
+      if (!signal.aborted) {
+        setResults(results);
+      }
+    },
+    [coords?.lat, coords?.lng, point]
+  );
 
   return (
     <SearchBase icon={false} iconDisabled logo={<Title />}>

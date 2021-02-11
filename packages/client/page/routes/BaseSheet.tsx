@@ -19,7 +19,7 @@ export function BaseSheet(props: Props) {
     >
       <article
         class={classNames(
-          'animate-enter--sheet shadow-lg bg-gray-50 dark:bg-gray-800 text-black dark:text-white lg:mx-4',
+          'animate-enter--sheet shadow-lg bg-gradient-to-br from-gray-50 to-gray-100 to:gray-100 dark:from-gray-750 dark:to-gray-800 text-black dark:text-white lg:mx-4',
           loadError ? '' : 'min-h-1/4-screen',
           props.loaded ? 'animate-run' : 'animate-pause'
         )}

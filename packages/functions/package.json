@@ -15,7 +15,7 @@
     "tslib": "^2.1.0"
   },
   "devDependencies": {
-    "@types/aws-lambda": "^8.10.71",
+    "@types/aws-lambda": "^8.10.72",
     "@types/node": "^14.14.25",
     "ava": "^3.15.0",
     "prettier": "^2.2.1",

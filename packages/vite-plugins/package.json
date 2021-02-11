@@ -11,7 +11,7 @@
     "postformat": "eslint **/*.ts --fix"
   },
   "dependencies": {
-    "@babel/core": "^7.9.6",
+    "@babel/core": "^7.12.13",
     "@prefresh/babel-plugin": "0.4.0",
     "@prefresh/vite": "^2.0.4",
     "tslib": "^2.1.0"
@@ -25,7 +25,7 @@
     "prettier": "^2.2.1",
     "type-fest": "^0.20.2",
     "typescript": "4.1.3",
-    "vite": "^2.0.0-beta.65"
+    "vite": "^2.0.0-beta.68"
   },
   "files": [
     "src",
