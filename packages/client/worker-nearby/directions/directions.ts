@@ -3,8 +3,8 @@ import { Point } from '@hawaii-bus-plus/presentation';
 import { Stop } from '@hawaii-bus-plus/types';
 import { notNull, PlainDaysTime } from '@hawaii-bus-plus/utils';
 import { Temporal } from 'proposal-temporal';
-import { findClosestStops } from './closest-stops';
-import { Journey, journeyToDirections } from './directions/format';
+import { findClosestStops } from '../closest/closest-stops';
+import { Journey, journeyToDirections } from './format';
 import {
   CompletePath,
   Path,
@@ -12,7 +12,7 @@ import {
   PathStart,
   raptorDirections,
   Source,
-} from './directions/raptor';
+} from './raptor';
 
 async function pointToSources(
   repo: Pick<Repository, 'loadStopsSpatial'>,
@@ -79,7 +79,7 @@ export async function directions(
     | 'loadTrips'
     | 'loadTrip'
     | 'loadRoutes'
-    | 'loadAgency'
+    | 'loadAgencies'
   >,
   from: Point,
   to: Point,

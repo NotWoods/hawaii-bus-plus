@@ -1,14 +1,14 @@
 import { Repository } from '@hawaii-bus-plus/data';
 import { Agency, Route, Stop } from '@hawaii-bus-plus/types';
-import { batch } from '@hawaii-bus-plus/utils';
 import { applyOffset, SearchRequest } from './helpers';
 
 export interface RouteSearchResult extends Route {
   agency: Agency;
 }
 
-export interface StopSearchResult extends Pick<Stop, 'stop_id' | 'stop_name'> {
-  routes: Route[];
+export interface StopSearchResult
+  extends Pick<Stop, 'stop_id' | 'stop_name' | 'stop_desc'> {
+  routes: readonly Route[];
 }
 
 export interface SearchResults {
@@ -21,7 +21,7 @@ export interface SearchResults {
 export function search(
   repo: Pick<
     Repository,
-    'loadRoutes' | 'loadAgency' | 'searchRoutes' | 'searchStops'
+    'loadRoutes' | 'loadAgencies' | 'searchRoutes' | 'searchStops'
   >,
   request: SearchRequest
 ): Promise<SearchResults> {
@@ -30,8 +30,8 @@ export function search(
   const searchTerm = applyOffset(request.input, request.offset);
   const routeSearchReady = repo.searchRoutes(searchTerm, 3).then(
     async (routes): Promise<RouteSearchResult[]> => {
-      const agencyIds = new Set(routes.map((route) => route.agency_id));
-      const agencies = await batch(agencyIds, (id) => repo.loadAgency(id));
+      const agencyIds = routes.map((route) => route.agency_id);
+      const agencies = await repo.loadAgencies(agencyIds);
       return routes.map((route) => ({
         ...route,
         agency: agencies.get(route.agency_id)!,
@@ -45,6 +45,7 @@ export function search(
       return stops.map((stop) => ({
         stop_id: stop.stop_id,
         stop_name: stop.stop_name,
+        stop_desc: stop.stop_desc,
         routes: stop.routes.map((routeId) => routes.get(routeId)!),
       }));
     }

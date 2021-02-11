@@ -1,7 +1,7 @@
 import { Point } from '@hawaii-bus-plus/presentation';
 import { h } from 'preact';
 import { SearchResults } from '../../../worker-search/search-db';
-import { usePlacesService } from '../../hooks/usePlacesService';
+import { getDetails, usePlacesService } from '../../hooks/usePlacesService';
 import { SearchResultsList } from '../items/SearchResultsList';
 import { emptyResults } from '../simple/places-autocomplete';
 
@@ -14,7 +14,7 @@ interface Props {
 }
 
 export function DirectionsPointResults(props: Props) {
-  const getPlaceDetails = usePlacesService();
+  const service = usePlacesService();
 
   const fieldSetter = {
     depart: props.setDepart,
@@ -45,7 +45,7 @@ export function DirectionsPointResults(props: Props) {
           results: emptyResults,
         });
 
-        const details = await getPlaceDetails!({
+        const details = await getDetails(service!, {
           placeId: place.place_id,
           fields: ['geometry.location'],
         });

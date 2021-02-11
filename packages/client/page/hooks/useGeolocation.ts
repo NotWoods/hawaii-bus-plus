@@ -23,6 +23,7 @@ export function usePermission(
     navigator.permissions
       .query(permissionDesc)
       .then((t) => {
+        setStatus(t.state);
         target = t;
         target.addEventListener('change', handleChange);
       })

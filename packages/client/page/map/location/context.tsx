@@ -1,5 +1,6 @@
 import { h, ComponentChildren, createContext } from 'preact';
 import { useState } from 'preact/hooks';
+import { convertLatLng } from 'spherical-geometry-js';
 import {
   GeolocationErrorCode,
   usePermission,
@@ -7,13 +8,10 @@ import {
 import { useAbortEffect } from '../../hooks/usePromise';
 import { locationFromIp } from './ipstack';
 
-export type Coordinates = Pick<
-  GeolocationCoordinates,
-  'latitude' | 'longitude'
->;
+type Coordinates = Pick<GeolocationCoordinates, 'latitude' | 'longitude'>;
 
 interface MyLocationContext {
-  coords?: Coordinates;
+  coords?: google.maps.LatLngLiteral;
   error?: GeolocationErrorCode;
   onButtonClick(): void;
 }
@@ -26,13 +24,15 @@ export const MyLocationContext = createContext<MyLocationContext>({
 export function MyLocationProvider(props: { children: ComponentChildren }) {
   const status = usePermission({ name: 'geolocation' });
   const [clicked, setClicked] = useState(false);
-  const [coords, setCoordinates] = useState<Coordinates | undefined>();
+  const [coords, setCoordinates] = useState<
+    google.maps.LatLngLiteral | undefined
+  >();
   const [error, setError] = useState<GeolocationErrorCode | undefined>(
     GeolocationErrorCode.NOT_YET_LOADED
   );
 
   function onFetchSuccess(coords: Coordinates) {
-    setCoordinates(coords);
+    setCoordinates(convertLatLng(coords).toJSON());
     setError(undefined);
     setClicked(false);
   }
@@ -84,6 +84,8 @@ export function MyLocationProvider(props: { children: ComponentChildren }) {
               // TODO tell user geolocation is denied
             }
           }
+          break;
+        case undefined:
           break;
       }
 

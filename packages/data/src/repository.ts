@@ -8,6 +8,8 @@ export type TripCursor = {
 } | null;
 
 export interface Repository {
+  loadAllRoutes(): Promise<readonly Route[]>;
+
   loadRoutes(
     routeIds: Iterable<Route['route_id']>
   ): Promise<Map<Route['route_id'], Route>>;
@@ -26,7 +28,9 @@ export interface Repository {
 
   loadCalendars(): Promise<Map<Calendar['service_id'], Calendar>>;
 
-  loadAgency(agencyId: Agency['agency_id']): Promise<Agency | undefined>;
+  loadAgencies(
+    agencyIds: Iterable<Agency['agency_id']>
+  ): Promise<Map<Agency['agency_id'], Agency>>;
 
   searchRoutes(term: string, max: number): Promise<Route[]>;
 

@@ -8,6 +8,7 @@ import {
 } from '@hawaii-bus-plus/types';
 import { downloadScheduleData } from '../fetch';
 import { Repository, TripCursor } from '../repository';
+import { memoryBatch } from './batch';
 import { searchArray } from './search';
 import { memTripCursor } from './trips';
 
@@ -22,14 +23,14 @@ export class MemoryRepository implements Repository {
     return downloadScheduleData(localStorage.getItem('api-key')!);
   }
 
+  loadAllRoutes(): Promise<readonly Route[]> {
+    return this.apiReady.then((api) => Object.values(api.routes));
+  }
+
   loadRoutes(
     routeIds: Iterable<Route['route_id']>
   ): Promise<Map<Route['route_id'], Route>> {
-    const uniq = new Set(routeIds);
-    return this.apiReady.then(
-      (api) =>
-        new Map(Array.from(uniq, (routeId) => [routeId, api.routes[routeId]]))
-    );
+    return this.apiReady.then((api) => memoryBatch('routes', api, routeIds));
   }
 
   loadTrip(tripId: Trip['trip_id']): Promise<Trip | undefined> {
@@ -51,11 +52,7 @@ export class MemoryRepository implements Repository {
   loadStops(
     stopIds: Iterable<Stop['stop_id']>
   ): Promise<Map<Stop['stop_id'], Stop>> {
-    const uniq = new Set(stopIds);
-    return this.apiReady.then(
-      (api) =>
-        new Map(Array.from(uniq, (stopId) => [stopId, api.stops[stopId]]))
-    );
+    return this.apiReady.then((api) => memoryBatch('stops', api, stopIds));
   }
 
   loadStopsSpatial(): Promise<Stop[]> {
@@ -71,8 +68,10 @@ export class MemoryRepository implements Repository {
       .then((entries) => new Map(entries));
   }
 
-  loadAgency(agencyId: Agency['agency_id']): Promise<Agency | undefined> {
-    return this.apiReady.then((api) => api.agency[agencyId]);
+  loadAgencies(
+    agencyIds: Iterable<Agency['agency_id']>
+  ): Promise<Map<Agency['agency_id'], Agency>> {
+    return this.apiReady.then((api) => memoryBatch('agency', api, agencyIds));
   }
 
   searchRoutes(term: string, max: number): Promise<Route[]> {

@@ -15,13 +15,15 @@ interface MarkerProps {
   icon: ComponentChildren;
   title?: ComponentChildren;
   subtitle?: ComponentChildren;
+  badges?: ComponentChildren;
   class?: string;
   onClick?(evt: MouseEvent): void;
 }
 
 const gridTemplate = `
   'icon title' auto
-  'icon subtitle' auto
+  'icon subtitle' min-content
+  'icon badges' min-content
   / 2rem auto`;
 
 function MarkerSearchResultItem(props: MarkerProps) {
@@ -29,21 +31,19 @@ function MarkerSearchResultItem(props: MarkerProps) {
     <li>
       <a
         href={props.href}
-        class={classNames(
-          'group grid gap-x-2 gap-y-1 py-1 text-white',
-          props.class
-        )}
+        class={classNames('group grid gap-x-2 py-1 text-white', props.class)}
         onClick={props.onClick}
         style={{ gridTemplate }}
       >
         <span
-          class="rounded bg-blue-900 self-start p-1"
+          class="rounded bg-blue-900 self-start p-1 mb-1"
           style={{ gridArea: 'icon' }}
         >
           {props.icon}
         </span>
         <p className="text-sm group-hover:underline">{props.title}</p>
         <p className="text-xs">{props.subtitle}</p>
+        {props.badges && <p className="text-xs mt-1">{props.badges}</p>}
       </a>
     </li>
   );
@@ -71,7 +71,8 @@ export function StopSearchResultItem({
       href={`?stop=${stopId}`}
       icon={<Icon src={busStopIcon} alt="Bus stop" class="filter-invert" />}
       title={stopName}
-      subtitle={stopDesc ?? <RouteBadges routes={routes} />}
+      subtitle={stopDesc}
+      badges={<RouteBadges routes={routes} />}
     />
   );
 }

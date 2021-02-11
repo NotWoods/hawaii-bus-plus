@@ -1,7 +1,6 @@
 import { Marker } from '@hawaii-bus-plus/react-google-maps';
 import { h } from 'preact';
 import { useContext } from 'preact/hooks';
-import { convertLatLng } from 'spherical-geometry-js';
 import { MyLocationContext } from './location/context';
 
 const userIcon = {
@@ -17,6 +16,5 @@ export function UserMarker() {
 
   if (!coords) return null;
 
-  const position = convertLatLng(coords).toJSON();
-  return <Marker position={position} icon={userIcon} title="My location" />;
+  return <Marker position={coords} icon={userIcon} title="My location" />;
 }

@@ -1,11 +1,17 @@
 import { useGoogleMap } from '@hawaii-bus-plus/react-google-maps';
 import { memoize } from '@hawaii-bus-plus/utils';
 
+export class PlacesServiceError extends Error {
+  constructor(readonly code: google.maps.places.PlacesServiceStatus) {
+    super(code);
+  }
+}
+
 const buildPlacesService = memoize(
   (map: google.maps.Map) => new google.maps.places.PlacesService(map)
 );
 
-function getDetails(
+export function getDetails(
   service: google.maps.places.PlacesService,
   request: google.maps.places.PlaceDetailsRequest
 ) {
@@ -15,7 +21,7 @@ function getDetails(
         case google.maps.places.PlacesServiceStatus.OK:
           return resolve(result);
         default:
-          return reject(status);
+          return reject(new PlacesServiceError(status));
       }
     })
   );
@@ -24,10 +30,5 @@ function getDetails(
 export function usePlacesService() {
   const map = useGoogleMap();
   const placesService = map && buildPlacesService(map);
-  if (placesService) {
-    return (request: google.maps.places.PlaceDetailsRequest) =>
-      getDetails(placesService, request);
-  } else {
-    return undefined;
-  }
+  return placesService ?? undefined;
 }

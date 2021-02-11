@@ -1,9 +1,8 @@
-import { Repository } from '@hawaii-bus-plus/data';
+import { getSingle, Repository } from '@hawaii-bus-plus/data';
 import { Agency, Route, Stop } from '@hawaii-bus-plus/types';
-import { batch } from '@hawaii-bus-plus/utils';
 
 export interface StopDetails extends Omit<Stop, 'routes' | 'transfers'> {
-  routes: readonly Route[];
+  routes: ReadonlyMap<Route['route_id'], Route>;
   agencies: ReadonlyMap<Agency['agency_id'], Agency>;
   transfers: readonly {
     toStop: Stop;
@@ -13,18 +12,18 @@ export interface StopDetails extends Omit<Stop, 'routes' | 'transfers'> {
 }
 
 export async function loadStop(
-  repo: Pick<Repository, 'loadStops' | 'loadRoutes' | 'loadAgency'>,
+  repo: Pick<Repository, 'loadStops' | 'loadRoutes' | 'loadAgencies'>,
   stopId: Stop['stop_id']
 ): Promise<StopDetails | undefined> {
-  const stop = (await repo.loadStops([stopId])).get(stopId);
+  const stop = await getSingle(repo, repo.loadStops, stopId);
   if (!stop) return undefined;
 
   const transferStopsReady = repo.loadStops(
     stop.transfers.map((t) => t.to_stop_id)
   );
-  const routes = Array.from((await repo.loadRoutes(stop.routes)).values());
-  const agencyIds = new Set(routes.map((route) => route.agency_id));
-  const agencies = await batch(agencyIds, (id) => repo.loadAgency(id));
+  const routes = await repo.loadRoutes(stop.routes);
+  const agencyIds = Array.from(routes.values(), (route) => route.agency_id);
+  const agencies = await repo.loadAgencies(agencyIds);
   const transferStops = await transferStopsReady;
 
   const transfers = stop.transfers.map((t) => ({

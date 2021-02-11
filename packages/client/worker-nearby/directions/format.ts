@@ -1,4 +1,4 @@
-import { omitStopTimes, Repository } from '@hawaii-bus-plus/data';
+import { getSingle, omitStopTimes, Repository } from '@hawaii-bus-plus/data';
 import {
   durationToData,
   PlainTimeData,
@@ -75,7 +75,7 @@ function isPathTripSegment(segment: PathSegment): segment is PathTripSegment {
 export async function journeyToDirections(
   repo: Pick<
     Repository,
-    'loadStops' | 'loadTrip' | 'loadRoutes' | 'loadAgency'
+    'loadStops' | 'loadTrip' | 'loadRoutes' | 'loadAgencies'
   >,
   from: Point,
   to: Point,
@@ -158,7 +158,7 @@ export async function journeyToDirections(
         throw new Error(`Invalid route ID ${trip.route_id}`);
       }
 
-      const agency = await repo.loadAgency(route.agency_id);
+      const agency = await getSingle(repo, repo.loadAgencies, route.agency_id);
       if (!agency) {
         throw new Error(`Invalid agency ID ${route.agency_id}`);
       }

@@ -3,4 +3,5 @@ export { dbReady } from './database';
 export * from './fetch';
 export * from './format';
 export * from './repository';
+export * from './single';
 export { init } from './db-repository/init';

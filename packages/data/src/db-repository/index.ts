@@ -1,14 +1,19 @@
 import { Agency, Calendar, Route, Stop, Trip } from '@hawaii-bus-plus/types';
 import { dbReady } from '../database';
 import { Repository, TripCursor } from '../repository';
+import { loadAgencies, loadRoutes, loadStops } from './batch';
 import { loadCalendars } from './calendar';
-import { loadAgency, loadRoutes } from './routes';
+import { loadAllRoutes } from './routes';
 import { searchRoutes, searchStops } from './search';
-import { loadStops, loadStopsSpatial } from './stops';
+import { loadStopsSpatial } from './stops';
 import { loadTrip, loadTrips, loadTripsForRoute } from './trips';
 
 export class DBRepository implements Repository {
   private readonly ready = dbReady;
+
+  loadAllRoutes(): Promise<Route[]> {
+    return this.ready.then((db) => loadAllRoutes(db));
+  }
 
   loadRoutes(
     routeIds: Iterable<Route['route_id']>
@@ -42,8 +47,10 @@ export class DBRepository implements Repository {
     return this.ready.then((db) => loadCalendars(db));
   }
 
-  loadAgency(agencyId: Agency['agency_id']): Promise<Agency | undefined> {
-    return this.ready.then((db) => loadAgency(db, agencyId));
+  loadAgencies(
+    agencyIds: Iterable<Agency['agency_id']>
+  ): Promise<Map<Agency['agency_id'], Agency>> {
+    return this.ready.then((db) => loadAgencies(db, agencyIds));
   }
 
   searchRoutes(term: string, max: number): Promise<Route[]> {

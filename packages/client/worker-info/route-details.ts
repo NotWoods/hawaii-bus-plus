@@ -1,4 +1,4 @@
-import { Repository } from '@hawaii-bus-plus/data';
+import { getSingle, Repository } from '@hawaii-bus-plus/data';
 import { nowWithZone } from '@hawaii-bus-plus/utils';
 import {
   durationToData,
@@ -81,7 +81,7 @@ export async function getRouteDetails(
   repo: Pick<
     Repository,
     | 'loadRoutes'
-    | 'loadAgency'
+    | 'loadAgencies'
     | 'loadTripsForRoute'
     | 'loadCalendars'
     | 'loadStops'
@@ -90,12 +90,12 @@ export async function getRouteDetails(
   now?: Temporal.PlainDateTime
 ): Promise<RouteDetails | undefined> {
   const allCalendarsReady = repo.loadCalendars();
-  const route = (await repo.loadRoutes([routeId])).get(routeId);
+  const route = await getSingle(repo, repo.loadRoutes, routeId);
   if (!route) {
     return undefined;
   }
 
-  const agency = await repo.loadAgency(route.agency_id);
+  const agency = await getSingle(repo, repo.loadAgencies, route.agency_id);
   const timeZone = agency!.agency_timezone;
 
   const nowZoned = now ?? nowWithZone(timeZone);

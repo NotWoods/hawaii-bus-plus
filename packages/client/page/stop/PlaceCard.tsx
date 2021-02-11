@@ -1,10 +1,16 @@
 import { PlacePointPartial } from '@hawaii-bus-plus/presentation';
 import { h } from 'preact';
 import { useState } from 'preact/hooks';
-import { usePlacesService } from '../hooks/usePlacesService';
+import type { ClosestResults } from '../../worker-nearby/closest/closest';
+import {
+  getDetails,
+  PlacesServiceError,
+  usePlacesService,
+} from '../hooks/usePlacesService';
 import { usePromise } from '../hooks/usePromise';
 import { PlaceResult } from '../router/reducer';
 import { buildSessionToken } from '../search/simple/places-autocomplete';
+import { PlaceInfo } from './PlaceInfo';
 import { PointBase } from './PointBase';
 import { PointDescription, PointHeader } from './PointInfo';
 
@@ -13,21 +19,36 @@ interface Props {
   onClose(): void;
 }
 
+export const emptyClosestResults: ClosestResults = {
+  stops: [],
+  routes: new Map(),
+  agencies: new Map(),
+};
+
 export function PlaceCard({ point, onClose }: Props) {
-  const getPlaceDetails = usePlacesService();
+  const service = usePlacesService();
   const [details, setDetails] = useState<PlaceResult | undefined>();
 
   usePromise(async () => {
     setDetails(undefined);
-    if (getPlaceDetails) {
-      const details = await getPlaceDetails({
-        placeId: point.placeId,
-        fields: ['formatted_address', 'name', 'geometry', 'place_id'],
-        sessionToken: buildSessionToken(),
-      });
-      setDetails(details);
+    if (service) {
+      try {
+        const details = await getDetails(service, {
+          placeId: point.placeId,
+          fields: ['formatted_address', 'name', 'geometry', 'place_id'],
+          sessionToken: buildSessionToken(),
+        });
+        console.log(details);
+        setDetails(details);
+      } catch (err: unknown) {
+        if (err instanceof PlacesServiceError) {
+          setDetails({ place_id: point.placeId, name: '' });
+        } else {
+          throw err;
+        }
+      }
     }
-  }, [getPlaceDetails, point.placeId]);
+  }, [service, point.placeId]);
 
   const position = point.position ?? details?.location;
   if (position) {
@@ -35,6 +56,7 @@ export function PlaceCard({ point, onClose }: Props) {
       <PointBase position={position} onClose={onClose}>
         <PointHeader>{point.name ?? details?.name}</PointHeader>
         <PointDescription>{details?.formatted_address}</PointDescription>
+        <PlaceInfo position={position} />
       </PointBase>
     );
   } else {

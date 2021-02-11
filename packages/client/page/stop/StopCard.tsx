@@ -8,7 +8,7 @@ import { databaseInitialized } from '../hooks/useDatabaseInitialized';
 import { usePromise } from '../hooks/usePromise';
 import { useWorker } from '../hooks/useWorker';
 import { PointBase } from './PointBase';
-import { PointHeader } from './PointInfo';
+import { PointDescription, PointHeader } from './PointInfo';
 import { StopInfo } from './StopInfo';
 
 interface Props {
@@ -34,6 +34,7 @@ export function StopCard({ point, onClose }: Props) {
     return (
       <PointBase position={position} onClose={onClose}>
         <PointHeader>{details?.stop_name}</PointHeader>
+        <PointDescription>{details?.stop_desc}</PointDescription>
         {details ? <StopInfo stop={details} /> : null}
       </PointBase>
     );

@@ -84,7 +84,7 @@ function buildTimeLabels(sources: Iterable<Source>) {
  * @param multiLabel Map of stops to round numbers to paths.
  * @param getFootPaths
  */
-function raptorFootpaths(
+async function raptorFootpaths(
   markedStops: Set<Stop['stop_id']>,
   k: number,
   timeLabels: ReturnType<typeof buildTimeLabels>,
@@ -92,37 +92,36 @@ function raptorFootpaths(
     marked: Iterable<Stop['stop_id']>
   ) => Promise<ReadonlyMap<Stop['stop_id'], Stop>>
 ) {
-  return loadStops(markedStops).then((footPaths) => {
-    for (const fromStopId of markedStops) {
-      const transfers = footPaths.get(fromStopId)?.transfers ?? [];
-      for (const { to_stop_id, min_transfer_time = 0 } of transfers) {
-        // fromStopId: p
-        // to_stop_id: p'
+  const footPaths = await loadStops(markedStops);
+  for (const fromStopId of markedStops) {
+    const transfers = footPaths.get(fromStopId)?.transfers ?? [];
+    for (const { to_stop_id, min_transfer_time = 0 } of transfers) {
+      // fromStopId: p
+      // to_stop_id: p'
 
-        const walkingTime = Temporal.Duration.from({
-          minutes: min_transfer_time,
+      const walkingTime = Temporal.Duration.from({
+        minutes: min_transfer_time,
+      });
+
+      // currentTime: t_k(p')
+      const existingTime = timeLabels.getArrival(to_stop_id, k);
+      // timeWithWalking: t_k(p) + l(p, p')
+      const timeWithWalking = timeLabels
+        .getArrival(fromStopId, k)
+        .add(walkingTime);
+
+      // time with walking is before existing time
+      if (PlainDaysTime.compare(timeWithWalking, existingTime) < 0) {
+        timeLabels.setPath(to_stop_id, k, {
+          time: timeWithWalking,
+          transferFrom: fromStopId,
+          transferTo: to_stop_id,
+          transferTime: walkingTime,
         });
-
-        // currentTime: t_k(p')
-        const existingTime = timeLabels.getArrival(to_stop_id, k);
-        // timeWithWalking: t_k(p) + l(p, p')
-        const timeWithWalking = timeLabels
-          .getArrival(fromStopId, k)
-          .add(walkingTime);
-
-        // time with walking is before existing time
-        if (PlainDaysTime.compare(timeWithWalking, existingTime) < 0) {
-          timeLabels.setPath(to_stop_id, k, {
-            time: timeWithWalking,
-            transferFrom: fromStopId,
-            transferTo: to_stop_id,
-            transferTime: walkingTime,
-          });
-          markedStops.add(to_stop_id);
-        }
+        markedStops.add(to_stop_id);
       }
     }
-  });
+  }
 }
 
 /**

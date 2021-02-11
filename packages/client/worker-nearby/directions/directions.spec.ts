@@ -1,12 +1,12 @@
 import { NodeRepository } from '@hawaii-bus-plus/data/node';
+import { expectPlainTimeData } from '@hawaii-bus-plus/jest-utils';
 import { Point } from '@hawaii-bus-plus/presentation';
 import { Stop, StopTime, TimeString, Trip } from '@hawaii-bus-plus/types';
 import { last, PlainDaysTime } from '@hawaii-bus-plus/utils';
 import { Temporal } from 'proposal-temporal';
 import { directions, traversePath } from './directions';
-import { JourneyTripSegment } from './directions/format';
-import { Path } from './directions/raptor';
-import { expectPlainTimeData } from '@hawaii-bus-plus/jest-utils';
+import { JourneyTripSegment } from './format';
+import { Path } from './raptor';
 
 const LAKELAND = 'll' as Stop['stop_id'];
 const LAKELAND_ACROSS = 'll-across' as Stop['stop_id'];

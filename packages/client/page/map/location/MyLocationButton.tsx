@@ -1,7 +1,6 @@
 import { useGoogleMap } from '@hawaii-bus-plus/react-google-maps';
 import { h } from 'preact';
 import { useContext, useEffect, useState } from 'preact/hooks';
-import { convertLatLng } from 'spherical-geometry-js';
 import { FloatingActionButton } from '../../buttons/FloatingActionButton';
 import { classNames } from '../../hooks/classnames';
 import locationIcon from '../../icons/gps_fixed.svg';
@@ -24,8 +23,7 @@ export function MyLocationButton(props: Props) {
 
   useEffect(() => {
     if (shouldCenter && map && coords) {
-      const latLng = convertLatLng(coords).toJSON();
-      map.panTo(latLng);
+      map.panTo(coords);
       setShouldCenter(false);
     }
   }, [shouldCenter, map, coords]);
@@ -36,7 +34,7 @@ export function MyLocationButton(props: Props) {
       title="My location"
       onClick={handleClick}
       class={classNames(
-        'absolute z-10 m-4 right-0 md:right-auto md:left-80',
+        'fixed m-4 right-0 md:right-auto md:left-80',
         props.shiftUp ? 'bottom-1/4-screen' : 'bottom-0'
       )}
     >
