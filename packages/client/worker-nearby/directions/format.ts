@@ -58,7 +58,7 @@ function formatDepartArrive(
   if (point.type === 'stop') return undefined;
 
   const distance = computeDistanceBetween(point.position, walkToFrom);
-  const time = Temporal.Duration.from({ seconds: distance });
+  const time = Temporal.Duration.from({ seconds: Math.floor(distance) });
   const walk: Walking = { distance, time: durationToData(time) };
 
   if (waitUntil) {

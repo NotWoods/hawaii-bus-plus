@@ -13,7 +13,7 @@ if (productionMode) {
 
 export default defineConfig({
   plugins: [emptyPackage('@empty'), prefreshPlus()],
-  alias,
+  resolve: { alias },
   optimizeDeps: {
     include: ['mnemonist/set', 'preact', 'preact/debug', 'preact/hooks'],
   },

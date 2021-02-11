@@ -3,7 +3,6 @@ import { ColorString, Stop } from '@hawaii-bus-plus/types';
 import { h, Fragment } from 'preact';
 import { useContext } from 'preact/hooks';
 import { useApi } from '../hooks/useApi';
-import { useMarkerIcon } from '../hooks/useMarkerIcon';
 import { setStopAction } from '../router/action';
 import { RouterContext } from '../router/Router';
 
@@ -28,40 +27,38 @@ interface Props {
   darkMode?: boolean;
 }
 
+function makeHighlightIcon(
+  ringColor: ColorString,
+  dark?: boolean
+): google.maps.Icon {
+  return ({
+    path: 'M6,12a6,6 0 1,0 12,0a6,6 0 1,0 -12,0',
+    fillColor: dark ? '#333' : '#fff',
+    fillOpacity: 1,
+    strokeWeight: 4,
+    strokeColor: ringColor,
+    anchor: { x: 12, y: 12 },
+  } as unknown) as google.maps.Icon;
+}
+
 export function StopMarkers(props: Props) {
   const { dispatch, point } = useContext(RouterContext);
-  // TODO multiple colors
-  const [first] = props.highlighted?.values() ?? [];
-  const highlightIconUrl = useMarkerIcon(
-    props.darkMode ? '#25282C' : '#fff',
-    first
-  );
 
   const api = useApi();
   const stops = api?.stops ?? [];
   const selectedStopId = point?.type === 'stop' && point.stopId;
 
-  let highlightIcon: google.maps.Icon | undefined;
-  if (highlightIconUrl) {
-    highlightIcon = {
-      url: highlightIconUrl,
-      size: { height: 26, width: 26 },
-      scaledSize: { height: 26, width: 26 },
-      origin: { x: 0, y: 0 },
-      anchor: { x: 12, y: 12 },
-    } as google.maps.Icon;
-  }
-
   return (
     <>
       {stops.map((stop) => {
         const selected = stop.stop_id === selectedStopId;
+        const highlightColor = props.highlighted?.get(stop.stop_id);
 
         let icon = otherIcon;
         if (selected) {
           icon = selectedStop;
-        } else if (props.highlighted?.has(stop.stop_id)) {
-          icon = highlightIcon ?? otherIcon;
+        } else if (highlightColor != undefined) {
+          icon = makeHighlightIcon(highlightColor, props.darkMode);
         }
 
         return (

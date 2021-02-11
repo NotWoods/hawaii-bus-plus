@@ -31,7 +31,7 @@ async function pointToSources(
     const closest = await findClosestStops(repo, point.position);
     return closest.map((stop) => {
       // Rough walking speed is 1 meter per second
-      const timeWithWalking = time.add({ seconds: stop.distance });
+      const timeWithWalking = time.add({ seconds: Math.floor(stop.distance) });
       return {
         stop_id: stop.stop_id,
         departure_time: timeWithWalking,

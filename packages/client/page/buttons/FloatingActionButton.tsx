@@ -12,7 +12,7 @@ export function FloatingActionButton({ mini, ...props }: Props) {
       type="button"
       {...props}
       class={classNames(
-        'rounded-full shadow-lg focus:ring-indigo-500 focus:border-indigo-500 border-transparent bg-blue-500 hover:bg-blue-600 transition-colors',
+        'rounded-full shadow-lg focus:ring-cyan focus:border-cyan border-transparent bg-blue-500 hover:bg-blue-600 transition-colors',
         mini ? 'p-2' : 'p-4',
         props.class
       )}

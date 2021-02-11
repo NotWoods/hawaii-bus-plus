@@ -12,7 +12,7 @@ export function SearchInput(props: JSX.HTMLAttributes<HTMLInputElement>) {
       {...props}
       type="search"
       class={classNames(
-        'search__input focus:ring-indigo-500 focus:border-indigo-500 block w-full placeholder-current placeholder-opacity-70 bg-blue-700 text-white sm:text-sm border-gray-300',
+        'search__input focus:ring-cyan focus:border-cyan block w-full placeholder-current placeholder-opacity-70 bg-blue-700 text-white sm:text-sm border-gray-300',
         props.class
       )}
     />

@@ -15,7 +15,7 @@ export function IconButton({ forceDark: dark, ...props }: Props) {
       type="button"
       {...props}
       class={classNames(
-        'rounded-full focus:ring-indigo-500 focus:border-indigo-500 border-transparent hover:bg-opacity-10 transition-colors',
+        'rounded-full focus:ring-cyan focus:border-cyan border-transparent hover:bg-opacity-10 transition-colors',
         props.disabled ? 'cursor-default' : hover,
         props.class
       )}

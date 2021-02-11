@@ -49,7 +49,7 @@ export function DirectionsField(props: Props) {
           class={classNames(point && 'pl-10', invalid && 'border-red-500')}
           placeholder="Stop or location"
           value={point?.name ?? value}
-          onChange={(evt) => {
+          onInput={(evt) => {
             setValue(evt.currentTarget.value);
             props.onChange(undefined);
           }}

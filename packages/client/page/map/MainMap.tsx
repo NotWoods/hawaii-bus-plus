@@ -41,9 +41,7 @@ function MapContent() {
       gestureHandling: 'greedy',
     };
 
-    if (darkMode) {
-      options.styles = darkStyles;
-    }
+    options.styles = darkMode ? darkStyles : undefined;
     if (mdMatches) {
       options.mapTypeControlOptions!.position =
         google.maps.ControlPosition.TOP_LEFT;
