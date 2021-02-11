@@ -35,19 +35,22 @@ export function DirectionsSearch(props: Props) {
     DirectionsWorker
   ) as NearbyWorkerHandler;
 
-  usePromise(async () => {
-    if (!depart || !arrive) return;
+  usePromise(
+    async (signal) => {
+      if (!depart || !arrive) return;
 
-    await databaseInitialized;
-    const results = await postToDirectionsWorker({
-      type: 'directions',
-      from: depart,
-      to: arrive,
-      departureTime: departureTime.toString(),
-    });
+      await databaseInitialized;
+      const results = await postToDirectionsWorker(signal, {
+        type: 'directions',
+        from: depart,
+        to: arrive,
+        departureTime: departureTime.toString(),
+      });
 
-    setResults(results);
-  }, [depart, arrive, departureTime]);
+      setResults(results);
+    },
+    [depart, arrive, departureTime]
+  );
 
   // TODO overlay results on top of map
   return (

@@ -21,8 +21,12 @@ type Message = RouteInfoMessage | StopInfoMessage;
 const repo = makeRepository();
 
 export interface InfoWorkerHandler {
-  (message: RouteInfoMessage): Promise<RouteDetails | undefined>;
-  (message: StopInfoMessage): Promise<StopDetails | undefined>;
+  (signal: AbortSignal, message: RouteInfoMessage): Promise<
+    RouteDetails | undefined
+  >;
+  (signal: AbortSignal, message: StopInfoMessage): Promise<
+    StopDetails | undefined
+  >;
 }
 
 registerPromiseWorker((message: Message) => {

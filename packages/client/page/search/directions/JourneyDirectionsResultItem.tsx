@@ -1,5 +1,5 @@
 import { h } from 'preact';
-import { Journey } from '../../../worker-nearby/directions/format';
+import type { Journey } from '../../../worker-nearby/directions/format';
 import { JourneyHeader } from '../../directions/JourneyHeader';
 import { isJourneyTripSegment } from '../../directions/JourneySegment';
 import { openJourney } from '../../router/action';

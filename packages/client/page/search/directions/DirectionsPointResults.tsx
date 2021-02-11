@@ -1,6 +1,6 @@
 import { Point } from '@hawaii-bus-plus/presentation';
 import { h } from 'preact';
-import { SearchResults } from '../../../worker-search/search-db';
+import type { SearchResults } from '../../../worker-search/search-db';
 import { getDetails, usePlacesService } from '../../hooks/usePlacesService';
 import { SearchResultsList } from '../items/SearchResultsList';
 import { emptyResults } from '../simple/places-autocomplete';

@@ -6,7 +6,7 @@ import { search, SearchResults } from './search-db';
 const repo = makeRepository();
 
 export interface SearchWorkerHandler {
-  (message: SearchRequest): Promise<SearchResults>;
+  (signal: AbortSignal, message: SearchRequest): Promise<SearchResults>;
 }
 
 registerPromiseWorker((message: SearchRequest) => search(repo, message));

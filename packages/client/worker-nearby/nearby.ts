@@ -22,8 +22,10 @@ interface ClosestStopsMessage {
 type Message = DirectionsMessage | ClosestStopsMessage;
 
 export interface NearbyWorkerHandler {
-  (message: DirectionsMessage): Promise<Journey[]>;
-  (message: ClosestStopsMessage): Promise<ClosestResults>;
+  (signal: AbortSignal, message: DirectionsMessage): Promise<
+    readonly Journey[]
+  >;
+  (signal: AbortSignal, message: ClosestStopsMessage): Promise<ClosestResults>;
 }
 
 const repo = makeRepository();

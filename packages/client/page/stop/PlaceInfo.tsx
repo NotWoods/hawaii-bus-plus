@@ -16,15 +16,18 @@ export function PlaceInfo({ position }: Props) {
   const [results, setResults] = useState(emptyClosestResults);
   const postToNearbyWorker = useWorker(NearbyWorker) as NearbyWorkerHandler;
 
-  usePromise(async () => {
-    await databaseInitialized;
-    const results = await postToNearbyWorker({
-      type: 'closest-stop',
-      location: position,
-      fallbackToAll: false,
-    });
-    setResults(results);
-  }, [position]);
+  usePromise(
+    async (signal) => {
+      await databaseInitialized;
+      const results = await postToNearbyWorker(signal, {
+        type: 'closest-stop',
+        location: position,
+        fallbackToAll: false,
+      });
+      setResults(results);
+    },
+    [position]
+  );
 
   return (
     <PointInfo

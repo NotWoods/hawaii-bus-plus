@@ -26,20 +26,23 @@ export function RouteTimetable() {
   );
   const postToInfoWorker = useWorker(InfoWorker) as InfoWorkerHandler;
 
-  usePromise(async () => {
-    if (routeId) {
-      await databaseInitialized;
-      const details = await postToInfoWorker({
-        type: 'route',
-        id: routeId,
-        time: tripTime.toString(),
-      });
+  usePromise(
+    async (signal) => {
+      if (routeId) {
+        await databaseInitialized;
+        const details = await postToInfoWorker(signal, {
+          type: 'route',
+          id: routeId,
+          time: tripTime.toString(),
+        });
 
-      setDetails(details);
-    } else {
-      setDetails(undefined);
-    }
-  }, [routeId, tripTime]);
+        setDetails(details);
+      } else {
+        setDetails(undefined);
+      }
+    },
+    [routeId, tripTime]
+  );
 
   const route = details?.route;
   if (route) {

@@ -1,6 +1,6 @@
 import { h, Fragment } from 'preact';
 import { Temporal } from 'proposal-temporal';
-import { RouteDetails } from '../../../worker-info/route-details';
+import type { RouteDetails } from '../../../worker-info/route-details';
 import { SwitchDirectionButton } from './info/SwitchDirectionButton';
 import { TimetableDetails } from './info/TimetableDetails';
 import { TripSelector } from './info/TripSelector';

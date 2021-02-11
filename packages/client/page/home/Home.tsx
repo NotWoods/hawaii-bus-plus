@@ -45,14 +45,13 @@ export function Home(props: Props) {
         location = coords;
       }
 
-      const results = await postToNearbyWorker({
+      const results = await postToNearbyWorker(signal, {
         type: 'closest-stop',
         location,
         fallbackToAll: true,
       });
-      if (!signal.aborted) {
-        setResults(results);
-      }
+
+      setResults(results);
     },
     [coords?.lat, coords?.lng, point]
   );

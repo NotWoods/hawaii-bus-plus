@@ -1,7 +1,7 @@
 import { StopPoint } from '@hawaii-bus-plus/presentation';
 import { h } from 'preact';
 import { useState } from 'preact/hooks';
-import { InfoWorkerHandler } from '../../worker-info/info';
+import type { InfoWorkerHandler } from '../../worker-info/info';
 import InfoWorker from '../../worker-info/info?worker';
 import type { StopDetails } from '../../worker-info/stop-details';
 import { databaseInitialized } from '../hooks/useDatabaseInitialized';
@@ -20,14 +20,17 @@ export function StopCard({ point, onClose }: Props) {
   const [details, setDetails] = useState<StopDetails | undefined>();
   const postToInfoWorker = useWorker(InfoWorker) as InfoWorkerHandler;
 
-  usePromise(async () => {
-    await databaseInitialized;
-    const result = await postToInfoWorker({
-      type: 'stop',
-      id: point.stopId,
-    });
-    setDetails(result);
-  }, [point.stopId]);
+  usePromise(
+    async (signal) => {
+      await databaseInitialized;
+      const result = await postToInfoWorker(signal, {
+        type: 'stop',
+        id: point.stopId,
+      });
+      setDetails(result);
+    },
+    [point.stopId]
+  );
 
   const position = point.position ?? details?.position;
   if (position) {

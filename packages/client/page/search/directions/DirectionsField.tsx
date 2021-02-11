@@ -1,7 +1,7 @@
 import { Point } from '@hawaii-bus-plus/presentation';
 import { ComponentChildren, h } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
-import { SearchResults } from '../../../worker-search/search-db';
+import type { SearchResults } from '../../../worker-search/search-db';
 import { classNames } from '../../hooks/classnames';
 import stopIcon from '../../icons/bus_stop.svg';
 import locationIcon from '../../icons/gps_fixed.svg';

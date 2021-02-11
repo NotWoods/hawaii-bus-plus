@@ -42,6 +42,7 @@
     "esbuild": "^0.8.44",
     "esbuild-jest": "^0.3.0",
     "jest": "^26.6.3",
+    "preact-render-to-string": "^5.1.12",
     "prettier": "^2.2.1",
     "tailwindcss": "^2.0.3",
     "tailwindcss-scroll-snap": "^1.0.3",

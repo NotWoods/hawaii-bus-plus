@@ -1,5 +1,13 @@
 let messageIds = 0;
 
+export class AbortError extends Error {
+  code = 'abort';
+
+  constructor() {
+    super('Aborted');
+  }
+}
+
 export class PromiseWorker {
   private readonly callbacks = new Map<
     number,
@@ -33,15 +41,27 @@ export class PromiseWorker {
     callback(error, result);
   }
 
-  postMessage(userMessage: unknown): Promise<unknown> {
+  postMessage(userMessage: unknown, signal?: AbortSignal): Promise<unknown> {
     const messageId = messageIds++;
     const messageToSend = [messageId, userMessage];
 
     return new Promise((resolve, reject) => {
+      const onAbort = () => {
+        this.callbacks.delete(messageId);
+        reject(new AbortError());
+      };
+
+      if (signal?.aborted) {
+        onAbort();
+      }
+
       this.callbacks.set(messageId, (error, result) => {
+        signal?.removeEventListener('abort', onAbort);
         if (error) reject(error);
         else resolve(result);
       });
+
+      signal?.addEventListener('abort', onAbort, { once: true });
 
       this.worker.postMessage(messageToSend);
     });

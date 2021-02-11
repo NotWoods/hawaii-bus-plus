@@ -6,6 +6,7 @@ import { MyLocationProvider } from './map/location/context';
 import { MainMap } from './map/MainMap';
 import { Router } from './router/Router';
 import { RouteDetailProvider } from './routes/timetable/context';
+import './App.css';
 
 export function App() {
   return (

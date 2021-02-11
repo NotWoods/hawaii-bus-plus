@@ -20,14 +20,17 @@ export function useWorker(workerConstructor: { new (): Worker }) {
     };
   }, []);
 
-  async function postMessage(message: unknown): Promise<unknown> {
+  async function postMessage(
+    signal: AbortSignal,
+    message: unknown
+  ): Promise<unknown> {
     if (!workerRef.current) {
       workerRef.current = generateWorker();
     }
 
-    console.log('WorkerRequest', message);
-    const result = await workerRef.current.postMessage(message);
-    console.log('WorkerResponse', result);
+    console.info('WorkerRequest:', message);
+    const result = await workerRef.current.postMessage(message, signal);
+    console.info('WorkerResponse:', result);
     return result;
   }
 
