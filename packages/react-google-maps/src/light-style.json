@@ -1,0 +1,19 @@
+[
+  {
+    "featureType": "landscape",
+    "stylers": [
+      {
+        "color": "#ecf1d6"
+      }
+    ]
+  },
+  {
+    "featureType": "water",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#8bb9bd"
+      }
+    ]
+  }
+]

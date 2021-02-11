@@ -52,6 +52,11 @@ module.exports = {
         cyan: {
           DEFAULT: '#8BB9BD',
         },
+        ocean: {
+          light: '#778a91',
+          DEFAULT: '#335468',
+          dark: '#2d4859',
+        },
       },
       fill: (theme) => ({
         'blue-500': theme('colors.blue.500'),

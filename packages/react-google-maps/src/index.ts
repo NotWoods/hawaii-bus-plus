@@ -1,4 +1,6 @@
+import _lightStyles from './light-style.json';
 import _darkStyles from './dark-style.json';
+export const lightStyles = _lightStyles as google.maps.MapTypeStyle[];
 export const darkStyles = _darkStyles as google.maps.MapTypeStyle[];
 
 export * from './drawing/Marker';

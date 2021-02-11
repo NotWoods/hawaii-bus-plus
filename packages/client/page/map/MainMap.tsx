@@ -1,5 +1,6 @@
 import {
   center,
+  lightStyles,
   darkStyles,
   GoogleMapPortal,
   mapTypeControlOptions,
@@ -41,7 +42,7 @@ function MapContent() {
       gestureHandling: 'greedy',
     };
 
-    options.styles = darkMode ? darkStyles : undefined;
+    options.styles = darkMode ? darkStyles : lightStyles;
     if (mdMatches) {
       options.mapTypeControlOptions!.position =
         google.maps.ControlPosition.TOP_LEFT;
