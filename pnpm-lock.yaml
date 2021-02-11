@@ -65,6 +65,7 @@ importers:
       '@hawaii-bus-plus/react-google-maps': 'link:../react-google-maps'
       '@hawaii-bus-plus/types': 'link:../types'
       '@hawaii-bus-plus/utils': 'link:../utils'
+      '@hawaii-bus-plus/vite-plugins': 'link:../vite-plugins'
       halfmoon: 1.1.1
       idb: 6.0.0
       mnemonist: 0.38.1
@@ -75,7 +76,6 @@ importers:
       tslib: 2.1.0
     devDependencies:
       '@hawaii-bus-plus/jest-utils': 'link:../jest-utils'
-      '@hawaii-bus-plus/vite-plugins': 'link:../vite-plugins'
       '@prefresh/vite': 2.0.4_e400f90aee5454bc5f1507eabe7541b5
       '@tailwindcss/aspect-ratio': 0.2.0
       '@tailwindcss/forms': 0.2.1
