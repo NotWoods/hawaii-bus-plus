@@ -1,8 +1,0 @@
-.route-link {
-  display: grid;
-  grid-template:
-    'icon title' auto
-    'icon subtitle' min-content
-    / var(--sidebar-icon-width-height) auto;
-  min-height: 4rem;
-}

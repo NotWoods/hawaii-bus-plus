@@ -25,7 +25,30 @@ module.exports = {
       },
       colors: {
         gray: colors.trueGray,
-        blue: colors.coolGray,
+        blue: {
+          50: 'hsl(212, 20%, 90%)',
+          100: 'hsl(212, 10%, 72%)',
+          200: 'hsl(212, 10%, 64%)',
+          300: 'hsl(212, 10%, 53%)',
+          400: 'hsl(212, 10%, 42%)',
+          500: 'hsl(212, 10%, 32%)',
+          600: 'hsl(212, 10%, 28%)',
+          700: 'hsl(212, 10%, 22%)',
+          800: 'hsl(212, 10%, 18%)',
+          900: 'hsl(212, 10%, 10%)',
+        },
+        red: {
+          DEFAULT: '#C67168',
+        },
+        yellow: {
+          DEFAULT: '#E2C049',
+        },
+        brown: {
+          DEFAULT: '#918381',
+        },
+        cyan: {
+          DEFAULT: '#8BB9BD',
+        },
       },
       zIndex: {
         '-1': '-1',

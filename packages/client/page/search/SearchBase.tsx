@@ -7,7 +7,10 @@ import { UpIcon } from '../icons/MenuIcon';
 interface Props {
   children: ComponentChildren;
   icon?: ComponentChildren;
+  iconDisabled?: boolean;
+  showIcon?: boolean;
   title?: ComponentChildren;
+  logo?: ComponentChildren;
   onClose?(): void;
 }
 
@@ -16,7 +19,7 @@ export function SearchBase(props: Props) {
   return (
     <section
       class={classNames(
-        'overlay fixed flex flex-col bg-center bg-no-repeat shadow z-10 py-4 bg-blue-800 w-full md:w-80 max-h-screen md:h-screen text-white overflow-y-auto',
+        'overlay fixed flex flex-col bg-center bg-no-repeat shadow z-10 py-4 bg-blue-700 w-full md:w-80 max-h-screen md:h-screen text-white overflow-y-auto',
         loadError && 'h-screen'
       )}
     >
@@ -24,11 +27,14 @@ export function SearchBase(props: Props) {
         <IconButton
           class="w-12 h-12 p-3 text-white"
           forceDark
+          disabled={props.iconDisabled}
           onClick={props.onClose}
         >
           {props.icon ?? <UpIcon />}
         </IconButton>
-        {props.title ? (
+        {props.logo ? (
+          props.logo
+        ) : props.title ? (
           <h2 class="font-display font-medium text-2xl">{props.title}</h2>
         ) : null}
       </header>
