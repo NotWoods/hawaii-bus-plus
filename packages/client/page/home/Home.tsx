@@ -23,7 +23,7 @@ function Title() {
     <h1 class="font-display font-medium text-2xl uppercase flex items-center">
       <img class="h-8 mr-1" src={hawaiiSvg} alt="Hawaii" />
       Bus Plus
-      <img class="h-5 ml-1" src={plusSvg} alt="+" />
+      <img class="h-4 ml-1 mb-3" src={plusSvg} alt="+" />
     </h1>
   );
 }

@@ -1,4 +1,5 @@
 import { ComponentChildren, h } from 'preact';
+import { classNames } from '../hooks/classnames';
 
 interface Props {
   src: string;
@@ -22,12 +23,15 @@ export function Icon(props: Props) {
   );
 }
 
-export function BaseIcon(props: { children: ComponentChildren }) {
+export function BaseIcon(props: {
+  children: ComponentChildren;
+  class?: string;
+}) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
-      class="fill-current w-6 h-6"
+      class={classNames('fill-current w-6 h-6', props.class)}
       width="24px"
       height="24px"
     >

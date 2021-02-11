@@ -35,11 +35,11 @@ export function MyLocationButton(props: Props) {
       title={title}
       onClick={handleClick}
       class={classNames(
-        'fixed m-4 right-0 md:right-auto md:left-80',
+        'fixed m-6 right-0 md:right-auto md:left-80',
         props.shiftUp ? 'bottom-1/4-screen' : 'bottom-0'
       )}
     >
-      <BaseIcon>
+      <BaseIcon class="relative">
         <title>{title}</title>
         <path d="M21 11a9 9 0 00-8-8V1h-2v2a9 9 0 00-8 8H1v2h2a9 9 0 008 8v2h2v-2a9 9 0 008-8h2v-2h-2zm-9 8a7 7 0 110-14 7 7 0 010 14z" />
         <circle
