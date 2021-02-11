@@ -16,7 +16,7 @@ export function SearchBase(props: Props) {
   return (
     <section
       class={classNames(
-        'overlay fixed flex flex-col bg-center bg-no-repeat shadow py-4 bg-blue-800 w-full md:w-80 md:h-screen text-white md:overflow-y-auto',
+        'overlay fixed flex flex-col bg-center bg-no-repeat shadow z-10 py-4 bg-blue-800 w-full md:w-80 max-h-screen md:h-screen text-white overflow-y-auto',
         loadError && 'h-screen'
       )}
     >

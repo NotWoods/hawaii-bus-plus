@@ -11,14 +11,6 @@ const placeIcon = {
   anchor: { x: 12, y: 12 },
 } as google.maps.Icon;
 
-const userIcon = {
-  url: '/pins.png',
-  size: { height: 26, width: 24 },
-  scaledSize: { height: 26, width: 120 },
-  origin: { x: 48, y: 0 },
-  anchor: { x: 12, y: 23 },
-} as google.maps.Icon;
-
 export function PlaceMarker() {
   const { point } = useContext(RouterContext);
 
@@ -42,14 +34,4 @@ export function PlaceMarker() {
     default:
       return null;
   }
-}
-
-export function UserMarker({
-  position,
-}: {
-  position: google.maps.LatLngLiteral;
-}) {
-  if (!position) return null;
-
-  return <Marker position={position} icon={userIcon} title="My location" />;
 }

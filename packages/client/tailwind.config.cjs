@@ -17,6 +17,7 @@ module.exports = {
     }),
     extend: {
       inset: {
+        '1/4-screen': '25vh',
         '3/4-screen': '75vh',
       },
       minHeight: {

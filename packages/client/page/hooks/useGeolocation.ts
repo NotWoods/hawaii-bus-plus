@@ -1,7 +1,17 @@
 import { useEffect, useState } from 'preact/hooks';
 import { locationFromIp } from '../map/location/ipstack';
 
-function usePermission(permissionDesc: Parameters<Permissions['query']>[0]) {
+export type GeolocationErrorCode = typeof GeolocationErrorCode[keyof typeof GeolocationErrorCode];
+export const GeolocationErrorCode = {
+  NOT_YET_LOADED: -1,
+  PERMISSION_DENIED: 1,
+  POSITION_UNAVAILABLE: 2,
+  TIMEOUT: 3,
+} as const;
+
+export function usePermission(
+  permissionDesc: Parameters<Permissions['query']>[0]
+) {
   const [status, setStatus] = useState<PermissionState | undefined>();
 
   function handleChange(this: PermissionStatus) {
@@ -26,12 +36,6 @@ function usePermission(permissionDesc: Parameters<Permissions['query']>[0]) {
   return status;
 }
 
-/**
- * Set up a worker that lasts as long as the component is mounted.
- * The worker is terminated afterwards.
- *
- * Returns a postMessage function.
- */
 export function useGeolocation(active: boolean) {
   const status = usePermission({ name: 'geolocation' });
   const [coords, setCoordinates] = useState<

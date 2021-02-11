@@ -3,6 +3,7 @@ import { h, Fragment } from 'preact';
 import { useContext } from 'preact/hooks';
 import { JourneySheet } from '../directions/JourneySheet';
 import { useScreens } from '../hooks/useScreens';
+import { MyLocationButton } from '../map/location/MyLocationButton';
 import { RouterContext } from '../router/Router';
 import { RouteTimetable } from '../routes/RouteTimetable';
 import { PointDetails } from '../stop/PointDetails';
@@ -45,14 +46,20 @@ export function MainContent() {
     // Medium or bigger
     return (
       <>
+        <MyLocationButton shiftUp={sheetOpen} />
         {renderOverlay()}
         {renderSheet()}
       </>
     );
   } else {
     // Small screen
-    return pointDetailsOpen(point) || !sheetOpen
-      ? renderOverlay()
-      : renderSheet();
+    return (
+      <>
+        <MyLocationButton shiftUp={sheetOpen} />
+        {pointDetailsOpen(point) || !sheetOpen
+          ? renderOverlay()
+          : renderSheet()}
+      </>
+    );
   }
 }

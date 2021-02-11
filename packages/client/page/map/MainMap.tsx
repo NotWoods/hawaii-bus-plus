@@ -13,6 +13,7 @@ import { openPlace, setMarker } from '../router/action';
 import { RouterContext } from '../router/Router';
 import { PlaceMarker } from './PlaceMarker';
 import { RouteGlyphs } from './RouteGlyphs';
+import { UserMarker } from './UserMarker';
 
 type MapMouseEvent = google.maps.MapMouseEvent;
 
@@ -44,6 +45,8 @@ function MapContent() {
       options.styles = darkStyles;
     }
     if (mdMatches) {
+      options.mapTypeControlOptions!.position =
+        google.maps.ControlPosition.TOP_LEFT;
       options.zoomControlOptions = {
         position: google.maps.ControlPosition.TOP_RIGHT,
       };
@@ -51,7 +54,7 @@ function MapContent() {
       options.mapTypeControlOptions!.position =
         google.maps.ControlPosition.BOTTOM_CENTER;
       options.zoomControlOptions = {
-        position: google.maps.ControlPosition.RIGHT_BOTTOM,
+        position: google.maps.ControlPosition.LEFT_BOTTOM,
       };
     }
 
@@ -68,6 +71,7 @@ function MapContent() {
     >
       <RouteGlyphs darkMode={darkMode} />
       <PlaceMarker />
+      <UserMarker />
     </GoogleMapPortal>
   );
 }
@@ -76,7 +80,7 @@ export function MainMap() {
   const { isLoaded } = useLoadGoogleMaps();
 
   return (
-    <section class="fixed sheet inset-0 top-52 md:top-0 md:ml-80">
+    <section class="fixed sheet inset-0 md:top-0 md:ml-80">
       {isLoaded ? <MapContent /> : null}
     </section>
   );

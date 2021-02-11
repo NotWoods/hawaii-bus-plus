@@ -2,6 +2,7 @@ import { Point } from '@hawaii-bus-plus/presentation';
 import { h } from 'preact';
 import { Temporal } from 'proposal-temporal';
 import type { Journey } from '../../../worker-nearby/directions/format';
+import { classNames } from '../../hooks/classnames';
 import { openJourney } from '../../router/action';
 import { directionsToParams } from '../../router/url';
 import { SearchResultsSubList } from '../items/SearchResultsSubList';
@@ -49,6 +50,8 @@ interface Props {
   onClose?(): void;
 }
 
+const sharedClasses = 'fixed bottom-0 md:static';
+
 export function DirectionsJourneys(props: Props) {
   const { results, departureTime } = props;
 
@@ -59,28 +62,44 @@ export function DirectionsJourneys(props: Props) {
     props.setDepartTime(tomorrow);
   }
 
-  return (
-    <div class="fixed bottom-0 md:static overflow-x-auto snap snap-both snap-mandatory snap-px-32 overscroll-contain">
-      <SearchResultsSubList
-        forceTitles
-        list={results}
-        title="By bus"
-        titleClass="hidden md:block"
-        child={(journey) => (
-          <DirectionsJourneyItem
-            journey={journey}
-            from={props.depart}
-            to={props.arrive}
-            departureTime={departureTime}
-            onClick={props.onClose}
-          />
-        )}
-      />
-      {results.length === 0 ? (
-        <button class="sidebar-link" onClick={moveToTomorrow}>
-          No results found. Try searching for trips starting tomorrow?
+  if (results.length === 0) {
+    return (
+      <div class={classNames(sharedClasses, 'mx-4 mb-2 inset-x-0')}>
+        <button
+          class="block group m-auto px-8 py-4 shadow-xl text-black dark:text-white bg-blue-200 dark:bg-blue-700"
+          onClick={moveToTomorrow}
+        >
+          <p>No results found.</p>
+          <p class="group-hover:underline">
+            Try searching for trips starting tomorrow?
+          </p>
         </button>
-      ) : null}
-    </div>
-  );
+      </div>
+    );
+  } else {
+    return (
+      <div
+        class={classNames(
+          sharedClasses,
+          'overflow-x-auto snap snap-both snap-mandatory snap-px-32 overscroll-contain'
+        )}
+      >
+        <SearchResultsSubList
+          forceTitles
+          list={results}
+          title="By bus"
+          titleClass="hidden md:block"
+          child={(journey) => (
+            <DirectionsJourneyItem
+              journey={journey}
+              from={props.depart}
+              to={props.arrive}
+              departureTime={departureTime}
+              onClick={props.onClose}
+            />
+          )}
+        />
+      </div>
+    );
+  }
 }

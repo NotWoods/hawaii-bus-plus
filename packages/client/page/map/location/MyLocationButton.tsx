@@ -1,46 +1,46 @@
 import { useGoogleMap } from '@hawaii-bus-plus/react-google-maps';
 import { h } from 'preact';
-import { useEffect, useState } from 'preact/hooks';
+import { useContext, useEffect, useState } from 'preact/hooks';
 import { convertLatLng } from 'spherical-geometry-js';
-import { Button } from '../../buttons/Button';
-import { useGeolocation } from '../../hooks/useGeolocation';
-import { usePromise } from '../../hooks/usePromise';
+import { FloatingActionButton } from '../../buttons/FloatingActionButton';
+import { classNames } from '../../hooks/classnames';
 import locationIcon from '../../icons/gps_fixed.svg';
-import { UserMarker } from '../PlaceMarker';
+import { Icon } from '../../icons/Icon';
+import { MyLocationContext } from './context';
 
-export function MyLocationButton() {
+interface Props {
+  shiftUp?: boolean;
+}
+
+export function MyLocationButton(props: Props) {
   const map = useGoogleMap();
+  const { coords, onButtonClick } = useContext(MyLocationContext);
   const [shouldCenter, setShouldCenter] = useState(false);
-  const [active, setActive] = useState(false);
-  const coords = useGeolocation(active);
-  const latLng = coords && convertLatLng(coords).toJSON();
 
   function handleClick() {
+    onButtonClick();
     setShouldCenter(true);
-    setActive(true);
   }
 
-  usePromise(async () => {
-    const { state } = await navigator.permissions.query({
-      name: 'geolocation',
-    });
-    if (state === 'granted') {
-      setActive(true);
-    }
-  }, []);
-
   useEffect(() => {
-    if (shouldCenter && map && latLng) {
+    if (shouldCenter && map && coords) {
+      const latLng = convertLatLng(coords).toJSON();
       map.panTo(latLng);
       setShouldCenter(false);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [shouldCenter, map]);
+  }, [shouldCenter, map, coords]);
 
   return (
-    <Button icon={locationIcon} onClick={handleClick}>
-      My location
-      {latLng ? <UserMarker position={latLng} /> : null}
-    </Button>
+    <FloatingActionButton
+      mini
+      title="My location"
+      onClick={handleClick}
+      class={classNames(
+        'absolute z-10 m-4 right-0 md:right-auto md:left-80',
+        props.shiftUp ? 'bottom-1/4-screen' : 'bottom-0'
+      )}
+    >
+      <Icon src={locationIcon} alt="My location" class="filter-invert" />
+    </FloatingActionButton>
   );
 }

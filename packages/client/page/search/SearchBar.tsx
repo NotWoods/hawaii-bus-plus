@@ -8,7 +8,7 @@ export function SearchBar(props: JSX.HTMLAttributes<HTMLInputElement>) {
     <form class="relative shadow-sm m-4">
       <SearchInput
         {...props}
-        class="pl-10 pr-12"
+        class="pl-10"
         placeholder="Where to?"
         aria-label="Where to?"
         accessKey="f"
