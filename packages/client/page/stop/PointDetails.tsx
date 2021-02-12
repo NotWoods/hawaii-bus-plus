@@ -24,12 +24,20 @@ export function PointDetails({ point }: Props) {
   switch (point.type) {
     case 'stop':
       if (StopCard) {
-        return <StopCard point={point} onClose={onClose} />;
+        return (
+          <SearchBase onClose={onClose}>
+            <StopCard point={point} />
+          </SearchBase>
+        );
       }
       break;
     case 'place':
       if (PlaceCard) {
-        return <PlaceCard point={point} onClose={onClose} />;
+        return (
+          <SearchBase onClose={onClose}>
+            <PlaceCard point={point} />
+          </SearchBase>
+        );
       }
       break;
   }

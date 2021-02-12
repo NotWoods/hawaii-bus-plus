@@ -13,10 +13,9 @@ import { StopInfo } from './StopInfo';
 
 interface Props {
   point: StopPoint;
-  onClose(): void;
 }
 
-export function StopCard({ point, onClose }: Props) {
+export function StopCard({ point }: Props) {
   const [details, setDetails] = useState<StopDetails | undefined>();
   const postToInfoWorker = useWorker(InfoWorker) as InfoWorkerHandler;
 
@@ -35,7 +34,7 @@ export function StopCard({ point, onClose }: Props) {
   const position = point.position ?? details?.position;
   if (position) {
     return (
-      <PointBase position={position} onClose={onClose}>
+      <PointBase position={position}>
         <PointHeader>{details?.stop_name}</PointHeader>
         <PointDescription>{details?.stop_desc}</PointDescription>
         {details ? <StopInfo stop={details} /> : null}

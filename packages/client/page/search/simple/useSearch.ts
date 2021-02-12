@@ -20,7 +20,10 @@ export function useSearch(
 
   usePromise(
     async (signal) => {
-      if (!query) onSearchResults(emptyResults);
+      if (!query) {
+        onSearchResults(emptyResults);
+        return;
+      }
 
       const request = { input: query, offset: query.length };
       const gtfsReady = databaseInitialized.then(() =>

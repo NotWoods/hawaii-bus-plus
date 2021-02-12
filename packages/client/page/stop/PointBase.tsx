@@ -2,18 +2,16 @@ import {
   StreetViewPano,
   StreetViewStatic,
 } from '@hawaii-bus-plus/react-google-maps';
-import { ComponentChildren, h } from 'preact';
+import { ComponentChildren, h, Fragment } from 'preact';
 import { useState } from 'preact/hooks';
 import {
   googleMapsApiKey,
   useLoadGoogleMaps,
 } from '../hooks/useLoadGoogleMaps';
-import { SearchBase } from '../search/SearchBase';
 
 interface Props {
   position?: google.maps.LatLngLiteral;
   children: ComponentChildren;
-  onClose?(): void;
 }
 
 export function PointBase(props: Props) {
@@ -23,7 +21,7 @@ export function PointBase(props: Props) {
   const { loadError } = useLoadGoogleMaps();
 
   return (
-    <SearchBase onClose={props.onClose}>
+    <>
       <div
         className="aspect-w-16 aspect-h-9 mb-4"
         hidden={status === 'ZERO_RESULTS'}
@@ -47,6 +45,6 @@ export function PointBase(props: Props) {
         ) : null}
       </div>
       {props.children}
-    </SearchBase>
+    </>
   );
 }

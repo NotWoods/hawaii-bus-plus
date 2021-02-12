@@ -15,10 +15,9 @@ import { PointDescription, PointHeader } from './PointInfo';
 
 interface Props {
   point: PlacePointPartial;
-  onClose(): void;
 }
 
-export function PlaceCard({ point, onClose }: Props) {
+export function PlaceCard({ point }: Props) {
   const service = usePlacesService();
   const [details, setDetails] = useState<PlaceResult | undefined>();
 
@@ -46,7 +45,7 @@ export function PlaceCard({ point, onClose }: Props) {
   const position = point.position ?? details?.location;
   if (position) {
     return (
-      <PointBase position={position} onClose={onClose}>
+      <PointBase position={position}>
         <PointHeader>{point.name ?? details?.name}</PointHeader>
         <PointDescription>{details?.formatted_address}</PointDescription>
         <PlaceInfo position={position} />

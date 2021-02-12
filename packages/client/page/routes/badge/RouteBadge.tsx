@@ -49,8 +49,8 @@ export function RouteBadges({ routes, omit, clear }: RouteBadgesProps) {
     ?.map((route) => <RouteBadge key={route.route_id} route={route} />);
 
   if (!badges || badges.length === 0) {
-    return clear ? null : <span class="route-link__badges">{BLANK}</span>;
+    return clear ? null : <span class="flex gap-1">{BLANK}</span>;
   } else {
-    return <span class="route-link__badges">{badges}</span>;
+    return <span class="flex gap-1">{badges}</span>;
   }
 }

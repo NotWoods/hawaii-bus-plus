@@ -18,13 +18,15 @@ export async function loadStop(
   const stop = await getSingle(repo, repo.loadStops, stopId);
   if (!stop) return undefined;
 
-  const transferStopsReady = repo.loadStops(
+  const transferStops = await repo.loadStops(
     stop.transfers.map((t) => t.to_stop_id)
   );
-  const routes = await repo.loadRoutes(stop.routes);
+  const routeIds = Array.from(transferStops.values())
+    .flatMap((stop) => stop.routes)
+    .concat(stop.routes);
+  const routes = await repo.loadRoutes(routeIds);
   const agencyIds = Array.from(routes.values(), (route) => route.agency_id);
   const agencies = await repo.loadAgencies(agencyIds);
-  const transferStops = await transferStopsReady;
 
   const transfers = stop.transfers.map((t) => ({
     toStop: transferStops.get(t.to_stop_id)!,

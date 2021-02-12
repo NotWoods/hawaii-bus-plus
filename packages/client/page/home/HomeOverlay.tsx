@@ -1,8 +1,9 @@
 import { h } from 'preact';
 import { useState } from 'preact/hooks';
 import { DirectionsSearch } from '../search/directions/DirectionsSearch';
+import { SearchBase } from '../search/SearchBase';
 import { SimpleSearch } from '../search/simple/SimpleSearch';
-import { Home } from './Home';
+import { Home, Title } from './Home';
 
 export function HomeOverlay() {
   const [screen, setScreen] = useState<'home' | 'search' | 'directions'>(
@@ -11,15 +12,22 @@ export function HomeOverlay() {
 
   switch (screen) {
     case 'home':
-      return <Home onSearch={() => setScreen('search')} />;
+      return (
+        <SearchBase icon={false} logo={<Title />}>
+          <Home onSearch={() => setScreen('search')} />
+        </SearchBase>
+      );
     case 'search':
       return (
-        <SimpleSearch
-          onClose={() => setScreen('home')}
-          onDirections={() => setScreen('directions')}
-        />
+        <SearchBase title="Search" onClose={() => setScreen('home')}>
+          <SimpleSearch onDirections={() => setScreen('directions')} />
+        </SearchBase>
       );
     case 'directions':
-      return <DirectionsSearch onClose={() => setScreen('home')} />;
+      return (
+        <SearchBase title="Directions" onClose={() => setScreen('home')}>
+          <DirectionsSearch onClose={() => setScreen('home')} />
+        </SearchBase>
+      );
   }
 }

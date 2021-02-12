@@ -8,6 +8,9 @@ module.exports = {
       display: ['Red Rose', 'serif'],
     },
     extend: {
+      backgroundSize: {
+        96: '24rem',
+      },
       inset: {
         '1/4-screen': '25vh',
         '3/4-screen': '75vh',

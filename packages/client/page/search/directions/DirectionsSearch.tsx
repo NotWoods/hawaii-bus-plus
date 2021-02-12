@@ -1,6 +1,6 @@
 import { Point } from '@hawaii-bus-plus/presentation';
 import { nowWithZone } from '@hawaii-bus-plus/utils';
-import { h } from 'preact';
+import { h, Fragment } from 'preact';
 import { useMemo, useState } from 'preact/hooks';
 import type { Journey } from '../../../worker-nearby/directions/format';
 import type { NearbyWorkerHandler } from '../../../worker-nearby/nearby';
@@ -55,9 +55,8 @@ export function DirectionsSearch(props: Props) {
     [depart, arrive, departureTime]
   );
 
-  // TODO overlay results on top of map
   return (
-    <SearchBase title="Directions" onClose={props.onClose}>
+    <>
       <DirectionsField
         id="directionsDepart"
         label="Departing from"
@@ -106,6 +105,6 @@ export function DirectionsSearch(props: Props) {
           setDepartTime={setDepartTime}
         />
       ) : null}
-    </SearchBase>
+    </>
   );
 }
