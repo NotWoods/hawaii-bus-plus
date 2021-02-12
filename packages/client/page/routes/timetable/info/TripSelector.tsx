@@ -1,4 +1,4 @@
-import { Trip } from '@hawaii-bus-plus/types';
+import { TimeString, Trip } from '@hawaii-bus-plus/types';
 import { h } from 'preact';
 import type { Temporal } from 'proposal-temporal';
 import type { DirectionDetails } from '../../../../worker-info/trip-details';
@@ -6,12 +6,13 @@ import { PlainDateInput } from '../../../time/input/PlainTimeInput';
 
 interface Props {
   details: DirectionDetails;
-  tripTime: Temporal.PlainDateTime;
-  onChangeTripTime(time: Temporal.PlainDateTime): void;
+  tripDate: Temporal.PlainDate;
+  onChangeTripDate(time: Temporal.PlainDate): void;
+  onChangeTripTime(time: TimeString): void;
 }
 
 export function TripSelector(props: Props) {
-  const { details, tripTime, onChangeTripTime } = props;
+  const { details, tripDate, onChangeTripTime } = props;
   const { closestTrip } = details;
 
   // TODO format trip time
@@ -20,12 +21,8 @@ export function TripSelector(props: Props) {
       <PlainDateInput
         class="bg-gray-50 dark:bg-gray-800"
         aria-label="Departure date"
-        value={tripTime.toPlainDate()}
-        onChange={(date) =>
-          onChangeTripTime(
-            date.toPlainDateTime(closestTrip.stopTimes[0].arrivalTime.string)
-          )
-        }
+        value={tripDate}
+        onChange={(date) => props.onChangeTripDate(date)}
       />
       <select
         class="border-current bg-gray-50 dark:bg-gray-800"
@@ -34,7 +31,7 @@ export function TripSelector(props: Props) {
         onChange={(evt) => {
           const tripId = evt.currentTarget.value as Trip['trip_id'];
           const trip = details.allTrips.get(tripId)!;
-          onChangeTripTime(tripTime.withPlainTime(trip.time));
+          onChangeTripTime(trip.time);
         }}
       >
         {Array.from(details.allTrips.values(), (trip) => (

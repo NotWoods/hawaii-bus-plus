@@ -1,3 +1,4 @@
+import { DateString, TimeString } from '@hawaii-bus-plus/types';
 import { nowWithZone } from '@hawaii-bus-plus/utils';
 import { h } from 'preact';
 import { useContext, useState } from 'preact/hooks';
@@ -24,9 +25,10 @@ export function RouteTimetable() {
     RouteDetailContext
   );
   const { Timetable } = useLazyComponent(() => lazyTimetable);
-  const [tripTime, setTripTime] = useState(() =>
-    nowWithZone('Pacific/Honolulu')
+  const [tripDate, setTripDate] = useState(() =>
+    nowWithZone('Pacific/Honolulu').toPlainDate()
   );
+  const [tripTime, setTripTime] = useState<TimeString | undefined>();
   const postToInfoWorker = useWorker(InfoWorker) as InfoWorkerHandler;
 
   usePromise(
@@ -36,7 +38,8 @@ export function RouteTimetable() {
         const details = await postToInfoWorker(signal, {
           type: 'route',
           id: routeId,
-          time: tripTime.toString(),
+          date: tripDate.toString() as DateString,
+          time: tripTime,
         });
 
         setDetails(details);
@@ -55,7 +58,8 @@ export function RouteTimetable() {
         <Timetable
           details={details!}
           directionId={directionId}
-          tripTime={tripTime}
+          tripDate={tripDate}
+          onChangeTripDate={setTripDate}
           onChangeTripTime={setTripTime}
           switchDirection={switchDirection}
         />

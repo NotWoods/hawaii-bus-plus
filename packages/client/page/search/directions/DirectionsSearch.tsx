@@ -1,7 +1,7 @@
 import { Point } from '@hawaii-bus-plus/presentation';
-import { nowWithZone } from '@hawaii-bus-plus/utils';
 import { h, Fragment } from 'preact';
-import { useMemo, useState } from 'preact/hooks';
+import { useState } from 'preact/hooks';
+import type { Temporal } from 'proposal-temporal';
 import type { Journey } from '../../../worker-nearby/directions/format';
 import type { NearbyWorkerHandler } from '../../../worker-nearby/nearby';
 import DirectionsWorker from '../../../worker-nearby/nearby?worker';
@@ -10,6 +10,7 @@ import { databaseInitialized } from '../../hooks/useDatabaseInitialized';
 import { useLazyComponent } from '../../hooks/useLazyComponent';
 import { usePromise } from '../../hooks/usePromise';
 import { useWorker } from '../../hooks/useWorker';
+import { NOW } from '../../time/input/symbol';
 import { emptyResults } from '../simple/places-autocomplete';
 import { lazySearchResults } from '../simple/SimpleSearch';
 import { DirectionsField } from './DirectionsField';
@@ -21,8 +22,9 @@ interface Props {
 export function DirectionsSearch(_props: Props) {
   const [depart, setDepart] = useState<Point | undefined>();
   const [arrive, setArrive] = useState<Point | undefined>();
-  const now = useMemo(() => nowWithZone('Pacific/Honolulu'), []);
-  const [departureTime, setDepartTime] = useState(now);
+  const [departureTime, setDepartTime] = useState<
+    Temporal.PlainDateTime | NOW | undefined
+  >();
 
   const [searchResults, setSearchResults] = useState({
     field: 'depart' as 'depart' | 'arrive',
@@ -80,11 +82,7 @@ export function DirectionsSearch(_props: Props) {
           })
         }
       />
-      <DirectionsTime
-        now={now}
-        value={departureTime}
-        onChange={setDepartTime}
-      />
+      <DirectionsTime value={departureTime} onChange={setDepartTime} />
 
       {DirectionsPointResults ? (
         <DirectionsPointResults

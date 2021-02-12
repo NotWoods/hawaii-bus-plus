@@ -1,12 +1,14 @@
 import { h } from 'preact';
-import { useState } from 'preact/hooks';
 import type { Temporal } from 'proposal-temporal';
 import { useLazyComponent } from '../hooks/useLazyComponent';
+import { NOW } from '../time/input/symbol';
 
 interface Props {
-  now: Temporal.PlainDateTime;
-  value: Temporal.PlainDateTime;
-  onChange(time: Temporal.PlainDateTime): void;
+  /**
+   * `undefined` means that "Leave now" is selected
+   */
+  value: Temporal.PlainDateTime | NOW | undefined;
+  onChange(time: Temporal.PlainDateTime | NOW | undefined): void;
 }
 
 type Selected = 'now' | 'leave-at';
@@ -15,9 +17,7 @@ export function DirectionsTime(props: Props) {
   const { PlainDateTimeInput } = useLazyComponent(
     () => import('../time/input/PlainTimeInput')
   );
-  const [selected, setSelected] = useState<Selected>(
-    props.now.equals(props.value) ? 'now' : 'leave-at'
-  );
+  const selected = props.value != undefined ? 'leave-at' : 'now';
 
   return (
     <div class="bg-blue-900 p-4 mt-2">
@@ -26,9 +26,10 @@ export function DirectionsTime(props: Props) {
         value={selected}
         onChange={(evt) => {
           const mode = evt.currentTarget.value as Selected;
-          setSelected(mode);
           if (mode === 'now') {
-            props.onChange(props.now);
+            props.onChange(undefined);
+          } else {
+            props.onChange(NOW);
           }
         }}
       >
@@ -38,7 +39,7 @@ export function DirectionsTime(props: Props) {
       {PlainDateTimeInput && selected === 'leave-at' ? (
         <PlainDateTimeInput
           class="text-xs bg-blue-900 flex-1"
-          value={props.value}
+          value={props.value!}
           onChange={(dateTime) => props.onChange(dateTime)}
         />
       ) : undefined}

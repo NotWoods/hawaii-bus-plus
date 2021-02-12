@@ -1,3 +1,4 @@
+import { TimeString } from '@hawaii-bus-plus/types';
 import { h, Fragment } from 'preact';
 import type { Temporal } from 'proposal-temporal';
 import type { RouteDetails } from '../../../worker-info/route-details';
@@ -11,13 +12,14 @@ import { useTripBounds } from './useTripBounds';
 interface Props {
   details: RouteDetails;
   directionId: number;
-  tripTime: Temporal.PlainDateTime;
-  onChangeTripTime(time: Temporal.PlainDateTime): void;
+  tripDate: Temporal.PlainDate;
+  onChangeTripDate(time: Temporal.PlainDate): void;
+  onChangeTripTime(time: TimeString): void;
   switchDirection?(): void;
 }
 
 export function Timetable(props: Props) {
-  const { details, tripTime, directionId } = props;
+  const { details, tripDate, directionId } = props;
   const directionDetails = details.directions[directionId];
 
   useTripBounds(details.bounds);
@@ -31,7 +33,8 @@ export function Timetable(props: Props) {
         />
         <TripSelector
           details={directionDetails}
-          tripTime={tripTime}
+          tripDate={tripDate}
+          onChangeTripDate={props.onChangeTripDate}
           onChangeTripTime={props.onChangeTripTime}
         />
       </div>

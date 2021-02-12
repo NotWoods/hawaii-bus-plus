@@ -87,7 +87,8 @@ export async function getRouteDetails(
     | 'loadStops'
   >,
   routeId: Route['route_id'],
-  now?: Temporal.PlainDateTime
+  date?: Temporal.PlainDate,
+  time?: Temporal.PlainTime | string | Temporal.TimeLike
 ): Promise<RouteDetails | undefined> {
   const allCalendarsReady = repo.loadCalendars();
   const route = await getSingle(repo, repo.loadRoutes, routeId);
@@ -98,15 +99,15 @@ export async function getRouteDetails(
   const agency = await getSingle(repo, repo.loadAgencies, route.agency_id);
   const timeZone = agency!.agency_timezone;
 
-  const nowZoned = now ?? nowWithZone(timeZone);
-  const nowDate = nowZoned.toPlainDate();
+  const nowZoned = nowWithZone(timeZone);
+  const nowDate = date ?? nowZoned.toPlainDate();
 
   const allCalendars = await allCalendarsReady;
   const { directionDetails, routeStops } = await findBestTrips(
     repo,
     routeId,
     allCalendars,
-    nowZoned
+    nowDate.toPlainDateTime(time ?? nowZoned.toPlainTime())
   );
 
   const { stops, routes, bounds } = await routeStopDetails(
