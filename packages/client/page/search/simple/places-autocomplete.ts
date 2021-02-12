@@ -1,4 +1,5 @@
 import { memoize } from '@hawaii-bus-plus/utils';
+import type { ClosestResults } from '../../../worker-nearby/closest/closest';
 import type { SearchResults } from '../../../worker-search/search-db';
 
 export const buildSessionToken = memoize(
@@ -33,4 +34,10 @@ export const emptyResults: SearchResults = {
   places: [],
   routes: [],
   stops: [],
+};
+
+export const emptyClosestResults: ClosestResults = {
+  stops: [],
+  routes: new Map(),
+  agencies: new Map(),
 };

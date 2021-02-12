@@ -9,13 +9,20 @@ const alias: AliasOptions = {
 
 if (productionMode) {
   alias['preact/debug'] = '@empty';
+  alias['proposal-temporal'] = 'proposal-temporal/lib/index.mjs';
 }
 
 export default defineConfig({
   plugins: [emptyPackage('@empty'), prefreshPlus()],
   resolve: { alias },
   optimizeDeps: {
-    include: ['mnemonist/set', 'preact', 'preact/debug', 'preact/hooks'],
+    include: [
+      'mnemonist/default-map',
+      'mnemonist/set',
+      'preact',
+      'preact/debug',
+      'preact/hooks',
+    ],
   },
   json: {
     stringify: true,

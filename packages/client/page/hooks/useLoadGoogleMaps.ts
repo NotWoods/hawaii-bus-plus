@@ -3,7 +3,7 @@ import { useJsApiLoader } from '@hawaii-bus-plus/react-google-maps';
 export const googleMapsApiKey = import.meta.env.VITE_GOOGLE_MAPS_KEY as string;
 
 const options = {
-  googleMapsApiKey,
+  apiKey: googleMapsApiKey,
   libraries: ['places' as const],
 };
 

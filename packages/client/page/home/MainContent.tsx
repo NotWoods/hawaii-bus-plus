@@ -1,7 +1,7 @@
 import { PlacePoint, Point, StopPoint } from '@hawaii-bus-plus/presentation';
 import { h, Fragment } from 'preact';
 import { useContext } from 'preact/hooks';
-import { JourneySheet } from '../directions/JourneySheet';
+import { useLazyComponent } from '../hooks/useLazyComponent';
 import { useScreens } from '../hooks/useScreens';
 import { MyLocationButton } from '../map/location/MyLocationButton';
 import { RouterContext } from '../router/Router';
@@ -11,6 +11,9 @@ import { HomeOverlay } from './HomeOverlay';
 
 export function MainContent() {
   const mdMatches = useScreens('md');
+  const { JourneySheet } = useLazyComponent(
+    () => import('../directions/JourneySheet')
+  );
   const { point, directions, routeId } = useContext(RouterContext);
   const sheetOpen = directions != undefined || routeId != undefined;
 
@@ -35,7 +38,7 @@ export function MainContent() {
   }
 
   function renderSheet() {
-    return directions?.journey ? (
+    return JourneySheet && directions?.journey ? (
       <JourneySheet journey={directions.journey} timeZone="Pacific/Honolulu" />
     ) : (
       <RouteTimetable />

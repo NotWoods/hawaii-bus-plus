@@ -5,14 +5,14 @@ import NearbyWorker from '../../worker-nearby/nearby?worker';
 import { databaseInitialized } from '../hooks/useDatabaseInitialized';
 import { usePromise } from '../hooks/usePromise';
 import { useWorker } from '../hooks/useWorker';
+import hawaiiSvg from '../icons/logo_hawaii.svg';
+import plusSvg from '../icons/logo_plus.svg';
 import { MyLocationContext } from '../map/location/context';
 import { RouterContext } from '../router/Router';
 import { SearchBar } from '../search/SearchBar';
 import { SearchBase } from '../search/SearchBase';
+import { emptyClosestResults } from '../search/simple/places-autocomplete';
 import { NearbyRoutes } from '../stop/NearbyRoutes';
-import { emptyClosestResults } from '../stop/PlaceCard';
-import hawaiiSvg from '../icons/logo_hawaii.svg';
-import plusSvg from '../icons/logo_plus.svg';
 
 interface Props {
   onSearch?(): void;

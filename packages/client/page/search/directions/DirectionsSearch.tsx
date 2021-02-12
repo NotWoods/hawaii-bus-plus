@@ -7,13 +7,13 @@ import type { NearbyWorkerHandler } from '../../../worker-nearby/nearby';
 import DirectionsWorker from '../../../worker-nearby/nearby?worker';
 import { DirectionsTime } from '../../directions/DirectionsTime';
 import { databaseInitialized } from '../../hooks/useDatabaseInitialized';
+import { useLazyComponent } from '../../hooks/useLazyComponent';
 import { usePromise } from '../../hooks/usePromise';
 import { useWorker } from '../../hooks/useWorker';
 import { SearchBase } from '../SearchBase';
 import { emptyResults } from '../simple/places-autocomplete';
+import { lazySearchResults } from '../simple/SimpleSearch';
 import { DirectionsField } from './DirectionsField';
-import { DirectionsJourneys } from './DirectionsJourneys';
-import { DirectionsPointResults } from './DirectionsPointResults';
 
 interface Props {
   onClose?(): void;
@@ -30,6 +30,9 @@ export function DirectionsSearch(props: Props) {
     results: emptyResults,
   });
   const [results, setResults] = useState<readonly Journey[] | undefined>();
+  const { DirectionsPointResults, DirectionsJourneys } = useLazyComponent(
+    lazySearchResults
+  );
 
   const postToDirectionsWorker = useWorker(
     DirectionsWorker
@@ -85,14 +88,16 @@ export function DirectionsSearch(props: Props) {
         onChange={setDepartTime}
       />
 
-      <DirectionsPointResults
-        {...searchResults}
-        setResults={setSearchResults}
-        setDepart={setDepart}
-        setArrive={setArrive}
-      />
+      {DirectionsPointResults ? (
+        <DirectionsPointResults
+          {...searchResults}
+          setResults={setSearchResults}
+          setDepart={setDepart}
+          setArrive={setArrive}
+        />
+      ) : null}
 
-      {results ? (
+      {results && DirectionsJourneys ? (
         <DirectionsJourneys
           results={results}
           depart={depart!}

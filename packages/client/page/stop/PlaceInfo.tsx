@@ -5,7 +5,7 @@ import NearbyWorker from '../../worker-nearby/nearby?worker';
 import { databaseInitialized } from '../hooks/useDatabaseInitialized';
 import { usePromise } from '../hooks/usePromise';
 import { useWorker } from '../hooks/useWorker';
-import { emptyClosestResults } from './PlaceCard';
+import { emptyClosestResults } from '../search/simple/places-autocomplete';
 import { PointInfo } from './PointInfo';
 
 interface Props {

@@ -3,43 +3,8 @@ import { h } from 'preact';
 import { Temporal } from 'proposal-temporal';
 import type { Journey } from '../../../worker-nearby/directions/format';
 import { classNames } from '../../hooks/classnames';
-import { openJourney } from '../../router/action';
-import { directionsToParams } from '../../router/url';
 import { SearchResultsSubList } from '../items/SearchResultsSubList';
-import { JourneyDirectionsResultItem } from './JourneyDirectionsResultItem';
-
-interface ItemProps {
-  journey: Journey;
-  from: Point;
-  to: Point;
-  departureTime: Temporal.PlainDateTime;
-  onClick?(): void;
-}
-
-export function DirectionsJourneyItem(props: ItemProps) {
-  const { journey } = props;
-  const params = directionsToParams({
-    depart: props.from,
-    arrive: props.to,
-    departureTime: props.departureTime.toString(),
-  });
-
-  return (
-    <li>
-      <JourneyDirectionsResultItem
-        action={openJourney(
-          props.from,
-          props.to,
-          props.departureTime.toString(),
-          props.journey
-        )}
-        href={`/directions?${params.toString()}`}
-        journey={journey}
-        onClick={props.onClick}
-      />
-    </li>
-  );
-}
+import { DirectionsJourneyItem } from './DirectionsJourneyItem';
 
 interface Props {
   results: readonly Journey[];
@@ -77,6 +42,7 @@ export function DirectionsJourneys(props: Props) {
       </div>
     );
   } else {
+    const departureTimeString = departureTime.toString();
     return (
       <div
         class={classNames(
@@ -94,7 +60,7 @@ export function DirectionsJourneys(props: Props) {
               journey={journey}
               from={props.depart}
               to={props.arrive}
-              departureTime={departureTime}
+              departureTime={departureTimeString}
               onClick={props.onClose}
             />
           )}

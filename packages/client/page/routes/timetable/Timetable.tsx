@@ -1,5 +1,5 @@
 import { h, Fragment } from 'preact';
-import { Temporal } from 'proposal-temporal';
+import type { Temporal } from 'proposal-temporal';
 import type { RouteDetails } from '../../../worker-info/route-details';
 import { SwitchDirectionButton } from './info/SwitchDirectionButton';
 import { TimetableDetails } from './info/TimetableDetails';
@@ -35,11 +35,7 @@ export function Timetable(props: Props) {
           onChangeTripTime={props.onChangeTripTime}
         />
       </div>
-      <TimetableDetails
-        details={details}
-        directionId={directionId}
-        tripTime={tripTime}
-      />
+      <TimetableDetails details={details} directionId={directionId} />
       <StopTimeSegmentList
         stopTimes={directionDetails.closestTrip.stopTimes}
         timeZone={details.agency.agency_timezone}

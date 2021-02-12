@@ -1,7 +1,6 @@
 import { PlacePointPartial } from '@hawaii-bus-plus/presentation';
 import { h } from 'preact';
 import { useState } from 'preact/hooks';
-import type { ClosestResults } from '../../worker-nearby/closest/closest';
 import {
   getDetails,
   PlacesServiceError,
@@ -18,12 +17,6 @@ interface Props {
   point: PlacePointPartial;
   onClose(): void;
 }
-
-export const emptyClosestResults: ClosestResults = {
-  stops: [],
-  routes: new Map(),
-  agencies: new Map(),
-};
 
 export function PlaceCard({ point, onClose }: Props) {
   const service = usePlacesService();

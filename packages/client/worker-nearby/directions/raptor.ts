@@ -5,7 +5,7 @@ import {
   PlainDaysTime,
   skipUntil,
 } from '@hawaii-bus-plus/utils';
-import { DefaultMap } from 'mnemonist';
+import DefaultMap from 'mnemonist/default-map';
 import { Temporal } from 'proposal-temporal';
 import { stopsLoader } from './footpaths';
 import { generateDirectionsData } from './generate-data';

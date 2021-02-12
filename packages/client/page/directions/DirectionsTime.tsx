@@ -1,7 +1,7 @@
 import { h } from 'preact';
 import { useState } from 'preact/hooks';
-import { Temporal } from 'proposal-temporal';
-import { PlainDateTimeInput } from '../time/input/PlainTimeInput';
+import type { Temporal } from 'proposal-temporal';
+import { useLazyComponent } from '../hooks/useLazyComponent';
 
 interface Props {
   now: Temporal.PlainDateTime;
@@ -12,6 +12,9 @@ interface Props {
 type Selected = 'now' | 'leave-at';
 
 export function DirectionsTime(props: Props) {
+  const { PlainDateTimeInput } = useLazyComponent(
+    () => import('../time/input/PlainTimeInput')
+  );
   const [selected, setSelected] = useState<Selected>(
     props.now.equals(props.value) ? 'now' : 'leave-at'
   );
@@ -32,7 +35,7 @@ export function DirectionsTime(props: Props) {
         <option value="now">Leave now</option>
         <option value="leave-at">Leave at</option>
       </select>
-      {selected === 'leave-at' ? (
+      {PlainDateTimeInput && selected === 'leave-at' ? (
         <PlainDateTimeInput
           class="text-xs bg-blue-900 flex-1"
           value={props.value}

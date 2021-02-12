@@ -8,7 +8,7 @@ import {
   Trip,
 } from '@hawaii-bus-plus/types';
 import { serviceRunningOn } from '@hawaii-bus-plus/utils';
-import { DefaultMap } from 'mnemonist';
+import DefaultMap from 'mnemonist/default-map';
 import { Temporal } from 'proposal-temporal';
 
 /**

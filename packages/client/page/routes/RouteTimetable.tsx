@@ -6,6 +6,7 @@ import InfoWorker from '../../worker-info/info?worker';
 import { LoadingBar } from '../buttons/LoadingBar';
 import { databaseInitialized } from '../hooks/useDatabaseInitialized';
 import { useDelay } from '../hooks/useDelay';
+import { useLazyComponent } from '../hooks/useLazyComponent';
 import { usePromise } from '../hooks/usePromise';
 import { useWorker } from '../hooks/useWorker';
 import { RouterContext } from '../router/Router';
@@ -13,7 +14,8 @@ import { BaseSheet } from './BaseSheet';
 import { colorVariables } from './props';
 import { RouteHeader } from './RouteHeader';
 import { RouteDetailContext } from './timetable/context';
-import { Timetable } from './timetable/Timetable';
+
+const lazyTimetable = import('./timetable/Timetable');
 
 export function RouteTimetable() {
   const { routeId } = useContext(RouterContext);
@@ -21,6 +23,7 @@ export function RouteTimetable() {
   const { details, directionId, setDetails, switchDirection } = useContext(
     RouteDetailContext
   );
+  const { Timetable } = useLazyComponent(() => lazyTimetable);
   const [tripTime, setTripTime] = useState(() =>
     nowWithZone('Pacific/Honolulu')
   );
@@ -45,7 +48,7 @@ export function RouteTimetable() {
   );
 
   const route = details?.route;
-  if (route) {
+  if (route && Timetable) {
     return (
       <BaseSheet style={colorVariables(route)} loaded>
         <RouteHeader route={route} />

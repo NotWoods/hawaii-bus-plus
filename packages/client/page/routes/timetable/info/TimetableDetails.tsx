@@ -1,6 +1,5 @@
 import { last } from '@hawaii-bus-plus/utils';
 import { h } from 'preact';
-import { Temporal } from 'proposal-temporal';
 import type { RouteDetails } from '../../../../worker-info/route-details';
 import { Icon } from '../../../icons/Icon';
 import timeIcon from '../../../icons/access_time.svg';
@@ -9,7 +8,6 @@ import { EndedAt, ReachesAt, StartedFrom } from './StartedFrom';
 interface Props {
   details: RouteDetails;
   directionId: number;
-  tripTime: Temporal.PlainDateTime;
 }
 
 export function TimetableDetails(props: Props) {
