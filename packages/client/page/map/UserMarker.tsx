@@ -2,9 +2,10 @@ import { Marker } from '@hawaii-bus-plus/react-google-maps';
 import { h } from 'preact';
 import { useContext } from 'preact/hooks';
 import { MyLocationContext } from './location/context';
+import pinsUrl from '../icons/pins.png';
 
 const userIcon = {
-  url: '/pins.png',
+  url: pinsUrl,
   size: { height: 26, width: 24 },
   scaledSize: { height: 26, width: 120 },
   origin: { x: 48, y: 0 },

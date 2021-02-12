@@ -19,9 +19,10 @@ export function SearchBase(props: Props) {
   return (
     <section
       class={classNames(
-        'overlay fixed flex flex-col shadow z-10 py-4 bg-gradient-to-r from-blue-700 to-blue-800 w-full md:w-80 max-h-screen md:h-screen text-white overflow-y-auto',
+        'overlay fixed flex flex-col shadow z-10 py-4 bg-blue-700 w-full md:w-80 max-h-screen md:h-screen text-white overflow-y-auto',
         loadError && 'h-screen'
       )}
+      style="background-image: url('/waves.svg')"
     >
       <header class="flex items-center">
         <IconButton

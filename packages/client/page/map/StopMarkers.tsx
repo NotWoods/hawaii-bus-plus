@@ -5,9 +5,10 @@ import { useContext } from 'preact/hooks';
 import { useApi } from '../hooks/useApi';
 import { setStopAction } from '../router/action';
 import { RouterContext } from '../router/Router';
+import pinsUrl from '../icons/pins.png';
 
 const otherIcon = {
-  url: '/pins.png',
+  url: pinsUrl,
   size: { height: 26, width: 24 },
   scaledSize: { height: 26, width: 120 },
   origin: { x: 0, y: 0 },
@@ -15,7 +16,7 @@ const otherIcon = {
 } as google.maps.Icon;
 
 const selectedStop = {
-  url: '/pins.png',
+  url: pinsUrl,
   size: { height: 26, width: 24 },
   scaledSize: { height: 26, width: 120 },
   origin: { x: 24, y: 0 },
