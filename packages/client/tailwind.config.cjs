@@ -7,14 +7,6 @@ module.exports = {
     fontFamily: {
       display: ['Red Rose', 'serif'],
     },
-    backgroundColor: (theme) => ({
-      ...theme('colors'),
-      route: 'var(--route-color)',
-    }),
-    textColor: (theme) => ({
-      ...theme('colors'),
-      route: 'var(--route-text-color)',
-    }),
     extend: {
       inset: {
         '1/4-screen': '25vh',
@@ -24,6 +16,7 @@ module.exports = {
         '1/4-screen': '25vh',
       },
       colors: {
+        route: 'var(--route-color)',
         gray: {
           ...colors.trueGray,
           750: '#333',
@@ -62,6 +55,9 @@ module.exports = {
         'blue-500': theme('colors.blue.500'),
         'blue-600': theme('colors.blue.600'),
       }),
+      textColor: {
+        route: 'var(--route-text-color)',
+      },
     },
   },
   plugins: [

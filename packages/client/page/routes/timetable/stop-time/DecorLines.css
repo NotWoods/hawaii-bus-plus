@@ -1,7 +1,3 @@
-.ring-route {
-  --tw-ring-color: var(--route-color);
-}
-
 .grid-area-dot {
   grid-area: dot;
 }
