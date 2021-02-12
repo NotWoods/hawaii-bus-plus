@@ -68,7 +68,7 @@ test.concurrent('getRouteDetails when in service', async () => {
     latest: expectPlainTimeData('17:00:00'),
     allTrips: expect.any(Map),
     closestTrip: expect.objectContaining({
-      offset: { days: 0, hours: 0, minutes: 0, seconds: 0 },
+      offset: { days: 0, hours: 0, minutes: 0, seconds: 0, string: 'PT0S' },
       stop: 'kv',
       stopName: 'Kamuela View Estates',
       trip: expect.objectContaining({
@@ -86,7 +86,7 @@ test.concurrent('getRouteDetails when in service', async () => {
     latest: expectPlainTimeData('17:30:00'),
     allTrips: expect.any(Map),
     closestTrip: expect.objectContaining({
-      offset: { days: 0, hours: 0, minutes: 0, seconds: 0 },
+      offset: { days: 0, hours: 0, minutes: 0, seconds: 0, string: 'PT0S' },
       stop: 'kv',
       stopName: 'Kamuela View Estates',
       trip: expect.objectContaining({
