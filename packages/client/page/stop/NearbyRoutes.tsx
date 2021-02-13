@@ -13,7 +13,7 @@ export function NearbyRoutes(props: Props) {
   return (
     <ul
       class={classNames(
-        'grid grid-flow-col md:grid-flow-row md:grid-cols-2 gap-4 px-4 snap snap-both snap-mandatory snap-px-32 overscroll-contain',
+        'grid grid-flow-col md:grid-flow-row md:grid-cols-2 gap-4 px-4 snap snap-px-32 overscroll-contain',
         props.class
       )}
     >
