@@ -67,6 +67,7 @@ importers:
       '@hawaii-bus-plus/utils': 'link:../utils'
       halfmoon: 1.1.1
       idb: 6.0.0
+      insights-js: 1.2.10
       mnemonist: 0.38.1
       preact: 10.5.12
       proposal-temporal: 0.7.0
@@ -115,6 +116,7 @@ importers:
       esbuild-jest: ^0.3.0
       halfmoon: ^1.1.1
       idb: ^6.0.0
+      insights-js: ^1.2.10
       jest: ^26.6.3
       mnemonist: ^0.38.1
       preact: ^10.5.12
@@ -3575,6 +3577,10 @@ packages:
       node: '>=10'
     resolution:
       integrity: sha512-7PnF4oN3CvZF23ADhA5wRaYEQpJ8qygSkbtTXWBeXWXmEVRXK+1ITciHWwHhsjv1TmW0MgacIv6hEi5pX5NQdA==
+  /insights-js/1.2.10:
+    dev: false
+    resolution:
+      integrity: sha512-BFk00KuGKK9ri4hAC8CuP8ap1xvYfDtU+J6VU9tBhcMKFPIoLR9LTFkb7H0HLW2ltT232DAb8xIlAmZ1JVT7dA==
   /internal-slot/1.0.3:
     dependencies:
       get-intrinsic: 1.1.1

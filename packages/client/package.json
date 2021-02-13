@@ -21,6 +21,7 @@
     "@hawaii-bus-plus/utils": "workspace:*",
     "halfmoon": "^1.1.1",
     "idb": "^6.0.0",
+    "insights-js": "^1.2.10",
     "mnemonist": "^0.38.1",
     "preact": "^10.5.12",
     "proposal-temporal": "^0.7.0",
