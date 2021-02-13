@@ -10,7 +10,6 @@ import { databaseInitialized } from '../../hooks/useDatabaseInitialized';
 import { useLazyComponent } from '../../hooks/useLazyComponent';
 import { usePromise } from '../../hooks/usePromise';
 import { useWorker } from '../../hooks/useWorker';
-import { SearchBase } from '../SearchBase';
 import { emptyResults } from '../simple/places-autocomplete';
 import { lazySearchResults } from '../simple/SimpleSearch';
 import { DirectionsField } from './DirectionsField';
@@ -19,7 +18,7 @@ interface Props {
   onClose?(): void;
 }
 
-export function DirectionsSearch(props: Props) {
+export function DirectionsSearch(_props: Props) {
   const [depart, setDepart] = useState<Point | undefined>();
   const [arrive, setArrive] = useState<Point | undefined>();
   const now = useMemo(() => nowWithZone('Pacific/Honolulu'), []);
