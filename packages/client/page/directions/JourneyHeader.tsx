@@ -2,7 +2,7 @@ import { formatPlainTimeRange } from '@hawaii-bus-plus/presentation';
 import { h } from 'preact';
 import type { Journey } from '../../worker-nearby/directions/format';
 import { classNames } from '../hooks/classnames';
-import { CloseButton } from '../page-wrapper/alert/CloseButton';
+import { CloseButton } from '../buttons/CloseButton';
 import './JourneyHeader.css';
 
 interface Props {

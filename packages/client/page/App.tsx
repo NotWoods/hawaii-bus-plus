@@ -7,6 +7,8 @@ import { MainMap } from './map/MainMap';
 import { Router } from './router/Router';
 import { RouteDetailProvider } from './routes/timetable/context';
 import './App.css';
+import { StickySnackbarProvider } from './snackbar/context';
+import { StickySnackbars } from './snackbar/StickySnackbars';
 
 export function App() {
   return (
@@ -15,10 +17,13 @@ export function App() {
         <MapProvider>
           <MyLocationProvider>
             <RouteDetailProvider>
-              <main class="main">
-                <MainMap />
-                <MainContent />
-              </main>
+              <StickySnackbarProvider>
+                <main class="main">
+                  <MainMap />
+                  <MainContent />
+                  <StickySnackbars />
+                </main>
+              </StickySnackbarProvider>
             </RouteDetailProvider>
           </MyLocationProvider>
         </MapProvider>

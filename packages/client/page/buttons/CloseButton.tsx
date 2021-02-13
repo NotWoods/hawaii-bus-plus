@@ -1,8 +1,8 @@
 import { h } from 'preact';
-import { IconButton } from '../../buttons/IconButton';
-import { Icon } from '../../icons/Icon';
-import clearIcon from '../../icons/clear.svg';
-import { classNames } from '../../hooks/classnames';
+import { classNames } from '../hooks/classnames';
+import clearIcon from '../icons/clear.svg';
+import { Icon } from '../icons/Icon';
+import { IconButton } from './IconButton';
 
 interface Props {
   class?: string;

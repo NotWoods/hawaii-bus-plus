@@ -4,7 +4,7 @@ import { classNames } from '../hooks/classnames';
 import { Icon } from '../icons/Icon';
 
 interface Props extends JSX.HTMLAttributes<HTMLButtonElement> {
-  icon: string;
+  icon?: string;
   iconClass?: string;
   children: ComponentChildren;
 }
@@ -19,7 +19,7 @@ export function Button({ icon, iconClass, ...props }: Props) {
       {...props}
       class={classNames(buttonClasses, props.class)}
     >
-      <Icon class={classNames('mr-2', iconClass)} src={icon} alt="" />
+      {icon && <Icon class={classNames('mr-2', iconClass)} src={icon} alt="" />}
       {props.children}
     </button>
   );

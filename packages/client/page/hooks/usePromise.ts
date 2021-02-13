@@ -1,5 +1,6 @@
+import { AbortError } from '@hawaii-bus-plus/promise-worker';
 import { Inputs, useEffect } from 'preact/hooks';
-import { useAlerts } from '../page-wrapper/alert/StickyAlerts';
+import { useSnackbar } from '../snackbar/context';
 
 export class Warning extends Error {}
 
@@ -22,21 +23,22 @@ export function usePromise(
   effect: (signal: AbortSignal) => Promise<void>,
   deps?: Inputs
 ) {
-  const toastAlert = useAlerts();
+  const toastAlert = useSnackbar();
 
   useAbortEffect((signal) => {
     effect(signal).catch((err: unknown) => {
       let message: string;
-      if (err instanceof Error) {
+      if (err instanceof AbortError) {
+        // Ignore abort errors
+        return;
+      } else if (err instanceof Error) {
         message = err.message;
       } else {
         message = 'An error occurred';
         console.warn(`Received error with unknown type `, err);
       }
       toastAlert({
-        title: 'Error',
         children: message,
-        alertType: err instanceof Warning ? 'alert-secondary' : 'alert-danger',
       });
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
