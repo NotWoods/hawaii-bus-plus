@@ -12,11 +12,13 @@
   "dependencies": {
     "@hawaii-bus-plus/types": "workspace:*",
     "@hawaii-bus-plus/utils": "workspace:*",
+    "node-fetch": "^2.6.1",
     "tslib": "^2.1.0"
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.72",
     "@types/node": "^14.14.27",
+    "@types/node-fetch": "^2.5.8",
     "ava": "^3.15.0",
     "prettier": "^2.2.1",
     "type-fest": "^0.20.2",

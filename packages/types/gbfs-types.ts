@@ -46,6 +46,6 @@ export interface StationInformation
       'physical_configuration' | 'groups' | 'lat' | 'lon'
     >
   > {
-  region_id: string;
+  region_id?: string;
   position: LatLngData;
 }

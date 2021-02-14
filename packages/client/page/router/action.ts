@@ -1,10 +1,5 @@
 import { PlacePoint, Point } from '@hawaii-bus-plus/presentation';
-import {
-  JsonStationInformation,
-  Route,
-  StationInformation,
-  Stop,
-} from '@hawaii-bus-plus/types';
+import { Route, StationInformation, Stop } from '@hawaii-bus-plus/types';
 import type { Journey } from '../../worker-nearby/directions/format';
 
 export type RouterAction =
@@ -39,7 +34,7 @@ export function setStopAction(
 
 export function setBikeStationAction(
   stationId: StationInformation['station_id'],
-  info: JsonStationInformation
+  info: StationInformation
 ): {
   type: 'bike-station';
   stationId: StationInformation['station_id'];
@@ -50,7 +45,7 @@ export function setBikeStationAction(
     type: 'bike-station',
     stationId,
     name: info.name,
-    position: { lat: info.lat, lng: info.lon },
+    position: info.position,
   };
 }
 

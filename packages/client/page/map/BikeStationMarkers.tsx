@@ -1,5 +1,5 @@
 import { Marker } from '@hawaii-bus-plus/react-google-maps';
-import { GbfsWrapper, JsonStationInformation } from '@hawaii-bus-plus/types';
+import { StationInformation } from '@hawaii-bus-plus/types';
 import { h, Fragment } from 'preact';
 import { useContext, useState } from 'preact/hooks';
 import { usePromise } from '../hooks/usePromise';
@@ -12,22 +12,15 @@ const selectedStop = pinsIcon(1);
 
 export function BikeStationMarkers() {
   const { dispatch, point } = useContext(RouterContext);
-  const [stations, setStations] = useState<readonly JsonStationInformation[]>(
-    []
-  );
+  const [stations, setStations] = useState<readonly StationInformation[]>([]);
 
   usePromise(async (signal) => {
-    const res = await fetch(
-      'https://kona.publicbikesystem.net/ube/gbfs/v1/en/station_information',
-      {
-        signal,
-      }
-    );
-    const json = (await res.json()) as GbfsWrapper<{
-      stations: JsonStationInformation[];
-    }>;
-    const { stations } = json.data;
-    setStations(stations);
+    const res = await fetch('/api/v1/bike/station_information.json', {
+      signal,
+    });
+    const json = await res.json();
+    const stations = json as { [id: string]: StationInformation };
+    setStations(Object.values(stations));
   }, []);
 
   const selectedId = point?.type === 'bike' && point.stationId;
@@ -41,7 +34,7 @@ export function BikeStationMarkers() {
         return (
           <Marker
             key={station.station_id}
-            position={{ lat: station.lat, lng: station.lon }}
+            position={station.position}
             icon={icon}
             title={selected ? `(Selected) ${station.name}` : station.name}
             onClick={() =>
