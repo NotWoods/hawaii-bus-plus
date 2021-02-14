@@ -1,4 +1,9 @@
-import { PlacePoint, Point, StopPoint } from '@hawaii-bus-plus/presentation';
+import {
+  BikeStationPoint,
+  PlacePoint,
+  Point,
+  StopPoint,
+} from '@hawaii-bus-plus/presentation';
 import { h, Fragment } from 'preact';
 import { useContext } from 'preact/hooks';
 import { useLazyComponent } from '../hooks/useLazyComponent';
@@ -9,6 +14,19 @@ import { RouteTimetable } from '../routes/RouteTimetable';
 import { PointDetails } from '../stop/PointDetails';
 import { HomeOverlay } from './HomeOverlay';
 
+function pointDetailsOpen(
+  point: Point | undefined
+): point is StopPoint | PlacePoint | BikeStationPoint {
+  switch (point?.type) {
+    case 'stop':
+    case 'place':
+    case 'bike':
+      return true;
+    default:
+      return false;
+  }
+}
+
 export function MainContent() {
   const mdMatches = useScreens('md');
   const { JourneySheet } = useLazyComponent(
@@ -16,18 +34,6 @@ export function MainContent() {
   );
   const { point, directions, routeId } = useContext(RouterContext);
   const sheetOpen = directions != undefined || routeId != undefined;
-
-  function pointDetailsOpen(
-    point: Point | undefined
-  ): point is StopPoint | PlacePoint {
-    switch (point?.type) {
-      case 'stop':
-      case 'place':
-        return true;
-      default:
-        return false;
-    }
-  }
 
   function renderOverlay() {
     if (pointDetailsOpen(point)) {

@@ -1,4 +1,8 @@
-import { PlacePointPartial, StopPoint } from '@hawaii-bus-plus/presentation';
+import {
+  BikeStationPoint,
+  PlacePointPartial,
+  StopPoint,
+} from '@hawaii-bus-plus/presentation';
 import { h } from 'preact';
 import { useContext } from 'preact/hooks';
 import { LoadingBar } from '../buttons/LoadingBar';
@@ -8,12 +12,12 @@ import { RouterContext } from '../router/Router';
 import { SearchBase } from '../search/SearchBase';
 
 interface Props {
-  point: StopPoint | PlacePointPartial;
+  point: StopPoint | PlacePointPartial | BikeStationPoint;
 }
 
 export function PointDetails({ point }: Props) {
   const { dispatch } = useContext(RouterContext);
-  const { StopCard, PlaceCard } = useLazyComponent(
+  const { StopCard, PlaceCard, BikeStationCard } = useLazyComponent(
     () => import('./card-lazy-entry')
   );
 
@@ -36,6 +40,15 @@ export function PointDetails({ point }: Props) {
         return (
           <SearchBase onClose={onClose}>
             <PlaceCard point={point} />
+          </SearchBase>
+        );
+      }
+      break;
+    case 'bike':
+      if (BikeStationCard) {
+        return (
+          <SearchBase onClose={onClose}>
+            <BikeStationCard point={point} />
           </SearchBase>
         );
       }

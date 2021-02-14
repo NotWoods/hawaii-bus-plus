@@ -1,9 +1,9 @@
 import test from 'ava';
 import { readFile } from 'fs/promises';
 import JSZip from 'jszip';
-import { GTFS_ZIP_LOCATION } from '../src/env.js';
-import { zipFilesToObject } from '../src/parse.js';
-import { JsonStreams } from '../src/parsers.js';
+import { GTFS_ZIP_LOCATION } from '../../src/env.js';
+import { zipFilesToObject } from '../../src/bus/parse.js';
+import { JsonStreams } from '../../src/bus/parsers.js';
 
 test('zipFilesToObject', async (t) => {
   const buffer = await readFile(GTFS_ZIP_LOCATION);

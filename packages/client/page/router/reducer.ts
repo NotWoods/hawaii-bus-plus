@@ -69,6 +69,16 @@ export function routerReducer(
       return { ...state, routeId: action.routeId, freshLoad: false };
     case 'stop':
       return { ...state, point: { type: 'stop', stopId: action.stopId } };
+    case 'bike-station':
+      return {
+        ...state,
+        point: {
+          type: 'bike',
+          stationId: action.stationId,
+          name: action.name,
+          position: action.position!,
+        },
+      };
     case 'close-route':
       return { ...state, routeId: undefined, freshLoad: false };
     case 'close-point':

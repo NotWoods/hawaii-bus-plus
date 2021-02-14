@@ -2,15 +2,9 @@ import { Marker } from '@hawaii-bus-plus/react-google-maps';
 import { h } from 'preact';
 import { useContext } from 'preact/hooks';
 import { RouterContext } from '../router/Router';
-import pinsUrl from '../icons/pins.png';
+import { pinsIcon } from './pins';
 
-const placeIcon = {
-  url: pinsUrl,
-  size: { height: 26, width: 24 },
-  scaledSize: { height: 26, width: 120 },
-  origin: { x: 72, y: 0 },
-  anchor: { x: 12, y: 12 },
-} as google.maps.Icon;
+const placeIcon = pinsIcon(3);
 
 export function PlaceMarker() {
   const { point } = useContext(RouterContext);

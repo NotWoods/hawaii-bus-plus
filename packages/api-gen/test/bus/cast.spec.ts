@@ -2,8 +2,8 @@ import test from 'ava';
 import { readFile } from 'fs/promises';
 import parse from 'csv-parse';
 import JSZip from 'jszip';
-import { cast } from '../src/cast.js';
-import { GTFS_ZIP_LOCATION } from '../src/env.js';
+import { cast } from '../../src/bus/cast.js';
+import { GTFS_ZIP_LOCATION } from '../../src/env.js';
 
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 

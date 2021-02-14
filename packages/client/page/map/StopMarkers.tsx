@@ -5,23 +5,10 @@ import { useContext } from 'preact/hooks';
 import { useApi } from '../hooks/useApi';
 import { setStopAction } from '../router/action';
 import { RouterContext } from '../router/Router';
-import pinsUrl from '../icons/pins.png';
+import { pinsIcon } from './pins';
 
-const otherIcon = {
-  url: pinsUrl,
-  size: { height: 26, width: 24 },
-  scaledSize: { height: 26, width: 120 },
-  origin: { x: 0, y: 0 },
-  anchor: { x: 12, y: 12 },
-} as google.maps.Icon;
-
-const selectedStop = {
-  url: pinsUrl,
-  size: { height: 26, width: 24 },
-  scaledSize: { height: 26, width: 120 },
-  origin: { x: 24, y: 0 },
-  anchor: { x: 12, y: 20 },
-} as google.maps.Icon;
+const otherIcon = pinsIcon(0);
+const selectedStop = pinsIcon(1);
 
 interface Props {
   highlighted?: ReadonlyMap<Stop['stop_id'], ColorString>;

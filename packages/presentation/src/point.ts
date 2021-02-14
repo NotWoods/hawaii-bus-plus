@@ -1,4 +1,4 @@
-import { Stop } from '@hawaii-bus-plus/types';
+import { StationInformation, Stop } from '@hawaii-bus-plus/types';
 
 interface LatLngLike {
   lat: number;
@@ -6,7 +6,7 @@ interface LatLngLike {
 }
 
 interface BasePoint {
-  type: 'user' | 'stop' | 'place' | 'marker';
+  type: 'user' | 'stop' | 'place' | 'marker' | 'bike';
   name?: string;
   position: LatLngLike;
 }
@@ -34,4 +34,14 @@ export interface MarkerPoint extends BasePoint {
   type: 'marker';
 }
 
-export type Point = StopPoint | PlacePoint | UserPoint | MarkerPoint;
+export interface BikeStationPoint extends BasePoint {
+  type: 'bike';
+  stationId: StationInformation['station_id'];
+}
+
+export type Point =
+  | StopPoint
+  | PlacePoint
+  | UserPoint
+  | MarkerPoint
+  | BikeStationPoint;

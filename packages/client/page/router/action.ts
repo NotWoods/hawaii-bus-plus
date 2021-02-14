@@ -1,11 +1,17 @@
 import { PlacePoint, Point } from '@hawaii-bus-plus/presentation';
-import { Route, Stop } from '@hawaii-bus-plus/types';
+import {
+  JsonStationInformation,
+  Route,
+  StationInformation,
+  Stop,
+} from '@hawaii-bus-plus/types';
 import type { Journey } from '../../worker-nearby/directions/format';
 
 export type RouterAction =
   | ReturnType<typeof linkAction>
   | ReturnType<typeof setRouteAction>
   | ReturnType<typeof setStopAction>
+  | ReturnType<typeof setBikeStationAction>
   | ReturnType<typeof closeRouteAction>
   | ReturnType<typeof closeStopAction>
   | ReturnType<typeof closeJourneyAction>
@@ -19,12 +25,33 @@ export function linkAction(href: string | URL) {
   return { type: 'link', url } as const;
 }
 
-export function setRouteAction(routeId: Route['route_id']) {
-  return { type: 'route', routeId } as const;
+export function setRouteAction(
+  routeId: Route['route_id']
+): { type: 'route'; routeId: Route['route_id'] } {
+  return { type: 'route', routeId };
 }
 
-export function setStopAction(stopId: Stop['stop_id']) {
-  return { type: 'stop', stopId } as const;
+export function setStopAction(
+  stopId: Stop['stop_id']
+): { type: 'stop'; stopId: Stop['stop_id'] } {
+  return { type: 'stop', stopId };
+}
+
+export function setBikeStationAction(
+  stationId: StationInformation['station_id'],
+  info: JsonStationInformation
+): {
+  type: 'bike-station';
+  stationId: StationInformation['station_id'];
+  name: string;
+  position: google.maps.LatLngLiteral;
+} {
+  return {
+    type: 'bike-station',
+    stationId,
+    name: info.name,
+    position: { lat: info.lat, lng: info.lon },
+  };
 }
 
 export function closeRouteAction() {

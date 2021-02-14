@@ -1,6 +1,6 @@
 import { readFile, writeFile, mkdir } from 'fs/promises';
 import { join } from 'path';
-import { createApiData } from './parse.js';
+import { createApiData } from './bus/parse.js';
 
 function writeJson(path: string, json: unknown) {
   const str = JSON.stringify(json);

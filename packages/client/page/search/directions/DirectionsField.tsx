@@ -22,6 +22,7 @@ const icons = Object.freeze({
   stop: { src: stopIcon, alt: 'Bus stop' },
   place: { src: placeIcon, alt: 'Place' },
   marker: { src: placeIcon, alt: 'Marker' },
+  bike: { src: placeIcon, alt: 'Bike station' },
 });
 
 export function DirectionsField(props: Props) {
