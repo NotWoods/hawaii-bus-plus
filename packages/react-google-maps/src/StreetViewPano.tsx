@@ -1,7 +1,7 @@
 import { h } from 'preact';
 import { useEffect, useRef } from 'preact/hooks';
 import { useListener, useMap } from './apply-changes';
-import { useGoogleMap } from './hooks';
+import { useGoogleMap } from './MapProvider';
 
 export interface StreetViewPanoProps {
   class?: string;

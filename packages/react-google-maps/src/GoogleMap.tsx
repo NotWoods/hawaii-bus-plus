@@ -1,8 +1,8 @@
-import type { GoogleMapProps as OrigGoogleMapProps } from '@react-google-maps/api';
+import { GoogleMapProps as OrigGoogleMapProps } from '@react-google-maps/api';
 import { h } from 'preact';
-import { useEffect, useRef, useState } from 'preact/hooks';
+import { useContext, useEffect, useRef } from 'preact/hooks';
 import { useListener } from './apply-changes';
-import { MapContext } from './hooks';
+import { MapContext } from './MapProvider';
 
 export interface GoogleMapProps
   extends Pick<
@@ -21,8 +21,8 @@ export interface GoogleMapProps
  * Displays a `GoogleMap` while linking it with the context of `MapProvider`.
  */
 export function GoogleMap(props: GoogleMapProps) {
+  const { map, setMap } = useContext(MapContext);
   const mapRef = useRef<HTMLDivElement>();
-  const [map, setMap] = useState<google.maps.Map | null>(null);
 
   useEffect(() => {
     const map = new google.maps.Map(mapRef.current, {
@@ -43,9 +43,7 @@ export function GoogleMap(props: GoogleMapProps) {
 
   return (
     <div ref={mapRef} className={props.mapContainerClassName}>
-      <MapContext.Provider value={map}>
-        {map !== null ? props.children : null}
-      </MapContext.Provider>
+      {map !== null ? props.children : null}
     </div>
   );
 }

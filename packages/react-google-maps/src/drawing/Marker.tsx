@@ -1,7 +1,7 @@
 import type { MarkerProps } from '@react-google-maps/api';
 import { useEffect } from 'preact/hooks';
 import { useListener, useMap } from '../apply-changes';
-import { useGoogleMap } from '../hooks';
+import { useGoogleMap } from '../MapProvider';
 
 type Props = Pick<MarkerProps, 'position' | 'title' | 'icon' | 'onClick'>;
 

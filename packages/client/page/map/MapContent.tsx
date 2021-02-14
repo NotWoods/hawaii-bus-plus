@@ -1,7 +1,7 @@
 import {
   center,
   darkStyles,
-  GoogleMapPortal,
+  GoogleMap,
   lightStyles,
   mapTypeControlOptions,
 } from '@hawaii-bus-plus/react-google-maps';
@@ -61,7 +61,7 @@ export function MapContent() {
   }, [darkMode, mdMatches]);
 
   return (
-    <GoogleMapPortal
+    <GoogleMap
       mapContainerClassName="w-full h-full"
       defaultCenter={center}
       defaultZoom={9}
@@ -72,6 +72,6 @@ export function MapContent() {
       <BikeStationMarkers />
       <PlaceMarker />
       <UserMarker />
-    </GoogleMapPortal>
+    </GoogleMap>
   );
 }

@@ -1,7 +1,7 @@
 import type { PolylineProps } from '@react-google-maps/api';
 import { useEffect } from 'preact/hooks';
 import { useMap } from '../apply-changes';
-import { useGoogleMap } from '../hooks';
+import { useGoogleMap } from '../MapProvider';
 
 type Props = Pick<PolylineProps, 'path' | 'options'>;
 

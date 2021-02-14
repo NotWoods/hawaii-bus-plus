@@ -1,15 +1,5 @@
 import { Loader, LoaderOptions } from '@googlemaps/js-api-loader';
-import { createContext } from 'preact';
-import { useContext, useEffect, useMemo, useState } from 'preact/hooks';
-
-export const MapContext = createContext<google.maps.Map | null>(null);
-
-/**
- * Variant of the react-google-map function that doesn't throw if map is null.
- */
-export function useGoogleMap() {
-  return useContext(MapContext);
-}
+import { useEffect, useMemo, useState } from 'preact/hooks';
 
 export function useJsApiLoader(
   options: LoaderOptions

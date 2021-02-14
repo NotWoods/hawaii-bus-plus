@@ -1,22 +1,42 @@
+import { LoaderOptions } from '@googlemaps/js-api-loader';
 import { ComponentChildren, createContext, h } from 'preact';
-import { useState } from 'preact/hooks';
-import { MapContext } from './hooks';
+import { useState, useContext } from 'preact/hooks';
+import { useJsApiLoader } from './hooks';
 
-type MapSetterContext = (map: google.maps.Map) => void;
+export type { LoaderOptions };
 
-export const MapSetterContext = createContext<MapSetterContext>(() => {});
+export interface MapContext {
+  isLoaded: boolean;
+  map?: google.maps.Map;
+  loadError?: Error;
+  setMap(map: google.maps.Map): void;
+}
 
-/**
- * Creates a `MapContext` that can have its map set by a child element.
- * This can be used with `GoogleMapsPortal` to expose a google map to sibling elements,
- * such as a street view panorama.
- */
-export function MapProvider(props: { children?: ComponentChildren }) {
-  const [map, setMap] = useState<google.maps.Map | null>(null);
+export const MapContext = createContext<MapContext>({
+  isLoaded: false,
+  setMap() {},
+});
+
+export function MapProvider(props: {
+  options: LoaderOptions;
+  children?: ComponentChildren;
+}) {
+  const [map, setMap] = useState<google.maps.Map | undefined>(undefined);
+  const { isLoaded, loadError } = useJsApiLoader(props.options);
 
   return (
-    <MapSetterContext.Provider value={setMap}>
-      <MapContext.Provider value={map}>{props.children}</MapContext.Provider>
-    </MapSetterContext.Provider>
+    <MapContext.Provider value={{ isLoaded, map, loadError, setMap }}>
+      {props.children}
+    </MapContext.Provider>
   );
+}
+
+export function useGoogleMap() {
+  const { map } = useContext(MapContext);
+  return map;
+}
+
+export function useGoogleApiLoaded() {
+  const { isLoaded, loadError } = useContext(MapContext);
+  return { isLoaded, loadError };
 }
