@@ -17,6 +17,7 @@
     "@hawaii-bus-plus/presentation": "workspace:*",
     "@hawaii-bus-plus/promise-worker": "workspace:*",
     "@hawaii-bus-plus/react-google-maps": "workspace:*",
+    "@hawaii-bus-plus/temporal-utils": "workspace:^1.0.0",
     "@hawaii-bus-plus/types": "workspace:*",
     "@hawaii-bus-plus/utils": "workspace:*",
     "halfmoon": "^1.1.1",

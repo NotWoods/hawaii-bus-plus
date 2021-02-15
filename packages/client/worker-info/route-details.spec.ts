@@ -23,7 +23,12 @@ test.concurrent('getRouteDetails when in service', async () => {
   const MONDAY = Temporal.PlainDate.from({ year: 2021, month: 1, day: 25 });
   const now = MONDAY.toPlainDateTime({ hour: 9 });
 
-  const details = await getRouteDetails(repo, routeId, now);
+  const details = await getRouteDetails(
+    repo,
+    routeId,
+    now.toPlainDate(),
+    now.toPlainTime()
+  );
   expect(details).toEqual({
     route: expect.objectContaining({ route_id: 'waimea' }),
     agency: expect.objectContaining({ agency_timezone: 'Pacific/Honolulu' }),

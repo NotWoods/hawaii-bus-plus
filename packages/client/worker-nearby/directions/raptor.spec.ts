@@ -1,6 +1,6 @@
 import { NodeRepository } from '@hawaii-bus-plus/data/node';
+import { PlainDaysTime } from '@hawaii-bus-plus/temporal-utils';
 import { Stop, TimeString } from '@hawaii-bus-plus/types';
-import { PlainDaysTime } from '@hawaii-bus-plus/utils';
 import { Temporal } from 'proposal-temporal';
 import { raptorDirections } from './raptor';
 

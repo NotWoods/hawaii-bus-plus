@@ -1,8 +1,9 @@
 import { NodeRepository } from '@hawaii-bus-plus/data/node';
 import { expectPlainTimeData } from '@hawaii-bus-plus/jest-utils';
 import { Point } from '@hawaii-bus-plus/presentation';
+import { PlainDaysTime } from '@hawaii-bus-plus/temporal-utils';
 import { Stop, StopTime, TimeString, Trip } from '@hawaii-bus-plus/types';
-import { last, PlainDaysTime } from '@hawaii-bus-plus/utils';
+import { last } from '@hawaii-bus-plus/utils';
 import { Temporal } from 'proposal-temporal';
 import { directions, traversePath } from './directions';
 import { JourneyTripSegment } from './format';
@@ -127,7 +128,7 @@ test.concurrent('directions', async () => {
     '10:10:00'
   );
 
-  const journeys = await directions(repo, from, to, departTime);
+  const { journeys } = await directions(repo, from, to, departTime);
   expect(journeys).toHaveLength(1);
   expect(journeys[0]).toEqual({
     depart: undefined,

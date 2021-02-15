@@ -1,15 +1,11 @@
 import type { Shape } from '@hawaii-bus-plus/types';
-import {
-  compareAs,
-  PlainDaysTime,
-  toInt,
-  valueNotNull,
-} from '@hawaii-bus-plus/utils';
+import { compareAs, toInt, valueNotNull } from '@hawaii-bus-plus/utils';
+import { PlainDaysTime } from '@hawaii-bus-plus/temporal-utils';
 import parse from 'csv-parse';
 import { from, zip } from 'ix/iterable/index.js';
 import { filter, map } from 'ix/iterable/operators/index.js';
 import JSZip, { JSZipObject } from 'jszip';
-import { Temporal } from 'proposal-temporal';
+import type { Temporal } from 'proposal-temporal';
 import type { Mutable } from 'type-fest';
 import { cast } from './cast.js';
 import {

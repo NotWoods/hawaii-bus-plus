@@ -1,7 +1,8 @@
 import { Repository } from '@hawaii-bus-plus/data';
 import { Point } from '@hawaii-bus-plus/presentation';
+import { PlainDaysTime } from '@hawaii-bus-plus/temporal-utils';
 import { Stop } from '@hawaii-bus-plus/types';
-import { notNull, PlainDaysTime } from '@hawaii-bus-plus/utils';
+import { notNull } from '@hawaii-bus-plus/utils';
 import { Temporal } from 'proposal-temporal';
 import { findClosestStops } from '../closest/closest-stops';
 import { Journey, journeyToDirections } from './format';
@@ -13,6 +14,12 @@ import {
   raptorDirections,
   Source,
 } from './raptor';
+
+export interface DirectionsResult {
+  journeys: readonly Journey[];
+  depatureTime: string;
+  tomorrow: string;
+}
 
 async function pointToSources(
   repo: Pick<Repository, 'loadStopsSpatial'>,
@@ -84,7 +91,7 @@ export async function directions(
   from: Point,
   to: Point,
   departureTime: Temporal.PlainDateTime
-): Promise<Journey[]> {
+): Promise<DirectionsResult> {
   const arriveAtReady = pointToSources(repo, to, departureTime);
   const departFrom = await pointToSources(repo, from, departureTime);
 
@@ -101,5 +108,12 @@ export async function directions(
       )
   );
 
-  return journeys.filter(notNull);
+  return {
+    journeys: journeys.filter(notNull),
+    depatureTime: departureTime.toString(),
+    tomorrow: departureTime
+      .add({ days: 1 })
+      .with({ hour: 0, minute: 0, second: 0 })
+      .toString(),
+  };
 }

@@ -1,4 +1,4 @@
-import { nowWithZone } from '@hawaii-bus-plus/utils';
+import { nowWithZone } from '@hawaii-bus-plus/temporal-utils';
 import { h } from 'preact';
 import { Temporal } from 'proposal-temporal';
 import { classNames } from '../../hooks/classnames';
@@ -6,16 +6,20 @@ import { NOW } from './symbol';
 
 interface InputProps<T> {
   'aria-label'?: string;
-  value: T | NOW;
+  value: T | string | NOW;
   class?: string;
   onChange(time: T): void;
 }
 
 function PlainTimeInput(props: InputProps<Temporal.PlainTime>) {
-  const value =
-    props.value === NOW
-      ? nowWithZone('Pacific/Honolulu').toPlainTime()
-      : props.value;
+  let value: Temporal.PlainTime;
+  if (props.value === NOW) {
+    value = nowWithZone('Pacific/Honolulu').toPlainTime();
+  } else if (typeof props.value === 'string') {
+    value = Temporal.PlainTime.from(props.value);
+  } else {
+    value = props.value;
+  }
   return (
     <input
       type="time"
@@ -35,10 +39,14 @@ function PlainTimeInput(props: InputProps<Temporal.PlainTime>) {
 }
 
 export function PlainDateInput(props: InputProps<Temporal.PlainDate>) {
-  const value =
-    props.value === NOW
-      ? nowWithZone('Pacific/Honolulu').toPlainDate()
-      : props.value;
+  let value: Temporal.PlainDate;
+  if (props.value === NOW) {
+    value = nowWithZone('Pacific/Honolulu').toPlainDate();
+  } else if (typeof props.value === 'string') {
+    value = Temporal.PlainDate.from(props.value);
+  } else {
+    value = props.value;
+  }
   return (
     <input
       type="date"
@@ -58,8 +66,14 @@ export function PlainDateInput(props: InputProps<Temporal.PlainDate>) {
 }
 
 export function PlainDateTimeInput(props: InputProps<Temporal.PlainDateTime>) {
-  const value =
-    props.value === NOW ? nowWithZone('Pacific/Honolulu') : props.value;
+  let value: Temporal.PlainDateTime;
+  if (props.value === NOW) {
+    value = nowWithZone('Pacific/Honolulu');
+  } else if (typeof props.value === 'string') {
+    value = Temporal.PlainDateTime.from(props.value);
+  } else {
+    value = props.value;
+  }
   return (
     <div class="flex gap-1 mt-1">
       <PlainTimeInput

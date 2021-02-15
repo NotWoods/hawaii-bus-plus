@@ -1,10 +1,10 @@
 import { Repository } from '@hawaii-bus-plus/data';
-import { Stop, StopTime, Trip } from '@hawaii-bus-plus/types';
 import {
   InfinityPlainDaysTime,
   PlainDaysTime,
-  skipUntil,
-} from '@hawaii-bus-plus/utils';
+} from '@hawaii-bus-plus/temporal-utils';
+import { Stop, StopTime, Trip } from '@hawaii-bus-plus/types';
+import { skipUntil } from '@hawaii-bus-plus/utils';
 import DefaultMap from 'mnemonist/default-map';
 import { Temporal } from 'proposal-temporal';
 import { stopsLoader } from './footpaths';

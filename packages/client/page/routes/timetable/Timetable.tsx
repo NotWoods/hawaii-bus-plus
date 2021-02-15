@@ -2,6 +2,7 @@ import { TimeString } from '@hawaii-bus-plus/types';
 import { h, Fragment } from 'preact';
 import type { Temporal } from 'proposal-temporal';
 import type { RouteDetails } from '../../../worker-info/route-details';
+import { NOW } from '../../time/input/symbol';
 import { SwitchDirectionButton } from './info/SwitchDirectionButton';
 import { TimetableDetails } from './info/TimetableDetails';
 import { TripSelector } from './info/TripSelector';
@@ -12,7 +13,7 @@ import { useTripBounds } from './useTripBounds';
 interface Props {
   details: RouteDetails;
   directionId: number;
-  tripDate: Temporal.PlainDate;
+  tripDate: Temporal.PlainDate | NOW;
   onChangeTripDate(time: Temporal.PlainDate): void;
   onChangeTripTime(time: TimeString): void;
   switchDirection?(): void;

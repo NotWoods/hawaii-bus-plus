@@ -1,7 +1,7 @@
 import { DateString, TimeString } from '@hawaii-bus-plus/types';
-import { nowWithZone } from '@hawaii-bus-plus/utils';
 import { h } from 'preact';
 import { useContext, useState } from 'preact/hooks';
+import type { Temporal } from 'proposal-temporal';
 import type { InfoWorkerHandler } from '../../worker-info/info';
 import InfoWorker from '../../worker-info/info?worker';
 import { LoadingBar } from '../buttons/LoadingBar';
@@ -11,12 +11,13 @@ import { useLazyComponent } from '../hooks/useLazyComponent';
 import { usePromise } from '../hooks/usePromise';
 import { useWorker } from '../hooks/useWorker';
 import { RouterContext } from '../router/Router';
+import { NOW } from '../time/input/symbol';
 import { BaseSheet } from './BaseSheet';
 import { colorVariables } from './props';
 import { RouteHeader } from './RouteHeader';
 import { RouteDetailContext } from './timetable/context';
 
-const lazyTimetable = import('./timetable/Timetable');
+const lazyTimetable = import('./time-entry');
 
 export function RouteTimetable() {
   const { routeId } = useContext(RouterContext);
@@ -25,9 +26,7 @@ export function RouteTimetable() {
     RouteDetailContext
   );
   const { Timetable } = useLazyComponent(() => lazyTimetable);
-  const [tripDate, setTripDate] = useState(() =>
-    nowWithZone('Pacific/Honolulu').toPlainDate()
-  );
+  const [tripDate, setTripDate] = useState<Temporal.PlainDate | NOW>(NOW);
   const [tripTime, setTripTime] = useState<TimeString | undefined>();
   const postToInfoWorker = useWorker(InfoWorker) as InfoWorkerHandler;
 
@@ -38,7 +37,8 @@ export function RouteTimetable() {
         const details = await postToInfoWorker(signal, {
           type: 'route',
           id: routeId,
-          date: tripDate.toString() as DateString,
+          date:
+            tripDate === NOW ? undefined : (tripDate.toString() as DateString),
           time: tripTime,
         });
 

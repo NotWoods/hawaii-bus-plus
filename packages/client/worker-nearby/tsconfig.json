@@ -4,6 +4,7 @@
   "references": [
     { "path": "../../promise-worker/worker" },
     { "path": "../../presentation/src" },
+    { "path": "../../temporal-utils/src" },
     { "path": "../../data/src" },
     { "path": "../../data/node" },
     { "path": "../../jest-utils/src" },

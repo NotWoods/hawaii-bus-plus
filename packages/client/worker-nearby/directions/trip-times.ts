@@ -1,5 +1,5 @@
 import { DirectionRoute, Stop, Trip } from '@hawaii-bus-plus/types';
-import { PlainDaysTime } from '@hawaii-bus-plus/utils';
+import { PlainDaysTime } from '@hawaii-bus-plus/temporal-utils';
 
 export function getStopTime(trip: Trip, stopId: Stop['stop_id']) {
   return trip.stop_times.find((st) => st.stop_id === stopId);

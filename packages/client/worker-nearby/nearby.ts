@@ -3,8 +3,9 @@ import { Point } from '@hawaii-bus-plus/presentation';
 import { registerPromiseWorker } from '@hawaii-bus-plus/promise-worker/worker';
 import { Temporal } from 'proposal-temporal';
 import { ClosestResults, findClosest } from './closest/closest';
-import { directions } from './directions/directions';
-import { Journey } from './directions/format';
+import { directions, DirectionsResult } from './directions/directions';
+
+export type { DirectionsResult };
 
 interface DirectionsMessage {
   type: 'directions';
@@ -22,9 +23,7 @@ interface ClosestStopsMessage {
 type Message = DirectionsMessage | ClosestStopsMessage;
 
 export interface NearbyWorkerHandler {
-  (signal: AbortSignal, message: DirectionsMessage): Promise<
-    readonly Journey[]
-  >;
+  (signal: AbortSignal, message: DirectionsMessage): Promise<DirectionsResult>;
   (signal: AbortSignal, message: ClosestStopsMessage): Promise<ClosestResults>;
 }
 

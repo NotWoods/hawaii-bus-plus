@@ -1,12 +1,12 @@
 import { getSingle, Repository } from '@hawaii-bus-plus/data';
-import { nowWithZone } from '@hawaii-bus-plus/utils';
+import { nowWithZone } from '@hawaii-bus-plus/temporal-utils';
 import {
   durationToData,
   formatPlainTime,
   StopTimeData,
 } from '@hawaii-bus-plus/presentation';
 import { Agency, ColorString, Route, Stop } from '@hawaii-bus-plus/types';
-import { Temporal } from 'proposal-temporal';
+import type { Temporal } from 'proposal-temporal';
 import { LatLngBounds, LatLngBoundsLiteral } from 'spherical-geometry-js';
 import { DirectionDetails, findBestTrips, zonedTime } from './trip-details';
 

@@ -2,8 +2,10 @@ import { Point } from '@hawaii-bus-plus/presentation';
 import { h, Fragment } from 'preact';
 import { useState } from 'preact/hooks';
 import type { Temporal } from 'proposal-temporal';
-import type { Journey } from '../../../worker-nearby/directions/format';
-import type { NearbyWorkerHandler } from '../../../worker-nearby/nearby';
+import type {
+  DirectionsResult,
+  NearbyWorkerHandler,
+} from '../../../worker-nearby/nearby';
 import DirectionsWorker from '../../../worker-nearby/nearby?worker';
 import { DirectionsTime } from '../../directions/DirectionsTime';
 import { databaseInitialized } from '../../hooks/useDatabaseInitialized';
@@ -23,14 +25,14 @@ export function DirectionsSearch(_props: Props) {
   const [depart, setDepart] = useState<Point | undefined>();
   const [arrive, setArrive] = useState<Point | undefined>();
   const [departureTime, setDepartTime] = useState<
-    Temporal.PlainDateTime | NOW | undefined
+    Temporal.PlainDateTime | string | NOW | undefined
   >();
 
   const [searchResults, setSearchResults] = useState({
     field: 'depart' as 'depart' | 'arrive',
     results: emptyResults,
   });
-  const [results, setResults] = useState<readonly Journey[] | undefined>();
+  const [results, setResults] = useState<DirectionsResult | undefined>();
   const { DirectionsPointResults, DirectionsJourneys } = useLazyComponent(
     lazySearchResults
   );
@@ -48,7 +50,12 @@ export function DirectionsSearch(_props: Props) {
         type: 'directions',
         from: depart,
         to: arrive,
-        departureTime: departureTime.toString(),
+        departureTime:
+          typeof departureTime === 'string'
+            ? departureTime
+            : typeof departureTime === 'object'
+            ? departureTime.toString()
+            : undefined,
       });
 
       setResults(results);
@@ -95,11 +102,11 @@ export function DirectionsSearch(_props: Props) {
 
       {results && DirectionsJourneys ? (
         <DirectionsJourneys
-          results={results}
+          results={results.journeys}
           depart={depart!}
           arrive={arrive!}
-          departureTime={departureTime}
-          setDepartTime={setDepartTime}
+          departureTime={results.depatureTime}
+          onTomorrowClick={() => setDepartTime(results.tomorrow)}
         />
       ) : null}
     </>

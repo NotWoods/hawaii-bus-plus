@@ -1,7 +1,7 @@
 import { NodeRepository } from '@hawaii-bus-plus/data/node';
 import { expectPlainTimeData } from '@hawaii-bus-plus/jest-utils';
+import { PlainDaysTime } from '@hawaii-bus-plus/temporal-utils';
 import { Stop, StopTime, TimeString, Trip } from '@hawaii-bus-plus/types';
-import { PlainDaysTime } from '@hawaii-bus-plus/utils';
 import { Temporal } from 'proposal-temporal';
 import { journeyToDirections, JourneyTripSegment } from './format';
 import { CompletePath } from './raptor';

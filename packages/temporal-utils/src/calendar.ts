@@ -1,5 +1,5 @@
 import { Calendar, DateString } from '@hawaii-bus-plus/types';
-import { Temporal } from 'proposal-temporal';
+import type { Temporal } from 'proposal-temporal';
 
 /**
  * Check if the given calendar is running on date.

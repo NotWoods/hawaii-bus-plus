@@ -1,4 +1,5 @@
 import { Repository } from '@hawaii-bus-plus/data';
+import { serviceRunningOn } from '@hawaii-bus-plus/temporal-utils';
 import {
   DirectionRoute,
   DirectionRouteMutable,
@@ -7,7 +8,6 @@ import {
   Stop,
   Trip,
 } from '@hawaii-bus-plus/types';
-import { serviceRunningOn } from '@hawaii-bus-plus/utils';
 import DefaultMap from 'mnemonist/default-map';
 import { Temporal } from 'proposal-temporal';
 

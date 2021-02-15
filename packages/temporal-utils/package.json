@@ -1,10 +1,10 @@
 {
-  "name": "@hawaii-bus-plus/presentation",
-  "version": "5.0.0",
+  "name": "@hawaii-bus-plus/temporal-utils",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
-  "main": "src/index.js",
-  "module": "src/index.js",
+  "main": "./src/index.js",
+  "module": "./src/index.js",
   "scripts": {
     "build": "tsc --build src",
     "format": "prettier **/*.ts --write --ignore-path ../../.prettierignore",
@@ -13,11 +13,9 @@
     "test": "ava"
   },
   "dependencies": {
-    "@hawaii-bus-plus/temporal-utils": "workspace:^1.0.0",
     "@hawaii-bus-plus/types": "workspace:*",
-    "@hawaii-bus-plus/utils": "workspace:*",
+    "@hawaii-bus-plus/utils": "workspace:^1.0.0",
     "proposal-temporal": "^0.7.0",
-    "spherical-geometry-js": "^2.0.0",
     "tslib": "^2.1.0"
   },
   "devDependencies": {
@@ -32,7 +30,7 @@
   "eslintConfig": {
     "parserOptions": {
       "project": [
-        "./packages/presentation/*/tsconfig.json"
+        "./packages/temporal-utils/*/tsconfig.json"
       ]
     }
   }

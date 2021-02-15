@@ -17,7 +17,7 @@ import {
   InfinityPlainDaysTime,
   nextServiceDay,
   PlainDaysTime,
-} from '@hawaii-bus-plus/utils';
+} from '@hawaii-bus-plus/temporal-utils';
 import { Temporal } from 'proposal-temporal';
 
 interface TripSlice {

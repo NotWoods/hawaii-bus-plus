@@ -7,8 +7,9 @@ import {
   StopTimeData,
   Walking,
 } from '@hawaii-bus-plus/presentation';
+import { PlainDaysTime } from '@hawaii-bus-plus/temporal-utils';
 import { Agency, ColorString, Route, Stop, Trip } from '@hawaii-bus-plus/types';
-import { last, findLastIndex, PlainDaysTime } from '@hawaii-bus-plus/utils';
+import { findLastIndex, last } from '@hawaii-bus-plus/utils';
 import { add } from 'mnemonist/set';
 import { Temporal } from 'proposal-temporal';
 import { computeDistanceBetween } from 'spherical-geometry-js';

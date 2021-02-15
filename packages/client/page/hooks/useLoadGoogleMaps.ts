@@ -12,6 +12,6 @@ export const googleMapOptions: LoaderOptions = {
 };
 
 export function useLoadGoogleMaps() {
-  return { isLoaded: false, loadError: new Error() };
-  // return useGoogleApiLoaded();
+  // return { isLoaded: false, loadError: new Error() };
+  return useGoogleApiLoaded();
 }

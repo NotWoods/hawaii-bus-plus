@@ -20,7 +20,8 @@ import type {
   Transfer,
   Trip,
 } from '@hawaii-bus-plus/types';
-import { compareAs, PlainDaysTime } from '@hawaii-bus-plus/utils';
+import { compareAs } from '@hawaii-bus-plus/utils';
+import { PlainDaysTime } from '@hawaii-bus-plus/temporal-utils';
 import { first, toArray } from 'ix/asynciterable/index.js';
 import mnemonist from 'mnemonist';
 import type { Merge, Mutable } from 'type-fest';

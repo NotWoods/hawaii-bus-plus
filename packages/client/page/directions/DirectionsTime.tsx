@@ -7,7 +7,7 @@ interface Props {
   /**
    * `undefined` means that "Leave now" is selected
    */
-  value: Temporal.PlainDateTime | NOW | undefined;
+  value: Temporal.PlainDateTime | string | NOW | undefined;
   onChange(time: Temporal.PlainDateTime | NOW | undefined): void;
 }
 
@@ -15,7 +15,7 @@ type Selected = 'now' | 'leave-at';
 
 export function DirectionsTime(props: Props) {
   const { PlainDateTimeInput } = useLazyComponent(
-    () => import('../time/input/PlainTimeInput')
+    () => import('../routes/time-entry')
   );
   const selected = props.value != undefined ? 'leave-at' : 'now';
 

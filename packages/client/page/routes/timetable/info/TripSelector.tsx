@@ -3,10 +3,11 @@ import { h } from 'preact';
 import type { Temporal } from 'proposal-temporal';
 import type { DirectionDetails } from '../../../../worker-info/trip-details';
 import { PlainDateInput } from '../../../time/input/PlainTimeInput';
+import { NOW } from '../../../time/input/symbol';
 
 interface Props {
   details: DirectionDetails;
-  tripDate: Temporal.PlainDate;
+  tripDate: Temporal.PlainDate | NOW;
   onChangeTripDate(time: Temporal.PlainDate): void;
   onChangeTripTime(time: TimeString): void;
 }
