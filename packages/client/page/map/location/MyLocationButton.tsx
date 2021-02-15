@@ -3,6 +3,7 @@ import { h } from 'preact';
 import { useContext, useEffect, useState } from 'preact/hooks';
 import { FloatingActionButton } from '../../buttons/FloatingActionButton';
 import { classNames } from '../../hooks/classnames';
+import { useLoadGoogleMaps } from '../../hooks/useLoadGoogleMaps';
 import { BaseIcon } from '../../icons/Icon';
 import { MyLocationContext } from './context';
 
@@ -12,13 +13,9 @@ interface Props {
 
 export function MyLocationButton(props: Props) {
   const map = useGoogleMap();
+  const { loadError } = useLoadGoogleMaps();
   const { coords, error, onButtonClick } = useContext(MyLocationContext);
   const [shouldCenter, setShouldCenter] = useState(false);
-
-  function handleClick() {
-    onButtonClick();
-    setShouldCenter(true);
-  }
 
   useEffect(() => {
     if (shouldCenter && map && coords) {
@@ -26,6 +23,13 @@ export function MyLocationButton(props: Props) {
       setShouldCenter(false);
     }
   }, [shouldCenter, map, coords]);
+
+  if (loadError) return null;
+
+  function handleClick() {
+    onButtonClick();
+    setShouldCenter(true);
+  }
 
   const title = 'My location';
 

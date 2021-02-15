@@ -1,6 +1,6 @@
 import { Agency, Route } from '@hawaii-bus-plus/types';
 import { Fragment, h } from 'preact';
-import { ButtonLink } from '../../buttons/Button';
+import { Button } from '../../buttons/Button';
 import fareIcon from '../../icons/monetization_on.svg';
 import webIcon from '../../icons/web.svg';
 
@@ -21,20 +21,20 @@ export function RouteDetailsCard({ route, agency, descParts }: Props) {
   return (
     <aside class="bg-white dark:bg-gray-700 shadow-inner px-4 pt-6 pb-8">
       <div class="flex flex-wrap gap-1 justify-center mb-4">
-        <ButtonLink
+        <Button
           icon={fareIcon}
           iconClass="dark:filter-invert"
           href={agency.agency_fare_url}
         >
           Fare info
-        </ButtonLink>
-        <ButtonLink
+        </Button>
+        <Button
           icon={webIcon}
           iconClass="dark:filter-invert"
           href={agency.agency_url}
         >
           Route webpage
-        </ButtonLink>
+        </Button>
       </div>
       <p class="mb-2 text-black dark:text-white">
         {'Bus route operated by '}

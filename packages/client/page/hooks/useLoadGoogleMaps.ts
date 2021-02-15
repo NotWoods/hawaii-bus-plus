@@ -11,7 +11,7 @@ export const googleMapOptions: LoaderOptions = {
   libraries: ['places' as const],
 };
 
-/**
- * Variant of `useLoadScript` that has the options all set.
- */
-export const useLoadGoogleMaps = useGoogleApiLoaded;
+export function useLoadGoogleMaps() {
+  return { isLoaded: false, loadError: new Error() };
+  // return useGoogleApiLoaded();
+}

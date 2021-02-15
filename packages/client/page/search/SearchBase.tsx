@@ -9,7 +9,7 @@ interface Props {
   icon?: ComponentChildren;
   title?: ComponentChildren;
   logo?: ComponentChildren;
-  onClose?(): void;
+  onButtonClick?(): void;
 }
 
 export function SearchBase(props: Props) {
@@ -27,7 +27,7 @@ export function SearchBase(props: Props) {
           class="w-12 h-12 p-3 text-white"
           forceDark
           disabled={props.icon === false}
-          onClick={props.onClose}
+          onClick={props.onButtonClick}
         >
           {props.icon ?? <UpIcon />}
         </IconButton>

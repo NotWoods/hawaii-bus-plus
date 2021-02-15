@@ -1,5 +1,6 @@
 import { h } from 'preact';
 import { useState } from 'preact/hooks';
+// import { MenuIcon } from '../icons/MenuIcon';
 import { DirectionsSearch } from '../search/directions/DirectionsSearch';
 import { SearchBase } from '../search/SearchBase';
 import { SimpleSearch } from '../search/simple/SimpleSearch';
@@ -19,13 +20,13 @@ export function HomeOverlay() {
       );
     case 'search':
       return (
-        <SearchBase title="Search" onClose={() => setScreen('home')}>
+        <SearchBase title="Search" onButtonClick={() => setScreen('home')}>
           <SimpleSearch onDirections={() => setScreen('directions')} />
         </SearchBase>
       );
     case 'directions':
       return (
-        <SearchBase title="Directions" onClose={() => setScreen('home')}>
+        <SearchBase title="Directions" onButtonClick={() => setScreen('home')}>
           <DirectionsSearch onClose={() => setScreen('home')} />
         </SearchBase>
       );
