@@ -78,5 +78,6 @@
     script-src 'self' 'unsafe-eval' maps.googleapis.com;
     style-src 'self' 'unsafe-inline' fonts.googleapis.com;
     font-src 'self' fonts.gstatic.com;
+    connect-src 'self getinsights.io;
     manifest-src 'self';
     base-uri 'none';'''

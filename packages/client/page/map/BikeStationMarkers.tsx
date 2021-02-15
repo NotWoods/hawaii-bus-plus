@@ -15,8 +15,12 @@ export function BikeStationMarkers() {
   const [stations, setStations] = useState<readonly StationInformation[]>([]);
 
   usePromise(async (signal) => {
+    const apiKey = localStorage.getItem('api-key');
     const res = await fetch('/api/v1/bike/station_information.json', {
       signal,
+      headers: {
+        Authorization: `Bearer ${apiKey!}`,
+      },
     });
     const json = await res.json();
     const stations = json as { [id: string]: StationInformation };
