@@ -1,4 +1,11 @@
-import { Agency, Calendar, Route, Stop, Trip } from '@hawaii-bus-plus/types';
+import {
+  Agency,
+  Calendar,
+  Route,
+  StationInformation,
+  Stop,
+  Trip,
+} from '@hawaii-bus-plus/types';
 import { DBRepository } from './db-repository';
 import { MemoryRepository } from './mem-repository';
 
@@ -31,6 +38,8 @@ export interface Repository {
   loadAgencies(
     agencyIds: Iterable<Agency['agency_id']>
   ): Promise<Map<Agency['agency_id'], Agency>>;
+
+  loadBikeStations(): Promise<readonly StationInformation[]>;
 
   searchRoutes(term: string, max: number): Promise<Route[]>;
 

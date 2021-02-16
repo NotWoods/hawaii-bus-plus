@@ -21,6 +21,10 @@ export interface SearchTrip extends Trip {
   start: TimeString;
 }
 
+export interface SearchBikeStation extends StationInformation {
+  words: readonly string[];
+}
+
 export interface GTFSSchema extends DBSchema {
   routes: {
     value: SearchRoute;
@@ -46,10 +50,11 @@ export interface GTFSSchema extends DBSchema {
     };
   };
   bike_stations: {
-    value: StationInformation;
+    value: SearchBikeStation;
     key: StationInformation['station_id'];
     indexes: {
       region_id: string;
+      words: string[];
     };
   };
   calendar: {
@@ -89,6 +94,7 @@ const callbacks: OpenDBCallbacks<GTFSSchema> = {
       keyPath: 'station_id',
     });
     bikeStationStore.createIndex('region_id', 'region_id');
+    bikeStationStore.createIndex('words', 'words', { multiEntry: true });
   },
 };
 

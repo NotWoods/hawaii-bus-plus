@@ -1,0 +1,37 @@
+import { Point } from '@hawaii-bus-plus/presentation';
+import { StationInformation } from '@hawaii-bus-plus/types';
+import { h, Fragment } from 'preact';
+import { RouterAction, setBikeStationAction } from '../../router/action';
+import { pinsIcon } from '../pins';
+import { SelectableMarker } from './SelectableMarker';
+
+const bikeIcon = pinsIcon(4);
+
+interface Props {
+  stations: readonly StationInformation[];
+  point?: Point;
+  dispatch(action: RouterAction): void;
+}
+
+export function BikeStationMarkers({ point, stations, dispatch }: Props) {
+  const selectedId = point?.type === 'bike' && point.stationId;
+
+  return (
+    <>
+      {stations.map((station) => {
+        return (
+          <SelectableMarker
+            key={station.station_id}
+            position={station.position}
+            selected={station.station_id === selectedId}
+            icon={bikeIcon}
+            name={station.name}
+            onClick={() =>
+              dispatch(setBikeStationAction(station.station_id, station))
+            }
+          />
+        );
+      })}
+    </>
+  );
+}

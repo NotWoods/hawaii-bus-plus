@@ -3,6 +3,7 @@ import {
   Calendar,
   GTFSData,
   Route,
+  StationInformation,
   Stop,
   Trip,
 } from '@hawaii-bus-plus/types';
@@ -75,6 +76,10 @@ export class MemoryRepository implements Repository {
     agencyIds: Iterable<Agency['agency_id']>
   ): Promise<Map<Agency['agency_id'], Agency>> {
     return this.apiReady.then((api) => memoryBatch('agency', api, agencyIds));
+  }
+
+  loadBikeStations(): Promise<readonly StationInformation[]> {
+    return this.apiReady.then((api) => Object.values(api.bike_stations));
   }
 
   searchRoutes(term: string, max: number): Promise<Route[]> {

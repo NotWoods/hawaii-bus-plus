@@ -6,7 +6,7 @@ import { isJourneyTripSegment } from '../directions/JourneySegment';
 import { RouterContext } from '../router/Router';
 import { RouteDetailContext } from '../routes/timetable/context';
 import { ShapeLine } from './ShapeLine';
-import { StopMarkers } from './StopMarkers';
+import { StopStationMarkers } from './markers/StopStationMarkers';
 
 interface Props {
   darkMode?: boolean;
@@ -57,7 +57,7 @@ export function RouteGlyphs({ darkMode }: Props) {
 
   return (
     <>
-      <StopMarkers highlighted={highlightedStops} darkMode={darkMode} />
+      <StopStationMarkers highlighted={highlightedStops} darkMode={darkMode} />
       {shapes}
     </>
   );

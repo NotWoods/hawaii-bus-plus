@@ -12,6 +12,7 @@ import { IDBPDatabase } from 'idb';
 import { difference } from 'mnemonist/set';
 import {
   GTFSSchema,
+  SearchBikeStation,
   SearchRoute,
   SearchStop,
   SearchTrip,
@@ -53,7 +54,11 @@ const transformers = {
   },
   calendar: (calendar: Calendar) => calendar,
   agency: (agency: Agency) => agency,
-  bike_stations: (station: StationInformation) => station,
+  bike_stations: (s: StationInformation) => {
+    const station = s as SearchBikeStation;
+    station.words = getWords(station.name, station.address ?? '');
+    return station;
+  },
 };
 const storeNames = Object.keys(transformers) as StoreName[];
 

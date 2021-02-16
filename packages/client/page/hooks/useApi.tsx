@@ -1,11 +1,12 @@
 import { downloadScheduleData } from '@hawaii-bus-plus/data';
-import { Stop } from '@hawaii-bus-plus/types';
+import { StationInformation, Stop } from '@hawaii-bus-plus/types';
 import { ComponentChildren, createContext, h } from 'preact';
 import { useContext, useState } from 'preact/hooks';
 import { usePromise } from '../hooks/usePromise';
 
 interface Api {
   stops: readonly Stop[];
+  bikeStations: { [id: string]: StationInformation };
 }
 
 declare module 'preact/hooks' {
@@ -28,7 +29,10 @@ export function ApiProvider(props: { children: ComponentChildren }) {
       apiKey: localStorage.getItem('api-key')!,
       signal,
     });
-    setApi({ stops: Object.values(api.stops) });
+    setApi({
+      stops: Object.values(api.stops),
+      bikeStations: api.bike_stations,
+    });
   }, []);
 
   return (

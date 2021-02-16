@@ -11,7 +11,6 @@ import { useDarkMode } from '../hooks/useMatchMedia';
 import { useScreens } from '../hooks/useScreens';
 import { openPlace, setMarker } from '../router/action';
 import { RouterContext } from '../router/Router';
-import { BikeStationMarkers } from './BikeStationMarkers';
 import { PlaceMarker } from './PlaceMarker';
 import { RouteGlyphs } from './RouteGlyphs';
 import { UserMarker } from './UserMarker';
@@ -69,7 +68,6 @@ export function MapContent() {
       onClick={handleClick}
     >
       <RouteGlyphs darkMode={darkMode} />
-      <BikeStationMarkers />
       <PlaceMarker />
       <UserMarker />
     </GoogleMap>
