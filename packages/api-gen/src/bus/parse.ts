@@ -95,7 +95,6 @@ export async function createApiData(
     trips: [],
     bike_stations: await bikeStationsReady,
     info: undefined,
-    version: '',
   };
 
   const shapesReady = parseShapes(json);
