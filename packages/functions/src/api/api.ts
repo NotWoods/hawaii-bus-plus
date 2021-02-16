@@ -1,8 +1,14 @@
 import { readFile } from 'fs';
+import { createHash, BinaryLike } from 'crypto';
 import { promisify } from 'util';
 import { NetlifyContext, NetlifyEvent, NetlifyResponse } from '../../types';
 
 const readFileAsync = promisify(readFile);
+function getHash(str: BinaryLike) {
+  const hash = createHash('sha256');
+  hash.update(str);
+  return hash.digest('hex');
+}
 
 export async function handler(
   event: NetlifyEvent,
@@ -15,7 +21,10 @@ export async function handler(
     return {
       statusCode: 200,
       body: file,
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        ETag: getHash(file),
+      },
     };
   } else {
     return {

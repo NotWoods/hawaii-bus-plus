@@ -2,6 +2,7 @@ import {
   Agency,
   Calendar,
   Route,
+  StationInformation,
   Stop,
   TimeString,
   Trip,
@@ -44,6 +45,13 @@ export interface GTFSSchema extends DBSchema {
       route_id: Route['route_id'];
     };
   };
+  bike_stations: {
+    value: StationInformation;
+    key: StationInformation['station_id'];
+    indexes: {
+      region_id: string;
+    };
+  };
   calendar: {
     value: Calendar;
     key: Calendar['service_id'];
@@ -76,6 +84,11 @@ const callbacks: OpenDBCallbacks<GTFSSchema> = {
     const tripStore = db.createObjectStore('trips', { keyPath: 'trip_id' });
     tripStore.createIndex('route_id', 'route_id');
     tripStore.createIndex('start', 'start');
+
+    const bikeStationStore = db.createObjectStore('bike_stations', {
+      keyPath: 'station_id',
+    });
+    bikeStationStore.createIndex('region_id', 'region_id');
   },
 };
 

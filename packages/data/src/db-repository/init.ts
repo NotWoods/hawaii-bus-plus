@@ -3,6 +3,7 @@ import {
   Calendar,
   GTFSData,
   Route,
+  StationInformation,
   Stop,
   Trip,
 } from '@hawaii-bus-plus/types';
@@ -15,12 +16,21 @@ import {
   SearchStop,
   SearchTrip,
 } from '../database.js';
-import { downloadScheduleData } from '../fetch.js';
+import { downloadScheduleData, ETagMatchError } from '../fetch.js';
 import { getWords } from '../words.js';
 
 export async function init(apiKey: string, db: IDBPDatabase<GTFSSchema>) {
-  const api = await downloadScheduleData(apiKey);
-  return initDatabase(db, api);
+  const storedTag = db.get('keyval', 'etag') as Promise<string | undefined>;
+  try {
+    const { api, eTag } = await downloadScheduleData({ apiKey, storedTag });
+    await initDatabase(db, api, eTag);
+  } catch (err: unknown) {
+    if (err instanceof ETagMatchError) {
+      console.info('Database has not changed');
+    } else {
+      throw err;
+    }
+  }
 }
 
 type StoreName = keyof typeof transformers;
@@ -43,6 +53,7 @@ const transformers = {
   },
   calendar: (calendar: Calendar) => calendar,
   agency: (agency: Agency) => agency,
+  bike_stations: (station: StationInformation) => station,
 };
 const storeNames = Object.keys(transformers) as StoreName[];
 
@@ -65,10 +76,14 @@ function keySet(api: GTFSData, name: StoreName) {
  */
 export async function initDatabase(
   db: IDBPDatabase<GTFSSchema>,
-  api: GTFSData
+  api: GTFSData,
+  eTag?: string
 ) {
-  const tx = db.transaction(storeNames, 'readwrite');
+  const allStores = (storeNames as ('keyval' | StoreName)[]).concat('keyval');
+  const tx = db.transaction(allStores, 'readwrite');
   const jobs: Promise<unknown>[] = [];
+
+  jobs.push(tx.objectStore('keyval').put('etag', eTag));
 
   // Prepare to gather the existing keys before inserting new items
   const existingKeysReady = batch(

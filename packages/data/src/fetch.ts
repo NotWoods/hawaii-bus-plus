@@ -4,16 +4,28 @@ export class UnauthorizedError extends Error {
   code = 401;
 }
 
-export async function downloadScheduleData(
-  apiKey: string,
-  signal?: AbortSignal
-): Promise<GTFSData> {
+export class ETagMatchError extends Error {
+  code = 208;
+}
+
+interface DownloadOptions {
+  apiKey: string;
+  signal?: AbortSignal;
+  storedTag?: Promise<string | undefined>;
+}
+
+export async function downloadScheduleData({
+  apiKey,
+  signal,
+  storedTag,
+}: DownloadOptions): Promise<{ api: GTFSData; eTag?: string }> {
   const res = await fetch('/api/v1/api.json', {
     signal,
     headers: {
       Authorization: `Bearer ${apiKey}`,
     },
   });
+
   if (!res.ok) {
     if (res.status === 401) {
       throw new UnauthorizedError(res.statusText);
@@ -21,6 +33,17 @@ export async function downloadScheduleData(
       throw new Error(res.statusText);
     }
   }
+
+  const eTag = res.headers.get('ETag') ?? undefined;
+  if (storedTag) {
+    const tag = await storedTag;
+    if (tag === eTag) {
+      // we've already cached this value
+      throw new ETagMatchError();
+    }
+  }
+
   const json = await res.json();
-  return json as GTFSData;
+  const api = json as GTFSData;
+  return { api, eTag };
 }

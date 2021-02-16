@@ -1,12 +1,13 @@
+import { PlainDaysTime } from '@hawaii-bus-plus/temporal-utils';
 import type { Shape } from '@hawaii-bus-plus/types';
 import { compareAs, toInt, valueNotNull } from '@hawaii-bus-plus/utils';
-import { PlainDaysTime } from '@hawaii-bus-plus/temporal-utils';
 import parse from 'csv-parse';
 import { from, zip } from 'ix/iterable/index.js';
 import { filter, map } from 'ix/iterable/operators/index.js';
 import JSZip, { JSZipObject } from 'jszip';
 import type { Temporal } from 'proposal-temporal';
 import type { Mutable } from 'type-fest';
+import { cacheStations } from '../bike/stations.js';
 import { cast } from './cast.js';
 import {
   JsonStreams,
@@ -58,6 +59,7 @@ export async function zipFilesToObject(
 export async function createApiData(
   gtfsZipData: Buffer | ArrayBuffer | Uint8Array
 ): Promise<[ServerGTFSData, ReadonlyMap<Shape['shape_id'], Shape>]> {
+  const bikeStationsReady = cacheStations();
   const fileList = [
     'agency.txt',
     'calendar.txt',
@@ -91,7 +93,9 @@ export async function createApiData(
     calendar: {},
     agency: {},
     trips: [],
+    bike_stations: await bikeStationsReady,
     info: undefined,
+    version: '',
   };
 
   const shapesReady = parseShapes(json);

@@ -51,11 +51,6 @@
   to = "/.netlify/functions/api"
   status = 200
   force = true
-[[redirects]]
-  from = "/api/v1/bike/*"
-  to = "/.netlify/functions/api"
-  status = 200
-  force = true
 
 # The following redirect is intended for use with most SPAs that handle
 # routing internally.

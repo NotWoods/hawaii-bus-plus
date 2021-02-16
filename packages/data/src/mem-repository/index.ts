@@ -19,8 +19,11 @@ export class MemoryRepository implements Repository {
     this.apiReady = this.init();
   }
 
-  protected init(): Promise<GTFSData> {
-    return downloadScheduleData(localStorage.getItem('api-key')!);
+  protected async init(): Promise<GTFSData> {
+    const { api } = await downloadScheduleData({
+      apiKey: localStorage.getItem('api-key')!,
+    });
+    return api;
   }
 
   loadAllRoutes(): Promise<readonly Route[]> {

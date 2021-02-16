@@ -1,4 +1,5 @@
 import { Opaque } from 'type-fest';
+import { StationInformation } from './gbfs-types';
 import { ColorString, DateString, TimeString } from './data-types';
 
 export interface GTFSData {
@@ -6,6 +7,7 @@ export interface GTFSData {
   stops: { [stop_id: string]: Stop };
   calendar: { [service_id: string]: Calendar };
   agency: { [agency_id: string]: Agency };
+  bike_stations: { [station_id: string]: StationInformation };
   trips: Trip[];
   info: FeedInfo;
 }

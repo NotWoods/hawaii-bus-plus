@@ -1,13 +1,11 @@
 import { downloadScheduleData } from '@hawaii-bus-plus/data';
-import { Route, Stop, Agency } from '@hawaii-bus-plus/types';
+import { Stop } from '@hawaii-bus-plus/types';
 import { ComponentChildren, createContext, h } from 'preact';
 import { useContext, useState } from 'preact/hooks';
 import { usePromise } from '../hooks/usePromise';
 
 interface Api {
-  routes: readonly Route[];
   stops: readonly Stop[];
-  agency: { [id: string]: Agency };
 }
 
 declare module 'preact/hooks' {
@@ -26,15 +24,11 @@ export function ApiProvider(props: { children: ComponentChildren }) {
   const [api, setApi] = useState<Api | undefined>();
 
   usePromise(async (signal) => {
-    const api = await downloadScheduleData(
-      localStorage.getItem('api-key')!,
-      signal
-    );
-    setApi({
-      routes: Object.values(api.routes),
-      stops: Object.values(api.stops),
-      agency: api.agency,
+    const { api } = await downloadScheduleData({
+      apiKey: localStorage.getItem('api-key')!,
+      signal,
     });
+    setApi({ stops: Object.values(api.stops) });
   }, []);
 
   return (

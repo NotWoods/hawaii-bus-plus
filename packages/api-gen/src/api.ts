@@ -1,6 +1,5 @@
-import { readFile, writeFile, mkdir } from 'fs/promises';
+import { mkdir, readFile, writeFile } from 'fs/promises';
 import { join } from 'path';
-import { cacheStations } from './bike/stations.js';
 import { createApiData } from './bus/parse.js';
 
 function writeJson(path: string, json: unknown) {
@@ -32,7 +31,6 @@ export async function generateApi(
   gtfsZipPath: string,
   apiFolder: string
 ): Promise<void> {
-  const bikeStationsReady = cacheStations();
   const zipData = await readFile(gtfsZipPath);
   const [api, shapes] = await createApiData(zipData);
 
@@ -45,11 +43,6 @@ export async function generateApi(
     mkdirIfNotExists(shapeFolder),
     mkdirIfNotExists(bikeFolder),
   ]);
-
-  const bikeStations = await bikeStationsReady;
-  jobs.push(
-    writeJson(join(bikeFolder, 'station_information.json'), bikeStations)
-  );
 
   for (const shape of shapes.values()) {
     jobs.push(writeJson(join(shapeFolder, `${shape.shape_id}.json`), shape));
