@@ -1,3 +1,4 @@
+import { Auth0Provider } from '@auth0/auth0-react';
 import { MapProvider } from '@hawaii-bus-plus/react-google-maps';
 import { h } from 'preact';
 import './App.css';
@@ -13,22 +14,28 @@ import { StickySnackbars } from './snackbar/StickySnackbars';
 
 export function App() {
   return (
-    <Router>
-      <ApiProvider>
-        <MyLocationProvider>
-          <RouteDetailProvider>
-            <StickySnackbarProvider>
-              <MapProvider options={googleMapOptions}>
-                <main class="main">
-                  <MainMap />
-                  <MainContent />
-                  <StickySnackbars />
-                </main>
-              </MapProvider>
-            </StickySnackbarProvider>
-          </RouteDetailProvider>
-        </MyLocationProvider>
-      </ApiProvider>
-    </Router>
+    <Auth0Provider
+      domain={import.meta.env.VITE_AUTH0_DOMAIN as string}
+      clientId={import.meta.env.VITE_AUTH0_CLIENT_ID as string}
+      redirectUri={window.location.origin}
+    >
+      <Router>
+        <ApiProvider>
+          <MyLocationProvider>
+            <RouteDetailProvider>
+              <StickySnackbarProvider>
+                <MapProvider options={googleMapOptions}>
+                  <main class="main">
+                    <MainMap />
+                    <MainContent />
+                    <StickySnackbars />
+                  </main>
+                </MapProvider>
+              </StickySnackbarProvider>
+            </RouteDetailProvider>
+          </MyLocationProvider>
+        </ApiProvider>
+      </Router>
+    </Auth0Provider>
   );
 }

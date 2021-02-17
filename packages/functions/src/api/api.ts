@@ -4,6 +4,7 @@ import { promisify } from 'util';
 import { NetlifyContext, NetlifyEvent, NetlifyResponse } from '../../types';
 
 const readFileAsync = promisify(readFile);
+
 function getHash(str: BinaryLike) {
   const hash = createHash('sha256');
   hash.update(str);

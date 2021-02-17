@@ -4,6 +4,8 @@ import { AliasOptions, defineConfig } from 'vite';
 const productionMode = false && process.env.NETLIFY_CONTEXT === 'production';
 const alias: AliasOptions = {
   'insights-js': 'insights-js/dist/esnext/index.js',
+  react: 'preact/compat',
+  'react-dom': 'preact/compat',
 };
 
 if (productionMode) {
