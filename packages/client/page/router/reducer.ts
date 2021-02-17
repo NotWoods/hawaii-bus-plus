@@ -1,41 +1,16 @@
-import { PlacePointPartial, Point } from '@hawaii-bus-plus/presentation';
 import { Route, Stop } from '@hawaii-bus-plus/types';
-import type { Journey } from '../../worker-nearby/directions/format';
+import {
+  STOP_POINT_TYPE,
+  PLACE_POINT_TYPE,
+  USER_POINT_TYPE,
+  MARKER_POINT_TYPE,
+  BIKE_POINT_TYPE,
+} from '@hawaii-bus-plus/presentation';
 import { RouterAction } from './action';
+import { DIRECTIONS, RouterState, ROUTES_PREFIX } from './state';
 import { queryToPoint } from './url';
 
-export interface PlaceResult
-  extends Pick<
-    google.maps.places.PlaceResult,
-    'formatted_address' | 'place_id'
-  > {
-  name?: string;
-  location?: google.maps.LatLngLiteral;
-}
-
-export interface DirectionsState {
-  depart: Point | PlacePointPartial;
-  arrive: Point | PlacePointPartial;
-  departureTime: string;
-  journey?: Journey;
-}
-
-export interface RouterState {
-  /** Open route */
-  routeId?: Route['route_id'];
-
-  /** Open stop */
-  point?: Point;
-
-  directions?: DirectionsState;
-
-  freshLoad: boolean;
-}
-
-const ROUTES_PREFIX = '/routes/';
-const DIRECTIONS = '/directions';
-
-export function initStateFromUrl(url: URL) {
+export function initStateFromUrl(url: URL): RouterState {
   const newState: RouterState = { freshLoad: true };
 
   if (url.pathname.startsWith(DIRECTIONS)) {
@@ -43,12 +18,20 @@ export function initStateFromUrl(url: URL) {
     const arrive = queryToPoint(url.searchParams.get('to'));
     const departureTime = url.searchParams.get('departureTime');
     if (depart && arrive && departureTime) {
-      newState.directions = { depart, arrive, departureTime };
+      newState.main = {
+        path: DIRECTIONS,
+        depart,
+        arrive,
+        departureTime,
+      };
     }
   } else if (url.pathname.startsWith(ROUTES_PREFIX)) {
     // If link opens route
     const [routeId] = url.pathname.slice(ROUTES_PREFIX.length).split('/');
-    newState.routeId = routeId as Route['route_id'];
+    newState.main = {
+      path: ROUTES_PREFIX,
+      routeId: routeId as Route['route_id'],
+    };
   }
 
   // If link opens stop
@@ -60,37 +43,54 @@ export function initStateFromUrl(url: URL) {
   return newState;
 }
 
-export function routerReducer(
-  state: RouterState,
+function routerReducerInternal(
+  state: Omit<RouterState, 'freshLoad'>,
   action: RouterAction
-): RouterState {
+): Omit<RouterState, 'freshLoad'> {
   switch (action.type) {
     case 'route':
-      return { ...state, routeId: action.routeId, freshLoad: false };
+      return {
+        ...state,
+        main: { path: ROUTES_PREFIX, routeId: action.routeId },
+      };
     case 'stop':
-      return { ...state, point: { type: 'stop', stopId: action.stopId } };
+      return {
+        ...state,
+        point: { type: STOP_POINT_TYPE, stopId: action.stopId },
+      };
     case 'bike-station':
       return {
         ...state,
         point: {
-          type: 'bike',
+          type: BIKE_POINT_TYPE,
           stationId: action.stationId,
           name: action.name,
-          position: action.position!,
+          position: action.position,
         },
       };
-    case 'close-route':
-      return { ...state, routeId: undefined, freshLoad: false };
+    case 'close-main':
+      return { ...state, main: undefined };
     case 'close-point':
-      return { ...state, point: undefined, freshLoad: false };
-    case 'close-journey':
-      return { ...state, directions: undefined, freshLoad: false };
+      return { ...state, point: undefined };
     case 'set-marker':
-      return { ...state, point: { type: 'marker', position: action.location } };
+      return {
+        ...state,
+        point: { type: MARKER_POINT_TYPE, position: action.location },
+      };
     case 'open-place':
-      return { ...state, point: action.point };
+      return {
+        ...state,
+        point: {
+          type: PLACE_POINT_TYPE,
+          placeId: action.placeId,
+          position: action.position,
+        },
+      };
     case 'update-user-location':
-      return { ...state, point: { type: 'user', position: action.location } };
+      return {
+        ...state,
+        point: { type: USER_POINT_TYPE, position: action.location },
+      };
     case 'link': {
       const { url } = action;
       if (url.hostname !== window.location.hostname) return state;
@@ -100,6 +100,24 @@ export function routerReducer(
       return newState;
     }
     case 'open-journey':
-      return { ...state, directions: action, freshLoad: false };
+      return {
+        ...state,
+        main: {
+          path: DIRECTIONS,
+          depart: action.depart,
+          arrive: action.arrive,
+          departureTime: action.departureTime,
+          journey: action.journey,
+        },
+      };
   }
+}
+
+export function routerReducer(
+  state: RouterState,
+  action: RouterAction
+): RouterState {
+  const newState = routerReducerInternal(state, action) as RouterState;
+  newState.freshLoad = false;
+  return newState;
 }

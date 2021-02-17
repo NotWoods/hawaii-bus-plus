@@ -11,6 +11,7 @@ const otherIcon = pinsIcon(0);
 
 interface Props {
   highlighted?: ReadonlyMap<Stop['stop_id'], ColorString>;
+  focused?: ReadonlySet<Stop['stop_id']>;
   darkMode?: boolean;
   point?: Point;
   stops: readonly Stop[];
@@ -35,6 +36,7 @@ export function StopMarkers({
   point,
   stops,
   highlighted,
+  focused,
   darkMode,
   dispatch,
 }: Props) {
@@ -57,6 +59,7 @@ export function StopMarkers({
           <SelectableMarker
             key={stop.stop_id}
             selected={stop.stop_id === selectedStopId}
+            focus={focused ? focused.has(stop.stop_id) : true}
             position={stop.position}
             icon={icon}
             name={stop.stop_name}

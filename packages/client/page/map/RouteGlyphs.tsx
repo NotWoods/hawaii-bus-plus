@@ -17,6 +17,7 @@ export function RouteGlyphs({ darkMode }: Props) {
   const { details, directionId } = useContext(RouteDetailContext);
 
   let highlightedStops: ReadonlyMap<Stop['stop_id'], ColorString> | undefined;
+  let stopsInTrip: ReadonlySet<Stop['stop_id']> | undefined;
   let shapes: ComponentChildren = null;
   if (directions) {
     if (directions.journey) {
@@ -42,10 +43,13 @@ export function RouteGlyphs({ darkMode }: Props) {
         });
     }
   } else if (details) {
-    const shapeId =
-      details.directions[directionId]?.closestTrip?.trip?.shape_id;
+    const currentTrip = details.directions[directionId]?.closestTrip;
+    const shapeId = currentTrip?.trip?.shape_id;
 
     highlightedStops = details.stops;
+    stopsInTrip =
+      currentTrip &&
+      new Set(currentTrip.stopTimes.map((st) => st.stop.stop_id));
     shapes = [
       <ShapeLine
         key={shapeId}
@@ -57,7 +61,11 @@ export function RouteGlyphs({ darkMode }: Props) {
 
   return (
     <>
-      <StopStationMarkers highlighted={highlightedStops} darkMode={darkMode} />
+      <StopStationMarkers
+        highlighted={highlightedStops}
+        focused={stopsInTrip}
+        darkMode={darkMode}
+      />
       {shapes}
     </>
   );

@@ -7,7 +7,6 @@ import {
   usePlacesService,
 } from '../hooks/usePlacesService';
 import { usePromise } from '../hooks/usePromise';
-import { PlaceResult } from '../router/reducer';
 import { buildSessionToken } from '../search/simple/places-autocomplete';
 import { PlaceInfo } from './PlaceInfo';
 import { PointBase } from './PointBase';
@@ -15,6 +14,15 @@ import { PointDescription, PointHeader } from './PointInfo';
 
 interface Props {
   point: PlacePointPartial;
+}
+
+interface PlaceResult
+  extends Pick<
+    google.maps.places.PlaceResult,
+    'formatted_address' | 'place_id'
+  > {
+  name?: string;
+  location?: google.maps.LatLngLiteral;
 }
 
 export function PlaceCard({ point }: Props) {

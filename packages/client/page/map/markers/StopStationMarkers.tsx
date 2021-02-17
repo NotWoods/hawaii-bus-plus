@@ -8,10 +8,11 @@ import { StopMarkers } from './StopMarkers';
 
 interface Props {
   highlighted?: ReadonlyMap<Stop['stop_id'], ColorString>;
+  focused?: ReadonlySet<Stop['stop_id']>;
   darkMode?: boolean;
 }
 
-export function StopStationMarkers({ highlighted, darkMode }: Props) {
+export function StopStationMarkers({ highlighted, focused, darkMode }: Props) {
   const { dispatch, point } = useContext(RouterContext);
   const api = useApi();
 
@@ -20,6 +21,7 @@ export function StopStationMarkers({ highlighted, darkMode }: Props) {
       <StopMarkers
         stops={api ? api.stops : []}
         highlighted={highlighted}
+        focused={focused}
         darkMode={darkMode}
         point={point}
         dispatch={dispatch}
