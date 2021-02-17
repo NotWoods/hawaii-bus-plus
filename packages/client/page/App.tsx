@@ -2,6 +2,7 @@ import { Auth0Provider } from '@auth0/auth0-react';
 import { MapProvider } from '@hawaii-bus-plus/react-google-maps';
 import { h } from 'preact';
 import './App.css';
+import { FocusTrapProvider } from './buttons/FocusTrap';
 import { MainContent } from './home/MainContent';
 import { ApiProvider } from './hooks/useApi';
 import { googleMapOptions } from './hooks/useLoadGoogleMaps';
@@ -24,13 +25,15 @@ export function App() {
           <MyLocationProvider>
             <RouteDetailProvider>
               <StickySnackbarProvider>
-                <MapProvider options={googleMapOptions}>
-                  <main class="main">
-                    <MainMap />
-                    <MainContent />
-                    <StickySnackbars />
-                  </main>
-                </MapProvider>
+                <FocusTrapProvider>
+                  <MapProvider options={googleMapOptions}>
+                    <main class="main">
+                      <MainMap />
+                      <MainContent />
+                      <StickySnackbars />
+                    </main>
+                  </MapProvider>
+                </FocusTrapProvider>
               </StickySnackbarProvider>
             </RouteDetailProvider>
           </MyLocationProvider>
