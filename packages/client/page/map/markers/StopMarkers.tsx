@@ -1,4 +1,5 @@
 import { Point } from '@hawaii-bus-plus/presentation';
+import { MarkerWithData } from '@hawaii-bus-plus/react-google-maps';
 import { ColorString, Stop } from '@hawaii-bus-plus/types';
 import { memoize } from '@hawaii-bus-plus/utils';
 import { h, Fragment } from 'preact';
@@ -39,6 +40,11 @@ export function StopMarkers({
 }: Props) {
   const selectedStopId = point?.type === 'stop' && point.stopId;
 
+  function handleClick(this: MarkerWithData<Stop>) {
+    const stop = this.get('extra');
+    dispatch(setStopAction(stop.stop_id));
+  }
+
   return (
     <>
       {stops.map((stop) => {
@@ -54,7 +60,8 @@ export function StopMarkers({
             position={stop.position}
             icon={icon}
             name={stop.stop_name}
-            onClick={() => dispatch(setStopAction(stop.stop_id))}
+            extra={stop}
+            onClick={handleClick}
           />
         );
       })}

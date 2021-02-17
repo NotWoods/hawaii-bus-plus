@@ -1,6 +1,7 @@
 import { Agency, Route } from '@hawaii-bus-plus/types';
-import { Fragment, h } from 'preact';
+import { ComponentChildren, Fragment, h } from 'preact';
 import { Button } from '../../buttons/Button';
+import { ButtonOrAnchor } from '../../buttons/ButtonOrAnchor';
 import fareIcon from '../../icons/monetization_on.svg';
 import webIcon from '../../icons/web.svg';
 
@@ -11,6 +12,10 @@ interface Props {
     type: 'text' | 'link';
     value: string;
   }[];
+}
+
+function DetailsLink(props: { href: string; children: ComponentChildren }) {
+  return <ButtonOrAnchor {...props} class="text-current hover:underline" />;
 }
 
 export function RouteDetailsCard({ route, agency, descParts }: Props) {
@@ -38,17 +43,15 @@ export function RouteDetailsCard({ route, agency, descParts }: Props) {
       </div>
       <p class="mb-2 text-black dark:text-white">
         {'Bus route operated by '}
-        <a href={agency.agency_url} class="text-current hover:underline">
-          {agency.agency_name}
-        </a>
+        <DetailsLink href={agency.agency_url}>{agency.agency_name}</DetailsLink>
         .
       </p>
       <p class="text-sm leading-relaxed max-w-none text-black dark:text-white text-opacity-75 break-words">
         {descParts?.map((part, i) =>
           part.type === 'link' ? (
-            <a key={i} href={part.value} class="hover:underline">
+            <DetailsLink key={i} href={part.value}>
               {part.value}
-            </a>
+            </DetailsLink>
           ) : (
             <Fragment key={i}>{part.value}</Fragment>
           )

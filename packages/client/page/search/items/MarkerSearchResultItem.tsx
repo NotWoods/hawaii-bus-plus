@@ -1,5 +1,6 @@
 import { Route, Stop } from '@hawaii-bus-plus/types';
 import { ComponentChildren, h } from 'preact';
+import { ButtonOrAnchor } from '../../buttons/ButtonOrAnchor';
 import { classNames } from '../../hooks/classnames';
 import busStopIcon from '../../icons/bus_stop.svg';
 import { Icon } from '../../icons/Icon';
@@ -29,7 +30,7 @@ const gridTemplate = `
 function MarkerSearchResultItem(props: MarkerProps) {
   return (
     <li>
-      <a
+      <ButtonOrAnchor
         href={props.href}
         class={classNames('group grid gap-x-2 py-1 text-white', props.class)}
         onClick={props.onClick}
@@ -44,7 +45,7 @@ function MarkerSearchResultItem(props: MarkerProps) {
         <p className="text-sm group-hover:underline">{props.title}</p>
         <p className="text-xs">{props.subtitle}</p>
         {props.badges && <p className="text-xs mt-1">{props.badges}</p>}
-      </a>
+      </ButtonOrAnchor>
     </li>
   );
 }

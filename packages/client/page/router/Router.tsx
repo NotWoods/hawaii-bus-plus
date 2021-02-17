@@ -1,6 +1,7 @@
 import { h, createContext, ComponentChildren } from 'preact';
 import { useContext, useEffect, useReducer } from 'preact/hooks';
 import { JSXInternal } from 'preact/src/jsx';
+import { useFocusTrapped } from '../buttons/FocusTrap';
 import { linkAction, RouterAction } from './action';
 import { initStateFromUrl, routerReducer, RouterState } from './reducer';
 import { directionsToParams } from './url';
@@ -72,9 +73,11 @@ interface LinkProps
  */
 export function Link({ action, ...props }: LinkProps) {
   const { dispatch } = useContext(RouterContext);
+  const trapped = useFocusTrapped();
   return (
     <a
       {...props}
+      tabIndex={trapped ? -1 : 0}
       onClick={function (evt) {
         evt.preventDefault();
         props.onClick?.call(this, evt);
