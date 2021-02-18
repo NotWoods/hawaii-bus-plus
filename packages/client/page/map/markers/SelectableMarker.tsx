@@ -22,7 +22,7 @@ export function SelectableMarker<T>(props: Props<T>) {
       position={props.position}
       icon={selected ? selectedStop : props.icon}
       title={selected ? `(Selected) ${name}` : name}
-      opacity={focus ? 1 : 0.5}
+      opacity={focus || selected ? 1 : 0.5}
       data-extra={props.extra}
       onClick={props.onClick}
     />

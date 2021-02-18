@@ -3,7 +3,7 @@ import { Route } from '@hawaii-bus-plus/types';
 import type { Journey } from '../../../worker-nearby/directions/format';
 
 export const ROUTES_PREFIX = '/routes/';
-export const DIRECTIONS = '/directions';
+export const DIRECTIONS_PATH = '/directions';
 
 export interface OpenRouteState {
   path: typeof ROUTES_PREFIX;
@@ -11,7 +11,7 @@ export interface OpenRouteState {
 }
 
 export interface OpenDirectionsState {
-  path: typeof DIRECTIONS;
+  path: typeof DIRECTIONS_PATH;
   depart: Point | PlacePointPartial;
   arrive: Point | PlacePointPartial;
   departureTime: string;

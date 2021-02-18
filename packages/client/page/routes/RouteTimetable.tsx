@@ -11,6 +11,7 @@ import { useLazyComponent } from '../hooks/useLazyComponent';
 import { usePromise } from '../hooks/usePromise';
 import { useWorker } from '../hooks/useWorker';
 import { RouterContext } from '../router/Router';
+import { RouterState, ROUTES_PREFIX } from '../router/state';
 import { NOW } from '../time/input/symbol';
 import { BaseSheet } from './BaseSheet';
 import { colorVariables } from './props';
@@ -19,8 +20,18 @@ import { RouteDetailContext } from './timetable/context';
 
 const lazyTimetable = import('./time-entry');
 
+function getRouteId({ main }: Pick<RouterState, 'main'>) {
+  if (main?.path === ROUTES_PREFIX) {
+    return main.routeId;
+  } else {
+    return undefined;
+  }
+}
+
 export function RouteTimetable() {
-  const { routeId } = useContext(RouterContext);
+  const state = useContext(RouterContext);
+  const routeId = getRouteId(state);
+
   const delayDone = useDelay(500, [routeId]);
   const { details, directionId, setDetails, switchDirection } = useContext(
     RouteDetailContext

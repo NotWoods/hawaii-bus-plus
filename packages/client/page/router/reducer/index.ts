@@ -1,6 +1,8 @@
 import { Route, Stop } from '@hawaii-bus-plus/types';
 import { RouterAction } from '../action';
-import { DIRECTIONS, RouterState, ROUTES_PREFIX } from '../state';
+import { MainRouterAction } from '../action/main';
+import { PointRouterAction } from '../action/point';
+import { DIRECTIONS_PATH, RouterState, ROUTES_PREFIX } from '../state';
 import { queryToPoint } from '../url';
 import { mainRouterReducer } from './main';
 import { pointRouterReducer } from './point';
@@ -8,13 +10,13 @@ import { pointRouterReducer } from './point';
 export function initStateFromUrl(url: URL): RouterState {
   const newState: RouterState = { freshLoad: true };
 
-  if (url.pathname.startsWith(DIRECTIONS)) {
+  if (url.pathname.startsWith(DIRECTIONS_PATH)) {
     const depart = queryToPoint(url.searchParams.get('from'));
     const arrive = queryToPoint(url.searchParams.get('to'));
     const departureTime = url.searchParams.get('departureTime');
     if (depart && arrive && departureTime) {
       newState.main = {
-        path: DIRECTIONS,
+        path: DIRECTIONS_PATH,
         depart,
         arrive,
         departureTime,
@@ -52,8 +54,11 @@ export function routerReducer(
       return newState;
     }
     default: {
-      const newMain = mainRouterReducer(state.main, action);
-      const newPoint = pointRouterReducer(state.point, action);
+      const newMain = mainRouterReducer(state.main, action as MainRouterAction);
+      const newPoint = pointRouterReducer(
+        state.point,
+        action as PointRouterAction
+      );
       if (newMain !== state.main || newPoint !== state.point) {
         return {
           main: newMain,

@@ -2,7 +2,10 @@ import { Point } from '@hawaii-bus-plus/presentation';
 import { MarkerWithData } from '@hawaii-bus-plus/react-google-maps';
 import { StationInformation } from '@hawaii-bus-plus/types';
 import { h, Fragment } from 'preact';
-import { RouterAction, setBikeStationAction } from '../../router/action';
+import {
+  PointRouterAction,
+  setBikeStationAction,
+} from '../../router/action/point';
 import { pinsIcon } from '../pins';
 import { SelectableMarker } from './SelectableMarker';
 
@@ -11,7 +14,7 @@ const bikeIcon = pinsIcon(4);
 interface Props {
   stations: readonly StationInformation[];
   point?: Point;
-  dispatch(action: RouterAction): void;
+  dispatch(action: PointRouterAction): void;
 }
 
 export function BikeStationMarkers({ point, stations, dispatch }: Props) {

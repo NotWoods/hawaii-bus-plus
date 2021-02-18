@@ -2,7 +2,7 @@ import { Route } from '@hawaii-bus-plus/types';
 import { h } from 'preact';
 import { useContext } from 'preact/hooks';
 import { CloseButton } from '../buttons/CloseButton';
-import { closeRouteAction } from '../router/action';
+import { closeMainAction } from '../router/action/main';
 import { RouterContext } from '../router/Router';
 import { BLANK } from './badge/RouteBadge';
 import { RouteIcon } from './badge/RouteIcon';
@@ -24,7 +24,7 @@ export function RouteHeader({ route }: Props) {
       <h2 class="font-display text-3xl" style={{ gridArea: 'name' }}>
         {route?.route_long_name ?? BLANK}
       </h2>
-      <CloseButton onClick={() => dispatch(closeRouteAction())} />
+      <CloseButton onClick={() => dispatch(closeMainAction())} />
     </header>
   );
 }

@@ -1,7 +1,7 @@
 import { h } from 'preact';
 import { useContext } from 'preact/hooks';
 import type { Journey } from '../../worker-nearby/directions/format';
-import { closeJourneyAction } from '../router/action';
+import { closeMainAction } from '../router/action/main';
 import { RouterContext } from '../router/Router';
 import { BaseSheet } from '../routes/BaseSheet';
 import { JourneyHeader } from './JourneyHeader';
@@ -20,7 +20,7 @@ export function JourneySheet(props: Props) {
       <JourneyHeader
         journey={props.journey}
         timeZone={props.timeZone}
-        onClose={() => dispatch(closeJourneyAction())}
+        onClose={() => dispatch(closeMainAction())}
       />
       <ul className="px-8">
         {props.journey.trips.map((segment, i) => {

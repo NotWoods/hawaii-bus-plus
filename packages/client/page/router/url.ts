@@ -1,7 +1,7 @@
 import { Point, PlacePointPartial } from '@hawaii-bus-plus/presentation';
 import { Stop } from '@hawaii-bus-plus/types';
 import { toInt } from '@hawaii-bus-plus/utils';
-import { DirectionsState } from './reducer';
+import { OpenDirectionsState } from './state/main';
 
 export function pointToQuery(point: Point | PlacePointPartial) {
   switch (point.type) {
@@ -37,7 +37,7 @@ export function queryToPoint(
 }
 
 export function directionsToParams(
-  directions: DirectionsState,
+  directions: Omit<OpenDirectionsState, 'path'>,
   params = new URLSearchParams()
 ) {
   params.set('from', pointToQuery(directions.depart));

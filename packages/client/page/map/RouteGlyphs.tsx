@@ -7,41 +7,46 @@ import { RouterContext } from '../router/Router';
 import { RouteDetailContext } from '../routes/timetable/context';
 import { ShapeLine } from './ShapeLine';
 import { StopStationMarkers } from './markers/StopStationMarkers';
+import { DIRECTIONS_PATH, RouterState } from '../router/state';
 
 interface Props {
   darkMode?: boolean;
 }
 
+function getJourney({ main }: Pick<RouterState, 'main'>) {
+  if (main?.path === DIRECTIONS_PATH) {
+    return main.journey;
+  } else {
+    return undefined;
+  }
+}
+
 export function RouteGlyphs({ darkMode }: Props) {
-  const { directions } = useContext(RouterContext);
+  const journey = getJourney(useContext(RouterContext));
   const { details, directionId } = useContext(RouteDetailContext);
 
   let highlightedStops: ReadonlyMap<Stop['stop_id'], ColorString> | undefined;
   let stopsInTrip: ReadonlySet<Stop['stop_id']> | undefined;
   let shapes: ComponentChildren = null;
-  if (directions) {
-    if (directions.journey) {
-      highlightedStops = directions.journey.stops;
-      shapes = directions.journey.trips
-        .filter(isJourneyTripSegment)
-        .map((segment) => {
-          const shapeId = segment.trip.shape_id;
-          const start = segment.stopTimes[0].shapeDistTraveled;
-          const end = last(segment.stopTimes).shapeDistTraveled;
-          const edges =
-            start != undefined && end != undefined
-              ? ([start, end] as const)
-              : undefined;
-          return (
-            <ShapeLine
-              key={shapeId}
-              edges={edges}
-              shapeId={shapeId}
-              routeColor={segment.route.route_color}
-            />
-          );
-        });
-    }
+  if (journey) {
+    highlightedStops = journey.stops;
+    shapes = journey.trips.filter(isJourneyTripSegment).map((segment) => {
+      const shapeId = segment.trip.shape_id;
+      const start = segment.stopTimes[0].shapeDistTraveled;
+      const end = last(segment.stopTimes).shapeDistTraveled;
+      const edges =
+        start != undefined && end != undefined
+          ? ([start, end] as const)
+          : undefined;
+      return (
+        <ShapeLine
+          key={shapeId}
+          edges={edges}
+          shapeId={shapeId}
+          routeColor={segment.route.route_color}
+        />
+      );
+    });
   } else if (details) {
     const currentTrip = details.directions[directionId]?.closestTrip;
     const shapeId = currentTrip?.trip?.shape_id;

@@ -2,7 +2,7 @@ import { h } from 'preact';
 import type { Journey } from '../../../worker-nearby/directions/format';
 import { JourneyHeader } from '../../directions/JourneyHeader';
 import { isJourneyTripSegment } from '../../directions/JourneySegment';
-import { openJourney } from '../../router/action';
+import { openJourney } from '../../router/action/main';
 import { Link } from '../../router/Router';
 import { SmallRouteIcon } from '../../routes/badge/RouteIcon';
 import { colorVariables } from '../../routes/props';

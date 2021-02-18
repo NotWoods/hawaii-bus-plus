@@ -1,7 +1,7 @@
 import { Point } from '@hawaii-bus-plus/presentation';
 import { h } from 'preact';
 import type { Journey } from '../../../worker-nearby/directions/format';
-import { openJourney } from '../../router/action';
+import { openJourney } from '../../router/action/main';
 import { directionsToParams } from '../../router/url';
 import { JourneyDirectionsResultItem } from './JourneyDirectionsResultItem';
 

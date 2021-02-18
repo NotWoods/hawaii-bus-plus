@@ -7,7 +7,7 @@ import { h } from 'preact';
 import { useContext } from 'preact/hooks';
 import { LoadingBar } from '../buttons/LoadingBar';
 import { useLazyComponent } from '../hooks/useLazyComponent';
-import { closeStopAction } from '../router/action';
+import { closePointAction } from '../router/action/point';
 import { RouterContext } from '../router/Router';
 import { SearchBase } from '../search/SearchBase';
 
@@ -22,7 +22,7 @@ export function PointDetails({ point }: Props) {
   );
 
   function onClose() {
-    dispatch(closeStopAction());
+    dispatch(closePointAction());
   }
 
   switch (point.type) {

@@ -3,7 +3,7 @@ import { MarkerWithData } from '@hawaii-bus-plus/react-google-maps';
 import { ColorString, Stop } from '@hawaii-bus-plus/types';
 import { memoize } from '@hawaii-bus-plus/utils';
 import { h, Fragment } from 'preact';
-import { RouterAction, setStopAction } from '../../router/action';
+import { PointRouterAction, setStopAction } from '../../router/action/point';
 import { pinsIcon } from '../pins';
 import { SelectableMarker } from './SelectableMarker';
 
@@ -15,7 +15,7 @@ interface Props {
   darkMode?: boolean;
   point?: Point;
   stops: readonly Stop[];
-  dispatch(action: RouterAction): void;
+  dispatch(action: PointRouterAction): void;
 }
 
 const makeHighlightIcon = memoize(function highlightIcon(

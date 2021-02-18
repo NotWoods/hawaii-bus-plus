@@ -3,7 +3,7 @@ import { StationInformation, Stop } from '@hawaii-bus-plus/types';
 export type PointRouterAction =
   | ReturnType<typeof setStopAction>
   | ReturnType<typeof setBikeStationAction>
-  | ReturnType<typeof closeStopAction>
+  | ReturnType<typeof closePointAction>
   | ReturnType<typeof setMarker>
   | ReturnType<typeof openPlace>
   | ReturnType<typeof updateUserLocation>;
@@ -31,7 +31,7 @@ export function setBikeStationAction(
   };
 }
 
-export function closeStopAction() {
+export function closePointAction() {
   return { type: 'close-point' } as const;
 }
 

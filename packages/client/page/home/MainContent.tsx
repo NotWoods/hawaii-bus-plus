@@ -10,6 +10,7 @@ import { useLazyComponent } from '../hooks/useLazyComponent';
 import { useScreens } from '../hooks/useScreens';
 import { MyLocationButton } from '../map/location/MyLocationButton';
 import { RouterContext } from '../router/Router';
+import { DIRECTIONS_PATH } from '../router/state';
 import { RouteTimetable } from '../routes/RouteTimetable';
 import { PointDetails } from '../stop/PointDetails';
 import { HomeOverlay } from './HomeOverlay';
@@ -32,8 +33,8 @@ export function MainContent() {
   const { JourneySheet } = useLazyComponent(
     () => import('../directions/JourneySheet')
   );
-  const { point, directions, routeId } = useContext(RouterContext);
-  const sheetOpen = directions != undefined || routeId != undefined;
+  const { point, main } = useContext(RouterContext);
+  const sheetOpen = main != undefined;
 
   function renderOverlay() {
     if (pointDetailsOpen(point)) {
@@ -44,11 +45,13 @@ export function MainContent() {
   }
 
   function renderSheet() {
-    return JourneySheet && directions?.journey ? (
-      <JourneySheet journey={directions.journey} timeZone="Pacific/Honolulu" />
-    ) : (
-      <RouteTimetable />
-    );
+    if (JourneySheet && main?.path === DIRECTIONS_PATH && main.journey) {
+      return (
+        <JourneySheet journey={main.journey} timeZone="Pacific/Honolulu" />
+      );
+    } else {
+      return <RouteTimetable />;
+    }
   }
 
   if (mdMatches) {

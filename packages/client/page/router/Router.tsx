@@ -3,7 +3,8 @@ import { useContext, useEffect, useReducer } from 'preact/hooks';
 import { JSXInternal } from 'preact/src/jsx';
 import { useFocusTrapped } from '../buttons/FocusTrap';
 import { linkAction, RouterAction } from './action';
-import { initStateFromUrl, routerReducer, RouterState } from './reducer';
+import { initStateFromUrl, routerReducer } from './reducer';
+import { DIRECTIONS_PATH, RouterState, ROUTES_PREFIX } from './state';
 import { directionsToParams } from './url';
 
 interface RouterContext extends RouterState {
@@ -41,20 +42,26 @@ export function Router(props: { children: ComponentChildren }) {
 
   useEffect(() => {
     const url = new URL('/', window.location.href);
-    if (state.directions) {
-      url.pathname = '/directions';
-      directionsToParams(state.directions, url.searchParams);
-    } else if (state.routeId) {
-      url.pathname = `/routes/${state.routeId}/`;
+    if (state.main) {
+      if (state.main.path === ROUTES_PREFIX) {
+        url.pathname = `${ROUTES_PREFIX}${state.main.routeId}/`;
+      } else if (state.main.path === DIRECTIONS_PATH) {
+        url.pathname = DIRECTIONS_PATH;
+        directionsToParams(state.main, url.searchParams);
+      } else {
+        // url.pathname = state.main.path;
+      }
     }
+
     if (state.point?.type === 'stop') {
       url.searchParams.set('stop', state.point.stopId);
     }
+
     if (path(url) !== path(window.location)) {
       history.pushState(state, '', path(url));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state.routeId, state.point, state.directions]);
+  }, [state.main, state.point]);
 
   return (
     <RouterContext.Provider value={{ ...state, dispatch }}>

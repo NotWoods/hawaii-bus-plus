@@ -1,18 +1,17 @@
-import { RouterAction } from '../action';
 import { MainRouterAction } from '../action/main';
 import { MainState } from '../state';
-import { DIRECTIONS, ROUTES_PREFIX } from '../state/main';
+import { DIRECTIONS_PATH, ROUTES_PREFIX } from '../state/main';
 
 export function mainRouterReducer(
   state: MainState | undefined,
-  action: MainRouterAction | RouterAction
+  action: MainRouterAction
 ): MainState | undefined {
   switch (action.type) {
     case 'route':
       return { path: ROUTES_PREFIX, routeId: action.routeId };
     case 'open-journey':
       return {
-        path: DIRECTIONS,
+        path: DIRECTIONS_PATH,
         depart: action.depart,
         arrive: action.arrive,
         departureTime: action.departureTime,

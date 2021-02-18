@@ -9,7 +9,7 @@ import { h } from 'preact';
 import { useContext, useMemo } from 'preact/hooks';
 import { useDarkMode } from '../hooks/useMatchMedia';
 import { useScreens } from '../hooks/useScreens';
-import { openPlace, setMarker } from '../router/action';
+import { openPlace, setMarker } from '../router/action/point';
 import { RouterContext } from '../router/Router';
 import { PlaceMarker } from './PlaceMarker';
 import { RouteGlyphs } from './RouteGlyphs';

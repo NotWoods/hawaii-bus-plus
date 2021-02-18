@@ -6,12 +6,11 @@ import {
   STOP_POINT_TYPE,
   USER_POINT_TYPE,
 } from '@hawaii-bus-plus/presentation';
-import { RouterAction } from '../action';
 import { PointRouterAction } from '../action/point';
 
 export function pointRouterReducer(
   state: Point | undefined,
-  action: PointRouterAction | RouterAction
+  action: PointRouterAction
 ): Point | undefined {
   switch (action.type) {
     case 'stop':
