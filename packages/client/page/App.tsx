@@ -1,6 +1,7 @@
 import { Auth0Provider } from '@auth0/auth0-react';
 import { MapProvider } from '@hawaii-bus-plus/react-google-maps';
 import { h } from 'preact';
+import { ApiReadyProvider } from './api/provider';
 import './App.css';
 import { FocusTrapProvider } from './buttons/FocusTrap';
 import { MainContent } from './home/MainContent';
@@ -13,6 +14,16 @@ import { RouteDetailProvider } from './routes/timetable/context';
 import { StickySnackbarProvider } from './snackbar/context';
 import { StickySnackbars } from './snackbar/StickySnackbars';
 
+function Main() {
+  return (
+    <main class="main">
+      <MainMap />
+      <MainContent />
+      <StickySnackbars />
+    </main>
+  );
+}
+
 export function App() {
   return (
     <Auth0Provider
@@ -20,25 +31,23 @@ export function App() {
       clientId={import.meta.env.VITE_AUTH0_CLIENT_ID as string}
       redirectUri={window.location.origin}
     >
-      <Router>
-        <ApiProvider>
-          <MyLocationProvider>
-            <RouteDetailProvider>
-              <StickySnackbarProvider>
-                <FocusTrapProvider>
-                  <MapProvider options={googleMapOptions}>
-                    <main class="main">
-                      <MainMap />
-                      <MainContent />
-                      <StickySnackbars />
-                    </main>
-                  </MapProvider>
-                </FocusTrapProvider>
-              </StickySnackbarProvider>
-            </RouteDetailProvider>
-          </MyLocationProvider>
-        </ApiProvider>
-      </Router>
+      <ApiReadyProvider>
+        <Router>
+          <ApiProvider>
+            <MyLocationProvider>
+              <RouteDetailProvider>
+                <StickySnackbarProvider>
+                  <FocusTrapProvider>
+                    <MapProvider options={googleMapOptions}>
+                      <Main />
+                    </MapProvider>
+                  </FocusTrapProvider>
+                </StickySnackbarProvider>
+              </RouteDetailProvider>
+            </MyLocationProvider>
+          </ApiProvider>
+        </Router>
+      </ApiReadyProvider>
     </Auth0Provider>
   );
 }
