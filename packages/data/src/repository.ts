@@ -6,6 +6,7 @@ import {
   Stop,
   Trip,
 } from '@hawaii-bus-plus/types';
+import { memoize } from '@hawaii-bus-plus/utils';
 import { DBRepository } from './db-repository';
 import { MemoryRepository } from './mem-repository';
 
@@ -46,10 +47,10 @@ export interface Repository {
   searchStops(term: string, max: number): Promise<Stop[]>;
 }
 
-export function makeRepository() {
+export const makeRepository = memoize((apiKey: string) => {
   if (self.indexedDB) {
     return new DBRepository();
   } else {
-    return new MemoryRepository();
+    return new MemoryRepository(apiKey);
   }
-}
+});

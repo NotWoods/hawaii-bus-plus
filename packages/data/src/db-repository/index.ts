@@ -16,6 +16,9 @@ import { loadStopsSpatial } from './stops';
 import { loadTrip, loadTrips, loadTripsForRoute } from './trips';
 
 export class DBRepository implements Repository {
+  /**
+   * Expects database to already be initialized
+   */
   private readonly ready = dbReady;
 
   loadAllRoutes(): Promise<Route[]> {

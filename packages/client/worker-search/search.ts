@@ -1,12 +1,13 @@
-import { makeRepository } from '@hawaii-bus-plus/data';
-import { registerPromiseWorker } from '@hawaii-bus-plus/promise-worker/worker';
+import { BaseMessageRequest, registerWorker } from '../worker-shared/register';
 import { SearchRequest } from './helpers';
 import { search, SearchResults } from './search-db';
 
-const repo = makeRepository();
-
-export interface SearchWorkerHandler {
-  (signal: AbortSignal, message: SearchRequest): Promise<SearchResults>;
+interface SearchMessage extends BaseMessageRequest, SearchRequest {
+  type: 'search';
 }
 
-registerPromiseWorker((message: SearchRequest) => search(repo, message));
+export interface SearchWorkerHandler {
+  (signal: AbortSignal, message: SearchMessage): Promise<SearchResults>;
+}
+
+registerWorker((repo, message: SearchMessage) => search(repo, message));

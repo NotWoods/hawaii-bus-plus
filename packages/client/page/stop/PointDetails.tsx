@@ -3,6 +3,7 @@ import {
   PlacePointPartial,
   StopPoint,
 } from '@hawaii-bus-plus/presentation';
+import { memoize } from '@hawaii-bus-plus/utils';
 import { h } from 'preact';
 import { useContext } from 'preact/hooks';
 import { LoadingBar } from '../buttons/LoadingBar';
@@ -15,11 +16,11 @@ interface Props {
   point: StopPoint | PlacePointPartial | BikeStationPoint;
 }
 
+const cardImport = memoize(() => import('./card-lazy-entry'));
+
 export function PointDetails({ point }: Props) {
   const { dispatch } = useContext(RouterContext);
-  const { StopCard, PlaceCard, BikeStationCard } = useLazyComponent(
-    () => import('./card-lazy-entry')
-  );
+  const { StopCard, PlaceCard, BikeStationCard } = useLazyComponent(cardImport);
 
   function onClose() {
     dispatch(closePointAction());

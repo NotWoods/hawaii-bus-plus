@@ -2,7 +2,7 @@ import { h, Fragment } from 'preact';
 import { useContext, useState } from 'preact/hooks';
 import type { NearbyWorkerHandler } from '../../worker-nearby/nearby';
 import NearbyWorker from '../../worker-nearby/nearby?worker';
-import { databaseInitialized } from '../hooks/useDatabaseInitialized';
+import { useApiKey } from '../api/hook';
 import { usePromise } from '../hooks/usePromise';
 import { useWorker } from '../hooks/useWorker';
 import hawaiiSvg from '../icons/logo_hawaii.svg';
@@ -31,11 +31,12 @@ export function Home(props: Props) {
   const { point } = useContext(RouterContext);
   const { coords } = useContext(MyLocationContext);
   const [results, setResults] = useState(emptyClosestResults);
+  const apiKey = useApiKey();
   const postToNearbyWorker = useWorker(NearbyWorker) as NearbyWorkerHandler;
 
   usePromise(
     async (signal) => {
-      await databaseInitialized;
+      if (!apiKey) return;
 
       let location: google.maps.LatLngLiteral | undefined;
       if (point && (point.type === 'marker' || point.type === 'user')) {
@@ -46,13 +47,14 @@ export function Home(props: Props) {
 
       const results = await postToNearbyWorker(signal, {
         type: 'closest-stop',
+        apiKey,
         location,
         fallbackToAll: true,
       });
 
       setResults(results);
     },
-    [coords?.lat, coords?.lng, point]
+    [apiKey, coords?.lat, coords?.lng, point]
   );
 
   return (

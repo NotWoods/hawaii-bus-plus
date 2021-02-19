@@ -1,20 +1,19 @@
-import { makeRepository } from '@hawaii-bus-plus/data';
 import { Point } from '@hawaii-bus-plus/presentation';
-import { registerPromiseWorker } from '@hawaii-bus-plus/promise-worker/worker';
 import { Temporal } from 'proposal-temporal';
+import { BaseMessageRequest, registerWorker } from '../worker-shared/register';
 import { ClosestResults, findClosest } from './closest/closest';
 import { directions, DirectionsResult } from './directions/directions';
 
 export type { DirectionsResult };
 
-interface DirectionsMessage {
+interface DirectionsMessage extends BaseMessageRequest {
   type: 'directions';
   from: Point;
   to: Point;
   departureTime?: string;
 }
 
-interface ClosestStopsMessage {
+interface ClosestStopsMessage extends BaseMessageRequest {
   type: 'closest-stop';
   location?: google.maps.LatLngLiteral;
   fallbackToAll: boolean;
@@ -27,9 +26,7 @@ export interface NearbyWorkerHandler {
   (signal: AbortSignal, message: ClosestStopsMessage): Promise<ClosestResults>;
 }
 
-const repo = makeRepository();
-
-registerPromiseWorker(async (message: Message) => {
+registerWorker(async (repo, message: Message) => {
   switch (message.type) {
     case 'directions': {
       const departureTime = message.departureTime

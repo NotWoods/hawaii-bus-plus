@@ -4,8 +4,8 @@ import { useContext, useState } from 'preact/hooks';
 import type { Temporal } from 'proposal-temporal';
 import type { InfoWorkerHandler } from '../../worker-info/info';
 import InfoWorker from '../../worker-info/info?worker';
+import { useApiKey } from '../api/hook';
 import { LoadingBar } from '../buttons/LoadingBar';
-import { databaseInitialized } from '../hooks/useDatabaseInitialized';
 import { useDelay } from '../hooks/useDelay';
 import { useLazyComponent } from '../hooks/useLazyComponent';
 import { usePromise } from '../hooks/usePromise';
@@ -39,14 +39,15 @@ export function RouteTimetable() {
   const { Timetable } = useLazyComponent(() => lazyTimetable);
   const [tripDate, setTripDate] = useState<Temporal.PlainDate | NOW>(NOW);
   const [tripTime, setTripTime] = useState<TimeString | undefined>();
+  const apiKey = useApiKey();
   const postToInfoWorker = useWorker(InfoWorker) as InfoWorkerHandler;
 
   usePromise(
     async (signal) => {
-      if (routeId) {
-        await databaseInitialized;
+      if (routeId && apiKey) {
         const details = await postToInfoWorker(signal, {
           type: 'route',
+          apiKey,
           id: routeId,
           date:
             tripDate === NOW ? undefined : (tripDate.toString() as DateString),
@@ -58,7 +59,7 @@ export function RouteTimetable() {
         setDetails(undefined);
       }
     },
-    [routeId, tripTime]
+    [apiKey, routeId, tripTime]
   );
 
   const route = details?.route;

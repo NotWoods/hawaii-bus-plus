@@ -1,25 +1,23 @@
-import { makeRepository } from '@hawaii-bus-plus/data';
-import { registerPromiseWorker } from '@hawaii-bus-plus/promise-worker/worker';
 import { DateString, Route, Stop, TimeString } from '@hawaii-bus-plus/types';
 import { Temporal } from 'proposal-temporal';
+import { BaseMessageRequest, registerWorker } from '../worker-shared/register';
 import { getRouteDetails, RouteDetails } from './route-details';
 import { loadStop, StopDetails } from './stop-details';
 
-interface RouteInfoMessage {
+interface RouteInfoMessage extends BaseMessageRequest {
   type: 'route';
   id: Route['route_id'];
   date?: DateString;
   time?: TimeString;
 }
 
-interface StopInfoMessage {
+interface StopInfoMessage extends BaseMessageRequest {
   type: 'stop';
+  apiKey: string;
   id: Stop['stop_id'];
 }
 
 type Message = RouteInfoMessage | StopInfoMessage;
-
-const repo = makeRepository();
 
 export interface InfoWorkerHandler {
   (signal: AbortSignal, message: RouteInfoMessage): Promise<
@@ -30,7 +28,7 @@ export interface InfoWorkerHandler {
   >;
 }
 
-registerPromiseWorker((message: Message) => {
+registerWorker((repo, message: Message) => {
   switch (message.type) {
     case 'route': {
       let date: Temporal.PlainDate | undefined;

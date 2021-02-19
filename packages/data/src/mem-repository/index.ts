@@ -13,19 +13,8 @@ import { memoryBatch } from './batch';
 import { searchArray } from './search';
 import { memTripCursor } from './trips';
 
-export class MemoryRepository implements Repository {
-  protected apiReady!: Promise<GTFSData>;
-
-  constructor() {
-    this.apiReady = this.init();
-  }
-
-  protected async init(): Promise<GTFSData> {
-    const { api } = await downloadScheduleData({
-      apiKey: localStorage.getItem('api-key')!,
-    });
-    return api;
-  }
+export abstract class BaseMemoryRepository implements Repository {
+  protected abstract readonly apiReady: Promise<GTFSData>;
 
   loadAllRoutes(): Promise<readonly Route[]> {
     return this.apiReady.then((api) => Object.values(api.routes));
@@ -102,5 +91,22 @@ export class MemoryRepository implements Repository {
         (stop) => stop.stop_name.includes(term) || stop.stop_desc.includes(term)
       )
     );
+  }
+}
+
+export class MemoryRepository extends BaseMemoryRepository {
+  /**
+   * @override
+   */
+  protected readonly apiReady: Promise<GTFSData>;
+
+  constructor(apiKey: string) {
+    super();
+    this.apiReady = this.init(apiKey);
+  }
+
+  private async init(apiKey: string): Promise<GTFSData> {
+    const { api } = await downloadScheduleData({ apiKey });
+    return api;
   }
 }
