@@ -1,7 +1,8 @@
-import GoTrue, { User } from 'gotrue-js';
 import { NetlifyContext, NetlifyEvent, NetlifyResponse } from '../../types';
+import { formatUser } from '../userdata/formatUser';
+import { getAuth } from '../userdata/getAuth';
+import { recoverSession, refreshedOrNull, setCookie } from './cookie';
 import { jsonResponse, RequiredError } from './response';
-import { recoverSession, refreshedOrNull } from './cookie';
 
 function parseJson(body: string | null) {
   if (!body) {
@@ -24,7 +25,7 @@ export async function handler(
   context: NetlifyContext
 ): Promise<NetlifyResponse> {
   const { identity } = context.clientContext;
-  const auth = new GoTrue({ APIUrl: identity.url });
+  const auth = getAuth(identity);
 
   const loggedInUser = await refreshedOrNull(
     recoverSession(auth, event.headers)
@@ -35,13 +36,24 @@ export async function handler(
     });
   }
 
-  let user: User;
   try {
     const body = parseJson(event.body);
-    user = await loggedInUser.update(body);
-    return jsonResponse(200, {
-      message: 'Updated user',
-    });
+    const user = await loggedInUser.update(body);
+    const [userData, cookies] = await Promise.all([
+      formatUser(user),
+      setCookie(user),
+    ]);
+
+    return {
+      statusCode: 201,
+      body: JSON.stringify(userData),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      multiValueHeaders: {
+        'Set-Cookie': cookies,
+      },
+    };
   } catch (err: unknown) {
     if (err instanceof RequiredError) {
       return jsonResponse(400, {

@@ -1,8 +1,9 @@
-import GoTrue, { User } from 'gotrue-js';
-import { URLSearchParams } from 'url';
+import { User } from 'gotrue-js';
+import { URL, URLSearchParams } from 'url';
 import { NetlifyContext, NetlifyEvent, NetlifyResponse } from '../../types';
 import { setCookie } from '../edituser/cookie';
 import { jsonResponse, RequiredError } from '../edituser/response';
+import { getAuth } from '../userdata/getAuth';
 
 function parseFormData(body: string | null) {
   if (!body) {
@@ -24,13 +25,23 @@ function parseFormData(body: string | null) {
   };
 }
 
+const baseURL = new URL('https://app.hawaiibusplus.com/');
+
 export async function handler(
   event: NetlifyEvent,
   context: NetlifyContext
 ): Promise<NetlifyResponse> {
   const { identity } = context.clientContext;
-  const auth = new GoTrue({ APIUrl: identity.url });
+  const auth = getAuth(identity);
   const formData = parseFormData(event.body);
+
+  let redirectTo = new URL(formData.get('redirect_to') ?? '', baseURL);
+  if (
+    !redirectTo.host.endsWith('.hawaiibusplus.com') &&
+    redirectTo.hostname !== 'localhost'
+  ) {
+    redirectTo = baseURL;
+  }
 
   let user: User;
   try {
@@ -95,25 +106,14 @@ export async function handler(
     }
   }
 
-  const [userData, cookies] = await Promise.all([
-    user.getUserData(),
-    setCookie(user),
-  ]);
   return {
-    statusCode: 201,
-    body: JSON.stringify({
-      confirmed_at: userData.confirmed_at,
-      created_at: userData.created_at,
-      email: userData.email,
-      role: userData.role,
-      updated_at: userData.updated_at,
-      user_metadata: userData.user_metadata,
-    }),
+    statusCode: 303,
+    body: '',
     headers: {
-      'Content-Type': 'application/json',
+      Location: redirectTo.href,
     },
     multiValueHeaders: {
-      'Set-Cookie': cookies,
+      'Set-Cookie': await setCookie(user),
     },
   };
 }
