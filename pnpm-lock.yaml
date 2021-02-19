@@ -171,6 +171,7 @@ importers:
       tslib: 2.1.0
     devDependencies:
       '@types/aws-lambda': 8.10.72
+      '@types/cookie': 0.4.0
       '@types/node': 14.14.28
       '@types/node-fetch': 2.5.8
       ava: 3.15.0
@@ -181,6 +182,7 @@ importers:
       '@hawaii-bus-plus/types': 'workspace:*'
       '@hawaii-bus-plus/utils': 'workspace:*'
       '@types/aws-lambda': ^8.10.72
+      '@types/cookie': ^0.4.0
       '@types/node': ^14.14.28
       '@types/node-fetch': ^2.5.8
       ava: ^3.15.0
@@ -1064,6 +1066,10 @@ packages:
     dev: true
     resolution:
       integrity: sha512-kSjgDMZONiIfSH1Nxcr5JIRMwUetDki63FSQfpTCz8ogF3Ulqm8+mr5f78dUYs6vMiB6gBusQqfQmBvHZj/lwg==
+  /@types/cookie/0.4.0:
+    dev: true
+    resolution:
+      integrity: sha512-y7mImlc/rNkvCRmg8gC3/lj87S7pTUIJ6QGjwHR9WQJcFs+ZMTOaoPrkdFA/YdbuqVEmEbb5RdhVxMkAcgOnpg==
   /@types/glob/7.1.3:
     dependencies:
       '@types/minimatch': 3.0.3

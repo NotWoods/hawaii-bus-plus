@@ -1,18 +1,8 @@
 import GoTrue, { User } from 'gotrue-js';
 import { URLSearchParams } from 'url';
 import { NetlifyContext, NetlifyEvent, NetlifyResponse } from '../../types';
-
-function jsonResponse(statusCode: number, body: unknown): NetlifyResponse {
-  return {
-    statusCode,
-    body: JSON.stringify(body),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  };
-}
-
-class RequiredError extends Error {}
+import { setCookie } from '../edituser/cookie';
+import { jsonResponse, RequiredError } from '../edituser/response';
 
 function parseFormData(body: string | null) {
   if (!body) {
@@ -59,6 +49,14 @@ export async function handler(
         user = await auth.confirm(formData.req('token'));
         break;
       }
+      // Sign up new user
+      case 'signup': {
+        const body = await auth.signup(
+          formData.req('email'),
+          formData.req('password')
+        );
+        return jsonResponse(200, body);
+      }
       // Login existing user
       case 'login': {
         user = await auth.login(
@@ -67,28 +65,17 @@ export async function handler(
         );
         break;
       }
+      // Request a password recovery
+      case 'requestPasswordRecovery': {
+        const body = await auth.requestPasswordRecovery(formData.req('email'));
+        return jsonResponse(200, body);
+      }
+      // Recover password
       case 'recover': {
         user = await auth.recover(formData.req('token'));
+        user = await user.update({ password: formData.req('password') });
         break;
       }
-      case 'requestPasswordRecovery': {
-        await auth.requestPasswordRecovery(formData.req('email'));
-        return jsonResponse(200, {
-          type: 'recoveryEmailSent',
-        });
-      }
-      // Sign up new user
-      case 'signup': {
-        await auth.signup(formData.req('email'), formData.req('password'), {
-          name: formData.get('name'),
-        });
-        break;
-      }
-      // Change email address associated with user
-      case 'changeEmail':
-        return jsonResponse(501, {
-          error: 'Not Implemented',
-        });
       default:
         throw new Error(`Invalid type ${type} given`);
     }
@@ -107,4 +94,26 @@ export async function handler(
       });
     }
   }
+
+  const [userData, cookies] = await Promise.all([
+    user.getUserData(),
+    setCookie(user),
+  ]);
+  return {
+    statusCode: 201,
+    body: JSON.stringify({
+      confirmed_at: userData.confirmed_at,
+      created_at: userData.created_at,
+      email: userData.email,
+      role: userData.role,
+      updated_at: userData.updated_at,
+      user_metadata: userData.user_metadata,
+    }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    multiValueHeaders: {
+      'Set-Cookie': cookies,
+    },
+  };
 }
