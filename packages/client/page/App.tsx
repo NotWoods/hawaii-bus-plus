@@ -1,7 +1,7 @@
 import { Auth0Provider } from '@auth0/auth0-react';
 import { MapProvider } from '@hawaii-bus-plus/react-google-maps';
 import { h } from 'preact';
-import '../login/main.css';
+import '../auth/main.css';
 import { ApiReadyProvider } from './api/provider';
 import { FocusTrapProvider } from './buttons/FocusTrap';
 import { MainContent } from './home/MainContent';
