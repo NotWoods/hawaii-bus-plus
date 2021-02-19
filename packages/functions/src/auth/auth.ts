@@ -5,12 +5,18 @@ import { setCookie } from '../edituser/cookie';
 import { jsonResponse, RequiredError } from '../edituser/response';
 import { getAuth } from '../userdata/getAuth';
 
-function parseFormData(body: string | null) {
-  if (!body) {
-    throw new RequiredError('No body passed in');
-  }
+function parseFormData(event: NetlifyEvent) {
+  let formData: URLSearchParams;
+  if (event.httpMethod === 'GET') {
+    formData = new URLSearchParams(event.queryStringParameters ?? {});
+  } else {
+    const { body } = event;
+    if (!body) {
+      throw new RequiredError('No body passed in');
+    }
 
-  const formData = new URLSearchParams(body);
+    formData = new URLSearchParams(body);
+  }
   return {
     get(key: string) {
       return formData.get(key);
@@ -33,7 +39,7 @@ export async function handler(
 ): Promise<NetlifyResponse> {
   const { identity } = context.clientContext;
   const auth = getAuth(identity);
-  const formData = parseFormData(event.body);
+  const formData = parseFormData(event);
 
   let redirectTo = new URL(formData.get('redirect_to') ?? '', baseURL);
   if (

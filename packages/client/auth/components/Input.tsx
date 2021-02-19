@@ -13,7 +13,9 @@ interface Props {
 export function Input({ children, ...props }: Props) {
   return (
     <div>
-      <label for={props.id}>{children}</label>
+      <label class="flex justify-between" for={props.id}>
+        {children}
+      </label>
       <input {...props} required class="mt-1 shadow-sm block w-full" />
     </div>
   );

@@ -2,6 +2,7 @@
   "extends": "../../tsconfig.base.json",
   "include": ["**/*", "**/*.json"],
   "references": [
+    { "path": "../all-pages" },
     { "path": "../../data/src" },
     { "path": "../../utils/src" },
     { "path": "../../types" },

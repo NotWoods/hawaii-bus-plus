@@ -1,26 +1,25 @@
-import { ComponentChildren, h } from 'preact';
+import { h } from 'preact';
 import { Input } from './Input';
+import { SignInWith } from './SignInWith';
+import { SubmitButton } from './SubmitButton';
 
-type FormType =
+export type FormType =
   | 'acceptInvite'
-  | 'confirm'
   | 'login'
   | 'recover'
   | 'requestPasswordRecovery'
   | 'signup';
 
-interface Props {
+export interface FormProps {
   type: FormType;
   token?: string;
   existingEmail?: string;
   newEmail?: string;
   redirectTo?: string;
-  children?: ComponentChildren;
 }
 
 const readonlyEmailTypes: ReadonlySet<FormType> = new Set([
   'acceptInvite',
-  'confirm',
   'recover',
 ]);
 const passwordTypes: ReadonlySet<FormType> = new Set([
@@ -30,12 +29,12 @@ const passwordTypes: ReadonlySet<FormType> = new Set([
   'signup',
 ]);
 
-export function Form(props: Props) {
-  const { type, existingEmail = '' } = props;
+export function Form(props: FormProps) {
+  const { type, existingEmail = '<hidden>' } = props;
   return (
     <form
       class="mt-8 px-12 py-8 space-y-6 bg-gray-50 text-black"
-      action="#"
+      action="/.netlify/functions/auth"
       method="POST"
     >
       <input type="hidden" name="type" required value={type} />
@@ -61,10 +60,21 @@ export function Form(props: Props) {
           }
         >
           Password
+          <a
+            href="/auth/forgot"
+            class="font-medium text-blue-500 hover:underline"
+          >
+            Forgot your password?
+          </a>
         </Input>
       ) : null}
 
-      {props.children}
+      <SubmitButton type={type} />
+
+      <fieldset class="border-t text-center">
+        <legend class="px-4">Or</legend>
+      </fieldset>
+      <SignInWith />
     </form>
   );
 }

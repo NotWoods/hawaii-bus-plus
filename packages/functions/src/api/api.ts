@@ -1,8 +1,9 @@
+import { BinaryLike, createHash } from 'crypto';
 import { readFile } from 'fs';
-import { createHash, BinaryLike } from 'crypto';
 import { promisify } from 'util';
-import GoTrue from 'gotrue-js';
 import { NetlifyContext, NetlifyEvent, NetlifyResponse } from '../../types';
+import { recoverSession, refreshedOrNull } from '../edituser/cookie';
+import { getAuth } from '../userdata/getAuth';
 
 const readFileAsync = promisify(readFile);
 
@@ -17,14 +18,15 @@ export async function handler(
   context: NetlifyContext
 ): Promise<NetlifyResponse> {
   const { identity } = context.clientContext;
-  const auth = new GoTrue({
-    APIUrl: identity.url,
-    setCookie: true,
-  });
+  const auth = getAuth(identity);
+  const loggedInUser = await refreshedOrNull(
+    recoverSession(auth, event.headers)
+  );
+  const userDetails = await loggedInUser?.getUserData();
 
-  if (event.headers.authorization === `Bearer ${process.env.API_KEY || ''}`) {
+  if (userDetails) {
     const path = require.resolve(event.path.replace('/api/v1/', './'));
-    console.log(event.path, path);
+    console.log(userDetails);
     const file = await readFileAsync(path, 'utf8');
     return {
       statusCode: 200,
