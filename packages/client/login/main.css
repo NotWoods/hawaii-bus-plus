@@ -6,6 +6,14 @@
   color-scheme: light dark;
 }
 
+@layer components {
+  .waves {
+    @apply bg-blue-700 text-white;
+    background-size: theme('spacing.96');
+    background-image: url('/waves.svg');
+  }
+}
+
 @layer utilities {
   @variants dark {
     .filter-none {

@@ -1,16 +1,13 @@
 const colors = require('tailwindcss/colors');
 
 module.exports = {
-  purge: ['./index.html', './page/**/*.tsx'],
+  purge: ['./*.html', './page/**/*.tsx'],
   darkMode: 'media',
   theme: {
     fontFamily: {
       display: ['Red Rose', 'serif'],
     },
     extend: {
-      backgroundSize: {
-        96: '24rem',
-      },
       inset: {
         '1/4-screen': '25vh',
         '3/4-screen': '75vh',

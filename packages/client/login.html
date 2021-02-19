@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - Hawaii Bus Plus</title>
+    <link rel="icon" type="image/png" sizes="512x512" href="/icon/transparent.png" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/icon/small.png" />
+    <link rel="apple-touch-icon" sizes="512x512" href="/icon/maskable.png" />
+    <meta name="theme-color" content="#32383e" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Red+Rose:wght@500&display=swap" rel="stylesheet" />
+    <script type="module" src="/login/login.ts"></script>
+  </head>
+  <body class="waves min-h-screen flex items-center justify-center">
+    <main class="max-w-md w-full space-y-8">
+      <header class="text-center">
+        <h1 class="font-display font-medium text-2xl uppercase flex items-center justify-center">
+          <img class="h-8 mr-1" src="/logo/logo_hawaii.svg" alt="Hawaii" width="101" height="32" />
+          Bus Plus
+          <img class="h-4 ml-1 mb-3" src="/logo/logo_plus.svg" alt="+" width="18" height="16" />
+        </h1>
+        <h2 id="header" class="mt-6 text-4xl font-display font-medium text-gray-100">Welcome back!</h2>
+        <p class="mt-2 text-sm">
+          <span id="not" class="text-gray-200">Not registered?</span>
+          <a id="swap" href="/register" class="font-medium text-gray-100 hover:underline">
+            Start your 14-day free trial.
+          </a>
+        </p>
+      </header>
+
+      <form class="mt-8 px-12 py-8 space-y-6 bg-gray-50 text-black" action="#" method="POST">
+        <div class="only--register" hidden="true">
+          <label for="name">Name</label>
+          <input id="name" name="name" type="text" autocomplete="name" required class="mt-1 shadow-sm block w-full" />
+        </div>
+
+        <div>
+          <label for="email-address">Email address</label>
+          <input
+            id="email-address"
+            name="email"
+            type="email"
+            autocomplete="email"
+            required
+            class="mt-1 shadow-sm block w-full"
+          />
+        </div>
+
+        <div>
+          <label for="password">Password</label>
+          <input
+            id="password"
+            name="password"
+            type="password"
+            autocomplete="current-password"
+            required
+            class="mt-1 shadow-sm block w-full"
+          />
+        </div>
+
+        <div class="text-sm text-right">
+          <a href="#" class="font-medium text-blue-500 hover:underline">Forgot your password?</a>
+        </div>
+
+        <button
+          id="submit"
+          type="submit"
+          class="transition-colors w-full py-2 px-4 bg-blue-500 hover:bg-blue-600 font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan"
+        >
+          Login
+        </button>
+
+        <fieldset class="border-t text-center">
+          <legend class="px-4">Or</legend>
+        </fieldset>
+        <div>
+          <a
+            href="#"
+            class="flex justify-center transition-colors w-full py-2 px-4 border border-current hover:bg-red hover:bg-opacity-20 font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              aria-label="Google"
+              role="img"
+              viewBox="0 0 512 512"
+              width="24"
+              height="24"
+              class="w-6 h-6 mr-1"
+            >
+              <path fill="#4285f4" d="M386 400c45-42 65-112 53-179H260v74h102c-4 24-18 44-38 57z" />
+              <path fill="#34a853" d="M90 341a192 192 0 0 0 296 59l-62-48c-53 35-141 22-171-60z" />
+              <path fill="#fbbc02" d="M153 292c-8-25-8-48 0-73l-63-49c-23 46-30 111 0 171z" />
+              <path fill="#ea4335" d="M153 219c22-69 116-109 179-50l55-54c-78-75-230-72-297 55z" />
+            </svg>
+            Continue with Google
+          </a>
+        </div>
+      </form>
+    </main>
+  </body>
+</html>
