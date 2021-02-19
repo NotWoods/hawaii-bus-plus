@@ -1,4 +1,5 @@
 import { ComponentChildren, h } from 'preact';
+import './Input.css';
 
 interface Props {
   children: ComponentChildren;
@@ -16,7 +17,14 @@ export function Input({ children, ...props }: Props) {
       <label class="flex justify-between" for={props.id}>
         {children}
       </label>
-      <input {...props} required class="mt-1 shadow-sm block w-full" />
+      <input
+        {...props}
+        required
+        tabIndex={props.readonly ? -1 : 0}
+        class={`input mt-1 shadow-sm block w-full text-black ${
+          props.readonly ? 'opacity-60' : ''
+        }`}
+      />
     </div>
   );
 }

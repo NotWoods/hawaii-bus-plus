@@ -1,4 +1,4 @@
-import { h } from 'preact';
+import { h, Fragment } from 'preact';
 
 interface Props {
   type: 'Google';
@@ -43,8 +43,13 @@ export function SignInWithButton(props: Props) {
 
 export function SignInWith() {
   return (
-    <div class="flex">
-      <SignInWithButton type="Google" />
-    </div>
+    <>
+      <fieldset class="border-t text-center">
+        <legend class="px-4">Or</legend>
+      </fieldset>
+      <div class="flex">
+        <SignInWithButton type="Google" />
+      </div>
+    </>
   );
 }

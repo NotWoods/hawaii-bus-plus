@@ -1,5 +1,6 @@
 import { h } from 'preact';
 import { Input } from './Input';
+import { MouseEventHandler } from './link';
 import { SignInWith } from './SignInWith';
 import { SubmitButton } from './SubmitButton';
 
@@ -16,6 +17,7 @@ export interface FormProps {
   existingEmail?: string;
   newEmail?: string;
   redirectTo?: string;
+  onLinkClick?: MouseEventHandler;
 }
 
 const readonlyEmailTypes: ReadonlySet<FormType> = new Set([
@@ -28,25 +30,25 @@ const passwordTypes: ReadonlySet<FormType> = new Set([
   'recover',
   'signup',
 ]);
+const thirdPartyTypes: ReadonlySet<FormType> = new Set(['login', 'signup']);
 
 export function Form(props: FormProps) {
   const { type, existingEmail = '<hidden>' } = props;
+  const readonlyEmail = readonlyEmailTypes.has(type);
   return (
     <form
       class="mt-8 px-12 py-8 space-y-6 bg-gray-50 text-black"
       action="/.netlify/functions/auth"
       method="POST"
     >
-      <input type="hidden" name="type" required value={type} />
-      <input type="hidden" name="redirect_to" value={props.redirectTo} />
-      <input type="hidden" name="token" value={props.token} />
       <Input
         id="email-address"
         name="email"
         type="email"
-        autocomplete={readonlyEmailTypes.has(type) ? 'off' : 'email'}
-        readonly={readonlyEmailTypes.has(type)}
-        value={readonlyEmailTypes.has(type) ? existingEmail : undefined}
+        key={readonlyEmail ? 'readonly' : 'edit'}
+        autocomplete={readonlyEmail ? 'off' : 'email'}
+        readonly={readonlyEmail}
+        value={readonlyEmail ? existingEmail : undefined}
       >
         Email address
       </Input>
@@ -60,21 +62,25 @@ export function Form(props: FormProps) {
           }
         >
           Password
-          <a
-            href="/auth/forgot"
-            class="font-medium text-blue-500 hover:underline"
-          >
-            Forgot your password?
-          </a>
+          {type === 'login' ? (
+            <a
+              href="/auth/forgot"
+              class="font-medium text-blue-500 hover:underline"
+              onClick={props.onLinkClick}
+            >
+              Forgot your password?
+            </a>
+          ) : undefined}
         </Input>
-      ) : null}
+      ) : undefined}
 
       <SubmitButton type={type} />
 
-      <fieldset class="border-t text-center">
-        <legend class="px-4">Or</legend>
-      </fieldset>
-      <SignInWith />
+      {thirdPartyTypes.has(type) ? <SignInWith /> : undefined}
+
+      <input type="hidden" name="type" required value={type} />
+      <input type="hidden" name="redirect_to" value={props.redirectTo} />
+      <input type="hidden" name="token" value={props.token} />
     </form>
   );
 }

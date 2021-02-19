@@ -1,9 +1,11 @@
 import { h } from 'preact';
 import { Title } from '../../all-pages/Title';
 import { FormType } from './Form';
+import { MouseEventHandler } from './link';
 
 interface Props {
   type?: FormType;
+  onLinkClick?: MouseEventHandler;
 }
 
 function headerContent(type: FormType | undefined) {
@@ -12,9 +14,9 @@ function headerContent(type: FormType | undefined) {
       return {
         title: 'Welcome back!',
         subtitle: {
-          prefix: 'Not registered?',
+          prefix: 'Not registered? ',
           href: '/auth/register',
-          content: 'Start your 14-day free trial.',
+          content: 'Sign up for free.',
         },
       };
     case 'acceptInvite':
@@ -22,7 +24,7 @@ function headerContent(type: FormType | undefined) {
       return {
         title: 'Create your account',
         subtitle: {
-          prefix: 'Already signed up?',
+          prefix: 'Already signed up? ',
           href: '/auth/login',
           content: 'Login to your account.',
         },
@@ -35,21 +37,22 @@ function headerContent(type: FormType | undefined) {
   }
 }
 
-export function Header({ type }: Props) {
+export function Header({ type, onLinkClick }: Props) {
   const { title, subtitle } = headerContent(type);
 
   return (
     <header class="text-center">
-      <Title />
+      <Title class="justify-center" />
       <h2 class="mt-6 text-4xl font-display font-medium text-gray-100">
         {title}
       </h2>
       {subtitle ? (
-        <p class="mt-2 text-sm">
-          <span class="text-gray-200">{subtitle.prefix}</span>
+        <p class="mt-2 text-sm text-gray-200">
+          {subtitle.prefix}
           <a
             href={subtitle.href}
             class="font-medium text-gray-100 hover:underline"
+            onClick={onLinkClick}
           >
             {subtitle.content}
           </a>

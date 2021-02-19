@@ -1,8 +1,16 @@
 import { h } from 'preact';
 
-export function Title() {
+interface Props {
+  class?: string;
+}
+
+export function Title(props: Props) {
   return (
-    <h1 class="font-display font-medium text-2xl uppercase flex items-center">
+    <h1
+      class={`font-display font-medium text-2xl uppercase flex items-center ${
+        props.class ?? ''
+      }`}
+    >
       <img
         class="h-8 mr-1"
         src="/logo/logo_hawaii.svg"
