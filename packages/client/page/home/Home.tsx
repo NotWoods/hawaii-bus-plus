@@ -3,6 +3,7 @@ import { useContext, useState } from 'preact/hooks';
 import type { NearbyWorkerHandler } from '../../worker-nearby/nearby';
 import NearbyWorker from '../../worker-nearby/nearby?worker';
 import { useApiKey } from '../api/hook';
+import { LoginButton } from '../buttons/LoginButton';
 import { usePromise } from '../hooks/usePromise';
 import { useWorker } from '../hooks/useWorker';
 import hawaiiSvg from '../icons/logo_hawaii.svg';
@@ -62,6 +63,7 @@ export function Home(props: Props) {
       <h2 class="mt-4 font-display font-medium text-xl text-center text-white">
         Aloha kakahiaka
       </h2>
+      <LoginButton />
       <SearchBar onClick={props.onSearch} />
       <NearbyRoutes
         class="mt-12 overflow-auto"
