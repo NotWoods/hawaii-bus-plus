@@ -13,18 +13,23 @@ const dbInitialized = initWorker
 export function ApiReadyProvider(props: { children: ComponentChildren }) {
   const [loading, setLoading] = useState(true);
   const [initialized, setInitialized] = useState(false);
+  const [error, setError] = useState<unknown>();
 
   usePromise(async () => {
     try {
       await dbInitialized;
       setInitialized(true);
+    } catch (err: unknown) {
+      setError(err);
     } finally {
       setLoading(false);
     }
   }, []);
 
   return (
-    <ApiReadyContext.Provider value={{ loading, initialized, apiKey: '' }}>
+    <ApiReadyContext.Provider
+      value={{ loading, initialized, apiKey: '', error }}
+    >
       {props.children}
     </ApiReadyContext.Provider>
   );

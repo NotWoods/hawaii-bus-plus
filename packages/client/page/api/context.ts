@@ -4,6 +4,7 @@ interface ApiReadyContext {
   apiKey?: string;
   loading: boolean;
   initialized: boolean;
+  error?: unknown;
 }
 
 export const ApiReadyContext = createContext<ApiReadyContext>({

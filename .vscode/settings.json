@@ -12,6 +12,7 @@
       "when": "$(basename)"
     },
     "**/*.d.ts": true,
+    "node_modules": true,
   },
   "editor.formatOnSave": true,
   "typescript.tsc.autoDetect": "off",
