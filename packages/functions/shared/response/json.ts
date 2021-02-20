@@ -1,4 +1,4 @@
-import { NetlifyResponse } from '../../types';
+import { NetlifyResponse } from '../types';
 
 export function jsonResponse(
   statusCode: number,
@@ -12,5 +12,3 @@ export function jsonResponse(
     },
   };
 }
-
-export class RequiredError extends Error {}

@@ -1,9 +1,9 @@
 import { BinaryLike, createHash } from 'crypto';
 import { readFile } from 'fs';
 import { promisify } from 'util';
-import { NetlifyContext, NetlifyEvent, NetlifyResponse } from '../../types';
-import { recoverSession, refreshedOrNull } from '../edituser/cookie';
-import { getAuth } from '../userdata/getAuth';
+import { recoverSession, refreshedOrNull } from '../shared/cookie/parse';
+import { getAuth } from '../shared/identity/auth';
+import { NetlifyContext, NetlifyEvent, NetlifyResponse } from '../shared/types';
 
 const readFileAsync = promisify(readFile);
 

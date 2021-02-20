@@ -3,8 +3,7 @@
   "include": ["**/*"],
   "references": [],
   "compilerOptions": {
-    "lib": ["esnext"],
-    "types": [],
-    "emitDeclarationOnly": true
+    "lib": ["esnext", "dom"],
+    "types": ["node"]
   }
 }

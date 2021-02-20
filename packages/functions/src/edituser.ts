@@ -1,8 +1,9 @@
-import { NetlifyContext, NetlifyEvent, NetlifyResponse } from '../../types';
-import { formatUser } from '../userdata/formatUser';
-import { getAuth } from '../userdata/getAuth';
-import { recoverSession, refreshedOrNull, setCookie } from './cookie';
-import { jsonResponse, RequiredError } from './response';
+import { NetlifyContext, NetlifyEvent, NetlifyResponse } from '../shared/types';
+import { formatUser } from '../shared/response/user';
+import { getAuth } from '../shared/identity/auth';
+import { setCookie } from '../shared/cookie/serialize';
+import { recoverSession, refreshedOrNull } from '../shared/cookie/parse';
+import { jsonResponse, RequiredError } from '../shared/response';
 
 function parseJson(body: string | null) {
   if (!body) {

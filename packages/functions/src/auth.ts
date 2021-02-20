@@ -1,9 +1,9 @@
 import { User } from 'gotrue-js';
 import { URL, URLSearchParams } from 'url';
-import { NetlifyContext, NetlifyEvent, NetlifyResponse } from '../../types';
-import { setCookie } from '../edituser/cookie';
-import { jsonResponse, RequiredError } from '../edituser/response';
-import { getAuth } from '../userdata/getAuth';
+import { setCookie } from '../shared/cookie/serialize';
+import { getAuth } from '../shared/identity/auth';
+import { jsonResponse, RequiredError } from '../shared/response';
+import { NetlifyContext, NetlifyEvent, NetlifyResponse } from '../shared/types';
 
 function parseFormData(event: NetlifyEvent) {
   let formData: URLSearchParams;

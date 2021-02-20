@@ -6,15 +6,17 @@ import type {
 
 export type NetlifyEvent = APIGatewayEvent;
 
+export interface NetlifyIdentityContext {
+  url: string;
+  token: string;
+}
+
 export interface NetlifyContext extends Omit<Context, 'clientContext'> {
   clientContext: {
     custom: {
       netlify: string;
     };
-    identity: {
-      url: string;
-      token: string;
-    };
+    identity: NetlifyIdentityContext;
     user?: unknown;
   };
 }

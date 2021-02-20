@@ -1,8 +1,8 @@
-import { NetlifyContext, NetlifyEvent, NetlifyResponse } from '../../types';
-import { recoverSession, refreshedOrNull, setCookie } from '../edituser/cookie';
-import { jsonResponse } from '../edituser/response';
-import { formatUser } from '../userdata/formatUser';
-import { getAuth } from './getAuth';
+import { recoverSession, refreshedOrNull } from '../shared/cookie/parse';
+import { setCookie } from '../shared/cookie/serialize';
+import { getAuth } from '../shared/identity/auth';
+import { formatUser, jsonResponse } from '../shared/response';
+import { NetlifyContext, NetlifyEvent, NetlifyResponse } from '../shared/types';
 
 /**
  * Retrieve user data

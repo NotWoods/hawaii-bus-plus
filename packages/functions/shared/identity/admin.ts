@@ -1,4 +1,5 @@
 import GoTrue, { User } from 'gotrue-js';
+import { NetlifyIdentityContext } from '../types';
 
 // These properties exist but are private
 declare module 'gotrue-js' {
@@ -19,7 +20,7 @@ declare module 'gotrue-js' {
 class AdminUser extends User {
   private readonly adminToken: string;
 
-  constructor(auth: GoTrue, identity: { token: string }) {
+  constructor(auth: GoTrue, identity: NetlifyIdentityContext) {
     super(auth.api, undefined, auth.audience);
     this.adminToken = identity.token;
   }
@@ -41,7 +42,7 @@ class AdminUser extends User {
 
 export function getAdmin(
   auth: GoTrue,
-  identity: { token: string }
+  identity: NetlifyIdentityContext
 ): User['admin'] {
   return new AdminUser(auth, identity).admin;
 }
