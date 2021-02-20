@@ -167,11 +167,12 @@ importers:
       '@hawaii-bus-plus/utils': 'link:../utils'
       cookie: 0.4.1
       gotrue-js: 0.9.29
-      node-fetch: 2.6.1
+      node-fetch: 3.0.0-beta.9
       tslib: 2.1.0
     devDependencies:
       '@rollup/plugin-commonjs': 17.1.0_rollup@2.39.0
       '@rollup/plugin-node-resolve': 11.2.0_rollup@2.39.0
+      '@rollup/plugin-replace': 2.3.4_rollup@2.39.0
       '@types/aws-lambda': 8.10.72
       '@types/cookie': 0.4.0
       '@types/node': 14.14.28
@@ -186,6 +187,7 @@ importers:
       '@hawaii-bus-plus/utils': 'workspace:*'
       '@rollup/plugin-commonjs': ^17.1.0
       '@rollup/plugin-node-resolve': ^11.2.0
+      '@rollup/plugin-replace': ^2.3.4
       '@types/aws-lambda': ^8.10.72
       '@types/cookie': ^0.4.0
       '@types/node': ^14.14.28
@@ -193,7 +195,7 @@ importers:
       ava: ^3.15.0
       cookie: ^0.4.1
       gotrue-js: ^0.9.29
-      node-fetch: ^2.6.1
+      node-fetch: ^3.0.0-beta.9
       prettier: ^2.2.1
       rollup: ^2.39.0
       tslib: ^2.1.0
@@ -1014,6 +1016,16 @@ packages:
       rollup: ^1.20.0||^2.0.0
     resolution:
       integrity: sha512-qHjNIKYt5pCcn+5RUBQxK8krhRvf1HnyVgUCcFFcweDS7fhkOLZeYh0mhHK6Ery8/bb9tvN/ubPzmfF0qjDCTA==
+  /@rollup/plugin-replace/2.3.4_rollup@2.39.0:
+    dependencies:
+      '@rollup/pluginutils': 3.1.0_rollup@2.39.0
+      magic-string: 0.25.7
+      rollup: 2.39.0
+    dev: true
+    peerDependencies:
+      rollup: ^1.20.0 || ^2.0.0
+    resolution:
+      integrity: sha512-waBhMzyAtjCL1GwZes2jaE9MjuQ/DQF2BatH3fRivUF3z0JBFrU0U6iBNC/4WR+2rLKhaAhPWDNPYp4mI6RqdQ==
   /@rollup/pluginutils/3.1.0_rollup@2.39.0:
     dependencies:
       '@types/estree': 0.0.39
@@ -2454,6 +2466,12 @@ packages:
       node: '>=0.10'
     resolution:
       integrity: sha1-hTz6D3y+L+1d4gMmuN1YEDX24vA=
+  /data-uri-to-buffer/3.0.1:
+    dev: false
+    engines:
+      node: '>= 6'
+    resolution:
+      integrity: sha512-WboRycPNsVw3B3TL559F7kuBUM4d8CgMEvk6xEJlOp7OBPjt6G7z8WMWlD2rOFZLk6OYfFIUGsCOWzcQH9K2og==
   /data-urls/2.0.0:
     dependencies:
       abab: 2.0.5
@@ -3257,6 +3275,14 @@ packages:
     dev: true
     resolution:
       integrity: sha512-DkPJKQeY6kKwmuMretBhr7G6Vodr7bFwDYTXIkfG1gjvNpaxBTQV3PbXg6bR1c1UP4jPOX0jHUbbHANL9vRjVg==
+  /fetch-blob/2.1.1:
+    dev: false
+    engines:
+      node: ^10.17.0 || >=12.3.0
+    peerDependencies:
+      domexception: ^2.0.1
+    resolution:
+      integrity: sha512-Uf+gxPCe1hTOFXwkxYyckn8iUSk6CFXGy5VENZKifovUTZC9eUODWSBhOBS7zICGrAetKzdwLMr85KhIcePMAQ==
   /figures/3.2.0:
     dependencies:
       escape-string-regexp: 1.0.5
@@ -5223,6 +5249,15 @@ packages:
       node: 4.x || >=6.0.0
     resolution:
       integrity: sha512-V4aYg89jEoVRxRb2fJdAg8FHvI7cEyYdVAh94HH0UIK8oJxUfkjlDQN9RbMx+bEjP7+ggMiFRprSti032Oipxw==
+  /node-fetch/3.0.0-beta.9:
+    dependencies:
+      data-uri-to-buffer: 3.0.1
+      fetch-blob: 2.1.1
+    dev: false
+    engines:
+      node: ^10.17 || >=12.3
+    resolution:
+      integrity: sha512-RdbZCEynH2tH46+tj0ua9caUHVWrd/RHnRfvly2EVdqGmI3ndS1Vn/xjm5KuGejDt2RNDQsVRLPNd2QPwcewVg==
   /node-int64/0.4.0:
     dev: true
     resolution:
