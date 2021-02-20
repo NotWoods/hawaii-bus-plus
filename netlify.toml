@@ -30,7 +30,6 @@
 [[redirects]]
   from = "/api/v1/lookup_location"
   to = "http://api.ipstack.com/check?access_key={IPSTACK_KEY}&fields=latitude,longitude"
-
   # When you assign an HTTP status code of 200 to a redirect rule, it becomes a rewrite.
   # This means that the URL in the visitor’s address bar remains the same,
   # while Netlify’s servers fetch the new location behind the scenes.
@@ -40,17 +39,20 @@
   from = "/api/v1/api.json"
   to = "/.netlify/functions/api"
   status = 200
-
   # By default, redirects won’t be applied if there’s a file with the same
   # path as the one defined in the `from` property. Setting `force` to `true`
   # will make the redirect rule take precedence over any existing files.
   force = true
+  [redirects.conditions]
+    Role = ["plus", "trial"]
 
 [[redirects]]
   from = "/api/v1/shapes/*"
   to = "/.netlify/functions/api"
   status = 200
   force = true
+  [redirects.conditions]
+    Role = ["plus", "trial"]
 
 # The following redirects are intended for use with most SPAs that handle
 # routing internally.

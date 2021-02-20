@@ -35,9 +35,7 @@ export function urlToType(url: URL): FormType | undefined {
 }
 
 export function App(props: Props) {
-  const [type, setType] = useState<FormType | undefined>(
-    props.defaultType ?? 'acceptInvite'
-  );
+  const [type, setType] = useState<FormType | undefined>(props.defaultType);
 
   const handleLink: MouseEventHandler = (evt) => {
     evt.preventDefault();

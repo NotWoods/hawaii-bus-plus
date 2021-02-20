@@ -33,7 +33,13 @@ function headerContent(type: FormType | undefined) {
     case 'recover':
       return { title: 'Reset your password' };
     case undefined:
-      return { title: 'Redirecting...' };
+      return {
+        title: '404 Page not found',
+        subtitle: {
+          href: '/auth/login',
+          content: 'Login to your account.',
+        },
+      };
   }
 }
 

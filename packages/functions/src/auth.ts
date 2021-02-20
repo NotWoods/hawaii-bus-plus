@@ -19,7 +19,7 @@ function parseFormData(event: NetlifyEvent) {
   }
   return {
     get(key: string) {
-      return formData.get(key);
+      return formData.get(key) ?? undefined;
     },
     req(key: string) {
       const value = formData.get(key);
@@ -70,7 +70,10 @@ export async function handler(
       case 'signup': {
         const body = await auth.signup(
           formData.req('email'),
-          formData.req('password')
+          formData.req('password'),
+          {
+            full_name: formData.get('name'),
+          }
         );
         return jsonResponse(200, body);
       }
@@ -113,7 +116,7 @@ export async function handler(
   }
 
   return {
-    statusCode: 303,
+    statusCode: 302,
     body: '',
     headers: {
       Location: redirectTo.href,

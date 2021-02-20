@@ -23,5 +23,6 @@ defineConfig('api', 'api/index');
 defineConfig('auth');
 defineConfig('edituser');
 defineConfig('userdata');
+defineConfig('identity-validate');
 
 export default allConfigs;
