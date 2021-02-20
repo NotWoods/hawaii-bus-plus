@@ -5,10 +5,14 @@ import { User } from 'gotrue-js';
 export const JWT_ACCESS_TOKEN_KEY = 'nf_jwt';
 export const JWT_REFRESH_TOKEN_KEY = 'nf_jwt_refresh';
 
+const SECONDS_IN_DAY = 86400;
+
 const serializeOptions: cookie.CookieSerializeOptions = {
   httpOnly: true,
   sameSite: 'lax',
   secure: true,
+  path: '/',
+  maxAge: 30 * SECONDS_IN_DAY,
 };
 
 /**
@@ -35,15 +39,13 @@ export async function setCookie(user: User) {
 }
 
 export function removeCookie() {
-  // 1 hour ago
-  const past = new Date(Date.now() - 3600_000);
   const accessTokenCookie = cookie.serialize(JWT_ACCESS_TOKEN_KEY, '', {
     ...serializeOptions,
-    expires: past,
+    maxAge: 0,
   });
   const refreshTokenCookie = cookie.serialize(JWT_REFRESH_TOKEN_KEY, '', {
     ...serializeOptions,
-    expires: past,
+    maxAge: 0,
   });
 
   return [accessTokenCookie, refreshTokenCookie];
