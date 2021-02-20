@@ -1,5 +1,30 @@
 {
   "name": "@hawaii-bus-plus/identity-email",
   "version": "1.0.0",
-  "private": true
+  "private": true,
+  "type": "module",
+  "main": "./src/copy.js",
+  "module": "./src/copy.js",
+  "scripts": {
+    "build": "tsc --build src",
+    "postbuild": "node ./src/copy.js",
+    "format": "prettier **/*.ts --write --ignore-path ../../.prettierignore",
+    "postformat": "eslint **/*.ts --fix"
+  },
+  "dependencies": {
+    "tslib": "^2.1.0"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^9.0.7",
+    "fs-extra": "^9.1.0",
+    "prettier": "^2.2.1",
+    "typescript": "4.1.3"
+  },
+  "eslintConfig": {
+    "parserOptions": {
+      "project": [
+        "./packages/identity-email/*/tsconfig.json"
+      ]
+    }
+  }
 }
