@@ -72,7 +72,7 @@
     X-Frame-Options = "DENY"
     X-XSS-Protection = "1; mode=block"
     Content-Security-Policy = '''frame-ancestors 'none';
-    form-action 'none';
+    form-action 'self';
     default-src 'self';
     img-src 'self' data: blob: *.googleapis.com *.ggpht.com maps.gstatic.com;
     script-src 'self' 'unsafe-eval' maps.googleapis.com;
