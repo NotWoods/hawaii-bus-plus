@@ -19,6 +19,7 @@ export interface FormProps {
   onLinkClick?: MouseEventHandler;
 }
 
+const nameTypes: ReadonlySet<FormType> = new Set(['acceptInvite', 'signup']);
 const readonlyEmailTypes: ReadonlySet<FormType> = new Set([
   'acceptInvite',
   'recover',
@@ -29,7 +30,11 @@ const passwordTypes: ReadonlySet<FormType> = new Set([
   'recover',
   'signup',
 ]);
-// const thirdPartyTypes: ReadonlySet<FormType> = new Set(['login', 'signup']);
+/*const thirdPartyTypes: ReadonlySet<FormType> = new Set([
+  'acceptInvite',
+  'login',
+  'signup',
+]);*/
 
 export function Form(props: FormProps) {
   const { type, existingEmail = '<hidden>' } = props;
@@ -40,6 +45,11 @@ export function Form(props: FormProps) {
       action="/.netlify/functions/auth"
       method="POST"
     >
+      {nameTypes.has(type) ? (
+        <Input id="name" name="name" type="text" autocomplete="full-name">
+          Name
+        </Input>
+      ) : undefined}
       <Input
         id="email-address"
         name="email"

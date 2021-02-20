@@ -7,7 +7,6 @@ export function registerPromiseWorker(
     result?: unknown
   ) {
     if (error) {
-      console.error('Worker caught an error:', error);
       self.postMessage([messageId, error]);
     } else {
       self.postMessage([messageId, undefined, result]);

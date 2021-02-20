@@ -23,11 +23,11 @@ export { Title } from '../../all-pages/Title';
 function LoginButtons() {
   return (
     <div class="mx-4 mt-8">
-      <p class="flex mb-2">
+      <p class="flex mb-4">
         <Icon
           src={loginSvg}
           alt=""
-          class="w-6 h-6 mr-2 filter-invert opacity-60"
+          class="w-6 h-6 mt-1 mr-2 filter-invert opacity-60"
         />
         You need to have an account to use Hawaii Bus Plus.
       </p>
@@ -51,7 +51,7 @@ export function Home(props: Props) {
       try {
         await dbInitialized;
       } catch (err: unknown) {
-        console.error('TODO here', err);
+        console.error('TODO here', err, (err as { code: number }).code);
         setAuthError(true);
         return;
       }

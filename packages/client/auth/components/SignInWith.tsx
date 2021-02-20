@@ -1,13 +1,26 @@
 import { h, Fragment } from 'preact';
 
 interface Props {
-  type: 'Google';
+  apiUrl?: string;
+  provider: 'Google';
+  token?: string;
 }
 
+/**
+ * Currently Netlify doesn't give any control over the callback URL on free plans,
+ * forcing you to handle it at the root page with client-side code.
+ */
 export function SignInWithButton(props: Props) {
+  const { provider, token, apiUrl = '/.netlify/identity' } = props;
+  const params = new URLSearchParams();
+  params.set('provider', provider.toLowerCase());
+  if (token) {
+    params.set('invite_token', token);
+  }
+
   return (
     <a
-      href="#"
+      href={`${apiUrl}/authorize?${params.toString()}`}
       class="flex justify-center transition-colors w-full py-2 px-4 border border-current hover:bg-red hover:bg-opacity-20 font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan"
     >
       <svg
@@ -36,19 +49,19 @@ export function SignInWithButton(props: Props) {
           d="M153 219c22-69 116-109 179-50l55-54c-78-75-230-72-297 55z"
         />
       </svg>
-      Continue with {props.type}
+      Continue with {provider}
     </a>
   );
 }
 
-export function SignInWith() {
+export function SignInWith(props: Omit<Props, 'provider'>) {
   return (
     <>
       <fieldset class="border-t text-center">
         <legend class="px-4">Or</legend>
       </fieldset>
       <div class="flex">
-        <SignInWithButton type="Google" />
+        <SignInWithButton {...props} provider="Google" />
       </div>
     </>
   );

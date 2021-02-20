@@ -17,7 +17,7 @@ export class PromiseWorker {
   constructor(private readonly worker: Worker) {
     worker.addEventListener('message', (evt) => this.onMessage(evt.data));
     worker.addEventListener('error', (evt) => {
-      console.error('Worker error', evt);
+      console.error('Worker error', evt.error, evt.message);
     });
   }
 
