@@ -1,4 +1,3 @@
-import { Auth0Provider } from '@auth0/auth0-react';
 import { MapProvider } from '@hawaii-bus-plus/react-google-maps';
 import { h } from 'preact';
 import '../auth/main.css';
@@ -26,28 +25,22 @@ function Main() {
 
 export function App() {
   return (
-    <Auth0Provider
-      domain={import.meta.env.VITE_AUTH0_DOMAIN as string}
-      clientId={import.meta.env.VITE_AUTH0_CLIENT_ID as string}
-      redirectUri={window.location.origin}
-    >
-      <ApiReadyProvider>
-        <Router>
-          <ApiProvider>
-            <MyLocationProvider>
-              <RouteDetailProvider>
-                <StickySnackbarProvider>
-                  <FocusTrapProvider>
-                    <MapProvider options={googleMapOptions}>
-                      <Main />
-                    </MapProvider>
-                  </FocusTrapProvider>
-                </StickySnackbarProvider>
-              </RouteDetailProvider>
-            </MyLocationProvider>
-          </ApiProvider>
-        </Router>
-      </ApiReadyProvider>
-    </Auth0Provider>
+    <ApiReadyProvider>
+      <Router>
+        <ApiProvider>
+          <MyLocationProvider>
+            <RouteDetailProvider>
+              <StickySnackbarProvider>
+                <FocusTrapProvider>
+                  <MapProvider options={googleMapOptions}>
+                    <Main />
+                  </MapProvider>
+                </FocusTrapProvider>
+              </StickySnackbarProvider>
+            </RouteDetailProvider>
+          </MyLocationProvider>
+        </ApiProvider>
+      </Router>
+    </ApiReadyProvider>
   );
 }
