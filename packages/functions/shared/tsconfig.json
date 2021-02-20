@@ -4,6 +4,7 @@
   "references": [],
   "compilerOptions": {
     "lib": ["esnext", "dom"],
-    "types": ["node"]
+    "types": ["node"],
+    "target": "es2017"
   }
 }
