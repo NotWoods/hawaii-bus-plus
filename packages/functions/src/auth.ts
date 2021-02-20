@@ -116,10 +116,12 @@ export async function handler(
   }
 
   return {
-    statusCode: 302,
-    body: '',
+    statusCode: 201,
+    body:
+      'Login successful. Go to <a href="https://app.hawaiibusplus.com">app.hawaiibusplus.com</a>.',
     headers: {
       Location: redirectTo.href,
+      'Content-Type': 'text/html',
     },
     multiValueHeaders: {
       'Set-Cookie': await setCookie(user),

@@ -23,7 +23,6 @@ export async function handler(
     recoverSession(auth, event.headers)
   );
   const userDetails = await loggedInUser?.getUserData();
-  console.log(event.path);
 
   if (userDetails) {
     const path = require.resolve(event.path.replace('/api/v1/', './'));
