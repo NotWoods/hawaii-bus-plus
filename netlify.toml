@@ -43,16 +43,12 @@
   # path as the one defined in the `from` property. Setting `force` to `true`
   # will make the redirect rule take precedence over any existing files.
   force = true
-  [redirects.conditions]
-    Role = ["plus", "trial"]
 
 [[redirects]]
   from = "/api/v1/shapes/*"
   to = "/.netlify/functions/api"
   status = 200
   force = true
-  [redirects.conditions]
-    Role = ["plus", "trial"]
 
 # The following redirects are intended for use with most SPAs that handle
 # routing internally.
@@ -62,7 +58,11 @@
   status = 200
 
 [[redirects]]
-  from = "/*"
+  from = "/directions/*"
+  to = "/index.html"
+  status = 200
+[[redirects]]
+  from = "/routes/*"
   to = "/index.html"
   status = 200
 
