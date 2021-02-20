@@ -20,10 +20,10 @@ import {
 import { downloadScheduleData, ETagMatchError } from '../fetch.js';
 import { getWords } from '../words.js';
 
-export async function init(apiKey: string, db: IDBPDatabase<GTFSSchema>) {
+export async function init(db: IDBPDatabase<GTFSSchema>) {
   const storedTag = db.get('keyval', 'etag') as Promise<string | undefined>;
   try {
-    const { api, eTag } = await downloadScheduleData({ apiKey, storedTag });
+    const { api, eTag } = await downloadScheduleData({ storedTag });
     await initDatabase(db, api, eTag);
   } catch (err: unknown) {
     if (err instanceof ETagMatchError) {

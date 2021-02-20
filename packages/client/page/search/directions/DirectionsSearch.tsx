@@ -7,7 +7,7 @@ import type {
   NearbyWorkerHandler,
 } from '../../../worker-nearby/nearby';
 import DirectionsWorker from '../../../worker-nearby/nearby?worker';
-import { useApiKey } from '../../api/hook';
+import { dbInitialized } from '../../api';
 import { DirectionsTime } from '../../directions/DirectionsTime';
 import { useLazyComponent } from '../../hooks/useLazyComponent';
 import { usePromise } from '../../hooks/usePromise';
@@ -37,18 +37,17 @@ export function DirectionsSearch(_props: Props) {
     lazySearchResults
   );
 
-  const apiKey = useApiKey();
   const postToDirectionsWorker = useWorker(
     DirectionsWorker
   ) as NearbyWorkerHandler;
 
   usePromise(
     async (signal) => {
-      if (!apiKey || !depart || !arrive) return;
+      if (!depart || !arrive) return;
 
+      await dbInitialized;
       const results = await postToDirectionsWorker(signal, {
         type: 'directions',
-        apiKey,
         from: depart,
         to: arrive,
         departureTime:
@@ -61,7 +60,7 @@ export function DirectionsSearch(_props: Props) {
 
       setResults(results);
     },
-    [apiKey, depart, arrive, departureTime]
+    [depart, arrive, departureTime]
   );
 
   return (

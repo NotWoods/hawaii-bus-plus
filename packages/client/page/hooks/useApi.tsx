@@ -25,10 +25,7 @@ export function ApiProvider(props: { children: ComponentChildren }) {
   const [api, setApi] = useState<Api | undefined>();
 
   usePromise(async (signal) => {
-    const { api } = await downloadScheduleData({
-      apiKey: localStorage.getItem('api-key')!,
-      signal,
-    });
+    const { api } = await downloadScheduleData({ signal });
     setApi({
       stops: Object.values(api.stops),
       bikeStations: api.bike_stations,

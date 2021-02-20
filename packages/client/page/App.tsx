@@ -1,7 +1,6 @@
 import { MapProvider } from '@hawaii-bus-plus/react-google-maps';
 import { h } from 'preact';
 import '../auth/main.css';
-import { ApiReadyProvider } from './api/provider';
 import { FocusTrapProvider } from './buttons/FocusTrap';
 import { MainContent } from './home/MainContent';
 import { ApiProvider } from './hooks/useApi';
@@ -25,22 +24,20 @@ function Main() {
 
 export function App() {
   return (
-    <ApiReadyProvider>
-      <Router>
-        <ApiProvider>
-          <MyLocationProvider>
-            <RouteDetailProvider>
-              <StickySnackbarProvider>
-                <FocusTrapProvider>
-                  <MapProvider options={googleMapOptions}>
-                    <Main />
-                  </MapProvider>
-                </FocusTrapProvider>
-              </StickySnackbarProvider>
-            </RouteDetailProvider>
-          </MyLocationProvider>
-        </ApiProvider>
-      </Router>
-    </ApiReadyProvider>
+    <Router>
+      <ApiProvider>
+        <MyLocationProvider>
+          <RouteDetailProvider>
+            <StickySnackbarProvider>
+              <FocusTrapProvider>
+                <MapProvider options={googleMapOptions}>
+                  <Main />
+                </MapProvider>
+              </FocusTrapProvider>
+            </StickySnackbarProvider>
+          </RouteDetailProvider>
+        </MyLocationProvider>
+      </ApiProvider>
+    </Router>
   );
 }

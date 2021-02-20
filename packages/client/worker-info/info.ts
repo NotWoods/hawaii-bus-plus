@@ -13,7 +13,6 @@ interface RouteInfoMessage extends BaseMessageRequest {
 
 interface StopInfoMessage extends BaseMessageRequest {
   type: 'stop';
-  apiKey: string;
   id: Stop['stop_id'];
 }
 

@@ -100,13 +100,13 @@ export class MemoryRepository extends BaseMemoryRepository {
    */
   protected readonly apiReady: Promise<GTFSData>;
 
-  constructor(apiKey: string) {
+  constructor() {
     super();
-    this.apiReady = this.init(apiKey);
+    this.apiReady = this.init();
   }
 
-  private async init(apiKey: string): Promise<GTFSData> {
-    const { api } = await downloadScheduleData({ apiKey });
+  private async init(): Promise<GTFSData> {
+    const { api } = await downloadScheduleData();
     return api;
   }
 }

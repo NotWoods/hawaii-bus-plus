@@ -47,10 +47,10 @@ export interface Repository {
   searchStops(term: string, max: number): Promise<Stop[]>;
 }
 
-export const makeRepository = memoize((apiKey: string) => {
+export const makeRepository = memoize(() => {
   if (self.indexedDB) {
     return new DBRepository();
   } else {
-    return new MemoryRepository(apiKey);
+    return new MemoryRepository();
   }
 });
