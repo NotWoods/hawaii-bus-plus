@@ -3,7 +3,7 @@
   "include": ["**/*"],
   "references": [],
   "compilerOptions": {
-    "lib": ["esnext", "dom"],
+    "lib": ["esnext"],
     "types": ["node"],
     "target": "es2017"
   }
