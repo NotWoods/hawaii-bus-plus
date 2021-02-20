@@ -5,7 +5,7 @@
   "main": "./src/index.js",
   "module": "./src/index.js",
   "scripts": {
-    "build": "tsc --build src",
+    "build": "tsc --build src && rollup -c",
     "format": "prettier **/*.ts --write --ignore-path ../../.prettierignore",
     "postformat": "eslint **/*.ts --fix"
   },

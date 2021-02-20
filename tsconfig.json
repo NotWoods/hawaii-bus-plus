@@ -8,6 +8,7 @@
     { "path": "packages/client/worker-search" },
     { "path": "packages/data/src" },
     { "path": "packages/data/node" },
+    { "path": "packages/functions/src" },
     { "path": "packages/presentation/src" },
     { "path": "packages/promise-worker/page" },
     { "path": "packages/promise-worker/worker" },

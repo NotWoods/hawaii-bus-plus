@@ -3,7 +3,7 @@ import { NetlifyIdentityContext } from '../types';
 
 // These properties exist but are private
 declare module 'gotrue-js' {
-  export default class GoTrue {
+  export default interface GoTrue {
     readonly api: unknown;
     readonly audience: string;
   }
