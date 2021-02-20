@@ -27,7 +27,7 @@ export function urlToType(url: URL): FormType | undefined {
       return 'requestPasswordRecovery';
     case 'recover':
       return 'recover';
-    case 'invite':
+    case 'invited':
       return 'acceptInvite';
     default:
       return undefined;

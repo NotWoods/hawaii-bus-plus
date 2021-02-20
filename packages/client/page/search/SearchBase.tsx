@@ -23,6 +23,7 @@ export function SearchBase(props: Props) {
     >
       <header class="flex items-center">
         <IconButton
+          id="appBarUp"
           class="w-12 h-12 p-3 text-white"
           forceDark
           disabled={props.icon === false}

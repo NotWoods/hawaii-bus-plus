@@ -11,11 +11,14 @@ interface Props {
 
 export function MenuOption(props: Props) {
   return (
-    <li>
-      <ButtonOrAnchor>
-        <Icon src={props.icon} alt="" />
-        {props.children}
-      </ButtonOrAnchor>
-    </li>
+    <ButtonOrAnchor
+      href={props.href}
+      role="menuitem"
+      onClick={props.onClick}
+      class="flex px-4 py-3 gap-x-4 transition-colors hover:bg-black hover:bg-opacity-20"
+    >
+      <Icon src={props.icon} alt="" class="filter-invert opacity-60" />
+      {props.children}
+    </ButtonOrAnchor>
   );
 }
