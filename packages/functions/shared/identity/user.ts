@@ -1,4 +1,5 @@
-import GoTrue, { User, Token } from 'gotrue-js';
+import GoTrue, { Token } from 'gotrue-js';
+import { User } from './baseuser';
 
 export class TokenUser extends User {
   constructor(auth: GoTrue, accessToken: string, refreshToken?: string) {
