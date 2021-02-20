@@ -21,6 +21,7 @@ export async function downloadScheduleData({
 }: DownloadOptions): Promise<{ api: GTFSData; eTag?: string }> {
   const res = await fetch('/api/v1/api.json', {
     signal,
+    credentials: 'same-origin',
     headers: {
       Authorization: `Bearer ${apiKey}`,
     },

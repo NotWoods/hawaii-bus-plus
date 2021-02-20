@@ -33,3 +33,18 @@ export async function setCookie(user: User) {
 
   return [accessTokenCookie, refreshTokenCookie];
 }
+
+export function removeCookie() {
+  // 1 hour ago
+  const past = new Date(Date.now() - 3600_000);
+  const accessTokenCookie = cookie.serialize(JWT_ACCESS_TOKEN_KEY, '', {
+    ...serializeOptions,
+    expires: past,
+  });
+  const refreshTokenCookie = cookie.serialize(JWT_REFRESH_TOKEN_KEY, '', {
+    ...serializeOptions,
+    expires: past,
+  });
+
+  return [accessTokenCookie, refreshTokenCookie];
+}
