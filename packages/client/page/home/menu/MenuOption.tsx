@@ -17,7 +17,7 @@ export function MenuOption(props: Props) {
       onClick={props.onClick}
       class="flex px-4 py-3 gap-x-4 transition-colors hover:bg-black hover:bg-opacity-20"
     >
-      <Icon src={props.icon} alt="" class="filter-invert opacity-60" />
+      <Icon src={props.icon} alt="" class="w-6 h-6 filter-invert opacity-60" />
       {props.children}
     </ButtonOrAnchor>
   );

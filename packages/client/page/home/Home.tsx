@@ -6,6 +6,8 @@ import { dbInitialized } from '../api';
 import { Button } from '../buttons/Button';
 import { usePromise } from '../hooks/usePromise';
 import { useWorker } from '../hooks/useWorker';
+import loginSvg from '../icons/login.svg';
+import { Icon } from '../icons/Icon';
 import { MyLocationContext } from '../map/location/context';
 import { RouterContext } from '../router/Router';
 import { SearchBar } from '../search/SearchBar';
@@ -17,6 +19,25 @@ interface Props {
 }
 
 export { Title } from '../../all-pages/Title';
+
+function LoginButtons() {
+  return (
+    <div class="mx-4 mt-8">
+      <p class="flex mb-2">
+        <Icon
+          src={loginSvg}
+          alt=""
+          class="w-6 h-6 mr-2 filter-invert opacity-60"
+        />
+        You need to have an account to use Hawaii Bus Plus.
+      </p>
+      <Button href="/auth/login" class="mb-1">
+        Login
+      </Button>
+      <Button href="/auth/register">Create an account</Button>
+    </div>
+  );
+}
 
 export function Home(props: Props) {
   const { point } = useContext(RouterContext);
@@ -60,17 +81,14 @@ export function Home(props: Props) {
       </h2>
       <SearchBar onClick={props.onSearch} />
       {authError ? (
-        <>
-          <p>You need to have an account to use Hawaii Bus Plus.</p>
-          <Button href="/auth/login">Login</Button>
-          <Button href="/auth/register">Create an account</Button>
-        </>
-      ) : undefined}
-      <NearbyRoutes
-        class="mt-12 overflow-auto"
-        routes={Array.from(results.routes.values())}
-        agencies={results.agencies}
-      />
+        <LoginButtons />
+      ) : (
+        <NearbyRoutes
+          class="mt-12 overflow-auto"
+          routes={Array.from(results.routes.values())}
+          agencies={results.agencies}
+        />
+      )}
     </>
   );
 }
