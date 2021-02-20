@@ -5,16 +5,21 @@ import { setCookie } from '../shared/cookie/serialize';
 import { recoverSession, refreshedOrNull } from '../shared/cookie/parse';
 import { jsonResponse, RequiredError } from '../shared/response';
 
-function parseJson(body: string | null) {
-  if (!body) {
-    throw new RequiredError('No body passed in');
-  }
-
-  const data = JSON.parse(body) as unknown;
-  if (typeof data === 'object' && data != null) {
-    return data;
+function parseJson(event: NetlifyEvent) {
+  if (event.httpMethod === 'GET') {
+    return event.queryStringParameters;
   } else {
-    throw new Error(`Invalid body ${data as string}`);
+    const { body } = event;
+    if (!body) {
+      throw new RequiredError('No body passed in');
+    }
+
+    const data = JSON.parse(body) as unknown;
+    if (typeof data === 'object' && data != null) {
+      return data;
+    } else {
+      throw new Error(`Invalid body ${data as string}`);
+    }
   }
 }
 
@@ -38,7 +43,7 @@ export async function handler(
   }
 
   try {
-    const body = parseJson(event.body);
+    const body = parseJson(event);
     const user = await loggedInUser.update(body);
     const [userData, cookies] = await Promise.all([
       formatUser(user),
