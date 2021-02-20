@@ -21,15 +21,14 @@ async function mkdirIfNotExists(folder: string | URL) {
 
 async function makeOutDir() {
   await mkdirIfNotExists(distFolder);
-  await mkdirIfNotExists(new URL(`./auth/`, distFolder));
-  await mkdirIfNotExists(new URL(`./auth/email/`, distFolder));
+  await mkdirIfNotExists(new URL(`./email/`, distFolder));
 }
 
 async function copyFile(file: string) {
   const path = new URL(`./${file}`, templatesFolder);
   const body = await readFile(path);
 
-  const outPath = new URL(`./auth/email/${file}`, distFolder);
+  const outPath = new URL(`./email/${file}`, distFolder);
   await writeFile(outPath, body, 'utf8');
 }
 
