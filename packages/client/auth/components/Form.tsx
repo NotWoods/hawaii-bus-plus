@@ -1,7 +1,6 @@
 import { h } from 'preact';
 import { Input } from './Input';
 import { MouseEventHandler } from './link';
-import { SignInWith } from './SignInWith';
 import { SubmitButton } from './SubmitButton';
 
 export type FormType =
@@ -30,7 +29,7 @@ const passwordTypes: ReadonlySet<FormType> = new Set([
   'recover',
   'signup',
 ]);
-const thirdPartyTypes: ReadonlySet<FormType> = new Set(['login', 'signup']);
+// const thirdPartyTypes: ReadonlySet<FormType> = new Set(['login', 'signup']);
 
 export function Form(props: FormProps) {
   const { type, existingEmail = '<hidden>' } = props;
@@ -75,8 +74,6 @@ export function Form(props: FormProps) {
       ) : undefined}
 
       <SubmitButton type={type} />
-
-      {thirdPartyTypes.has(type) ? <SignInWith /> : undefined}
 
       <input type="hidden" name="type" required value={type} />
       <input type="hidden" name="redirect_to" value={props.redirectTo} />

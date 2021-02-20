@@ -6,8 +6,8 @@
   "main": "./src/copy.js",
   "module": "./src/copy.js",
   "scripts": {
-    "build": "tsc --build src",
-    "postbuild": "node ./src/copy.js",
+    "prebuild": "tsc --build src",
+    "build": "node ./src/copy.js",
     "format": "prettier **/*.ts --write --ignore-path ../../.prettierignore",
     "postformat": "eslint **/*.ts --fix"
   },
@@ -16,6 +16,7 @@
   },
   "devDependencies": {
     "@types/fs-extra": "^9.0.7",
+    "copyfiles": "^2.4.1",
     "fs-extra": "^9.1.0",
     "prettier": "^2.2.1",
     "typescript": "4.1.3"

@@ -1,9 +1,13 @@
+import { readFile } from 'fs';
 import { User } from 'gotrue-js';
 import { URL, URLSearchParams } from 'url';
+import { promisify } from 'util';
 import { setCookie } from '../shared/cookie/serialize';
 import { getAuth } from '../shared/identity/auth';
 import { jsonResponse, RequiredError } from '../shared/response';
 import { NetlifyContext, NetlifyEvent, NetlifyResponse } from '../shared/types';
+
+const readFileAsync = promisify(readFile);
 
 function parseFormData(event: NetlifyEvent) {
   let formData: URLSearchParams;
@@ -32,6 +36,8 @@ function parseFormData(event: NetlifyEvent) {
 }
 
 const baseURL = new URL('https://app.hawaiibusplus.com/');
+const templatePath = require.resolve('./done.html');
+const templateReady = readFileAsync(templatePath, 'utf8');
 
 export async function handler(
   event: NetlifyEvent,
@@ -115,10 +121,12 @@ export async function handler(
     }
   }
 
+  const template = await templateReady;
   return {
     statusCode: 201,
-    body:
-      'Login successful. Go to <a href="https://app.hawaiibusplus.com">app.hawaiibusplus.com</a>.',
+    body: template
+      .replace(/{{ \.RedirectTo }}/g, redirectTo.href)
+      .replace(/{{ \.Stylesheet }}/g, '/assets/main.css'),
     headers: {
       Location: redirectTo.href,
       'Content-Type': 'text/html',

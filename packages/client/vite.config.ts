@@ -33,6 +33,7 @@ export default defineConfig({
     jsxFragment: 'Fragment',
   },
   build: {
+    manifest: true,
     outDir: '../../dist',
     emptyOutDir: true,
     minify: process.env.NETLIFY_CONTEXT === 'production',

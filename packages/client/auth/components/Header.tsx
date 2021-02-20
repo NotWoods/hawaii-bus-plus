@@ -1,4 +1,5 @@
 import { h } from 'preact';
+import { useEffect } from 'preact/hooks';
 import { Title } from '../../all-pages/Title';
 import { FormType } from './Form';
 import { MouseEventHandler } from './link';
@@ -12,6 +13,7 @@ function headerContent(type: FormType | undefined) {
   switch (type) {
     case 'login':
       return {
+        name: 'Login',
         title: 'Welcome back!',
         subtitle: {
           prefix: 'Not registered? ',
@@ -22,6 +24,7 @@ function headerContent(type: FormType | undefined) {
     case 'acceptInvite':
     case 'signup':
       return {
+        name: 'Register',
         title: 'Create your account',
         subtitle: {
           prefix: 'Already signed up? ',
@@ -31,7 +34,10 @@ function headerContent(type: FormType | undefined) {
       };
     case 'requestPasswordRecovery':
     case 'recover':
-      return { title: 'Reset your password' };
+      return {
+        name: 'Reset your password',
+        title: 'Reset your password',
+      };
     case undefined:
       return {
         title: '404 Page not found',
@@ -44,7 +50,12 @@ function headerContent(type: FormType | undefined) {
 }
 
 export function Header({ type, onLinkClick }: Props) {
-  const { title, subtitle } = headerContent(type);
+  const { name, title, subtitle } = headerContent(type);
+
+  useEffect(() => {
+    const suffix = 'Hawaii Bus Plus';
+    document.title = name ? `${name} - ${suffix}` : suffix;
+  }, [name]);
 
   return (
     <header class="text-center">

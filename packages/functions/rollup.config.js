@@ -20,7 +20,7 @@ function defineConfig(input, output = input) {
 }
 
 defineConfig('api', 'api/index');
-defineConfig('auth');
+defineConfig('auth', 'auth/index');
 defineConfig('edituser');
 defineConfig('userdata');
 defineConfig('logout');
