@@ -25,7 +25,7 @@ export async function handler(
   const userDetails = await loggedInUser?.getUserData();
 
   if (userDetails) {
-    const path = require.resolve(event.path.replace('/api/v1/', '../'));
+    const path = require.resolve(event.path.replace('/api/v1/', './'));
     console.log(userDetails);
     const file = await readFileAsync(path, 'utf8');
     return {

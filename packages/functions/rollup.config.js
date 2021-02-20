@@ -8,18 +8,18 @@ const allConfigs = [];
 /**
  * @param {string} input
  */
-function defineConfig(input) {
+function defineConfig(input, output = input) {
   allConfigs.push({
     input: `src/${input}.js`,
     output: {
-      file: `../../dist/functions/${input}.js`,
+      file: `../../dist/functions/${output}.js`,
       format: 'cjs',
     },
     plugins: [nodeResolve(), commonjs()],
   });
 }
 
-defineConfig('api');
+defineConfig('api', 'api/index');
 defineConfig('auth');
 defineConfig('edituser');
 defineConfig('userdata');
