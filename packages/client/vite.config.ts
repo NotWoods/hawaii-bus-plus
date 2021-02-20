@@ -36,6 +36,12 @@ export default defineConfig({
     outDir: '../../dist',
     emptyOutDir: true,
     minify: process.env.NETLIFY_CONTEXT === 'production',
+    rollupOptions: {
+      input: {
+        main: './index.html',
+        auth: './auth.html',
+      },
+    },
   },
   server: {
     proxy: {
