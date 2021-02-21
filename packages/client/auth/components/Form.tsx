@@ -37,7 +37,7 @@ const passwordTypes: ReadonlySet<FormType> = new Set([
 ]);*/
 
 export function Form(props: FormProps) {
-  const { type, existingEmail = '<hidden>' } = props;
+  const { type, existingEmail } = props;
   const readonlyEmail = readonlyEmailTypes.has(type);
   return (
     <form
@@ -57,7 +57,13 @@ export function Form(props: FormProps) {
         key={readonlyEmail ? 'readonly' : 'edit'}
         autocomplete={readonlyEmail ? 'off' : 'email'}
         readonly={readonlyEmail}
-        value={readonlyEmail ? existingEmail : undefined}
+        value={
+          readonlyEmail
+            ? existingEmail ?? '<hidden>'
+            : type === 'signup'
+            ? existingEmail
+            : undefined
+        }
       >
         Email address
       </Input>

@@ -4,6 +4,9 @@ import { getAuth } from '../shared/identity/auth';
 import { formatUser, jsonResponse } from '../shared/response';
 import { NetlifyContext, NetlifyEvent, NetlifyResponse } from '../shared/types';
 
+const defaultOrigin = 'https://app.hawaiibusplus.com';
+const allowedOrigins = new Set([defaultOrigin, 'https://hawaiibusplus.com']);
+
 /**
  * Retrieve user data
  */
@@ -23,6 +26,7 @@ export async function handler(
     });
   }
 
+  const requestOrigin = event.headers['origin']!;
   const [userData, cookies] = await Promise.all([
     formatUser(loggedInUser),
     setCookie(loggedInUser),
@@ -33,6 +37,11 @@ export async function handler(
     body: JSON.stringify(userData),
     headers: {
       'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': allowedOrigins.has(requestOrigin)
+        ? requestOrigin
+        : defaultOrigin,
+      'Access-Control-Allow-Methods': 'GET',
+      Vary: 'Origin',
     },
     multiValueHeaders: {
       'Set-Cookie': cookies,
