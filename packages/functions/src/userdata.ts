@@ -1,7 +1,7 @@
 import { recoverSession, refreshedOrNull } from '../shared/cookie/parse';
 import { setCookie } from '../shared/cookie/serialize';
 import { getAuth } from '../shared/identity/auth';
-import { formatUser, jsonResponse } from '../shared/response';
+import { formatUser } from '../shared/response';
 import { NetlifyContext, NetlifyEvent, NetlifyResponse } from '../shared/types';
 
 const defaultOrigin = 'https://app.hawaiibusplus.com';
@@ -17,17 +17,29 @@ export async function handler(
   const { identity } = context.clientContext;
   const auth = getAuth(identity);
 
+  const requestOrigin = event.headers['origin']!;
+  const responseHeaders = {
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': allowedOrigins.has(requestOrigin)
+      ? requestOrigin
+      : defaultOrigin,
+    'Access-Control-Allow-Methods': 'GET, OPTION',
+    Vary: 'Origin',
+  };
+
   const loggedInUser = await refreshedOrNull(
     recoverSession(auth, event.headers)
   );
   if (!loggedInUser) {
-    return jsonResponse(401, {
-      error: 'Unauthorized: Not logged in',
-    });
+    return {
+      statusCode: 401,
+      body: JSON.stringify({
+        error: 'Unauthorized: Not logged in',
+      }),
+      headers: responseHeaders,
+    };
   }
 
-  const requestOrigin = event.headers['origin']!;
-  console.log(requestOrigin);
   const [userData, cookies] = await Promise.all([
     formatUser(loggedInUser),
     setCookie(loggedInUser),
@@ -36,14 +48,7 @@ export async function handler(
   return {
     statusCode: 200,
     body: JSON.stringify(userData),
-    headers: {
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': allowedOrigins.has(requestOrigin)
-        ? requestOrigin
-        : defaultOrigin,
-      'Access-Control-Allow-Methods': 'GET, OPTION',
-      Vary: 'Origin',
-    },
+    headers: responseHeaders,
     multiValueHeaders: {
       'Set-Cookie': cookies,
     },
