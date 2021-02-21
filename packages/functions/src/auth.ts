@@ -35,6 +35,14 @@ function parseFormData(event: NetlifyEvent) {
   };
 }
 
+function isHttpError(err: unknown): err is Error & { status: number } {
+  // Handles errors from gotrue-js
+  return (
+    err instanceof Error &&
+    typeof (err as { status?: unknown }).status === 'number'
+  );
+}
+
 const baseURL = new URL('https://app.hawaiibusplus.com/');
 const templatePath = require.resolve('./done.html');
 const templateReady = readFileAsync(templatePath, 'utf8');
@@ -55,6 +63,7 @@ export async function handler(
     redirectTo = baseURL;
   }
 
+  let successStatus = 201;
   let user: User;
   try {
     const type = formData.req('type');
@@ -85,6 +94,7 @@ export async function handler(
       }
       // Login existing user
       case 'login': {
+        successStatus = 200;
         user = await auth.login(
           formData.req('email'),
           formData.req('password')
@@ -110,6 +120,10 @@ export async function handler(
       return jsonResponse(400, {
         error: err.message,
       });
+    } else if (isHttpError(err)) {
+      return jsonResponse(err.status, {
+        error: err.message,
+      });
     } else if (err instanceof Error) {
       return jsonResponse(500, {
         error: err.message,
@@ -123,7 +137,7 @@ export async function handler(
 
   const template = await templateReady;
   return {
-    statusCode: 201,
+    statusCode: successStatus,
     body: template
       .replace(/{{ \.RedirectTo }}/g, redirectTo.href)
       .replace(/{{ \.Stylesheet }}/g, '/assets/main.css'),

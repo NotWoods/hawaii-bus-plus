@@ -1,0 +1,10 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "include": ["**/*", "**/*.json"],
+  "references": [{ "path": "../all-pages" }],
+  "compilerOptions": {
+    "lib": ["esnext", "dom", "dom.iterable"],
+    "types": ["vite/client"],
+    "noEmit": true
+  }
+}

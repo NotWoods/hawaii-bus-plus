@@ -1,6 +1,6 @@
 import { MapProvider } from '@hawaii-bus-plus/react-google-maps';
 import { h } from 'preact';
-import '../auth/main.css';
+import '../all-pages/main.css';
 import { FocusTrapProvider } from './buttons/FocusTrap';
 import { MainContent } from './home/MainContent';
 import { ApiProvider } from './hooks/useApi';

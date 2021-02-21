@@ -17,8 +17,8 @@ function headerContent(type: FormType | undefined) {
         title: 'Welcome back!',
         subtitle: {
           prefix: 'Not registered? ',
-          href: '/auth/register',
-          content: 'Sign up for free.',
+          href: 'https://eepurl.com/hqxfyb',
+          content: 'Sign up for early access.',
         },
       };
     case 'acceptInvite':
@@ -69,7 +69,7 @@ export function Header({ type, onLinkClick }: Props) {
           <a
             href={subtitle.href}
             class="font-medium text-gray-100 hover:underline"
-            onClick={onLinkClick}
+            onClick={subtitle.href.startsWith('http') ? undefined : onLinkClick}
           >
             {subtitle.content}
           </a>
