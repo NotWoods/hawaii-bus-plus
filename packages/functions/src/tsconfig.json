@@ -5,7 +5,7 @@
   "compilerOptions": {
     "lib": ["esnext"],
     "types": ["node"],
-    "target": "es2020",
+    "target": "es2019",
     "resolveJsonModule": true
   }
 }

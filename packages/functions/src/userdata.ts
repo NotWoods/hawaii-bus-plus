@@ -27,6 +27,7 @@ export async function handler(
   }
 
   const requestOrigin = event.headers['origin']!;
+  console.log(requestOrigin);
   const [userData, cookies] = await Promise.all([
     formatUser(loggedInUser),
     setCookie(loggedInUser),
@@ -40,7 +41,7 @@ export async function handler(
       'Access-Control-Allow-Origin': allowedOrigins.has(requestOrigin)
         ? requestOrigin
         : defaultOrigin,
-      'Access-Control-Allow-Methods': 'GET',
+      'Access-Control-Allow-Methods': 'GET, OPTION',
       Vary: 'Origin',
     },
     multiValueHeaders: {

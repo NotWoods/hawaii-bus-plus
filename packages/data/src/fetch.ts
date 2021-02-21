@@ -1,10 +1,12 @@
 import { GTFSData } from '@hawaii-bus-plus/types';
 
 export class UnauthorizedError extends Error {
+  name = 'UnauthorizedError';
   code = 401;
 }
 
 export class ETagMatchError extends Error {
+  name = 'ETagMatchError';
   code = 208;
 }
 
