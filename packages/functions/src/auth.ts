@@ -50,7 +50,7 @@ function isHttpError(err: unknown): err is Error & { status: number } {
 
 const baseURL = new URL('https://app.hawaiibusplus.com/');
 const templatePath = require.resolve('./done.html');
-const manifestPath = require.resolve('../../manifest.json');
+const manifestPath = require.resolve('./manifest.json');
 const templateReady = readFileAsync(templatePath, 'utf8');
 const manifestReady = readFileAsync(manifestPath, 'utf8')
   .then((json) => JSON.parse(json) as Manifest)
