@@ -8,6 +8,10 @@ import { jsonResponse, RequiredError } from '../shared/response';
 import { NetlifyContext, NetlifyEvent, NetlifyResponse } from '../shared/types';
 import allowList from './allowlist.json';
 
+interface Manifest {
+  [id: string]: { file: string; imports?: string[]; css?: string[] };
+}
+
 const readFileAsync = promisify(readFile);
 
 function parseFormData(event: NetlifyEvent) {
@@ -46,7 +50,25 @@ function isHttpError(err: unknown): err is Error & { status: number } {
 
 const baseURL = new URL('https://app.hawaiibusplus.com/');
 const templatePath = require.resolve('./done.html');
+const manifestPath = require.resolve('../manifest.json');
 const templateReady = readFileAsync(templatePath, 'utf8');
+const manifestReady = readFileAsync(manifestPath, 'utf8')
+  .then((json) => JSON.parse(json) as Manifest)
+  .then(cssFromManifest);
+
+function cssFromManifest(manifest: Manifest) {
+  const queue = ['auth.html'];
+  const found: string[] = [];
+  while (queue.length > 0) {
+    const item = queue.pop()!;
+    const { imports = [], css = [] } = manifest[item];
+    queue.push(...imports);
+    found.push(...css);
+  }
+  return found
+    .map((path) => `<link rel="stylesheet" href="${path}" />`)
+    .join('');
+}
 
 export async function handler(
   event: NetlifyEvent,
@@ -138,12 +160,15 @@ export async function handler(
     }
   }
 
-  const template = await templateReady;
+  const [template, manifest] = await Promise.all([
+    templateReady,
+    manifestReady,
+  ]);
   return {
     statusCode: successStatus,
     body: template
       .replace(/{{ \.RedirectTo }}/g, redirectTo.href)
-      .replace(/{{ \.Stylesheet }}/g, '/assets/main.css'),
+      .replace(/{{ \.Stylesheets }}/g, manifest),
     headers: {
       Location: redirectTo.href,
       'Content-Type': 'text/html',
