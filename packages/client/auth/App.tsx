@@ -1,11 +1,12 @@
 import { h, Fragment } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
 import { Form, FormType, FormProps } from './components/Form';
-import { Header } from './components/Header';
+import { Header, HeaderType } from './components/Header';
+import { Alert } from './components/Alert';
 import { MouseEventHandler } from './components/link';
 
 interface Props extends Omit<FormProps, 'type'> {
-  defaultType: FormType | undefined;
+  defaultType: HeaderType;
 }
 
 export function urlToType(url: URL): FormType | undefined {
@@ -35,14 +36,15 @@ export function urlToType(url: URL): FormType | undefined {
 }
 
 export function App(props: Props) {
-  const [type, setType] = useState<FormType | undefined>(props.defaultType);
+  const [type, setType] = useState<HeaderType>(props.defaultType ?? 'success');
 
   const handleLink: MouseEventHandler = (evt) => {
     evt.preventDefault();
     const url = new URL(evt.currentTarget.href);
-    setType(urlToType(url));
+    const type = urlToType(url);
+    setType(type);
 
-    history.pushState(undefined, '', url.pathname);
+    history.pushState(type, '', url.pathname);
   };
 
   useEffect(() => {
@@ -57,9 +59,10 @@ export function App(props: Props) {
   return (
     <>
       <Header type={type} onLinkClick={handleLink} />
-      {type ? (
+      {type != undefined && type != 'success' ? (
         <Form {...props} type={type} onLinkClick={handleLink} />
       ) : undefined}
+      <Alert />
     </>
   );
 }

@@ -21,7 +21,7 @@ function defineConfig(input, output = input) {
 }
 
 defineConfig('api', 'api/index');
-defineConfig('auth', 'auth/index');
+defineConfig('auth/index');
 defineConfig('edituser');
 defineConfig('userdata');
 defineConfig('logout');

@@ -1,15 +1,28 @@
-import { h } from 'preact';
+import { ComponentChildren, h } from 'preact';
 import { useEffect } from 'preact/hooks';
 import { Title } from '../../all-pages/Title';
 import { FormType } from './Form';
 import { MouseEventHandler } from './link';
 
+export type HeaderType = FormType | 'success' | undefined;
+
 interface Props {
-  type?: FormType;
+  type?: HeaderType;
+  redirectTo?: string;
   onLinkClick?: MouseEventHandler;
 }
 
-function headerContent(type: FormType | undefined) {
+interface SubtitleProps {
+  subtitle?: {
+    prefix?: ComponentChildren;
+    href?: string;
+    content: ComponentChildren;
+  };
+  redirectTo?: string;
+  onLinkClick?: MouseEventHandler;
+}
+
+function headerContent(type: HeaderType | undefined) {
   switch (type) {
     case 'login':
       return {
@@ -38,6 +51,14 @@ function headerContent(type: FormType | undefined) {
         name: 'Reset your password',
         title: 'Reset your password',
       };
+    case 'success':
+      return {
+        name: 'Success',
+        title: `You're all set!`,
+        subtitle: {
+          content: 'Redirecting you to the app now...',
+        },
+      };
     case undefined:
       return {
         title: '404 Page not found',
@@ -49,7 +70,31 @@ function headerContent(type: FormType | undefined) {
   }
 }
 
-export function Header({ type, onLinkClick }: Props) {
+function HeaderSubtitle(props: SubtitleProps) {
+  const { subtitle } = props;
+  if (!subtitle) return null;
+
+  let clickHandler: MouseEventHandler | undefined;
+  if (subtitle.href && !subtitle.href.startsWith('http')) {
+    clickHandler = props.onLinkClick;
+  }
+
+  return (
+    <p class="mt-2 text-sm text-gray-200">
+      {subtitle.prefix}
+      <a
+        href={subtitle.href ?? props.redirectTo}
+        class="font-medium text-gray-100 hover:underline"
+        onClick={clickHandler}
+      >
+        {subtitle.content}
+      </a>
+    </p>
+  );
+}
+
+export function Header(props: Props) {
+  const { type } = props;
   const { name, title, subtitle } = headerContent(type);
 
   useEffect(() => {
@@ -63,18 +108,11 @@ export function Header({ type, onLinkClick }: Props) {
       <h2 class="mt-6 text-4xl font-display font-medium text-gray-100">
         {title}
       </h2>
-      {subtitle ? (
-        <p class="mt-2 text-sm text-gray-200">
-          {subtitle.prefix}
-          <a
-            href={subtitle.href}
-            class="font-medium text-gray-100 hover:underline"
-            onClick={subtitle.href.startsWith('http') ? undefined : onLinkClick}
-          >
-            {subtitle.content}
-          </a>
-        </p>
-      ) : null}
+      <HeaderSubtitle
+        subtitle={subtitle}
+        redirectTo={props.redirectTo}
+        onLinkClick={props.onLinkClick}
+      />
     </header>
   );
 }

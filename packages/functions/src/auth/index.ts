@@ -2,10 +2,14 @@ import { readFile } from 'fs';
 import { User } from 'gotrue-js';
 import { URL, URLSearchParams } from 'url';
 import { promisify } from 'util';
-import { setCookie } from '../shared/cookie/serialize';
-import { getAuth } from '../shared/identity/auth';
-import { jsonResponse, RequiredError } from '../shared/response';
-import { NetlifyContext, NetlifyEvent, NetlifyResponse } from '../shared/types';
+import { setCookie } from '../../shared/cookie/serialize';
+import { getAuth } from '../../shared/identity/auth';
+import { jsonResponse, RequiredError } from '../../shared/response';
+import {
+  NetlifyContext,
+  NetlifyEvent,
+  NetlifyResponse,
+} from '../../shared/types';
 import allowList from './allowlist.json';
 
 interface Manifest {
