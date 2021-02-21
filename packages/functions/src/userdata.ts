@@ -24,6 +24,7 @@ export async function handler(
       ? requestOrigin
       : defaultOrigin,
     'Access-Control-Allow-Methods': 'GET, OPTION',
+    'Access-Control-Allow-Credentials': 'true',
     Vary: 'Origin',
   };
 
