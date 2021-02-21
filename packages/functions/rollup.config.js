@@ -1,6 +1,7 @@
 // @ts-check
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
+import json from '@rollup/plugin-json';
 
 /** @type {import('rollup').RollupOptions[]} */
 const allConfigs = [];
@@ -15,7 +16,7 @@ function defineConfig(input, output = input) {
       file: `../../dist/functions/${output}.js`,
       format: 'cjs',
     },
-    plugins: [nodeResolve(), commonjs()],
+    plugins: [nodeResolve(), commonjs(), json()],
   });
 }
 

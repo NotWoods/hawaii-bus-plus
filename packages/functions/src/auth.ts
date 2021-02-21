@@ -6,6 +6,7 @@ import { setCookie } from '../shared/cookie/serialize';
 import { getAuth } from '../shared/identity/auth';
 import { jsonResponse, RequiredError } from '../shared/response';
 import { NetlifyContext, NetlifyEvent, NetlifyResponse } from '../shared/types';
+import allowList from './allowlist.json';
 
 const readFileAsync = promisify(readFile);
 
@@ -83,13 +84,15 @@ export async function handler(
       }
       // Sign up new user
       case 'signup': {
-        const body = await auth.signup(
-          formData.req('email'),
-          formData.req('password'),
-          {
-            full_name: formData.get('name'),
-          }
-        );
+        const email = formData.req('email');
+        if (!allowList.includes(email)) {
+          return jsonResponse(403, {
+            error: `Unauthorized: ${email} is not on whitelist`,
+          });
+        }
+        const body = await auth.signup(email, formData.req('password'), {
+          full_name: formData.get('name'),
+        });
         return jsonResponse(200, body);
       }
       // Login existing user

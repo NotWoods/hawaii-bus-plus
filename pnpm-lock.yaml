@@ -169,6 +169,7 @@ importers:
       tslib: 2.1.0
     devDependencies:
       '@rollup/plugin-commonjs': 17.1.0_rollup@2.39.0
+      '@rollup/plugin-json': 4.1.0_rollup@2.39.0
       '@rollup/plugin-node-resolve': 11.2.0_rollup@2.39.0
       '@rollup/plugin-replace': 2.3.4_rollup@2.39.0
       '@types/aws-lambda': 8.10.72
@@ -185,6 +186,7 @@ importers:
       '@hawaii-bus-plus/types': 'workspace:*'
       '@hawaii-bus-plus/utils': 'workspace:*'
       '@rollup/plugin-commonjs': ^17.1.0
+      '@rollup/plugin-json': ^4.1.0
       '@rollup/plugin-node-resolve': ^11.2.0
       '@rollup/plugin-replace': ^2.3.4
       '@types/aws-lambda': ^8.10.72
@@ -995,6 +997,15 @@ packages:
       rollup: ^2.30.0
     resolution:
       integrity: sha512-PoMdXCw0ZyvjpCMT5aV4nkL0QywxP29sODQsSGeDpr/oI49Qq9tRtAsb/LbYbDzFlOydVEqHmmZWFtXJEAX9ew==
+  /@rollup/plugin-json/4.1.0_rollup@2.39.0:
+    dependencies:
+      '@rollup/pluginutils': 3.1.0_rollup@2.39.0
+      rollup: 2.39.0
+    dev: true
+    peerDependencies:
+      rollup: ^1.20.0 || ^2.0.0
+    resolution:
+      integrity: sha512-yfLbTdNS6amI/2OpmbiBoW12vngr5NW2jCJVZSBEz+H5KfUJZ2M7sDjk0U6GOOdCWFVScShte29o9NezJ53TPw==
   /@rollup/plugin-node-resolve/11.2.0_rollup@2.39.0:
     dependencies:
       '@rollup/pluginutils': 3.1.0_rollup@2.39.0
