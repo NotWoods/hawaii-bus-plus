@@ -26,7 +26,7 @@ defineConfig('billing');
 defineConfig('edituser');
 defineConfig('userdata');
 defineConfig('logout');
-defineConfig('identity-signup');
+defineConfig('identity-validate');
 defineConfig('stripe-webhook');
 
 export default allConfigs;
