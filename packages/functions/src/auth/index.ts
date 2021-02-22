@@ -1,5 +1,5 @@
 import { readFile } from 'fs';
-import { User } from 'gotrue-js';
+import { User, UserData } from 'gotrue-js';
 import { URL, URLSearchParams } from 'url';
 import { promisify } from 'util';
 import { setCookie } from '../../shared/cookie/serialize';
@@ -11,10 +11,6 @@ import {
   NetlifyResponse,
 } from '../../shared/types';
 import allowList from './allowlist.json';
-
-interface Manifest {
-  [id: string]: { file: string; imports?: string[]; css?: string[] };
-}
 
 const readFileAsync = promisify(readFile);
 
@@ -53,25 +49,34 @@ function isHttpError(err: unknown): err is Error & { status: number } {
 }
 
 const baseURL = new URL('https://app.hawaiibusplus.com/');
-const templatePath = require.resolve('./done.html');
-const manifestPath = require.resolve('./manifest.json');
+const templatePath = require.resolve('./index.html');
 const templateReady = readFileAsync(templatePath, 'utf8');
-const manifestReady = readFileAsync(manifestPath, 'utf8')
-  .then((json) => JSON.parse(json) as Manifest)
-  .then(cssFromManifest);
 
-function cssFromManifest(manifest: Manifest) {
-  const queue = ['auth.html'];
-  const found: string[] = [];
-  while (queue.length > 0) {
-    const item = queue.pop()!;
-    const { imports = [], css = [] } = manifest[item];
-    queue.push(...imports);
-    found.push(...css);
+async function renderTemplate(
+  statusCode: number,
+  ctx: { type: string; redirectTo?: string; userData?: UserData }
+): Promise<NetlifyResponse> {
+  const template = await templateReady;
+  const globalContext = `<script>window.ctx = ${JSON.stringify(ctx)}</script>`;
+  const metaRefresh = ctx.redirectTo
+    ? `<meta http-equiv="refresh" content="0; URL=${ctx.redirectTo}" />`
+    : '';
+
+  const headers: NetlifyResponse['headers'] = {
+    'Content-Type': 'text/html',
+  };
+  if (ctx.redirectTo) {
+    headers['Location'] = ctx.redirectTo;
   }
-  return found
-    .map((path) => `<link rel="stylesheet" href="${path}" />`)
-    .join('');
+
+  return {
+    statusCode,
+    body: template.replace(
+      '<!--head-html-->',
+      `${metaRefresh}${globalContext}`
+    ),
+    headers,
+  };
 }
 
 export async function handler(
@@ -119,7 +124,10 @@ export async function handler(
         const body = await auth.signup(email, formData.req('password'), {
           full_name: formData.get('name'),
         });
-        return jsonResponse(200, body);
+        return renderTemplate(successStatus, {
+          type: 'sentConfirmation',
+          userData: body,
+        });
       }
       // Login existing user
       case 'login': {
@@ -133,7 +141,10 @@ export async function handler(
       // Request a password recovery
       case 'requestPasswordRecovery': {
         const body = await auth.requestPasswordRecovery(formData.req('email'));
-        return jsonResponse(200, body);
+        return renderTemplate(200, {
+          type: 'sentConfirmation',
+          userData: (body as unknown) as UserData,
+        });
       }
       // Recover password
       case 'recover': {
@@ -164,21 +175,12 @@ export async function handler(
     }
   }
 
-  const [template, manifest] = await Promise.all([
-    templateReady,
-    manifestReady,
-  ]);
-  return {
-    statusCode: successStatus,
-    body: template
-      .replace(/{{ \.RedirectTo }}/g, redirectTo.href)
-      .replace(/{{ \.Stylesheets }}/g, manifest),
-    headers: {
-      Location: redirectTo.href,
-      'Content-Type': 'text/html',
-    },
-    multiValueHeaders: {
-      'Set-Cookie': await setCookie(user),
-    },
+  const response = await renderTemplate(successStatus, {
+    type: 'success',
+    redirectTo: redirectTo.href,
+  });
+  response.multiValueHeaders = {
+    'Set-Cookie': await setCookie(user),
   };
+  return response;
 }

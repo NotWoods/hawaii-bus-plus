@@ -6,8 +6,8 @@
   "module": "./src/index.js",
   "scripts": {
     "prebuild": "tsc --build src",
-    "build": "rollup -c && copyfiles done.html ../../dist/functions/auth/",
-    "postbuild": "copyfiles ../../dist/manifest.json ../../dist/functions/auth/ --flat",
+    "build": "rollup -c",
+    "postbuild": "copyfiles ../../dist/auth/index.html ../../dist/functions/auth/ --flat",
     "format": "prettier **/*.ts --write --ignore-path ../../.prettierignore",
     "postformat": "eslint **/*.ts --fix"
   },
