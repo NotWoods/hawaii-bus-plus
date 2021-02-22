@@ -115,14 +115,14 @@ export async function handler(
       }
       // Sign up new user
       case 'signup': {
-        const email = formData.req('email');
+        const email = formData.req('email').trim();
         if (!allowList.includes(email)) {
           return jsonResponse(403, {
             error: `Unauthorized: ${email} is not on whitelist`,
           });
         }
         const body = await auth.signup(email, formData.req('password'), {
-          full_name: formData.get('name'),
+          full_name: formData.get('name')?.trim(),
         });
         return renderTemplate(successStatus, {
           type: 'sentConfirmation',
@@ -133,14 +133,16 @@ export async function handler(
       case 'login': {
         successStatus = 200;
         user = await auth.login(
-          formData.req('email'),
+          formData.req('email').trim(),
           formData.req('password')
         );
         break;
       }
       // Request a password recovery
       case 'requestPasswordRecovery': {
-        const body = await auth.requestPasswordRecovery(formData.req('email'));
+        const body = await auth.requestPasswordRecovery(
+          formData.req('email').trim()
+        );
         return renderTemplate(200, {
           type: 'sentConfirmation',
           userData: (body as unknown) as UserData,
