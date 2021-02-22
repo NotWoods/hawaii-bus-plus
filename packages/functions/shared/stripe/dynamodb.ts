@@ -3,7 +3,6 @@ import {
   PutItemCommand,
   GetItemCommand,
 } from '@aws-sdk/client-dynamodb';
-import Stripe from 'stripe';
 
 export class DatabaseClient {
   dynamoDb = new DynamoDBClient({
@@ -14,11 +13,7 @@ export class DatabaseClient {
     },
   });
 
-  async createUser(
-    netlifyId: string,
-    stripeId: string,
-    _subscription: Stripe.Subscription
-  ) {
+  async createUser(netlifyId: string, stripeId: string) {
     await this.dynamoDb.send(
       new PutItemCommand({
         TableName: 'Users',

@@ -25,6 +25,7 @@ export async function handler(
   );
   const userDetails = await loggedInUser?.getUserData();
   const payingOrTrialUser = userDetails && hasPaidAccess(userDetails);
+  console.log(userDetails);
 
   if (payingOrTrialUser) {
     const path = require.resolve(event.path.replace('/api/v1/', './'));

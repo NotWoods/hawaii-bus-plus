@@ -64,9 +64,9 @@ function headerContent(type: HeaderType | undefined) {
         name: 'Success',
         title: `You're all set!`,
         subtitle: {
-          content: 'You can now ',
+          prefix: 'You can now ',
           href: '/auth/login',
-          prefix: 'login to your new account.',
+          content: 'login to your new account.',
         },
       };
     case undefined:
