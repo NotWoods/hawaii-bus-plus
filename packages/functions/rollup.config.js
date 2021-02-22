@@ -16,15 +16,17 @@ function defineConfig(input, output = input) {
       file: `../../dist/functions/${output}.js`,
       format: 'cjs',
     },
-    plugins: [nodeResolve(), commonjs(), json()],
+    plugins: [nodeResolve({ preferBuiltins: true }), commonjs(), json()],
   });
 }
 
 defineConfig('api', 'api/index');
 defineConfig('auth/index');
+defineConfig('billing');
 defineConfig('edituser');
 defineConfig('userdata');
 defineConfig('logout');
-defineConfig('identity-validate');
+defineConfig('identity-signup');
+defineConfig('stripe-webhook');
 
 export default allConfigs;

@@ -1,6 +1,6 @@
 import { h } from 'preact';
 import { MenuOption } from './MenuOption';
-import settingsIcon from '../../icons/settings.svg';
+import paymentsIcon from '../../icons/payments.svg';
 import logoutIcon from '../../icons/logout.svg';
 import feedbackIcon from '../../icons/feedback.svg';
 import { classNames } from '../../hooks/classnames';
@@ -25,8 +25,8 @@ export function Menu(props: Props) {
       aria-orientation="vertical"
       aria-labelledby={props.labelledBy}
     >
-      <MenuOption href="#" icon={settingsIcon}>
-        My account
+      <MenuOption href="/.netlify/functions/billing" icon={paymentsIcon}>
+        Billing
       </MenuOption>
       <MenuOption href="mailto:feedback@hawaiibusplus.com" icon={feedbackIcon}>
         Feedback
