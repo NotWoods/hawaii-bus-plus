@@ -7,6 +7,7 @@ import { Button } from '../buttons/Button';
 import { usePromise } from '../hooks/usePromise';
 import { useWorker } from '../hooks/useWorker';
 import loginSvg from '../icons/login.svg';
+import paymentsSvg from '../icons/payments.svg';
 import { Icon } from '../icons/Icon';
 import { MyLocationContext } from '../map/location/context';
 import { RouterContext } from '../router/Router';
@@ -39,11 +40,29 @@ function LoginButtons() {
   );
 }
 
+function BillingButtons() {
+  return (
+    <div class="mx-4 mt-8">
+      <p class="flex mb-4">
+        <Icon
+          src={paymentsSvg}
+          alt=""
+          class="w-6 h-6 mt-1 mr-2 filter-invert opacity-60"
+        />
+        Your account has expired. Sign up for a new plan to use Hawaii Bus Plus.
+      </p>
+      <Button href="/.netlify/functions/billing" class="mb-1">
+        Billing
+      </Button>
+    </div>
+  );
+}
+
 export function Home(props: Props) {
   const { point } = useContext(RouterContext);
   const { coords } = useContext(MyLocationContext);
   const [results, setResults] = useState(emptyClosestResults);
-  const [authError, setAuthError] = useState(false);
+  const [authError, setAuthError] = useState<401 | 402 | undefined>(undefined);
   const postToNearbyWorker = useWorker(NearbyWorker) as NearbyWorkerHandler;
 
   usePromise(
@@ -51,8 +70,11 @@ export function Home(props: Props) {
       try {
         await dbInitialized;
       } catch (err: unknown) {
-        console.error('TODO here', err, (err as { code: number }).code);
-        setAuthError(true);
+        if (err === 401 || err === 402) {
+          setAuthError(err);
+        } else {
+          console.error('TODO here', err, (err as { code: number }).code);
+        }
         return;
       }
 
@@ -80,8 +102,10 @@ export function Home(props: Props) {
         Aloha kakahiaka
       </h2>
       <SearchBar onClick={props.onSearch} />
-      {authError ? (
+      {authError === 401 ? (
         <LoginButtons />
+      ) : authError === 402 ? (
+        <BillingButtons />
       ) : (
         <NearbyRoutes
           class="mt-12 overflow-auto"

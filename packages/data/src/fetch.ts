@@ -5,6 +5,11 @@ export class UnauthorizedError extends Error {
   code = 401;
 }
 
+export class PaymentRequiredError extends Error {
+  name = 'PaymentRequiredError';
+  code = 402;
+}
+
 export class ETagMatchError extends Error {
   name = 'ETagMatchError';
   code = 208;
@@ -27,6 +32,8 @@ export async function downloadScheduleData({
   if (!res.ok) {
     if (res.status === 401) {
       throw new UnauthorizedError(res.statusText);
+    } else if (res.status === 402) {
+      throw new PaymentRequiredError(res.statusText);
     } else {
       throw new Error(res.statusText);
     }
