@@ -23,7 +23,7 @@
     "@rollup/plugin-commonjs": "^17.1.0",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^11.2.0",
-    "@rollup/plugin-replace": "^2.3.4",
+    "@rollup/plugin-replace": "^2.4.0",
     "@types/aws-lambda": "^8.10.72",
     "@types/cookie": "^0.4.0",
     "@types/node": "^14.14.31",

@@ -90,8 +90,8 @@ importers:
       '@types/jest': 26.0.20
       '@types/react': 17.0.2
       cross-env: 7.0.3
-      esbuild: 0.8.49
-      esbuild-jest: 0.3.0_esbuild@0.8.49
+      esbuild: 0.8.50
+      esbuild-jest: 0.3.0_esbuild@0.8.50
       jest: 26.6.3
       preact-render-to-string: 5.1.12_preact@10.5.12
       prettier: 2.2.1
@@ -118,7 +118,7 @@ importers:
       '@types/jest': ^26.0.20
       '@types/react': ^17.0.2
       cross-env: ^7.0.3
-      esbuild: ^0.8.49
+      esbuild: ^0.8.50
       esbuild-jest: ^0.3.0
       idb: ^6.0.0
       insights-js: ^1.2.10
@@ -173,7 +173,7 @@ importers:
       '@rollup/plugin-commonjs': 17.1.0_rollup@2.39.0
       '@rollup/plugin-json': 4.1.0_rollup@2.39.0
       '@rollup/plugin-node-resolve': 11.2.0_rollup@2.39.0
-      '@rollup/plugin-replace': 2.3.4_rollup@2.39.0
+      '@rollup/plugin-replace': 2.4.0_rollup@2.39.0
       '@types/aws-lambda': 8.10.72
       '@types/cookie': 0.4.0
       '@types/node': 14.14.31
@@ -190,7 +190,7 @@ importers:
       '@rollup/plugin-commonjs': ^17.1.0
       '@rollup/plugin-json': ^4.1.0
       '@rollup/plugin-node-resolve': ^11.2.0
-      '@rollup/plugin-replace': ^2.3.4
+      '@rollup/plugin-replace': ^2.4.0
       '@types/aws-lambda': ^8.10.72
       '@types/cookie': ^0.4.0
       '@types/node': ^14.14.31
@@ -224,6 +224,18 @@ importers:
     specifiers:
       '@hawaii-bus-plus/types': 'workspace:*'
       jest: ^26.6.3
+      prettier: ^2.2.1
+      tslib: ^2.1.0
+      type-fest: ^0.20.2
+      typescript: 4.1.3
+  packages/prerender:
+    dependencies:
+      tslib: 2.1.0
+      type-fest: 0.20.2
+    devDependencies:
+      prettier: 2.2.1
+      typescript: 4.1.3
+    specifiers:
       prettier: ^2.2.1
       tslib: ^2.1.0
       type-fest: ^0.20.2
@@ -1015,7 +1027,7 @@ packages:
       rollup: ^1.20.0||^2.0.0
     resolution:
       integrity: sha512-qHjNIKYt5pCcn+5RUBQxK8krhRvf1HnyVgUCcFFcweDS7fhkOLZeYh0mhHK6Ery8/bb9tvN/ubPzmfF0qjDCTA==
-  /@rollup/plugin-replace/2.3.4_rollup@2.39.0:
+  /@rollup/plugin-replace/2.4.0_rollup@2.39.0:
     dependencies:
       '@rollup/pluginutils': 3.1.0_rollup@2.39.0
       magic-string: 0.25.7
@@ -1024,7 +1036,7 @@ packages:
     peerDependencies:
       rollup: ^1.20.0 || ^2.0.0
     resolution:
-      integrity: sha512-waBhMzyAtjCL1GwZes2jaE9MjuQ/DQF2BatH3fRivUF3z0JBFrU0U6iBNC/4WR+2rLKhaAhPWDNPYp4mI6RqdQ==
+      integrity: sha512-QGuKCj9fTegKtLh1zsxNWP5uVmUctbFOG9S8wIir5dDO7qzGyISmwrQjlyEN0H7ptz60+CFeVFi5x4aDQ5+L6g==
   /@rollup/pluginutils/3.1.0_rollup@2.39.0:
     dependencies:
       '@types/estree': 0.0.39
@@ -2822,20 +2834,20 @@ packages:
       node: '>= 0.4'
     resolution:
       integrity: sha512-QCOllgZJtaUo9miYBcLChTUaHNjJF3PYs1VidD7AwiEj1kYxKeQTctLAezAOH5ZKRH0g2IgPn6KwB4IT8iRpvA==
-  /esbuild-jest/0.3.0_esbuild@0.8.49:
+  /esbuild-jest/0.3.0_esbuild@0.8.50:
     dependencies:
-      esbuild: 0.8.49
+      esbuild: 0.8.50
     dev: true
     peerDependencies:
       esbuild: '>=0.8.16'
     resolution:
       integrity: sha512-J1ZHN4IbQiLJAsCMK2XkPYZsTrD8ius+1B09RVqfrvmT+BnwGdR6CLvRq6DGopOaEmdkr4AIk/J6LQUhRQDsSg==
-  /esbuild/0.8.49:
+  /esbuild/0.8.50:
     dev: true
     hasBin: true
     requiresBuild: true
     resolution:
-      integrity: sha512-itiFVYv5UZz4NooO7/Y0bRGVDGz/M/cxKbl6zyNI5pnKaz1mZjvZXAFhhDVz6rGCmcdTKj5oag6rh8DaaSSmfQ==
+      integrity: sha512-oidFLXssA7IccYzkqLVZSqNJDwDq8Mh/vqvrW+3fPWM7iUiC5O2bCllhnO8+K9LlyL/2Z6n+WwRJAz9fqSIVRg==
   /escalade/3.1.1:
     dev: true
     engines:
@@ -2970,11 +2982,11 @@ packages:
       has: 1.0.3
       jsx-ast-utils: 3.2.0
       object.entries: 1.1.3
-      object.fromentries: 2.0.3
+      object.fromentries: 2.0.4
       object.values: 1.1.2
       prop-types: 15.7.2
       resolve: 1.20.0
-      string.prototype.matchall: 4.0.3
+      string.prototype.matchall: 4.0.4
     dev: true
     engines:
       node: '>=4'
@@ -5392,7 +5404,7 @@ packages:
       node: '>= 0.4'
     resolution:
       integrity: sha512-ym7h7OZebNS96hn5IJeyUmaWhaSM4SVtAPPfNLQEI2MYWCO2egsITb9nab2+i/Pwibx+R0mtn+ltKJXRSeTMGg==
-  /object.fromentries/2.0.3:
+  /object.fromentries/2.0.4:
     dependencies:
       call-bind: 1.0.2
       define-properties: 1.1.3
@@ -5402,7 +5414,7 @@ packages:
     engines:
       node: '>= 0.4'
     resolution:
-      integrity: sha512-IDUSMXs6LOSJBWE++L0lzIbSqHl9KDCfff2x/JSEIDtEUavUnyMYC2ZGay/04Zq4UT8lvd4xNhU4/YHKibAOlw==
+      integrity: sha512-EsFBshs5RUUpQEY1D4q/m59kMfz4YJvxuNCJcv/jWwOJr34EaVnG11ZrZa0UHB3wnzV1wx8m58T4hQL8IuNXlQ==
   /object.pick/1.3.0:
     dependencies:
       isobject: 3.0.1
@@ -6623,7 +6635,7 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-zUz5JD+tgqtuDjMhwIg5uFVV3dtqZ9yQJlZVfq4I01/K5Paj5UHj7VyrQOJvzawSVlKpObApbfD0Ed6yJc+1eg==
-  /string.prototype.matchall/4.0.3:
+  /string.prototype.matchall/4.0.4:
     dependencies:
       call-bind: 1.0.2
       define-properties: 1.1.3
@@ -6634,7 +6646,7 @@ packages:
       side-channel: 1.0.4
     dev: true
     resolution:
-      integrity: sha512-OBxYDA2ifZQ2e13cP82dWFMaCV9CGF8GzmN4fljBVw5O5wep0lu4gacm1OL6MjROoUnB8VbkWRThqkV2YFLNxw==
+      integrity: sha512-pknFIWVachNcyqRfaQSeu/FUfpvJTe4uskUSZ9Wc1RijsPuzbZ8TyYT8WCNnntCjUEqQ3vUHMAfVj2+wLAisPQ==
   /string.prototype.trimend/1.0.3:
     dependencies:
       call-bind: 1.0.2
@@ -7194,7 +7206,7 @@ packages:
       integrity: sha1-OhBcoXBTr1XW4nDB+CiGguGNpAA=
   /vite/2.0.1:
     dependencies:
-      esbuild: 0.8.49
+      esbuild: 0.8.50
       postcss: 8.2.6
       resolve: 1.20.0
       rollup: 2.39.0
