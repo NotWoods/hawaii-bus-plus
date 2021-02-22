@@ -21,10 +21,16 @@
       "purpose": "any"
     },
     {
-      "src": "/icon/logo.svg",
+      "src": "/icon/monochrome.png",
+      "type": "image/png",
+      "sizes": "48x48",
+      "purpose": "monochrome"
+    },
+    {
+      "src": "/icon/monochrome.svg",
       "type": "image/svg+xml",
       "sizes": "any",
-      "purpose": "any"
+      "purpose": "monochrome"
     }
   ],
   "start_url": ".",
