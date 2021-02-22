@@ -4,7 +4,7 @@ import { Title } from '../../all-pages/Title';
 import { FormType } from './Form';
 import { MouseEventHandler } from './link';
 
-export type HeaderType = FormType | 'success' | undefined;
+export type HeaderType = FormType | 'success' | 'sentConfirmation' | undefined;
 
 interface Props {
   type?: HeaderType;
@@ -16,7 +16,7 @@ interface SubtitleProps {
   subtitle?: {
     prefix?: ComponentChildren;
     href?: string;
-    content: ComponentChildren;
+    content?: ComponentChildren;
   };
   redirectTo?: string;
   onLinkClick?: MouseEventHandler;
@@ -59,6 +59,14 @@ function headerContent(type: HeaderType | undefined) {
           content: 'Redirecting you to the app now...',
         },
       };
+    case 'sentConfirmation':
+      return {
+        name: 'Success',
+        title: `You're all set!`,
+        subtitle: {
+          prefix: 'Check your email to confirm your new account.',
+        },
+      };
     case undefined:
       return {
         title: '404 Page not found',
@@ -82,13 +90,15 @@ function HeaderSubtitle(props: SubtitleProps) {
   return (
     <p class="mt-2 text-sm text-gray-200">
       {subtitle.prefix}
-      <a
-        href={subtitle.href ?? props.redirectTo}
-        class="font-medium text-gray-100 hover:underline"
-        onClick={clickHandler}
-      >
-        {subtitle.content}
-      </a>
+      {subtitle.content ? (
+        <a
+          href={subtitle.href ?? props.redirectTo}
+          class="font-medium text-gray-100 hover:underline"
+          onClick={clickHandler}
+        >
+          {subtitle.content}
+        </a>
+      ) : undefined}
     </p>
   );
 }

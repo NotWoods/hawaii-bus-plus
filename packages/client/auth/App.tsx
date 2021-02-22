@@ -2,14 +2,14 @@ import { h, Fragment } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
 import { Form, FormType, FormProps } from './components/Form';
 import { Header, HeaderType } from './components/Header';
-import { Alert } from './components/Alert';
 import { MouseEventHandler } from './components/link';
+import '../all-pages/main.css';
 
 interface Props extends Omit<FormProps, 'type'> {
   defaultType: HeaderType;
 }
 
-export function urlToType(url: URL): FormType | undefined {
+export function urlToType(url: URL): HeaderType | undefined {
   let path = url.pathname;
   if (!path.startsWith('/auth/')) {
     return undefined;
@@ -30,10 +30,20 @@ export function urlToType(url: URL): FormType | undefined {
       return 'recover';
     case 'invited':
       return 'acceptInvite';
+    case 'done':
+      return 'success';
+    case 'registered':
+      return 'sentConfirmation';
     default:
       return undefined;
   }
 }
+
+const headerTypes = new Set<HeaderType>([
+  'success',
+  'sentConfirmation',
+  undefined,
+]);
 
 export function App(props: Props) {
   const [type, setType] = useState<HeaderType>(props.defaultType ?? 'success');
@@ -59,10 +69,9 @@ export function App(props: Props) {
   return (
     <>
       <Header type={type} onLinkClick={handleLink} />
-      {type != undefined && type != 'success' ? (
-        <Form {...props} type={type} onLinkClick={handleLink} />
-      ) : undefined}
-      <Alert />
+      {headerTypes.has(type) ? undefined : (
+        <Form {...props} type={type as FormType} onLinkClick={handleLink} />
+      )}
     </>
   );
 }

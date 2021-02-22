@@ -1,4 +1,3 @@
-import '../all-pages/main.css';
 import 'preact/debug';
 import { h, render } from 'preact';
 import { App, urlToType } from './App';
