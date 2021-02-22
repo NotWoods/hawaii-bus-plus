@@ -12,11 +12,11 @@ registerPromiseWorker(async () => {
   try {
     await apiReady;
   } catch (err: unknown) {
-    console.warn(err, (err as { code: number }).code);
-    if (err instanceof UnauthorizedError) {
-      throw 401;
-    } else if (err instanceof PaymentRequiredError) {
-      throw 402;
+    if (
+      err instanceof UnauthorizedError ||
+      err instanceof PaymentRequiredError
+    ) {
+      throw err.code;
     } else {
       return err;
     }

@@ -73,7 +73,7 @@ export function Home(props: Props) {
         if (err === 401 || err === 402) {
           setAuthError(err);
         } else {
-          console.error('TODO here', err, (err as { code: number }).code);
+          console.error(err);
         }
         return;
       }
