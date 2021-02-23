@@ -1,9 +1,7 @@
 import { useGoogleMap } from '@hawaii-bus-plus/react-google-maps';
 import type { SearchWorkerHandler } from '../../../worker-search/search';
-import { SearchResults } from '../../../worker-search/search-db';
 import SearchWorker from '../../../worker-search/search?worker';
 import { dbInitialized } from '../../api';
-import { usePromise } from '../../hooks/usePromise';
 import { useWorker } from '../../hooks/useWorker';
 import {
   buildSessionToken,
@@ -11,40 +9,33 @@ import {
   getPlacePredictions,
 } from './places-autocomplete';
 
-export function useSearch(
-  query: string,
-  onSearchResults: (results: SearchResults) => void
-) {
+export function useSearch() {
   const map = useGoogleMap();
   const postToSearchWorker = useWorker(SearchWorker) as SearchWorkerHandler;
 
-  usePromise(
-    async (signal) => {
-      if (!query) {
-        onSearchResults(emptyResults);
-        return;
-      }
+  return async function getSearchResults(query: string, signal: AbortSignal) {
+    if (!query) {
+      return emptyResults;
+    }
 
-      const request = { input: query, offset: query.length };
-      const gtfsReady = dbInitialized.then(() =>
-        postToSearchWorker(signal, {
+    const request = { input: query, offset: query.length };
+    const gtfsReady = dbInitialized.then(() =>
+      postToSearchWorker(signal, {
+        ...request,
+        type: 'search',
+      })
+    );
+    const placesReady = map
+      ? getPlacePredictions({
           ...request,
-          type: 'search',
+          sessionToken: buildSessionToken(),
+          bounds: map.getBounds()!,
+          location: map.getCenter(),
+          componentRestrictions: { country: 'us' },
         })
-      );
-      const placesReady = map
-        ? getPlacePredictions({
-            ...request,
-            sessionToken: buildSessionToken(),
-            bounds: map.getBounds()!,
-            location: map.getCenter(),
-            componentRestrictions: { country: 'us' },
-          })
-        : [];
+      : [];
 
-      const [places, gtfs] = await Promise.all([placesReady, gtfsReady]);
-      onSearchResults({ ...gtfs, places });
-    },
-    [query]
-  );
+    const [places, gtfs] = await Promise.all([placesReady, gtfsReady]);
+    return { ...gtfs, places };
+  };
 }

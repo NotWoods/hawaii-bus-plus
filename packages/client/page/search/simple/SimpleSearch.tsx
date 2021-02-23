@@ -3,6 +3,7 @@ import { h, Fragment } from 'preact';
 import { useState } from 'preact/hooks';
 import { Button } from '../../buttons/Button';
 import { useLazyComponent } from '../../hooks/useLazyComponent';
+import { usePromise } from '../../hooks/usePromise';
 import directionsIcon from '../../icons/directions.svg';
 import { SearchBar } from '../SearchBar';
 import { emptyResults } from './places-autocomplete';
@@ -17,8 +18,15 @@ export const lazySearchResults = memoize(() => import('../search-lazy-entry'));
 export function SimpleSearch(props: Props) {
   const [search, setSearch] = useState('');
   const [searchResults, setSearchResults] = useState(emptyResults);
-  useSearch(search, setSearchResults);
+  const getSearchResults = useSearch();
   const { SearchResultsList } = useLazyComponent(lazySearchResults);
+
+  usePromise(
+    async (signal) => {
+      setSearchResults(await getSearchResults(search, signal));
+    },
+    [search]
+  );
 
   return (
     <>

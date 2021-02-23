@@ -1,6 +1,6 @@
 import { Point } from '@hawaii-bus-plus/presentation';
 import { ComponentChildren, h } from 'preact';
-import { useEffect, useState } from 'preact/hooks';
+import { useEffect, useRef, useState } from 'preact/hooks';
 import type { SearchResults } from '../../../worker-search/search-db';
 import { classNames } from '../../hooks/classnames';
 import stopIcon from '../../icons/bus_stop.svg';
@@ -27,9 +27,16 @@ const icons = Object.freeze({
 
 export function DirectionsField(props: Props) {
   const { point, id } = props;
+  const aborter = useRef<AbortController>();
   const [value, setValue] = useState('');
   const [edited, setEdited] = useState(false);
+  const getSearchResults = useSearch();
   const invalid = !point && edited;
+
+  useEffect(() => {
+    aborter.current = new AbortController();
+    return () => aborter.current?.abort();
+  }, []);
 
   useEffect(() => {
     if (point) {
@@ -37,7 +44,10 @@ export function DirectionsField(props: Props) {
     }
   }, [point]);
 
-  useSearch(point ? '' : value, props.onSearchResults);
+  async function performSearch(value: string) {
+    const results = await getSearchResults(value, aborter.current.signal);
+    props.onSearchResults(results);
+  }
 
   return (
     <div className="mx-4 mb-2">
@@ -50,9 +60,16 @@ export function DirectionsField(props: Props) {
           class={classNames(point && 'pl-10', invalid && 'border-red-500')}
           placeholder="Stop or location"
           value={point?.name ?? value}
-          onInput={(evt) => {
-            setValue(evt.currentTarget.value);
+          onInput={async (evt) => {
+            const newValue = evt.currentTarget.value;
+            setValue(newValue);
             props.onChange(undefined);
+            await performSearch(newValue);
+          }}
+          onFocus={async () => {
+            if (value && !point) {
+              await performSearch(value);
+            }
           }}
           onBlur={() => setEdited(true)}
         />
