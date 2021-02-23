@@ -1,5 +1,6 @@
 import { getSingle, omitStopTimes, Repository } from '@hawaii-bus-plus/data';
 import {
+  DurationData,
   durationToData,
   PlainTimeData,
   plainTimeToData,
@@ -32,6 +33,7 @@ export interface JourneyTripSegment {
 }
 
 export interface Journey {
+  duration: DurationData;
   departTime: PlainTimeData;
   arriveTime: PlainTimeData;
   depart?: {
@@ -49,7 +51,15 @@ export interface Journey {
     walk: Walking;
   };
   stops: ReadonlyMap<Stop['stop_id'], ColorString>;
+  fare: string;
 }
+
+const fareFormatter = new Intl.NumberFormat([], {
+  style: 'currency',
+  currency: 'USD',
+});
+
+const notableWait = Temporal.Duration.from({ minutes: 4 });
 
 function formatDepartArrive(
   point: Point,
@@ -62,7 +72,7 @@ function formatDepartArrive(
   const time = Temporal.Duration.from({ seconds: Math.floor(distance) });
   const walk: Walking = { distance, time: durationToData(time) };
 
-  if (waitUntil) {
+  if (waitUntil && Temporal.Duration.compare(waitUntil, notableWait) > 0) {
     walk.waitUntil = durationToData(waitUntil);
   }
 
@@ -99,6 +109,7 @@ export async function journeyToDirections(
 
   const allStops = new Map<Stop['stop_id'], ColorString>();
   const trips: (JourneyTripSegment | Walking)[] = [];
+  let pathCount = 0;
   let journeyStart: PlainDaysTime | undefined;
   let journeyEnd: PlainDaysTime | undefined;
 
@@ -107,6 +118,7 @@ export async function journeyToDirections(
   let endEntry: JourneyStopTime | undefined;
   for (const current of pathSegments) {
     if (isPathTripSegment(current)) {
+      pathCount++;
       // Lookup trip and get stop times
       const trip = await repo.loadTrip(current.trip);
       if (!trip) {
@@ -230,7 +242,10 @@ export async function journeyToDirections(
 
   // Ending at (to)
 
+  const farePrice = Math.ceil(pathCount / 2) * 2;
+
   return {
+    duration: durationToData(journeyStart!.until(journeyEnd!)),
     departTime: zonedTime(journeyStart!, 'Pacific/Honolulu'),
     arriveTime: zonedTime(journeyEnd!, 'Pacific/Honolulu'),
     depart: formatDepartArrive(
@@ -241,5 +256,6 @@ export async function journeyToDirections(
     arrive: formatDepartArrive(to, endEntry!.stop.position),
     trips,
     stops: allStops,
+    fare: fareFormatter.format(farePrice),
   };
 }

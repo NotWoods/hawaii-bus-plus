@@ -1,8 +1,12 @@
-import { formatPlainTimeRange } from '@hawaii-bus-plus/presentation';
+import {
+  formatDurationParts,
+  formatPlainTimeRange,
+} from '@hawaii-bus-plus/presentation';
 import { h } from 'preact';
 import type { Journey } from '../../worker-nearby/directions/format';
-import { classNames } from '../hooks/classnames';
 import { CloseButton } from '../buttons/CloseButton';
+import { classNames } from '../hooks/classnames';
+import { useScreens } from '../hooks/useScreens';
 import './JourneyHeader.css';
 
 interface Props {
@@ -11,12 +15,37 @@ interface Props {
   onClose?(): void;
 }
 
+function JourneyDuration({
+  duration,
+  unitDisplay,
+}: {
+  duration: Journey['duration'];
+  unitDisplay: 'short' | 'long';
+}) {
+  return (
+    <time class="block font-display font-medium p-2" dateTime={duration.string}>
+      {formatDurationParts(duration, unitDisplay).map((part) => {
+        if (part.type === 'integer') {
+          return (
+            <span key={part.value} class="text-2xl">
+              {part.value}
+            </span>
+          );
+        } else {
+          return part.value;
+        }
+      })}
+    </time>
+  );
+}
+
 export function JourneyHeader({ journey, timeZone, onClose }: Props) {
   const durationRange = formatPlainTimeRange(
     journey.departTime,
     journey.arriveTime,
     timeZone
   );
+  const unitDisplay = useScreens('md') ? 'long' : 'short';
 
   return (
     <header
@@ -25,10 +54,8 @@ export function JourneyHeader({ journey, timeZone, onClose }: Props) {
         onClose && 'journey__header--close'
       )}
     >
-      <time class="block font-display font-medium p-2">
-        <span class="text-2xl">20</span> <span>min</span>
-      </time>
-      <span class="bg-black px-1 text-white">$2.00</span>
+      <JourneyDuration duration={journey.duration} unitDisplay={unitDisplay} />
+      <span class="bg-black px-1 text-white">{journey.fare}</span>
       <time
         class="block text-sm p-2 pt-0"
         title={durationRange.localTime}

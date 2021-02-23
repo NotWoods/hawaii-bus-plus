@@ -1,5 +1,5 @@
 import { memoize } from '@hawaii-bus-plus/utils';
-import { biggestUnit, DurationData, formatDuration } from './duration.js';
+import { DurationData, formatDuration } from './duration.js';
 
 export interface Walking {
   /** How long it takes to walk to a location */
@@ -19,19 +19,25 @@ const distanceFormatter = memoize(
 );
 
 export function formatWalkingTime(walk: Walking) {
-  let walkTime;
+  let walkTime: string | undefined;
   if (walk.distance >= 1_000) {
     // TODO feet
     walkTime = distanceFormatter('meter', []).format(walk.distance);
   } else {
-    walkTime = formatDuration(walk.time)!;
+    walkTime = formatDuration(walk.time, 'long');
   }
   if (walk.waitUntil) {
-    const unit = biggestUnit(walk.waitUntil);
-    if (unit === 'days' || unit === 'hours' || walk.waitUntil.minutes! > 4) {
-      const until = formatDuration(walk.waitUntil)!;
+    const until = formatDuration(walk.waitUntil, 'long')!;
+    if (walkTime) {
       return `Walk ${walkTime}, then wait for ${until}`;
+    } else {
+      return `Wait for ${until}`;
     }
   }
-  return `Walk ${walkTime}`;
+
+  if (walkTime) {
+    return `Walk ${walkTime}`;
+  } else {
+    return '';
+  }
 }

@@ -1,4 +1,7 @@
-import { DurationData, formatDuration } from '@hawaii-bus-plus/presentation';
+import {
+  DurationData,
+  formatRelativeDuration,
+} from '@hawaii-bus-plus/presentation';
 import { h } from 'preact';
 import { classNames } from '../hooks/classnames';
 
@@ -11,7 +14,7 @@ interface Props {
 }
 
 export function DurationElement(props: Props) {
-  const str = formatDuration(props.duration);
+  const str = formatRelativeDuration(props.duration);
 
   return (
     <time
@@ -25,7 +28,7 @@ export function DurationElement(props: Props) {
 }
 
 export function RelativeDurationElement(props: Props) {
-  const str = formatDuration(props.duration);
+  const str = formatRelativeDuration(props.duration);
 
   return (
     <time

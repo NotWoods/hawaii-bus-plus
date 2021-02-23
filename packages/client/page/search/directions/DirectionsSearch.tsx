@@ -43,7 +43,10 @@ export function DirectionsSearch(_props: Props) {
 
   usePromise(
     async (signal) => {
-      if (!depart || !arrive) return;
+      if (!depart || !arrive) {
+        setResults(undefined);
+        return;
+      }
 
       await dbInitialized;
       const results = await postToDirectionsWorker(signal, {
@@ -100,11 +103,11 @@ export function DirectionsSearch(_props: Props) {
         />
       ) : null}
 
-      {results && DirectionsJourneys ? (
+      {depart && arrive && results && DirectionsJourneys ? (
         <DirectionsJourneys
           results={results.journeys}
-          depart={depart!}
-          arrive={arrive!}
+          depart={depart}
+          arrive={arrive}
           departureTime={results.depatureTime}
           onTomorrowClick={() => setDepartTime(results.tomorrow)}
         />

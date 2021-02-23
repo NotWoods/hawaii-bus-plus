@@ -46,8 +46,8 @@ declare global {
 const localTimeFormatter = new Intl.DateTimeFormat([], { timeStyle: 'long' });
 
 const agencyTimeFormatter = memoize(
-  (agencyTimezone: string, locale: string[]) =>
-    new Intl.DateTimeFormat(locale, {
+  (agencyTimezone: string) =>
+    new Intl.DateTimeFormat([], {
       timeStyle: 'short',
       timeZone: agencyTimezone,
     })
@@ -64,7 +64,7 @@ export function formatPlainTime(
 
   return {
     localTime: localTimeFormatter.format(date),
-    agencyTime: agencyTimeFormatter(agencyTimezone, []).format(date),
+    agencyTime: agencyTimeFormatter(agencyTimezone).format(date),
   };
 }
 
@@ -78,6 +78,6 @@ export function formatPlainTimeRange(
 
   return {
     localTime: localTimeFormatter.formatRange(start, end),
-    agencyTime: agencyTimeFormatter(agencyTimezone, []).formatRange(start, end),
+    agencyTime: agencyTimeFormatter(agencyTimezone).formatRange(start, end),
   };
 }
