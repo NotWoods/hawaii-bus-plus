@@ -1,5 +1,8 @@
 import { NodeRepository } from '@hawaii-bus-plus/data/node';
-import { expectPlainTimeData } from '@hawaii-bus-plus/jest-utils';
+import {
+  expectDurationData,
+  expectPlainTimeData,
+} from '@hawaii-bus-plus/jest-utils';
 import { Point } from '@hawaii-bus-plus/presentation';
 import { PlainDaysTime } from '@hawaii-bus-plus/temporal-utils';
 import { Stop, StopTime, TimeString, Trip } from '@hawaii-bus-plus/types';
@@ -137,6 +140,8 @@ test.concurrent('directions', async () => {
     arriveTime: expectPlainTimeData('15:45:00'),
     stops: expect.any(Map),
     trips: expect.any(Array),
+    duration: expectDurationData('PT1H'),
+    fare: expect.stringContaining('$2.00'),
   });
   expect(journeys[0].trips).toHaveLength(1);
 
