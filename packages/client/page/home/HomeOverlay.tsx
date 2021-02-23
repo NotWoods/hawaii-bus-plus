@@ -20,7 +20,7 @@ export function HomeOverlay() {
     case 'home':
       return (
         <SearchBase
-          icon={<MenuIcon />}
+          icon={<MenuIcon open={menuOpen} />}
           logo={<Title />}
           onButtonClick={() => setMenuOpen(!menuOpen)}
         >
