@@ -3,8 +3,10 @@ import { User, UserData } from 'gotrue-js';
 import { URL, URLSearchParams } from 'url';
 import { promisify } from 'util';
 import { setCookie } from '../../shared/cookie/serialize';
+import { getAdmin } from '../../shared/identity/admin';
 import { getAuth } from '../../shared/identity/auth';
 import { jsonResponse, RequiredError } from '../../shared/response';
+import { createUserInDb } from './create';
 import {
   NetlifyContext,
   NetlifyEvent,
@@ -85,6 +87,7 @@ export async function handler(
 ): Promise<NetlifyResponse> {
   const { identity } = context.clientContext;
   const auth = getAuth(identity);
+  const admin = getAdmin(auth, identity);
   const formData = parseFormData(event);
 
   let redirectTo = new URL(formData.get('redirect_to') ?? '', baseURL);
@@ -106,6 +109,8 @@ export async function handler(
           formData.req('token'),
           formData.req('password')
         );
+        const attributes = await createUserInDb(user);
+        await admin.updateUser(user, attributes);
         break;
       }
       // Confirm email address
@@ -118,15 +123,16 @@ export async function handler(
         const email = formData.req('email').trim();
         if (!allowList.includes(email)) {
           return jsonResponse(403, {
-            error: `Unauthorized: ${email} is not on whitelist`,
+            error: `Unauthorized: ${email} is not on allowlist. Sign up at https://hawaiibusplus.com to request an invite.`,
           });
         }
         const body = await auth.signup(email, formData.req('password'), {
           full_name: formData.get('name')?.trim(),
         });
+        const attributes = await createUserInDb(body);
+        await admin.updateUser(body, attributes);
         return renderTemplate(successStatus, {
           type: 'sentConfirmation',
-          userData: body,
         });
       }
       // Login existing user

@@ -1,18 +1,7 @@
 import { UserData } from 'gotrue-js';
-import { jsonResponse } from '../shared/response';
-import { database, stripe } from '../shared/stripe';
-import { NetlifyContext, NetlifyEvent, NetlifyResponse } from '../shared/types';
+import { database, stripe } from '../../shared/stripe';
 
-interface IdentityEvent {
-  event: 'login' | 'signup' | 'validate';
-  user: UserData;
-}
-
-export async function handler(
-  event: NetlifyEvent,
-  _context: NetlifyContext
-): Promise<NetlifyResponse> {
-  const { user } = JSON.parse(event.body!) as IdentityEvent;
+export async function createUserInDb(user: UserData) {
   const metadata = user.user_metadata as { full_name?: string };
 
   // create a new customer in Stripe
@@ -30,12 +19,10 @@ export async function handler(
   await database.createUser(user.id, customer.id);
   console.log('New user', user.id, customer.id, subscription.id);
 
-  return jsonResponse(200, {
+  return {
     app_metadata: {
       roles: ['trial'],
     },
-    user_metadata: {
-      ...metadata,
-    },
-  });
+    user_metadata: metadata,
+  };
 }
