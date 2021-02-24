@@ -15,7 +15,7 @@ test('should parse token in ctor', (t) => {
     access_token:
       'header.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJleHAiOjEwMDB9.secret',
   };
-  const user = new TokenUser({} as GoTrue, tokenResponse.access_token);
+  const user = new TokenUser({ api: {} } as GoTrue, tokenResponse.access_token);
 
   t.is(user.token.expires_at, 1000000);
 });

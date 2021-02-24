@@ -1,7 +1,5 @@
 import { User, UserData } from '@hawaii-bus-plus/gotrue';
-import { readFile } from 'fs';
 import { URL, URLSearchParams } from 'url';
-import { promisify } from 'util';
 import { setCookie } from '../../shared/cookie/serialize';
 import { getAuth } from '../../shared/identity/auth';
 import { jsonResponse, RequiredError } from '../../shared/response';
@@ -12,8 +10,7 @@ import {
 } from '../../shared/types';
 import allowList from './allowlist.json';
 import { createUserInDb } from './create';
-
-const readFileAsync = promisify(readFile);
+import { renderTemplate } from './template';
 
 function parseFormData(event: NetlifyEvent) {
   let formData: URLSearchParams;
@@ -50,35 +47,6 @@ function isHttpError(err: unknown): err is Error & { status: number } {
 }
 
 const baseURL = new URL('https://app.hawaiibusplus.com/');
-const templatePath = require.resolve('./index.html');
-const templateReady = readFileAsync(templatePath, 'utf8');
-
-async function renderTemplate(
-  statusCode: number,
-  ctx: { type: string; redirectTo?: string; userData?: unknown }
-): Promise<NetlifyResponse> {
-  const template = await templateReady;
-  const globalContext = `<script>window.ctx = ${JSON.stringify(ctx)}</script>`;
-  const metaRefresh = ctx.redirectTo
-    ? `<meta http-equiv="refresh" content="0; URL=${ctx.redirectTo}" />`
-    : '';
-
-  const headers: NetlifyResponse['headers'] = {
-    'Content-Type': 'text/html',
-  };
-  if (ctx.redirectTo) {
-    headers['Location'] = ctx.redirectTo;
-  }
-
-  return {
-    statusCode,
-    body: template.replace(
-      '<!--head-html-->',
-      `${metaRefresh}${globalContext}`
-    ),
-    headers,
-  };
-}
 
 export async function handler(
   event: NetlifyEvent,
