@@ -45,7 +45,6 @@ importers:
       tslib: 2.1.0
     devDependencies:
       '@types/node': 14.14.31
-      '@types/node-fetch': 2.5.8
       ava: 3.15.0
       prettier: 2.2.1
       typescript: 4.1.3
@@ -54,7 +53,6 @@ importers:
       '@hawaii-bus-plus/types': 'workspace:*'
       '@hawaii-bus-plus/utils': 'workspace:*'
       '@types/node': ^14.14.31
-      '@types/node-fetch': ^2.5.8
       ava: ^3.15.0
       csv-parse: ^4.15.3
       ix: ^4.2.0
@@ -215,13 +213,11 @@ importers:
       tslib: 2.1.0
     devDependencies:
       '@types/node': 14.14.31
-      '@types/node-fetch': 2.5.8
       ava: 3.15.0
       prettier: 2.2.1
       typescript: 4.1.3
     specifiers:
       '@types/node': ^14.14.31
-      '@types/node-fetch': ^2.5.8
       ava: ^3.15.0
       node-fetch: ^3.0.0-beta.9
       prettier: ^2.2.1
@@ -1735,13 +1731,6 @@ packages:
     dev: true
     resolution:
       integrity: sha512-fZQQafSREFyuZcdWFAExYjBiCL7AUCdgsk80iO0q4yihYYdcIiH28CcuPTGFgLOCC8RlW49GSQxdHwZP+I7CNg==
-  /@types/node-fetch/2.5.8:
-    dependencies:
-      '@types/node': 14.14.31
-      form-data: 3.0.1
-    dev: true
-    resolution:
-      integrity: sha512-fbjI6ja0N5ZA8TV53RUqzsKNkl9fv8Oj3T7zxW7FGv1GSH7gwJaNF8dzCjrqKaxKeUpTz4yT1DaJFq/omNpGfw==
   /@types/node/13.13.45:
     dev: false
     resolution:
@@ -3916,16 +3905,6 @@ packages:
       node: '>= 0.12'
     resolution:
       integrity: sha512-1lLKB2Mu3aGP1Q/2eCOx0fNbRMe7XdwktwOruhfqqd0rIJWwN4Dh+E3hrPSlDCXnSR7UtZ1N38rVXm+6+MEhJQ==
-  /form-data/3.0.1:
-    dependencies:
-      asynckit: 0.4.0
-      combined-stream: 1.0.8
-      mime-types: 2.1.29
-    dev: true
-    engines:
-      node: '>= 6'
-    resolution:
-      integrity: sha512-RHkBKtLWUVwd7SqRIvCZMEvAMoGUp0XU+seQiZejj0COz3RI3hWP4sCv3gZWWLjJTd7rGwcsF5eKZGii0r/hbg==
   /fragment-cache/0.2.1:
     dependencies:
       map-cache: 0.2.2

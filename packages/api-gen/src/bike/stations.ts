@@ -8,7 +8,7 @@ import fetch from 'node-fetch';
 import { GBFS_URL } from '../env.js';
 
 async function getFeeds() {
-  const res = await fetch(GBFS_URL);
+  const res = await fetch(GBFS_URL.href);
   const json = await res.json();
   const feeds = json as GbfsWrapper<{ [lang: string]: { feeds: JsonFeed[] } }>;
 
