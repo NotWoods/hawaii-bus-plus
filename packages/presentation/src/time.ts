@@ -36,6 +36,10 @@ declare global {
     interface DateTimeFormatRangePart extends DateTimeFormatPart {
       source: 'shared' | 'startRange' | 'endRange';
     }
+
+    interface DateTimeFormatOptions {
+      timeStyle?: any;
+    }
   }
 }
 

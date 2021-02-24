@@ -3,6 +3,7 @@
   "include": ["*"],
   "references": [{ "path": "../../types" }, { "path": "../../utils/src" }],
   "compilerOptions": {
+    "lib": ["ES2020"],
     "types": []
   }
 }
