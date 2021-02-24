@@ -38,7 +38,7 @@ declare global {
     }
 
     interface DateTimeFormatOptions {
-      timeStyle?: any;
+      timeStyle?: 'long' | 'short' | 'full' | 'medium' | undefined;
     }
   }
 }
