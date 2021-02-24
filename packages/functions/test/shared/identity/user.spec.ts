@@ -1,5 +1,5 @@
 import test from 'ava';
-import GoTrue from 'gotrue-js';
+import { GoTrue } from '@hawaii-bus-plus/gotrue';
 import { TokenUser } from '../../../shared/identity/user.js';
 
 test('should parse token in ctor', (t) => {
