@@ -1,5 +1,5 @@
 import GoTrue, { Token } from 'gotrue-js';
-import { User } from './baseuser';
+import { User } from './baseuser.js';
 
 function atob(base64: string) {
   return Buffer.from(base64, 'base64').toString('ascii');

@@ -2,6 +2,7 @@
   "name": "@hawaii-bus-plus/functions",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "main": "./src/index.js",
   "module": "./src/index.js",
   "scripts": {
@@ -9,7 +10,9 @@
     "build": "rollup -c",
     "postbuild": "copyfiles ../../dist/auth/index.html ../../dist/functions/auth/ --flat",
     "format": "prettier **/*.ts --write --ignore-path ../../.prettierignore",
-    "postformat": "eslint **/*.ts --fix"
+    "postformat": "eslint **/*.ts --fix",
+    "pretest": "tsc --build test",
+    "test": "ava"
   },
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.6.0",

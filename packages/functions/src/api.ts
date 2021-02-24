@@ -18,17 +18,16 @@ export async function handler(
   event: NetlifyEvent,
   context: NetlifyContext
 ): Promise<NetlifyResponse> {
-  const { identity, user: nUser } = context.clientContext;
+  const { identity } = context.clientContext;
   const auth = getAuth(identity);
   const user = recoverSession(auth, event.headers);
   const loggedInUser = await refreshedOrNull(user);
   const userDetails = await loggedInUser?.getUserData();
   const payingOrTrialUser = userDetails && hasPaidAccess(userDetails);
-  console.log(userDetails);
+  console.log('DEBUG HERE', user, loggedInUser, userDetails);
 
   if (payingOrTrialUser) {
     const path = require.resolve(event.path.replace('/api/v1/', './'));
-    console.log('DEBUG HERE', nUser, user, loggedInUser, userDetails);
     const file = await readFileAsync(path, 'utf8');
     return {
       statusCode: 200,
