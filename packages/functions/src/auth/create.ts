@@ -10,14 +10,14 @@ export async function createUserInDb(user: UserData) {
     name: metadata.full_name,
   });
   // subscribe the new customer to the plus plan
-  const subscription = await stripe.subscriptions.create({
+  /*const subscription = await stripe.subscriptions.create({
     customer: customer.id,
     items: [{ price: process.env.STRIPE_PLUS_PRICE_PLAN }],
     trial_period_days: 14,
-  });
+  });*/
 
   await database.createUser(user.id, customer.id);
-  console.log('New user', user.id, customer.id, subscription.id);
+  console.log('New user', user.id, customer.id);
 
   return {
     app_metadata: {
