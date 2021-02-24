@@ -88,7 +88,7 @@ export async function initDatabase(
   const tx = db.transaction(allStores, 'readwrite');
   const jobs: Promise<unknown>[] = [];
 
-  jobs.push(tx.objectStore('keyval').put('etag', eTag));
+  jobs.push(tx.objectStore('keyval').put(eTag, 'etag'));
 
   // Prepare to gather the existing keys before inserting new items
   const existingKeysReady = batch(
