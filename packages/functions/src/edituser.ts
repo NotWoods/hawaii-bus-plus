@@ -31,7 +31,7 @@ export async function handler(
   context: NetlifyContext
 ): Promise<NetlifyResponse> {
   const { identity } = context.clientContext;
-  const auth = getAuth(identity);
+  const { auth } = getAuth(identity);
 
   const loggedInUser = await refreshedOrNull(
     recoverSession(auth, event.headers)
@@ -43,7 +43,7 @@ export async function handler(
   }
 
   try {
-    const body = parseJson(event);
+    const body = parseJson(event)!;
     const user = await loggedInUser.update(body);
     const [userData, cookies] = await Promise.all([
       formatUser(user),

@@ -3,6 +3,8 @@
   "description": "GoTrue API client for JavaScript",
   "version": "0.9.29",
   "type": "module",
+  "main": "./src/index.js",
+  "module": "./src/index.js",
   "scripts": {
     "build": "tsc --build src",
     "format": "prettier **/*.ts --write --ignore-path ../../.prettierignore",
@@ -30,5 +32,10 @@
         "./packages/gotrue/*/tsconfig.json"
       ]
     }
+  },
+  "ava": {
+    "files": [
+      "test/**/*.spec.{js,ts}"
+    ]
   }
 }

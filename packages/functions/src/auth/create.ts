@@ -1,7 +1,7 @@
-import { UserData } from 'gotrue-js';
+import { SignupResponse } from '@hawaii-bus-plus/gotrue';
 import { database, stripe } from '../../shared/stripe';
 
-export async function createUserInDb(user: UserData) {
+export async function createUserInDb(user: SignupResponse) {
   const metadata = user.user_metadata as { full_name?: string };
 
   // create a new customer in Stripe

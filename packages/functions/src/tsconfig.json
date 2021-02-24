@@ -1,7 +1,7 @@
 {
   "extends": "../../tsconfig.base.json",
   "include": ["**/*", "**/*.json"],
-  "references": [{ "path": "../shared" }],
+  "references": [{ "path": "../shared" }, { "path": "../../gotrue/src" }],
   "compilerOptions": {
     "lib": ["esnext"],
     "types": ["node"],

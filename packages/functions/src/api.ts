@@ -19,7 +19,7 @@ export async function handler(
   context: NetlifyContext
 ): Promise<NetlifyResponse> {
   const { identity } = context.clientContext;
-  const auth = getAuth(identity);
+  const { auth } = getAuth(identity);
   const user = recoverSession(auth, event.headers);
   const loggedInUser = await refreshedOrNull(user);
   const userDetails = await loggedInUser?.getUserData();

@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
+import { RequestInit } from 'node-fetch';
 import { Admin } from './admin.js';
-import API, { JSONHTTPError, RequestMap } from './api/index.js';
+import API, { JSONHTTPError } from './api/index.js';
+import { RequestMap, UserData, Token, UserRequest } from './api/interface.js';
 
 function atob(base64: string) {
   return Buffer.from(base64, 'base64').toString('ascii');
@@ -13,27 +15,6 @@ const forbiddenUpdateAttributes = { api: 1, token: 1, audience: 1, url: 1 };
 export interface RequestOptions extends RequestInit {
   headers?: Record<string, string>;
   audience?: string;
-}
-
-export interface Token {
-  access_token: string;
-  refresh_token?: string;
-  expires_at?: number;
-}
-
-export interface UserData {
-  app_metadata: unknown;
-  aud: string;
-  audience: string;
-  confirmed_at: string;
-  created_at: string;
-  email: string;
-  id: string;
-  role: string;
-  token: Token;
-  updated_at: string;
-  url: string;
-  user_metadata: unknown;
 }
 
 export function formatError(error: unknown) {
@@ -59,7 +40,7 @@ export class User implements UserData {
   token!: Token;
   _fromStorage?: boolean;
 
-  app_metadata: unknown;
+  app_metadata!: UserData['app_metadata'];
   aud!: string;
   confirmed_at!: string;
   created_at!: string;
@@ -67,7 +48,7 @@ export class User implements UserData {
   id!: string;
   role!: string;
   updated_at!: string;
-  user_metadata: unknown;
+  user_metadata!: UserData['user_metadata'];
 
   constructor(api: API, tokenResponse: Token, audience = '') {
     this.api = api;
@@ -76,33 +57,27 @@ export class User implements UserData {
     this._processTokenResponse(tokenResponse);
   }
 
-  static removeSavedSession() {}
-
-  static recoverSession(_apiInstance?: API) {
-    return null;
-  }
-
   get admin() {
     return new Admin(this);
   }
 
-  update(attributes: Partial<UserData>) {
+  update(attributes: UserRequest) {
     return this._request('/user', {
       method: 'PUT',
       body: JSON.stringify(attributes),
-    }).then((response) => this._saveUserData(response)._refreshSavedSession());
+    }).then((response) => this._saveUserData(response));
   }
 
   jwt(forceRefresh?: boolean) {
     const token = this.tokenDetails();
-    if (token === null || token === undefined) {
+    if (token == undefined) {
       return Promise.reject(
         new Error(`Gotrue-js: failed getting jwt access token`)
       );
     }
     const { expires_at, refresh_token, access_token } = token;
-    if (forceRefresh || expires_at! - ExpiryMargin < Date.now()) {
-      return this._refreshToken(refresh_token!);
+    if (forceRefresh || expires_at - ExpiryMargin < Date.now()) {
+      return this._refreshToken(refresh_token);
     }
     return Promise.resolve(access_token);
   }
@@ -125,7 +100,6 @@ export class User implements UserData {
       .then((response) => {
         delete refreshPromises[refresh_token];
         this._processTokenResponse(response);
-        this._refreshSavedSession();
         return this.token.access_token;
       })
       .catch((error) => {
@@ -137,7 +111,7 @@ export class User implements UserData {
   _request<P extends keyof RequestMap>(
     path: `/admin/users/${unknown & string}`,
     options?: RequestOptions
-  ): Promise<unknown>;
+  ): Promise<RequestMap['/admin/users/:id']>;
   _request<P extends keyof RequestMap>(
     path: P,
     options?: RequestOptions
@@ -167,9 +141,7 @@ export class User implements UserData {
   }
 
   getUserData() {
-    return this._request('/user')
-      .then(this._saveUserData.bind(this))
-      .then(this._refreshSavedSession.bind(this));
+    return this._request('/user').then(this._saveUserData.bind(this));
   }
 
   _saveUserData(attributes: UserData, fromStorage?: boolean) {
@@ -199,14 +171,6 @@ export class User implements UserData {
         )
       );
     }
-  }
-
-  _refreshSavedSession() {
-    return this;
-  }
-
-  _saveSession() {
-    return this;
   }
 
   tokenDetails() {

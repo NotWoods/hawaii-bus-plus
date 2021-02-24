@@ -15,7 +15,7 @@ export async function handler(
   context: NetlifyContext
 ): Promise<NetlifyResponse> {
   const { identity } = context.clientContext;
-  const auth = getAuth(identity);
+  const { auth } = getAuth(identity);
 
   const requestOrigin = event.headers['origin']!;
   const responseHeaders = {

@@ -3,7 +3,8 @@
 /* eslint-disable @typescript-eslint/prefer-regexp-exec */
 /* eslint-disable no-useless-escape */
 /* eslint-disable @typescript-eslint/prefer-optional-chain */
-import { Token, UserData } from '../user.js';
+import fetch, { Response, RequestInit } from 'node-fetch';
+import { RequestMap } from './interface.js';
 import { getPagination } from './pagination.js';
 
 export class HTTPError extends Error {
@@ -41,17 +42,6 @@ export class JSONHTTPError extends HTTPError {
 
 interface APIOptions {
   defaultHeaders?: Record<string, string>;
-}
-
-export interface RequestMap {
-  '/settings': unknown;
-  '/signup': unknown;
-  '/token': Token;
-  '/recover': unknown;
-  '/verify': Token;
-  '/user': UserData;
-  '/logout': unknown;
-  '/admin/users': unknown;
 }
 
 export default class API {
@@ -93,7 +83,7 @@ export default class API {
   ): Promise<RequestMap[P]> {
     const headers = this.headers(options.headers || {});
     if (this._sameOrigin) {
-      options.credentials = options.credentials || 'same-origin';
+      // options.credentials = options.credentials || 'same-origin';
     }
     return fetch(this.apiURL + path, { ...options, headers }).then(
       (response) => {

@@ -1,5 +1,6 @@
 import test from 'ava';
 import API from '../src/api/index.js';
+import { Token } from '../src/api/interface.js';
 import { User } from '../src/user.js';
 
 test('should parse token in ctor', (t) => {
@@ -14,8 +15,8 @@ test('should parse token in ctor', (t) => {
   const tokenResponse = {
     access_token:
       'header.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJleHAiOjEwMDB9.secret',
-  };
+  } as Token;
   const user = new User({} as API, tokenResponse, '');
 
-  t.is(user.token.expires_at, 1000000);
+  t.is(user.token.expires_at, 1000_000);
 });

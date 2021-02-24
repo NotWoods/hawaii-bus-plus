@@ -1,4 +1,4 @@
-import { UserData } from 'gotrue-js';
+import { UserData } from '@hawaii-bus-plus/gotrue';
 
 const paidRoles = new Set(['plus', 'trial']);
 

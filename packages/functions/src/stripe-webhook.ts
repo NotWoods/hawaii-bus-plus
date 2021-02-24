@@ -1,9 +1,7 @@
 import Stripe from 'stripe';
 import { getAuth } from '../shared/identity/auth';
 import { database, stripe } from '../shared/stripe';
-import { getAdmin } from '../shared/identity/admin';
 import { NetlifyContext, NetlifyEvent, NetlifyResponse } from '../shared/types';
-import { UserData } from 'gotrue-js';
 
 function customerId({ customer }: Stripe.Subscription) {
   if (typeof customer === 'string') {
@@ -53,14 +51,16 @@ export async function handler(
         };
       }
 
-      const auth = getAuth(identity);
-      const admin = getAdmin(auth, identity);
+      const { admin } = getAuth(identity);
 
-      await admin.updateUser({ id: netlifyId } as UserData, {
-        app_metadata: {
-          roles: [statusToRole(subscription.status)],
-        },
-      });
+      await admin.updateUser(
+        { id: netlifyId },
+        {
+          app_metadata: {
+            roles: [statusToRole(subscription.status)],
+          },
+        }
+      );
 
       return {
         statusCode: 200,

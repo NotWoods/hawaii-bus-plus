@@ -16,11 +16,11 @@
   },
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.6.0",
+    "@hawaii-bus-plus/gotrue": "workspace:^0.9.29",
     "@hawaii-bus-plus/types": "workspace:*",
     "@hawaii-bus-plus/utils": "workspace:*",
     "cookie": "^0.4.1",
     "date-fns": "^2.17.0",
-    "gotrue-js": "^0.9.29",
     "node-fetch": "^3.0.0-beta.9",
     "stripe": "^8.137.0",
     "tslib": "^2.1.0"

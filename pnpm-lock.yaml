@@ -166,11 +166,11 @@ importers:
   packages/functions:
     dependencies:
       '@aws-sdk/client-dynamodb': 3.6.0
+      '@hawaii-bus-plus/gotrue': 'link:../gotrue'
       '@hawaii-bus-plus/types': 'link:../types'
       '@hawaii-bus-plus/utils': 'link:../utils'
       cookie: 0.4.1
       date-fns: 2.17.0
-      gotrue-js: 0.9.29
       node-fetch: 3.0.0-beta.9
       stripe: 8.137.0
       tslib: 2.1.0
@@ -191,6 +191,7 @@ importers:
       typescript: 4.1.3
     specifiers:
       '@aws-sdk/client-dynamodb': ^3.6.0
+      '@hawaii-bus-plus/gotrue': 'workspace:^0.9.29'
       '@hawaii-bus-plus/types': 'workspace:*'
       '@hawaii-bus-plus/utils': 'workspace:*'
       '@rollup/plugin-commonjs': ^17.1.0
@@ -205,7 +206,6 @@ importers:
       cookie: ^0.4.1
       copyfiles: ^2.4.1
       date-fns: ^2.17.0
-      gotrue-js: ^0.9.29
       node-fetch: ^3.0.0-beta.9
       prettier: ^2.2.1
       rollup: ^2.39.0
@@ -4094,12 +4094,6 @@ packages:
       node: '>=8.6'
     resolution:
       integrity: sha512-R7eWptXuGYxwijs0eV+v3o6+XH1IqVK8dJOEecQfTmkncw9AV4dcw/Dhxi8MdlqPthxxpZyizMzyg8RTmEsG+Q==
-  /gotrue-js/0.9.29:
-    dependencies:
-      micro-api-client: 3.3.0
-    dev: false
-    resolution:
-      integrity: sha512-NSFwJlFfWxHd1zHDitysbh+amFPHBAyQG1YmecZJTaSe8TlC7Wja1ewdUBikfJBblN3SqghS6aViMd+Q/pPzGQ==
   /graceful-fs/4.2.6:
     dev: true
     resolution:
@@ -5603,10 +5597,6 @@ packages:
       node: '>= 8'
     resolution:
       integrity: sha512-8q7VEgMJW4J8tcfVPy8g09NcQwZdbwFEqhe/WZkoIzjn/3TGDwtOCYtXGxA3O8tPzpczCCDgv+P2P5y00ZJOOg==
-  /micro-api-client/3.3.0:
-    dev: false
-    resolution:
-      integrity: sha512-y0y6CUB9RLVsy3kfgayU28746QrNMpSm9O/AYGNsBgOkJr/X/Jk0VLGoO8Ude7Bpa8adywzF+MzXNZRFRsNPhg==
   /micro-spelling-correcter/1.1.1:
     dev: true
     resolution:

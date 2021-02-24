@@ -1,12 +1,14 @@
 /* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 /* eslint-disable @typescript-eslint/prefer-string-starts-ends-with */
-import API, { RequestMap } from './api/index.js';
-import { formatError, RequestOptions, Token, User, UserData } from './user.js';
+import API from './api/index.js';
+import { Provider, RequestMap, Token, UserData } from './api/interface.js';
+import { formatError, RequestOptions, User } from './user.js';
 
 const HTTPRegexp = /^http:\/\//;
 const defaultApiURL = `/.netlify/identity`;
 
 export { HTTPError, TextHTTPError, JSONHTTPError } from './api/index.js';
+export * from './api/interface.js';
 export * from './user.js';
 export * from './admin.js';
 
@@ -28,7 +30,7 @@ export class GoTrue {
     this.api = new API(APIUrl);
   }
 
-  async _request<P extends keyof RequestMap>(
+  private async _request<P extends keyof RequestMap>(
     path: P,
     options: RequestOptions = {}
   ) {
@@ -48,7 +50,7 @@ export class GoTrue {
     return this._request('/settings');
   }
 
-  signup(email: string, password: string, data: Partial<UserData>) {
+  signup(email: string, password: string, data?: UserData['user_metadata']) {
     return this._request('/signup', {
       method: 'POST',
       body: JSON.stringify({ email, password, data }),
@@ -63,12 +65,11 @@ export class GoTrue {
         email
       )}&password=${encodeURIComponent(password)}`,
     }).then((response) => {
-      User.removeSavedSession();
       return this.createUser(response);
     });
   }
 
-  loginExternalUrl(provider: string) {
+  loginExternalUrl(provider: Provider) {
     return `${this.api.apiURL}/authorize?provider=${provider}`;
   }
 
@@ -88,10 +89,7 @@ export class GoTrue {
   }
 
   acceptInvite(token: string, password: string) {
-    return this._request('/verify', {
-      method: 'POST',
-      body: JSON.stringify({ token, password, type: 'signup' }),
-    }).then((response) => this.createUser(response));
+    return this.verify('signup', token, password);
   }
 
   acceptInviteExternalUrl(provider: string, token: string) {
@@ -100,15 +98,15 @@ export class GoTrue {
 
   createUser(tokenResponse: Token) {
     const user = new User(this.api, tokenResponse, this.audience);
-    return user.getUserData().then((userData) => {
-      return userData;
-    });
+    return user.getUserData();
   }
 
-  verify(type: unknown, token: string) {
+  verify(type: 'signup' | 'recovery', token: string, password?: string) {
     return this._request('/verify', {
       method: 'POST',
-      body: JSON.stringify({ token, type }),
+      body: JSON.stringify(
+        password ? { token, type, password } : { token, type }
+      ),
     }).then((response) => this.createUser(response));
   }
 }

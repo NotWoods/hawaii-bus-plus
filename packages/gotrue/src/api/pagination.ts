@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 /* eslint-disable @typescript-eslint/prefer-regexp-exec */
+import { Response } from 'node-fetch';
+
 interface Pagination {
   last: number;
   prev?: number;

@@ -1,43 +1,18 @@
-import GoTrue from 'gotrue-js';
+import { GoTrue, Admin, User, Token } from '@hawaii-bus-plus/gotrue';
 import { NetlifyIdentityContext } from '../types';
-import { Admin, User } from './baseuser';
-
-// These properties exist but are private
-declare module 'gotrue-js' {
-  export default interface GoTrue {
-    readonly api: unknown;
-    readonly audience: string;
-  }
-
-  export interface User {
-    _refreshToken(token: string): Promise<unknown>;
-  }
-}
 
 /**
  * `User` designed to be converted into an admin
  * using the admin token given to Netlify Functions.
  */
 class AdminUser extends User {
-  private readonly adminToken: string;
-
   constructor(auth: GoTrue, identity: NetlifyIdentityContext) {
-    super(auth.api, undefined, auth.audience);
-    this.adminToken = identity.token;
+    super(auth.api, { access_token: identity.token } as Token, auth.audience);
   }
 
-  jwt() {
-    // Return the admin token here so that it gets used in requests.
-    return Promise.resolve(this.adminToken);
-  }
-
-  /**
-   * Override so we don't need to fake a token response,
-   * the 2nd parameter of the super constructor.
-   */
-  _processTokenResponse() {
-    // Override so we don't need to fake a token response,
-    // the 2nd parameter of the super constructor.
+  _refreshToken() {
+    // Override so we never refresh.
+    return Promise.resolve(this.token.access_token);
   }
 }
 

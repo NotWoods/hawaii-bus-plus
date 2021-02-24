@@ -1,5 +1,5 @@
+import { User } from '@hawaii-bus-plus/gotrue';
 import * as cookie from 'cookie';
-import { User } from 'gotrue-js';
 
 // Netlify's JWT cookie key
 export const JWT_ACCESS_TOKEN_KEY = 'nf_jwt';

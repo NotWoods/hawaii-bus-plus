@@ -1,18 +1,17 @@
+import { User, UserData } from '@hawaii-bus-plus/gotrue';
 import { readFile } from 'fs';
-import { User, UserData } from 'gotrue-js';
 import { URL, URLSearchParams } from 'url';
 import { promisify } from 'util';
 import { setCookie } from '../../shared/cookie/serialize';
-import { getAdmin } from '../../shared/identity/admin';
 import { getAuth } from '../../shared/identity/auth';
 import { jsonResponse, RequiredError } from '../../shared/response';
-import { createUserInDb } from './create';
 import {
   NetlifyContext,
   NetlifyEvent,
   NetlifyResponse,
 } from '../../shared/types';
 import allowList from './allowlist.json';
+import { createUserInDb } from './create';
 
 const readFileAsync = promisify(readFile);
 
@@ -56,7 +55,7 @@ const templateReady = readFileAsync(templatePath, 'utf8');
 
 async function renderTemplate(
   statusCode: number,
-  ctx: { type: string; redirectTo?: string; userData?: UserData }
+  ctx: { type: string; redirectTo?: string; userData?: unknown }
 ): Promise<NetlifyResponse> {
   const template = await templateReady;
   const globalContext = `<script>window.ctx = ${JSON.stringify(ctx)}</script>`;
@@ -86,8 +85,7 @@ export async function handler(
   context: NetlifyContext
 ): Promise<NetlifyResponse> {
   const { identity } = context.clientContext;
-  const auth = getAuth(identity);
-  const admin = getAdmin(auth, identity);
+  const { auth, admin } = getAuth(identity);
   const formData = parseFormData(event);
 
   let redirectTo = new URL(formData.get('redirect_to') ?? '', baseURL);

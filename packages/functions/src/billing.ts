@@ -22,7 +22,7 @@ export async function handler(
   }
 
   const { identity } = context.clientContext;
-  const auth = getAuth(identity);
+  const { auth } = getAuth(identity);
 
   const loggedInUser = await refreshedOrNull(
     recoverSession(auth, event.headers)

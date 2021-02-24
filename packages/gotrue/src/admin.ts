@@ -1,4 +1,5 @@
-import { User, UserData } from './user.js';
+import { UserData, UserRequest } from './api/interface.js';
+import { User } from './user.js';
 
 export class Admin {
   user: User;
@@ -26,13 +27,9 @@ export class Admin {
     });
   }
 
-  createUser(
-    email: string,
-    password: string,
-    attributes: Partial<UserData> = {}
-  ) {
+  createUser(email: string, password: string, attributes: UserRequest = {}) {
     attributes.email = email;
-    (attributes as UserData & { password: string }).password = password;
+    attributes.password = password;
     return this.user._request('/admin/users', {
       method: 'POST',
       body: JSON.stringify(attributes),

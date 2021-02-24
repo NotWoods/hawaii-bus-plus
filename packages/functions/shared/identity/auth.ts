@@ -1,28 +1,16 @@
-import GoTrue, { Token, User } from 'gotrue-js';
-import fetch from 'node-fetch';
+import { Admin, GoTrue } from '@hawaii-bus-plus/gotrue';
 import { NetlifyIdentityContext } from '../types';
-import { NodeUser } from './user';
+import { getAdmin } from './admin';
 
-declare module globalThis {
-  let fetch: typeof import('node-fetch').default;
-}
-
-globalThis.fetch = fetch;
-
-let auth: GoTrue | undefined;
+let cache: { auth: GoTrue; admin: Admin } | undefined;
 let url: string | undefined;
 
-class Auth extends GoTrue {
-  createUser(tokenResponse: Token) {
-    const user = new NodeUser(this.api, tokenResponse, this.audience);
-    return user.getUserData() as Promise<User>;
-  }
-}
-
 export function getAuth(identity: NetlifyIdentityContext) {
-  if (identity.url !== url || !auth) {
-    auth = new Auth({ APIUrl: identity.url });
+  if (identity.url !== url || !cache) {
     url = identity.url;
+    const auth = new GoTrue({ APIUrl: identity.url });
+    const admin = getAdmin(auth, identity);
+    cache = { auth, admin };
   }
-  return auth;
+  return cache;
 }

@@ -1,4 +1,4 @@
-import { User } from 'gotrue-js';
+import { User } from '@hawaii-bus-plus/gotrue';
 
 export async function formatUser(user: User) {
   const userData = await user.getUserData();
