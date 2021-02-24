@@ -40,7 +40,7 @@ importers:
       ix: 4.2.0
       jszip: 3.6.0
       mnemonist: 0.38.1
-      node-fetch: 2.6.1
+      node-fetch: 3.0.0-beta.9
       proposal-temporal: 0.7.0
       tslib: 2.1.0
     devDependencies:
@@ -60,7 +60,7 @@ importers:
       ix: ^4.2.0
       jszip: ^3.6.0
       mnemonist: ^0.38.1
-      node-fetch: ^2.6.1
+      node-fetch: ^3.0.0-beta.9
       prettier: ^2.2.1
       proposal-temporal: ^0.7.0
       tslib: ^2.1.0
@@ -84,7 +84,7 @@ importers:
     devDependencies:
       '@hawaii-bus-plus/jest-utils': 'link:../jest-utils'
       '@hawaii-bus-plus/vite-plugins': 'link:../vite-plugins'
-      '@prefresh/vite': 2.1.0_preact@10.5.12+vite@2.0.2
+      '@prefresh/vite': 2.1.0_preact@10.5.12+vite@2.0.3
       '@tailwindcss/aspect-ratio': 0.2.0
       '@tailwindcss/forms': 0.2.1
       '@tailwindcss/typography': 0.4.0_tailwindcss@2.0.3
@@ -101,7 +101,7 @@ importers:
       tailwindcss-scroll-snap: 1.1.0
       type-fest: 0.20.2
       typescript: 4.1.3
-      vite: 2.0.2
+      vite: 2.0.3
     specifiers:
       '@hawaii-bus-plus/data': 'workspace:*'
       '@hawaii-bus-plus/jest-utils': 'workspace:*'
@@ -136,7 +136,7 @@ importers:
       tslib: ^2.1.0
       type-fest: ^0.20.2
       typescript: 4.1.3
-      vite: ^2.0.2
+      vite: ^2.0.3
   packages/data:
     dependencies:
       '@hawaii-bus-plus/types': 'link:../types'
@@ -171,7 +171,6 @@ importers:
       '@hawaii-bus-plus/utils': 'link:../utils'
       cookie: 0.4.1
       date-fns: 2.17.0
-      node-fetch: 3.0.0-beta.9
       stripe: 8.137.0
       tslib: 2.1.0
     devDependencies:
@@ -182,7 +181,6 @@ importers:
       '@types/aws-lambda': 8.10.72
       '@types/cookie': 0.4.0
       '@types/node': 14.14.31
-      '@types/node-fetch': 2.5.8
       ava: 3.15.0
       copyfiles: 2.4.1
       prettier: 2.2.1
@@ -201,12 +199,10 @@ importers:
       '@types/aws-lambda': ^8.10.72
       '@types/cookie': ^0.4.0
       '@types/node': ^14.14.31
-      '@types/node-fetch': ^2.5.8
       ava: ^3.15.0
       cookie: ^0.4.1
       copyfiles: ^2.4.1
       date-fns: ^2.17.0
-      node-fetch: ^3.0.0-beta.9
       prettier: ^2.2.1
       rollup: ^2.39.1
       stripe: ^8.137.0
@@ -215,7 +211,7 @@ importers:
       typescript: 4.1.3
   packages/gotrue:
     dependencies:
-      node-fetch: 2.6.1
+      node-fetch: 3.0.0-beta.9
       tslib: 2.1.0
     devDependencies:
       '@types/node': 14.14.31
@@ -227,7 +223,7 @@ importers:
       '@types/node': ^14.14.31
       '@types/node-fetch': ^2.5.8
       ava: ^3.15.0
-      node-fetch: ^2.6.1
+      node-fetch: ^3.0.0-beta.9
       prettier: ^2.2.1
       tslib: ^2.1.0
       typescript: 4.1.3
@@ -378,7 +374,7 @@ importers:
     dependencies:
       '@babel/core': 7.13.1
       '@prefresh/babel-plugin': 0.4.0
-      '@prefresh/vite': 2.1.0_vite@2.0.2
+      '@prefresh/vite': 2.1.0_vite@2.0.3
       tslib: 2.1.0
     devDependencies:
       '@types/node': 14.14.31
@@ -386,7 +382,7 @@ importers:
       prettier: 2.2.1
       type-fest: 0.20.2
       typescript: 4.1.3
-      vite: 2.0.2
+      vite: 2.0.3
     specifiers:
       '@babel/core': ^7.13.1
       '@prefresh/babel-plugin': 0.4.0
@@ -397,7 +393,7 @@ importers:
       tslib: ^2.1.0
       type-fest: ^0.20.2
       typescript: 4.1.3
-      vite: ^2.0.2
+      vite: ^2.0.3
 lockfileVersion: 5.2
 packages:
   /@aws-crypto/ie11-detection/1.0.0:
@@ -1470,7 +1466,7 @@ packages:
   /@prefresh/utils/1.1.1:
     resolution:
       integrity: sha512-MUhT5m2XNN5NsZl4GnpuvlzLo6VSTa/+wBfBd3fiWUvHGhv0GF9hnA1pd//v0uJaKwUnVRQ1hYElxCV7DtYsCQ==
-  /@prefresh/vite/2.1.0_preact@10.5.12+vite@2.0.2:
+  /@prefresh/vite/2.1.0_preact@10.5.12+vite@2.0.3:
     dependencies:
       '@babel/core': 7.13.1
       '@prefresh/babel-plugin': 0.4.0
@@ -1478,21 +1474,21 @@ packages:
       '@prefresh/utils': 1.1.1
       '@rollup/pluginutils': 4.1.0
       preact: 10.5.12
-      vite: 2.0.2
+      vite: 2.0.3
     dev: true
     peerDependencies:
       preact: ^10.4.0
       vite: '>=2.0.0-beta.3'
     resolution:
       integrity: sha512-GJSDA5N2iYibEXSSpyjqwSAfbh2SPBqto5h2t39HaEQOqRcm/vSpv8Vvz8OyXKqtdd7kaPuRzL1XjcJbRFI5vg==
-  /@prefresh/vite/2.1.0_vite@2.0.2:
+  /@prefresh/vite/2.1.0_vite@2.0.3:
     dependencies:
       '@babel/core': 7.13.1
       '@prefresh/babel-plugin': 0.4.0
       '@prefresh/core': 1.3.0
       '@prefresh/utils': 1.1.1
       '@rollup/pluginutils': 4.1.0
-      vite: 2.0.2
+      vite: 2.0.3
     dev: false
     peerDependencies:
       preact: ^10.4.0
@@ -5782,12 +5778,6 @@ packages:
     dev: true
     resolution:
       integrity: sha512-Yt3384If5H6BYGVHiHwTL+99OzJKHhgp82S8/dktEK73T26BazdgZ4JZh92xSVtGNJvz9UbXdNAc5hcrXV42vw==
-  /node-fetch/2.6.1:
-    dev: false
-    engines:
-      node: 4.x || >=6.0.0
-    resolution:
-      integrity: sha512-V4aYg89jEoVRxRb2fJdAg8FHvI7cEyYdVAh94HH0UIK8oJxUfkjlDQN9RbMx+bEjP7+ggMiFRprSti032Oipxw==
   /node-fetch/3.0.0-beta.9:
     dependencies:
       data-uri-to-buffer: 3.0.1
@@ -7784,7 +7774,7 @@ packages:
       '0': node >=0.6.0
     resolution:
       integrity: sha1-OhBcoXBTr1XW4nDB+CiGguGNpAA=
-  /vite/2.0.2:
+  /vite/2.0.3:
     dependencies:
       esbuild: 0.8.51
       postcss: 8.2.6
@@ -7797,7 +7787,7 @@ packages:
     optionalDependencies:
       fsevents: 2.3.2
     resolution:
-      integrity: sha512-X+PTIPRt6/5Odf/h0kBkwkck+YC0I6oKH5+ttA9ytoLyC9yeksktVq1KNzImqB+/1CNBiBE2vr7orcgSxAi67w==
+      integrity: sha512-4CUm3FVUHyTSSSK6vHWkj3SVkP+GGNNzwYcFsHOjjc8xQ3BPjJa1JDDmFlYxpxR29ANa+7RWptYPoyHyJ29Nhw==
   /w3c-hr-time/1.0.2:
     dependencies:
       browser-process-hrtime: 1.0.0
