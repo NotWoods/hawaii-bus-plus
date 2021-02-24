@@ -66,7 +66,7 @@ export default class API {
     };
   }
 
-  parseJsonResponse(response: Response) {
+  parseJsonResponse(response: Response): any {
     return response.json().then((json) => {
       if (!response.ok) {
         return Promise.reject(new JSONHTTPError(response, json));
