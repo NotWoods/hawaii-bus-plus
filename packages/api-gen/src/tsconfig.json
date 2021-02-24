@@ -4,6 +4,7 @@
   "references": [{ "path": "../../types" }, { "path": "../../utils/src" }],
   "compilerOptions": {
     "target": "es2020",
-    "types": ["node"]
+    "types": ["node"],
+    "skipLibCheck": true
   }
 }

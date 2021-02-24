@@ -33,10 +33,6 @@ declare global {
       ): DateTimeFormatRangePart[];
     }
 
-    interface DateTimeFormatOptions {
-      timeStyle?: string;
-    }
-
     interface DateTimeFormatRangePart extends DateTimeFormatPart {
       source: 'shared' | 'startRange' | 'endRange';
     }
