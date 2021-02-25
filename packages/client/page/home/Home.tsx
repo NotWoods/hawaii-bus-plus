@@ -35,7 +35,7 @@ function LoginButtons() {
       <Button href="/auth/login" class="mb-1">
         Login
       </Button>
-      <Button href="/auth/register">Create an account</Button>
+      <Button href="https://eepurl.com/hqxfyb">Request an invite</Button>
     </div>
   );
 }
