@@ -2,18 +2,26 @@ import { readFile, writeFile } from 'fs/promises';
 import { createRequire } from 'module';
 import { resolve } from 'path';
 import type { OutputAsset } from 'rollup';
+import { Promisable } from 'type-fest';
 import { fileURLToPath, URL } from 'url';
 import { build } from 'vite';
 
-const distFolder = new URL('../../../dist/', import.meta.url);
+export type RenderFunction = (
+  url: URL
+) => Promisable<{ html: string; head?: string }>;
+
+export const distFolder = new URL('../../../dist/', import.meta.url);
 export const clientFolder = new URL('../../client/', import.meta.url);
 
-export async function buildSsrVite(input: string) {
+export async function buildPrerenderCode(input: string) {
   const root = fileURLToPath(clientFolder);
   const buildResult = await build({
     root,
+    css: {
+      postcss: '',
+    },
     build: {
-      minify: true,
+      minify: false,
       write: false,
       ssr: input,
       manifest: false,
@@ -60,21 +68,21 @@ export function renderTemplate(
     .replace(`<!--head-html-->`, headHtml);
 }
 
-export async function renderRoutes(
-  templatePath: string,
-  serverEntryPath: string,
-  routes: string[]
-) {
-  const templateReady = readFile(
-    new URL(`./${templatePath}`, distFolder),
-    'utf8'
-  );
+interface RenderRoutesOptions {
+  templatePath: string;
+  serverEntryPath: string;
+  routes: string[];
+  write?: boolean;
+}
 
-  const { default: render } = (await import(
-    new URL(`./${serverEntryPath}`, distFolder).href
-  )) as { default: (url: URL) => Promise<{ html: string; head?: string }> };
+export async function renderRoutes(options: RenderRoutesOptions) {
+  const { templatePath, serverEntryPath, routes, write } = options;
+  const templateReady = readFile(new URL(templatePath, distFolder), 'utf8');
 
-  await Promise.all(
+  const { module } = await buildPrerenderCode(serverEntryPath);
+  const render = module.exports.default as RenderFunction;
+
+  return await Promise.all(
     routes.map(async (pathname) => {
       const url = new URL(pathname, 'https://app.hawaiibusplus.com');
       const { html, head } = await render(url);
@@ -84,7 +92,10 @@ export async function renderRoutes(
         ? `${pathname}index.html`
         : `${pathname}.html`;
       const destPath = new URL(`.${withSuffix}`, distFolder);
-      await writeFile(destPath, rendered, 'utf8');
+      if (write) {
+        await writeFile(destPath, rendered, 'utf8');
+      }
+      return { fileName: destPath.href, source: rendered };
     })
   );
 }

@@ -6,6 +6,6 @@ export default function renderAuthPage(url: URL) {
   const type = urlToType(url);
   return {
     html: render(<App defaultType={type} />),
-    head: `{{ .Head }}`,
+    head: ``,
   };
 }
