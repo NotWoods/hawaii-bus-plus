@@ -3,7 +3,6 @@ import { useEffect, useState } from 'preact/hooks';
 import { Form, FormType, FormProps } from './components/Form';
 import { Header, HeaderType } from './components/Header';
 import { MouseEventHandler } from './components/link';
-import '../all-pages/main.css';
 
 interface Props extends Omit<FormProps, 'type'> {
   defaultType: HeaderType;

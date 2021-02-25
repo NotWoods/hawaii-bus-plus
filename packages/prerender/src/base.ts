@@ -13,9 +13,15 @@ export type RenderFunction = (
 export const distFolder = new URL('../../../dist/', import.meta.url);
 export const clientFolder = new URL('../../client/', import.meta.url);
 
+// Max 1 build at a time, vite issue
+let lastJob: Promise<unknown> | undefined;
+
 export async function buildPrerenderCode(input: string) {
   const root = fileURLToPath(clientFolder);
-  const buildResult = await build({
+  const external = ['preact', 'tailwindcss', 'fs/promises'];
+
+  await lastJob;
+  const job = build({
     root,
     css: {
       postcss: '',
@@ -28,14 +34,16 @@ export async function buildPrerenderCode(input: string) {
       ssrManifest: false,
       rollupOptions: {
         input: resolve(root, input),
-        external: ['preact', 'tailwindcss'],
+        external,
       },
     },
     // @ts-expect-error bug in vite type deps
     ssr: {
-      external: ['preact', 'tailwindcss'],
+      external,
     },
   });
+  lastJob = job;
+  const buildResult = await job;
 
   if (Array.isArray(buildResult)) {
     throw new Error(`output from vite is an array`);
@@ -49,13 +57,18 @@ export async function buildPrerenderCode(input: string) {
 
   // eslint-disable-next-line @typescript-eslint/no-implied-eval
   const func = new Function(...params);
-  func(...[module, module.exports, require]);
+  let error: unknown;
+  try {
+    func(...[module, module.exports, require]);
+  } catch (err: unknown) {
+    error = err;
+  }
 
   const assets = output.filter(
     (chunk): chunk is OutputAsset => chunk.type === 'asset'
   );
 
-  return { code, module, assets };
+  return { code, module, assets, error };
 }
 
 export function renderTemplate(

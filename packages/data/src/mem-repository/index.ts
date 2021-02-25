@@ -42,6 +42,10 @@ export abstract class BaseMemoryRepository implements Repository {
     );
   }
 
+  loadAllStops(): Promise<readonly Stop[]> {
+    return this.apiReady.then((api) => Object.values(api.stops));
+  }
+
   loadStops(
     stopIds: Iterable<Stop['stop_id']>
   ): Promise<Map<Stop['stop_id'], Stop>> {

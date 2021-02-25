@@ -1,6 +1,5 @@
 import { MapProvider } from '@hawaii-bus-plus/react-google-maps';
 import { h } from 'preact';
-import '../all-pages/main.css';
 import { FocusTrapProvider } from './buttons/FocusTrap';
 import { MainContent } from './home/MainContent';
 import { ApiProvider } from './hooks/useApi';
@@ -12,7 +11,7 @@ import { RouteDetailProvider } from './routes/timetable/context';
 import { StickySnackbarProvider } from './snackbar/context';
 import { StickySnackbars } from './snackbar/StickySnackbars';
 
-function Main() {
+export function Main() {
   return (
     <main class="main">
       <MainMap />

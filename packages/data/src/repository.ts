@@ -28,6 +28,8 @@ export interface Repository {
 
   loadTripsForRoute(routeId: Route['route_id']): Promise<TripCursor>;
 
+  loadAllStops(): Promise<readonly Stop[]>;
+
   loadStops(
     stopIds: Iterable<Stop['stop_id']>
   ): Promise<Map<Stop['stop_id'], Stop>>;

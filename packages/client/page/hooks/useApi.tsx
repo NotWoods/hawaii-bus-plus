@@ -4,7 +4,7 @@ import { ComponentChildren, createContext, h } from 'preact';
 import { useContext, useState } from 'preact/hooks';
 import { usePromise } from '../hooks/usePromise';
 
-interface Api {
+export interface Api {
   stops: readonly Stop[];
   bikeStations: { [id: string]: StationInformation };
 }
@@ -19,7 +19,7 @@ declare module 'preact/hooks' {
   ];
 }
 
-const ApiContext = createContext<Api | undefined>(undefined);
+export const ApiContext = createContext<Api | undefined>(undefined);
 
 export function ApiProvider(props: { children: ComponentChildren }) {
   const [api, setApi] = useState<Api | undefined>();

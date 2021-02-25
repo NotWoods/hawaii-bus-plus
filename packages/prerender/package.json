@@ -11,6 +11,8 @@
     "test": "ava"
   },
   "dependencies": {
+    "@hawaii-bus-plus/data": "workspace:*",
+    "preact-render-to-string": "^5.1.12",
     "rollup": "^2.39.1",
     "tslib": "^2.1.0",
     "type-fest": "^0.20.2",

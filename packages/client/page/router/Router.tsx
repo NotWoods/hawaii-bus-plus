@@ -23,12 +23,9 @@ function path(url: URL | Location) {
 /**
  * Top level provider for sticky alerts
  */
-export function Router(props: { children: ComponentChildren }) {
-  const [state, dispatch] = useReducer(
-    routerReducer,
-    new URL(window.location.href),
-    initStateFromUrl
-  );
+export function Router(props: { url?: URL; children: ComponentChildren }) {
+  const { url = new URL(window.location.href) } = props;
+  const [state, dispatch] = useReducer(routerReducer, url, initStateFromUrl);
 
   useEffect(() => {
     function onPopState() {

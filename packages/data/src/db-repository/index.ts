@@ -8,7 +8,7 @@ import {
 } from '@hawaii-bus-plus/types';
 import { dbReady } from '../database';
 import { Repository, TripCursor } from '../repository';
-import { loadAllRoutes, loadBikeStations } from './all';
+import { loadAllRoutes, loadAllStops, loadBikeStations } from './all';
 import { loadAgencies, loadRoutes, loadStops } from './batch';
 import { loadCalendars } from './calendar';
 import { searchRoutes, searchStops } from './search';
@@ -21,7 +21,7 @@ export class DBRepository implements Repository {
    */
   private readonly ready = dbReady;
 
-  loadAllRoutes(): Promise<Route[]> {
+  loadAllRoutes(): Promise<readonly Route[]> {
     return this.ready.then((db) => loadAllRoutes(db));
   }
 
@@ -41,6 +41,10 @@ export class DBRepository implements Repository {
 
   loadTripsForRoute(routeId: Route['route_id']): Promise<TripCursor> {
     return this.ready.then((db) => loadTripsForRoute(db, routeId));
+  }
+
+  loadAllStops(): Promise<readonly Stop[]> {
+    return this.ready.then((db) => loadAllStops(db));
   }
 
   loadStops(

@@ -2,7 +2,7 @@ import { createContext, h, ComponentChildren } from 'preact';
 import { useState } from 'preact/hooks';
 import type { RouteDetails } from '../../../worker-info/route-details';
 
-interface RouteDetailContext {
+export interface RouteDetailContext {
   details?: RouteDetails;
   directionId: number;
   setDetails(details: RouteDetails | undefined): void;
