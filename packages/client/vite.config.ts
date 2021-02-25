@@ -1,7 +1,7 @@
 import { emptyPackage, prefreshPlus } from '@hawaii-bus-plus/vite-plugins';
 import { AliasOptions, defineConfig } from 'vite';
 
-const productionMode = false && process.env.NETLIFY_CONTEXT === 'production';
+const productionMode = process.env.NETLIFY_CONTEXT === 'production';
 const alias: AliasOptions = {
   'insights-js': 'insights-js/dist/esnext/index.js',
   react: 'preact/compat',
@@ -14,7 +14,7 @@ if (productionMode) {
 }
 
 export default defineConfig({
-  plugins: [emptyPackage('@empty'), prefreshPlus()],
+  // plugins: [emptyPackage('@empty'), prefreshPlus()],
   resolve: { alias },
   optimizeDeps: {
     include: [
@@ -34,9 +34,11 @@ export default defineConfig({
   },
   build: {
     manifest: true,
+    ssrManifest: true,
     outDir: '../../dist',
     emptyOutDir: true,
-    minify: process.env.NETLIFY_CONTEXT === 'production',
+    cssCodeSplit: false,
+    minify: productionMode,
     rollupOptions: {
       input: {
         main: './index.html',
