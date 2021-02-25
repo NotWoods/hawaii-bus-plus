@@ -1,9 +1,10 @@
 {
   "extends": "../../tsconfig.base.json",
   "include": ["**/*"],
-  "references": [],
+  "references": [{ "path": "../../data/node" }],
   "compilerOptions": {
-    "lib": ["esnext"],
-    "types": ["node"]
+    "lib": ["esnext", "dom"],
+    "types": ["node", "googlemaps"],
+    "skipLibCheck": true
   }
 }

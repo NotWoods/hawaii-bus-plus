@@ -7,7 +7,8 @@ import { fileURLToPath, URL } from 'url';
 import { build } from 'vite';
 
 export type RenderFunction = (
-  url: URL
+  url: URL,
+  ...args: unknown[]
 ) => Promisable<{ html: string; head?: string }>;
 
 export const distFolder = new URL('../../../dist/', import.meta.url);
@@ -88,7 +89,10 @@ interface RenderRoutesOptions {
   write?: boolean;
 }
 
-export async function renderRoutes(options: RenderRoutesOptions) {
+export async function renderRoutes(
+  options: RenderRoutesOptions,
+  ...args: unknown[]
+) {
   const { templatePath, serverEntryPath, routes, write } = options;
   const templateReady = readFile(new URL(templatePath, distFolder), 'utf8');
 
@@ -98,7 +102,7 @@ export async function renderRoutes(options: RenderRoutesOptions) {
   return await Promise.all(
     routes.map(async (pathname) => {
       const url = new URL(pathname, 'https://app.hawaiibusplus.com');
-      const { html, head } = await render(url);
+      const { html, head } = await render(url, ...args);
       const rendered = renderTemplate(await templateReady, html, head);
 
       const withSuffix = pathname.endsWith('/')

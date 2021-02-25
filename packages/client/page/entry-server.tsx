@@ -1,4 +1,4 @@
-import { NodeRepository } from '@hawaii-bus-plus/data/node';
+import { Repository } from '@hawaii-bus-plus/data';
 import { h } from 'preact';
 import render from 'preact-render-to-string';
 import { getRouteDetails } from '../worker-info/route-details';
@@ -9,8 +9,7 @@ import { Router } from './router/Router';
 import { ROUTES_PREFIX } from './router/state';
 import { RouteDetailContext } from './routes/timetable/context';
 
-export default async function renderPage(url: URL) {
-  const repo = new NodeRepository();
+export default async function renderPage(url: URL, repo: Repository) {
   const [stops, stations] = await Promise.all([
     repo.loadAllStops(),
     repo.loadBikeStations(),

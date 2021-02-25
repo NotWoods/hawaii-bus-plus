@@ -50,7 +50,7 @@ export interface Repository {
 }
 
 export const makeRepository = memoize(() => {
-  if (self.indexedDB) {
+  if (globalThis.indexedDB) {
     return new DBRepository();
   } else {
     return new MemoryRepository();
