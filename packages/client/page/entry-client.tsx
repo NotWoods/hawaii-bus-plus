@@ -1,5 +1,5 @@
 import 'preact/debug';
-import { h, render } from 'preact';
+import { h, hydrate } from 'preact';
 import { App } from './App';
 import '../all-pages/main.css';
 
@@ -10,4 +10,4 @@ if (window.location.hostname !== 'localhost') {
   });
 }
 
-render(<App />, document.getElementById('root')!);
+hydrate(<App />, document.getElementById('root')!);
