@@ -29,6 +29,7 @@
     "tslib": "^2.1.0"
   },
   "devDependencies": {
+    "@googlemaps/js-api-loader": "^1.11.1",
     "@hawaii-bus-plus/jest-utils": "workspace:*",
     "@hawaii-bus-plus/vite-plugins": "workspace:*",
     "@prefresh/vite": "^2.1.0",

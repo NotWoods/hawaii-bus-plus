@@ -10,11 +10,13 @@
     { "path": "packages/data/node" },
     { "path": "packages/functions/src" },
     { "path": "packages/gotrue/src" },
+    { "path": "packages/jest-utils/src" },
     { "path": "packages/prerender/src" },
     { "path": "packages/presentation/src" },
     { "path": "packages/promise-worker/page" },
     { "path": "packages/promise-worker/worker" },
     { "path": "packages/react-google-maps/src" },
+    { "path": "packages/temporal-utils/src" },
     { "path": "packages/types" },
     { "path": "packages/utils/src" },
     { "path": "packages/vite-plugins/src" }

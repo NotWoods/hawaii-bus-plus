@@ -59,3 +59,21 @@ test.serial('render auth routes', async (t) => {
   t.true(login.source.includes('Login'), 'Login');
   t.true(register.source.includes('Register'), 'Register');
 });
+
+test.serial.only('render and run page entry file', async (t) => {
+  const { module, error } = await buildPrerenderCode('./page/entry-server.tsx');
+
+  t.is(error, undefined);
+
+  const exports = Object.keys(module.exports);
+  t.deepEqual(exports, ['default']);
+
+  const render = module.exports.default as RenderFunction;
+  const result = await render(new URL('/', 'https://app.hawaiibusplus.com'));
+
+  t.deepEqual(Object.keys(result), ['html', 'head']);
+  t.is(typeof result.head, 'string');
+  t.is(typeof result.html, 'string');
+
+  t.is(result.head, '');
+});

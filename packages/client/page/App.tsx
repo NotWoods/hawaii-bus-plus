@@ -21,9 +21,9 @@ export function Main() {
   );
 }
 
-export function App() {
+export function App(props: { initialUrl?: URL }) {
   return (
-    <Router>
+    <Router initialUrl={props.initialUrl}>
       <ApiProvider>
         <MyLocationProvider>
           <RouteDetailProvider>

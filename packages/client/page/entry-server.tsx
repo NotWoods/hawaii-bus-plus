@@ -1,16 +1,10 @@
-import { Repository } from '@hawaii-bus-plus/data';
 import { h } from 'preact';
 import render from 'preact-render-to-string';
-import { getRouteDetails } from '../worker-info/route-details';
 import { Main } from './App';
-import { Api, ApiContext } from './hooks/useApi';
-import { initStateFromUrl } from './router/reducer';
 import { Router } from './router/Router';
-import { ROUTES_PREFIX } from './router/state';
-import { RouteDetailContext } from './routes/timetable/context';
 
-export default async function renderPage(url: URL, repo: Repository) {
-  const [stops, stations] = await Promise.all([
+export default function renderPage(url: URL) {
+  /*const [stops, stations] = await Promise.all([
     repo.loadAllStops(),
     repo.loadBikeStations(),
   ]);
@@ -34,16 +28,12 @@ export default async function renderPage(url: URL, repo: Repository) {
     if (directions.length > 1) {
       detailContext.switchDirection = () => {};
     }
-  }
+  }*/
 
   return {
     html: render(
-      <Router url={url}>
-        <ApiContext.Provider value={api}>
-          <RouteDetailContext.Provider value={detailContext}>
-            <Main />
-          </RouteDetailContext.Provider>
-        </ApiContext.Provider>
+      <Router initialUrl={url}>
+        <Main />
       </Router>
     ),
     head: '',
