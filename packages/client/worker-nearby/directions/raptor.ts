@@ -89,10 +89,10 @@ async function raptorFootpaths(
   k: number,
   timeLabels: ReturnType<typeof buildTimeLabels>,
   loadStops: (
-    marked: Iterable<Stop['stop_id']>
+    marked: readonly Stop['stop_id'][]
   ) => Promise<ReadonlyMap<Stop['stop_id'], Stop>>
 ) {
-  const footPaths = await loadStops(markedStops);
+  const footPaths = await loadStops(Array.from(markedStops));
   for (const fromStopId of markedStops) {
     const transfers = footPaths.get(fromStopId)?.transfers ?? [];
     for (const { to_stop_id, min_transfer_time = 0 } of transfers) {

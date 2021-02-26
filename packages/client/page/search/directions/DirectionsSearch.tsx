@@ -8,7 +8,9 @@ import type {
 } from '../../../worker-nearby/nearby';
 import DirectionsWorker from '../../../worker-nearby/nearby?worker';
 import { dbInitialized } from '../../api';
+import { LoadingBar } from '../../buttons/LoadingBar';
 import { DirectionsTime } from '../../directions/DirectionsTime';
+import { useDelay } from '../../hooks/useDelay';
 import { useLazyComponent } from '../../hooks/useLazyComponent';
 import { usePromise } from '../../hooks/usePromise';
 import { useWorker } from '../../hooks/useWorker';
@@ -40,6 +42,7 @@ export function DirectionsSearch(_props: Props) {
   const postToDirectionsWorker = useWorker(
     DirectionsWorker
   ) as NearbyWorkerHandler;
+  const delayDone = useDelay(300, [depart, arrive, departureTime]);
 
   usePromise(
     async (signal) => {
@@ -65,6 +68,28 @@ export function DirectionsSearch(_props: Props) {
     },
     [depart, arrive, departureTime]
   );
+
+  function renderJourneys() {
+    if (depart && arrive) {
+      if (results && DirectionsJourneys) {
+        return (
+          <DirectionsJourneys
+            results={results.journeys}
+            depart={depart}
+            arrive={arrive}
+            departureTime={results.depatureTime}
+            onTomorrowClick={() => setDepartTime(results.tomorrow)}
+          />
+        );
+      } else if (delayDone) {
+        return <LoadingBar />;
+      } else {
+        return null;
+      }
+    } else {
+      return null;
+    }
+  }
 
   return (
     <>
@@ -103,15 +128,7 @@ export function DirectionsSearch(_props: Props) {
         />
       ) : null}
 
-      {depart && arrive && results && DirectionsJourneys ? (
-        <DirectionsJourneys
-          results={results.journeys}
-          depart={depart}
-          arrive={arrive}
-          departureTime={results.depatureTime}
-          onTomorrowClick={() => setDepartTime(results.tomorrow)}
-        />
-      ) : null}
+      {renderJourneys()}
     </>
   );
 }

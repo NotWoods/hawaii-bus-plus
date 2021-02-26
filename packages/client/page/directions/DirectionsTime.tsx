@@ -20,7 +20,7 @@ export function DirectionsTime(props: Props) {
   const selected = props.value != undefined ? 'leave-at' : 'now';
 
   return (
-    <div class="bg-blue-900 p-4 mt-2">
+    <div class="bg-blue-900 p-4 my-2">
       <select
         class="border-current bg-blue-900 w-full"
         value={selected}

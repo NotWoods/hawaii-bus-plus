@@ -1,4 +1,4 @@
-import { ColorString, Stop } from '@hawaii-bus-plus/types';
+import { ColorString, Shape, Stop } from '@hawaii-bus-plus/types';
 import { last } from '@hawaii-bus-plus/utils';
 import { ComponentChildren, h, Fragment } from 'preact';
 import { useContext } from 'preact/hooks';
@@ -8,6 +8,7 @@ import { RouteDetailContext } from '../routes/timetable/context';
 import { ShapeLine } from './ShapeLine';
 import { StopStationMarkers } from './markers/StopStationMarkers';
 import { DIRECTIONS_PATH, RouterState } from '../router/state';
+import { JourneyTripSegment } from '../../worker-nearby/directions/format';
 
 interface Props {
   darkMode?: boolean;
@@ -30,7 +31,13 @@ export function RouteGlyphs({ darkMode }: Props) {
   let shapes: ComponentChildren = null;
   if (journey) {
     highlightedStops = journey.stops;
-    shapes = journey.trips.filter(isJourneyTripSegment).map((segment) => {
+    const unique = new Map<Shape['shape_id'] | undefined, JourneyTripSegment>(
+      journey.trips
+        .filter(isJourneyTripSegment)
+        .map((segment) => [segment.trip.shape_id, segment] as const)
+    );
+
+    shapes = Array.from(unique.values()).map((segment) => {
       const shapeId = segment.trip.shape_id;
       const start = segment.stopTimes[0].shapeDistTraveled;
       const end = last(segment.stopTimes).shapeDistTraveled;
@@ -38,6 +45,7 @@ export function RouteGlyphs({ darkMode }: Props) {
         start != undefined && end != undefined
           ? ([start, end] as const)
           : undefined;
+
       return (
         <ShapeLine
           key={shapeId}
