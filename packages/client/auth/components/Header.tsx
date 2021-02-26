@@ -1,8 +1,8 @@
 import { ComponentChildren, h } from 'preact';
-import { useEffect } from 'preact/hooks';
 import { Title } from '../../all-pages/Title';
 import { FormType } from './Form';
 import { MouseEventHandler } from './link';
+import { PageTitle } from './Title';
 
 export type HeaderType = FormType | 'success' | 'sentConfirmation' | undefined;
 
@@ -26,7 +26,6 @@ function headerContent(type: HeaderType | undefined) {
   switch (type) {
     case 'login':
       return {
-        name: 'Login',
         title: 'Welcome back!',
         subtitle: {
           prefix: 'Not registered? ',
@@ -37,7 +36,6 @@ function headerContent(type: HeaderType | undefined) {
     case 'acceptInvite':
     case 'signup':
       return {
-        name: 'Register',
         title: 'Create your account',
         subtitle: {
           prefix: 'Already signed up? ',
@@ -48,12 +46,10 @@ function headerContent(type: HeaderType | undefined) {
     case 'requestPasswordRecovery':
     case 'recover':
       return {
-        name: 'Reset your password',
         title: 'Reset your password',
       };
     case 'success':
       return {
-        name: 'Success',
         title: `You're all set!`,
         subtitle: {
           content: 'Redirecting you to the app now...',
@@ -61,7 +57,6 @@ function headerContent(type: HeaderType | undefined) {
       };
     case 'sentConfirmation':
       return {
-        name: 'Success',
         title: `You're all set!`,
         subtitle: {
           prefix: 'You can now ',
@@ -107,15 +102,11 @@ function HeaderSubtitle(props: SubtitleProps) {
 
 export function Header(props: Props) {
   const { type } = props;
-  const { name, title, subtitle } = headerContent(type);
-
-  useEffect(() => {
-    const suffix = 'Hawaii Bus Plus';
-    document.title = name ? `${name} - ${suffix}` : suffix;
-  }, [name]);
+  const { title, subtitle } = headerContent(type);
 
   return (
     <header class="text-center">
+      <PageTitle type={type} />
       <Title class="justify-center" />
       <h2 class="mt-6 text-4xl font-display font-medium text-gray-100">
         {title}

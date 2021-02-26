@@ -4,7 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "tsc --build .",
+    "build": "tsc --build src",
+    "postbuild": "node src/build.js",
     "format": "prettier **/*.ts --write --ignore-path ../../.prettierignore",
     "postformat": "eslint **/*.ts",
     "pretest": "tsc --build test",

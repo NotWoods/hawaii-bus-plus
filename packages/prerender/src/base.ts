@@ -14,15 +14,14 @@ export type RenderFunction = (
 export const distFolder = new URL('../../../dist/', import.meta.url);
 export const clientFolder = new URL('../../client/', import.meta.url);
 
-// Max 1 build at a time, vite issue
-let lastJob: Promise<unknown> | undefined;
-
-export async function buildPrerenderCode(input: string) {
+export async function buildPrerenderCode(
+  input: string,
+  args: Record<string, unknown> = {}
+) {
   const root = fileURLToPath(clientFolder);
   const external = ['preact', 'tailwindcss', 'fs/promises'];
 
-  await lastJob;
-  const job = build({
+  const buildResult = await build({
     root,
     css: {
       postcss: '',
@@ -43,8 +42,6 @@ export async function buildPrerenderCode(input: string) {
       external,
     },
   });
-  lastJob = job;
-  const buildResult = await job;
 
   if (Array.isArray(buildResult)) {
     throw new Error(`output from vite is an array`);
@@ -54,13 +51,15 @@ export async function buildPrerenderCode(input: string) {
   const [{ code, fileName }] = output;
   const module = { exports: {} as { [name: string]: unknown } };
   const require = createRequire(resolve(root, fileName));
-  const params = ['module', 'exports', 'require'].concat(code);
+  const params = ['module', 'exports', 'require', ...Object.keys(args)].concat(
+    code
+  );
 
   // eslint-disable-next-line @typescript-eslint/no-implied-eval
   const func = new Function(...params);
   let error: unknown;
   try {
-    func(...[module, module.exports, require]);
+    func(...[module, module.exports, require, ...Object.values(args)]);
   } catch (err: unknown) {
     error = err;
   }

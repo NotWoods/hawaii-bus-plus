@@ -1,5 +1,5 @@
 import 'preact/debug';
-import { h, render } from 'preact';
+import { h, hydrate } from 'preact';
 import { App, urlToType } from './App';
 import { HeaderType } from './components/Header';
 import '../all-pages/main.css';
@@ -30,7 +30,7 @@ const params = {
     context.redirectTo ?? url.searchParams.get('redirect_to') ?? undefined,
 };
 
-render(
+hydrate(
   <App defaultType={context.type ?? urlToType(url)} {...params} />,
   document.getElementById('root')!
 );
