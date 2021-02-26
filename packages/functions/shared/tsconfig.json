@@ -5,6 +5,7 @@
   "compilerOptions": {
     "lib": ["esnext"],
     "types": ["node"],
-    "target": "es2017"
+    "target": "es2017",
+    "noPropertyAccessFromIndexSignature": false
   }
 }

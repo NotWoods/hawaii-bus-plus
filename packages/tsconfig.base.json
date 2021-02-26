@@ -22,7 +22,8 @@
     "jsxFactory": "h",
     "jsxFragmentFactory": "Fragment",
     "skipDefaultLibCheck": true,
-    "sourceMap": true
+    "sourceMap": true,
+    "noPropertyAccessFromIndexSignature": false
   },
   "include": ["./src"]
 }

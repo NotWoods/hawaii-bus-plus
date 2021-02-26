@@ -47,7 +47,7 @@ importers:
       '@types/node': 14.14.31
       ava: 3.15.0
       prettier: 2.2.1
-      typescript: 4.1.3
+      typescript: 4.2.2
     specifiers:
       '@hawaii-bus-plus/temporal-utils': 'workspace:^1.0.0'
       '@hawaii-bus-plus/types': 'workspace:*'
@@ -62,7 +62,7 @@ importers:
       prettier: ^2.2.1
       proposal-temporal: ^0.7.0
       tslib: ^2.1.0
-      typescript: 4.1.3
+      typescript: ^4.2.2
   packages/client:
     dependencies:
       '@hawaii-bus-plus/data': 'link:../data'
@@ -98,7 +98,7 @@ importers:
       tailwindcss: 2.0.3
       tailwindcss-scroll-snap: 1.1.0
       type-fest: 0.20.2
-      typescript: 4.1.3
+      typescript: 4.2.2
       vite: 2.0.3
     specifiers:
       '@hawaii-bus-plus/data': 'workspace:*'
@@ -133,7 +133,7 @@ importers:
       tailwindcss-scroll-snap: ^1.1.0
       tslib: ^2.1.0
       type-fest: ^0.20.2
-      typescript: 4.1.3
+      typescript: ^4.2.2
       vite: ^2.0.3
   packages/data:
     dependencies:
@@ -148,7 +148,7 @@ importers:
       ava: 3.15.0
       prettier: 2.2.1
       type-fest: 0.20.2
-      typescript: 4.1.3
+      typescript: 4.2.2
     specifiers:
       '@hawaii-bus-plus/types': 'workspace:*'
       '@hawaii-bus-plus/utils': 'workspace:*'
@@ -160,7 +160,7 @@ importers:
       prettier: ^2.2.1
       tslib: ^2.1.0
       type-fest: ^0.20.2
-      typescript: 4.1.3
+      typescript: ^4.2.2
   packages/functions:
     dependencies:
       '@aws-sdk/client-dynamodb': 3.7.0
@@ -184,7 +184,7 @@ importers:
       prettier: 2.2.1
       rollup: 2.39.1
       type-fest: 0.20.2
-      typescript: 4.1.3
+      typescript: 4.2.2
     specifiers:
       '@aws-sdk/client-dynamodb': ^3.7.0
       '@hawaii-bus-plus/gotrue': 'workspace:^0.9.29'
@@ -206,7 +206,7 @@ importers:
       stripe: ^8.137.0
       tslib: ^2.1.0
       type-fest: ^0.20.2
-      typescript: 4.1.3
+      typescript: ^4.2.2
   packages/gotrue:
     dependencies:
       node-fetch: 3.0.0-beta.9
@@ -215,14 +215,14 @@ importers:
       '@types/node': 14.14.31
       ava: 3.15.0
       prettier: 2.2.1
-      typescript: 4.1.3
+      typescript: 4.2.2
     specifiers:
       '@types/node': ^14.14.31
       ava: ^3.15.0
       node-fetch: ^3.0.0-beta.9
       prettier: ^2.2.1
       tslib: ^2.1.0
-      typescript: 4.1.3
+      typescript: ^4.2.2
   packages/identity-email:
     devDependencies:
       copyfiles: 2.4.1
@@ -238,14 +238,14 @@ importers:
       jest: 26.6.3
       prettier: 2.2.1
       type-fest: 0.20.2
-      typescript: 4.1.3
+      typescript: 4.2.2
     specifiers:
       '@hawaii-bus-plus/types': 'workspace:*'
       jest: ^26.6.3
       prettier: ^2.2.1
       tslib: ^2.1.0
       type-fest: ^0.20.2
-      typescript: 4.1.3
+      typescript: ^4.2.2
   packages/prerender:
     dependencies:
       '@hawaii-bus-plus/data': 'link:../data'
@@ -259,7 +259,7 @@ importers:
       preact: 10.5.12
       prettier: 2.2.1
       tailwindcss: 2.0.3
-      typescript: 4.1.3
+      typescript: 4.2.2
     specifiers:
       '@hawaii-bus-plus/data': 'workspace:*'
       ava: ^3.15.0
@@ -270,7 +270,7 @@ importers:
       tailwindcss: ^2.0.3
       tslib: ^2.1.0
       type-fest: ^0.20.2
-      typescript: 4.1.3
+      typescript: ^4.2.2
       vite: ^2.0.3
   packages/presentation:
     dependencies:
@@ -284,7 +284,7 @@ importers:
       ava: 3.15.0
       prettier: 2.2.1
       type-fest: 0.20.2
-      typescript: 4.1.3
+      typescript: 4.2.2
     specifiers:
       '@hawaii-bus-plus/temporal-utils': 'workspace:^1.0.0'
       '@hawaii-bus-plus/types': 'workspace:*'
@@ -295,7 +295,7 @@ importers:
       spherical-geometry-js: ^2.0.0
       tslib: ^2.1.0
       type-fest: ^0.20.2
-      typescript: 4.1.3
+      typescript: ^4.2.2
   packages/promise-worker:
     dependencies:
       tslib: 2.1.0
@@ -304,14 +304,14 @@ importers:
       ava: 3.15.0
       prettier: 2.2.1
       pseudo-worker: 1.3.0
-      typescript: 4.1.3
+      typescript: 4.2.2
     specifiers:
       '@types/node': ^14.14.31
       ava: ^3.15.0
       prettier: ^2.2.1
       pseudo-worker: ^1.3.0
       tslib: ^2.1.0
-      typescript: 4.1.3
+      typescript: ^4.2.2
   packages/react-google-maps:
     dependencies:
       '@googlemaps/js-api-loader': 1.11.1
@@ -322,7 +322,7 @@ importers:
       ava: 3.15.0
       preact: 10.5.12
       prettier: 2.2.1
-      typescript: 4.1.3
+      typescript: 4.2.2
     specifiers:
       '@googlemaps/js-api-loader': ^1.11.1
       '@react-google-maps/api': ^2.1.1
@@ -331,7 +331,7 @@ importers:
       preact: ^10.5.12
       prettier: ^2.2.1
       tslib: ^2.1.0
-      typescript: 4.1.3
+      typescript: ^4.2.2
   packages/temporal-utils:
     dependencies:
       '@hawaii-bus-plus/types': 'link:../types'
@@ -342,7 +342,7 @@ importers:
       ava: 3.15.0
       prettier: 2.2.1
       type-fest: 0.20.2
-      typescript: 4.1.3
+      typescript: 4.2.2
     specifiers:
       '@hawaii-bus-plus/types': 'workspace:*'
       '@hawaii-bus-plus/utils': 'workspace:^1.0.0'
@@ -351,19 +351,19 @@ importers:
       proposal-temporal: ^0.7.0
       tslib: ^2.1.0
       type-fest: ^0.20.2
-      typescript: 4.1.3
+      typescript: ^4.2.2
   packages/types:
     dependencies:
       tslib: 2.1.0
       type-fest: 0.20.2
     devDependencies:
       prettier: 2.2.1
-      typescript: 4.1.3
+      typescript: 4.2.2
     specifiers:
       prettier: ^2.2.1
       tslib: ^2.1.0
       type-fest: ^0.20.2
-      typescript: 4.1.3
+      typescript: ^4.2.2
   packages/utils:
     dependencies:
       '@hawaii-bus-plus/types': 'link:../types'
@@ -372,14 +372,14 @@ importers:
       ava: 3.15.0
       prettier: 2.2.1
       type-fest: 0.20.2
-      typescript: 4.1.3
+      typescript: 4.2.2
     specifiers:
       '@hawaii-bus-plus/types': 'workspace:*'
       ava: ^3.15.0
       prettier: ^2.2.1
       tslib: ^2.1.0
       type-fest: ^0.20.2
-      typescript: 4.1.3
+      typescript: ^4.2.2
   packages/vite-plugins:
     dependencies:
       '@babel/core': 7.13.1
@@ -391,7 +391,7 @@ importers:
       ava: 3.15.0
       prettier: 2.2.1
       type-fest: 0.20.2
-      typescript: 4.1.3
+      typescript: 4.2.2
       vite: 2.0.3
     specifiers:
       '@babel/core': ^7.13.1
@@ -402,7 +402,7 @@ importers:
       prettier: ^2.2.1
       tslib: ^2.1.0
       type-fest: ^0.20.2
-      typescript: 4.1.3
+      typescript: ^4.2.2
       vite: ^2.0.3
 lockfileVersion: 5.2
 packages:
@@ -7651,13 +7651,6 @@ packages:
     dev: true
     resolution:
       integrity: sha512-zdu8XMNEDepKKR+XYOXAVPtWui0ly0NtohUscw+UmaHiAWT8hrV1rr//H6V+0DvJ3OQ19S979M0laLfX8rm82Q==
-  /typescript/4.1.3:
-    dev: true
-    engines:
-      node: '>=4.2.0'
-    hasBin: true
-    resolution:
-      integrity: sha512-B3ZIOf1IKeH2ixgHhj6la6xdwR9QrLC5d1VKeCSY4tvkqhF2eqd9O7txNlS0PO3GrBAFIdr3L1ndNwteUbZLYg==
   /typescript/4.2.2:
     dev: true
     engines:
