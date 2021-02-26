@@ -22,7 +22,7 @@ export function DirectionsJourneyItem(props: Props) {
   });
 
   return (
-    <li>
+    <li class="mb-4">
       <JourneyDirectionsResultItem
         action={openJourney(
           props.from,

@@ -16,7 +16,7 @@ export function JourneySheet(props: Props) {
   const { dispatch } = useContext(RouterContext);
 
   return (
-    <BaseSheet>
+    <BaseSheet loaded>
       <JourneyHeader
         journey={props.journey}
         timeZone={props.timeZone}

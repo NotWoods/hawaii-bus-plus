@@ -19,7 +19,13 @@ export class DBRepository implements Repository {
   /**
    * Expects database to already be initialized
    */
-  private readonly ready = dbReady;
+  private readonly ready = dbReady.then((db) => {
+    if (db) {
+      return db;
+    } else {
+      throw new Error('Cannot use DBRepository when IndexedDB unsupported');
+    }
+  });
 
   loadAllRoutes(): Promise<readonly Route[]> {
     return this.ready.then((db) => loadAllRoutes(db));

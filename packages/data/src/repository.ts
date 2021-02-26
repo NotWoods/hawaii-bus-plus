@@ -7,6 +7,7 @@ import {
   Trip,
 } from '@hawaii-bus-plus/types';
 import { memoize } from '@hawaii-bus-plus/utils';
+import { IDB_SUPPORT } from './database';
 import { DBRepository } from './db-repository';
 import { MemoryRepository } from './mem-repository';
 
@@ -50,7 +51,7 @@ export interface Repository {
 }
 
 export const makeRepository = memoize(() => {
-  if (globalThis.indexedDB) {
+  if (IDB_SUPPORT) {
     return new DBRepository();
   } else {
     return new MemoryRepository();

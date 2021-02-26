@@ -6,7 +6,7 @@ import {
 } from '@hawaii-bus-plus/data';
 import { registerPromiseWorker } from '@hawaii-bus-plus/promise-worker/worker';
 
-const apiReady = dbReady.then((db) => init(db));
+const apiReady = dbReady.then((db) => (db ? init(db) : undefined));
 
 registerPromiseWorker(async () => {
   try {
