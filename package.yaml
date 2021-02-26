@@ -5,6 +5,7 @@ scripts:
   api: 'pnpm run api:client --filter @hawaii-bus-plus/api-gen'
   build: >-
     pnpm run build --filter @hawaii-bus-plus/client && pnpm run build --filter
+    @hawaii-bus-plus/prerender && pnpm run build --filter
     @hawaii-bus-plus/functions && pnpm run api:dist --filter
     @hawaii-bus-plus/api-gen
   clean: >-

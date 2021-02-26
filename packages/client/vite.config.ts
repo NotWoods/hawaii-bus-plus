@@ -32,6 +32,9 @@ export default defineConfig({
     jsxFactory: 'h',
     jsxFragment: 'Fragment',
   },
+  define: {
+    globalThis: 'self',
+  },
   build: {
     manifest: true,
     ssrManifest: true,

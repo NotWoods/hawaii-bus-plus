@@ -15,7 +15,7 @@
     "test": "ava"
   },
   "dependencies": {
-    "@aws-sdk/client-dynamodb": "^3.6.1",
+    "@aws-sdk/client-dynamodb": "^3.7.0",
     "@hawaii-bus-plus/gotrue": "workspace:^0.9.29",
     "@hawaii-bus-plus/types": "workspace:*",
     "@hawaii-bus-plus/utils": "workspace:*",

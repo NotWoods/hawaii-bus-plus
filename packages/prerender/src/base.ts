@@ -26,6 +26,9 @@ export async function buildPrerenderCode(
     css: {
       postcss: '',
     },
+    define: {
+      globalThis: 'global',
+    },
     build: {
       minify: false,
       write: false,

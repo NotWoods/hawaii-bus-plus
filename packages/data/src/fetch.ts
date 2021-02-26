@@ -42,7 +42,7 @@ export async function downloadScheduleData({
   const eTag = res.headers.get('ETag') ?? undefined;
   if (storedTag) {
     const tag = await storedTag;
-    if (tag === eTag) {
+    if (tag && eTag && tag === eTag) {
       // we've already cached this value
       throw new ETagMatchError();
     }
