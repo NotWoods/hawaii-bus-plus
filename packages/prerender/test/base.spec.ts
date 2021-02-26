@@ -60,7 +60,7 @@ test.serial('render auth routes', async (t) => {
   t.true(register.source.includes('Register'), 'Register');
 });
 
-test.serial.only('render and run page entry file', async (t) => {
+test.serial('render and run page entry file', async (t) => {
   const { module, error } = await buildPrerenderCode('./page/entry-server.tsx');
 
   t.is(error, undefined);
