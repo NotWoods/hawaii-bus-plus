@@ -10,6 +10,7 @@
     { "path": "packages/data/node" },
     { "path": "packages/functions/src" },
     { "path": "packages/gotrue/src" },
+    { "path": "packages/prerender/src" },
     { "path": "packages/presentation/src" },
     { "path": "packages/promise-worker/page" },
     { "path": "packages/promise-worker/worker" },
