@@ -6,6 +6,10 @@ export type Footpaths = ReadonlyMap<Stop['stop_id'], readonly Transfer[]>;
 export function stopsLoader(repo: Pick<Repository, 'loadStops'>) {
   const loaded = new Map<Stop['stop_id'], Stop>();
 
+  function filterLoaded(stops: readonly Stop['stop_id'][]) {
+    return new Map(stops.map((id) => [id, loaded.get(id)!]));
+  }
+
   return async (
     stops: readonly Stop['stop_id'][]
   ): Promise<ReadonlyMap<Stop['stop_id'], Stop>> => {
@@ -15,7 +19,7 @@ export function stopsLoader(repo: Pick<Repository, 'loadStops'>) {
     }
 
     if (toLoad.size === 0) {
-      return Promise.resolve(loaded);
+      return filterLoaded(stops);
     }
 
     const newStops = await repo.loadStops(toLoad);
@@ -23,6 +27,6 @@ export function stopsLoader(repo: Pick<Repository, 'loadStops'>) {
       loaded.set(stopId, stop);
     }
 
-    return new Map(stops.map((id) => [id, loaded.get(id)!]));
+    return filterLoaded(stops);
   };
 }
