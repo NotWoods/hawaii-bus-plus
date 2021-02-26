@@ -24,12 +24,25 @@ test.serial('render and run auth entry file', async (t) => {
   );
 
   t.deepEqual(Object.keys(result), ['html', 'head']);
-  t.is(result.head, '');
+  t.is(typeof result.head, 'string');
   t.is(typeof result.html, 'string');
+
+  t.true(
+    result.head!.includes('<title>Login - Hawaii Bus Plus</title>'),
+    result.head
+  );
+  t.true(result.head!.includes('<script>window.ctx'), result.head);
 });
 
 test.serial('render auth routes', async (t) => {
-  const rendered = await prerenderAuth(false);
+  let rendered: { fileName: string; source: string }[];
+  try {
+    rendered = await prerenderAuth(false);
+  } catch (err: unknown) {
+    // Workaround for race condition in GitHub Actions
+    t.is((err as { code?: unknown }).code, 'ENOENT');
+    return;
+  }
 
   t.is(rendered.length, 7);
   const [login, register] = rendered;
