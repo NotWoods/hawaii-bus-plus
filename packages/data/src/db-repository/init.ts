@@ -17,16 +17,16 @@ import {
   SearchStop,
   SearchTrip,
 } from '../database.js';
-import { downloadScheduleData, ETagMatchError } from '../fetch.js';
+import { downloadScheduleData, NotModifiedError } from '../fetch.js';
 import { getWords } from '../words.js';
 
 export async function init(db: IDBPDatabase<GTFSSchema>) {
-  const storedTag = db.get('keyval', 'etag') as Promise<string | undefined>;
+  const storedTag = (await db.get('keyval', 'etag')) as string | undefined;
   try {
     const { api, eTag } = await downloadScheduleData({ storedTag });
     await initDatabase(db, api, eTag);
   } catch (err: unknown) {
-    if (err instanceof ETagMatchError) {
+    if (err instanceof NotModifiedError) {
       console.info('Database has not changed');
     } else {
       throw err;

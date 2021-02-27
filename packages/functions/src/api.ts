@@ -3,6 +3,7 @@ import { readFile } from 'fs';
 import { promisify } from 'util';
 import { recoverSession, refreshedOrNull } from '../shared/cookie/parse';
 import { getAuth } from '../shared/identity/auth';
+import { jsonResponse } from '../shared/response';
 import { hasPaidAccess } from '../shared/role/paying';
 import { NetlifyContext, NetlifyEvent, NetlifyResponse } from '../shared/types';
 
@@ -18,6 +19,10 @@ export async function handler(
   event: NetlifyEvent,
   context: NetlifyContext
 ): Promise<NetlifyResponse> {
+  if (event.httpMethod !== 'GET') {
+    return jsonResponse(405, { error: 'Method Not Allowed' });
+  }
+
   const { identity } = context.clientContext;
   const { auth } = getAuth(identity);
   const user = recoverSession(auth, event.headers);
@@ -29,27 +34,29 @@ export async function handler(
   if (payingOrTrialUser) {
     const path = require.resolve(event.path.replace('/api/v1/', './'));
     const file = await readFileAsync(path, 'utf8');
-    return {
-      statusCode: 200,
-      body: file,
-      headers: {
-        'Content-Type': 'application/json',
-        ETag: getHash(file),
-      },
-    };
+
+    const storedTags = event.headers['if-none-match']
+      ?.split(',')
+      ?.map((h) => h.trim());
+    const eTag = getHash(file);
+
+    if (storedTags?.some((stored) => stored === `"${eTag}"`)) {
+      return jsonResponse(304, { error: 'Not Modified' });
+    } else {
+      return {
+        statusCode: 200,
+        body: file,
+        headers: {
+          'Content-Type': 'application/json',
+          ETag: eTag,
+        },
+      };
+    }
   } else if (userDetails) {
     // Logged in but not paying
-    return {
-      statusCode: 402,
-      body: JSON.stringify({ error: 'Payment Required' }),
-      headers: { 'Content-Type': 'application/json' },
-    };
+    return jsonResponse(402, { error: 'Payment Required' });
   } else {
     // Logged out
-    return {
-      statusCode: 401,
-      body: JSON.stringify({ error: 'Unauthorized' }),
-      headers: { 'Content-Type': 'application/json' },
-    };
+    return jsonResponse(401, { error: 'Unauthorized' });
   }
 }

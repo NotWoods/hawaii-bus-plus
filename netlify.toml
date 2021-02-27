@@ -68,11 +68,22 @@
 
 [[headers]]
   # Define which paths this specific [[headers]] block will cover.
+  for = "/assets/*"
+
+  [headers.values]
+    Cache-Control = "max-age=31536000,immutable"
+
+[[headers]]
+  # Define which paths this specific [[headers]] block will cover.
   for = "/*"
 
   [headers.values]
     X-Frame-Options = "DENY"
     X-XSS-Protection = "1; mode=block"
+    Referrer = "strict-origin"
+    Cross-Origin-Embedder-Policy = "require-corp"
+    Cross-Origin-Resource-Policy = "same-origin"
+    Cross-Origin-Opener-Policy = "same-origin"
     Content-Security-Policy = '''frame-ancestors 'none';
     form-action 'self';
     default-src 'self';

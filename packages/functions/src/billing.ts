@@ -14,7 +14,7 @@ export async function handler(
   const referrer = event.headers['referer']
     ? new URL(event.headers['referer'])
     : undefined;
-  if (referrer && !referrer.host.endsWith('hawaiibusplus.com')) {
+  if (!referrer || !referrer.host.endsWith('hawaiibusplus.com')) {
     return {
       statusCode: 403,
       body: 'Forbidden: Must log in on https://hawaiibusplus.com',

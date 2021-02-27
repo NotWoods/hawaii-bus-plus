@@ -10,23 +10,29 @@ export class PaymentRequiredError extends Error {
   code = 402;
 }
 
-export class ETagMatchError extends Error {
-  name = 'ETagMatchError';
-  code = 208;
+export class NotModifiedError extends Error {
+  name = 'NotModifiedError';
+  code = 304;
 }
 
 interface DownloadOptions {
   signal?: AbortSignal;
-  storedTag?: Promise<string | undefined>;
+  storedTag?: string;
 }
 
 export async function downloadScheduleData({
   signal,
   storedTag,
 }: DownloadOptions = {}): Promise<{ api: GTFSData; eTag?: string }> {
+  const headers = new Headers();
+  if (storedTag) {
+    headers.set('If-None-Match', `"${storedTag}"`);
+  }
+
   const res = await fetch('/api/v1/api.json', {
     signal,
     credentials: 'same-origin',
+    headers,
   });
 
   if (!res.ok) {
@@ -34,18 +40,17 @@ export async function downloadScheduleData({
       throw new UnauthorizedError(res.statusText);
     } else if (res.status === 402) {
       throw new PaymentRequiredError(res.statusText);
+    } else if (res.status === 304) {
+      throw new NotModifiedError(res.statusText);
     } else {
       throw new Error(res.statusText);
     }
   }
 
   const eTag = res.headers.get('ETag') ?? undefined;
-  if (storedTag) {
-    const tag = await storedTag;
-    if (tag && eTag && tag === eTag) {
-      // we've already cached this value
-      throw new ETagMatchError();
-    }
+  if (storedTag && eTag && storedTag === eTag) {
+    // we've already cached this value
+    throw new NotModifiedError();
   }
 
   const json = await res.json();
