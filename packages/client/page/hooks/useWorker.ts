@@ -1,13 +1,17 @@
 import { PromiseWorker } from '@hawaii-bus-plus/promise-worker';
 import { useCallback, useEffect, useRef } from 'preact/hooks';
 
+export interface WorkerConstructor {
+  new (): Worker;
+}
+
 /**
  * Set up a worker that lasts as long as the component is mounted.
  * The worker is terminated afterwards.
  *
  * Returns a postMessage function.
  */
-export function useWorker(workerConstructor: { new (): Worker }) {
+export function useWorker(workerConstructor: WorkerConstructor) {
   const workerRef = useRef<PromiseWorker | undefined>();
 
   const generateWorker = useCallback(() => {

@@ -2,9 +2,9 @@ import { ColorString, Stop } from '@hawaii-bus-plus/types';
 import { Fragment, h } from 'preact';
 import { useContext } from 'preact/hooks';
 import { useState } from 'react';
-import type { InfoWorkerHandler } from '../../../worker-info/info';
-import InfoWorker from '../../../worker-info/info?worker';
-import type { MarkersResponse } from '../../../worker-info/markers';
+import type { MapWorkerHandler } from '../../../worker-map/map';
+import MapWorker from '../../../worker-map/map?worker';
+import type { MarkersResponse } from '../../../worker-map/markers';
 import { dbInitialized } from '../../api';
 import { usePromise } from '../../hooks/usePromise';
 import { useWorker } from '../../hooks/useWorker';
@@ -24,7 +24,7 @@ export function StopStationMarkers({ highlighted, focused, darkMode }: Props) {
     stops: [],
     bikeStations: [],
   });
-  const postToInfoWorker = useWorker(InfoWorker) as InfoWorkerHandler;
+  const postToInfoWorker = useWorker(MapWorker) as MapWorkerHandler;
 
   usePromise(async (signal) => {
     await dbInitialized;

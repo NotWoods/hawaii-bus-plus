@@ -1,7 +1,6 @@
 import { DateString, Route, Stop, TimeString } from '@hawaii-bus-plus/types';
 import { Temporal } from 'proposal-temporal';
 import { BaseMessageRequest, registerWorker } from '../worker-shared/register';
-import { loadMarkers, MarkersResponse } from './markers';
 import { getRouteDetails, RouteDetails } from './route-details';
 import { loadStop, StopDetails } from './stop-details';
 
@@ -17,11 +16,7 @@ interface StopInfoMessage extends BaseMessageRequest {
   id: Stop['stop_id'];
 }
 
-interface MapMarkersMessage extends BaseMessageRequest {
-  type: 'markers';
-}
-
-type Message = RouteInfoMessage | StopInfoMessage | MapMarkersMessage;
+type Message = RouteInfoMessage | StopInfoMessage;
 
 export interface InfoWorkerHandler {
   (signal: AbortSignal, message: RouteInfoMessage): Promise<
@@ -30,7 +25,6 @@ export interface InfoWorkerHandler {
   (signal: AbortSignal, message: StopInfoMessage): Promise<
     StopDetails | undefined
   >;
-  (signal: AbortSignal, message: MapMarkersMessage): Promise<MarkersResponse>;
 }
 
 registerWorker((repo, message: Message) => {
@@ -45,7 +39,5 @@ registerWorker((repo, message: Message) => {
     }
     case 'stop':
       return loadStop(repo, message.id);
-    case 'markers':
-      return loadMarkers(repo);
   }
 });
