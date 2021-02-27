@@ -1,7 +1,13 @@
 import { ColorString, Stop } from '@hawaii-bus-plus/types';
-import { h, Fragment } from 'preact';
+import { Fragment, h } from 'preact';
 import { useContext } from 'preact/hooks';
-import { useApi } from '../../hooks/useApi';
+import { useState } from 'react';
+import type { InfoWorkerHandler } from '../../../worker-info/info';
+import InfoWorker from '../../../worker-info/info?worker';
+import type { MarkersResponse } from '../../../worker-info/markers';
+import { dbInitialized } from '../../api';
+import { usePromise } from '../../hooks/usePromise';
+import { useWorker } from '../../hooks/useWorker';
 import { RouterContext } from '../../router/Router';
 import { BikeStationMarkers } from './BikeStationMarkers';
 import { StopMarkers } from './StopMarkers';
@@ -14,12 +20,22 @@ interface Props {
 
 export function StopStationMarkers({ highlighted, focused, darkMode }: Props) {
   const { dispatch, point } = useContext(RouterContext);
-  const api = useApi();
+  const [api, setApi] = useState<MarkersResponse>({
+    stops: [],
+    bikeStations: [],
+  });
+  const postToInfoWorker = useWorker(InfoWorker) as InfoWorkerHandler;
+
+  usePromise(async (signal) => {
+    await dbInitialized;
+    const api = await postToInfoWorker(signal, { type: 'markers' });
+    setApi(api);
+  }, []);
 
   return (
     <>
       <StopMarkers
-        stops={api ? api.stops : []}
+        stops={api.stops}
         highlighted={highlighted}
         focused={focused}
         darkMode={darkMode}
@@ -27,7 +43,7 @@ export function StopStationMarkers({ highlighted, focused, darkMode }: Props) {
         dispatch={dispatch}
       />
       <BikeStationMarkers
-        stations={api ? Object.values(api.bikeStations) : []}
+        stations={api.bikeStations}
         point={point}
         dispatch={dispatch}
       />
