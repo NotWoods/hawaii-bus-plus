@@ -11,7 +11,13 @@ module.exports = {
   darkMode: 'media',
   theme: {
     fontFamily: {
-      display: ['Red Rose', 'serif'],
+      display: [
+        'Red Rose',
+        'Copperplate Gothic',
+        'Copperplate',
+        'Bookman Old Style',
+        'serif',
+      ],
     },
     extend: {
       inset: {
