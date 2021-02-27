@@ -9,12 +9,11 @@ const alias: AliasOptions = {
 };
 
 if (productionMode) {
-  alias['preact/debug'] = '@empty';
   alias['proposal-temporal'] = 'proposal-temporal/lib/index.mjs';
 }
 
 export default defineConfig({
-  // plugins: [emptyPackage('@empty'), prefreshPlus()],
+  plugins: [emptyPackage('preact/debug'), prefreshPlus()],
   resolve: { alias },
   optimizeDeps: {
     include: [
