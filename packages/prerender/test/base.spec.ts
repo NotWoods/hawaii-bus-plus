@@ -31,7 +31,6 @@ test.serial('render and run auth entry file', async (t) => {
     result.head!.includes('<title>Login - Hawaii Bus Plus</title>'),
     result.head
   );
-  t.true(result.head!.includes('<script>window.ctx'), result.head);
 });
 
 test.serial('render auth routes', async (t) => {
