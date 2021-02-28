@@ -58,6 +58,11 @@ function BillingButtons() {
   );
 }
 
+function isAuthError(err: unknown): err is { code: 401 | 402 } {
+  const error = err as { code?: unknown };
+  return error.code === 401 || error.code === 402;
+}
+
 export function Home(props: Props) {
   const { point } = useContext(RouterContext);
   const { coords } = useContext(MyLocationContext);
@@ -70,8 +75,8 @@ export function Home(props: Props) {
       try {
         await dbInitialized;
       } catch (err: unknown) {
-        if (err === 401 || err === 402) {
-          setAuthError(err);
+        if (isAuthError(err)) {
+          setAuthError(err.code);
         } else {
           console.error(err);
         }
