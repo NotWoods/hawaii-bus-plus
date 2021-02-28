@@ -1,9 +1,10 @@
-import { NetlifyContext, NetlifyEvent, NetlifyResponse } from '../shared/types';
-import { formatUser } from '../shared/response/user';
-import { getAuth } from '../shared/identity/auth';
+import { TextHTTPError } from '@hawaii-bus-plus/gotrue';
+import { createHandler } from '../shared';
+import { refreshedOrNull } from '../shared/cookie/parse';
 import { setCookie } from '../shared/cookie/serialize';
-import { recoverSession, refreshedOrNull } from '../shared/cookie/parse';
-import { jsonResponse, RequiredError } from '../shared/response';
+import { RequiredError } from '../shared/response';
+import { formatUser } from '../shared/response/user';
+import { NetlifyEvent } from '../shared/types';
 
 function parseJson(event: NetlifyEvent) {
   if (event.httpMethod === 'GET') {
@@ -26,23 +27,17 @@ function parseJson(event: NetlifyEvent) {
 /**
  * Update properties on the user.
  */
-export async function handler(
-  event: NetlifyEvent,
-  context: NetlifyContext
-): Promise<NetlifyResponse> {
-  const { identity } = context.clientContext;
-  const { auth } = getAuth(identity);
+export const handler = createHandler(
+  ['GET', 'POST'],
+  async (event, context) => {
+    const loggedInUser = await refreshedOrNull(context.authContext.currentUser);
+    if (!loggedInUser) {
+      throw new TextHTTPError(
+        { status: 401, statusText: 'Unauthorized' },
+        'Not logged in'
+      );
+    }
 
-  const loggedInUser = await refreshedOrNull(
-    recoverSession(auth, event.headers)
-  );
-  if (!loggedInUser) {
-    return jsonResponse(401, {
-      error: 'Unauthorized: Not logged in',
-    });
-  }
-
-  try {
     const body = parseJson(event)!;
     const user = await loggedInUser.update(body);
     const [userData, cookies] = await Promise.all([
@@ -60,19 +55,5 @@ export async function handler(
         'Set-Cookie': cookies,
       },
     };
-  } catch (err: unknown) {
-    if (err instanceof RequiredError) {
-      return jsonResponse(400, {
-        error: err.message,
-      });
-    } else if (err instanceof Error) {
-      return jsonResponse(500, {
-        error: err.message,
-      });
-    } else {
-      return jsonResponse(500, {
-        error: 'Unknown server error',
-      });
-    }
   }
-}
+);

@@ -1,8 +1,8 @@
-// import { prerenderAuth } from './prerender-auth.js';
+import { prerenderAuth } from './prerender-auth.js';
 import { prerenderPage } from './prerender-page.js';
 
 async function main() {
-  // await prerenderAuth(true);
+  await prerenderAuth(true);
   await prerenderPage(true);
 }
 

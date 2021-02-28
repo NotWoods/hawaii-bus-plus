@@ -1,13 +1,9 @@
-import { User, UserData } from '@hawaii-bus-plus/gotrue';
+import { User } from '@hawaii-bus-plus/gotrue';
 import { URL, URLSearchParams } from 'url';
+import { createHandler } from '../../shared';
 import { setCookie } from '../../shared/cookie/serialize';
-import { getAuth } from '../../shared/identity/auth';
 import { jsonResponse, RequiredError } from '../../shared/response';
-import {
-  NetlifyContext,
-  NetlifyEvent,
-  NetlifyResponse,
-} from '../../shared/types';
+import { NetlifyEvent } from '../../shared/types';
 import allowList from './allowlist.json';
 import { createUserInDb } from './create';
 import { renderTemplate } from './template';
@@ -38,35 +34,24 @@ function parseFormData(event: NetlifyEvent) {
   };
 }
 
-function isHttpError(err: unknown): err is Error & { status: number } {
-  // Handles errors from gotrue-js
-  return (
-    err instanceof Error &&
-    typeof (err as { status?: unknown }).status === 'number'
-  );
-}
-
 const baseURL = new URL('https://app.hawaiibusplus.com/');
 
-export async function handler(
-  event: NetlifyEvent,
-  context: NetlifyContext
-): Promise<NetlifyResponse> {
-  const { identity } = context.clientContext;
-  const { auth, admin } = getAuth(identity);
-  const formData = parseFormData(event);
+export const handler = createHandler(
+  ['GET', 'POST'],
+  async (event, context) => {
+    const { auth, admin } = context.authContext;
+    const formData = parseFormData(event);
 
-  let redirectTo = new URL(formData.get('redirect_to') ?? '', baseURL);
-  if (
-    !redirectTo.host.endsWith('.hawaiibusplus.com') &&
-    redirectTo.hostname !== 'localhost'
-  ) {
-    redirectTo = baseURL;
-  }
+    let redirectTo = new URL(formData.get('redirect_to') ?? '', baseURL);
+    if (
+      !redirectTo.host.endsWith('.hawaiibusplus.com') &&
+      redirectTo.hostname !== 'localhost'
+    ) {
+      redirectTo = baseURL;
+    }
 
-  let successStatus = 201;
-  let user: User;
-  try {
+    let successStatus = 201;
+    let user: User;
     const type = formData.req('type');
     switch (type) {
       // Accept invite for new user
@@ -112,13 +97,8 @@ export async function handler(
       }
       // Request a password recovery
       case 'requestPasswordRecovery': {
-        const body = await auth.requestPasswordRecovery(
-          formData.req('email').trim()
-        );
-        return renderTemplate(200, {
-          type: 'sentConfirmation',
-          userData: (body as unknown) as UserData,
-        });
+        await auth.requestPasswordRecovery(formData.req('email').trim());
+        return renderTemplate(200, { type: 'sentConfirmation' });
       }
       // Recover password
       case 'recover': {
@@ -129,32 +109,14 @@ export async function handler(
       default:
         throw new Error(`Invalid type ${type} given`);
     }
-  } catch (err: unknown) {
-    if (err instanceof RequiredError) {
-      return jsonResponse(400, {
-        error: err.message,
-      });
-    } else if (isHttpError(err)) {
-      return jsonResponse(err.status, {
-        error: err.message,
-      });
-    } else if (err instanceof Error) {
-      return jsonResponse(500, {
-        error: err.message,
-      });
-    } else {
-      return jsonResponse(500, {
-        error: 'Unknown server error',
-      });
-    }
-  }
 
-  const response = await renderTemplate(successStatus, {
-    type: 'success',
-    redirectTo: redirectTo.href,
-  });
-  response.multiValueHeaders = {
-    'Set-Cookie': await setCookie(user),
-  };
-  return response;
-}
+    const response = await renderTemplate(successStatus, {
+      type: 'success',
+      redirectTo: redirectTo.href,
+    });
+    response.multiValueHeaders = {
+      'Set-Cookie': await setCookie(user),
+    };
+    return response;
+  }
+);

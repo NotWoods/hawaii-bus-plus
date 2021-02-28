@@ -1,21 +1,13 @@
-import { recoverSession } from '../shared/cookie/parse';
+import { createHandler } from '../shared';
 import { removeCookie } from '../shared/cookie/serialize';
-import { getAuth } from '../shared/identity/auth';
-import { NetlifyContext, NetlifyEvent, NetlifyResponse } from '../shared/types';
 
 /**
  * Logout user
  */
-export async function handler(
-  event: NetlifyEvent,
-  context: NetlifyContext
-): Promise<NetlifyResponse> {
-  const { identity } = context.clientContext;
-  const { auth } = getAuth(identity);
-
-  const loggedInUser = recoverSession(auth, event.headers);
-  if (loggedInUser) {
-    await loggedInUser.logout();
+export const handler = createHandler(['GET', 'POST'], async (_, context) => {
+  const { currentUser } = context.authContext;
+  if (currentUser) {
+    await currentUser.logout();
   }
 
   return {
@@ -28,4 +20,4 @@ export async function handler(
       'Set-Cookie': removeCookie(),
     },
   };
-}
+});

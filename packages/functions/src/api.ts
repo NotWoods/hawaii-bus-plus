@@ -1,11 +1,9 @@
+import { HTTPError } from '@hawaii-bus-plus/gotrue';
 import { BinaryLike, createHash } from 'crypto';
 import { readFile } from 'fs';
 import { promisify } from 'util';
-import { recoverSession, refreshedOrNull } from '../shared/cookie/parse';
-import { getAuth } from '../shared/identity/auth';
-import { jsonResponse } from '../shared/response';
+import { createHandler } from '../shared';
 import { hasPaidAccess } from '../shared/role/paying';
-import { NetlifyContext, NetlifyEvent, NetlifyResponse } from '../shared/types';
 
 const readFileAsync = promisify(readFile);
 
@@ -15,48 +13,48 @@ function getHash(str: BinaryLike) {
   return hash.digest('hex');
 }
 
-export async function handler(
-  event: NetlifyEvent,
-  context: NetlifyContext
-): Promise<NetlifyResponse> {
-  if (event.httpMethod !== 'GET') {
-    return jsonResponse(405, { error: 'Method Not Allowed' });
+function matchEntityTags(
+  entityTags: string | undefined
+): (eTag: string) => boolean {
+  if (entityTags == undefined) {
+    return () => false;
+  } else if (entityTags === '*') {
+    return () => true;
+  } else {
+    const storedTags = new Set(entityTags.split(',').map((h) => h.trim()));
+    return (eTag) => storedTags.has(`"${eTag}"`);
   }
+}
 
-  const { identity } = context.clientContext;
-  const { auth } = getAuth(identity);
-  const user = recoverSession(auth, event.headers);
-  const loggedInUser = await refreshedOrNull(user);
+export const handler = createHandler('GET', async (event, context) => {
+  const loggedInUser = await context.authContext.user();
   const userDetails = await loggedInUser?.getUserData();
   const payingOrTrialUser = userDetails && hasPaidAccess(userDetails);
-  console.log('DEBUG HERE', user, loggedInUser, userDetails);
 
   if (payingOrTrialUser) {
     const path = require.resolve(event.path.replace('/api/v1/', './'));
     const file = await readFileAsync(path, 'utf8');
 
-    const storedTags = event.headers['if-none-match']
-      ?.split(',')
-      ?.map((h) => h.trim());
-    const eTag = getHash(file);
+    const matchETag = matchEntityTags(event.headers['if-none-match']);
+    const entityTag = getHash(file);
 
-    if (storedTags?.some((stored) => stored === `"${eTag}"`)) {
-      return jsonResponse(304, { error: 'Not Modified' });
+    if (matchETag(entityTag)) {
+      throw new HTTPError(304, 'Not Modified');
     } else {
       return {
         statusCode: 200,
         body: file,
         headers: {
           'Content-Type': 'application/json',
-          ETag: eTag,
+          ETag: entityTag,
         },
       };
     }
   } else if (userDetails) {
     // Logged in but not paying
-    return jsonResponse(402, { error: 'Payment Required' });
+    throw new HTTPError(402, 'Payment Required');
   } else {
     // Logged out
-    return jsonResponse(401, { error: 'Unauthorized' });
+    throw new HTTPError(401, 'Unauthorized');
   }
-}
+});

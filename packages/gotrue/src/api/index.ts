@@ -7,10 +7,18 @@ import fetch, { Response, RequestInit } from 'node-fetch';
 import { RequestMap } from './interface.js';
 import { getPagination } from './pagination.js';
 
+type ResponseData = Pick<Response, 'status' | 'statusText'>;
+
 export class HTTPError extends Error {
   status: number;
 
-  constructor(response: Response) {
+  constructor(status: number, statusText: string);
+  constructor(response: ResponseData);
+  constructor(response: ResponseData | number, statusText?: string) {
+    if (typeof response === 'number') {
+      response = { status: response, statusText: statusText! };
+    }
+
     super(response.statusText);
     this.name = this.constructor.name;
     if (typeof Error.captureStackTrace === 'function') {
@@ -25,7 +33,7 @@ export class HTTPError extends Error {
 export class TextHTTPError extends HTTPError {
   data: unknown;
 
-  constructor(response: Response, data: unknown) {
+  constructor(response: ResponseData, data: unknown) {
     super(response);
     this.data = data;
   }
@@ -34,7 +42,7 @@ export class TextHTTPError extends HTTPError {
 export class JSONHTTPError extends HTTPError {
   json: unknown;
 
-  constructor(response: Response, json: unknown) {
+  constructor(response: ResponseData, json: unknown) {
     super(response);
     this.json = json;
   }

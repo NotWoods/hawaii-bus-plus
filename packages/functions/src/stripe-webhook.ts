@@ -1,7 +1,6 @@
 import Stripe from 'stripe';
-import { getAuth } from '../shared/identity/auth';
+import { createHandler } from '../shared';
 import { database, stripe } from '../shared/stripe';
-import { NetlifyContext, NetlifyEvent, NetlifyResponse } from '../shared/types';
 
 function customerId({ customer }: Stripe.Subscription) {
   if (typeof customer === 'string') {
@@ -26,11 +25,7 @@ function statusToRole(status: Stripe.Subscription.Status) {
 /**
  * Handle Stripe webhook events
  */
-export async function handler(
-  event: NetlifyEvent,
-  context: NetlifyContext
-): Promise<NetlifyResponse> {
-  const { identity } = context.clientContext;
+export const handler = createHandler('POST', async (event, context) => {
   const stripeEvent = stripe.webhooks.constructEvent(
     event.body!,
     event.headers['stripe-signature']!,
@@ -51,9 +46,7 @@ export async function handler(
         };
       }
 
-      const { admin } = getAuth(identity);
-
-      await admin.updateUser(
+      await context.authContext.admin.updateUser(
         { id: netlifyId },
         {
           app_metadata: {
@@ -73,4 +66,4 @@ export async function handler(
         body: 'Not Found: invalid event type',
       };
   }
-}
+});

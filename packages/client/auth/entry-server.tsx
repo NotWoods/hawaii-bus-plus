@@ -7,7 +7,6 @@ export default function renderAuthPage(url: URL) {
   const type = urlToType(url);
   return {
     html: render(<App defaultType={type} />),
-    head: `<title>${renderTitle(type)}</title>
-    <script>window.ctx = ${JSON.stringify({ type })}</script>`,
+    head: `<title>${renderTitle(type)}</title><!--head-html-->`,
   };
 }

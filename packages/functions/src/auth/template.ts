@@ -4,7 +4,7 @@ import { NetlifyResponse } from '../../shared/types';
 
 const readFileAsync = promisify(readFile);
 
-const templatePath = require.resolve('./index.html');
+const templatePath = require.resolve('./done.html');
 const templateReady = readFileAsync(templatePath, 'utf8');
 
 export async function renderTemplate(

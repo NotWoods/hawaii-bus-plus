@@ -1,46 +1,42 @@
+import { TextHTTPError } from '@hawaii-bus-plus/gotrue';
 import { URL } from 'url';
-import { recoverSession, refreshedOrNull } from '../shared/cookie/parse';
-import { getAuth } from '../shared/identity/auth';
+import { createHandler } from '../shared';
 import { database, stripe } from '../shared/stripe';
-import { NetlifyContext, NetlifyEvent, NetlifyResponse } from '../shared/types';
+import { NetlifyEvent } from '../shared/types';
+
+function getReferrer(event: NetlifyEvent) {
+  return event.headers['referer']
+    ? new URL(event.headers['referer'])
+    : undefined;
+}
 
 /**
  * Redirects to Stripe Billing page for the logged in user.
  */
-export async function handler(
-  event: NetlifyEvent,
-  context: NetlifyContext
-): Promise<NetlifyResponse> {
-  const referrer = event.headers['referer']
-    ? new URL(event.headers['referer'])
-    : undefined;
+export const handler = createHandler('GET', async (event, context) => {
+  const referrer = getReferrer(event);
   if (!referrer || !referrer.host.endsWith('hawaiibusplus.com')) {
-    return {
-      statusCode: 403,
-      body: 'Forbidden: Must log in on https://hawaiibusplus.com',
-    };
+    throw new TextHTTPError(
+      { status: 403, statusText: 'Forbidden' },
+      'Must log in on https://hawaiibusplus.com'
+    );
   }
 
-  const { identity } = context.clientContext;
-  const { auth } = getAuth(identity);
-
-  const loggedInUser = await refreshedOrNull(
-    recoverSession(auth, event.headers)
-  );
+  const loggedInUser = await context.authContext.user();
   const userDetails = await loggedInUser?.getUserData();
   if (!userDetails) {
-    return {
-      statusCode: 401,
-      body: 'Unauthorized: Not logged in',
-    };
+    throw new TextHTTPError(
+      { status: 401, statusText: 'Unauthorized' },
+      'Not logged in'
+    );
   }
 
   const stripeId = await database.getUserByNetlifyId(userDetails.id);
   if (!stripeId) {
-    return {
-      statusCode: 500,
-      body: `Internal Server Error: Can't find payment info. Please contact support.`,
-    };
+    throw new TextHTTPError(
+      { status: 500, statusText: 'Internal Server Error' },
+      `Can't find payment info. Please contact support.`
+    );
   }
 
   const link = await stripe.billingPortal.sessions.create({
@@ -55,4 +51,4 @@ export async function handler(
       Location: link.url,
     },
   };
-}
+});
