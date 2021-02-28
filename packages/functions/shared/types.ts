@@ -16,7 +16,7 @@ export interface NetlifyContext extends Omit<Context, 'clientContext'> {
     custom: {
       netlify: string;
     };
-    identity: NetlifyIdentityContext;
+    identity?: NetlifyIdentityContext;
     user?: unknown;
   };
 }

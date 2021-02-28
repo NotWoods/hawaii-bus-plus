@@ -7,7 +7,15 @@ export function registerPromiseWorker(
     result?: unknown
   ) {
     if (error) {
-      globalThis.postMessage([messageId, error]);
+      globalThis.postMessage([
+        messageId,
+        {
+          name: error.name,
+          message: error.message,
+          status: (error as { status?: unknown }).status,
+          code: (error as { code?: unknown }).code,
+        },
+      ]);
     } else {
       globalThis.postMessage([messageId, undefined, result]);
     }

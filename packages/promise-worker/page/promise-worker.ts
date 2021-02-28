@@ -8,6 +8,23 @@ export class AbortError extends Error {
   }
 }
 
+export class WorkerError extends Error {
+  status?: number;
+  code?: number | string;
+
+  constructor(data: {
+    name: string;
+    message: string;
+    status?: number;
+    code?: number | string;
+  }) {
+    super(data.message);
+    this.name = data.name;
+    this.status = data.status;
+    this.code = data.code;
+  }
+}
+
 export class PromiseWorker {
   private readonly callbacks = new Map<
     number,
@@ -57,7 +74,7 @@ export class PromiseWorker {
 
       this.callbacks.set(messageId, (error, result) => {
         signal?.removeEventListener('abort', onAbort);
-        if (error) reject(error);
+        if (error) reject(new WorkerError(error));
         else resolve(result);
       });
 

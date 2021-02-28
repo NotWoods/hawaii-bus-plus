@@ -120,7 +120,6 @@ export async function initDatabase(
 
     for (const [storeName, removed] of removedKeys) {
       for (const key of removed) {
-        console.log(removed, key);
         jobs.push(deleteTx.objectStore(storeName).delete(key as any));
       }
     }
