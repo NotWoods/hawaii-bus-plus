@@ -5,6 +5,7 @@ import { Icon } from '../icons/Icon';
 import './SearchInput.css';
 
 export const searchInputIconClass = 'absolute inset-y-0 h-full py-0 px-2';
+export const leadingInputClass = `${searchInputIconClass} left-0 w-10 opacity-60 filter-invert`;
 
 export function SearchInput(props: JSX.HTMLAttributes<HTMLInputElement>) {
   return (
@@ -20,10 +21,5 @@ export function SearchInput(props: JSX.HTMLAttributes<HTMLInputElement>) {
 }
 
 export function LeadingInputIcon(props: { src: string; alt: string }) {
-  return (
-    <Icon
-      {...props}
-      class={`${searchInputIconClass} left-0 w-10 opacity-60 filter-invert`}
-    />
-  );
+  return <Icon {...props} class={leadingInputClass} />;
 }
