@@ -78,6 +78,7 @@ test.concurrent('journeyToDirections no walking', async () => {
     trips: expect.any(Array),
     duration: expectDurationData('PT3H15M'),
     fare: expect.stringContaining('$2.00'),
+    bounds: expect.any(Object),
   });
   expect(journey.trips).toHaveLength(2);
   expect(journey.trips[0]).toEqual({

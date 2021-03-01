@@ -142,6 +142,7 @@ test.concurrent('directions', async () => {
     trips: expect.any(Array),
     duration: expectDurationData('PT1H'),
     fare: expect.stringContaining('$2.00'),
+    bounds: expect.any(Object),
   });
   expect(journeys[0].trips).toHaveLength(1);
 
