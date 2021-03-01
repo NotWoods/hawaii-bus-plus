@@ -34,17 +34,20 @@ function createAuthContext(
   const authContext = getAuth(identity) as AuthContext;
   const currentUser = recoverSession(authContext.auth, event.headers);
   async function user() {
+    console.log('currentUser', currentUser);
     if (!currentUser) return undefined;
 
     const currentToken = currentUser.tokenDetails().access_token;
     try {
       const refreshedToken = await currentUser.jwt();
+      console.log('refreshedToken', refreshedToken);
       if (currentToken !== refreshedToken) {
         // Token has been changed, update user
         response.multiValueHeaders['Set-Cookie'] = await setCookie(currentUser);
       }
       return currentUser;
     } catch (err: unknown) {
+      console.log('refresh error', err);
       response.multiValueHeaders['Set-Cookie'] = removeCookie();
       return undefined;
     }
