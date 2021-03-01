@@ -15,12 +15,11 @@ function Divider() {
 }
 
 export function Menu(props: Props) {
+  if (!props.open) return null;
+
   return (
     <nav
-      class={classNames(
-        'fixed origin-top-right left-0 top-12 m-2 w-56 shadow-lg bg-blue-600 text-white ring-1 ring-black ring-opacity-50 z-10',
-        props.open ? 'block' : 'hidden'
-      )}
+      class="fixed origin-top-right left-0 top-12 m-2 w-56 shadow-lg bg-blue-600 text-white ring-1 ring-black ring-opacity-50 z-10"
       role="menu"
       aria-orientation="vertical"
       aria-labelledby={props.labelledBy}

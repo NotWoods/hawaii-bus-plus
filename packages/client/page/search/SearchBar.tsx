@@ -1,7 +1,7 @@
 import { h } from 'preact';
 import type { JSXInternal as JSX } from 'preact/src/jsx';
-import searchIcon from '../icons/search.svg';
-import { LeadingInputIcon, SearchInput } from './SearchInput';
+import { SearchIcon } from '../icons/MenuIcon';
+import { SearchInput } from './SearchInput';
 
 export function SearchBar(props: JSX.HTMLAttributes<HTMLInputElement>) {
   return (
@@ -13,7 +13,7 @@ export function SearchBar(props: JSX.HTMLAttributes<HTMLInputElement>) {
         aria-label="Where to?"
         accessKey="f"
       />
-      <LeadingInputIcon src={searchIcon} alt="Search" />
+      <SearchIcon />
     </form>
   );
 }
