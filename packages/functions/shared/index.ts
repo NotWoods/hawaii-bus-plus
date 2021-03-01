@@ -78,7 +78,7 @@ export function createHandler(
       const response = await handler(event, subContext);
       response.headers = Object.assign(headers, response.headers);
       response.multiValueHeaders = Object.assign(
-        headers,
+        multiValueHeaders,
         response.multiValueHeaders
       );
       console.log(response);
