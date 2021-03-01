@@ -22,8 +22,8 @@ function matchEntityTags(
     return () => true;
   } else {
     const storedTags = new Set(entityTags.split(',').map((h) => h.trim()));
-    console.log(storedTags);
-    return (eTag) => storedTags.has(`"${eTag}"`);
+    return (eTag) =>
+      storedTags.has(`"${eTag}"`) || storedTags.has(`"${eTag}-df"`);
   }
 }
 
@@ -42,7 +42,6 @@ export const handler = createHandler('GET', async (event, context) => {
     );
     const entityTag = getHash(file);
 
-    console.log(event.headers);
     console.log(matchETag(entityTag), entityTag);
 
     if (matchETag(entityTag)) {
