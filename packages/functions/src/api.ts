@@ -36,9 +36,13 @@ export const handler = createHandler('GET', async (event, context) => {
     const path = require.resolve(event.path.replace('/api/v1/', './'));
     const file = await readFileAsync(path, 'utf8');
 
-    const matchETag = matchEntityTags(event.headers['if-none-match']);
+    const matchETag = matchEntityTags(
+      // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+      event.headers['if-none-match'] || event.headers['x-if-none-match']
+    );
     const entityTag = getHash(file);
 
+    console.log(event.headers);
     console.log(matchETag(entityTag), entityTag);
 
     if (matchETag(entityTag)) {

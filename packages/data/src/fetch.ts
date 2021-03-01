@@ -27,6 +27,7 @@ export async function downloadScheduleData({
   const headers = new Headers();
   if (storedTag) {
     headers.set('If-None-Match', `"${storedTag}"`);
+    headers.set('X-If-None-Match', `"${storedTag}"`);
   }
 
   const res = await fetch('/api/v1/api.json', {
