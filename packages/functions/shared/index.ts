@@ -25,6 +25,65 @@ interface Context extends NetlifyContext {
   authContext: AuthContext;
 }
 
+function createAuthContext(
+  event: NetlifyEvent,
+  context: NetlifyContext,
+  response: Required<Pick<NetlifyResponse, 'multiValueHeaders'>>
+) {
+  const { identity } = context.clientContext;
+  const authContext = getAuth(identity) as AuthContext;
+  const currentUser = recoverSession(authContext.auth, event.headers);
+  async function user() {
+    if (!currentUser) return undefined;
+
+    const currentToken = currentUser.tokenDetails().access_token;
+    try {
+      const refreshedToken = await currentUser.jwt();
+      if (currentToken !== refreshedToken) {
+        // Token has been changed, update user
+        response.multiValueHeaders['Set-Cookie'] = await setCookie(currentUser);
+      }
+      return currentUser;
+    } catch (err: unknown) {
+      response.multiValueHeaders['Set-Cookie'] = removeCookie();
+      return undefined;
+    }
+  }
+  authContext.currentUser = currentUser;
+  authContext.user = user;
+  return authContext;
+}
+
+/**
+ * Convert error to Netlify response
+ */
+function errorToResponse(err: unknown): NetlifyResponse {
+  if (err instanceof JSONHTTPError) {
+    return jsonResponse(err.status, {
+      error: err.message,
+      json: err.json,
+    });
+  } else if (err instanceof TextHTTPError) {
+    return jsonResponse(err.status, {
+      error: err.message,
+      data: err.data,
+    });
+  } else if (err instanceof HTTPError) {
+    return jsonResponse(err.status, {
+      error: err.message,
+    });
+  } else if (err instanceof Error) {
+    return jsonResponse(500, {
+      error: 'Internal Server Error',
+      data: err.message,
+    });
+  } else {
+    return jsonResponse(500, {
+      error: 'Unknown server error',
+    });
+  }
+}
+
 export function createHandler(
   httpMethods: HttpMethod | readonly HttpMethod[],
   handler: (
@@ -44,70 +103,30 @@ export function createHandler(
       return jsonResponse(405, { error: 'Method Not Allowed' });
     }
 
-    const { identity } = context.clientContext;
-    const authContext = getAuth(identity) as AuthContext;
-    const headers: NonNullable<NetlifyResponse['headers']> = {
-      'Access-Control-Allow-Methods': Array.from(methods).join(', '),
+    const partialResponse: Required<
+      Pick<NetlifyResponse, 'headers' | 'multiValueHeaders'>
+    > = {
+      headers: {
+        'Access-Control-Allow-Methods': Array.from(methods).join(', '),
+      },
+      multiValueHeaders: {},
     };
-    const multiValueHeaders: NonNullable<
-      NetlifyResponse['multiValueHeaders']
-    > = {};
-
-    const currentUser = recoverSession(authContext.auth, event.headers);
-    async function user() {
-      if (!currentUser) return undefined;
-
-      const currentToken = currentUser.tokenDetails().access_token;
-      try {
-        const refreshedToken = await currentUser.jwt();
-        if (currentToken !== refreshedToken) {
-          // Token has been changed, update user
-          multiValueHeaders['Set-Cookie'] = await setCookie(currentUser);
-        }
-        return currentUser;
-      } catch (err: unknown) {
-        multiValueHeaders['Set-Cookie'] = removeCookie();
-        return undefined;
-      }
-    }
-    authContext.currentUser = currentUser;
-    authContext.user = user;
+    const authContext = createAuthContext(event, context, partialResponse);
 
     try {
       const subContext: Context = { ...context, authContext };
       const response = await handler(event, subContext);
-      response.headers = Object.assign(headers, response.headers);
+      response.headers = Object.assign(
+        partialResponse.headers,
+        response.headers
+      );
       response.multiValueHeaders = Object.assign(
-        multiValueHeaders,
+        partialResponse.multiValueHeaders,
         response.multiValueHeaders
       );
-      console.log(response);
       return response;
     } catch (err: unknown) {
-      if (err instanceof JSONHTTPError) {
-        return jsonResponse(err.status, {
-          error: err.message,
-          json: err.json,
-        });
-      } else if (err instanceof TextHTTPError) {
-        return jsonResponse(err.status, {
-          error: err.message,
-          data: err.data,
-        });
-      } else if (err instanceof HTTPError) {
-        return jsonResponse(err.status, {
-          error: err.message,
-        });
-      } else if (err instanceof Error) {
-        return jsonResponse(500, {
-          error: 'Internal Server Error',
-          data: err.message,
-        });
-      } else {
-        return jsonResponse(500, {
-          error: 'Unknown server error',
-        });
-      }
+      return errorToResponse(err);
     }
   };
 }

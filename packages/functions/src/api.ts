@@ -22,6 +22,7 @@ function matchEntityTags(
     return () => true;
   } else {
     const storedTags = new Set(entityTags.split(',').map((h) => h.trim()));
+    console.log(storedTags);
     return (eTag) => storedTags.has(`"${eTag}"`);
   }
 }
@@ -37,6 +38,8 @@ export const handler = createHandler('GET', async (event, context) => {
 
     const matchETag = matchEntityTags(event.headers['if-none-match']);
     const entityTag = getHash(file);
+
+    console.log(matchETag(entityTag), entityTag);
 
     if (matchETag(entityTag)) {
       throw new HTTPError(304, 'Not Modified');
