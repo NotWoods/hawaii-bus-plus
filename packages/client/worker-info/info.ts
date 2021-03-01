@@ -6,7 +6,7 @@ import { loadStop, StopDetails } from './stop-details';
 
 interface RouteInfoMessage extends BaseMessageRequest {
   type: 'route';
-  id: Route['route_id'];
+  routeId: Route['route_id'];
   date?: DateString;
   time?: TimeString;
 }
@@ -35,7 +35,7 @@ registerWorker((repo, message: Message) => {
         date = Temporal.PlainDate.from(message.date);
       }
 
-      return getRouteDetails(repo, message.id, date, message.time);
+      return getRouteDetails(repo, message.routeId, date, message.time);
     }
     case 'stop':
       return loadStop(repo, message.id);

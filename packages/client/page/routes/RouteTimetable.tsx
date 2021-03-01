@@ -47,18 +47,18 @@ export function RouteTimetable() {
         await dbInitialized;
         const details = await postToInfoWorker(signal, {
           type: 'route',
-          id: routeId,
+          routeId,
           date:
             tripDate === NOW ? undefined : (tripDate.toString() as DateString),
           time: tripTime,
         });
 
-        setDetails(details);
+        setDetails(details, tripTime ? directionId : undefined);
       } else {
-        setDetails(undefined);
+        setDetails();
       }
     },
-    [routeId, tripTime]
+    [routeId, tripTime, directionId]
   );
 
   const route = details?.route;

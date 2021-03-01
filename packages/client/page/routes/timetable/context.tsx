@@ -5,7 +5,7 @@ import type { RouteDetails } from '../../../worker-info/route-details';
 export interface RouteDetailContext {
   details?: RouteDetails;
   directionId: number;
-  setDetails(details: RouteDetails | undefined): void;
+  setDetails(details?: RouteDetails, directionId?: number): void;
   switchDirection?(): void;
 }
 
@@ -27,9 +27,11 @@ export function RouteDetailProvider(props: { children: ComponentChildren }) {
   const [selectedIdIndex, setSelectedIdIndex] = useState(directionIds[0]);
   const directionId = directionIds[selectedIdIndex % directionIds.length] || 0;
 
-  function setDetails(details: RouteDetails | undefined) {
+  function setDetails(details?: RouteDetails, directionId?: number) {
     setDetailState(details);
-    setSelectedIdIndex(0);
+    setSelectedIdIndex(
+      directionId != undefined ? directionIds.indexOf(directionId) : 0
+    );
   }
 
   function switchDirection() {

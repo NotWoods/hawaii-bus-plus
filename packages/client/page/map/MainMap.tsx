@@ -10,7 +10,7 @@ export function MainMap() {
 
   return (
     <section class="fixed sheet inset-0 md:top-0 md:ml-80">
-      {isLoaded && MapContent ? <MapContent /> : null}
+      {isLoaded && MapContent ? <MapContent /> : undefined}
     </section>
   );
 }

@@ -1,10 +1,10 @@
 import { getSingle, Repository } from '@hawaii-bus-plus/data';
-import { nowWithZone } from '@hawaii-bus-plus/temporal-utils';
 import {
   durationToData,
   formatPlainTime,
   StopTimeData,
 } from '@hawaii-bus-plus/presentation';
+import { nowWithZone } from '@hawaii-bus-plus/temporal-utils';
 import { Agency, ColorString, Route, Stop } from '@hawaii-bus-plus/types';
 import type { Temporal } from 'proposal-temporal';
 import { LatLngBounds, LatLngBoundsLiteral } from 'spherical-geometry-js';
@@ -88,9 +88,10 @@ export async function getRouteDetails(
   >,
   routeId: Route['route_id'],
   date?: Temporal.PlainDate,
-  time?: Temporal.PlainTime | string | Temporal.TimeLike
+  time?: Temporal.TimeLike | string
 ): Promise<RouteDetails | undefined> {
   const allCalendarsReady = repo.loadCalendars();
+
   const route = await getSingle(repo, repo.loadRoutes, routeId);
   if (!route) {
     return undefined;
