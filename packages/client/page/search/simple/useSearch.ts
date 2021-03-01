@@ -1,7 +1,7 @@
 import { useGoogleMap } from '@hawaii-bus-plus/react-google-maps';
 import type { SearchWorkerHandler } from '../../../worker-search/search';
 import SearchWorker from '../../../worker-search/search?worker';
-import { dbInitialized } from '../../api';
+import { dbInitialized } from '../../hooks/api';
 import { useWorker } from '../../hooks/useWorker';
 import {
   buildSessionToken,

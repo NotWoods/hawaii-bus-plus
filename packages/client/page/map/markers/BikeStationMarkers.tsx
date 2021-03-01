@@ -1,7 +1,7 @@
 import { Point } from '@hawaii-bus-plus/presentation';
 import { MarkerWithData } from '@hawaii-bus-plus/react-google-maps';
 import { StationInformation } from '@hawaii-bus-plus/types';
-import { h, Fragment } from 'preact';
+import { Fragment, h } from 'preact';
 import {
   PointRouterAction,
   setBikeStationAction,

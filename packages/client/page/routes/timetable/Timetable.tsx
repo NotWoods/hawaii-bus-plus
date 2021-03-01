@@ -1,5 +1,5 @@
 import { TimeString } from '@hawaii-bus-plus/types';
-import { h, Fragment } from 'preact';
+import { Fragment, h } from 'preact';
 import type { Temporal } from 'proposal-temporal';
 import type { RouteDetails } from '../../../worker-info/route-details';
 import { NOW } from '../../time/input/symbol';

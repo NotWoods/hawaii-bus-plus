@@ -13,7 +13,11 @@ import { Agency, ColorString, Route, Stop, Trip } from '@hawaii-bus-plus/types';
 import { findLastIndex, last } from '@hawaii-bus-plus/utils';
 import { add } from 'mnemonist/set';
 import { Temporal } from 'proposal-temporal';
-import { computeDistanceBetween } from 'spherical-geometry-js';
+import {
+  computeDistanceBetween,
+  LatLngBounds,
+  LatLngBoundsLiteral,
+} from 'spherical-geometry-js';
 import { stopsLoader } from './footpaths';
 import { CompletePath, PathSegment, PathTripSegment } from './raptor';
 
@@ -52,6 +56,7 @@ export interface Journey {
   };
   stops: ReadonlyMap<Stop['stop_id'], ColorString>;
   fare: string;
+  bounds?: LatLngBoundsLiteral;
 }
 
 const fareFormatter = new Intl.NumberFormat([], {
@@ -108,6 +113,8 @@ export async function journeyToDirections(
   const pathSegments = path.slice(1) as readonly PathSegment[];
 
   const allStops = new Map<Stop['stop_id'], ColorString>();
+  let bounds: LatLngBounds | undefined;
+
   const trips: (JourneyTripSegment | Walking)[] = [];
   let pathCount = 0;
   let journeyStart: PlainDaysTime | undefined;
@@ -176,8 +183,13 @@ export async function journeyToDirections(
         throw new Error(`Invalid agency ID ${route.agency_id}`);
       }
 
-      for (const stop of stops.keys()) {
-        allStops.set(stop, route.route_color);
+      for (const stop of stops.values()) {
+        allStops.set(stop.stop_id, route.route_color);
+        if (bounds) {
+          bounds.extend(stop.position);
+        } else {
+          bounds = new LatLngBounds(stop.position, stop.position);
+        }
       }
 
       trips.push({
@@ -257,5 +269,6 @@ export async function journeyToDirections(
     trips,
     stops: allStops,
     fare: fareFormatter.format(farePrice),
+    bounds: bounds?.toJSON(),
   };
 }

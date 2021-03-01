@@ -1,10 +1,10 @@
 import { PlainTimeData } from '@hawaii-bus-plus/presentation';
-import { h, Fragment } from 'preact';
+import { Fragment, h } from 'preact';
 import { classNames } from '../../../hooks/classnames';
 import { Link } from '../../../router/Router';
 import { PlainTimeElement } from '../../../time/PlainTimeElement';
-import { TripDecorDot, TripDecorLine } from './DecorLines';
 import './BaseSegment.css';
+import { TripDecorDot, TripDecorLine } from './DecorLines';
 
 interface ContentProps {
   name: string;

@@ -38,7 +38,6 @@ export function PlaceCard({ point }: Props) {
           fields: ['formatted_address', 'name', 'geometry', 'place_id'],
           sessionToken: buildSessionToken(),
         });
-        console.log(details);
         setDetails(details);
       } catch (err: unknown) {
         if (err instanceof PlacesServiceError) {

@@ -1,14 +1,14 @@
 import { ColorString, Shape, Stop } from '@hawaii-bus-plus/types';
 import { last } from '@hawaii-bus-plus/utils';
-import { ComponentChildren, h, Fragment } from 'preact';
+import { ComponentChildren, Fragment, h } from 'preact';
 import { useContext } from 'preact/hooks';
+import { JourneyTripSegment } from '../../worker-nearby/directions/format';
 import { isJourneyTripSegment } from '../directions/JourneySegment';
 import { RouterContext } from '../router/Router';
-import { RouteDetailContext } from '../routes/timetable/context';
-import { ShapeLine } from './ShapeLine';
-import { StopStationMarkers } from './markers/StopStationMarkers';
 import { DIRECTIONS_PATH, RouterState } from '../router/state';
-import { JourneyTripSegment } from '../../worker-nearby/directions/format';
+import { RouteDetailContext } from '../routes/timetable/context';
+import { StopStationMarkers } from './markers/StopStationMarkers';
+import { ShapeLine } from './ShapeLine';
 
 interface Props {
   darkMode?: boolean;

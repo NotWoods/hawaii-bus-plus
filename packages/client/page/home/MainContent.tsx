@@ -4,7 +4,7 @@ import {
   Point,
   StopPoint,
 } from '@hawaii-bus-plus/presentation';
-import { h, Fragment } from 'preact';
+import { Fragment, h } from 'preact';
 import { useContext } from 'preact/hooks';
 import { useLazyComponent } from '../hooks/useLazyComponent';
 import { useScreens } from '../hooks/useScreens';

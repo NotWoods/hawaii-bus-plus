@@ -5,7 +5,7 @@ import { useState } from 'react';
 import type { MapWorkerHandler } from '../../../worker-map/map';
 import MapWorker from '../../../worker-map/map?worker';
 import type { MarkersResponse } from '../../../worker-map/markers';
-import { dbInitialized } from '../../api';
+import { dbInitialized } from '../../hooks/api';
 import { usePromise } from '../../hooks/usePromise';
 import { useWorker } from '../../hooks/useWorker';
 import { RouterContext } from '../../router/Router';

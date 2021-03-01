@@ -1,4 +1,4 @@
-import { h, createContext, ComponentChildren } from 'preact';
+import { ComponentChildren, createContext, h } from 'preact';
 import { useContext, useEffect, useReducer } from 'preact/hooks';
 import { JSXInternal } from 'preact/src/jsx';
 import { useFocusTrapped } from '../buttons/FocusTrap';

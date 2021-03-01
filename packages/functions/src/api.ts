@@ -42,8 +42,6 @@ export const handler = createHandler('GET', async (event, context) => {
     );
     const entityTag = getHash(file);
 
-    console.log(matchETag(entityTag), entityTag);
-
     if (matchETag(entityTag)) {
       throw new HTTPError(304, 'Not Modified');
     } else {

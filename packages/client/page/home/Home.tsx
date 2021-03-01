@@ -1,14 +1,14 @@
-import { h, Fragment } from 'preact';
+import { Fragment, h } from 'preact';
 import { useContext, useState } from 'preact/hooks';
 import type { NearbyWorkerHandler } from '../../worker-nearby/nearby';
 import NearbyWorker from '../../worker-nearby/nearby?worker';
-import { dbInitialized } from '../api';
 import { Button } from '../buttons/Button';
+import { dbInitialized } from '../hooks/api';
 import { usePromise } from '../hooks/usePromise';
 import { useWorker } from '../hooks/useWorker';
+import { Icon } from '../icons/Icon';
 import loginSvg from '../icons/login.svg';
 import paymentsSvg from '../icons/payments.svg';
-import { Icon } from '../icons/Icon';
 import { MyLocationContext } from '../map/location/context';
 import { RouterContext } from '../router/Router';
 import { SearchBar } from '../search/SearchBar';

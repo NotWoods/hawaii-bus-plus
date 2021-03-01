@@ -1,5 +1,5 @@
 import { Point } from '@hawaii-bus-plus/presentation';
-import { h, Fragment } from 'preact';
+import { Fragment, h } from 'preact';
 import { useState } from 'preact/hooks';
 import type { Temporal } from 'proposal-temporal';
 import type {
@@ -7,9 +7,9 @@ import type {
   NearbyWorkerHandler,
 } from '../../../worker-nearby/nearby';
 import DirectionsWorker from '../../../worker-nearby/nearby?worker';
-import { dbInitialized } from '../../api';
 import { LoadingBar } from '../../buttons/LoadingBar';
 import { DirectionsTime } from '../../directions/DirectionsTime';
+import { dbInitialized } from '../../hooks/api';
 import { useDelay } from '../../hooks/useDelay';
 import { useLazyComponent } from '../../hooks/useLazyComponent';
 import { usePromise } from '../../hooks/usePromise';

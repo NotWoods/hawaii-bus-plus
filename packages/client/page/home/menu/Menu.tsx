@@ -1,9 +1,8 @@
 import { h } from 'preact';
-import { MenuOption } from './MenuOption';
-import paymentsIcon from '../../icons/payments.svg';
-import logoutIcon from '../../icons/logout.svg';
 import feedbackIcon from '../../icons/feedback.svg';
-import { classNames } from '../../hooks/classnames';
+import logoutIcon from '../../icons/logout.svg';
+import paymentsIcon from '../../icons/payments.svg';
+import { MenuOption } from './MenuOption';
 
 interface Props {
   open?: boolean;

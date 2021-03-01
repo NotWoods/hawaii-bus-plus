@@ -1,4 +1,4 @@
-import { h, ComponentChildren, createContext } from 'preact';
+import { ComponentChildren, createContext, h } from 'preact';
 import { useState } from 'preact/hooks';
 import { convertLatLng } from 'spherical-geometry-js';
 import {

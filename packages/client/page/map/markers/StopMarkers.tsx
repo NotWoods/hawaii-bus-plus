@@ -2,7 +2,7 @@ import { Point } from '@hawaii-bus-plus/presentation';
 import { MarkerWithData } from '@hawaii-bus-plus/react-google-maps';
 import { ColorString, Stop } from '@hawaii-bus-plus/types';
 import { memoize } from '@hawaii-bus-plus/utils';
-import { h, Fragment } from 'preact';
+import { Fragment, h } from 'preact';
 import { PointRouterAction, setStopAction } from '../../router/action/point';
 import { pinsIcon } from '../pins';
 import { SelectableMarker } from './SelectableMarker';

@@ -1,8 +1,8 @@
 import { last } from '@hawaii-bus-plus/utils';
 import { h } from 'preact';
 import type { RouteDetails } from '../../../../worker-info/route-details';
-import { Icon } from '../../../icons/Icon';
 import timeIcon from '../../../icons/access_time.svg';
+import { Icon } from '../../../icons/Icon';
 import { EndedAt, ReachesAt, StartedFrom } from './StartedFrom';
 
 interface Props {

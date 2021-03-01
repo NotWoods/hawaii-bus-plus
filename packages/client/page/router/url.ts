@@ -1,4 +1,4 @@
-import { Point, PlacePointPartial } from '@hawaii-bus-plus/presentation';
+import { PlacePointPartial, Point } from '@hawaii-bus-plus/presentation';
 import { Stop } from '@hawaii-bus-plus/types';
 import { toInt } from '@hawaii-bus-plus/utils';
 import { OpenDirectionsState } from './state/main';

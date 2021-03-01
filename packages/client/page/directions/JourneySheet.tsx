@@ -4,6 +4,7 @@ import type { Journey } from '../../worker-nearby/directions/format';
 import { closeMainAction } from '../router/action/main';
 import { RouterContext } from '../router/Router';
 import { BaseSheet } from '../routes/BaseSheet';
+import { useTripBounds } from '../routes/timetable/useTripBounds';
 import { JourneyHeader } from './JourneyHeader';
 import { isJourneyTripSegment, JourneySegment } from './JourneySegment';
 
@@ -14,6 +15,8 @@ interface Props {
 
 export function JourneySheet(props: Props) {
   const { dispatch } = useContext(RouterContext);
+
+  useTripBounds(props.journey.bounds);
 
   return (
     <BaseSheet loaded>

@@ -4,7 +4,7 @@ import { useState } from 'preact/hooks';
 import type { InfoWorkerHandler } from '../../worker-info/info';
 import InfoWorker from '../../worker-info/info?worker';
 import type { StopDetails } from '../../worker-info/stop-details';
-import { dbInitialized } from '../api';
+import { dbInitialized } from '../hooks/api';
 import { usePromise } from '../hooks/usePromise';
 import { useWorker } from '../hooks/useWorker';
 import { PointBase } from './PointBase';

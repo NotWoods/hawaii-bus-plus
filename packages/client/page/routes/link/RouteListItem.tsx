@@ -1,8 +1,8 @@
 import { Agency, Route } from '@hawaii-bus-plus/types';
 import { h } from 'preact';
-import { colorVariables } from '../props';
-import { RouteIcon } from '../badge/RouteIcon';
 import { Link } from '../../router/Router';
+import { RouteIcon } from '../badge/RouteIcon';
+import { colorVariables } from '../props';
 
 interface Props {
   route: Route;
