@@ -81,6 +81,7 @@ export function createHandler(
         headers,
         response.multiValueHeaders
       );
+      console.log(response);
       return response;
     } catch (err: unknown) {
       if (err instanceof JSONHTTPError) {
