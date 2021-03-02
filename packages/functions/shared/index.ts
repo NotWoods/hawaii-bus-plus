@@ -38,13 +38,11 @@ function createAuthContext(
   const authContext = getAuth(identity) as AuthContext;
   const currentUser = recoverSession(authContext.auth, event.headers);
   async function user() {
-    console.log('currentUser', currentUser);
     if (!currentUser) return undefined;
 
     const currentToken = currentUser.tokenDetails().access_token;
     try {
-      const refreshedToken = await currentUser.jwt(true);
-      console.log('refreshedToken', refreshedToken);
+      const refreshedToken = await currentUser.jwt();
       if (currentToken !== refreshedToken) {
         // Token has been changed, update user
         response.multiValueHeaders['Set-Cookie'] = await setCookie(currentUser);
@@ -107,7 +105,6 @@ function mergePartialResponse(
     partialResponse.multiValueHeaders,
     response.multiValueHeaders
   );
-  console.log(response);
 }
 
 export function createHandler(
