@@ -5,6 +5,7 @@
   "type": "module",
   "main": "src/index.js",
   "module": "src/index.js",
+  "sideEffects": false,
   "scripts": {
     "build": "tsc --build src",
     "format": "prettier **/*.ts --write --ignore-path ../../.prettierignore",

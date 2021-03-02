@@ -26,12 +26,17 @@ export function Icon(props: Props) {
 export function BaseIcon(props: {
   children: ComponentChildren;
   class?: string;
+  fillBlack?: boolean;
 }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
-      class={classNames('fill-current w-6 h-6', props.class)}
+      class={classNames(
+        'w-6 h-6',
+        props.class,
+        props.fillBlack ? '' : 'fill-current'
+      )}
       width="24px"
       height="24px"
     >

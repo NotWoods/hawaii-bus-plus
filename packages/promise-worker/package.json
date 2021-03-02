@@ -5,6 +5,7 @@
   "main": "page/promise-worker.js",
   "module": "page/promise-worker.js",
   "type": "module",
+  "sideEffects": false,
   "scripts": {
     "build": "tsc --build page worker",
     "format": "prettier **/*.ts --write --ignore-path ../../.prettierignore",
