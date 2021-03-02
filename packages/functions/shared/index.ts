@@ -25,6 +25,10 @@ interface Context extends NetlifyContext {
   authContext: AuthContext;
 }
 
+type PartialResponse = Required<
+  Pick<NetlifyResponse, 'headers' | 'multiValueHeaders'>
+>;
+
 function createAuthContext(
   event: NetlifyEvent,
   context: NetlifyContext,
@@ -87,6 +91,25 @@ function errorToResponse(err: unknown): NetlifyResponse {
   }
 }
 
+/**
+ * Applies headers from `partialResponse` to `response`.
+ * Both objects are mutated.
+ *
+ * If the same keys are present in `partialResponse.headers` and `response.headers`,
+ * `response` will be used and the other value will be discarded.
+ */
+function mergePartialResponse(
+  response: NetlifyResponse,
+  partialResponse: PartialResponse
+) {
+  response.headers = Object.assign(partialResponse.headers, response.headers);
+  response.multiValueHeaders = Object.assign(
+    partialResponse.multiValueHeaders,
+    response.multiValueHeaders
+  );
+  console.log(response);
+}
+
 export function createHandler(
   httpMethods: HttpMethod | readonly HttpMethod[],
   handler: (
@@ -106,9 +129,7 @@ export function createHandler(
       return jsonResponse(405, { error: 'Method Not Allowed' });
     }
 
-    const partialResponse: Required<
-      Pick<NetlifyResponse, 'headers' | 'multiValueHeaders'>
-    > = {
+    const partialResponse: PartialResponse = {
       headers: {
         'Access-Control-Allow-Methods': Array.from(methods).join(', '),
       },
@@ -116,21 +137,14 @@ export function createHandler(
     };
     const authContext = createAuthContext(event, context, partialResponse);
 
+    let response: NetlifyResponse;
     try {
       const subContext: Context = { ...context, authContext };
-      const response = await handler(event, subContext);
-      response.headers = Object.assign(
-        partialResponse.headers,
-        response.headers
-      );
-      response.multiValueHeaders = Object.assign(
-        partialResponse.multiValueHeaders,
-        response.multiValueHeaders
-      );
-      console.log(response);
-      return response;
+      response = await handler(event, subContext);
     } catch (err: unknown) {
-      return errorToResponse(err);
+      response = errorToResponse(err);
     }
+    mergePartialResponse(response, partialResponse);
+    return response;
   };
 }
