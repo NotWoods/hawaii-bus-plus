@@ -39,7 +39,7 @@ function createAuthContext(
 
     const currentToken = currentUser.tokenDetails().access_token;
     try {
-      const refreshedToken = await currentUser.jwt();
+      const refreshedToken = await currentUser.jwt(true);
       console.log('refreshedToken', refreshedToken);
       if (currentToken !== refreshedToken) {
         // Token has been changed, update user
@@ -127,6 +127,7 @@ export function createHandler(
         partialResponse.multiValueHeaders,
         response.multiValueHeaders
       );
+      console.log(response);
       return response;
     } catch (err: unknown) {
       return errorToResponse(err);

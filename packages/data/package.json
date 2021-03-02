@@ -17,7 +17,7 @@
     "@hawaii-bus-plus/utils": "workspace:*",
     "idb": "^6.0.0",
     "ix": "^4.2.0",
-    "mnemonist": "^0.38.1",
+    "mnemonist": "^0.38.3",
     "tslib": "^2.1.0"
   },
   "devDependencies": {
