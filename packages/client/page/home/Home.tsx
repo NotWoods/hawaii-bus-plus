@@ -1,19 +1,17 @@
-import { Fragment, h } from 'preact';
+import { ComponentChildren, Fragment, h } from 'preact';
 import { useContext, useState } from 'preact/hooks';
+import { ClosestResults } from '../../worker-nearby/closest/closest';
 import type { NearbyWorkerHandler } from '../../worker-nearby/nearby';
 import NearbyWorker from '../../worker-nearby/nearby?worker';
-import { Button } from '../buttons/Button';
+import { LoadingBar } from '../buttons/LoadingBar';
+import { useDelay, usePromise, useWorker } from '../hooks';
 import { dbInitialized } from '../hooks/api';
-import { usePromise } from '../hooks/usePromise';
-import { useWorker } from '../hooks/useWorker';
-import { Icon } from '../icons/Icon';
-import loginSvg from '../icons/login.svg';
-import paymentsSvg from '../icons/payments.svg';
 import { MyLocationContext } from '../map/location/context';
 import { RouterContext } from '../router/Router';
 import { SearchBar } from '../search/SearchBar';
 import { emptyClosestResults } from '../search/simple/places-autocomplete';
 import { NearbyRoutes } from '../stop/NearbyRoutes';
+import { BillingButtons, LoginButtons } from './HomeButtons';
 
 interface Props {
   onSearch?(): void;
@@ -21,55 +19,28 @@ interface Props {
 
 export { Title } from '../../all-pages/Title';
 
-function LoginButtons() {
-  return (
-    <div class="mx-4 mt-8">
-      <p class="flex mb-4">
-        <Icon
-          src={loginSvg}
-          alt=""
-          class="w-6 h-6 mt-1 mr-2 filter-invert opacity-60"
-        />
-        You need to have an account to use Hawaii Bus Plus.
-      </p>
-      <Button href="/auth/login" class="mb-1">
-        Login
-      </Button>
-      <Button href="https://eepurl.com/hqxfyb">Request an invite</Button>
-    </div>
-  );
-}
-
-function BillingButtons() {
-  return (
-    <div class="mx-4 mt-8">
-      <p class="flex mb-4">
-        <Icon
-          src={paymentsSvg}
-          alt=""
-          class="w-6 h-6 mt-1 mr-2 filter-invert opacity-60"
-        />
-        Your account has expired. Sign up for a new plan to use Hawaii Bus Plus.
-      </p>
-      <Button href="/.netlify/functions/billing" class="mb-1">
-        Billing
-      </Button>
-    </div>
-  );
-}
-
 function isAuthError(err: unknown): err is { code: 401 | 402 } {
   const error = err as { code?: unknown };
   return error.code === 401 || error.code === 402;
 }
 
+function renderButtons(code: 401 | 402) {
+  switch (code) {
+    case 401:
+      return <LoginButtons />;
+    case 402:
+      return <BillingButtons />;
+  }
+}
+
 export function Home(props: Props) {
   const { point } = useContext(RouterContext);
   const { coords } = useContext(MyLocationContext);
-  const [results, setResults] = useState(emptyClosestResults);
-  const [authError, setAuthError] = useState<401 | 402 | undefined>(undefined);
-  const postToNearbyWorker = useWorker(NearbyWorker) as NearbyWorkerHandler;
+  const [results, setResults] = useState<ClosestResults | undefined>();
+  const [authError, setAuthError] = useState<401 | 402 | undefined>();
+  const delayDone = useDelay(500, [coords?.lat, coords?.lng, point]);
 
+  const postToNearbyWorker = useWorker(NearbyWorker) as NearbyWorkerHandler;
   usePromise(
     async (signal) => {
       try {
@@ -101,23 +72,29 @@ export function Home(props: Props) {
     [coords?.lat, coords?.lng, point]
   );
 
+  let content: ComponentChildren;
+  if (authError) {
+    content = renderButtons(authError);
+  } else if (delayDone && !results) {
+    content = <LoadingBar />;
+  } else {
+    const { routes, agencies } = results ?? emptyClosestResults;
+    content = (
+      <NearbyRoutes
+        class="mt-12 overflow-auto"
+        routes={Array.from(routes.values())}
+        agencies={agencies}
+      />
+    );
+  }
+
   return (
     <>
       <h2 class="mt-4 font-display font-medium text-xl text-center text-white">
         Aloha kakahiaka
       </h2>
       <SearchBar onClick={props.onSearch} />
-      {authError === 401 ? (
-        <LoginButtons />
-      ) : authError === 402 ? (
-        <BillingButtons />
-      ) : (
-        <NearbyRoutes
-          class="mt-12 overflow-auto"
-          routes={Array.from(results.routes.values())}
-          agencies={results.agencies}
-        />
-      )}
+      {content}
     </>
   );
 }

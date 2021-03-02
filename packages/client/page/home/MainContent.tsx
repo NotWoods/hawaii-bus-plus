@@ -6,8 +6,7 @@ import {
 } from '@hawaii-bus-plus/presentation';
 import { Fragment, h } from 'preact';
 import { useContext } from 'preact/hooks';
-import { useLazyComponent } from '../hooks/useLazyComponent';
-import { useScreens } from '../hooks/useScreens';
+import { useLazyComponent, useScreens } from '../hooks';
 import { MyLocationButton } from '../map/location/MyLocationButton';
 import { RouterContext } from '../router/Router';
 import { DIRECTIONS_PATH } from '../router/state';

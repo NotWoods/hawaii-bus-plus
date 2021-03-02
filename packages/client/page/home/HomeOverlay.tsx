@@ -1,6 +1,6 @@
 import { h } from 'preact';
 import { useState } from 'preact/hooks';
-import { useLazyComponent } from '../hooks/useLazyComponent';
+import { useLazyComponent } from '../hooks';
 import { MenuIcon } from '../icons/MenuIcon';
 import { DirectionsSearch } from '../search/directions/DirectionsSearch';
 import { SearchBase } from '../search/SearchBase';

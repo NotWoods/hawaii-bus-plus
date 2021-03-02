@@ -7,7 +7,7 @@ import { memoize } from '@hawaii-bus-plus/utils';
 import { h } from 'preact';
 import { useContext } from 'preact/hooks';
 import { LoadingBar } from '../buttons/LoadingBar';
-import { useLazyComponent } from '../hooks/useLazyComponent';
+import { useLazyComponent } from '../hooks';
 import { closePointAction } from '../router/action/point';
 import { RouterContext } from '../router/Router';
 import { SearchBase } from '../search/SearchBase';

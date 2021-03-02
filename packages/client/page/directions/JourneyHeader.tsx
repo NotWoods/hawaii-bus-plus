@@ -6,7 +6,7 @@ import { h } from 'preact';
 import type { Journey } from '../../worker-nearby/directions/format';
 import { CloseButton } from '../buttons/CloseButton';
 import { classNames } from '../hooks/classnames';
-import { useScreens } from '../hooks/useScreens';
+import { useScreens } from '../hooks';
 import './JourneyHeader.css';
 
 interface Props {

@@ -1,9 +1,8 @@
 import { memoize } from '@hawaii-bus-plus/utils';
-import { h, Fragment } from 'preact';
+import { Fragment, h } from 'preact';
 import { useState } from 'preact/hooks';
 import { Button } from '../../buttons/Button';
-import { useLazyComponent } from '../../hooks/useLazyComponent';
-import { usePromise } from '../../hooks/usePromise';
+import { useLazyComponent, usePromise } from '../../hooks';
 import directionsIcon from '../../icons/directions.svg';
 import { SearchBar } from '../SearchBar';
 import { emptyResults } from './places-autocomplete';

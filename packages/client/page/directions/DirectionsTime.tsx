@@ -1,6 +1,6 @@
 import { h } from 'preact';
 import type { Temporal } from 'proposal-temporal';
-import { useLazyComponent } from '../hooks/useLazyComponent';
+import { useLazyComponent } from '../hooks';
 import { NOW } from '../time/input/symbol';
 
 interface Props {

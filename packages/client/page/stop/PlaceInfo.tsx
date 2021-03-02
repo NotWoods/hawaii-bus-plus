@@ -2,9 +2,8 @@ import { h } from 'preact';
 import { useState } from 'preact/hooks';
 import type { NearbyWorkerHandler } from '../../worker-nearby/nearby';
 import NearbyWorker from '../../worker-nearby/nearby?worker';
+import { usePromise, useWorker } from '../hooks';
 import { dbInitialized } from '../hooks/api';
-import { usePromise } from '../hooks/usePromise';
-import { useWorker } from '../hooks/useWorker';
 import { emptyClosestResults } from '../search/simple/places-autocomplete';
 import { PointInfo } from './PointInfo';
 

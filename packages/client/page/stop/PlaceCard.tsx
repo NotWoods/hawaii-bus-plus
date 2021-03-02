@@ -1,12 +1,12 @@
 import { PlacePointPartial } from '@hawaii-bus-plus/presentation';
 import { h } from 'preact';
 import { useState } from 'preact/hooks';
+import { usePromise } from '../hooks';
 import {
   getDetails,
   PlacesServiceError,
   usePlacesService,
 } from '../hooks/usePlacesService';
-import { usePromise } from '../hooks/usePromise';
 import { buildSessionToken } from '../search/simple/places-autocomplete';
 import { PlaceInfo } from './PlaceInfo';
 import { PointBase } from './PointBase';

@@ -3,9 +3,9 @@ import { useState } from 'preact/hooks';
 import { convertLatLng } from 'spherical-geometry-js';
 import {
   GeolocationErrorCode,
+  useAbortEffect,
   usePermission,
-} from '../../hooks/useGeolocation';
-import { useAbortEffect } from '../../hooks/usePromise';
+} from '../../hooks';
 import { locationFromIp } from './ipstack';
 
 type Coordinates = Pick<GeolocationCoordinates, 'latitude' | 'longitude'>;

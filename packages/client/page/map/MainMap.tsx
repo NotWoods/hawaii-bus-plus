@@ -1,5 +1,5 @@
 import { h } from 'preact';
-import { useLazyComponent } from '../hooks/useLazyComponent';
+import { useLazyComponent } from '../hooks';
 import { useLoadGoogleMaps } from '../hooks/useLoadGoogleMaps';
 
 const lazyMap = import('./MapContent');

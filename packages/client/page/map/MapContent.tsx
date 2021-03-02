@@ -7,8 +7,7 @@ import {
 } from '@hawaii-bus-plus/react-google-maps';
 import { h } from 'preact';
 import { useContext, useMemo } from 'preact/hooks';
-import { useDarkMode } from '../hooks/useMatchMedia';
-import { useScreens } from '../hooks/useScreens';
+import { useDarkMode, useScreens } from '../hooks';
 import { openPlace, setMarker } from '../router/action/point';
 import { RouterContext } from '../router/Router';
 import { PlaceMarker } from './PlaceMarker';
