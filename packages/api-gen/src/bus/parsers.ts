@@ -1,3 +1,4 @@
+import { PlainDaysTime } from '@hawaii-bus-plus/temporal-utils';
 import type {
   Agency,
   Calendar,
@@ -21,7 +22,6 @@ import type {
   Trip,
 } from '@hawaii-bus-plus/types';
 import { compareAs } from '@hawaii-bus-plus/utils';
-import { PlainDaysTime } from '@hawaii-bus-plus/temporal-utils';
 import { first, toArray } from 'ix/asynciterable/index.js';
 import mnemonist from 'mnemonist';
 import type { Merge, Mutable } from 'type-fest';
@@ -192,6 +192,7 @@ export async function parseStopTimes(
   trips: ReadonlyMap<Trip['trip_id'], TripInflated>
 ) {
   for await (const csvStopTime of json.stop_times) {
+    const dist = csvStopTime.shape_dist_traveled;
     const stopTime: StopTimeInflated = {
       trip_id: csvStopTime.trip_id,
       arrival_time: PlainDaysTime.from(csvStopTime.arrival_time),
@@ -201,11 +202,12 @@ export async function parseStopTimes(
       pickup_type: csvStopTime.pickup_type,
       continuous_pickup: csvStopTime.continuous_pickup,
       timepoint: csvStopTime.timepoint,
-      shape_dist_traveled: csvStopTime.shape_dist_traveled ?? undefined,
+      shape_dist_traveled:
+        dist != undefined && !Number.isNaN(dist) ? dist : undefined,
     };
 
     const stop = variable.stops[stopTime.stop_id];
-    const trip = trips.get(csvStopTime.trip_id)!;
+    const trip = trips.get(stopTime.trip_id)!;
     const route = variable.routes[trip.route_id];
 
     trip.stop_times.push(stopTime);

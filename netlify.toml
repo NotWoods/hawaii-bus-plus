@@ -93,5 +93,5 @@
     font-src 'self' fonts.gstatic.com;
     connect-src 'self' getinsights.io;
     manifest-src 'self';
-    object-src 'none'
+    object-src 'none';
     base-uri 'none';'''

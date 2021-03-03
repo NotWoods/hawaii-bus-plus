@@ -248,6 +248,20 @@ importers:
       tslib: ^2.1.0
       type-fest: ^0.20.2
       typescript: ^4.2.2
+  packages/mnemonist:
+    dependencies:
+      tslib: 2.1.0
+    devDependencies:
+      ava: 3.15.0
+      prettier: 2.2.1
+      type-fest: 0.20.2
+      typescript: 4.2.2
+    specifiers:
+      ava: ^3.15.0
+      prettier: ^2.2.1
+      tslib: ^2.1.0
+      type-fest: ^0.20.2
+      typescript: ^4.2.2
   packages/prerender:
     dependencies:
       '@hawaii-bus-plus/data': 'link:../data'

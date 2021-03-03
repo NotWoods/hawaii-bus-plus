@@ -1,0 +1,91 @@
+/**
+ * Mnemonist DefaultMap
+ * =====================
+ *
+ * JavaScript implementation of a default map that will return a constructed
+ * value any time one tries to access an inexisting key. It's quite similar
+ * to python's defaultdict.
+ */
+export class DefaultMap<K, V> implements Iterable<[K, V]> {
+  private readonly items = new Map<K, V>();
+  private readonly factory: (key: K, index: number) => V;
+  size = 0;
+
+  constructor(factory: (key: K, index: number) => V) {
+    this.factory = factory;
+  }
+
+  /**
+   * Method used to clear the structure.
+   */
+  clear(): void {
+    this.items.clear();
+    this.size = 0;
+  }
+
+  /**
+   * Method used to get the value set for given key. If the key does not exist,
+   * the value will be created using the provided factory.
+   *
+   * @param  {any} key - Target key.
+   */
+  get(key: K): V {
+    let value = this.items.get(key);
+
+    if (typeof value === 'undefined') {
+      value = this.factory(key, this.size);
+      this.items.set(key, value);
+      this.size++;
+    }
+
+    return value;
+  }
+
+  /**
+   * Method used to get the value set for given key. If the key does not exist,
+   * a value won't be created.
+   *
+   * @param  {any} key - Target key.
+   * @return {boolean}
+   */
+  peek(key: K): V | undefined {
+    return this.items.get(key);
+  }
+
+  /**
+   * Method used to set a value for given key.
+   *
+   * @param  {any} key   - Target key.
+   * @param  {any} value - Value.
+   * @return {DefaultMap}
+   */
+  set(key: K, value: V): this {
+    this.items.set(key, value);
+    this.size = this.items.size;
+
+    return this;
+  }
+
+  /**
+   * Method used to test the existence of a key in the map.
+   *
+   * @param  {any} key   - Target key.
+   * @return {boolean}
+   */
+  has(key: K): boolean {
+    return this.items.has(key);
+  }
+
+  keys() {
+    return this.items.keys();
+  }
+  values() {
+    return this.items.values();
+  }
+  entries() {
+    return this.items.entries();
+  }
+  [Symbol.iterator]() {
+    return this.entries();
+  }
+}

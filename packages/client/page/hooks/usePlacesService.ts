@@ -29,6 +29,5 @@ export function getDetails(
 
 export function usePlacesService() {
   const map = useGoogleMap();
-  const placesService = map && buildPlacesService(map);
-  return placesService ?? undefined;
+  return map ? buildPlacesService(map) : undefined;
 }
