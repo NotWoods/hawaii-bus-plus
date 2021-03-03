@@ -1,8 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-return */
-/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
-/* eslint-disable @typescript-eslint/prefer-regexp-exec */
-/* eslint-disable no-useless-escape */
-/* eslint-disable @typescript-eslint/prefer-optional-chain */
 import fetch, { Response, RequestInit } from 'node-fetch';
 import { RequestMap } from './interface.js';
 import { getPagination } from './pagination.js';
@@ -97,7 +92,7 @@ export default class API {
       (response) => {
         const contentType = response.headers.get('Content-Type');
         if (contentType && contentType.match(/json/)) {
-          return this.parseJsonResponse(response);
+          return this.parseJsonResponse(response) as RequestMap[P];
         }
 
         if (!response.ok) {
@@ -105,9 +100,7 @@ export default class API {
             return Promise.reject(new TextHTTPError(response, data));
           });
         }
-        return response.text().then((data) => {
-          data;
-        });
+        return response.text().then((data) => data as RequestMap[P]);
       }
     );
   }

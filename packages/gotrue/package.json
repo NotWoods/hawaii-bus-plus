@@ -31,6 +31,13 @@
       "project": [
         "./packages/gotrue/*/tsconfig.json"
       ]
+    },
+    "rules": {
+      "@typescript-eslint/prefer-nullish-coalescing": "off",
+      "@typescript-eslint/prefer-optional-chain": "off",
+      "@typescript-eslint/prefer-regexp-exec": "off",
+      "@typescript-eslint/prefer-string-starts-ends-with": "off",
+      "no-useless-escape": "off"
     }
   },
   "ava": {

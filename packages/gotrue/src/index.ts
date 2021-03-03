@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
-/* eslint-disable @typescript-eslint/prefer-string-starts-ends-with */
 import API from './api/index.js';
 import { Provider, RequestMap, Token, UserData } from './api/interface.js';
 import { formatError, RequestOptions, User } from './user.js';

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 import { RequestInit } from 'node-fetch';
 import { Admin } from './admin.js';
 import API, { JSONHTTPError } from './api/index.js';
