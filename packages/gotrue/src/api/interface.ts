@@ -6,7 +6,7 @@ export interface RequestMap {
   '/recover': {};
   '/verify': Token;
   '/user': UserData;
-  '/logout': undefined;
+  '/logout': '';
   '/admin/users': unknown;
   '/admin/users/:id': unknown;
 }

@@ -60,7 +60,7 @@ test('refresh token', async (t) => {
   t.is(token.token_type, 'bearer');
 
   const result = await user.logout();
-  t.is(result, undefined);
+  t.is(result, '');
 });
 
 test('settings', async (t) => {
