@@ -16,13 +16,7 @@ export default defineConfig({
   plugins: [emptyPackage('preact/debug'), prefreshPlus()],
   resolve: { alias },
   optimizeDeps: {
-    include: [
-      'mnemonist/default-map',
-      'mnemonist/set',
-      'preact',
-      'preact/debug',
-      'preact/hooks',
-    ],
+    include: ['preact', 'preact/debug', 'preact/hooks'],
   },
   json: {
     stringify: true,

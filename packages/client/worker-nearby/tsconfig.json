@@ -3,11 +3,12 @@
   "include": ["**/*"],
   "references": [
     { "path": "../worker-shared" },
-    { "path": "../../presentation/src" },
-    { "path": "../../temporal-utils/src" },
     { "path": "../../data/src" },
     { "path": "../../data/node" },
     { "path": "../../jest-utils/src" },
+    { "path": "../../mnemonist/src" },
+    { "path": "../../presentation/src" },
+    { "path": "../../temporal-utils/src" },
     { "path": "../../types" }
   ],
   "compilerOptions": {

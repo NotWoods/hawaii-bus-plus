@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@hawaii-bus-plus/data": "workspace:*",
+    "@hawaii-bus-plus/mnemonist": "workspace:^0.38.3",
     "@hawaii-bus-plus/presentation": "workspace:*",
     "@hawaii-bus-plus/promise-worker": "workspace:*",
     "@hawaii-bus-plus/react-google-maps": "workspace:*",
@@ -22,7 +23,6 @@
     "@hawaii-bus-plus/utils": "workspace:*",
     "idb": "^6.0.0",
     "insights-js": "^1.2.10",
-    "mnemonist": "^0.38.3",
     "preact": "^10.5.12",
     "proposal-temporal": "^0.7.0",
     "spherical-geometry-js": "^2.0.0",
@@ -49,7 +49,7 @@
     "tailwindcss-scroll-snap": "^1.1.0",
     "type-fest": "^0.20.2",
     "typescript": "^4.2.2",
-    "vite": "^2.0.4"
+    "vite": "^2.0.5"
   },
   "jest": {
     "transform": {

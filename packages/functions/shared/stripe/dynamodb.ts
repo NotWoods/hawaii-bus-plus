@@ -1,7 +1,7 @@
 import {
   DynamoDBClient,
-  PutItemCommand,
   GetItemCommand,
+  PutItemCommand,
 } from '@aws-sdk/client-dynamodb';
 
 export class DatabaseClient {

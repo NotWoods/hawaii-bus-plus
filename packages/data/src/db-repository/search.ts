@@ -1,11 +1,11 @@
 import { Route, Stop } from '@hawaii-bus-plus/types';
 import { batch, take } from '@hawaii-bus-plus/utils';
 import { IDBPDatabase } from 'idb';
-import { intersection } from 'mnemonist/set';
+import { intersection } from '@hawaii-bus-plus/mnemonist';
 import { GTFSSchema } from '../database';
 import { removeWords } from '../format';
 
-function interset<T>(sets: readonly Set<T>[]): Set<T> {
+function interset<T>(sets: readonly ReadonlySet<T>[]): ReadonlySet<T> {
   if (sets.length === 0) {
     return new Set();
   } else if (sets.length === 1) {

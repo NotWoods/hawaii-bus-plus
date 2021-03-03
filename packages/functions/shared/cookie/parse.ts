@@ -1,6 +1,6 @@
+import { GoTrue, User } from '@hawaii-bus-plus/gotrue';
 import { APIGatewayProxyEventHeaders } from 'aws-lambda';
 import * as cookie from 'cookie';
-import { GoTrue, User } from '@hawaii-bus-plus/gotrue';
 import { TokenUser } from '../identity/user';
 import { JWT_ACCESS_TOKEN_KEY, JWT_REFRESH_TOKEN_KEY } from './serialize';
 

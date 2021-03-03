@@ -1,3 +1,4 @@
+import { difference } from '@hawaii-bus-plus/mnemonist';
 import {
   Agency,
   Calendar,
@@ -9,7 +10,6 @@ import {
 } from '@hawaii-bus-plus/types';
 import { batch } from '@hawaii-bus-plus/utils';
 import { IDBPDatabase } from 'idb';
-import { difference } from 'mnemonist/set';
 import {
   GTFSSchema,
   SearchBikeStation,
@@ -62,7 +62,7 @@ const transformers = {
 };
 const storeNames = Object.keys(transformers) as StoreName[];
 
-function keySet(api: GTFSData, name: StoreName) {
+function keySet(api: GTFSData, name: StoreName): ReadonlySet<string> {
   switch (name) {
     case 'trips':
       return new Set(api.trips.map((trip) => trip.trip_id));

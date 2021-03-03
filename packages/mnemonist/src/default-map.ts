@@ -6,7 +6,7 @@
  * value any time one tries to access an inexisting key. It's quite similar
  * to python's defaultdict.
  */
-export class DefaultMap<K, V> implements Iterable<[K, V]> {
+export class DefaultMap<K, V> implements Iterable<[K, V]>, ReadonlyMap<K, V> {
   private readonly items = new Map<K, V>();
   private readonly factory: (key: K, index: number) => V;
   size = 0;
@@ -74,6 +74,20 @@ export class DefaultMap<K, V> implements Iterable<[K, V]> {
    */
   has(key: K): boolean {
     return this.items.has(key);
+  }
+
+  /**
+   * Method used to iterate over each of the key/value pairs.
+   *
+   * @param  {function}  callback - Function to call for each item.
+   * @param  {object}    scope    - Optional scope.
+   * @return {undefined}
+   */
+  forEach(
+    callback: (value: V, key: K, map: ReadonlyMap<K, V>) => void,
+    scope: any = this
+  ) {
+    this.items.forEach(callback, scope);
   }
 
   keys() {

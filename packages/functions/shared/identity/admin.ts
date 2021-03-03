@@ -1,4 +1,4 @@
-import { GoTrue, Admin, User, Token } from '@hawaii-bus-plus/gotrue';
+import { Admin, GoTrue, Token, User } from '@hawaii-bus-plus/gotrue';
 import { NetlifyIdentityContext } from '../types';
 
 /**

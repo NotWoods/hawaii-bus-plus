@@ -1,3 +1,4 @@
+import { DefaultMap, MultiMap } from '@hawaii-bus-plus/mnemonist';
 import { PlainDaysTime } from '@hawaii-bus-plus/temporal-utils';
 import type {
   Agency,
@@ -23,10 +24,7 @@ import type {
 } from '@hawaii-bus-plus/types';
 import { compareAs } from '@hawaii-bus-plus/utils';
 import { first, toArray } from 'ix/asynciterable/index.js';
-import mnemonist from 'mnemonist';
 import type { Merge, Mutable } from 'type-fest';
-
-const { MultiMap, DefaultMap } = mnemonist;
 
 export type StopTimeInflated = Merge<
   StopTime,
@@ -218,7 +216,9 @@ export async function parseStopTimes(
   }
 }
 
-export async function parseShapes(json: Pick<JsonStreams, 'shapes'>) {
+export async function parseShapes(
+  json: Pick<JsonStreams, 'shapes'>
+): Promise<ReadonlyMap<Shape['shape_id'], Shape>> {
   const shapes = new DefaultMap<Shape['shape_id'], Shape>((shape_id) => ({
     shape_id,
     points: [],

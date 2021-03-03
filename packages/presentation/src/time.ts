@@ -1,5 +1,5 @@
-import { memoize } from '@hawaii-bus-plus/utils';
 import type { PlainDaysTime } from '@hawaii-bus-plus/temporal-utils';
+import { memoize } from '@hawaii-bus-plus/utils';
 import type { Temporal } from 'proposal-temporal';
 
 export interface PlainTimeData {

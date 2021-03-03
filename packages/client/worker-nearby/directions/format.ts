@@ -1,4 +1,5 @@
 import { getSingle, omitStopTimes, Repository } from '@hawaii-bus-plus/data';
+import { add } from '@hawaii-bus-plus/mnemonist';
 import {
   DurationData,
   durationToData,
@@ -11,7 +12,6 @@ import {
 import { PlainDaysTime } from '@hawaii-bus-plus/temporal-utils';
 import { Agency, ColorString, Route, Stop, Trip } from '@hawaii-bus-plus/types';
 import { findLastIndex, last } from '@hawaii-bus-plus/utils';
-import { add } from 'mnemonist/set';
 import { Temporal } from 'proposal-temporal';
 import {
   computeDistanceBetween,
@@ -149,7 +149,7 @@ export async function journeyToDirections(
       const routeIds = new Set([trip.route_id]);
       const formattedStopTimes: JourneyStopTime[] = rawStopTimes.map((st) => {
         const stop = stops.get(st.stop_id)!;
-        add(routeIds, new Set(stop.routes));
+        add(routeIds, stop.routes);
 
         return {
           stop,
