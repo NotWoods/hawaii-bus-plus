@@ -9,7 +9,7 @@ import { useDelay, useLazyComponent, usePromise, useWorker } from '../hooks';
 import { dbInitialized } from '../hooks/api';
 import { RouterContext } from '../router/Router';
 import { RouterState, ROUTES_PREFIX } from '../router/state';
-import { NOW } from '../time/input/symbol';
+import { NOW, timeForWorker } from '../time/input/symbol';
 import { BaseSheet } from './BaseSheet';
 import { colorVariables } from './props';
 import { RouteHeader } from './RouteHeader';
@@ -45,8 +45,7 @@ export function RouteTimetable() {
         const details = await postToInfoWorker(signal, {
           type: 'route',
           routeId,
-          date:
-            tripDate === NOW ? undefined : (tripDate.toString() as DateString),
+          date: timeForWorker(tripDate) as DateString | undefined,
           time: tripTime,
         });
 
@@ -55,7 +54,7 @@ export function RouteTimetable() {
         setDetails();
       }
     },
-    [routeId, tripTime, directionId]
+    [routeId, tripDate, tripTime, directionId]
   );
 
   const route = details?.route;

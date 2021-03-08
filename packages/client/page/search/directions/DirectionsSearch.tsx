@@ -11,7 +11,7 @@ import { LoadingBar } from '../../buttons/LoadingBar';
 import { DirectionsTime } from '../../directions/DirectionsTime';
 import { useDelay, useLazyComponent, usePromise, useWorker } from '../../hooks';
 import { dbInitialized } from '../../hooks/api';
-import { NOW } from '../../time/input/symbol';
+import { NOW, timeForWorker } from '../../time/input/symbol';
 import { emptyResults } from '../simple/places-autocomplete';
 import { lazySearchResults } from '../simple/SimpleSearch';
 import { DirectionsField } from './DirectionsField';
@@ -53,12 +53,7 @@ export function DirectionsSearch(_props: Props) {
         type: 'directions',
         from: depart,
         to: arrive,
-        departureTime:
-          typeof departureTime === 'string'
-            ? departureTime
-            : typeof departureTime === 'object'
-            ? departureTime.toString()
-            : undefined,
+        departureTime: timeForWorker(departureTime),
       });
 
       setResults(results);
