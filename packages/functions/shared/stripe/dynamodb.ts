@@ -1,7 +1,10 @@
 import {
+  DeleteItemCommand,
+  DescribeTableCommand,
   DynamoDBClient,
   GetItemCommand,
   PutItemCommand,
+  QueryCommand,
 } from '@aws-sdk/client-dynamodb';
 
 export class DatabaseClient {
@@ -13,6 +16,14 @@ export class DatabaseClient {
     },
   });
 
+  async debug() {
+    return await this.dynamoDb.send(
+      new DescribeTableCommand({
+        TableName: 'Users',
+      })
+    );
+  }
+
   async createUser(netlifyId: string, stripeId: string) {
     await this.dynamoDb.send(
       new PutItemCommand({
@@ -20,6 +31,17 @@ export class DatabaseClient {
         Item: {
           netlifyId: { S: netlifyId },
           stripeId: { S: stripeId },
+        },
+      })
+    );
+  }
+
+  async deleteUser(netlifyId: string) {
+    await this.dynamoDb.send(
+      new DeleteItemCommand({
+        TableName: 'Users',
+        Key: {
+          netlifyId: { S: netlifyId },
         },
       })
     );
@@ -40,15 +62,17 @@ export class DatabaseClient {
 
   async getUserByStripeId(stripeId: string) {
     const data = await this.dynamoDb.send(
-      new GetItemCommand({
+      new QueryCommand({
         TableName: 'Users',
-        Key: {
-          stripeId: { S: stripeId },
-        },
         ProjectionExpression: 'netlifyId',
+        IndexName: 'stripeId',
+        KeyConditionExpression: 'stripeId = :id',
+        ExpressionAttributeValues: {
+          ':id': { S: stripeId },
+        },
       })
     );
-    return data.Item?.['netlifyId']?.S;
+    return data.Items?.[0]?.['netlifyId']?.S;
   }
 }
 

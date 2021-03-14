@@ -1,3 +1,4 @@
+import { TextHTTPError } from '@hawaii-bus-plus/gotrue';
 import Stripe from 'stripe';
 import { createHandler } from '../shared';
 import { database, stripe } from '../shared/stripe';
@@ -40,10 +41,10 @@ export const handler = createHandler('POST', async (event, context) => {
         customerId(subscription)
       );
       if (!netlifyId) {
-        return {
-          statusCode: 500,
-          body: 'Server Error: No user found that matches customer ID',
-        };
+        throw new TextHTTPError(
+          { status: 500, statusText: 'Internal Server Error' },
+          'No user found that matches customer ID'
+        );
       }
 
       await context.authContext.admin.updateUser(
@@ -61,9 +62,9 @@ export const handler = createHandler('POST', async (event, context) => {
       };
     }
     default:
-      return {
-        statusCode: 404,
-        body: 'Not Found: invalid event type',
-      };
+      throw new TextHTTPError(
+        { status: 404, statusText: 'Not Found' },
+        `Invalid event type ${stripeEvent.type}`
+      );
   }
 });
