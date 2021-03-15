@@ -52,13 +52,6 @@ module.exports = {
       },
     },
     extend: {
-      inset: {
-        '1/4-screen': '25vh',
-        '3/4-screen': '75vh',
-      },
-      minHeight: {
-        '1/4-screen': '25vh',
-      },
       fill: (theme) => ({
         'blue-500': theme('colors.blue.500'),
         'blue-600': theme('colors.blue.600'),

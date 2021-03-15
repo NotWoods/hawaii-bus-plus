@@ -14,13 +14,11 @@ interface Props {
 export function BaseSheet(props: Props) {
   const { loadError } = useLoadGoogleMaps();
   return (
-    <div
-      class={classNames('relative md:ml-80', loadError ? '' : 'top-3/4-screen')}
-    >
+    <div class={classNames('relative md:ml-80', loadError ? '' : 'top-[75vh]')}>
       <article
         class={classNames(
           'animate-enter--sheet shadow-lg bg-gradient-to-br from-gray-50 to-gray-100 to:gray-100 dark:from-gray-750 dark:to-gray-800 text-black dark:text-white lg:mx-4',
-          loadError ? '' : 'min-h-1/4-screen',
+          loadError ? '' : 'min-h-[25vh]',
           props.loaded ? 'animate-run' : 'animate-pause'
         )}
         style={props.style}

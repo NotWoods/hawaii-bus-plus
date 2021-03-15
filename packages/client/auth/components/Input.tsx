@@ -1,5 +1,5 @@
 import { ComponentChildren, h } from 'preact';
-import './Input.css';
+import '../../all-pages/Input.css';
 
 interface Props {
   children: ComponentChildren;

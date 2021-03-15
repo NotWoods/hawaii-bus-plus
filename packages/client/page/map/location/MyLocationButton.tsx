@@ -40,7 +40,7 @@ export function MyLocationButton(props: Props) {
       onClick={handleClick}
       class={classNames(
         'fixed m-6 right-0 md:right-auto md:left-80',
-        props.shiftUp ? 'bottom-1/4-screen' : 'bottom-0'
+        props.shiftUp ? 'bottom-[25vh]' : 'bottom-0'
       )}
     >
       <BaseIcon class="relative">
