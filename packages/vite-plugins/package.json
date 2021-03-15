@@ -12,7 +12,7 @@
     "postformat": "eslint **/*.ts --fix"
   },
   "dependencies": {
-    "@babel/core": "^7.13.8",
+    "@babel/core": "^7.13.10",
     "@prefresh/babel-plugin": "0.4.0",
     "@prefresh/vite": "^2.1.0",
     "tslib": "^2.1.0"
@@ -21,12 +21,12 @@
     "vite": "^2.0.0-beta.65"
   },
   "devDependencies": {
-    "@types/node": "^14.14.32",
+    "@types/node": "^14.14.34",
     "ava": "^3.15.0",
     "prettier": "^2.2.1",
     "type-fest": "^0.20.2",
     "typescript": "^4.2.3",
-    "vite": "^2.0.5"
+    "vite": "^2.1.0"
   },
   "files": [
     "src",

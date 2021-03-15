@@ -15,10 +15,10 @@
     "test": "ava"
   },
   "dependencies": {
-    "@aws-sdk/client-dynamodb": "^3.8.0",
+    "@aws-sdk/client-dynamodb": "^3.8.1",
     "@hawaii-bus-plus/gotrue": "workspace:^0.9.29",
     "cookie": "^0.4.1",
-    "stripe": "^8.137.0",
+    "stripe": "^8.138.0",
     "tslib": "^2.1.0"
   },
   "devDependencies": {
@@ -28,11 +28,11 @@
     "@rollup/plugin-replace": "^2.4.1",
     "@types/aws-lambda": "^8.10.72",
     "@types/cookie": "^0.4.0",
-    "@types/node": "^14.14.32",
+    "@types/node": "^14.14.34",
     "ava": "^3.15.0",
     "copyfiles": "^2.4.1",
     "prettier": "^2.2.1",
-    "rollup": "^2.40.0",
+    "rollup": "^2.41.2",
     "type-fest": "^0.20.2",
     "typescript": "^4.2.3"
   },
