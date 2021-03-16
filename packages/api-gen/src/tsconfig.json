@@ -4,6 +4,7 @@
   "references": [
     { "path": "../../mnemonist/src" },
     { "path": "../../types" },
+    { "path": "../../temporal-utils/src" },
     { "path": "../../utils/src" }
   ],
   "compilerOptions": {

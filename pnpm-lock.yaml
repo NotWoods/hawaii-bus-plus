@@ -9,12 +9,11 @@ importers:
       dotenv: 8.2.0
       eslint: 7.22.0
       eslint-config-preact: 1.1.3_eslint@7.22.0+typescript@4.2.3
-      eslint-config-prettier: 7.2.0_eslint@7.22.0
+      eslint-config-prettier: 8.1.0_eslint@7.22.0
       eslint-plugin-ava: 11.0.0_eslint@7.22.0
       eslint-plugin-react: 7.22.0_eslint@7.22.0
       pnpm: 5.18.7
       prettier: 2.2.1
-      type-fest: 0.20.2
       typescript: 4.2.3
     specifiers:
       '@typescript-eslint/eslint-plugin': ^4.18.0
@@ -23,13 +22,12 @@ importers:
       dotenv: ^8.2.0
       eslint: ^7.22.0
       eslint-config-preact: ^1.1.3
-      eslint-config-prettier: ^7.2.0
+      eslint-config-prettier: ^8.1.0
       eslint-plugin-ava: ^11.0.0
       eslint-plugin-react: ^7.22.0
       pnpm: ^5.18.7
       prettier: ^2.2.1
       tslib: ^2.1.0
-      type-fest: ^0.20.2
       typescript: ^4.2.3
   packages/api-gen:
     dependencies:
@@ -47,6 +45,7 @@ importers:
       '@types/node': 14.14.35
       ava: 3.15.0
       prettier: 2.2.1
+      type-fest: 0.21.3
       typescript: 4.2.3
     specifiers:
       '@hawaii-bus-plus/mnemonist': 'workspace:^0.38.3'
@@ -62,6 +61,7 @@ importers:
       prettier: ^2.2.1
       proposal-temporal: ^0.7.0
       tslib: ^2.1.0
+      type-fest: ^0.21.3
       typescript: ^4.2.3
   packages/client:
     dependencies:
@@ -92,14 +92,14 @@ importers:
       '@types/jest': 26.0.20
       '@types/react': 17.0.3
       cross-env: 7.0.3
-      esbuild: 0.8.57
-      esbuild-jest: 0.3.0_esbuild@0.8.57
+      esbuild: 0.9.2
+      esbuild-jest: 0.5.0_esbuild@0.9.2
       jest: 26.6.3
       preact-render-to-string: 5.1.16_preact@10.5.13
       prettier: 2.2.1
       tailwindcss: 2.0.3
       tailwindcss-scroll-snap: 1.1.0
-      type-fest: 0.20.2
+      type-fest: 0.21.3
       typescript: 4.2.3
       vite: 2.1.1
     specifiers:
@@ -123,8 +123,8 @@ importers:
       '@types/jest': ^26.0.20
       '@types/react': ^17.0.3
       cross-env: ^7.0.3
-      esbuild: ^0.8.57
-      esbuild-jest: ^0.3.0
+      esbuild: ^0.9.2
+      esbuild-jest: ^0.5.0
       idb: ^6.0.0
       insights-js: ^1.2.10
       jest: ^26.6.3
@@ -136,7 +136,7 @@ importers:
       tailwindcss: ^2.0.3
       tailwindcss-scroll-snap: ^1.1.0
       tslib: ^2.1.0
-      type-fest: ^0.20.2
+      type-fest: ^0.21.3
       typescript: ^4.2.3
       vite: ^2.1.1
   packages/data:
@@ -151,7 +151,7 @@ importers:
       '@types/node': 14.14.35
       ava: 3.15.0
       prettier: 2.2.1
-      type-fest: 0.20.2
+      type-fest: 0.21.3
       typescript: 4.2.3
     specifiers:
       '@hawaii-bus-plus/mnemonist': 'workspace:^0.38.3'
@@ -163,7 +163,7 @@ importers:
       ix: ^4.3.0
       prettier: ^2.2.1
       tslib: ^2.1.0
-      type-fest: ^0.20.2
+      type-fest: ^0.21.3
       typescript: ^4.2.3
   packages/functions:
     dependencies:
@@ -184,7 +184,7 @@ importers:
       copyfiles: 2.4.1
       prettier: 2.2.1
       rollup: 2.41.4
-      type-fest: 0.20.2
+      type-fest: 0.21.3
       typescript: 4.2.3
     specifiers:
       '@aws-sdk/client-dynamodb': ^3.8.1
@@ -203,7 +203,7 @@ importers:
       rollup: ^2.41.4
       stripe: ^8.138.0
       tslib: ^2.1.0
-      type-fest: ^0.20.2
+      type-fest: ^0.21.3
       typescript: ^4.2.3
   packages/gotrue:
     dependencies:
@@ -235,14 +235,14 @@ importers:
     devDependencies:
       jest: 26.6.3
       prettier: 2.2.1
-      type-fest: 0.20.2
+      type-fest: 0.21.3
       typescript: 4.2.3
     specifiers:
       '@hawaii-bus-plus/types': 'workspace:*'
       jest: ^26.6.3
       prettier: ^2.2.1
       tslib: ^2.1.0
-      type-fest: ^0.20.2
+      type-fest: ^0.21.3
       typescript: ^4.2.3
   packages/mnemonist:
     dependencies:
@@ -250,13 +250,13 @@ importers:
     devDependencies:
       ava: 3.15.0
       prettier: 2.2.1
-      type-fest: 0.20.2
+      type-fest: 0.21.3
       typescript: 4.2.3
     specifiers:
       ava: ^3.15.0
       prettier: ^2.2.1
       tslib: ^2.1.0
-      type-fest: ^0.20.2
+      type-fest: ^0.21.3
       typescript: ^4.2.3
   packages/prerender:
     dependencies:
@@ -264,7 +264,7 @@ importers:
       preact-render-to-string: 5.1.16_preact@10.5.13
       rollup: 2.41.4
       tslib: 2.1.0
-      type-fest: 0.20.2
+      type-fest: 0.21.3
       vite: 2.1.1
     devDependencies:
       ava: 3.15.0
@@ -281,7 +281,7 @@ importers:
       rollup: ^2.41.4
       tailwindcss: ^2.0.3
       tslib: ^2.1.0
-      type-fest: ^0.20.2
+      type-fest: ^0.21.3
       typescript: ^4.2.3
       vite: ^2.1.1
   packages/presentation:
@@ -295,7 +295,7 @@ importers:
     devDependencies:
       ava: 3.15.0
       prettier: 2.2.1
-      type-fest: 0.20.2
+      type-fest: 0.21.3
       typescript: 4.2.3
     specifiers:
       '@hawaii-bus-plus/temporal-utils': 'workspace:^1.0.0'
@@ -306,7 +306,7 @@ importers:
       proposal-temporal: ^0.7.0
       spherical-geometry-js: ^2.0.0
       tslib: ^2.1.0
-      type-fest: ^0.20.2
+      type-fest: ^0.21.3
       typescript: ^4.2.3
   packages/promise-worker:
     dependencies:
@@ -353,7 +353,7 @@ importers:
     devDependencies:
       ava: 3.15.0
       prettier: 2.2.1
-      type-fest: 0.20.2
+      type-fest: 0.21.3
       typescript: 4.2.3
     specifiers:
       '@hawaii-bus-plus/types': 'workspace:*'
@@ -362,19 +362,19 @@ importers:
       prettier: ^2.2.1
       proposal-temporal: ^0.7.0
       tslib: ^2.1.0
-      type-fest: ^0.20.2
+      type-fest: ^0.21.3
       typescript: ^4.2.3
   packages/types:
     dependencies:
       tslib: 2.1.0
-      type-fest: 0.20.2
+      type-fest: 0.21.3
     devDependencies:
       prettier: 2.2.1
       typescript: 4.2.3
     specifiers:
       prettier: ^2.2.1
       tslib: ^2.1.0
-      type-fest: ^0.20.2
+      type-fest: ^0.21.3
       typescript: ^4.2.3
   packages/utils:
     dependencies:
@@ -383,14 +383,14 @@ importers:
     devDependencies:
       ava: 3.15.0
       prettier: 2.2.1
-      type-fest: 0.20.2
+      type-fest: 0.21.3
       typescript: 4.2.3
     specifiers:
       '@hawaii-bus-plus/types': 'workspace:*'
       ava: ^3.15.0
       prettier: ^2.2.1
       tslib: ^2.1.0
-      type-fest: ^0.20.2
+      type-fest: ^0.21.3
       typescript: ^4.2.3
   packages/vite-plugins:
     dependencies:
@@ -402,7 +402,7 @@ importers:
       '@types/node': 14.14.35
       ava: 3.15.0
       prettier: 2.2.1
-      type-fest: 0.20.2
+      type-fest: 0.21.3
       typescript: 4.2.3
       vite: 2.1.1
     specifiers:
@@ -413,10 +413,13 @@ importers:
       ava: ^3.15.0
       prettier: ^2.2.1
       tslib: ^2.1.0
-      type-fest: ^0.20.2
+      type-fest: ^0.21.3
       typescript: ^4.2.3
       vite: ^2.1.1
 lockfileVersion: 5.2
+overrides:
+  type-fest: ^0.21.3
+  typescript: ^4.2.3
 packages:
   /@aws-crypto/ie11-detection/1.0.0:
     dependencies:
@@ -1209,6 +1212,18 @@ packages:
       '@babel/core': ^7.0.0-0
     resolution:
       integrity: sha512-A81F9pDwyS7yM//KwbCSDqy3Uj4NMIurtplxphWxoYtNPov7cJsDkAFNNyVlIZ3jwGycVsurZ+LtOA8gZ376iQ==
+  /@babel/plugin-transform-modules-commonjs/7.13.8_@babel+core@7.13.10:
+    dependencies:
+      '@babel/core': 7.13.10
+      '@babel/helper-module-transforms': 7.13.0
+      '@babel/helper-plugin-utils': 7.13.0
+      '@babel/helper-simple-access': 7.12.13
+      babel-plugin-dynamic-import-node: 2.3.3
+    dev: true
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    resolution:
+      integrity: sha512-9QiOx4MEGglfYZ4XOnU79OHr6vIWUakIj9b4mioN8eQIoEh+pf5p/zEB36JpDFWA12nNMiRf7bfoRvl9Rn79Bw==
   /@babel/template/7.12.13:
     dependencies:
       '@babel/code-frame': 7.12.13
@@ -2113,7 +2128,7 @@ packages:
       integrity: sha512-JoX0apGbHaUJBNl6yF+p6JAFYZ666/hhCGKN5t9QFjbJQKUU/g8MNbFDbvfrgKXvI1QpZplPOnwIo99lX/AAmA==
   /ansi-escapes/4.3.1:
     dependencies:
-      type-fest: 0.11.0
+      type-fest: 0.21.3
     dev: true
     engines:
       node: '>=8'
@@ -2403,6 +2418,12 @@ packages:
       '@babel/core': ^7.0.0
     resolution:
       integrity: sha512-pl4Q+GAVOHwvjrck6jKjvmGhnO3jHX/xuB9d27f+EJZ/6k+6nMuPjorrYp7s++bKKdANwzElBWnLWaObvTnaZA==
+  /babel-plugin-dynamic-import-node/2.3.3:
+    dependencies:
+      object.assign: 4.1.2
+    dev: true
+    resolution:
+      integrity: sha512-jZVI+s9Zg3IqA/kdi0i6UDCybUI3aSBLnglhYbSSjKlV7yF1F/5LWv8MakQmvYpnbJDS6fcBL2KzHSxNCMtWSQ==
   /babel-plugin-istanbul/6.0.0:
     dependencies:
       '@babel/helper-plugin-utils': 7.13.0
@@ -2521,7 +2542,7 @@ packages:
       chalk: 4.1.0
       cli-boxes: 2.2.1
       string-width: 4.2.2
-      type-fest: 0.20.2
+      type-fest: 0.21.3
       widest-line: 3.1.0
       wrap-ansi: 7.0.0
     dev: true
@@ -3466,20 +3487,17 @@ packages:
       node: '>= 0.4'
     resolution:
       integrity: sha512-QCOllgZJtaUo9miYBcLChTUaHNjJF3PYs1VidD7AwiEj1kYxKeQTctLAezAOH5ZKRH0g2IgPn6KwB4IT8iRpvA==
-  /esbuild-jest/0.3.0_esbuild@0.8.57:
+  /esbuild-jest/0.5.0_esbuild@0.9.2:
     dependencies:
-      esbuild: 0.8.57
+      '@babel/core': 7.13.10
+      '@babel/plugin-transform-modules-commonjs': 7.13.8_@babel+core@7.13.10
+      babel-jest: 26.6.3_@babel+core@7.13.10
+      esbuild: 0.9.2
     dev: true
     peerDependencies:
-      esbuild: '>=0.8.16'
+      esbuild: '>=0.8.50'
     resolution:
-      integrity: sha512-J1ZHN4IbQiLJAsCMK2XkPYZsTrD8ius+1B09RVqfrvmT+BnwGdR6CLvRq6DGopOaEmdkr4AIk/J6LQUhRQDsSg==
-  /esbuild/0.8.57:
-    dev: true
-    hasBin: true
-    requiresBuild: true
-    resolution:
-      integrity: sha512-j02SFrUwFTRUqiY0Kjplwjm1psuzO1d6AjaXKuOR9hrY0HuPsT6sV42B6myW34h1q4CRy+Y3g4RU/cGJeI/nNA==
+      integrity: sha512-AMZZCdEpXfNVOIDvURlqYyHwC8qC1/BFjgsrOiSL1eyiIArVtHL8YAC83Shhn16cYYoAWEW17yZn0W/RJKJKHQ==
   /esbuild/0.9.2:
     hasBin: true
     requiresBuild: true
@@ -3541,7 +3559,7 @@ packages:
       typescript: '*'
     resolution:
       integrity: sha512-AU90nXiNv3P1kA10eBJkv8TB6dd81OsT4UyM5fG6Ie8bxQGinE/6XR7LMxylvk3fusK5xAxDET4bIHPT6S5Hvw==
-  /eslint-config-prettier/7.2.0_eslint@7.22.0:
+  /eslint-config-prettier/8.1.0_eslint@7.22.0:
     dependencies:
       eslint: 7.22.0
     dev: true
@@ -3549,7 +3567,7 @@ packages:
     peerDependencies:
       eslint: '>=7.0.0'
     resolution:
-      integrity: sha512-rV4Qu0C3nfJKPOAhFujFxB7RMP+URFyQqqOZW9DMRD7ZDTFyjaIlETU3xzHELt++4ugC0+Jm084HQYkkJe+Ivg==
+      integrity: sha512-oKMhGv3ihGbCIimCAjqkdzx2Q+jthoqnXSP+d86M9tptwugycmTFdVR4IpLgq2c4SHifbwO90z2fQ8/Aio73yw==
   /eslint-plugin-ava/11.0.0_eslint@7.22.0:
     dependencies:
       deep-strict-equal: 0.2.0
@@ -4136,7 +4154,7 @@ packages:
       integrity: sha512-WOBp/EEGUiIsJSp7wcv/y6MO+lV9UoncWqxuFfm8eBwzWNgyfBd6Gz+IeKQ9jCmyhoH99g15M3T+QaVHFjizVA==
   /globals/12.4.0:
     dependencies:
-      type-fest: 0.8.1
+      type-fest: 0.21.3
     dev: true
     engines:
       node: '>=8'
@@ -4144,7 +4162,7 @@ packages:
       integrity: sha512-BWICuzzDvDoH54NHKCseDanAhE3CeDorgDL5MT6LMXXj2WCnd9UC2szdk4AWLfjdgNBCXLUanXYcpBBKOSWGwg==
   /globals/13.6.0:
     dependencies:
-      type-fest: 0.20.2
+      type-fest: 0.21.3
     dev: true
     engines:
       node: '>=8'
@@ -5514,7 +5532,7 @@ packages:
       parse-json: 4.0.0
       pify: 4.0.1
       strip-bom: 3.0.0
-      type-fest: 0.3.1
+      type-fest: 0.21.3
     dev: true
     engines:
       node: '>=6'
@@ -5696,7 +5714,7 @@ packages:
       read-pkg-up: 7.0.1
       redent: 3.0.0
       trim-newlines: 3.0.0
-      type-fest: 0.13.1
+      type-fest: 0.21.3
       yargs-parser: 18.1.3
     dev: true
     engines:
@@ -6633,7 +6651,7 @@ packages:
     dependencies:
       find-up: 4.1.0
       read-pkg: 5.2.0
-      type-fest: 0.8.1
+      type-fest: 0.21.3
     dev: true
     engines:
       node: '>=8'
@@ -6644,7 +6662,7 @@ packages:
       '@types/normalize-package-data': 2.4.0
       normalize-package-data: 2.5.0
       parse-json: 5.2.0
-      type-fest: 0.6.0
+      type-fest: 0.21.3
     dev: true
     engines:
       node: '>=8'
@@ -6992,7 +7010,7 @@ packages:
       integrity: sha512-tCfb2WLjqFAtXn4KEdxIhalnRtoKFN7nAwj0B3ZXCbQloV2tq5eDbcTmT68JJD3nRJq24/XgxtQKFIpQdtvmVw==
   /serialize-error/7.0.1:
     dependencies:
-      type-fest: 0.13.1
+      type-fest: 0.21.3
     dev: true
     engines:
       node: '>=10'
@@ -7668,41 +7686,11 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha512-0fr/mIH1dlO+x7TlcMy+bIDqKPsw/70tVyeHW787goQjhmqaZe10uwLujubK9q9Lg6Fiho1KUKDYz0Z7k7g5/g==
-  /type-fest/0.11.0:
-    dev: true
-    engines:
-      node: '>=8'
-    resolution:
-      integrity: sha512-OdjXJxnCN1AvyLSzeKIgXTXxV+99ZuXl3Hpo9XpJAv9MBcHrrJOQ5kV7ypXOuQie+AmWG25hLbiKdwYTifzcfQ==
-  /type-fest/0.13.1:
-    dev: true
+  /type-fest/0.21.3:
     engines:
       node: '>=10'
     resolution:
-      integrity: sha512-34R7HTnG0XIJcBSn5XhDd7nNFPRcXYRZrBB2O2jdKqYODldSzBAqzsWoZYYvduky73toYS/ESqxPvkDf/F0XMg==
-  /type-fest/0.20.2:
-    engines:
-      node: '>=10'
-    resolution:
-      integrity: sha512-Ne+eE4r0/iWnpAxD852z3A+N0Bt5RN//NjJwRd2VFHEmrywxf5vsZlh4R6lixl6B+wz/8d+maTSAkN1FIkI3LQ==
-  /type-fest/0.3.1:
-    dev: true
-    engines:
-      node: '>=6'
-    resolution:
-      integrity: sha512-cUGJnCdr4STbePCgqNFbpVNCepa+kAVohJs1sLhxzdH+gnEoOd8VhbYa7pD3zZYGiURWM2xzEII3fQcRizDkYQ==
-  /type-fest/0.6.0:
-    dev: true
-    engines:
-      node: '>=8'
-    resolution:
-      integrity: sha512-q+MB8nYR1KDLrgr4G5yemftpMC7/QLqVndBmEEdqzmNj5dcFOO4Oo8qlwZE3ULT3+Zim1F8Kq4cBnikNhlCMlg==
-  /type-fest/0.8.1:
-    dev: true
-    engines:
-      node: '>=8'
-    resolution:
-      integrity: sha512-4dbzIzqvjtgiM5rw1k5rEHtBANKmdudhGyBEajN01fEyhaAIhsoKNy6y7+IN93IfpFtwY9iqi7kD+xwKhQsNJA==
+      integrity: sha512-t0rzBq87m3fVcduHDUFhKmyyX+9eo6WQjZvf51Ea/M0Q7+T374Jp1aUiyUl0GKxp8M/OETVHSDvmkyPgvX+X2w==
   /typedarray-to-buffer/3.1.5:
     dependencies:
       is-typedarray: 1.0.0

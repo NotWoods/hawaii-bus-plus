@@ -7,7 +7,7 @@
     { "path": "../../utils/src" }
   ],
   "compilerOptions": {
-    "lib": ["ES2020"],
+    "lib": ["esnext"],
     "types": []
   }
 }

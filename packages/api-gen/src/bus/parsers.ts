@@ -34,10 +34,8 @@ export type StopTimeInflated = Merge<
   }
 >;
 
-export type TripInflated = Merge<
-  Trip,
-  { readonly stop_times: StopTimeInflated[] }
->;
+export interface TripInflated
+  extends Merge<Trip, { readonly stop_times: StopTimeInflated[] }> {}
 
 export type ServerGTFSData = Merge<
   GTFSData,
@@ -99,7 +97,7 @@ export async function parseRoutes(
 export async function parseTrips(
   json: Pick<JsonStreams, 'trips'>,
   variable: Pick<ServerGTFSData, 'trips'>
-) {
+): Promise<ReadonlyMap<Trip['trip_id'], TripInflated>> {
   const trips = new Map<Trip['trip_id'], TripInflated>();
   for await (const csvTrip of json.trips) {
     const trip = csvTrip as Mutable<TripInflated>;
