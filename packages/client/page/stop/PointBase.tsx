@@ -2,7 +2,7 @@ import {
   StreetViewPano,
   StreetViewStatic,
 } from '@hawaii-bus-plus/react-google-maps';
-import { ComponentChildren, h, Fragment } from 'preact';
+import { ComponentChildren, Fragment, h } from 'preact';
 import { useState } from 'preact/hooks';
 import {
   googleMapsApiKey,
@@ -14,7 +14,10 @@ interface Props {
   children: ComponentChildren;
 }
 
+const pov: Required<google.maps.StreetViewPov> = { heading: 34, pitch: 0 };
+
 export function PointBase(props: Props) {
+  const { position } = props;
   const [status, setStatus] = useState<
     google.maps.StreetViewStatus | undefined
   >();
@@ -26,17 +29,20 @@ export function PointBase(props: Props) {
         className="aspect-w-16 aspect-h-9 mb-4"
         hidden={status === 'ZERO_RESULTS'}
       >
-        {props.position ? (
+        {position ? (
           loadError ? (
             <StreetViewStatic
               googleMapsApiKey={googleMapsApiKey}
+              size="474x266"
               class="bg-very-dark"
-              position={props.position}
+              position={position}
+              pov={pov}
             />
           ) : (
             <StreetViewPano
               class="bg-very-dark"
-              position={props.position}
+              position={position}
+              pov={pov}
               onStatusChange={function () {
                 setStatus(this.getStatus());
               }}

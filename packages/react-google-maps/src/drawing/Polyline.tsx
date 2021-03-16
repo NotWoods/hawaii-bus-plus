@@ -1,25 +1,25 @@
 import type { PolylineProps } from '@react-google-maps/api';
-import { useEffect } from 'preact/hooks';
-import { useMap } from '../apply-changes';
+import { useMap, useSetter } from '../apply-changes';
 import { useGoogleMap } from '../MapProvider';
+import { onUnmount } from './Marker';
 
-type Props = Pick<PolylineProps, 'path' | 'options'>;
+type Props = Required<Pick<PolylineProps, 'path' | 'options'>>;
+
+function createPolyline(map: google.maps.Map) {
+  return { instance: new google.maps.Polyline({ map }), onUnmount };
+}
 
 export function Polyline(props: Props) {
   const map = useGoogleMap();
-  const marker = useMap<google.maps.Polyline>(map, (setInstance, map) => {
-    const marker = new google.maps.Polyline({ map });
-    setInstance(marker);
+  const polyline = useMap<google.maps.Polyline>(map, createPolyline);
 
-    return () => marker.setMap(null);
+  const { options, path } = props;
+  useSetter(polyline, options, (marker) => {
+    marker.setOptions(options);
   });
-
-  useEffect(() => {
-    marker?.setOptions(props.options!);
-  }, [marker, props.options]);
-  useEffect(() => {
-    marker?.setPath(props.path!);
-  }, [marker, props.path]);
+  useSetter(polyline, path, (marker) => {
+    marker.setPath(path);
+  });
 
   return null;
 }

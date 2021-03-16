@@ -1,5 +1,4 @@
-import { useEffect } from 'preact/hooks';
-import { useListener, useMap } from '../apply-changes';
+import { useListener, useMap, useSetter } from '../apply-changes';
 import { useGoogleMap } from '../MapProvider';
 
 interface Props {
@@ -27,34 +26,36 @@ export interface MarkerWithData<T> extends google.maps.Marker {
   set(key: 'extra', value: T): void;
 }
 
-export function Marker<T>(props: Props | PropsWithData<T>) {
-  const map = useGoogleMap();
-  const marker = useMap<MarkerWithData<T>>(map, (setInstance, map) => {
-    const marker = new google.maps.Marker({
-      map,
-      position: props.position,
-    });
-    setInstance(marker);
+export function onUnmount(instance: { setMap(map: null): void }) {
+  instance.setMap(null);
+}
 
-    return () => marker.setMap(null);
+export function Marker<T>(props: Props | PropsWithData<T>) {
+  const { position, title = null, icon = null, opacity = null } = props;
+
+  const map = useGoogleMap();
+  const marker = useMap<MarkerWithData<T>>(map, (map) => {
+    const instance = new google.maps.Marker({ map, position });
+
+    return { instance, onUnmount };
   });
   const dataExtra = (props as Partial<PropsWithData<T>>)['data-extra'];
 
-  useEffect(() => {
-    marker?.setTitle(props.title ?? null);
-  }, [marker, props.title]);
-  useEffect(() => {
-    marker?.setPosition(props.position);
-  }, [marker, props.position]);
-  useEffect(() => {
-    marker?.setIcon(props.icon ?? null);
-  }, [marker, props.icon]);
-  useEffect(() => {
-    marker?.setOpacity(props.opacity ?? null);
-  }, [marker, props.opacity]);
-  useEffect(() => {
-    marker?.set('extra', dataExtra!);
-  }, [marker, dataExtra]);
+  useSetter(marker, title, (marker) => {
+    marker.setTitle(title);
+  });
+  useSetter(marker, position, (marker) => {
+    marker.setPosition(position);
+  });
+  useSetter(marker, icon, (marker) => {
+    marker.setIcon(icon);
+  });
+  useSetter(marker, opacity, (marker) => {
+    marker.setOpacity(opacity);
+  });
+  useSetter(marker, dataExtra, (marker) => {
+    marker.set('extra', dataExtra!);
+  });
 
   useListener(marker, 'click', props.onClick);
 
