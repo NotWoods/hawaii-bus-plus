@@ -17,7 +17,7 @@
     "tslib": "^2.1.0"
   },
   "peerDependencies": {
-    "preact": "^10.5.12"
+    "preact": "^10.5.13"
   },
   "devDependencies": {
     "@types/googlemaps": "^3.43.3",

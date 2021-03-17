@@ -49,7 +49,7 @@ importers:
       typescript: 4.2.3
     specifiers:
       '@hawaii-bus-plus/mnemonist': 'workspace:^0.38.3'
-      '@hawaii-bus-plus/temporal-utils': 'workspace:^1.0.0'
+      '@hawaii-bus-plus/temporal-utils': 'workspace:*'
       '@hawaii-bus-plus/types': 'workspace:*'
       '@hawaii-bus-plus/utils': 'workspace:*'
       '@types/node': ^14.14.35
@@ -151,7 +151,6 @@ importers:
       '@types/node': 14.14.35
       ava: 3.15.0
       prettier: 2.2.1
-      type-fest: 0.21.3
       typescript: 4.2.3
     specifiers:
       '@hawaii-bus-plus/mnemonist': 'workspace:^0.38.3'
@@ -163,7 +162,6 @@ importers:
       ix: ^4.3.0
       prettier: ^2.2.1
       tslib: ^2.1.0
-      type-fest: ^0.21.3
       typescript: ^4.2.3
   packages/functions:
     dependencies:
@@ -184,7 +182,6 @@ importers:
       copyfiles: 2.4.1
       prettier: 2.2.1
       rollup: 2.41.4
-      type-fest: 0.21.3
       typescript: 4.2.3
     specifiers:
       '@aws-sdk/client-dynamodb': ^3.8.1
@@ -203,7 +200,6 @@ importers:
       rollup: ^2.41.4
       stripe: ^8.138.0
       tslib: ^2.1.0
-      type-fest: ^0.21.3
       typescript: ^4.2.3
   packages/gotrue:
     dependencies:
@@ -235,14 +231,12 @@ importers:
     devDependencies:
       jest: 26.6.3
       prettier: 2.2.1
-      type-fest: 0.21.3
       typescript: 4.2.3
     specifiers:
       '@hawaii-bus-plus/types': 'workspace:*'
       jest: ^26.6.3
       prettier: ^2.2.1
       tslib: ^2.1.0
-      type-fest: ^0.21.3
       typescript: ^4.2.3
   packages/mnemonist:
     dependencies:
@@ -250,13 +244,11 @@ importers:
     devDependencies:
       ava: 3.15.0
       prettier: 2.2.1
-      type-fest: 0.21.3
       typescript: 4.2.3
     specifiers:
       ava: ^3.15.0
       prettier: ^2.2.1
       tslib: ^2.1.0
-      type-fest: ^0.21.3
       typescript: ^4.2.3
   packages/prerender:
     dependencies:
@@ -298,7 +290,7 @@ importers:
       type-fest: 0.21.3
       typescript: 4.2.3
     specifiers:
-      '@hawaii-bus-plus/temporal-utils': 'workspace:^1.0.0'
+      '@hawaii-bus-plus/temporal-utils': 'workspace:*'
       '@hawaii-bus-plus/types': 'workspace:*'
       '@hawaii-bus-plus/utils': 'workspace:*'
       ava: ^3.15.0
@@ -353,16 +345,14 @@ importers:
     devDependencies:
       ava: 3.15.0
       prettier: 2.2.1
-      type-fest: 0.21.3
       typescript: 4.2.3
     specifiers:
       '@hawaii-bus-plus/types': 'workspace:*'
-      '@hawaii-bus-plus/utils': 'workspace:^1.0.0'
+      '@hawaii-bus-plus/utils': 'workspace:*'
       ava: ^3.15.0
       prettier: ^2.2.1
       proposal-temporal: ^0.7.0
       tslib: ^2.1.0
-      type-fest: ^0.21.3
       typescript: ^4.2.3
   packages/types:
     dependencies:
@@ -383,14 +373,12 @@ importers:
     devDependencies:
       ava: 3.15.0
       prettier: 2.2.1
-      type-fest: 0.21.3
       typescript: 4.2.3
     specifiers:
       '@hawaii-bus-plus/types': 'workspace:*'
       ava: ^3.15.0
       prettier: ^2.2.1
       tslib: ^2.1.0
-      type-fest: ^0.21.3
       typescript: ^4.2.3
   packages/vite-plugins:
     dependencies:
@@ -402,7 +390,6 @@ importers:
       '@types/node': 14.14.35
       ava: 3.15.0
       prettier: 2.2.1
-      type-fest: 0.21.3
       typescript: 4.2.3
       vite: 2.1.1
     specifiers:
@@ -413,7 +400,6 @@ importers:
       ava: ^3.15.0
       prettier: ^2.2.1
       tslib: ^2.1.0
-      type-fest: ^0.21.3
       typescript: ^4.2.3
       vite: ^2.1.1
 lockfileVersion: 5.2
