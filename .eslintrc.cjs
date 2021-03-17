@@ -16,7 +16,6 @@ const config = {
     'plugin:jest/style',
     'plugin:ava/recommended',
     'prettier',
-    'prettier/@typescript-eslint',
   ],
   ignorePatterns: ['**/*.d.ts'],
   rules: {

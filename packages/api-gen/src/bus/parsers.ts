@@ -24,23 +24,22 @@ import type {
 } from '@hawaii-bus-plus/types';
 import { compareAs } from '@hawaii-bus-plus/utils';
 import { first, toArray } from 'ix/asynciterable/index.js';
-import type { Merge, Mutable } from 'type-fest';
+import type { Mutable } from 'type-fest';
 
-export type StopTimeInflated = Merge<
-  StopTime,
-  {
-    readonly arrival_time: PlainDaysTime;
-    readonly departure_time: PlainDaysTime;
-  }
->;
+export interface StopTimeInflated
+  extends Omit<StopTime, 'arrival_time' | 'departure_time'> {
+  readonly arrival_time: PlainDaysTime;
+  readonly departure_time: PlainDaysTime;
+}
 
-export interface TripInflated
-  extends Merge<Trip, { readonly stop_times: StopTimeInflated[] }> {}
+export interface TripInflated extends Omit<Trip, 'stop_times'> {
+  readonly stop_times: StopTimeInflated[];
+}
 
-export type ServerGTFSData = Merge<
-  GTFSData,
-  { trips: TripInflated[]; info?: FeedInfo }
->;
+export interface ServerGTFSData extends Omit<GTFSData, 'trips' | 'info'> {
+  trips: TripInflated[];
+  info?: FeedInfo;
+}
 
 export type JsonStreams = {
   routes: AsyncIterable<CsvRoute>;
@@ -60,7 +59,7 @@ export async function parseFeedInfo(
   variable: Partial<Pick<GTFSData, 'info'>>
 ) {
   const info = await first(json.feed_info);
-  variable.info = info!;
+  variable.info = info;
 }
 
 export async function parseAgency(
