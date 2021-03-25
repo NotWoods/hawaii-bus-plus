@@ -3,9 +3,11 @@ import { Button } from '../buttons/Button';
 import { Icon } from '../icons/Icon';
 import loginSvg from '../icons/login.svg';
 import paymentsSvg from '../icons/payments.svg';
+import errorSvg from '../icons/error.svg';
+import { HomeButtonsError } from './hooks';
 
 function HomeButtons(props: {
-  children: ComponentChildren;
+  children?: ComponentChildren;
   icon: string;
   about: ComponentChildren;
 }) {
@@ -49,4 +51,24 @@ export function BillingButtons() {
       </Button>
     </HomeButtons>
   );
+}
+
+export function BrowserUnsupported() {
+  return (
+    <HomeButtons
+      icon={errorSvg}
+      about="Your browser is not supported at this time. Try using Microsoft Edge or Google Chrome to access Hawaii Bus Plus."
+    />
+  );
+}
+
+export function HomeErrorButtons(props: { error: HomeButtonsError }) {
+  switch (props.error.code) {
+    case 401:
+      return <LoginButtons />;
+    case 402:
+      return <BillingButtons />;
+    case 'worker_start_error':
+      return <BrowserUnsupported />;
+  }
 }

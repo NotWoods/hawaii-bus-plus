@@ -1,44 +1,26 @@
 import { ComponentChildren, Fragment, h } from 'preact';
-import { useContext, useState } from 'preact/hooks';
+import { useState } from 'preact/hooks';
 import { ClosestResults } from '../../worker-nearby/closest/closest';
 import type { NearbyWorkerHandler } from '../../worker-nearby/nearby';
 import NearbyWorker from '../../worker-nearby/nearby?worker';
 import { LoadingBar } from '../buttons/LoadingBar';
 import { useDelay, usePromise, useWorker } from '../hooks';
 import { dbInitialized } from '../hooks/api';
-import { MyLocationContext } from '../map/location/context';
-import { RouterContext } from '../router/Router';
 import { SearchBar } from '../search/SearchBar';
 import { emptyClosestResults } from '../search/simple/places-autocomplete';
 import { NearbyRoutes } from '../stop/NearbyRoutes';
-import { BillingButtons, LoginButtons } from './HomeButtons';
+import { HomeErrorButtons } from './HomeButtons';
+import { HomeButtonsError, isHomeButtonsError, useHomeLocation } from './hooks';
 
 interface Props {
   onSearch?(): void;
 }
 
-export { Title } from '../../all-pages/Title';
-
-function isAuthError(err: unknown): err is { code: 401 | 402 } {
-  const error = err as { code?: unknown };
-  return error.code === 401 || error.code === 402;
-}
-
-function renderButtons(code: 401 | 402) {
-  switch (code) {
-    case 401:
-      return <LoginButtons />;
-    case 402:
-      return <BillingButtons />;
-  }
-}
-
 export function Home(props: Props) {
-  const { point } = useContext(RouterContext);
-  const { coords } = useContext(MyLocationContext);
   const [results, setResults] = useState<ClosestResults | undefined>();
-  const [authError, setAuthError] = useState<401 | 402 | undefined>();
-  const delayDone = useDelay(500, [coords?.lat, coords?.lng, point]);
+  const [error, setError] = useState<HomeButtonsError | undefined>();
+  const location = useHomeLocation();
+  const delayDone = useDelay(500, [location?.lat, location?.lng]);
 
   const postToNearbyWorker = useWorker(NearbyWorker) as NearbyWorkerHandler;
   usePromise(
@@ -46,19 +28,12 @@ export function Home(props: Props) {
       try {
         await dbInitialized;
       } catch (err: unknown) {
-        if (isAuthError(err)) {
-          setAuthError(err.code);
+        if (isHomeButtonsError(err)) {
+          setError(err);
         } else {
           console.error(err);
         }
         return;
-      }
-
-      let location: google.maps.LatLngLiteral | undefined;
-      if (point && (point.type === 'marker' || point.type === 'user')) {
-        location = point.position;
-      } else {
-        location = coords;
       }
 
       const results = await postToNearbyWorker(signal, {
@@ -69,12 +44,12 @@ export function Home(props: Props) {
 
       setResults(results);
     },
-    [coords?.lat, coords?.lng, point]
+    [location?.lat, location?.lng]
   );
 
   let content: ComponentChildren;
-  if (authError) {
-    content = renderButtons(authError);
+  if (error) {
+    content = <HomeErrorButtons error={error} />;
   } else if (delayDone && !results) {
     content = <LoadingBar />;
   } else {

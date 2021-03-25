@@ -1,11 +1,12 @@
 import { h } from 'preact';
 import { useState } from 'preact/hooks';
+import { Title } from '../../all-pages/Title';
 import { useLazyComponent } from '../hooks';
 import { MenuIcon } from '../icons/MenuIcon';
 import { DirectionsSearch } from '../search/directions/DirectionsSearch';
 import { SearchBase } from '../search/SearchBase';
 import { SimpleSearch } from '../search/simple/SimpleSearch';
-import { Home, Title } from './Home';
+import { Home } from './Home';
 
 const lazyMenu = import('./menu/Menu');
 

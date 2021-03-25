@@ -31,10 +31,19 @@ export class PromiseWorker {
     (error: Error | undefined, result: unknown) => void
   >();
 
+  private syntaxError?: unknown;
+
   constructor(private readonly worker: Worker) {
     worker.addEventListener('message', (evt) => this.onMessage(evt.data));
     worker.addEventListener('error', (evt) => {
-      console.error('Worker error', evt.error, evt.message);
+      const error = evt.error || new Error(evt.message);
+      (error as { code?: string }).code = 'worker_start_error';
+
+      this.syntaxError = error;
+      console.warn('Worker error', error);
+      for (const id of this.callbacks.keys()) {
+        this.onMessage([id, error]);
+      }
     });
   }
 
@@ -59,6 +68,10 @@ export class PromiseWorker {
   }
 
   postMessage(userMessage: unknown, signal?: AbortSignal): Promise<unknown> {
+    if (this.syntaxError) {
+      throw this.syntaxError;
+    }
+
     const messageId = messageIds++;
     const messageToSend = [messageId, userMessage];
 
