@@ -1,3 +1,4 @@
+/// <reference lib="webworker" />
 import { emptyPackage, prefreshPlus } from '@hawaii-bus-plus/vite-plugins';
 import { AliasOptions, defineConfig } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
