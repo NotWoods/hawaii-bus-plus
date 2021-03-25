@@ -1,10 +1,10 @@
-/// <reference lib="webworker" />
 import { emptyPackage, prefreshPlus } from '@hawaii-bus-plus/vite-plugins';
-import { AliasOptions, defineConfig } from 'vite';
+import { defineConfig } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
 
 const productionMode = process.env.NETLIFY_CONTEXT === 'production';
-const alias: AliasOptions = {
+/** @type {import('vite').AliasOptions} */
+const alias = {
   'insights-js': 'insights-js/dist/esnext/index.js',
   react: 'preact/compat',
   'react-dom': 'preact/compat',
