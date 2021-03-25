@@ -8,8 +8,10 @@ test.serial('build code and assets', async (t) => {
   const { code, assets } = await buildPrerenderCode('./auth/entry-server.tsx');
 
   t.is(typeof code, 'string');
-  t.is(assets.length, 1);
+  t.is(assets.length, 3);
   t.like(assets[0], { name: 'style.css' });
+  t.like(assets[1], { fileName: 'manifest.webmanifest' });
+  t.like(assets[2], { fileName: 'registerSW.js' });
 });
 
 test.serial('render and run auth entry file', async (t) => {
