@@ -91,7 +91,7 @@
     worker-src 'self';
     style-src 'self' 'unsafe-inline' fonts.googleapis.com;
     font-src 'self' fonts.gstatic.com;
-    connect-src 'self' getinsights.io;
+    connect-src 'self' getinsights.io *.googleapis.com *.ggpht.com maps.gstatic.com fonts.googleapis.com;
     manifest-src 'self';
     object-src 'none';
     base-uri 'none';'''
