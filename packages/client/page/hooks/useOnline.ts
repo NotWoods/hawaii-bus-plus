@@ -17,11 +17,13 @@ function useWindowListener(eventName: string, callback: () => void) {
   }, [eventName]);
 }
 
+const ssr = import.meta.env.SSR as boolean;
+
 /**
  * @returns True if the user is currently connected to the internet
  */
 export function useOnline() {
-  const [online, setOnline] = useState(() => navigator.onLine);
+  const [online, setOnline] = useState(() => !ssr && navigator.onLine);
   useWindowListener('online', () => setOnline(true));
   useWindowListener('offline', () => setOnline(false));
   return online;
