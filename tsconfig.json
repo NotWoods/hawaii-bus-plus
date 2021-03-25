@@ -1,5 +1,4 @@
 {
-  "files": ["./packages/client/vite.config.ts"],
   "references": [
     { "path": "packages/api-gen/src" },
     { "path": "packages/client/worker-info" },

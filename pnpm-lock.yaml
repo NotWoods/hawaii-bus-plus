@@ -91,7 +91,6 @@ importers:
       '@types/googlemaps': 3.43.3
       '@types/jest': 26.0.21
       '@types/react': 17.0.3
-      '@types/workbox-build': 5.0.0
       cross-env: 7.0.3
       esbuild: 0.9.7
       esbuild-jest: 0.5.0_esbuild@0.9.7
@@ -124,7 +123,6 @@ importers:
       '@types/googlemaps': ^3.43.3
       '@types/jest': ^26.0.21
       '@types/react': ^17.0.3
-      '@types/workbox-build': ^5.0.0
       cross-env: ^7.0.3
       esbuild: ^0.9.7
       esbuild-jest: ^0.5.0
@@ -2607,16 +2605,6 @@ packages:
     dev: true
     resolution:
       integrity: sha512-RJJrrySY7A8havqpGObOB4W92QXKJo63/jFLLgpvOtsGUqbQZ9Sbgl35KMm1DjC6j7AvmmU2bIno+3IyEaemaw==
-  /@types/workbox-build/5.0.0:
-    dependencies:
-      '@types/workbox-routing': 4.3.0
-    dev: true
-    resolution:
-      integrity: sha512-6hn6W63+U1zaTRCaHIwJTVx1FaZbXZDA9dOE/txsQk8D0nRDZLxtnTwhfyvhtxnWb+zY7nH7psuJXv4oUDZyMA==
-  /@types/workbox-routing/4.3.0:
-    dev: true
-    resolution:
-      integrity: sha512-op5P/f6n+9g5X4a+sYONp9EALnNxpoU3oXuB/BjeQv9d+k0bNE4LYSF06K6tXYL4PeCIZVJOi4yMCUCOi2NaqQ==
   /@types/yargs-parser/20.2.0:
     dev: true
     resolution:
