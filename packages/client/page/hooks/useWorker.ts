@@ -12,15 +12,27 @@ export interface WorkerConstructor {
  * Returns a postMessage function.
  */
 export function useWorker(workerConstructor: WorkerConstructor) {
-  const workerRef = useRef<PromiseWorker | undefined>();
+  const workerRef = useRef<PromiseWorker | Error | undefined>();
 
   const generateWorker = useCallback(() => {
-    return new PromiseWorker(new workerConstructor());
+    try {
+      return new PromiseWorker(new workerConstructor());
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        (err as { code?: unknown }).code = 'worker_start_error';
+        return err;
+      } else {
+        throw err;
+      }
+    }
   }, [workerConstructor]);
 
   useEffect(() => {
     return () => {
-      workerRef.current?.terminate();
+      const worker = workerRef.current;
+      if (worker instanceof PromiseWorker) {
+        worker.terminate();
+      }
     };
   }, []);
 
@@ -33,9 +45,14 @@ export function useWorker(workerConstructor: WorkerConstructor) {
     }
 
     console.info('WorkerRequest:', message);
-    const result = await workerRef.current.postMessage(message, signal);
-    console.info('WorkerResponse:', result);
-    return result;
+    const worker = workerRef.current;
+    if (worker instanceof PromiseWorker) {
+      const result = await worker.postMessage(message, signal);
+      console.info('WorkerResponse:', result);
+      return result;
+    } else {
+      throw worker;
+    }
   }
 
   return postMessage;
