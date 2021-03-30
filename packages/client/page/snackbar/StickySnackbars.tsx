@@ -24,7 +24,7 @@ function CurrentSnackbar() {
  */
 export function StickySnackbars() {
   return (
-    <div className="fixed z-50 bottom-0 inset-x-0 m-4">
+    <div className="fixed z-50 bottom-20 md:bottom-0 left-0 md:left-80 right-0 m-4">
       <CurrentSnackbar />
     </div>
   );

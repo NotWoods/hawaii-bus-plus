@@ -15,13 +15,13 @@ export function Snackbar(props: SnackbarProps) {
   return (
     <div
       className={classNames(
-        'mx-auto pl-4 flex gap-2 items-center shadow w-96 bg-gray-900 transition',
+        'mx-auto pl-4 py-2 flex gap-2 items-center shadow max-w-sm bg-red text-white transition',
         props.class
       )}
     >
       <span class="mr-auto">{props.children}</span>
       {props.action && <Button onClick={props.onAction}>{props.action}</Button>}
-      <CloseButton onClick={props.onClose} />
+      <CloseButton class="self-start" onClick={props.onClose} />
     </div>
   );
 }
