@@ -13,11 +13,11 @@
   },
   "dependencies": {
     "@hawaii-bus-plus/data": "workspace:*",
-    "preact-render-to-string": "^5.1.16",
-    "rollup": "^2.42.4",
+    "preact-render-to-string": "^5.1.18",
+    "rollup": "^2.44.0",
     "tslib": "^2.1.0",
-    "type-fest": "^0.21.3",
-    "vite": "^2.1.2"
+    "type-fest": "^1.0.1",
+    "vite": "^2.1.4"
   },
   "devDependencies": {
     "ava": "^3.15.0",

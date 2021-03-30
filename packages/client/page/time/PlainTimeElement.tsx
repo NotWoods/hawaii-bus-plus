@@ -1,11 +1,11 @@
 import { formatPlainTime, PlainTimeData } from '@hawaii-bus-plus/presentation';
+import clsx, { ClassValue } from 'clsx';
 import { h } from 'preact';
-import { classNames } from '../hooks/classnames';
 
 interface Props {
   time: PlainTimeData;
   approximate?: boolean;
-  class?: string;
+  class?: ClassValue;
   style?: {
     [key: string]: string | number | null | undefined;
   };
@@ -29,7 +29,7 @@ export function PlainTimeElement(props: Props) {
 
   return (
     <time
-      class={classNames('whitespace-nowrap', props.class)}
+      class={clsx('whitespace-nowrap', props.class)}
       style={props.style}
       dateTime={props.time.string}
       title={`${prefix}${localTime}`}

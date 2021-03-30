@@ -1,13 +1,13 @@
 import { nowWithZone } from '@hawaii-bus-plus/temporal-utils';
+import clsx, { ClassValue } from 'clsx';
 import { h } from 'preact';
 import { Temporal } from 'proposal-temporal';
-import { classNames } from '../../hooks/classnames';
 import { NOW } from './symbol';
 
 interface InputProps<T> {
   'aria-label'?: string;
   value: T | string | NOW;
-  class?: string;
+  class?: ClassValue;
   onChange(time: T): void;
 }
 
@@ -23,7 +23,7 @@ function PlainTimeInput(props: InputProps<Temporal.PlainTime>) {
   return (
     <input
       type="time"
-      class={classNames('border-current', props.class)}
+      class={clsx('border-current', props.class)}
       placeholder="12:00"
       aria-label={props['aria-label']}
       value={value.toString({ smallestUnit: 'minutes' })}
@@ -50,7 +50,7 @@ export function PlainDateInput(props: InputProps<Temporal.PlainDate>) {
   return (
     <input
       type="date"
-      class={classNames('border-current', props.class)}
+      class={clsx('border-current', props.class)}
       placeholder="2021-01-31"
       aria-label={props['aria-label']}
       value={value.toString()}

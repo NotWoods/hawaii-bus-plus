@@ -21,6 +21,7 @@ export default defineConfig({
     VitePWA({
       mode: productionMode ? 'production' : 'development',
       minify: productionMode,
+      injectRegister: 'inline',
       workbox: {
         navigateFallback: '/index.html',
         navigateFallbackAllowlist: [

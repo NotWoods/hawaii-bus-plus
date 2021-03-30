@@ -1,6 +1,6 @@
 import { Agency, Route } from '@hawaii-bus-plus/types';
+import clsx, { ClassValue } from 'clsx';
 import { h } from 'preact';
-import { classNames } from '../../hooks/classnames';
 import { Link } from '../../router/Router';
 import { RouteIcon } from '../../routes/badge/RouteIcon';
 import { colorVariables } from '../../routes/props';
@@ -8,7 +8,7 @@ import { colorVariables } from '../../routes/props';
 interface Props {
   route: Route;
   agency: Pick<Agency, 'agency_name' | 'primary'>;
-  className?: string;
+  class?: ClassValue;
   onClick?(evt: MouseEvent): void;
 }
 
@@ -17,7 +17,7 @@ export function RouteSearchResultItem(props: Props) {
   return (
     <Link
       href={`/routes/${route.route_id}/`}
-      class={classNames('group block p-2 text-white', props.className)}
+      class={clsx('group block p-2 text-white', props.class)}
       onClick={props.onClick}
     >
       <RouteIcon style={colorVariables(route)}>

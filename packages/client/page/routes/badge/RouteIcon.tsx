@@ -1,5 +1,5 @@
+import clsx from 'clsx';
 import { ComponentChildren, h } from 'preact';
-import { classNames } from '../../hooks/classnames';
 
 const ring = 'ring-1 ring-gray-500 bg-route';
 const line = `${ring} block w-8 h-2`;
@@ -20,7 +20,7 @@ export function SmallRouteIcon(props: Props) {
   return (
     <span
       {...props}
-      class={classNames(
+      class={clsx(
         ring,
         'font-display font-medium text-center text-route px-1 self-end justify-self-end',
         props.class
@@ -36,11 +36,11 @@ export function SmallRouteIcon(props: Props) {
 export function RouteIcon(props: Props) {
   return (
     <div class="flex items-center" {...props}>
-      <span class={`${line} rounded-l-full`} />
+      <span class={clsx(line, 'rounded-l-full')} />
       <SmallRouteIcon class={`text-xl w-12 flex-none mx-1`}>
         {props.children}
       </SmallRouteIcon>
-      <span class={`${line} rounded-r-full`} />
+      <span class={clsx(line, 'rounded-r-full')} />
     </div>
   );
 }

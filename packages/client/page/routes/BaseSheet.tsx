@@ -1,5 +1,5 @@
+import clsx from 'clsx';
 import { ComponentChildren, h } from 'preact';
-import { classNames } from '../hooks/classnames';
 import { useLoadGoogleMaps } from '../hooks/useLoadGoogleMaps';
 import './BaseSheet.css';
 
@@ -14,11 +14,11 @@ interface Props {
 export function BaseSheet(props: Props) {
   const { loadError } = useLoadGoogleMaps();
   return (
-    <div class={classNames('relative md:ml-80', loadError ? '' : 'top-[75vh]')}>
+    <div class={clsx('relative md:ml-80', { 'top-[75vh]': !loadError })}>
       <article
-        class={classNames(
+        class={clsx(
           'animate-enter--sheet shadow-lg bg-gradient-to-br from-gray-50 to-gray-100 to:gray-100 dark:from-gray-750 dark:to-gray-800 text-black dark:text-white lg:mx-4',
-          loadError ? '' : 'min-h-[25vh]',
+          { 'min-h-[25vh]': !loadError },
           props.loaded ? 'animate-run' : 'animate-pause'
         )}
         style={props.style}

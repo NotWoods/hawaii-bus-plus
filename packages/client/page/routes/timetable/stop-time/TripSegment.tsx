@@ -1,8 +1,8 @@
 import { StopTimeData } from '@hawaii-bus-plus/presentation';
+import clsx from 'clsx';
 import { h } from 'preact';
 import { useState } from 'preact/hooks';
 import type { JourneyTripSegment } from '../../../../worker-nearby/directions/format';
-import { classNames } from '../../../hooks/classnames';
 import expandIcon from '../../../icons/expand_more.svg';
 import { Icon } from '../../../icons/Icon';
 import { SmallRouteIcon } from '../../badge/RouteIcon';
@@ -56,10 +56,9 @@ function TripCollapse({ stopTimes }: TripCollapseProps) {
     >
       <summary class="flex -mx-2 overflow-hidden">
         <Icon
-          class={classNames(
-            'transform transition-transform dark:filter-invert',
-            open && 'rotate-180'
-          )}
+          class={clsx('transform transition-transform dark:filter-invert', {
+            'rotate-180': open,
+          })}
           style={{ gridArea: 'dot' }}
           src={expandIcon}
           alt={open ? 'Collapse' : 'Collapsed'}

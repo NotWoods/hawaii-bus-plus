@@ -1,8 +1,8 @@
 import { Point } from '@hawaii-bus-plus/presentation';
+import clsx from 'clsx';
 import { ComponentChildren, h } from 'preact';
 import { useEffect, useRef, useState } from 'preact/hooks';
 import type { SearchResults } from '../../../worker-search/search-db';
-import { classNames } from '../../hooks/classnames';
 import stopIcon from '../../icons/bus_stop.svg';
 import locationIcon from '../../icons/gps_fixed.svg';
 import placeIcon from '../../icons/place.svg';
@@ -57,7 +57,7 @@ export function DirectionsField(props: Props) {
       <div className="relative shadow-sm">
         <SearchInput
           id={id}
-          class={classNames(point && 'pl-10', invalid && 'border-red-500')}
+          class={clsx({ 'pl-10': point, 'border-red-500': invalid })}
           placeholder="Stop or location"
           value={point?.name ?? value}
           onInput={async (evt) => {

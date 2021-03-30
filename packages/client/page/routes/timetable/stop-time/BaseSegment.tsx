@@ -1,6 +1,6 @@
 import { PlainTimeData } from '@hawaii-bus-plus/presentation';
+import clsx, { ClassValue } from 'clsx';
 import { Fragment, h } from 'preact';
-import { classNames } from '../../../hooks/classnames';
 import { Link } from '../../../router/Router';
 import { PlainTimeElement } from '../../../time/PlainTimeElement';
 import './BaseSegment.css';
@@ -26,7 +26,7 @@ function BaseSegmentContent(props: ContentProps) {
       <TripDecorLine gridArea="line-top" />
       <TripDecorLine gridArea="line" />
       <p
-        class={classNames('group-hover:underline', props.small && 'text-sm')}
+        class={clsx('group-hover:underline', { 'text-sm': props.small })}
         style={{ gridArea: 'name' }}
       >
         {name}
@@ -52,22 +52,18 @@ function BaseSegmentContent(props: ContentProps) {
 
 interface Props extends ContentProps {
   href?: string;
-  class?: string;
+  class?: ClassValue;
   gridArea?: string;
 }
 
 export function BaseSegment(props: Props) {
   const { gridArea } = props;
-  const linkClasses = classNames('segment grid gap-x-4', props.class);
+  const linkClasses = clsx('segment grid gap-x-4', props.class);
   const style = { gridArea };
 
   if (props.href) {
     return (
-      <Link
-        href={props.href}
-        class={classNames(linkClasses, 'group')}
-        style={style}
-      >
+      <Link href={props.href} class={clsx(linkClasses, 'group')} style={style}>
         <BaseSegmentContent {...props} />
       </Link>
     );

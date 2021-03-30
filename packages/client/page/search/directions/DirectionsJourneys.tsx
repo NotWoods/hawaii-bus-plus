@@ -1,7 +1,7 @@
 import { Point } from '@hawaii-bus-plus/presentation';
+import clsx from 'clsx';
 import { h } from 'preact';
 import type { Journey } from '../../../worker-nearby/directions/format';
-import { classNames } from '../../hooks/classnames';
 import { SearchResultsSubList } from '../items/SearchResultsSubList';
 import { DirectionsJourneyItem } from './DirectionsJourneyItem';
 
@@ -21,7 +21,7 @@ export function DirectionsJourneys(props: Props) {
 
   if (results.length === 0) {
     return (
-      <div class={classNames(sharedClasses, 'mx-4 mb-2 inset-x-0')}>
+      <div class={clsx(sharedClasses, 'mx-4 mb-2 inset-x-0')}>
         <button
           class="block group m-auto px-8 py-4 shadow-xl text-black dark:text-white bg-blue-200 dark:bg-blue-700"
           onClick={props.onTomorrowClick}
@@ -37,7 +37,7 @@ export function DirectionsJourneys(props: Props) {
     const departureTimeString = departureTime.toString();
     return (
       <div
-        class={classNames(
+        class={clsx(
           sharedClasses,
           'overflow-x-auto snap snap-px-32 overscroll-contain'
         )}

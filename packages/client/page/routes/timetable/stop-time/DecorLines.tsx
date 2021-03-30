@@ -1,5 +1,5 @@
+import clsx from 'clsx';
 import { h } from 'preact';
-import { classNames } from '../../../hooks/classnames';
 import './DecorLines.css';
 
 export function TripDecorDot() {
@@ -17,12 +17,11 @@ interface Props {
 export function TripDecorLine({ gridArea, rounded, horizontal }: Props) {
   return (
     <div
-      class={classNames(
-        'bg-route w-2 h-full',
-        horizontal === 'md' && 'md:w-full md:h-2',
-        rounded && 'rounded-b-full',
-        horizontal === 'md' && rounded && 'md:rounded-r-full'
-      )}
+      class={clsx('bg-route w-2 h-full', {
+        'md:w-full md:h-2': horizontal === 'md',
+        'rounded-b-full': rounded,
+        'md:rounded-r-full': horizontal === 'md' && rounded,
+      })}
       style={{ gridArea }}
     />
   );

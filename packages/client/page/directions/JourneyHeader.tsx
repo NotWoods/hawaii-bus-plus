@@ -2,10 +2,10 @@ import {
   formatDurationParts,
   formatPlainTimeRange,
 } from '@hawaii-bus-plus/presentation';
+import clsx from 'clsx';
 import { h } from 'preact';
 import type { Journey } from '../../worker-nearby/directions/format';
 import { CloseButton } from '../buttons/CloseButton';
-import { classNames } from '../hooks/classnames';
 import { useScreens } from '../hooks';
 import './JourneyHeader.css';
 
@@ -49,7 +49,7 @@ export function JourneyHeader({ journey, timeZone, onClose }: Props) {
 
   return (
     <header
-      class={classNames(
+      class={clsx(
         'journey__header grid relative items-center bg-white bg-opacity-20 border-b',
         onClose && 'journey__header--close'
       )}

@@ -1,6 +1,6 @@
+import clsx from 'clsx';
 import { h } from 'preact';
 import type { JSXInternal as JSX } from 'preact/src/jsx';
-import { classNames } from '../hooks/classnames';
 
 interface Props extends JSX.HTMLAttributes<HTMLButtonElement> {
   mini?: boolean;
@@ -11,7 +11,7 @@ export function FloatingActionButton({ mini, ...props }: Props) {
     <button
       type="button"
       {...props}
-      class={classNames(
+      class={clsx(
         'group text-white focus:ring-cyan',
         mini ? 'p-2' : 'p-4',
         props.class

@@ -1,7 +1,7 @@
 import { Route, Stop } from '@hawaii-bus-plus/types';
+import clsx, { ClassValue } from 'clsx';
 import { ComponentChildren, h } from 'preact';
 import { ButtonOrAnchor } from '../../buttons/ButtonOrAnchor';
-import { classNames } from '../../hooks/classnames';
 import busStopIcon from '../../icons/bus_stop.svg';
 import { Icon } from '../../icons/Icon';
 import placeIcon from '../../icons/place.svg';
@@ -17,7 +17,7 @@ interface MarkerProps {
   title?: ComponentChildren;
   subtitle?: ComponentChildren;
   badges?: ComponentChildren;
-  class?: string;
+  class?: ClassValue;
   onClick?(evt: MouseEvent): void;
 }
 
@@ -32,7 +32,7 @@ function MarkerSearchResultItem(props: MarkerProps) {
     <li>
       <ButtonOrAnchor
         href={props.href}
-        class={classNames('group grid gap-x-2 py-1 text-white', props.class)}
+        class={clsx('group grid gap-x-2 py-1 text-white', props.class)}
         onClick={props.onClick}
         style={{ gridTemplate }}
       >
