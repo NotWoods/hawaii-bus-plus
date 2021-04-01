@@ -1,52 +1,72 @@
 import { Agency } from '@hawaii-bus-plus/types';
-import { last } from '@hawaii-bus-plus/utils';
-import { ComponentChildren, h } from 'preact';
-import {
-  DirectionDetails,
-  TripDetails,
-} from '../../../../worker-info/trip-details';
-import timeIcon from '../../../icons/access_time.svg';
-import busIcon from '../../../icons/directions_bus.svg';
-import { Icon } from '../../../icons/Icon';
-import { BLANK } from '../../badge/RouteBadge';
-import { EndedAt, ReachesAt, StartedFrom } from './StartedFrom';
+import { h } from 'preact';
+import { useCallback, useRef } from 'preact/hooks';
+import { DirectionDetails } from '../../../../worker-info/trip-details';
+import { SwitchDirectionButton } from './SwitchDirectionButton';
+import './TimetableDetails.css';
+import { TimetableDirectionsDetail } from './TimetableDirectionsDetail';
 
 interface Props {
-  directionDetails: DirectionDetails;
+  directionsDetails: readonly DirectionDetails[];
   agency: Agency;
 }
 
-function BaseDetails(props: { icon: string; children: ComponentChildren }) {
+/** Spacer with the same size as SwitchDirectionButton */
+function Spacer() {
   return (
-    <aside class="shadow m-4 mb-0 p-4 pl-12 bg-white dark:bg-gray-700 relative">
-      <Icon
-        src={props.icon}
-        alt=""
-        class="absolute top-5 left-3 dark:filter-invert"
-      />
-      {props.children}
-    </aside>
+    <div aria-hidden="true" class="inline-block invisible p-2 mt-4 ml-4">
+      <div class="inline-block mr-2 w-6 h-6" />
+      Switch direction
+    </div>
   );
 }
 
-export function TripName(props: { details?: TripDetails }) {
-  const { trip, serviceDays = BLANK } = props.details ?? {};
-  return (
-    <BaseDetails icon={busIcon}>
-      <p class="text-lg">{trip?.trip_short_name ?? BLANK}</p>
-      <p>{serviceDays}</p>
-    </BaseDetails>
+export function TimetableDetails(props: Props) {
+  const { directionsDetails, agency } = props;
+  const scrollEl = useRef<HTMLDivElement>();
+
+  // Scroll to the current detail
+  /*useEffect(() => {
+    console.log(directionId);
+    const container = scrollEl.current;
+    container.scrollTo({
+      left: container.clientWidth * directionId,
+      behavior: 'smooth',
+    });
+  }, [directionId]);*/
+
+  const handleScroll = useCallback(
+    debounce(() => {
+      const container = scrollEl.current;
+      const newDirectionId = container.scrollLeft / container.clientWidth;
+      console.log('Left position', container.scrollLeft, newDirectionId);
+      if (newDirectionId !== directionId) {
+        switchDirection!();
+      }
+    }, 300),
+    [switchDirection]
   );
-}
-
-export function TimetableDetails({ agency, directionDetails }: Props) {
-  const { closestTrip } = directionDetails;
 
   return (
-    <BaseDetails icon={timeIcon}>
-      <ReachesAt closestTrip={closestTrip} />
-      <StartedFrom stopTime={closestTrip.stopTimes[0]} agency={agency} />
-      <EndedAt stopTime={last(closestTrip.stopTimes)} />
-    </BaseDetails>
+    <header class="relative">
+      <div
+        class="timetable__details grid scroll snap overflow-x-auto"
+        style={{
+          gridTemplateColumns: directionsDetails.map(() => '100%').join(' '),
+        }}
+        ref={scrollEl}
+        onScroll={handleScroll}
+      >
+        {directionsDetails.map((directionDetails) => (
+          <TimetableDirectionsDetail
+            directionDetails={directionDetails}
+            agency={agency}
+          >
+            <Spacer />
+          </TimetableDirectionsDetail>
+        ))}
+      </div>
+      <SwitchDirectionButton class="absolute bottom-0 right-0 m-4 bg-white dark:bg-gray-700" />
+    </header>
   );
 }

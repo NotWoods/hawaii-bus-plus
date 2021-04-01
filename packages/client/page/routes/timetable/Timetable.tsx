@@ -1,5 +1,5 @@
 import { Trip } from '@hawaii-bus-plus/types';
-import { Fragment, h } from 'preact';
+import { h } from 'preact';
 import { useContext } from 'preact/hooks';
 import type { Temporal } from 'proposal-temporal';
 import type { RouteDetails } from '../../../worker-info/route-details';
@@ -8,7 +8,6 @@ import { RouterContext } from '../../router/Router';
 import { selectOpenRoute } from '../../router/selector/main';
 import { NOW } from '../../time/input/symbol';
 import { RouteDetailContext } from './context';
-import { SwitchDirectionButton } from './info/SwitchDirectionButton';
 import { TimetableDetails, TripName } from './info/TimetableDetails';
 import { TripSelector } from './info/TripSelector';
 import { RouteDetailsCard } from './RouteDetails';
@@ -49,9 +48,8 @@ export function Timetable(props: Props) {
   useTripBounds(details.bounds);
 
   return (
-    <>
+    <section>
       <div class="flex flex-wrap-reverse gap-4 m-4">
-        <SwitchDirectionButton class="mr-auto" />
         <TripSelector
           directionsDetails={details.directions}
           tripDate={tripDate}
@@ -78,6 +76,6 @@ export function Timetable(props: Props) {
         descParts={details.descParts}
         tripId={selectedTripId}
       />
-    </>
+    </section>
   );
 }

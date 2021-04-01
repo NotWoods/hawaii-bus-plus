@@ -1,0 +1,6 @@
+.timetable__details {
+  grid-template-rows: 1fr;
+}
+.timetable__details::-webkit-scrollbar {
+  display: none;
+}
