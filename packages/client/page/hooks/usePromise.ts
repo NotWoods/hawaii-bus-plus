@@ -19,6 +19,15 @@ export function useAbortEffect(
   }, deps);
 }
 
+export function errorMessage(err: unknown) {
+  if (err instanceof Error) {
+    return err.message;
+  } else {
+    console.warn(`Received error with unknown type `, err);
+    return 'An error occurred';
+  }
+}
+
 export function usePromise(
   effect: (signal: AbortSignal) => Promise<void>,
   deps?: Inputs
@@ -27,18 +36,13 @@ export function usePromise(
 
   useAbortEffect((signal) => {
     effect(signal).catch((err: unknown) => {
-      let message: string;
       if (err instanceof AbortError) {
         // Ignore abort errors
         return;
-      } else if (err instanceof Error) {
-        message = err.message;
-      } else {
-        message = 'An error occurred';
-        console.warn(`Received error with unknown type `, err);
       }
+
       toastAlert({
-        children: message,
+        children: errorMessage(err),
       });
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps

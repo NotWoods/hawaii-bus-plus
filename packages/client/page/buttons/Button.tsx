@@ -7,6 +7,7 @@ import { useFocusTrapped } from './FocusTrap';
 interface Props {
   href?: string;
   icon?: string;
+  id?: string;
   class?: ClassValue;
   iconClass?: ClassValue;
   children: ComponentChildren;

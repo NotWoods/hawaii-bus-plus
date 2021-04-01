@@ -1,7 +1,6 @@
 import { MultiMap } from '@hawaii-bus-plus/mnemonist';
 import { Agency, Route, Stop, Trip } from '@hawaii-bus-plus/types';
 import { Fragment, h } from 'preact';
-import { Logo } from '../all-pages/components/Logo';
 import { PageTitle } from '../all-pages/components/PageTitle';
 import { colorVariables } from '../page/routes/props';
 import { RouteHeader } from '../page/routes/RouteHeader';
@@ -10,6 +9,8 @@ import { RouteDescription } from '../page/routes/timetable/details/RouteDescript
 import { extractLinks } from '../worker-info/description';
 import './App.css';
 import { ExtendedFloatingActionButton } from './components/ExtendedFloatingActionButton';
+import { Footer } from './components/Footer';
+import { PageHeader } from './components/PageHeader';
 import { StaticMap } from './components/StaticMap';
 import { StopTimeSegments } from './components/StopTimeSegments';
 import { TableOfContents } from './components/TableOfContents';
@@ -36,13 +37,9 @@ export function App({ route, agency, trips, stops }: Props) {
   const idToTrips = groupByDirectionId(trips);
   return (
     <>
+      <PageTitle>{renderTitle(route)}</PageTitle>
       <div class="waves px-4 shadow-lg">
-        <header class="pt-6 max-w-5xl">
-          <PageTitle>{renderTitle(route)}</PageTitle>
-          <a href="https://hawaiibusplus.com">
-            <Logo />
-          </a>
-        </header>
+        <PageHeader />
         <StaticMap
           route={route}
           stops={stops.values()}
@@ -56,7 +53,7 @@ export function App({ route, agency, trips, stops }: Props) {
       >
         <RouteHeader route={route} />
 
-        <div class="flex flex-wrap gap-1 justify-center grid-area-buttons">
+        <div class="flex flex-wrap gap-1 justify-center grid-area-buttons px-2">
           <DetailButtons route={route} agency={agency} />
         </div>
 
@@ -79,6 +76,7 @@ export function App({ route, agency, trips, stops }: Props) {
             agency={agency}
             descParts={extractLinks(route.route_desc)}
           />
+          <Footer />
         </footer>
       </article>
     </>

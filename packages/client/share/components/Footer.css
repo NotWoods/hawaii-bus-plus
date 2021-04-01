@@ -1,0 +1,8 @@
+.text-overlay path {
+  stroke-dasharray: 25;
+  stroke-dashoffset: 25;
+  transition: stroke-dashoffset 0.5s linear;
+}
+.group:hover .text-overlay path {
+  stroke-dashoffset: 0;
+}

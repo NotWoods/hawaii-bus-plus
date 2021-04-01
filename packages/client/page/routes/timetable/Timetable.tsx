@@ -48,6 +48,7 @@ export function Timetable(props: Props) {
         route={details.route}
         agency={details.agency}
         descParts={details.descParts}
+        tripId={directionDetails.closestTrip.trip.trip_id}
       />
     </>
   );
