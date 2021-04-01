@@ -7,29 +7,12 @@ import fareIcon from '../../../icons/monetization_on.svg';
 import shareIcon from '../../../icons/share.svg';
 import webIcon from '../../../icons/web.svg';
 import { useSnackbar } from '../../../snackbar/context';
+import { buildShareHandler } from './share';
 
 interface Props {
   route: Route;
   agency: Agency;
   tripId?: Trip['trip_id'];
-}
-
-export function buildShareHandler(
-  text: string,
-  onError: (err: unknown) => void
-) {
-  return function handleShare(evt: MouseEvent) {
-    evt.preventDefault();
-    const { href } = evt.currentTarget as HTMLAnchorElement;
-
-    navigator
-      .share({
-        title: 'Route on Hawaii Bus Plus',
-        text,
-        url: href,
-      })
-      .catch(onError);
-  };
 }
 
 function useShare(text: string) {
@@ -43,8 +26,7 @@ function useShare(text: string) {
     [text, toastAlert]
   );
 
-  // @ts-expect-error Share feature detection
-  if (navigator.share) {
+  if (!import.meta.env.SSR && navigator.share) {
     return callback;
   } else {
     return undefined;

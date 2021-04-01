@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "tsc --build page && vite build",
+    "build": "tsc --build tsconfig.build.json && vite build",
     "predev": "tsc --build page",
     "dev": "vite",
     "format": "prettier **/*.{ts,tsx} *.cjs *.html --write --ignore-path ../../.prettierignore",

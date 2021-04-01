@@ -9,6 +9,6 @@ export default async function renderSharingPage(url: URL, repo: Repository) {
   const data = await loadRoute(repo, routeId);
   return {
     html: render(<App {...data} />),
-    head: `<title>${renderTitle(route)}</title><!--head-html-->`,
+    head: `<title>${renderTitle(data.route)}</title><!--head-html-->`,
   };
 }

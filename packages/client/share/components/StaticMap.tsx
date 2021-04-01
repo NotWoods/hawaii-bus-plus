@@ -18,7 +18,6 @@ export function StaticMap({ route, stops, width, height }: Props) {
   markers.unshift(
     `size:tiny|color:0x${route.route_color.slice(1).toUpperCase()}`
   );
-  console.log(markers[0]);
   url.searchParams.set('markers', markers.join('|'));
   url.searchParams.set('key', import.meta.env.VITE_GOOGLE_MAPS_KEY as string);
   url.searchParams.set('size', `${width}x${height}`);

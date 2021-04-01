@@ -1,0 +1,13 @@
+{
+  "extends": "../tsconfig.base.json",
+  "files": [],
+  "references": [
+    { "path": "./auth" },
+    { "path": "./page" },
+    { "path": "./share" },
+    { "path": "../prerender/src" }
+  ],
+  "compilerOptions": {
+    "noEmit": true
+  }
+}
