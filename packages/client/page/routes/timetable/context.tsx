@@ -61,8 +61,6 @@ export function RouteDetailProvider(props: { children: ComponentChildren }) {
     setDirectionId(firstValidId);
   }
 
-  console.log(selectedIdIndex);
-
   return (
     <RouteDetailContext.Provider
       value={{

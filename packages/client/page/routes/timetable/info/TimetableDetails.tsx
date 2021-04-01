@@ -1,7 +1,9 @@
 import { Agency } from '@hawaii-bus-plus/types';
 import { h } from 'preact';
-import { useCallback, useRef } from 'preact/hooks';
+import { useContext, useEffect, useRef } from 'preact/hooks';
+import { useScroll, useVisibleElements } from 'react-snaplist-carousel';
 import { DirectionDetails } from '../../../../worker-info/trip-details';
+import { RouteDetailContext } from '../context';
 import { SwitchDirectionButton } from './SwitchDirectionButton';
 import './TimetableDetails.css';
 import { TimetableDirectionsDetail } from './TimetableDirectionsDetail';
@@ -21,31 +23,24 @@ function Spacer() {
   );
 }
 
+function first([element]: readonly number[]) {
+  return element as 0 | 1;
+}
+
 export function TimetableDetails(props: Props) {
+  const { directionId, setDirectionId } = useContext(RouteDetailContext);
   const { directionsDetails, agency } = props;
   const scrollEl = useRef<HTMLDivElement>();
 
-  // Scroll to the current detail
-  /*useEffect(() => {
-    console.log(directionId);
-    const container = scrollEl.current;
-    container.scrollTo({
-      left: container.clientWidth * directionId,
-      behavior: 'smooth',
-    });
-  }, [directionId]);*/
+  const visible = useVisibleElements({ debounce: 300, ref: scrollEl }, first);
+  const goToChildren = useScroll({ ref: scrollEl });
 
-  const handleScroll = useCallback(
-    debounce(() => {
-      const container = scrollEl.current;
-      const newDirectionId = container.scrollLeft / container.clientWidth;
-      console.log('Left position', container.scrollLeft, newDirectionId);
-      if (newDirectionId !== directionId) {
-        switchDirection!();
-      }
-    }, 300),
-    [switchDirection]
-  );
+  /*useEffect(() => {
+    goToChildren(directionId);
+  }, [goToChildren, directionId]);*/
+  useEffect(() => {
+    setDirectionId(visible);
+  }, [visible, setDirectionId]);
 
   return (
     <header class="relative">
@@ -55,7 +50,6 @@ export function TimetableDetails(props: Props) {
           gridTemplateColumns: directionsDetails.map(() => '100%').join(' '),
         }}
         ref={scrollEl}
-        onScroll={handleScroll}
       >
         {directionsDetails.map((directionDetails) => (
           <TimetableDirectionsDetail

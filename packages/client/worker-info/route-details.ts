@@ -1,5 +1,5 @@
 import { Repository } from '@hawaii-bus-plus/data';
-import { durationToData, formatPlainTime } from '@hawaii-bus-plus/presentation';
+import { durationToData } from '@hawaii-bus-plus/presentation';
 import { Agency, ColorString, Route, Stop } from '@hawaii-bus-plus/types';
 import type { Temporal } from 'proposal-temporal';
 import { LatLngBounds, LatLngBoundsLiteral } from 'spherical-geometry-js';

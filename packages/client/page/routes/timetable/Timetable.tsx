@@ -8,7 +8,8 @@ import { RouterContext } from '../../router/Router';
 import { selectOpenRoute } from '../../router/selector/main';
 import { NOW } from '../../time/input/symbol';
 import { RouteDetailContext } from './context';
-import { TimetableDetails, TripName } from './info/TimetableDetails';
+import { TimetableDetails } from './info/TimetableDetails';
+import { TripName } from './info/TimetableDirectionsDetail';
 import { TripSelector } from './info/TripSelector';
 import { RouteDetailsCard } from './RouteDetails';
 import { StopTimeSegmentList } from './stop-time/StopTimeSegmentList';
@@ -62,7 +63,7 @@ export function Timetable(props: Props) {
         <TripName details={selectedTrip} />
       ) : (
         <TimetableDetails
-          directionDetails={directionDetails}
+          directionsDetails={details.directions}
           agency={details.agency}
         />
       )}
