@@ -1,4 +1,4 @@
-import { Route, Stop } from '@hawaii-bus-plus/types';
+import { Route, Stop, Trip } from '@hawaii-bus-plus/types';
 import { RouterAction } from '../action';
 import { MainRouterAction } from '../action/main';
 import { PointRouterAction } from '../action/point';
@@ -24,10 +24,13 @@ export function initStateFromUrl(url: URL): RouterState {
     }
   } else if (url.pathname.startsWith(ROUTES_PREFIX)) {
     // If link opens route
-    const [routeId] = url.pathname.slice(ROUTES_PREFIX.length).split('/');
+    const [routeId, tripId] = url.pathname
+      .slice(ROUTES_PREFIX.length)
+      .split('/');
     newState.main = {
       path: ROUTES_PREFIX,
       routeId: routeId as Route['route_id'],
+      tripId: tripId ? (tripId as Trip['trip_id']) : undefined,
     };
   }
 

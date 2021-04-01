@@ -1,10 +1,14 @@
-import { Repository } from '@hawaii-bus-plus/data';
+import { omitStopTimes, Repository } from '@hawaii-bus-plus/data';
 import {
   DurationData,
   PlainTimeData,
-  plainTimeToData,
   StopTimeData,
 } from '@hawaii-bus-plus/presentation';
+import {
+  InfinityPlainDaysTime,
+  nextServiceDay,
+  PlainDaysTime,
+} from '@hawaii-bus-plus/temporal-utils';
 import type {
   Calendar,
   Route,
@@ -13,17 +17,20 @@ import type {
   Trip,
   TripWithoutTimes,
 } from '@hawaii-bus-plus/types';
-import {
-  InfinityPlainDaysTime,
-  nextServiceDay,
-  PlainDaysTime,
-} from '@hawaii-bus-plus/temporal-utils';
 import { Temporal } from 'proposal-temporal';
+import { loadCalendarAgency, routeStopDetails } from './shared';
+import { FormatOptions, formatStopTime } from './stop-time';
 
 interface TripSlice {
   tripId: Trip['trip_id'];
   shortName: string;
   time: TimeString;
+}
+
+export interface TripDetails {
+  readonly trip: TripWithoutTimes;
+  readonly stopTimes: readonly StopTimeData[];
+  readonly serviceDays?: string;
 }
 
 export interface DirectionDetails {
@@ -36,13 +43,10 @@ export interface DirectionDetails {
   readonly latest: PlainTimeData;
 
   readonly allTrips: ReadonlyMap<Trip['trip_id'], TripSlice>;
-  readonly closestTrip: {
-    readonly trip: TripWithoutTimes;
+  readonly closestTrip: TripDetails & {
     readonly offset: DurationData;
     readonly stop: Stop['stop_id'];
     readonly stopName: string;
-    readonly stopTimes: readonly StopTimeData[];
-    readonly serviceDays?: string;
   };
 }
 
@@ -87,12 +91,42 @@ function emptyDirectionDetails(): DirectionDetailsMutable {
 
 const ZERO_DURATION = new Temporal.Duration();
 
-export function zonedTime(
-  time: TimeString | PlainDaysTime,
-  serviceDate: Temporal.PlainDate,
-  timeZone: string | Temporal.TimeZoneProtocol
-): PlainTimeData {
-  return plainTimeToData(PlainDaysTime.from(time), serviceDate, timeZone);
+export function formatTripDetails(
+  trip: Trip,
+  allCalendars: ReadonlyMap<Calendar['service_id'], Calendar>,
+  options: FormatOptions
+): TripDetails {
+  return {
+    trip: omitStopTimes(trip),
+    stopTimes: trip.stop_times.map((st) => formatStopTime(st, options)),
+    serviceDays: allCalendars.get(trip.service_id)?.service_name,
+  };
+}
+
+export async function getTripDetails(
+  repo: Pick<
+    Repository,
+    'loadRoutes' | 'loadAgencies' | 'loadTrip' | 'loadCalendars' | 'loadStops'
+  >,
+  routeId: Route['route_id'],
+  tripId: Trip['trip_id'],
+  date?: Temporal.PlainDate
+): Promise<TripDetails | undefined> {
+  const [neededInfo, trip] = await Promise.all([
+    loadCalendarAgency(repo, routeId, date),
+    repo.loadTrip(tripId),
+  ]);
+  if (!neededInfo || !trip) return undefined;
+
+  const routeStops = new Set(trip.stop_times.flatMap((st) => st.stop_id));
+  const { stops, routes } = await routeStopDetails(repo, routeStops, routeId);
+
+  return formatTripDetails(trip, neededInfo.allCalendars, {
+    serviceDate: neededInfo.serviceDate,
+    timeZone: neededInfo.timeZone,
+    stops,
+    routes,
+  });
 }
 
 /**

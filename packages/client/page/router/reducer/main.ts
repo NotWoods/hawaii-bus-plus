@@ -9,6 +9,12 @@ export function mainRouterReducer(
   switch (action.type) {
     case 'route':
       return { path: ROUTES_PREFIX, routeId: action.routeId };
+    case 'trip':
+      return {
+        path: ROUTES_PREFIX,
+        routeId: action.routeId,
+        tripId: action.tripId,
+      };
     case 'open-journey':
       return {
         path: DIRECTIONS_PATH,

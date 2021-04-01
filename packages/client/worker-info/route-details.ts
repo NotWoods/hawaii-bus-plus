@@ -1,15 +1,16 @@
-import { getSingle, Repository } from '@hawaii-bus-plus/data';
-import {
-  durationToData,
-  formatPlainTime,
-  StopTimeData,
-} from '@hawaii-bus-plus/presentation';
-import { nowWithZone } from '@hawaii-bus-plus/temporal-utils';
+import { Repository } from '@hawaii-bus-plus/data';
+import { durationToData, formatPlainTime } from '@hawaii-bus-plus/presentation';
 import { Agency, ColorString, Route, Stop } from '@hawaii-bus-plus/types';
 import type { Temporal } from 'proposal-temporal';
 import { LatLngBounds, LatLngBoundsLiteral } from 'spherical-geometry-js';
 import { DescriptionPart, extractLinks } from './description';
-import { DirectionDetails, findBestTrips, zonedTime } from './trip-details';
+import { loadCalendarAgency, routeStopDetails } from './shared';
+import { FormatOptions, zonedTime } from './stop-time';
+import {
+  DirectionDetails,
+  findBestTrips,
+  formatTripDetails,
+} from './trip-details';
 
 export interface RouteDetails {
   readonly route: Route;
@@ -21,15 +22,7 @@ export interface RouteDetails {
   readonly directions: DirectionDetails[];
 }
 
-async function routeStopDetails(
-  repo: Pick<Repository, 'loadRoutes' | 'loadStops'>,
-  routeStops: Iterable<Stop['stop_id']>,
-  loadedRoute: Route['route_id']
-) {
-  const stops: ReadonlyMap<Stop['stop_id'], Stop> = await repo.loadStops(
-    routeStops
-  );
-
+function routeBounds(stops: ReadonlyMap<Stop['stop_id'], Stop>) {
   let bounds: LatLngBounds | undefined;
   for (const stop of stops.values()) {
     if (bounds) {
@@ -38,14 +31,7 @@ async function routeStopDetails(
       bounds = new LatLngBounds(stop.position, stop.position);
     }
   }
-
-  const routeIds = new Set(
-    Array.from(stops.values()).flatMap((stop) => stop.routes)
-  );
-  routeIds.delete(loadedRoute);
-  const routes = await repo.loadRoutes(routeIds);
-
-  return { stops, bounds, routes };
+  return bounds;
 }
 
 /**
@@ -63,80 +49,57 @@ export async function getRouteDetails(
     | 'loadStops'
   >,
   routeId: Route['route_id'],
-  date?: Temporal.PlainDate,
-  time?: Temporal.TimeLike | string
+  date?: Temporal.PlainDate
 ): Promise<RouteDetails | undefined> {
-  const allCalendarsReady = repo.loadCalendars();
+  const neededInfo = await loadCalendarAgency(repo, routeId, date);
+  if (!neededInfo) return undefined;
+  const { allCalendars, route, agency, timeZone } = neededInfo;
 
-  const route = await getSingle(repo, repo.loadRoutes, routeId);
-  if (!route) {
-    return undefined;
-  }
-
-  const agency = await getSingle(repo, repo.loadAgencies, route.agency_id);
-  const timeZone = agency!.agency_timezone;
-
-  const nowZoned = nowWithZone(timeZone);
-  const nowDate = date ?? nowZoned.toPlainDate();
-
-  const allCalendars = await allCalendarsReady;
   const { directionDetails, routeStops } = await findBestTrips(
     repo,
     routeId,
     allCalendars,
-    nowDate.toPlainDateTime(time ?? nowZoned.toPlainTime())
+    neededInfo.serviceDate.toPlainDateTime(neededInfo.now)
   );
 
-  const { stops, routes, bounds } = await routeStopDetails(
-    repo,
-    routeStops,
-    routeId
-  );
+  const { stops, routes } = await routeStopDetails(repo, routeStops, routeId);
+  const bounds = routeBounds(stops);
   routes.set(routeId, route);
+
+  const formatOptions: FormatOptions = {
+    serviceDate: neededInfo.serviceDate,
+    timeZone,
+    stops,
+    routes,
+    routeId,
+  };
 
   return {
     route,
-    agency: agency!,
+    agency,
     descParts: extractLinks(route.route_desc),
     stops: new Map(Array.from(routeStops, (id) => [id, route.route_color])),
     bounds: bounds?.toJSON(),
     directions: directionDetails.map((dirDetails) => {
-      const stopTimes: StopTimeData[] = dirDetails.closestTrip.trip.stop_times.map(
-        (st) => {
-          const stop = stops.get(st.stop_id)!;
-          return {
-            stop,
-            routes: stop.routes
-              .filter((id) => id !== routeId)
-              .map((routeId) => routes.get(routeId)!),
-            arrivalTime: zonedTime(st.arrival_time, nowDate, timeZone),
-            departureTime: zonedTime(st.departure_time, nowDate, timeZone),
-            timepoint: st.timepoint,
-          };
-        }
+      const closestTripDetails = formatTripDetails(
+        dirDetails.closestTrip.trip,
+        allCalendars,
+        formatOptions
       );
-
-      for (const slice of dirDetails.allTrips.values()) {
-        const data = zonedTime(slice.time, nowDate, timeZone);
-        slice.shortName = formatPlainTime(data, timeZone).agencyTime;
-      }
 
       return {
         firstStop: dirDetails.firstStop,
         firstStopName: stops.get(dirDetails.firstStop)!.stop_name,
         lastStop: dirDetails.lastStop,
         lastStopName: stops.get(dirDetails.lastStop)!.stop_name,
-        earliest: zonedTime(dirDetails.earliest, nowDate, timeZone),
-        latest: zonedTime(dirDetails.latest, nowDate, timeZone),
+        earliest: zonedTime(dirDetails.earliest, formatOptions),
+        latest: zonedTime(dirDetails.latest, formatOptions),
         allTrips: dirDetails.allTrips,
         closestTrip: {
-          trip: dirDetails.closestTrip.trip,
+          ...closestTripDetails,
           offset: durationToData(dirDetails.closestTrip.offset),
           stop: dirDetails.closestTrip.stop,
           stopName: stops.get(dirDetails.closestTrip.stop)!.stop_name,
-          serviceDays: allCalendars.get(dirDetails.closestTrip.trip.service_id)
-            ?.service_name,
-          stopTimes,
         },
       };
     }),

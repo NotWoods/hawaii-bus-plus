@@ -1,4 +1,4 @@
-import { DateString, TimeString } from '@hawaii-bus-plus/types';
+import { DateString } from '@hawaii-bus-plus/types';
 import { h } from 'preact';
 import { useContext, useState } from 'preact/hooks';
 import type { Temporal } from 'proposal-temporal';
@@ -8,7 +8,7 @@ import { LoadingBar } from '../buttons/LoadingBar';
 import { useDelay, useLazyComponent, usePromise, useWorker } from '../hooks';
 import { dbInitialized } from '../hooks/api';
 import { RouterContext } from '../router/Router';
-import { RouterState, ROUTES_PREFIX } from '../router/state';
+import { selectOpenRoute } from '../router/selector/main';
 import { NOW, timeForWorker } from '../time/input/symbol';
 import { BaseSheet } from './BaseSheet';
 import { colorVariables } from './props';
@@ -17,26 +17,33 @@ import { RouteDetailContext } from './timetable/context';
 
 const lazyTimetable = import('./time-entry');
 
-function getRouteId({ main }: Pick<RouterState, 'main'>) {
-  if (main?.path === ROUTES_PREFIX) {
-    return main.routeId;
-  } else {
-    return undefined;
-  }
+/**
+ * Returns the ID of the currently open route.
+ * Also runs a timer to show a loading bar if it takes too long to load the full route data.
+ */
+function useOpenRouteId() {
+  const state = useContext(RouterContext);
+  const { routeId, tripId } = selectOpenRoute(state) ?? {};
+
+  const delayDone = useDelay(500, [routeId]);
+
+  return {
+    routeId,
+    tripId,
+    showLoadingBar: routeId && delayDone,
+  };
 }
 
 export function RouteTimetable() {
-  const state = useContext(RouterContext);
-  const routeId = getRouteId(state);
+  const postToInfoWorker = useWorker(InfoWorker) as InfoWorkerHandler;
+  const { routeId, tripId, showLoadingBar } = useOpenRouteId();
 
-  const delayDone = useDelay(500, [routeId]);
-  const { details, directionId, setDetails, switchDirection } = useContext(
+  const { Timetable } = useLazyComponent(() => lazyTimetable);
+
+  const { details, setDetails, setSelectedTrip } = useContext(
     RouteDetailContext
   );
-  const { Timetable } = useLazyComponent(() => lazyTimetable);
   const [tripDate, setTripDate] = useState<Temporal.PlainDate | NOW>(NOW);
-  const [tripTime, setTripTime] = useState<TimeString | undefined>();
-  const postToInfoWorker = useWorker(InfoWorker) as InfoWorkerHandler;
 
   usePromise(
     async (signal) => {
@@ -46,15 +53,33 @@ export function RouteTimetable() {
           type: 'route',
           routeId,
           date: timeForWorker(tripDate) as DateString | undefined,
-          time: tripTime,
         });
 
-        setDetails(details, tripTime ? directionId : undefined);
+        setDetails(details);
       } else {
-        setDetails();
+        setDetails(undefined);
       }
     },
-    [routeId, tripDate, tripTime, directionId]
+    [routeId, tripDate]
+  );
+
+  usePromise(
+    async (signal) => {
+      if (routeId && tripId) {
+        await dbInitialized;
+        const details = await postToInfoWorker(signal, {
+          type: 'trip',
+          routeId,
+          tripId,
+          date: timeForWorker(tripDate) as DateString | undefined,
+        });
+
+        setSelectedTrip(details);
+      } else {
+        setDetails(undefined);
+      }
+    },
+    [routeId, tripId, tripDate]
   );
 
   const route = details?.route;
@@ -64,15 +89,12 @@ export function RouteTimetable() {
         <RouteHeader route={route} showClose />
         <Timetable
           details={details!}
-          directionId={directionId}
           tripDate={tripDate}
           onChangeTripDate={setTripDate}
-          onChangeTripTime={setTripTime}
-          switchDirection={switchDirection}
         />
       </BaseSheet>
     );
-  } else if (routeId && delayDone) {
+  } else if (showLoadingBar) {
     return (
       <BaseSheet>
         <RouteHeader />
