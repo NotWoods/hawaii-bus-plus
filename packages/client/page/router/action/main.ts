@@ -6,6 +6,7 @@ export type MainRouterAction =
   | ReturnType<typeof setRouteAction>
   | ReturnType<typeof setTripAction>
   | ReturnType<typeof closeMainAction>
+  | ReturnType<typeof resetTripAction>
   | ReturnType<typeof openJourney>;
 
 export function setRouteAction(
@@ -23,6 +24,10 @@ export function setTripAction(
 
 export function closeMainAction() {
   return { type: 'close-main' } as const;
+}
+
+export function resetTripAction() {
+  return { type: 'close-trip' } as const;
 }
 
 export function openJourney(

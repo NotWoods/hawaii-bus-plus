@@ -11,7 +11,7 @@ interface Props {
   selectedTripId: Trip['trip_id'];
   tripDate: Temporal.PlainDate | NOW;
   onChangeTripDate(time: Temporal.PlainDate): void;
-  setSelectedTrip(tripId: Trip['trip_id']): void;
+  setSelectedTrip(tripId: Trip['trip_id'] | NOW): void;
 }
 
 export function TripSelector(props: Props) {

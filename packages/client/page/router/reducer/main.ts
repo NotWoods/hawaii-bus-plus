@@ -15,6 +15,12 @@ export function mainRouterReducer(
         routeId: action.routeId,
         tripId: action.tripId,
       };
+    case 'close-trip':
+      if (state?.path === ROUTES_PREFIX) {
+        return { path: state.path, routeId: state.routeId, tripId: undefined };
+      } else {
+        return state;
+      }
     case 'open-journey':
       return {
         path: DIRECTIONS_PATH,

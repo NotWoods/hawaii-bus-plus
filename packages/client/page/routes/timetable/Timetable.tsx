@@ -3,7 +3,7 @@ import { Fragment, h } from 'preact';
 import { useContext } from 'preact/hooks';
 import type { Temporal } from 'proposal-temporal';
 import type { RouteDetails } from '../../../worker-info/route-details';
-import { setTripAction } from '../../router/action/main';
+import { resetTripAction, setTripAction } from '../../router/action/main';
 import { RouterContext } from '../../router/Router';
 import { selectOpenRoute } from '../../router/selector/main';
 import { NOW } from '../../time/input/symbol';
@@ -28,8 +28,12 @@ function useOpenTrip() {
 
   return {
     tripId,
-    setSelectedTrip(tripId: Trip['trip_id']) {
-      dispatch(setTripAction(routeId!, tripId));
+    setSelectedTrip(tripId: Trip['trip_id'] | NOW) {
+      if (tripId === NOW) {
+        dispatch(resetTripAction());
+      } else {
+        dispatch(setTripAction(routeId!, tripId));
+      }
     },
   };
 }
@@ -41,7 +45,6 @@ export function Timetable(props: Props) {
 
   const directionDetails = details.directions[directionId];
   const selectedTripId = tripId ?? directionDetails.closestTrip.trip.trip_id;
-  console.log(selectedTripId, directionId, details.directions);
 
   useTripBounds(details.bounds);
 
