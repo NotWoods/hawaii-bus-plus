@@ -12,6 +12,6 @@ details > summary::-webkit-details-marker {
 .trip-collapse__icon {
   grid-area: dot;
 }
-.trip-collapse__icon[open] {
+.trip-collapse[open] .trip-collapse__icon {
   @apply rotate-180;
 }

@@ -1,0 +1,41 @@
+html {
+  scroll-behavior: smooth;
+}
+
+.share {
+  grid:
+    'header' minmax(3rem, min-content)
+    'buttons' auto
+    'toc' auto
+    'timetable' auto
+    'footer' auto
+    / 1fr;
+}
+@screen md {
+  .share {
+    grid:
+      'header header' minmax(3rem, min-content)
+      'buttons toc' auto
+      'timetable toc' min-content
+      'timetable .' max-content
+      'timetable .' max-content
+      'footer footer' auto
+      / 1fr theme('spacing.80');
+  }
+}
+
+.grid-area-header {
+  grid-area: header;
+}
+.grid-area-toc {
+  grid-area: toc;
+}
+.grid-area-buttons {
+  grid-area: buttons;
+}
+.grid-area-timetable {
+  grid-area: timetable;
+}
+.grid-area-footer {
+  grid-area: footer;
+}

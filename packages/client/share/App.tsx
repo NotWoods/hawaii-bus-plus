@@ -4,12 +4,15 @@ import { Fragment, h } from 'preact';
 import { Logo } from '../all-pages/components/Logo';
 import { PageTitle } from '../all-pages/components/PageTitle';
 import { colorVariables } from '../page/routes/props';
-import { RouteDetailsCard } from '../page/routes/timetable/RouteDetails';
+import { RouteHeader } from '../page/routes/RouteHeader';
+import { DetailButtons } from '../page/routes/timetable/details/DetailButtons';
+import { RouteDescription } from '../page/routes/timetable/details/RouteDescription';
 import { extractLinks } from '../worker-info/description';
-import { ShareHeader } from './components/ShareHeader';
+import './App.css';
+import { ExtendedFloatingActionButton } from './components/ExtendedFloatingActionButton';
 import { StaticMap } from './components/StaticMap';
 import { StopTimeSegments } from './components/StopTimeSegments';
-import { directionLists, TableOfContents } from './components/TableOfContents';
+import { TableOfContents } from './components/TableOfContents';
 import { renderTitle } from './url-to-route';
 
 interface Props {
@@ -33,32 +36,50 @@ export function App({ route, agency, trips, stops }: Props) {
   const idToTrips = groupByDirectionId(trips);
   return (
     <>
-      <header>
-        <PageTitle>{renderTitle(route)}</PageTitle>
-        <a href="https://hawaiibusplus.com">
-          <Logo />
-        </a>
-      </header>
-      <article style={colorVariables(route)}>
-        <ShareHeader route={route} />
-        <StaticMap route={route} stops={stops.values()} />
+      <div class="waves px-4 shadow-lg">
+        <header class="pt-6 max-w-5xl">
+          <PageTitle>{renderTitle(route)}</PageTitle>
+          <a href="https://hawaiibusplus.com">
+            <Logo />
+          </a>
+        </header>
+        <StaticMap
+          route={route}
+          stops={stops.values()}
+          width={640}
+          height={360}
+        />
+      </div>
+      <article
+        class="grid gap-y-4 share text-black dark:text-white"
+        style={colorVariables(route)}
+      >
+        <RouteHeader route={route} />
+
+        <div class="flex flex-wrap gap-1 justify-center grid-area-buttons">
+          <DetailButtons route={route} agency={agency} />
+        </div>
 
         <TableOfContents idToTrips={idToTrips} />
-        <ul>
-          {directionLists(idToTrips, (trip) => (
-            <StopTimeSegments
-              key={trip.trip_id}
-              trip={trip}
-              agency={agency}
-              stops={stops}
-            />
-          ))}
-        </ul>
-        <RouteDetailsCard
-          route={route}
-          agency={agency}
-          descParts={extractLinks(route.route_desc)}
-        />
+        <ExtendedFloatingActionButton />
+        <div class="grid-area-timetable space-y-8">
+          {Array.from(idToTrips.values())
+            .flat()
+            .map((trip) => (
+              <StopTimeSegments
+                key={trip.trip_id}
+                trip={trip}
+                agency={agency}
+                stops={stops}
+              />
+            ))}
+        </div>
+        <footer class="bg-white dark:bg-gray-700 shadow-inner px-4 pt-6 pb-16 grid-area-footer">
+          <RouteDescription
+            agency={agency}
+            descParts={extractLinks(route.route_desc)}
+          />
+        </footer>
       </article>
     </>
   );

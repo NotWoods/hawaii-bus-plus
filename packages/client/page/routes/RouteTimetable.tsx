@@ -61,7 +61,7 @@ export function RouteTimetable() {
   if (route && Timetable) {
     return (
       <BaseSheet style={colorVariables(route)} loaded>
-        <RouteHeader route={route} />
+        <RouteHeader route={route} showClose />
         <Timetable
           details={details!}
           directionId={directionId}

@@ -13,9 +13,10 @@ interface Props {
     Route,
     'route_short_name' | 'route_long_name' | 'route_text_color' | 'route_color'
   >;
+  showClose?: boolean;
 }
 
-export function RouteHeader({ route }: Props) {
+export function RouteHeader({ route, showClose }: Props) {
   const { dispatch } = useContext(RouterContext);
 
   return (
@@ -24,7 +25,9 @@ export function RouteHeader({ route }: Props) {
       <h2 class="font-display text-3xl" style={{ gridArea: 'name' }}>
         {route?.route_long_name ?? BLANK}
       </h2>
-      <CloseButton onClick={() => dispatch(closeMainAction())} />
+      {showClose ? (
+        <CloseButton onClick={() => dispatch(closeMainAction())} />
+      ) : null}
     </header>
   );
 }

@@ -3,7 +3,7 @@ import { PlainDaysTime } from '@hawaii-bus-plus/temporal-utils';
 import { Agency, Stop, TimeString, Trip } from '@hawaii-bus-plus/types';
 import { h } from 'preact';
 import { Temporal } from 'proposal-temporal';
-import { StopTimesCollapsible } from '../../page/routes/timetable/stop-time/StopTimesCollapsible';
+import { StopTimeSegmentList } from '../../page/routes/timetable/stop-time/StopTimeSegmentList';
 
 interface Props {
   trip: Trip;
@@ -26,24 +26,22 @@ export function StopTimeSegments({ trip, agency, stops }: Props) {
   }
 
   return (
-    <li>
-      <section id={trip.trip_id}>
-        <header>
-          <h3 className="font-display font-medium text-lg">
-            {trip.trip_short_name}
-          </h3>
-        </header>
-        <StopTimesCollapsible
-          stopTimes={trip.stop_times.map((stopTime) => ({
-            stop: stops.get(stopTime.stop_id)!,
-            arrivalTime: timeData(stopTime.arrival_time),
-            departureTime: timeData(stopTime.departure_time),
-            timepoint: stopTime.timepoint,
-          }))}
-          timeZone={agency.agency_timezone}
-          link={stopLink}
-        />
-      </section>
-    </li>
+    <article id={trip.trip_id}>
+      <a class="hover:underline" href={`#${trip.trip_id}`}>
+        <h3 className="font-display font-medium text-xl mx-6 mb-2">
+          {trip.trip_short_name}
+        </h3>
+      </a>
+      <StopTimeSegmentList
+        stopTimes={trip.stop_times.map((stopTime) => ({
+          stop: stops.get(stopTime.stop_id)!,
+          arrivalTime: timeData(stopTime.arrival_time),
+          departureTime: timeData(stopTime.departure_time),
+          timepoint: stopTime.timepoint,
+        }))}
+        timeZone={agency.agency_timezone}
+        link={stopLink}
+      />
+    </article>
   );
 }

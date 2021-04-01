@@ -6,6 +6,7 @@ module.exports = {
     './auth/index.html',
     './page/**/*.tsx',
     './auth/**/*.tsx',
+    './share/**/*.tsx',
     './all-pages/**/*.tsx',
   ],
   darkMode: 'media',

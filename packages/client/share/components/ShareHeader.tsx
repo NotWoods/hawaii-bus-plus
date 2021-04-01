@@ -8,11 +8,9 @@ interface Props {
 
 export function ShareHeader(props: Props) {
   return (
-    <header>
-      <div>
-        <RouteIcon>{props.route.route_short_name}</RouteIcon>
-        <h2 class="font-display text-3xl">{props.route.route_long_name}</h2>
-      </div>
+    <header class="grid-area-header flex flex-col md:flex-row gap-x-4 gap-y-2 md:items-center px-4 py-2 md:pb-0 border-b">
+      <RouteIcon>{props.route.route_short_name}</RouteIcon>
+      <h2 class="font-display text-3xl">{props.route.route_long_name}</h2>
     </header>
   );
 }

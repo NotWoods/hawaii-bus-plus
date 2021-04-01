@@ -4,9 +4,13 @@ import { h } from 'preact';
 import { StopTimeSegment } from './StopTimeSegment';
 
 interface Props {
-  stopTimes: readonly StopTimeData[];
+  stopTimes: readonly Pick<
+    StopTimeData,
+    'stop' | 'arrivalTime' | 'departureTime' | 'timepoint'
+  >[];
   skipToStop?: Stop['stop_id'];
   timeZone: string;
+  link?(stop: Stop): string;
 }
 
 export function stopTimeKeys() {
@@ -30,6 +34,7 @@ export function StopTimeSegmentList(props: Props) {
             key={makeKey(stopTime.stop.stop_id)}
             stopTime={stopTime}
             timeZone={props.timeZone}
+            link={props.link}
           />
         </li>
       ))}
