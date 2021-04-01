@@ -1,5 +1,7 @@
 .timetable__details {
   grid-template-rows: 1fr;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 .timetable__details::-webkit-scrollbar {
   display: none;

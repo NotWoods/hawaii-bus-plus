@@ -76,9 +76,9 @@ importers:
       clsx: 1.1.1
       idb: 6.0.0
       insights-js: 1.2.10
+      just-debounce: 1.1.0
       preact: 10.5.13
       proposal-temporal: 0.7.0
-      react-snaplist-carousel: 4.3.0
       spherical-geometry-js: 2.0.0
       tslib: 2.1.0
     devDependencies:
@@ -132,11 +132,11 @@ importers:
       idb: ^6.0.0
       insights-js: ^1.2.10
       jest: ^26.6.3
+      just-debounce: ^1.1.0
       preact: ^10.5.13
       preact-render-to-string: ^5.1.18
       prettier: ^2.2.1
       proposal-temporal: ^0.7.0
-      react-snaplist-carousel: ^4.3.0
       spherical-geometry-js: ^2.0.0
       tailwindcss: ^2.0.4
       tailwindcss-scroll-snap: ^1.1.0
@@ -6320,6 +6320,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-jgnQoG9LKnWO3mnVNBnfhkh0QknICd1FGSrXcgrl67zioyJ4wgx25o9ZqwNtrROSflGBCGYnJfjrIyRIby1OoQ==
+  /just-debounce/1.1.0:
+    dev: false
+    resolution:
+      integrity: sha512-qpcRocdkUmf+UTNBYx5w6dexX5J31AKK1OmPwH630a83DdVVUIngk55RSAiIGpQyoH0dlr872VHfPjnQnK1qDQ==
   /keyv/3.1.0:
     dependencies:
       json-buffer: 3.0.0
@@ -7566,16 +7570,6 @@ packages:
       react-native: '>=0.56'
     resolution:
       integrity: sha512-sPTRTJk4bpuZeTBf6d7DldQGAOCi0GZh5NxzNI3eHXzxwHbNkV13Q22TehiSb3bsaVqwLC4UAa6QvYIucyyc+A==
-  /react-snaplist-carousel/4.3.0:
-    dev: false
-    engines:
-      node: '>=8'
-      npm: '>=5'
-    peerDependencies:
-      react: '>=16.8.0'
-      react-dom: '>=16.8.0'
-    resolution:
-      integrity: sha512-h+oF9RUrU5M8ETEJ114nb4uA6wlBXhIOmRi2c+jfsdPsP4ghi5+nTNquj95Wbebyw51zeh0TThyeSpCcQViFPg==
   /read-pkg-up/7.0.1:
     dependencies:
       find-up: 4.1.0

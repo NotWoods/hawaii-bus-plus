@@ -1,5 +1,5 @@
 import { Trip } from '@hawaii-bus-plus/types';
-import { h } from 'preact';
+import { Fragment, h } from 'preact';
 import { useContext } from 'preact/hooks';
 import type { Temporal } from 'proposal-temporal';
 import type { RouteDetails } from '../../../worker-info/route-details';
@@ -49,7 +49,7 @@ export function Timetable(props: Props) {
   useTripBounds(details.bounds);
 
   return (
-    <section>
+    <>
       <div class="flex flex-wrap-reverse gap-4 m-4">
         <TripSelector
           directionsDetails={details.directions}
@@ -77,6 +77,6 @@ export function Timetable(props: Props) {
         descParts={details.descParts}
         tripId={selectedTripId}
       />
-    </section>
+    </>
   );
 }

@@ -44,7 +44,7 @@ export function RouteTimetable() {
     RouteDetailContext
   );
   const [tripDate, setTripDate] = useState<Temporal.PlainDate | NOW>(NOW);
-  console.log(routeId, tripDate);
+
   usePromise(
     async (signal) => {
       if (routeId) {

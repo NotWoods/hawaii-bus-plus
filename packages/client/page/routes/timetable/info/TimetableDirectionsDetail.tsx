@@ -19,8 +19,10 @@ interface Props {
 
 function BaseDetails(props: { children: ComponentChildren }) {
   return (
-    <div class="shadow p-4 pl-12 bg-white dark:bg-gray-700 relative snap-start">
-      {props.children}
+    <div class="px-4 snap-start">
+      <div class="shadow p-4 pl-12 bg-white dark:bg-gray-700 relative h-full">
+        {props.children}
+      </div>
     </div>
   );
 }

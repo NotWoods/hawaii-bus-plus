@@ -1,5 +1,5 @@
 import { createContext, h, ComponentChildren } from 'preact';
-import { useState, StateUpdater } from 'preact/hooks';
+import { useState, StateUpdater, useMemo, useCallback } from 'preact/hooks';
 import type { RouteDetails } from '../../../worker-info/route-details';
 import type { TripDetails } from '../../../worker-info/trip-details';
 
@@ -46,20 +46,25 @@ function validDirectionIds(directions?: readonly unknown[]) {
 export function RouteDetailProvider(props: { children: ComponentChildren }) {
   const [details, setDetailState] = useState<RouteDetails | undefined>();
 
-  const directionIds = validDirectionIds(details?.directions);
+  const directionIds = useMemo(() => validDirectionIds(details?.directions), [
+    details,
+  ]);
   const [directionId, setDirectionId] = useState<0 | 1>(0);
 
   const [selectedTrip, setSelectedTrip] = useState<TripDetails | undefined>();
 
-  function setDetails(details?: RouteDetails) {
-    setDetailState(details);
-    if (selectedTrip?.trip?.route_id !== details?.route.route_id) {
-      setSelectedTrip(undefined);
-    }
+  const setDetails = useCallback(
+    (details?: RouteDetails) => {
+      setDetailState(details);
+      if (selectedTrip?.trip?.route_id !== details?.route.route_id) {
+        setSelectedTrip(undefined);
+      }
 
-    const [firstValidId = 0] = validDirectionIds(details?.directions);
-    setDirectionId(firstValidId);
-  }
+      const [firstValidId = 0] = validDirectionIds(details?.directions);
+      setDirectionId(firstValidId);
+    },
+    [selectedTrip]
+  );
 
   return (
     <RouteDetailContext.Provider

@@ -1,7 +1,8 @@
 import { Agency } from '@hawaii-bus-plus/types';
+import debounce from 'just-debounce';
 import { h } from 'preact';
 import { useContext, useEffect, useRef } from 'preact/hooks';
-import { useScroll, useVisibleElements } from 'react-snaplist-carousel';
+import { useCallback } from 'react';
 import { DirectionDetails } from '../../../../worker-info/trip-details';
 import { RouteDetailContext } from '../context';
 import { SwitchDirectionButton } from './SwitchDirectionButton';
@@ -16,15 +17,11 @@ interface Props {
 /** Spacer with the same size as SwitchDirectionButton */
 function Spacer() {
   return (
-    <div aria-hidden="true" class="inline-block invisible p-2 mt-4 ml-4">
+    <div aria-hidden="true" class="inline-block invisible p-2 mt-2 ml-4">
       <div class="inline-block mr-2 w-6 h-6" />
       Switch direction
     </div>
   );
-}
-
-function first([element]: readonly number[]) {
-  return element as 0 | 1;
 }
 
 export function TimetableDetails(props: Props) {
@@ -32,15 +29,27 @@ export function TimetableDetails(props: Props) {
   const { directionsDetails, agency } = props;
   const scrollEl = useRef<HTMLDivElement>();
 
-  const visible = useVisibleElements({ debounce: 300, ref: scrollEl }, first);
-  const goToChildren = useScroll({ ref: scrollEl });
+  // Handle scroll events and update the direction ID when they happen
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const handleScroll = useCallback(
+    debounce(() => {
+      const scrollPos = scrollEl.current.scrollLeft;
+      const width = scrollEl.current.offsetWidth;
+      const newDirectionId = Math.round(scrollPos / width) as 0 | 1;
 
-  /*useEffect(() => {
-    goToChildren(directionId);
-  }, [goToChildren, directionId]);*/
+      setDirectionId(newDirectionId);
+    }, 300),
+    [setDirectionId]
+  );
+
+  // Set the scroll position when the direction ID shifts
   useEffect(() => {
-    setDirectionId(visible);
-  }, [visible, setDirectionId]);
+    const width = scrollEl.current.offsetWidth;
+    scrollEl.current.scrollTo({
+      left: width * directionId,
+      behavior: 'smooth',
+    });
+  }, [directionId]);
 
   return (
     <header class="relative">
@@ -50,6 +59,7 @@ export function TimetableDetails(props: Props) {
           gridTemplateColumns: directionsDetails.map(() => '100%').join(' '),
         }}
         ref={scrollEl}
+        onScroll={handleScroll}
       >
         {directionsDetails.map((directionDetails) => (
           <TimetableDirectionsDetail
@@ -60,7 +70,7 @@ export function TimetableDetails(props: Props) {
           </TimetableDirectionsDetail>
         ))}
       </div>
-      <SwitchDirectionButton class="absolute bottom-0 right-0 m-4 bg-white dark:bg-gray-700" />
+      <SwitchDirectionButton class="absolute bottom-0 right-4 m-4 bg-white dark:bg-gray-700" />
     </header>
   );
 }
