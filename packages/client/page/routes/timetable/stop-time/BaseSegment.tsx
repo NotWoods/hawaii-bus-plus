@@ -25,18 +25,11 @@ function BaseSegmentContent(props: ContentProps) {
       <TripDecorDot />
       <TripDecorLine gridArea="line-top" />
       <TripDecorLine gridArea="line" />
-      <p
-        class={clsx('group-hover:underline', { 'text-sm': props.small })}
-        style={{ gridArea: 'name' }}
-      >
-        {name}
+      <p class={clsx({ 'text-sm': props.small })} style={{ gridArea: 'name' }}>
+        <span class="group-hover:underline">{name}</span>
+        {desc && ' '}
+        {desc && <span class="text-sm block lg:inline">{desc}</span>}
       </p>
-      {desc && ' '}
-      {desc && (
-        <p class="text-sm" style={{ gridArea: 'desc' }}>
-          {desc}
-        </p>
-      )}
       {time && (
         <PlainTimeElement
           time={time.arrivalTime}
