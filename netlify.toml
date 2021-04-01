@@ -33,6 +33,12 @@ package = 'netlify-plugin-contextual-env'
 # PER-DEPLOY.
 
 [[redirects]]
+  from = "https://hibus.plus/*"
+  to = "https://app.hawaiibusplus.com/share/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/api/v1/lookup_location"
   to = "http://api.ipstack.com/check?access_key={IPSTACK_KEY}&fields=latitude,longitude"
   # When you assign an HTTP status code of 200 to a redirect rule, it becomes a rewrite.
