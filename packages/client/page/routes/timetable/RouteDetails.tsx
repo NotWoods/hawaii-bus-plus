@@ -1,21 +1,32 @@
 import { Agency, Route } from '@hawaii-bus-plus/types';
 import { ComponentChildren, Fragment, h } from 'preact';
+import type { DescriptionPart } from '../../../worker-info/description';
 import { Button } from '../../buttons/Button';
 import { ButtonOrAnchor } from '../../buttons/ButtonOrAnchor';
 import fareIcon from '../../icons/monetization_on.svg';
+import shareIcon from '../../icons/share.svg';
 import webIcon from '../../icons/web.svg';
 
 interface Props {
   route?: Route;
   agency?: Agency;
-  descParts?: readonly {
-    type: 'text' | 'link';
-    value: string;
-  }[];
+  descParts?: readonly DescriptionPart[];
 }
 
 function DetailsLink(props: { href: string; children: ComponentChildren }) {
   return <ButtonOrAnchor {...props} class="text-current hover:underline" />;
+}
+
+function renderDescriptionPart(part: DescriptionPart, index: number) {
+  if (part.type === 'link') {
+    return (
+      <DetailsLink key={index} href={part.value}>
+        {part.value}
+      </DetailsLink>
+    );
+  } else {
+    return <Fragment key={index}>{part.value}</Fragment>;
+  }
 }
 
 export function RouteDetailsCard({ route, agency, descParts }: Props) {
@@ -24,8 +35,15 @@ export function RouteDetailsCard({ route, agency, descParts }: Props) {
   }
 
   return (
-    <aside class="bg-white dark:bg-gray-700 shadow-inner px-4 pt-6 pb-8">
+    <footer class="bg-white dark:bg-gray-700 shadow-inner px-4 pt-6 pb-8">
       <div class="flex flex-wrap gap-1 justify-center mb-4">
+        <Button
+          icon={shareIcon}
+          iconClass="dark:filter-invert"
+          href={`https://hibus.plus/routes/${route.route_id}`}
+        >
+          Share
+        </Button>
         <Button
           icon={fareIcon}
           iconClass="dark:filter-invert"
@@ -47,16 +65,8 @@ export function RouteDetailsCard({ route, agency, descParts }: Props) {
         .
       </p>
       <p class="text-sm leading-relaxed max-w-none text-black dark:text-white text-opacity-75 break-words">
-        {descParts?.map((part, i) =>
-          part.type === 'link' ? (
-            <DetailsLink key={i} href={part.value}>
-              {part.value}
-            </DetailsLink>
-          ) : (
-            <Fragment key={i}>{part.value}</Fragment>
-          )
-        )}
+        {descParts?.map(renderDescriptionPart)}
       </p>
-    </aside>
+    </footer>
   );
 }

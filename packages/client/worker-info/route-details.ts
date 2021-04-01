@@ -8,41 +8,17 @@ import { nowWithZone } from '@hawaii-bus-plus/temporal-utils';
 import { Agency, ColorString, Route, Stop } from '@hawaii-bus-plus/types';
 import type { Temporal } from 'proposal-temporal';
 import { LatLngBounds, LatLngBoundsLiteral } from 'spherical-geometry-js';
+import { DescriptionPart, extractLinks } from './description';
 import { DirectionDetails, findBestTrips, zonedTime } from './trip-details';
 
 export interface RouteDetails {
   readonly route: Route;
   readonly agency: Agency;
-  readonly descParts: {
-    type: 'text' | 'link';
-    value: string;
-  }[];
+  readonly descParts: readonly DescriptionPart[];
   readonly stops: ReadonlyMap<Stop['stop_id'], ColorString>;
   readonly bounds?: LatLngBoundsLiteral;
 
   readonly directions: DirectionDetails[];
-}
-
-const LINK_REGEX = /(https?:)\s?(\/\/[.a-z/]+)/g;
-
-export function extractLinks(description: string) {
-  let descLastIndex = 0;
-  const descParts: RouteDetails['descParts'] = [];
-  for (const match of description.matchAll(LINK_REGEX)) {
-    const end = match.index! + match[0].length;
-    const textPart = description.slice(descLastIndex, match.index);
-    const linkPart = match[1] + match[2];
-    descParts.push(
-      { type: 'text', value: textPart },
-      { type: 'link', value: linkPart }
-    );
-    descLastIndex = end;
-  }
-  descParts.push({
-    type: 'text',
-    value: description.slice(descLastIndex),
-  });
-  return descParts;
 }
 
 async function routeStopDetails(

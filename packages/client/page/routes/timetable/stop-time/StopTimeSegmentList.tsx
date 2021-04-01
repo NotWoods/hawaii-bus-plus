@@ -9,26 +9,30 @@ interface Props {
   timeZone: string;
 }
 
-export function StopTimeSegmentList(props: Props) {
+export function stopTimeKeys() {
   const keySoFar = new Map<Stop['stop_id'], number>();
+
+  return function makeKey(stopId: Stop['stop_id']) {
+    const keySuffix = keySoFar.get(stopId) ?? 0;
+    keySoFar.set(stopId, keySuffix + 1);
+    return `${stopId}${keySuffix}`;
+  };
+}
+
+export function StopTimeSegmentList(props: Props) {
+  const makeKey = stopTimeKeys();
 
   return (
     <ul class="px-8">
-      {props.stopTimes.map((stopTime) => {
-        const stopId = stopTime.stop.stop_id;
-        const keySuffix = keySoFar.get(stopId) ?? 0;
-        keySoFar.set(stopId, keySuffix + 1);
-
-        return (
-          <li>
-            <StopTimeSegment
-              key={`${stopId}${keySuffix}`}
-              stopTime={stopTime}
-              timeZone={props.timeZone}
-            />
-          </li>
-        );
-      })}
+      {props.stopTimes.map((stopTime) => (
+        <li>
+          <StopTimeSegment
+            key={makeKey(stopTime.stop.stop_id)}
+            stopTime={stopTime}
+            timeZone={props.timeZone}
+          />
+        </li>
+      ))}
     </ul>
   );
 }

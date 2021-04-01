@@ -1,5 +1,5 @@
 import { ComponentChildren, h } from 'preact';
-import { Title } from '../../all-pages/Title';
+import { Logo } from '../../all-pages/components/Logo';
 import { FormType } from './Form';
 import { MouseEventHandler } from './link';
 import { PageTitle } from './Title';
@@ -107,7 +107,7 @@ export function Header(props: Props) {
   return (
     <header class="text-center">
       <PageTitle type={type} />
-      <Title class="justify-center" />
+      <Logo class="justify-center" />
       <h2 class="mt-6 text-4xl font-display font-medium text-gray-100">
         {title}
       </h2>

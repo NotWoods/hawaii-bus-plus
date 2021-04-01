@@ -1,11 +1,11 @@
 import { Route } from '@hawaii-bus-plus/types';
 import { h } from 'preact';
 import { useContext } from 'preact/hooks';
+import { RouteIcon } from '../../all-pages/components/RouteIcon';
 import { CloseButton } from '../buttons/CloseButton';
 import { closeMainAction } from '../router/action/main';
 import { RouterContext } from '../router/Router';
 import { BLANK } from './badge/RouteBadge';
-import { RouteIcon } from './badge/RouteIcon';
 import './RouteHeader.css';
 
 interface Props {

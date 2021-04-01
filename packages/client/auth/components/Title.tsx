@@ -1,4 +1,8 @@
-import { useEffect } from 'preact/hooks';
+import { h } from 'preact';
+import {
+  PageTitle as TitleComponent,
+  withAppName,
+} from '../../all-pages/components/PageTitle';
 import { HeaderType } from './Header';
 
 interface Props {
@@ -24,18 +28,11 @@ function titleContent(type: HeaderType | undefined) {
 }
 
 export function renderTitle(type: HeaderType | undefined) {
-  const suffix = 'Hawaii Bus Plus';
-  const title = titleContent(type);
-  return title ? `${title} - ${suffix}` : suffix;
+  return withAppName(titleContent(type));
 }
 
 export function PageTitle(props: Props) {
   const { type } = props;
-  const title = titleContent(type);
 
-  useEffect(() => {
-    document.title = title;
-  }, [title]);
-
-  return null;
+  return <TitleComponent>{titleContent(type)}</TitleComponent>;
 }

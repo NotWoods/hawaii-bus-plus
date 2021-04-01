@@ -1,7 +1,7 @@
 /**
  * Implementation of a MultiMap.
  */
-export class MultiMap<K, V> {
+export class MultiMap<K, V> implements ReadonlyMap<K, readonly V[]> {
   private readonly items = new Map<K, V[]>();
   dimension!: number;
   size!: number;
@@ -63,5 +63,32 @@ export class MultiMap<K, V> {
 
   toJSON() {
     return this.items;
+  }
+
+  [Symbol.iterator]() {
+    return this.items[Symbol.iterator]();
+  }
+
+  keys() {
+    return this.items.keys();
+  }
+
+  values() {
+    return this.items.values();
+  }
+
+  entries() {
+    return this.items.entries();
+  }
+
+  forEach(
+    callback: (
+      values: readonly V[],
+      key: K,
+      map: ReadonlyMap<K, readonly V[]>
+    ) => void,
+    thisArg?: any
+  ) {
+    this.items.forEach(callback, thisArg);
   }
 }

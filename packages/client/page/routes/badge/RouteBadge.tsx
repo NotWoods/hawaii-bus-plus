@@ -1,7 +1,7 @@
 import { Route } from '@hawaii-bus-plus/types';
 import { h } from 'preact';
+import { SmallRouteIcon } from '../../../all-pages/components/RouteIcon';
 import { colorVariables } from '../props';
-import { SmallRouteIcon } from './RouteIcon';
 
 export const BLANK = ' ';
 

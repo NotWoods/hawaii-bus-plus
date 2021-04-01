@@ -95,6 +95,7 @@ export default defineConfig({
       input: {
         main: './index.html',
         auth: './auth/index.html',
+        share: './share/index.html',
       },
     },
   },

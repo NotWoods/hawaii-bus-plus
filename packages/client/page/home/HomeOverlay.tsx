@@ -1,6 +1,6 @@
 import { h } from 'preact';
 import { useState } from 'preact/hooks';
-import { Title } from '../../all-pages/Title';
+import { Logo } from '../../all-pages/components/Logo';
 import { useLazyComponent } from '../hooks';
 import { MenuIcon } from '../icons/MenuIcon';
 import { DirectionsSearch } from '../search/directions/DirectionsSearch';
@@ -22,7 +22,7 @@ export function HomeOverlay() {
       return (
         <SearchBase
           icon={<MenuIcon open={menuOpen} />}
-          logo={<Title />}
+          logo={<Logo />}
           onButtonClick={() => setMenuOpen(!menuOpen)}
         >
           {Menu ? <Menu open={menuOpen} labelledBy="appBarUp" /> : undefined}

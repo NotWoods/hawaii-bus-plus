@@ -1,15 +1,20 @@
+import clsx, { ClassValue } from 'clsx';
 import { h } from 'preact';
 
 interface Props {
-  class?: string;
+  class?: ClassValue;
 }
 
-export function Title(props: Props) {
+/**
+ * Logo for the app saying "Hawaii Bus Plus"
+ */
+export function Logo(props: Props) {
   return (
     <h1
-      class={`font-display font-medium text-2xl uppercase flex items-center ${
-        props.class ?? ''
-      }`}
+      class={clsx(
+        'font-display font-medium text-2xl uppercase flex items-center',
+        props.class
+      )}
     >
       <svg
         class="h-8 mr-1"

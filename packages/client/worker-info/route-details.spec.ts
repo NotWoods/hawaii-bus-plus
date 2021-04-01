@@ -2,20 +2,7 @@ import { NodeRepository } from '@hawaii-bus-plus/data/node';
 import { expectPlainTimeData } from '@hawaii-bus-plus/jest-utils';
 import { Route } from '@hawaii-bus-plus/types';
 import { Temporal } from 'proposal-temporal';
-import { extractLinks, getRouteDetails } from './route-details';
-
-test('extractLinks separates link', () => {
-  const routeDesc =
-    'For more information go to the Park website at; https: //www.nps.gov/havo/planyourvisit/fees.htm';
-  const links = extractLinks(routeDesc);
-
-  expect(links[0].type).toBe('text');
-  expect(links[1].type).toBe('link');
-
-  expect(links[1].value).toBe(
-    'https://www.nps.gov/havo/planyourvisit/fees.htm'
-  );
-});
+import { getRouteDetails } from './route-details';
 
 test.concurrent('getRouteDetails when in service', async () => {
   const repo = new NodeRepository();

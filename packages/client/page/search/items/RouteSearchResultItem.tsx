@@ -2,7 +2,7 @@ import { Agency, Route } from '@hawaii-bus-plus/types';
 import clsx, { ClassValue } from 'clsx';
 import { h } from 'preact';
 import { Link } from '../../router/Router';
-import { RouteIcon } from '../../routes/badge/RouteIcon';
+import { RouteIcon } from '../../../all-pages/components/RouteIcon';
 import { colorVariables } from '../../routes/props';
 
 interface Props {
