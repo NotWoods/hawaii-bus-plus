@@ -49,7 +49,9 @@ export class NodeRepository extends BaseMemoryRepository {
     }
 
     if (!data) {
-      throw new AggregateError(errors);
+      console.error(errors);
+      throw new Error(errors as any);
+      // throw new AggregateError(errors);
     }
 
     return JSON.parse(data) as GTFSData;
