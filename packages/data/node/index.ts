@@ -14,7 +14,7 @@ export class NodeRepository extends BaseMemoryRepository {
     super();
     const paths: (string | URL)[] = [
       '../../client/public/api/v1/api.json',
-      '../../../dist/functions/api.json',
+      '../../../dist/functions/api/api.json',
     ];
     if (path) {
       paths.unshift(path);
