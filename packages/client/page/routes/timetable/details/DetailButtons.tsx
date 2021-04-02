@@ -5,7 +5,6 @@ import { Button } from '../../../buttons/Button';
 import { errorMessage } from '../../../hooks';
 import fareIcon from '../../../icons/monetization_on.svg';
 import shareIcon from '../../../icons/share.svg';
-import webIcon from '../../../icons/web.svg';
 import { useSnackbar } from '../../../snackbar/context';
 import { buildShareHandler } from './share';
 
@@ -59,13 +58,6 @@ export function DetailButtons({ route, agency, tripId }: Props) {
         href={agency.agency_fare_url}
       >
         Fare info
-      </Button>
-      <Button
-        icon={webIcon}
-        iconClass="dark:filter-invert"
-        href={agency.agency_url}
-      >
-        Route webpage
       </Button>
     </>
   );

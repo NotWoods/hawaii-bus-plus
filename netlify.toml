@@ -27,6 +27,9 @@ package = 'netlify-plugin-contextual-env'
   [plugins.inputs]
   mode = 'suffix'
 
+[[plugins]]
+package = "@netlify/plugin-sitemap"
+
 # Redirects and headers are GLOBAL for all builds – they do not get scoped to
 # contexts no matter where you define them in the file.
 # For context-specific rules, use _headers or _redirects files, which are
