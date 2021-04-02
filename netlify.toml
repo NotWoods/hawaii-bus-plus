@@ -37,6 +37,11 @@ package = 'netlify-plugin-contextual-env'
   to = "https://app.hawaiibusplus.com/share/:splat"
   status = 301
   force = true
+[[redirects]]
+  from = "https://hawaiibus.plus/*"
+  to = "https://app.hawaiibusplus.com/:splat"
+  status = 301
+  force = true
 
 [[redirects]]
   from = "/api/v1/lookup_location"

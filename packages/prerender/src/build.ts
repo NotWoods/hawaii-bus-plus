@@ -8,4 +8,7 @@ async function main() {
   await prerenderPage(true);
 }
 
-main().catch((err) => console.error(err));
+main().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});

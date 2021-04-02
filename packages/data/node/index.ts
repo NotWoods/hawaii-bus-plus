@@ -12,20 +12,46 @@ export class NodeRepository extends BaseMemoryRepository {
 
   constructor(path?: string | URL) {
     super();
-    let apiLocation = path;
-    if (!apiLocation) {
-      const rel = '../../client/public/api/v1/api.json';
-      if (import.meta.url) {
-        apiLocation = new URL(rel, import.meta.url);
-      } else {
-        apiLocation = resolve(__dirname, rel);
-      }
+    const paths: (string | URL)[] = [
+      '../../client/public/api/v1/api.json',
+      '../../../dist/functions/api.json',
+    ];
+    if (path) {
+      paths.unshift(path);
     }
-    this.apiReady = this.init(apiLocation);
+
+    const apiLocations = paths.map((relative) => {
+      if (import.meta.url) {
+        return new URL(
+          relative instanceof URL ? relative.href : relative,
+          import.meta.url
+        );
+      } else {
+        return resolve(__dirname, relative as string);
+      }
+    });
+    this.apiReady = this.init(apiLocations);
   }
 
-  private async init(apiLocation: string | URL): Promise<GTFSData> {
-    const data = await readFile(apiLocation, 'utf8');
+  private async init(
+    apiLocations: readonly (string | URL)[]
+  ): Promise<GTFSData> {
+    let data: string | undefined;
+    const errors: unknown[] = [];
+    for (const apiLocation of apiLocations) {
+      try {
+        data = await readFile(apiLocation, 'utf8');
+      } catch (err: unknown) {
+        errors.push(err);
+      }
+
+      if (data) break;
+    }
+
+    if (!data) {
+      throw new AggregateError(errors);
+    }
+
     return JSON.parse(data) as GTFSData;
   }
 }

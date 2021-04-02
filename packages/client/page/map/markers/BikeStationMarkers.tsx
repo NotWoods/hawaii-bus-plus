@@ -2,6 +2,7 @@ import { Point } from '@hawaii-bus-plus/presentation';
 import { MarkerWithData } from '@hawaii-bus-plus/react-google-maps';
 import { StationInformation } from '@hawaii-bus-plus/types';
 import { Fragment, h } from 'preact';
+import { useCallback } from 'preact/hooks';
 import {
   PointRouterAction,
   setBikeStationAction,
@@ -20,10 +21,13 @@ interface Props {
 export function BikeStationMarkers({ point, stations, dispatch }: Props) {
   const selectedId = point?.type === 'bike' && point.stationId;
 
-  function handleClick(this: MarkerWithData<StationInformation>) {
-    const station = this.get('extra');
-    dispatch(setBikeStationAction(station.station_id, station));
-  }
+  const handleClick = useCallback(
+    function (this: MarkerWithData<StationInformation>) {
+      const station = this.get('extra');
+      dispatch(setBikeStationAction(station.station_id, station));
+    },
+    [dispatch]
+  );
 
   return (
     <>
