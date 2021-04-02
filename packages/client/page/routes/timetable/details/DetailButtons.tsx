@@ -17,6 +17,7 @@ interface Props {
 
 function useShare(text: string) {
   const toastAlert = useSnackbar();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const callback = useCallback(
     buildShareHandler(text, (err) =>
       toastAlert({
