@@ -16,7 +16,7 @@ import { StopTimeSegments } from './components/StopTimeSegments';
 import { TableOfContents } from './components/TableOfContents';
 import { renderTitle } from './url-to-route';
 
-interface Props {
+export interface AppProps {
   route: Route;
   agency: Agency;
   stops: ReadonlyMap<Stop['stop_id'], Stop>;
@@ -33,7 +33,7 @@ function groupByDirectionId(
   return idToTrips;
 }
 
-export function App({ route, agency, trips, stops }: Props) {
+export function App({ route, agency, trips, stops }: AppProps) {
   const idToTrips = groupByDirectionId(trips);
   return (
     <>

@@ -1,6 +1,7 @@
 import { Repository } from '@hawaii-bus-plus/data';
 import { Route, Stop, Trip } from '@hawaii-bus-plus/types';
 import { withAppName } from '../all-pages/components/PageTitle';
+import { AppProps } from './App';
 
 const ROUTES_PREFIX = '/share/routes/';
 
@@ -16,7 +17,10 @@ export function urlToRouteId(url: URL): Route['route_id'] {
   }
 }
 
-export async function loadRoute(repo: Repository, routeId: Route['route_id']) {
+export async function loadRoute(
+  repo: Repository,
+  routeId: Route['route_id']
+): Promise<AppProps> {
   const routesReady = repo.loadRoutes([routeId]);
   const stopIds = new Set<Stop['stop_id']>();
   const trips: Trip[] = [];
