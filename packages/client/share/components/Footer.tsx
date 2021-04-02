@@ -1,5 +1,4 @@
 import { h } from 'preact';
-import './Footer.css';
 
 export function Footer() {
   return (

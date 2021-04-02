@@ -1,5 +1,7 @@
 import '../all-pages/main.css';
 import { buildShareHandler } from '../page/routes/timetable/details/share';
+import './App.css';
+import './components/Footer.css';
 import { dynamicLoginButton } from './components/PageHeader';
 
 if (import.meta.env.DEV) {

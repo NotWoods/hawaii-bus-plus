@@ -66,6 +66,17 @@ package = 'netlify-plugin-contextual-env'
   status = 200
   force = true
 
+[[redirects]]
+  from = "/auth/index.html"
+  to = "/404.html"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/share/index.html"
+  to = "/404.html"
+  status = 301
+  force = true
+
 # The following redirects are intended for use with most SPAs that handle
 # routing internally.
 [[redirects]]

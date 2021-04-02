@@ -7,7 +7,6 @@ import { RouteHeader } from '../page/routes/RouteHeader';
 import { DetailButtons } from '../page/routes/timetable/details/DetailButtons';
 import { RouteDescription } from '../page/routes/timetable/details/RouteDescription';
 import { extractLinks } from '../worker-info/description';
-import './App.css';
 import { ExtendedFloatingActionButton } from './components/ExtendedFloatingActionButton';
 import { Footer } from './components/Footer';
 import { PageHeader } from './components/PageHeader';

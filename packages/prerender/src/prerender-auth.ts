@@ -5,6 +5,7 @@ export async function prerenderAuth(write: boolean) {
     templatePath: './auth/index.html',
     serverEntryPath: './auth/entry-server.tsx',
     routes: [
+      '/404',
       '/auth/login',
       '/auth/register',
       '/auth/forgot',

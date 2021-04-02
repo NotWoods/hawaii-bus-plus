@@ -45,7 +45,7 @@ const headerTypes = new Set<HeaderType>([
 ]);
 
 export function App(props: Props) {
-  const [type, setType] = useState<HeaderType>(props.defaultType ?? 'success');
+  const [type, setType] = useState<HeaderType>(props.defaultType);
 
   const handleLink: MouseEventHandler = (evt) => {
     evt.preventDefault();
