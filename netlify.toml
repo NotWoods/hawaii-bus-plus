@@ -98,7 +98,7 @@ package = 'netlify-plugin-contextual-env'
     form-action 'self';
     default-src 'self';
     img-src 'self' data: blob: *.googleapis.com *.ggpht.com maps.gstatic.com;
-    script-src 'self' 'unsafe-eval' maps.googleapis.com;
+    script-src 'self' 'unsafe-eval' 'unsafe-inline' maps.googleapis.com;
     worker-src 'self';
     style-src 'self' 'unsafe-inline' fonts.googleapis.com;
     font-src 'self' fonts.gstatic.com;

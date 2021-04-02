@@ -25,8 +25,8 @@ export default defineConfig({
       workbox: {
         navigateFallback: '/index.html',
         navigateFallbackAllowlist: [
-          new RegExp('/routes/'),
-          new RegExp('/directions'),
+          new RegExp('^/routes/'),
+          new RegExp('^/directions'),
         ],
       },
       manifest: {

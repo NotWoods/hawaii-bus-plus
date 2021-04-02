@@ -48,7 +48,8 @@ export function Router(props: {
     const url = new URL('/', window.location.href);
     if (state.main) {
       if (state.main.path === ROUTES_PREFIX) {
-        url.pathname = `${ROUTES_PREFIX}${state.main.routeId}/`;
+        const { routeId, tripId = '' } = state.main;
+        url.pathname = `${ROUTES_PREFIX}${routeId}/${tripId}`;
       } else if (state.main.path === DIRECTIONS_PATH) {
         url.pathname = DIRECTIONS_PATH;
         directionsToParams(state.main, url.searchParams);
