@@ -1,10 +1,7 @@
 import { Agency } from '@hawaii-bus-plus/types';
 import { last } from '@hawaii-bus-plus/utils';
 import { ComponentChildren, h } from 'preact';
-import {
-  DirectionDetails,
-  TripDetails,
-} from '../../../../worker-info/trip-details';
+import { DirectionDetails } from '../../../../worker-info/trip-details';
 import timeIcon from '../../../icons/access_time.svg';
 import busIcon from '../../../icons/directions_bus.svg';
 import { Icon } from '../../../icons/Icon';
@@ -27,8 +24,11 @@ function BaseDetails(props: { children: ComponentChildren }) {
   );
 }
 
-export function TripName(props: { details?: TripDetails }) {
-  const { trip, serviceDays = BLANK } = props.details ?? {};
+export function TripName(props: {
+  tripShortName?: string;
+  serviceDays?: string;
+}) {
+  const { tripShortName = BLANK, serviceDays = BLANK } = props;
   return (
     <header>
       <BaseDetails>
@@ -37,7 +37,7 @@ export function TripName(props: { details?: TripDetails }) {
           alt=""
           class="absolute top-5 left-3 dark:filter-invert"
         />
-        <p class="text-lg">{trip?.trip_short_name ?? BLANK}</p>
+        <p class="text-lg">{tripShortName}</p>
         <p>{serviceDays}</p>
       </BaseDetails>
     </header>
