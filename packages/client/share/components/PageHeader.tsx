@@ -32,7 +32,7 @@ export function PageHeader() {
   }, []);
 
   return (
-    <header class="flex pt-6 max-w-5xl items-center">
+    <header class="flex pt-6 max-w-5xl items-center mx-auto">
       <a href="https://hawaiibusplus.com" class="mr-auto">
         <Logo />
       </a>

@@ -11,6 +11,7 @@ export function TableOfContents({ idToTrips }: Props) {
       id="toc"
       class="grid-area-toc mx-6 md:sticky top-4 text-gray-700 dark:text-gray-300"
     >
+      <h3 class="font-display font-medium text-lg">Schedule index</h3>
       {Array.from(idToTrips, ([id, trips]) => (
         <ul key={id} class="mb-4 pl-6 list-disc">
           {trips.map((trip) => (

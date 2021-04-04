@@ -47,7 +47,7 @@ export function App({ route, agency, trips, stops }: AppProps) {
         />
       </div>
       <article
-        class="grid gap-y-4 share text-black dark:text-white"
+        class="grid gap-y-4 share text-black dark:text-white max-w-5xl mx-auto mt-2"
         style={colorVariables(route)}
       >
         <RouteHeader route={route} />
