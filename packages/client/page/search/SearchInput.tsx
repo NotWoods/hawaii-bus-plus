@@ -14,7 +14,7 @@ export function SearchInput(props: JSX.HTMLAttributes<HTMLInputElement>) {
       type="search"
       class={clsx(
         'input focus:ring-cyan focus:border-cyan block w-full placeholder-current placeholder-opacity-70 bg-blue-700 text-white sm:text-sm border-gray-300',
-        props.class
+        props.class,
       )}
     />
   );

@@ -34,7 +34,7 @@ export function RouteGlyphs({ darkMode }: Props) {
     const unique = new Map<Shape['shape_id'] | undefined, JourneyTripSegment>(
       journey.trips
         .filter(isJourneyTripSegment)
-        .map((segment) => [segment.trip.shape_id, segment] as const)
+        .map((segment) => [segment.trip.shape_id, segment] as const),
     );
 
     shapes = Array.from(unique.values()).map((segment) => {

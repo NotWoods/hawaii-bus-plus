@@ -13,7 +13,7 @@ export function Logo(props: Props) {
     <h1
       class={clsx(
         'font-display font-medium text-2xl uppercase flex items-center',
-        props.class
+        props.class,
       )}
     >
       <svg

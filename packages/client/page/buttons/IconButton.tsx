@@ -17,7 +17,7 @@ export function IconButton({ forceDark: dark, ...props }: Props) {
       class={clsx(
         'block flex-shrink-0 rounded-full focus:ring-cyan focus:border-cyan border-transparent bg-opacity-0 dark:bg-opacity-0 hover:bg-opacity-10 transition-colors',
         props.disabled ? 'cursor-default' : hover,
-        props.class
+        props.class,
       )}
     />
   );

@@ -13,13 +13,13 @@ export interface StopDetails extends Omit<Stop, 'routes' | 'transfers'> {
 
 export async function loadStop(
   repo: Pick<Repository, 'loadStops' | 'loadRoutes' | 'loadAgencies'>,
-  stopId: Stop['stop_id']
+  stopId: Stop['stop_id'],
 ): Promise<StopDetails | undefined> {
   const stop = await getSingle(repo, repo.loadStops, stopId);
   if (!stop) return undefined;
 
   const transferStops = await repo.loadStops(
-    stop.transfers.map((t) => t.to_stop_id)
+    stop.transfers.map((t) => t.to_stop_id),
   );
   const routeIds = Array.from(transferStops.values())
     .flatMap((stop) => stop.routes)

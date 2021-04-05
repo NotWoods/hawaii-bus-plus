@@ -14,7 +14,7 @@ function getHash(str: BinaryLike) {
 }
 
 function matchEntityTags(
-  entityTags: string | undefined
+  entityTags: string | undefined,
 ): (eTag: string) => boolean {
   if (entityTags == undefined) {
     return () => false;
@@ -38,7 +38,7 @@ export const handler = createHandler('GET', async (event, context) => {
 
     const matchETag = matchEntityTags(
       // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
-      event.headers['if-none-match'] || event.headers['x-if-none-match']
+      event.headers['if-none-match'] || event.headers['x-if-none-match'],
     );
     const entityTag = getHash(file);
 

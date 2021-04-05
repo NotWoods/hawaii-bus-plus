@@ -63,7 +63,7 @@ export function RouteDetailProvider(props: { children: ComponentChildren }) {
       const [firstValidId = 0] = validDirectionIds(details?.directions);
       setDirectionId(firstValidId);
     },
-    [selectedTrip]
+    [selectedTrip],
   );
 
   return (

@@ -18,7 +18,7 @@ class AdminUser extends User {
 
 export function getAdmin(
   auth: GoTrue,
-  identity: NetlifyIdentityContext
+  identity: NetlifyIdentityContext,
 ): Admin {
   return new AdminUser(auth, identity).admin;
 }

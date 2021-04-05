@@ -82,7 +82,7 @@ export default class API {
 
   request<P extends keyof RequestMap>(
     path: P,
-    options: RequestInit = {}
+    options: RequestInit = {},
   ): Promise<RequestMap[P]> {
     const headers = this.headers(options.headers || {});
     if (this._sameOrigin) {
@@ -101,7 +101,7 @@ export default class API {
           });
         }
         return response.text().then((data) => data as RequestMap[P]);
-      }
+      },
     );
   }
 }

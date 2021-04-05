@@ -14,7 +14,7 @@ export function extractLinks(description: string) {
     const linkPart = match[1] + match[2];
     descParts.push(
       { type: 'text', value: textPart },
-      { type: 'link', value: linkPart }
+      { type: 'link', value: linkPart },
     );
     descLastIndex = end;
   }

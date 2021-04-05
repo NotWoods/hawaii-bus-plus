@@ -12,7 +12,7 @@ export interface StopWithDistance extends Stop {
  */
 export async function findClosestStops(
   repo: Pick<Repository, 'loadStopsSpatial'>,
-  location: google.maps.LatLngLiteral
+  location: google.maps.LatLngLiteral,
 ): Promise<StopWithDistance[]> {
   const stops = await repo.loadStopsSpatial(location);
   return stops

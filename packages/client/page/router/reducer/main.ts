@@ -4,7 +4,7 @@ import { DIRECTIONS_PATH, ROUTES_PREFIX } from '../state/main';
 
 export function mainRouterReducer(
   state: MainState | undefined,
-  action: MainRouterAction
+  action: MainRouterAction,
 ): MainState | undefined {
   switch (action.type) {
     case 'route':

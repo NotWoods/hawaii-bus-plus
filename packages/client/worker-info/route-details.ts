@@ -50,7 +50,7 @@ export async function getRouteDetails(
   >,
   routeId: Route['route_id'],
   date?: Temporal.PlainDate,
-  time?: Temporal.PlainTime
+  time?: Temporal.PlainTime,
 ): Promise<RouteDetails | undefined> {
   const neededInfo = await loadCalendarAgency(repo, routeId, date);
   if (!neededInfo) return undefined;
@@ -60,7 +60,7 @@ export async function getRouteDetails(
     repo,
     routeId,
     allCalendars,
-    neededInfo.serviceDate.toPlainDateTime(time ?? neededInfo.now)
+    neededInfo.serviceDate.toPlainDateTime(time ?? neededInfo.now),
   );
 
   const { stops, routes } = await routeStopDetails(repo, routeStops, routeId);
@@ -85,7 +85,7 @@ export async function getRouteDetails(
       const closestTripDetails = formatTripDetails(
         dirDetails.closestTrip.trip,
         allCalendars,
-        formatOptions
+        formatOptions,
       );
 
       return {

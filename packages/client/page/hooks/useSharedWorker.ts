@@ -49,7 +49,7 @@ export function useSharedWorker(workerConstructor: { new (): Worker }) {
 
   async function postMessage(
     signal: AbortSignal,
-    message: unknown
+    message: unknown,
   ): Promise<unknown> {
     if (!workerRef.current) {
       workerRef.current = generateWorker();

@@ -17,7 +17,7 @@ test.concurrent('findBestTrips before route is running that day', async () => {
     repo,
     routeId,
     allCalendars,
-    now
+    now,
   );
   expect(directionDetails).toHaveLength(2);
   expect(directionDetails[0]).toBeDefined();
@@ -53,17 +53,17 @@ test.concurrent('findBestTrips after route has run that day', async () => {
     repo,
     routeId,
     allCalendars,
-    now
+    now,
   );
   expect(directionDetails).toHaveLength(2);
   expect(directionDetails[0]).toBeDefined();
   expect(directionDetails[1]).toBeDefined();
 
   expect(directionDetails[0].closestTrip.trip).toEqual(
-    directionDetails[0].earliestTrip.trip
+    directionDetails[0].earliestTrip.trip,
   );
   expect(directionDetails[1].closestTrip.trip).toEqual(
-    directionDetails[1].earliestTrip.trip
+    directionDetails[1].earliestTrip.trip,
   );
   expect(directionDetails[0].earliestTrip.trip).toMatchObject({
     trip_id: expect.stringContaining('waimea-waimea-am'),
@@ -86,7 +86,7 @@ test.concurrent(
       repo,
       routeId,
       allCalendars,
-      now
+      now,
     );
 
     expect(directionDetails).toHaveLength(2);
@@ -94,18 +94,18 @@ test.concurrent(
     expect(directionDetails[1]).toBeDefined();
 
     expect(directionDetails[0].closestTrip.offset?.toString()).toEqual(
-      'P1DT3H30M'
+      'P1DT3H30M',
     );
     expect(directionDetails[0].closestTrip.trip?.trip_short_name).toEqual(
-      '6:30AM WAIMEA AM'
+      '6:30AM WAIMEA AM',
     );
     expect(directionDetails[1].closestTrip.offset?.toString()).toEqual(
-      'P1DT4H'
+      'P1DT4H',
     );
     expect(directionDetails[1].closestTrip.trip?.trip_short_name).toEqual(
-      '7:00AM WAIMEA AM'
+      '7:00AM WAIMEA AM',
     );
-  }
+  },
 );
 
 test.concurrent(
@@ -119,7 +119,7 @@ test.concurrent(
       repo,
       routeId,
       allCalendars,
-      now
+      now,
     );
 
     expect(directionDetails).toHaveLength(2);
@@ -127,16 +127,16 @@ test.concurrent(
     expect(directionDetails[1]).toBeDefined();
 
     expect(directionDetails[0].closestTrip.offset?.toString()).toEqual(
-      'P1DT30M'
+      'P1DT30M',
     );
     expect(directionDetails[0].closestTrip.trip?.trip_short_name).toEqual(
-      '6:30AM WAIMEA AM'
+      '6:30AM WAIMEA AM',
     );
     expect(directionDetails[1].closestTrip.offset?.toString()).toEqual(
-      'P1DT1H'
+      'P1DT1H',
     );
     expect(directionDetails[1].closestTrip.trip?.trip_short_name).toEqual(
-      '7:00AM WAIMEA AM'
+      '7:00AM WAIMEA AM',
     );
-  }
+  },
 );

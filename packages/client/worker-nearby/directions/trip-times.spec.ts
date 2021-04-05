@@ -19,7 +19,7 @@ test.concurrent('getEarliestValidTrip with infinity', async () => {
   const trip = getEarliestValidTrip(
     data.routes[WAIMEA_WESTBOUND],
     'll' as Stop['stop_id'],
-    InfinityPlainDaysTime
+    InfinityPlainDaysTime,
   );
   expect(trip).toBeUndefined();
 });
@@ -31,7 +31,7 @@ test.concurrent('getEarliestValidTrip with early time', async () => {
   const trip = getEarliestValidTrip(
     data.routes[WAIMEA_WESTBOUND],
     'll' as Stop['stop_id'],
-    PlainDaysTime.from('00:00:00' as TimeString)
+    PlainDaysTime.from('00:00:00' as TimeString),
   );
   expect(trip).toMatchObject({
     trip_short_name: '6:30AM WAIMEA AM',
@@ -45,7 +45,7 @@ test.concurrent('getEarliestValidTrip with mid time', async () => {
   const trip = getEarliestValidTrip(
     data.routes[WAIMEA_WESTBOUND],
     'll' as Stop['stop_id'],
-    PlainDaysTime.from('12:00:00' as TimeString)
+    PlainDaysTime.from('12:00:00' as TimeString),
   );
   expect(trip).toMatchObject({
     trip_short_name: '12:30PM WAIMEA PM',

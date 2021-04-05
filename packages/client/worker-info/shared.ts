@@ -19,7 +19,7 @@ interface CalendarAgencyResult {
 export async function loadCalendarAgency(
   repo: Pick<Repository, 'loadRoutes' | 'loadAgencies' | 'loadCalendars'>,
   routeId: Route['route_id'],
-  date?: Temporal.PlainDate
+  date?: Temporal.PlainDate,
 ): Promise<CalendarAgencyResult | undefined> {
   const allCalendarsReady = repo.loadCalendars();
 
@@ -49,14 +49,14 @@ interface RouteStopDetails {
 export async function routeStopDetails(
   repo: Pick<Repository, 'loadRoutes' | 'loadStops'>,
   routeStops: Iterable<Stop['stop_id']>,
-  loadedRoute: Route['route_id']
+  loadedRoute: Route['route_id'],
 ): Promise<RouteStopDetails> {
   const stops: ReadonlyMap<Stop['stop_id'], Stop> = await repo.loadStops(
-    routeStops
+    routeStops,
   );
 
   const routeIds = new Set(
-    Array.from(stops.values()).flatMap((stop) => stop.routes)
+    Array.from(stops.values()).flatMap((stop) => stop.routes),
   );
   routeIds.delete(loadedRoute);
   const routes = await repo.loadRoutes(routeIds);

@@ -19,7 +19,7 @@ export function calendarRunsOn(calendar: Calendar, date: Temporal.PlainDate) {
 export function serviceRunningOn(
   allCalendars: ReadonlyMap<Calendar['service_id'], Calendar>,
   serviceId: Calendar['service_id'],
-  date: Temporal.PlainDate
+  date: Temporal.PlainDate,
 ) {
   const calendar = allCalendars.get(serviceId);
   if (!calendar) return false;
@@ -29,7 +29,7 @@ export function serviceRunningOn(
 
 export function nextServiceDay(
   calendar: Calendar,
-  startingFrom: Temporal.PlainDate
+  startingFrom: Temporal.PlainDate,
 ) {
   let date = startingFrom;
   let addedDays = 0;

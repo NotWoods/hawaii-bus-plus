@@ -27,7 +27,7 @@ export function StopCard({ point }: Props) {
       });
       setDetails(result);
     },
-    [point.stopId]
+    [point.stopId],
   );
 
   const position = point.position ?? details?.position;

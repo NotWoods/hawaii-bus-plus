@@ -34,7 +34,7 @@ interface Context {
 
 function clientTest(
   title: string,
-  implementation: (t: ExecutionContext<Context>) => ImplementationResult
+  implementation: (t: ExecutionContext<Context>) => ImplementationResult,
 ) {
   if (client) {
     test(title, (t) => {

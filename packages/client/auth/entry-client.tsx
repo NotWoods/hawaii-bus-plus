@@ -32,5 +32,5 @@ const params = {
 
 hydrate(
   <App defaultType={context.type ?? urlToType(url)} {...params} />,
-  document.getElementById('root')!
+  document.getElementById('root')!,
 );

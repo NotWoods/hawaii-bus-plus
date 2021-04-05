@@ -22,7 +22,7 @@ export function Button({ icon, iconClass, ...props }: Props) {
       tabIndex={trapped ? -1 : 0}
       class={clsx(
         'flex p-2 font-medium border hover:bg-red hover:bg-opacity-20 transition-colors',
-        props.class
+        props.class,
       )}
     >
       {icon && <Icon class={clsx('mr-2', iconClass)} src={icon} alt="" />}

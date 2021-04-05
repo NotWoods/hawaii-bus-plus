@@ -9,7 +9,7 @@ const templateReady = readFileAsync(templatePath, 'utf8');
 
 export async function renderTemplate(
   statusCode: number,
-  ctx: { type: string; redirectTo?: string; userData?: unknown }
+  ctx: { type: string; redirectTo?: string; userData?: unknown },
 ): Promise<NetlifyResponse> {
   const template = await templateReady;
   const globalContext = `<script>window.ctx = ${JSON.stringify(ctx)}</script>`;
@@ -28,7 +28,7 @@ export async function renderTemplate(
     statusCode,
     body: template.replace(
       '<!--head-html-->',
-      `${metaRefresh}${globalContext}`
+      `${metaRefresh}${globalContext}`,
     ),
     headers,
   };

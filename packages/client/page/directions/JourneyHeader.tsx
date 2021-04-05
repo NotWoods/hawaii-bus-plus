@@ -43,7 +43,7 @@ export function JourneyHeader({ journey, timeZone, onClose }: Props) {
   const durationRange = formatPlainTimeRange(
     journey.departTime,
     journey.arriveTime,
-    timeZone
+    timeZone,
   );
   const unitDisplay = useScreens('md') ? 'long' : 'short';
 
@@ -51,7 +51,7 @@ export function JourneyHeader({ journey, timeZone, onClose }: Props) {
     <header
       class={clsx(
         'journey__header grid relative items-center bg-white bg-opacity-20 border-b',
-        onClose && 'journey__header--close'
+        onClose && 'journey__header--close',
       )}
     >
       <JourneyDuration duration={journey.duration} unitDisplay={unitDisplay} />

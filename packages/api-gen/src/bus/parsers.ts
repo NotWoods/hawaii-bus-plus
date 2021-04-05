@@ -56,7 +56,7 @@ export type JsonStreams = {
 
 export async function parseFeedInfo(
   json: Pick<JsonStreams, 'feed_info'>,
-  variable: Partial<Pick<GTFSData, 'info'>>
+  variable: Partial<Pick<GTFSData, 'info'>>,
 ) {
   const info = await first(json.feed_info);
   variable.info = info;
@@ -64,7 +64,7 @@ export async function parseFeedInfo(
 
 export async function parseAgency(
   json: Pick<JsonStreams, 'agency'>,
-  variable: Pick<GTFSData, 'agency'>
+  variable: Pick<GTFSData, 'agency'>,
 ) {
   let primary = true;
   for await (const csvAgency of json.agency) {
@@ -82,7 +82,7 @@ export async function parseAgency(
 export async function parseRoutes(
   json: Pick<JsonStreams, 'routes'>,
   variable: Pick<GTFSData, 'routes'>,
-  defaultAgency: Agency['agency_id']
+  defaultAgency: Agency['agency_id'],
 ) {
   const routes = await toArray(json.routes);
   routes.sort(compareAs((route) => route.route_sort_order));
@@ -101,7 +101,7 @@ export async function parseRoutes(
 
 export async function parseTrips(
   json: Pick<JsonStreams, 'trips'>,
-  variable: Pick<ServerGTFSData, 'trips'>
+  variable: Pick<ServerGTFSData, 'trips'>,
 ): Promise<ReadonlyMap<Trip['trip_id'], TripInflated>> {
   const trips = new Map<Trip['trip_id'], TripInflated>();
   for await (const csvTrip of json.trips) {
@@ -115,7 +115,7 @@ export async function parseTrips(
 
 export async function parseStops(
   json: Pick<JsonStreams, 'transfers' | 'stops'>,
-  variable: Pick<GTFSData, 'stops'>
+  variable: Pick<GTFSData, 'stops'>,
 ) {
   const transfers = new MultiMap<Stop['stop_id'], Transfer>();
   for await (const csvTransfer of json.transfers) {
@@ -142,7 +142,7 @@ export async function parseStops(
 
 export async function parseCalendar(
   json: Pick<JsonStreams, 'calendar' | 'calendar_dates'>,
-  variable: Pick<GTFSData, 'calendar'>
+  variable: Pick<GTFSData, 'calendar'>,
 ) {
   const calendarDates = new MultiMap<
     Calendar['service_id'],
@@ -190,7 +190,7 @@ export async function parseCalendar(
 export async function parseStopTimes(
   json: Pick<JsonStreams, 'stop_times'>,
   variable: Pick<GTFSData, 'routes' | 'stops'>,
-  trips: ReadonlyMap<Trip['trip_id'], TripInflated>
+  trips: ReadonlyMap<Trip['trip_id'], TripInflated>,
 ) {
   for await (const csvStopTime of json.stop_times) {
     const dist = csvStopTime.shape_dist_traveled;
@@ -220,7 +220,7 @@ export async function parseStopTimes(
 }
 
 export async function parseShapes(
-  json: Pick<JsonStreams, 'shapes'>
+  json: Pick<JsonStreams, 'shapes'>,
 ): Promise<ReadonlyMap<Shape['shape_id'], Shape>> {
   const shapes = new DefaultMap<Shape['shape_id'], Shape>((shape_id) => ({
     shape_id,

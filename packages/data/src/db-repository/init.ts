@@ -82,7 +82,7 @@ function keySet(api: GTFSData, name: StoreName): ReadonlySet<string> {
 export async function initDatabase(
   db: IDBPDatabase<GTFSSchema>,
   api: GTFSData,
-  eTag?: string
+  eTag?: string,
 ) {
   const allStores = (storeNames as ('keyval' | StoreName)[]).concat('keyval');
   const tx = db.transaction(allStores, 'readwrite');
@@ -93,7 +93,7 @@ export async function initDatabase(
   // Prepare to gather the existing keys before inserting new items
   const existingKeysReady = batch(
     storeNames,
-    async (storeName) => new Set(await tx.objectStore(storeName).getAllKeys())
+    async (storeName) => new Set(await tx.objectStore(storeName).getAllKeys()),
   );
 
   for (const [storeName, transform] of Object.entries(transformers)) {

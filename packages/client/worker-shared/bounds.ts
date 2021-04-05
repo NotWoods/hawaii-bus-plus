@@ -2,7 +2,7 @@ import { Stop } from '@hawaii-bus-plus/types';
 import { LatLngBounds, LatLngBoundsLiteral } from 'spherical-geometry-js';
 
 export function boundsFromStops(
-  stops: Iterable<Stop>
+  stops: Iterable<Stop>,
 ): LatLngBoundsLiteral | undefined {
   let bounds: LatLngBounds | undefined;
   for (const stop of stops) {

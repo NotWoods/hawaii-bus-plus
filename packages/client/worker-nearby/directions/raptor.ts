@@ -71,7 +71,7 @@ function buildTimeLabels(sources: Iterable<Source>) {
     },
     toMap() {
       return new Map(
-        Array.from(multiLabel).filter(([, value]) => value.length > 0)
+        Array.from(multiLabel).filter(([, value]) => value.length > 0),
       );
     },
   };
@@ -89,8 +89,8 @@ async function raptorFootpaths(
   k: number,
   timeLabels: ReturnType<typeof buildTimeLabels>,
   loadStops: (
-    marked: readonly Stop['stop_id'][]
-  ) => Promise<ReadonlyMap<Stop['stop_id'], Stop>>
+    marked: readonly Stop['stop_id'][],
+  ) => Promise<ReadonlyMap<Stop['stop_id'], Stop>>,
 ) {
   const footPaths = await loadStops(Array.from(markedStops));
   for (const fromStopId of markedStops) {
@@ -133,7 +133,7 @@ async function raptorFootpaths(
 export async function raptorDirections(
   repo: Pick<Repository, 'loadCalendars' | 'loadTrips' | 'loadStops'>,
   sources: readonly Source[],
-  departureDate: Temporal.PlainDate
+  departureDate: Temporal.PlainDate,
 ): Promise<ReadonlyMap<Stop['stop_id'], Path>> {
   const data = await generateDirectionsData(repo, departureDate);
   const loadStops = stopsLoader(repo);
@@ -177,7 +177,7 @@ export async function raptorDirections(
       let earliestTrip: Trip | undefined;
       const stopsBeginningWith = skipUntil(
         route.stops,
-        (stopId) => stopId === hopOnStop.stop_id
+        (stopId) => stopId === hopOnStop.stop_id,
       );
       for (const stopId of stopsBeginningWith) {
         // stopId: p_i
@@ -204,7 +204,7 @@ export async function raptorDirections(
           getEarliestValidTrip(
             route,
             stopId,
-            timeLabels.getArrival(stopId, k - 1)
+            timeLabels.getArrival(stopId, k - 1),
           ) ?? earliestTrip;
       }
     }

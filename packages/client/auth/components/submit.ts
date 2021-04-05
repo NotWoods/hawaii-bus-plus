@@ -4,7 +4,7 @@ interface Alert {
 }
 
 export async function handleFormSubmit(
-  form: HTMLFormElement
+  form: HTMLFormElement,
 ): Promise<Alert | undefined> {
   const formData = new FormData(form);
   const res = await fetch(form.action, {

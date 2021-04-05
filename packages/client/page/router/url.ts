@@ -15,7 +15,7 @@ export function pointToQuery(point: Point | PlacePointPartial) {
 }
 
 export function queryToPoint(
-  query: string | null
+  query: string | null,
 ): Point | PlacePointPartial | undefined {
   if (!query) {
     return undefined;
@@ -38,7 +38,7 @@ export function queryToPoint(
 
 export function directionsToParams(
   directions: Omit<OpenDirectionsState, 'path'>,
-  params = new URLSearchParams()
+  params = new URLSearchParams(),
 ) {
   params.set('from', pointToQuery(directions.depart));
   params.set('to', pointToQuery(directions.arrive));

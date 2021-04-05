@@ -19,7 +19,7 @@ test.concurrent('raptor', async () => {
   const directions = await raptorDirections(
     repo,
     [{ stop_id: LAKELAND, departure_time: NOON }],
-    MONDAY
+    MONDAY,
   );
 
   expect(directions.size).not.toBe(0);
@@ -53,7 +53,7 @@ test.concurrent('raptor', async () => {
     },
   ]);
   expect(directions.get(WAIMEA_PARK_ACROSS)![1]!.time.toString()).toBe(
-    '12:47:00'
+    '12:47:00',
   );
 
   expect(directions.get(LAKELAND_ACROSS)).toEqual([
@@ -104,7 +104,7 @@ test.concurrent('raptor weekend', async () => {
   const directions = await raptorDirections(
     repo,
     [{ stop_id: LAKELAND, departure_time: NOON }],
-    MONDAY.subtract({ days: 1 })
+    MONDAY.subtract({ days: 1 }),
   );
 
   expect(directions.size).not.toBe(0);

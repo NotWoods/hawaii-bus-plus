@@ -8,15 +8,15 @@ const FIVE_KM_LAT_LNG = 0.05;
 
 export function loadStopsSpatial(
   db: IDBPDatabase<GTFSSchema>,
-  center: google.maps.LatLngLiteral
+  center: google.maps.LatLngLiteral,
 ): Promise<Stop[]> {
   const latKeyRange = IDBKeyRange.bound(
     center.lat - FIVE_KM_LAT_LNG,
-    center.lat + FIVE_KM_LAT_LNG
+    center.lat + FIVE_KM_LAT_LNG,
   );
   const lngKeyRange = IDBKeyRange.bound(
     center.lng - FIVE_KM_LAT_LNG,
-    center.lng + FIVE_KM_LAT_LNG
+    center.lng + FIVE_KM_LAT_LNG,
   );
 
   const { store } = db.transaction('stops');

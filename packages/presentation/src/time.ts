@@ -12,7 +12,7 @@ export interface PlainTimeData {
 export function plainTimeToData(
   daysTime: PlainDaysTime,
   serviceDate: Temporal.PlainDate,
-  timeZone: string | Temporal.TimeZoneProtocol
+  timeZone: string | Temporal.TimeZoneProtocol,
 ): PlainTimeData {
   const dateTime = daysTime.toPlainDateTime(serviceDate);
   const zoned = dateTime.toZonedDateTime(timeZone);
@@ -29,7 +29,7 @@ declare global {
       formatRange(startDate: Date | number, endDate: Date | number): string;
       formatRangeToParts(
         startDate: Date | number,
-        endDate: Date | number
+        endDate: Date | number,
       ): DateTimeFormatRangePart[];
     }
 
@@ -50,7 +50,7 @@ const agencyTimeFormatter = memoize(
     new Intl.DateTimeFormat([], {
       timeStyle: 'short',
       timeZone: agencyTimezone,
-    })
+    }),
 );
 
 /**
@@ -58,7 +58,7 @@ const agencyTimeFormatter = memoize(
  */
 export function formatPlainTime(
   plainTime: PlainTimeData,
-  agencyTimezone: string
+  agencyTimezone: string,
 ) {
   const date = new Date(plainTime.epochMilliseconds);
 
@@ -71,7 +71,7 @@ export function formatPlainTime(
 export function formatPlainTimeRange(
   startTime: PlainTimeData,
   endTime: PlainTimeData,
-  agencyTimezone: string
+  agencyTimezone: string,
 ) {
   const start = new Date(startTime.epochMilliseconds);
   const end = new Date(endTime.epochMilliseconds);

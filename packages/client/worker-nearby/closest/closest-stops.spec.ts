@@ -40,5 +40,5 @@ test.concurrent(
     const stops = await findClosestStops(repo, VANCOUVER);
 
     expect(stops).toHaveLength(0);
-  }
+  },
 );

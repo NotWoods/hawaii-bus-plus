@@ -6,7 +6,7 @@ export class Warning extends Error {}
 
 export function useAbortEffect(
   effect: (signal: AbortSignal) => void | (() => void),
-  deps?: Inputs
+  deps?: Inputs,
 ) {
   useEffect(() => {
     const controller = new AbortController();
@@ -30,7 +30,7 @@ export function errorMessage(err: unknown) {
 
 export function usePromise(
   effect: (signal: AbortSignal) => Promise<void>,
-  deps?: Inputs
+  deps?: Inputs,
 ) {
   const toastAlert = useSnackbar();
 

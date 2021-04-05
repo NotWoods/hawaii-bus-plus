@@ -24,7 +24,7 @@ export interface DirectionsResult {
 async function pointToSources(
   repo: Pick<Repository, 'loadStopsSpatial'>,
   point: Point,
-  departureTime: Temporal.PlainDateTime
+  departureTime: Temporal.PlainDateTime,
 ): Promise<Source[]> {
   const time = new PlainDaysTime(0, departureTime.toPlainTime());
   if (point.type === 'stop') {
@@ -50,7 +50,7 @@ async function pointToSources(
 function traversePathRecurse(
   paths: ReadonlyMap<Stop['stop_id'], Path>,
   stopId: Stop['stop_id'],
-  pathSoFar: (PathStart | PathSegment)[]
+  pathSoFar: (PathStart | PathSegment)[],
 ): CompletePath | undefined {
   const firstNonEmpty = paths.get(stopId)?.find(Boolean);
 
@@ -72,7 +72,7 @@ function traversePathRecurse(
 
 export function traversePath(
   paths: ReadonlyMap<Stop['stop_id'], Path>,
-  arrival: Pick<Source, 'stop_id'>
+  arrival: Pick<Source, 'stop_id'>,
 ) {
   return traversePathRecurse(paths, arrival.stop_id, []);
 }
@@ -90,7 +90,7 @@ export async function directions(
   >,
   from: Point,
   to: Point,
-  departureTime: Temporal.PlainDateTime
+  departureTime: Temporal.PlainDateTime,
 ): Promise<DirectionsResult> {
   const arriveAtReady = pointToSources(repo, to, departureTime);
   const departFrom = await pointToSources(repo, from, departureTime);
@@ -104,8 +104,8 @@ export async function directions(
       .map((arrival) => traversePath(paths, arrival))
       .map(
         (path) =>
-          path && journeyToDirections(repo, from, to, departureTime, path)
-      )
+          path && journeyToDirections(repo, from, to, departureTime, path),
+      ),
   );
 
   return {

@@ -10,7 +10,7 @@ if (import.meta.env.DEV) {
   const shareButton = document.getElementById('share')!;
   shareButton.addEventListener(
     'click',
-    buildShareHandler(document.title, (err) => console.error(err))
+    buildShareHandler(document.title, (err) => console.error(err)),
   );
   void dynamicLoginButton();
 }

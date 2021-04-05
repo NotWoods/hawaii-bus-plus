@@ -33,11 +33,11 @@ export function DirectionsSearch(_props: Props) {
   });
   const [results, setResults] = useState<DirectionsResult | undefined>();
   const { DirectionsPointResults, DirectionsJourneys } = useLazyComponent(
-    lazySearchResults
+    lazySearchResults,
   );
 
   const postToDirectionsWorker = useWorker(
-    DirectionsWorker
+    DirectionsWorker,
   ) as NearbyWorkerHandler;
   const delayDone = useDelay(300, [depart, arrive, departureTime]);
 
@@ -58,7 +58,7 @@ export function DirectionsSearch(_props: Props) {
 
       setResults(results);
     },
-    [depart, arrive, departureTime]
+    [depart, arrive, departureTime],
   );
 
   function renderJourneys() {

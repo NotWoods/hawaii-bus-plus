@@ -23,7 +23,7 @@ export function search(
     Repository,
     'loadRoutes' | 'loadAgencies' | 'searchRoutes' | 'searchStops'
   >,
-  request: SearchRequest
+  request: SearchRequest,
 ): Promise<SearchResults> {
   //const placeSearchReady = getPlacePredictions(request);
 
@@ -36,7 +36,7 @@ export function search(
         ...route,
         agency: agencies.get(route.agency_id)!,
       }));
-    }
+    },
   );
   const stopSearchReady = repo.searchStops(searchTerm, 3).then(
     async (stops): Promise<StopSearchResult[]> => {
@@ -48,7 +48,7 @@ export function search(
         stop_desc: stop.stop_desc,
         routes: stop.routes.map((routeId) => routes.get(routeId)!),
       }));
-    }
+    },
   );
 
   return Promise.all([

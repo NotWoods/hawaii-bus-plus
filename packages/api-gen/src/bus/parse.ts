@@ -32,22 +32,22 @@ function formatTime(time: Temporal.PlainTime) {
 }
 
 export async function zipFilesToObject(
-  zipFiles: ReadonlyMap<string, JSZipObject>
+  zipFiles: ReadonlyMap<string, JSZipObject>,
 ) {
   const arrays = await from(zipFiles.values())
     .pipe(
       map((file) =>
-        file.nodeStream('nodebuffer').pipe(parse({ cast, columns: true }))
+        file.nodeStream('nodebuffer').pipe(parse({ cast, columns: true })),
       ),
       map((parser) => {
         const iter: AsyncIterable<unknown> = parser;
         return iter;
-      })
+      }),
     )
     .pipe((source) => Promise.all(source));
 
   return zip(zipFiles.keys(), arrays).pipe((entry) =>
-    Object.fromEntries(entry)
+    Object.fromEntries(entry),
   );
 }
 
@@ -57,7 +57,7 @@ export async function zipFilesToObject(
  * @param gtfsZipData Buffer data for the GTFS zip file.
  */
 export async function createApiData(
-  gtfsZipData: Buffer | ArrayBuffer | Uint8Array
+  gtfsZipData: Buffer | ArrayBuffer | Uint8Array,
 ): Promise<[ServerGTFSData, ReadonlyMap<Shape['shape_id'], Shape>]> {
   const bikeStationsReady = cacheStations();
   const fileList = [
@@ -82,7 +82,7 @@ export async function createApiData(
         const file = zip.file(fileName);
         return [name, file] as const;
       }),
-      filter(valueNotNull)
+      filter(valueNotNull),
     )
     .pipe((source) => new Map(source));
 
@@ -107,7 +107,7 @@ export async function createApiData(
   const [trips] = await Promise.all([
     parseTrips(json, variable),
     defaultAgencyReady.then((defaultAgency) =>
-      parseRoutes(json, variable, defaultAgency)
+      parseRoutes(json, variable, defaultAgency),
     ),
     parseStops(json, variable),
   ]);
@@ -134,7 +134,7 @@ export async function createApiData(
 
   for (const stop of Object.values(variable.stops)) {
     stop.routes.sort(
-      compareAs((routeId) => toInt(variable.routes[routeId].route_short_name))
+      compareAs((routeId) => toInt(variable.routes[routeId].route_short_name)),
     );
   }
 

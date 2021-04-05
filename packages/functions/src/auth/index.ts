@@ -58,7 +58,7 @@ export const handler = createHandler(
       case 'acceptInvite': {
         user = await auth.acceptInvite(
           formData.req('token'),
-          formData.req('password')
+          formData.req('password'),
         );
         const attributes = await createUserInDb(user);
         await admin.updateUser(user, attributes);
@@ -91,7 +91,7 @@ export const handler = createHandler(
         successStatus = 200;
         user = await auth.login(
           formData.req('email').trim(),
-          formData.req('password')
+          formData.req('password'),
         );
         break;
       }
@@ -118,5 +118,5 @@ export const handler = createHandler(
       'Set-Cookie': await setCookie(user),
     };
     return response;
-  }
+  },
 );

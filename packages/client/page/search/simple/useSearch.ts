@@ -23,7 +23,7 @@ export function useSearch() {
       postToSearchWorker(signal, {
         ...request,
         type: 'search',
-      })
+      }),
     );
     const placesReady = map
       ? getPlacePredictions({

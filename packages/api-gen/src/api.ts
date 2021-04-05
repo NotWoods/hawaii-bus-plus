@@ -29,7 +29,7 @@ async function mkdirIfNotExists(folder: string) {
  */
 export async function generateApi(
   gtfsZipPath: string,
-  apiFolder: string
+  apiFolder: string,
 ): Promise<void> {
   const zipData = await readFile(gtfsZipPath);
   const [api, shapes] = await createApiData(zipData);

@@ -15,12 +15,12 @@ export interface ZonedTimeOptions {
 
 export function zonedTime(
   time: TimeString | PlainDaysTime,
-  options: ZonedTimeOptions
+  options: ZonedTimeOptions,
 ): PlainTimeData {
   return plainTimeToData(
     PlainDaysTime.from(time),
     options.serviceDate,
-    options.timeZone
+    options.timeZone,
   );
 }
 
@@ -32,7 +32,7 @@ export interface FormatOptions extends ZonedTimeOptions {
 
 export function formatStopTime(
   stopTime: StopTime,
-  options: FormatOptions
+  options: FormatOptions,
 ): StopTimeData {
   const stop = options.stops.get(stopTime.stop_id)!;
   return {

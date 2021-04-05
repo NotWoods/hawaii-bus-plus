@@ -14,7 +14,7 @@ export function NearbyRoutes(props: Props) {
     <ul
       class={clsx(
         'grid grid-flow-col md:grid-flow-row md:grid-cols-2 gap-4 px-4 snap snap-px-32 overscroll-contain',
-        props.class
+        props.class,
       )}
     >
       {props.routes.map((route) => (

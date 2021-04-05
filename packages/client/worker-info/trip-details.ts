@@ -94,7 +94,7 @@ const ZERO_DURATION = new Temporal.Duration();
 export function formatTripDetails(
   trip: Trip,
   allCalendars: ReadonlyMap<Calendar['service_id'], Calendar>,
-  options: FormatOptions
+  options: FormatOptions,
 ): TripDetails {
   return {
     trip: omitStopTimes(trip),
@@ -110,7 +110,7 @@ export async function getTripDetails(
   >,
   routeId: Route['route_id'],
   tripId: Trip['trip_id'],
-  date?: Temporal.PlainDate
+  date?: Temporal.PlainDate,
 ): Promise<TripDetails | undefined> {
   const [neededInfo, trip] = await Promise.all([
     loadCalendarAgency(repo, routeId, date),
@@ -137,7 +137,7 @@ export async function findBestTrips(
   repo: Pick<Repository, 'loadTripsForRoute'>,
   routeId: Route['route_id'],
   allCalendars: ReadonlyMap<Calendar['service_id'], Calendar>,
-  now: Temporal.PlainDateTime
+  now: Temporal.PlainDateTime,
 ): Promise<{
   directionDetails: readonly DirectionDetailsResult[];
   routeStops: ReadonlySet<Stop['stop_id']>;

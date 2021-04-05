@@ -8,7 +8,7 @@ export default function renderPage(url: URL) {
     html: render(
       <Router initialUrl={url}>
         <Main />
-      </Router>
+      </Router>,
     ),
     head: '',
   };

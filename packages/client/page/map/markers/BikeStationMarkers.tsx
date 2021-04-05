@@ -26,7 +26,7 @@ export function BikeStationMarkers({ point, stations, dispatch }: Props) {
       const station = this.get('extra');
       dispatch(setBikeStationAction(station.station_id, station));
     },
-    [dispatch]
+    [dispatch],
   );
 
   return (

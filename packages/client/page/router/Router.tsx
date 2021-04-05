@@ -31,7 +31,7 @@ export function Router(props: {
   const [state, dispatch] = useReducer(
     routerReducer,
     initialUrl,
-    initStateFromUrl
+    initStateFromUrl,
   );
 
   useEffect(() => {

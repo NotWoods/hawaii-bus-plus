@@ -9,6 +9,6 @@ test('extractLinks separates link', () => {
   expect(links[1].type).toBe('link');
 
   expect(links[1].value).toBe(
-    'https://www.nps.gov/havo/planyourvisit/fees.htm'
+    'https://www.nps.gov/havo/planyourvisit/fees.htm',
   );
 });

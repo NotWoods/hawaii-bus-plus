@@ -32,7 +32,7 @@ type PartialResponse = Required<
 function createAuthContext(
   event: NetlifyEvent,
   context: NetlifyContext,
-  response: Required<Pick<NetlifyResponse, 'multiValueHeaders'>>
+  response: Required<Pick<NetlifyResponse, 'multiValueHeaders'>>,
 ) {
   const { identity } = context.clientContext;
   const authContext = getAuth(identity) as AuthContext;
@@ -98,12 +98,12 @@ function errorToResponse(err: unknown): NetlifyResponse {
  */
 function mergePartialResponse(
   response: NetlifyResponse,
-  partialResponse: PartialResponse
+  partialResponse: PartialResponse,
 ) {
   response.headers = Object.assign(partialResponse.headers, response.headers);
   response.multiValueHeaders = Object.assign(
     partialResponse.multiValueHeaders,
-    response.multiValueHeaders
+    response.multiValueHeaders,
   );
 }
 
@@ -111,16 +111,16 @@ export function createHandler(
   httpMethods: HttpMethod | readonly HttpMethod[],
   handler: (
     event: NetlifyEvent,
-    context: Context
-  ) => NetlifyResponse | Promise<NetlifyResponse>
+    context: Context,
+  ) => NetlifyResponse | Promise<NetlifyResponse>,
 ) {
   const methods = new Set(
-    Array.isArray(httpMethods) ? httpMethods : [httpMethods]
+    Array.isArray(httpMethods) ? httpMethods : [httpMethods],
   );
 
   return async (
     event: NetlifyEvent,
-    context: NetlifyContext
+    context: NetlifyContext,
   ): Promise<NetlifyResponse> => {
     if (!methods.has(event.httpMethod)) {
       return jsonResponse(405, { error: 'Method Not Allowed' });

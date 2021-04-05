@@ -13,10 +13,10 @@ export function StaticMap({ route, stops, width, height }: Props) {
 
   const markers = Array.from(
     stops,
-    (stop) => `${stop.position.lat},${stop.position.lng}`
+    (stop) => `${stop.position.lat},${stop.position.lng}`,
   );
   markers.unshift(
-    `size:tiny|color:0x${route.route_color.slice(1).toUpperCase()}`
+    `size:tiny|color:0x${route.route_color.slice(1).toUpperCase()}`,
   );
   url.searchParams.set('markers', markers.join('|'));
   url.searchParams.set('key', import.meta.env.VITE_GOOGLE_MAPS_KEY as string);

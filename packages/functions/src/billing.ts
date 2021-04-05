@@ -18,7 +18,7 @@ export const handler = createHandler('GET', async (event, context) => {
   if (!referrer || !referrer.host.endsWith('hawaiibusplus.com')) {
     throw new TextHTTPError(
       { status: 403, statusText: 'Forbidden' },
-      'Must log in on https://hawaiibusplus.com'
+      'Must log in on https://hawaiibusplus.com',
     );
   }
 
@@ -27,7 +27,7 @@ export const handler = createHandler('GET', async (event, context) => {
   if (!userDetails) {
     throw new TextHTTPError(
       { status: 401, statusText: 'Unauthorized' },
-      'Not logged in'
+      'Not logged in',
     );
   }
 
@@ -35,7 +35,7 @@ export const handler = createHandler('GET', async (event, context) => {
   if (!stripeId) {
     throw new TextHTTPError(
       { status: 500, statusText: 'Internal Server Error' },
-      `Can't find payment info. Please contact support.`
+      `Can't find payment info. Please contact support.`,
     );
   }
 

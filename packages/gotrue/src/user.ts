@@ -71,7 +71,7 @@ export class User implements UserData {
     const token = this.tokenDetails();
     if (token == undefined) {
       return Promise.reject(
-        new Error(`Gotrue-js: failed getting jwt access token`)
+        new Error(`Gotrue-js: failed getting jwt access token`),
       );
     }
     const { expires_at, refresh_token, access_token } = token;
@@ -109,15 +109,15 @@ export class User implements UserData {
 
   _request<P extends keyof RequestMap>(
     path: `/admin/users/${unknown & string}`,
-    options?: RequestOptions
+    options?: RequestOptions,
   ): Promise<RequestMap['/admin/users/:id']>;
   _request<P extends keyof RequestMap>(
     path: P,
-    options?: RequestOptions
+    options?: RequestOptions,
   ): Promise<RequestMap[P]>;
   async _request<P extends keyof RequestMap>(
     path: P,
-    options: RequestOptions = {}
+    options: RequestOptions = {},
   ) {
     options.headers = options.headers || {};
 
@@ -160,14 +160,14 @@ export class User implements UserData {
     this.token = tokenResponse;
     try {
       const claims = JSON.parse(
-        urlBase64Decode(tokenResponse.access_token.split('.')[1])
+        urlBase64Decode(tokenResponse.access_token.split('.')[1]),
       ) as { exp: number };
       this.token.expires_at = claims.exp * 1000;
     } catch (error: unknown) {
       console.error(
         new Error(
-          `Gotrue-js: Failed to parse tokenResponse claims: ${error as string}`
-        )
+          `Gotrue-js: Failed to parse tokenResponse claims: ${error as string}`,
+        ),
       );
     }
   }

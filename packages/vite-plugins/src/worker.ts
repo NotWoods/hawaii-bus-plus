@@ -84,7 +84,7 @@ export function webWorkerCodeSplit(workerQuery = 'worker'): Plugin {
           const contentHash = getAssetHash(content);
           const fileName = path.posix.join(
             config.build.assetsDir,
-            `${basename.slice(0, -ext.length)}.${contentHash}.js`
+            `${basename.slice(0, -ext.length)}.${contentHash}.js`,
           );
           const legacyUrl = `__VITE_ASSET__${this.emitFile({
             fileName,

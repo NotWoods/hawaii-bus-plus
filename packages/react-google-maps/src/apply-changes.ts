@@ -3,11 +3,11 @@ import { useEffect, useState } from 'preact/hooks';
 export function useMap<T>(
   map: google.maps.Map | null | undefined,
   effect: (
-    map: google.maps.Map
+    map: google.maps.Map,
   ) => {
     instance: T;
     onUnmount(instance: T, map: google.maps.Map): void;
-  }
+  },
 ) {
   const [instance, setInstance] = useState<T | undefined>(undefined);
   useEffect(() => {
@@ -27,14 +27,14 @@ export function useMap<T>(
 export function useListener<T extends google.maps.MVCObject>(
   target: T | null | undefined,
   eventName: string,
-  handler: ((this: T, ...args: any[]) => void) | undefined
+  handler: ((this: T, ...args: any[]) => void) | undefined,
 ) {
   useEffect(() => {
     if (target && handler) {
       const listener = google.maps.event.addListener(
         target,
         eventName,
-        handler
+        handler,
       );
       return () => listener.remove();
     } else {
@@ -46,7 +46,7 @@ export function useListener<T extends google.maps.MVCObject>(
 export function useSetter<T>(
   obj: T | undefined,
   value: unknown,
-  effect: (obj: T) => void
+  effect: (obj: T) => void,
 ) {
   useEffect(() => {
     if (obj != undefined) {

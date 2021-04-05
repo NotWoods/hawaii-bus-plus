@@ -9,14 +9,14 @@ export type PointRouterAction =
   | ReturnType<typeof updateUserLocation>;
 
 export function setStopAction(
-  stopId: Stop['stop_id']
+  stopId: Stop['stop_id'],
 ): { type: 'stop'; stopId: Stop['stop_id'] } {
   return { type: 'stop', stopId };
 }
 
 export function setBikeStationAction(
   stationId: StationInformation['station_id'],
-  info: StationInformation
+  info: StationInformation,
 ): {
   type: 'bike-station';
   stationId: StationInformation['station_id'];
@@ -41,14 +41,14 @@ export function setMarker(location: google.maps.LatLngLiteral) {
 
 export function openPlace(
   placeId: string,
-  position: google.maps.LatLngLiteral
+  position: google.maps.LatLngLiteral,
 ) {
   return { type: 'open-place', placeId, position } as const;
 }
 
 export function updateUserLocation(
   location: google.maps.LatLngLiteral,
-  silent = false
+  silent = false,
 ) {
   return { type: 'update-user-location', location, silent } as const;
 }

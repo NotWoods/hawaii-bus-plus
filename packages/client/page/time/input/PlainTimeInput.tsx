@@ -31,7 +31,7 @@ function PlainTimeInput(props: InputProps<Temporal.PlainTime>) {
         props.onChange(
           Temporal.PlainTime.from(evt.currentTarget.value, {
             overflow: 'constrain',
-          })
+          }),
         )
       }
     />
@@ -58,7 +58,7 @@ export function PlainDateInput(props: InputProps<Temporal.PlainDate>) {
         props.onChange(
           Temporal.PlainDate.from(evt.currentTarget.value, {
             overflow: 'constrain',
-          })
+          }),
         )
       }
     />

@@ -27,12 +27,12 @@ export async function setCookie(user: User) {
   const accessTokenCookie = cookie.serialize(
     JWT_ACCESS_TOKEN_KEY,
     token,
-    serializeOptions
+    serializeOptions,
   );
   const refreshTokenCookie = cookie.serialize(
     JWT_REFRESH_TOKEN_KEY,
     user.tokenDetails().refresh_token,
-    serializeOptions
+    serializeOptions,
   );
 
   return [accessTokenCookie, refreshTokenCookie];

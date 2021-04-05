@@ -30,7 +30,7 @@ export const handler = createHandler('POST', async (event, context) => {
   const stripeEvent = stripe.webhooks.constructEvent(
     event.body!,
     event.headers['stripe-signature']!,
-    process.env.STRIPE_WEBHOOK_SECRET!
+    process.env.STRIPE_WEBHOOK_SECRET!,
   );
 
   switch (stripeEvent.type) {
@@ -38,12 +38,12 @@ export const handler = createHandler('POST', async (event, context) => {
       // Update user role based on subscription status
       const subscription = stripeEvent.data.object as Stripe.Subscription;
       const netlifyId = await database.getUserByStripeId(
-        customerId(subscription)
+        customerId(subscription),
       );
       if (!netlifyId) {
         throw new TextHTTPError(
           { status: 500, statusText: 'Internal Server Error' },
-          'No user found that matches customer ID'
+          'No user found that matches customer ID',
         );
       }
 
@@ -53,7 +53,7 @@ export const handler = createHandler('POST', async (event, context) => {
           app_metadata: {
             roles: [statusToRole(subscription.status)],
           },
-        }
+        },
       );
 
       return {
@@ -64,7 +64,7 @@ export const handler = createHandler('POST', async (event, context) => {
     default:
       throw new TextHTTPError(
         { status: 404, statusText: 'Not Found' },
-        `Invalid event type ${stripeEvent.type}`
+        `Invalid event type ${stripeEvent.type}`,
       );
   }
 });

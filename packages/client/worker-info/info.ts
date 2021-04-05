@@ -56,7 +56,7 @@ registerWorker((repo, message: Message) => {
         repo,
         message.routeId,
         message.tripId,
-        extractDate(message)
+        extractDate(message),
       );
     case 'stop':
       return loadStop(repo, message.id);

@@ -24,7 +24,7 @@ export function PlainTimeElement(props: Props) {
   const prefix = props.approximate ? '~' : '';
   const { localTime, agencyTime } = formatPlainTime(
     props.time,
-    props.agencyTimezone
+    props.agencyTimezone,
   );
 
   return (

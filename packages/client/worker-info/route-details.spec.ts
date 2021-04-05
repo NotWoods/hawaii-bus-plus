@@ -14,7 +14,7 @@ test.concurrent('getRouteDetails when in service', async () => {
     repo,
     routeId,
     now.toPlainDate(),
-    now.toPlainTime()
+    now.toPlainTime(),
   );
   expect(details).toEqual({
     route: expect.objectContaining({ route_id: 'waimea' }),

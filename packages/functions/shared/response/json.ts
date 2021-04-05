@@ -2,7 +2,7 @@ import { NetlifyResponse } from '../types';
 
 export function jsonResponse(
   statusCode: number,
-  body: unknown
+  body: unknown,
 ): NetlifyResponse {
   return {
     statusCode,

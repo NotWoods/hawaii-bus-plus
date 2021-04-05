@@ -23,11 +23,11 @@ export const MyLocationContext = createContext<MyLocationContext>({
 
 declare module 'preact/hooks' {
   export function useState<S>(
-    initialState: S | (() => S)
+    initialState: S | (() => S),
   ): [S, StateUpdater<S>];
   export function useState<S = undefined>(): [
     S | undefined,
-    StateUpdater<S | undefined>
+    StateUpdater<S | undefined>,
   ];
 }
 
@@ -38,7 +38,7 @@ export function MyLocationProvider(props: { children: ComponentChildren }) {
     google.maps.LatLngLiteral | undefined
   >();
   const [error, setError] = useState<GeolocationErrorCode | undefined>(
-    GeolocationErrorCode.NOT_YET_LOADED
+    GeolocationErrorCode.NOT_YET_LOADED,
   );
 
   function onFetchSuccess(coords: Coordinates) {
@@ -64,7 +64,7 @@ export function MyLocationProvider(props: { children: ComponentChildren }) {
               } else {
                 return currentErr;
               }
-            })
+            }),
           );
         }
       }
@@ -74,14 +74,14 @@ export function MyLocationProvider(props: { children: ComponentChildren }) {
           // Already granted, just grab location
           watchId = navigator.geolocation.watchPosition(
             onGeolocationSuccess,
-            fallbackGeolocation
+            fallbackGeolocation,
           );
           break;
         case 'prompt':
           if (clicked) {
             watchId = navigator.geolocation.watchPosition(
               onGeolocationSuccess,
-              fallbackGeolocation
+              fallbackGeolocation,
             );
           } else {
             fallbackGeolocation();
@@ -101,7 +101,7 @@ export function MyLocationProvider(props: { children: ComponentChildren }) {
 
       return () => navigator.geolocation.clearWatch(watchId);
     },
-    [clicked, status, coords]
+    [clicked, status, coords],
   );
 
   function onButtonClick() {

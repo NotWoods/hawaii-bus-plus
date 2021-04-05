@@ -25,7 +25,7 @@ export function PlaceInfo({ position }: Props) {
       });
       setResults(results);
     },
-    [position]
+    [position],
   );
 
   return (

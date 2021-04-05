@@ -3,15 +3,15 @@ import type { ClosestResults } from '../../../worker-nearby/closest/closest';
 import type { SearchResults } from '../../../worker-search/search-db';
 
 export const buildSessionToken = memoize(
-  () => new google.maps.places.AutocompleteSessionToken()
+  () => new google.maps.places.AutocompleteSessionToken(),
 );
 
 const buildService = memoize(
-  () => new google.maps.places.AutocompleteService()
+  () => new google.maps.places.AutocompleteService(),
 );
 
 export function getPlacePredictions(
-  request: google.maps.places.AutocompletionRequest
+  request: google.maps.places.AutocompletionRequest,
 ) {
   const service = buildService();
   return new Promise<google.maps.places.AutocompletePrediction[]>(
@@ -25,7 +25,7 @@ export function getPlacePredictions(
           default:
             return reject(status);
         }
-      })
+      }),
   );
 }
 

@@ -9,7 +9,7 @@ interface MemoizeCacheEntry<Func extends (...args: unknown[]) => unknown> {
  */
 export function memoize<Func extends (...args: any[]) => unknown>(
   fn: Func,
-  cacheSize = 1
+  cacheSize = 1,
 ): Func {
   const cache: MemoizeCacheEntry<Func>[] = [];
 

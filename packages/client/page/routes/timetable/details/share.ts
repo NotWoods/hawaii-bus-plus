@@ -1,6 +1,6 @@
 export function buildShareHandler(
   text: string,
-  onError: (err: unknown) => void
+  onError: (err: unknown) => void,
 ) {
   return function handleShare(evt: MouseEvent) {
     evt.preventDefault();

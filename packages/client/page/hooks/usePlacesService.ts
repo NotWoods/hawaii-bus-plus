@@ -8,12 +8,12 @@ export class PlacesServiceError extends Error {
 }
 
 const buildPlacesService = memoize(
-  (map: google.maps.Map) => new google.maps.places.PlacesService(map)
+  (map: google.maps.Map) => new google.maps.places.PlacesService(map),
 );
 
 export function getDetails(
   service: google.maps.places.PlacesService,
-  request: google.maps.places.PlaceDetailsRequest
+  request: google.maps.places.PlaceDetailsRequest,
 ) {
   return new Promise<google.maps.places.PlaceResult>((resolve, reject) =>
     service.getDetails(request, (result, status) => {
@@ -23,7 +23,7 @@ export function getDetails(
         default:
           return reject(new PlacesServiceError(status));
       }
-    })
+    }),
   );
 }
 

@@ -23,7 +23,7 @@ export interface AppProps {
 }
 
 function groupByDirectionId(
-  trips: readonly Trip[]
+  trips: readonly Trip[],
 ): ReadonlyMap<Trip['direction_id'], readonly Trip[]> {
   const idToTrips = new MultiMap<Trip['direction_id'], Trip>();
   for (const trip of trips) {

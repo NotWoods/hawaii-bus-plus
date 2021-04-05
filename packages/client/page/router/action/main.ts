@@ -10,14 +10,14 @@ export type MainRouterAction =
   | ReturnType<typeof openJourney>;
 
 export function setRouteAction(
-  routeId: Route['route_id']
+  routeId: Route['route_id'],
 ): { type: 'route'; routeId: Route['route_id'] } {
   return { type: 'route', routeId };
 }
 
 export function setTripAction(
   routeId: Route['route_id'],
-  tripId: Trip['trip_id']
+  tripId: Trip['trip_id'],
 ): { type: 'trip'; routeId: Route['route_id']; tripId: Trip['trip_id'] } {
   return { type: 'trip', routeId, tripId };
 }
@@ -34,7 +34,7 @@ export function openJourney(
   depart: Point,
   arrive: Point,
   departureTime: string,
-  journey: Journey
+  journey: Journey,
 ) {
   return {
     type: 'open-journey',

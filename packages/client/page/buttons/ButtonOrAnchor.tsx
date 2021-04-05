@@ -6,7 +6,7 @@ type Props =
   | JSX.HTMLAttributes<HTMLAnchorElement>;
 
 function isAnchor(
-  props: Props
+  props: Props,
 ): props is JSX.HTMLAttributes<HTMLAnchorElement> {
   return props.href != undefined;
 }

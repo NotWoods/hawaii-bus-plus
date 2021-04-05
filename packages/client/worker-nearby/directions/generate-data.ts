@@ -24,7 +24,7 @@ export function uniqueRouteId(trip: Trip): DirectionRoute['id'] {
 
 export async function generateDirectionsData(
   repo: Pick<Repository, 'loadCalendars' | 'loadTrips'>,
-  date: Temporal.PlainDate
+  date: Temporal.PlainDate,
 ): Promise<DirectionsData> {
   const allCalendars = await repo.loadCalendars();
 
@@ -33,7 +33,7 @@ export async function generateDirectionsData(
       id,
       trips: [],
       stops: new Set(),
-    })
+    }),
   );
   const stops = new DefaultMap<Stop['stop_id'], DirectionStop>((id) => ({
     id,
@@ -54,7 +54,7 @@ export async function generateDirectionsData(
         if (
           !stop.routes.find(
             (r) =>
-              r.route_id === routeId && r.sequence === stopTime.stop_sequence
+              r.route_id === routeId && r.sequence === stopTime.stop_sequence,
           )
         ) {
           stop.routes.push({

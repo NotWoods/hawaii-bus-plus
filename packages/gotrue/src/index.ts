@@ -17,7 +17,7 @@ export class GoTrue {
   constructor({ APIUrl = defaultApiURL, audience = '' } = {}) {
     if (HTTPRegexp.test(APIUrl)) {
       console.warn(
-        'Warning:\n\nDO NOT USE HTTP IN PRODUCTION FOR GOTRUE EVER!\nGoTrue REQUIRES HTTPS to work securely.'
+        'Warning:\n\nDO NOT USE HTTP IN PRODUCTION FOR GOTRUE EVER!\nGoTrue REQUIRES HTTPS to work securely.',
       );
     }
 
@@ -30,7 +30,7 @@ export class GoTrue {
 
   private async _request<P extends keyof RequestMap>(
     path: P,
-    options: RequestOptions = {}
+    options: RequestOptions = {},
   ) {
     options.headers = options.headers || {};
     const aud = options.audience || this.audience;
@@ -60,7 +60,7 @@ export class GoTrue {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `grant_type=password&username=${encodeURIComponent(
-        email
+        email,
       )}&password=${encodeURIComponent(password)}`,
     }).then((response) => {
       return this.createUser(response);
@@ -103,7 +103,7 @@ export class GoTrue {
     return this._request('/verify', {
       method: 'POST',
       body: JSON.stringify(
-        password ? { token, type, password } : { token, type }
+        password ? { token, type, password } : { token, type },
       ),
     }).then((response) => this.createUser(response));
   }

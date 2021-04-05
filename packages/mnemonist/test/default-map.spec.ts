@@ -54,13 +54,13 @@ test('should be possible to create iterators.', (t) => {
     Array.from(map.keys()),
     entries.map((e) => {
       return e[0];
-    })
+    }),
   );
   t.deepEqual(
     Array.from(map.values()),
     entries.map((e) => {
       return e[1];
-    })
+    }),
   );
 });
 

@@ -11,7 +11,7 @@ import { JWT_ACCESS_TOKEN_KEY, JWT_REFRESH_TOKEN_KEY } from './serialize';
  */
 export function recoverSession(
   auth: GoTrue,
-  headers: APIGatewayProxyEventHeaders
+  headers: APIGatewayProxyEventHeaders,
 ) {
   const cookies = cookie.parse(headers['cookie'] ?? '');
   const accessToken: string | undefined = cookies[JWT_ACCESS_TOKEN_KEY];

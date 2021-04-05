@@ -69,7 +69,7 @@ const notableWait = Temporal.Duration.from({ minutes: 4 });
 function formatDepartArrive(
   point: Point,
   walkToFrom: google.maps.LatLngLiteral,
-  waitUntil?: Temporal.Duration
+  waitUntil?: Temporal.Duration,
 ) {
   if (point.type === 'stop') return undefined;
 
@@ -96,7 +96,7 @@ export async function journeyToDirections(
   from: Point,
   to: Point,
   departureTime: Temporal.PlainDateTime,
-  path: CompletePath
+  path: CompletePath,
 ): Promise<Journey> {
   const getStops = stopsLoader(repo);
 
@@ -105,7 +105,7 @@ export async function journeyToDirections(
 
   function zonedTime(
     time: PlainDaysTime,
-    timeZone: string | Temporal.TimeZoneProtocol
+    timeZone: string | Temporal.TimeZoneProtocol,
   ): PlainTimeData {
     return plainTimeToData(time, departureDate, timeZone);
   }
@@ -136,12 +136,12 @@ export async function journeyToDirections(
       const lastSTIndex = trip.stop_times.findIndex(
         (st) =>
           current.stopTime.stop_id === st.stop_id &&
-          current.stopTime.stop_sequence === st.stop_sequence
+          current.stopTime.stop_sequence === st.stop_sequence,
       );
       const firstSTIndex = findLastIndex(
         trip.stop_times,
         (st) => st.stop_id === current.transferFrom,
-        lastSTIndex
+        lastSTIndex,
       );
       const rawStopTimes = trip.stop_times.slice(firstSTIndex, lastSTIndex + 1);
 
@@ -222,7 +222,7 @@ export async function journeyToDirections(
 
       const distance = computeDistanceBetween(
         startStop.position,
-        endStop.position
+        endStop.position,
       );
       trips.push({
         time: durationToData(current.transferTime),
@@ -263,7 +263,7 @@ export async function journeyToDirections(
     depart: formatDepartArrive(
       from,
       startEntry!.stop.position,
-      departureDaysTime.until(startEntry!.arrivalTime)
+      departureDaysTime.until(startEntry!.arrivalTime),
     ),
     arrive: formatDepartArrive(to, endEntry!.stop.position),
     trips,

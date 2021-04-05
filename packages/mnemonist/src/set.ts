@@ -14,7 +14,7 @@
 export function intersection<T>(...args: ReadonlySet<T>[]): Set<T> {
   if (args.length < 2)
     throw new Error(
-      'mnemonist/Set.intersection: needs at least two arguments.'
+      'mnemonist/Set.intersection: needs at least two arguments.',
     );
 
   const I = new Set<T>();
@@ -103,7 +103,7 @@ export function difference<T>(A: ReadonlySet<T>, B: ReadonlySet<T>): Set<T> {
  */
 export function symmetricDifference<T>(
   A: ReadonlySet<T>,
-  B: ReadonlySet<T>
+  B: ReadonlySet<T>,
 ): Set<T> {
   const S = new Set<T>();
 
@@ -227,7 +227,7 @@ export function disjunct<T>(A: Set<T>, B: ReadonlySet<T>): void {
  */
 export function intersectionSize<T>(
   A: ReadonlySet<T>,
-  B: ReadonlySet<T>
+  B: ReadonlySet<T>,
 ): number {
   // We need to know the smallest set
   if (A.size > B.size) {

@@ -11,7 +11,7 @@ export function loadAllStops(db: IDBPDatabase<GTFSSchema>): Promise<Stop[]> {
 }
 
 export function loadBikeStations(
-  db: IDBPDatabase<GTFSSchema>
+  db: IDBPDatabase<GTFSSchema>,
 ): Promise<StationInformation[]> {
   return db.getAll('bike_stations');
 }

@@ -28,7 +28,7 @@ export function DirectionsJourneyItem(props: Props) {
           props.from,
           props.to,
           props.departureTime,
-          props.journey
+          props.journey,
         )}
         href={`/directions?${params.toString()}`}
         journey={journey}

@@ -19,7 +19,7 @@ export async function searchWordsIndex<Name extends 'routes' | 'stops'>(
   db: IDBPDatabase<GTFSSchema>,
   dbName: Name,
   searchTerm: string,
-  max: number
+  max: number,
 ) {
   const index = db.transaction(dbName).store.index('words');
   const terms = searchTerm.toLowerCase().split(/\s/g);
@@ -28,7 +28,7 @@ export async function searchWordsIndex<Name extends 'routes' | 'stops'>(
       const keyRange = IDBKeyRange.bound(term, `${term}\uffff`, false, false);
       const keys = await index.getAllKeys(keyRange);
       return new Set(keys);
-    })
+    }),
   );
 
   const andQuery = take(interset(resultsPerTerm), max);
@@ -40,7 +40,7 @@ export async function searchWordsIndex<Name extends 'routes' | 'stops'>(
 export function searchRoutes(
   db: IDBPDatabase<GTFSSchema>,
   term: string,
-  max: number
+  max: number,
 ): Promise<Route[]> {
   return searchWordsIndex(db, 'routes', term, max);
 }
@@ -48,7 +48,7 @@ export function searchRoutes(
 export function searchStops(
   db: IDBPDatabase<GTFSSchema>,
   term: string,
-  max: number
+  max: number,
 ): Promise<Stop[]> {
   return searchWordsIndex(db, 'stops', term, max);
 }

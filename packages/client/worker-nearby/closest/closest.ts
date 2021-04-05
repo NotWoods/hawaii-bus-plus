@@ -14,7 +14,7 @@ export async function findClosest(
     'loadStopsSpatial' | 'loadAllRoutes' | 'loadRoutes' | 'loadAgencies'
   >,
   location?: google.maps.LatLngLiteral,
-  fallbackToAll?: boolean
+  fallbackToAll?: boolean,
 ): Promise<ClosestResults> {
   let stops: readonly StopWithDistance[] = [];
   let routeIds: readonly Route['route_id'][] = [];

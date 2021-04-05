@@ -85,9 +85,9 @@ export class MultiMap<K, V> implements ReadonlyMap<K, readonly V[]> {
     callback: (
       values: readonly V[],
       key: K,
-      map: ReadonlyMap<K, readonly V[]>
+      map: ReadonlyMap<K, readonly V[]>,
     ) => void,
-    thisArg?: any
+    thisArg?: any,
   ) {
     this.items.forEach(callback, thisArg);
   }

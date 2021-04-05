@@ -20,7 +20,7 @@ export interface Repository {
   loadAllRoutes(): Promise<readonly Route[]>;
 
   loadRoutes(
-    routeIds: Iterable<Route['route_id']>
+    routeIds: Iterable<Route['route_id']>,
   ): Promise<Map<Route['route_id'], Route>>;
 
   loadTrip(tripId: Trip['trip_id']): Promise<Trip | undefined>;
@@ -32,7 +32,7 @@ export interface Repository {
   loadAllStops(): Promise<readonly Stop[]>;
 
   loadStops(
-    stopIds: Iterable<Stop['stop_id']>
+    stopIds: Iterable<Stop['stop_id']>,
   ): Promise<Map<Stop['stop_id'], Stop>>;
 
   loadStopsSpatial(center: google.maps.LatLngLiteral): Promise<Stop[]>;
@@ -40,7 +40,7 @@ export interface Repository {
   loadCalendars(): Promise<Map<Calendar['service_id'], Calendar>>;
 
   loadAgencies(
-    agencyIds: Iterable<Agency['agency_id']>
+    agencyIds: Iterable<Agency['agency_id']>,
   ): Promise<Map<Agency['agency_id'], Agency>>;
 
   loadBikeStations(): Promise<readonly StationInformation[]>;

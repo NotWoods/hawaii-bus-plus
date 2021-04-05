@@ -37,7 +37,7 @@ export function ShapeLine(props: Props) {
         }
       }
     },
-    [props.shapeId]
+    [props.shapeId],
   );
 
   const options = useMemo(() => ({ strokeColor: props.routeColor }), [
@@ -50,7 +50,7 @@ export function ShapeLine(props: Props) {
   if (props.edges) {
     const [start, end] = props.edges;
     points = shape.points.filter(
-      (p) => start <= p.shape_dist_traveled && p.shape_dist_traveled <= end
+      (p) => start <= p.shape_dist_traveled && p.shape_dist_traveled <= end,
     );
   }
 

@@ -85,7 +85,7 @@ export class DefaultMap<K, V> implements Iterable<[K, V]>, ReadonlyMap<K, V> {
    */
   forEach(
     callback: (value: V, key: K, map: ReadonlyMap<K, V>) => void,
-    scope: any = this
+    scope: any = this,
   ) {
     this.items.forEach(callback, scope);
   }

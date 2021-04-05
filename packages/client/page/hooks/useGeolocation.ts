@@ -10,7 +10,7 @@ export const GeolocationErrorCode = {
 } as const;
 
 export function usePermission(
-  permissionDesc: Parameters<Permissions['query']>[0]
+  permissionDesc: Parameters<Permissions['query']>[0],
 ) {
   const [status, setStatus] = useState<PermissionState | undefined>();
 
@@ -51,7 +51,7 @@ export function useGeolocation(active: boolean) {
         },
         function onGeolocationError() {
           locationFromIp().then(setCoordinates, (err) => console.error(err));
-        }
+        },
       );
       return () => {
         navigator.geolocation.clearWatch(watchId);

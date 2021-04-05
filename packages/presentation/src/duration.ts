@@ -9,7 +9,7 @@ const numberFormatter = memoize(
       style: 'unit',
       unit,
       unitDisplay,
-    })
+    }),
 );
 
 type UnitDisplay = 'long' | 'short' | 'narrow';
@@ -43,7 +43,7 @@ export function biggestUnit(duration: DurationData) {
 
 export function formatDurationParts(
   duration: DurationData,
-  unitDisplay: 'long' | 'short' | 'narrow'
+  unitDisplay: 'long' | 'short' | 'narrow',
 ) {
   const unit = biggestUnit(duration);
   if (unit) {
@@ -57,7 +57,7 @@ export function formatDurationParts(
 
 export function formatDuration(
   duration: DurationData,
-  unitDisplay: 'long' | 'short' | 'narrow'
+  unitDisplay: 'long' | 'short' | 'narrow',
 ) {
   const unit = biggestUnit(duration);
   if (unit) {

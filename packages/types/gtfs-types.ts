@@ -37,7 +37,7 @@ export interface Calendar
     thursday: boolean,
     friday: boolean,
     saturday: boolean,
-    sunday: boolean
+    sunday: boolean,
   ];
   readonly added_dates: readonly DateString[];
   readonly removed_dates: readonly DateString[];

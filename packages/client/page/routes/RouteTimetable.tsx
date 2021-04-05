@@ -41,7 +41,7 @@ export function RouteTimetable() {
   const { Timetable } = useLazyComponent(() => lazyTimetable);
 
   const { details, setDetails, setSelectedTrip } = useContext(
-    RouteDetailContext
+    RouteDetailContext,
   );
   const [tripDate, setTripDate] = useState<Temporal.PlainDate | NOW>(NOW);
 
@@ -60,7 +60,7 @@ export function RouteTimetable() {
         setDetails(undefined);
       }
     },
-    [routeId, tripDate]
+    [routeId, tripDate],
   );
 
   usePromise(
@@ -79,7 +79,7 @@ export function RouteTimetable() {
         setSelectedTrip(undefined);
       }
     },
-    [routeId, tripId, tripDate]
+    [routeId, tripId, tripDate],
   );
 
   const route = details?.route;

@@ -11,7 +11,7 @@ export function stopsLoader(repo: Pick<Repository, 'loadStops'>) {
   }
 
   return async (
-    stops: readonly Stop['stop_id'][]
+    stops: readonly Stop['stop_id'][],
   ): Promise<ReadonlyMap<Stop['stop_id'], Stop>> => {
     const toLoad = new Set(stops);
     for (const alreadyLoaded of loaded.keys()) {

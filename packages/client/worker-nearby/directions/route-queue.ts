@@ -17,7 +17,7 @@ export interface QueueValue {
  */
 export function buildQueue(
   data: Pick<DirectionsData, 'stops'>,
-  markedStops: Iterable<Stop['stop_id']>
+  markedStops: Iterable<Stop['stop_id']>,
 ): ReadonlyMap<DirectionRoute['id'], QueueValue> {
   const queue = new Map<DirectionRoute['id'], QueueValue>();
   for (const stopId of markedStops) {

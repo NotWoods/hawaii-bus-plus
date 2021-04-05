@@ -7,7 +7,7 @@ export async function getSingle<
 >(
   repo: Repo,
   load: (this: Repo, ids: Iterable<Id>) => Promise<Map<Id, Value>>,
-  id: Id
+  id: Id,
 ) {
   const map = await load.call(repo, [id]);
   return map.get(id);

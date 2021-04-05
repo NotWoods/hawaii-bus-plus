@@ -24,7 +24,7 @@ export class NodeRepository extends BaseMemoryRepository {
       if (import.meta.url) {
         return new URL(
           relative instanceof URL ? relative.href : relative,
-          import.meta.url
+          import.meta.url,
         );
       } else {
         return resolve(__dirname, relative as string);
@@ -34,7 +34,7 @@ export class NodeRepository extends BaseMemoryRepository {
   }
 
   private async init(
-    apiLocations: readonly (string | URL)[]
+    apiLocations: readonly (string | URL)[],
   ): Promise<GTFSData> {
     let data: string | undefined;
     const errors: unknown[] = [];

@@ -44,7 +44,7 @@ export function Home(props: Props) {
 
       setResults(results);
     },
-    [location?.lat, location?.lng]
+    [location?.lat, location?.lng],
   );
 
   let content: ComponentChildren;

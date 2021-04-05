@@ -43,7 +43,7 @@ function useOpenTrip() {
 
 function shortNameFromTripSlice(
   tripId: Trip['trip_id'],
-  directionsDetails: readonly DirectionDetails[]
+  directionsDetails: readonly DirectionDetails[],
 ) {
   for (const dirDetails of directionsDetails) {
     const tripSlice = dirDetails.allTrips.get(tripId);

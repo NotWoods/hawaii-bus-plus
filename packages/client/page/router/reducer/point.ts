@@ -10,7 +10,7 @@ import { PointRouterAction } from '../action/point';
 
 export function pointRouterReducer(
   state: Point | undefined,
-  action: PointRouterAction
+  action: PointRouterAction,
 ): Point | undefined {
   switch (action.type) {
     case 'stop':

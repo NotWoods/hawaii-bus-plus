@@ -10,7 +10,7 @@ export interface Splits {
 
 export function splitString(
   title: string,
-  matched: readonly PredictionSubstring[]
+  matched: readonly PredictionSubstring[],
 ): Splits[] {
   if (matched.length === 0) {
     return [{ text: title, match: false }];

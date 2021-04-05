@@ -15,7 +15,7 @@ type Selected = 'now' | 'leave-at';
 
 export function DirectionsTime(props: Props) {
   const { PlainDateTimeInput } = useLazyComponent(
-    () => import('../routes/time-entry')
+    () => import('../routes/time-entry'),
   );
   const selected = props.value != undefined ? 'leave-at' : 'now';
 

@@ -38,7 +38,7 @@ export function useWorker(workerConstructor: WorkerConstructor) {
 
   async function postMessage(
     signal: AbortSignal,
-    message: unknown
+    message: unknown,
   ): Promise<unknown> {
     if (!workerRef.current) {
       workerRef.current = generateWorker();

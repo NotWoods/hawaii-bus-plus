@@ -21,9 +21,9 @@ function useShare(text: string) {
     buildShareHandler(text, (err) =>
       toastAlert({
         children: errorMessage(err),
-      })
+      }),
     ),
-    [text, toastAlert]
+    [text, toastAlert],
   );
 
   if (!import.meta.env.SSR && navigator.share) {

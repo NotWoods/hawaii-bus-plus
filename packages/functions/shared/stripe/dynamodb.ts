@@ -20,7 +20,7 @@ export class DatabaseClient {
     return await this.dynamoDb.send(
       new DescribeTableCommand({
         TableName: 'Users',
-      })
+      }),
     );
   }
 
@@ -32,7 +32,7 @@ export class DatabaseClient {
           netlifyId: { S: netlifyId },
           stripeId: { S: stripeId },
         },
-      })
+      }),
     );
   }
 
@@ -43,7 +43,7 @@ export class DatabaseClient {
         Key: {
           netlifyId: { S: netlifyId },
         },
-      })
+      }),
     );
   }
 
@@ -55,7 +55,7 @@ export class DatabaseClient {
           netlifyId: { S: netlifyId },
         },
         ProjectionExpression: 'stripeId',
-      })
+      }),
     );
     return data.Item?.['stripeId']?.S;
   }
@@ -70,7 +70,7 @@ export class DatabaseClient {
         ExpressionAttributeValues: {
           ':id': { S: stripeId },
         },
-      })
+      }),
     );
     return data.Items?.[0]?.['netlifyId']?.S;
   }

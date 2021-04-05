@@ -1,10 +1,10 @@
 export function registerPromiseWorker(
-  callback: (message: any) => Promise<unknown> | unknown
+  callback: (message: any) => Promise<unknown> | unknown,
 ) {
   function postOutgoingMessage(
     messageId: number,
     error: Error | undefined,
-    result?: unknown
+    result?: unknown,
   ) {
     if (error) {
       globalThis.postMessage([
@@ -22,7 +22,7 @@ export function registerPromiseWorker(
   }
 
   globalThis.onmessage = function onIncomingMessage(
-    evt: MessageEvent<unknown>
+    evt: MessageEvent<unknown>,
   ) {
     const payload = evt.data;
     if (!Array.isArray(payload) || payload.length !== 2) {
@@ -34,7 +34,7 @@ export function registerPromiseWorker(
 
     Promise.resolve(callback(message)).then(
       (result) => postOutgoingMessage(messageId, undefined, result),
-      (error) => postOutgoingMessage(messageId, error)
+      (error) => postOutgoingMessage(messageId, error),
     );
   };
 }

@@ -16,7 +16,7 @@ export function Snackbar(props: SnackbarProps) {
     <div
       className={clsx(
         'mx-auto pl-4 py-2 flex gap-2 items-center shadow max-w-sm bg-red text-white transition',
-        props.class
+        props.class,
       )}
     >
       <span class="mr-auto">{props.children}</span>

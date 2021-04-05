@@ -37,7 +37,7 @@ export function getPagination(response: Response) {
 
   pagination.last = Math.max(
     pagination.last || 0,
-    (pagination.prev && pagination.prev + 1) || 0
+    (pagination.prev && pagination.prev + 1) || 0,
   );
   pagination.current = pagination.next
     ? pagination.next - 1

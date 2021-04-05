@@ -15,7 +15,7 @@ const distanceFormatter = memoize(
     new Intl.NumberFormat(locales, {
       style: 'unit',
       unit,
-    })
+    }),
 );
 
 export function formatWalkingTime(walk: Walking) {

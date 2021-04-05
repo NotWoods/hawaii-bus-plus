@@ -39,7 +39,7 @@ export function TimetableDetails(props: Props) {
 
       setDirectionId(newDirectionId);
     }, 300),
-    [setDirectionId]
+    [setDirectionId],
   );
 
   // Set the scroll position when the direction ID shifts

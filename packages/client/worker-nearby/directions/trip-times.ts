@@ -8,7 +8,7 @@ export function getStopTime(trip: Trip, stopId: Stop['stop_id']) {
 export function getEarliestValidTrip(
   route: DirectionRoute,
   stopId: Stop['stop_id'],
-  lastRoundTime: PlainDaysTime
+  lastRoundTime: PlainDaysTime,
 ) {
   if (!route.stops.has(stopId)) {
     // this stop isn't even in this route

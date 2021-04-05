@@ -34,7 +34,7 @@ export const handler = createHandler(
     if (!loggedInUser) {
       throw new TextHTTPError(
         { status: 401, statusText: 'Unauthorized' },
-        'Not logged in'
+        'Not logged in',
       );
     }
 
@@ -55,5 +55,5 @@ export const handler = createHandler(
         'Set-Cookie': cookies,
       },
     };
-  }
+  },
 );

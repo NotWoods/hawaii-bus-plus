@@ -21,7 +21,7 @@ export function StopTimeSegments({ trip, agency, stops }: Props) {
     return plainTimeToData(
       PlainDaysTime.from(timeStr),
       nowDate,
-      agency.agency_timezone
+      agency.agency_timezone,
     );
   }
 

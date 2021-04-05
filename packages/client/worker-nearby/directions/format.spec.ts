@@ -66,7 +66,7 @@ test.concurrent('journeyToDirections no walking', async () => {
       position: hwyIntersection.position,
     },
     MONDAY.toPlainDateTime(NOON.toPlainTime()),
-    path
+    path,
   );
 
   expect(journey).toEqual({

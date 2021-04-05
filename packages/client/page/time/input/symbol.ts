@@ -13,7 +13,7 @@ export function timeForWorker(
     | undefined
     | Temporal.PlainDateTime
     | Temporal.PlainDate
-    | Temporal.PlainTime
+    | Temporal.PlainTime,
 ) {
   if (time === NOW || time == undefined) {
     // Use undefined to represent "now"

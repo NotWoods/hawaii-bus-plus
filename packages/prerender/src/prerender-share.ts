@@ -23,6 +23,6 @@ export async function prerenderShare(write: boolean) {
       routes: routes.map((route) => `/share/routes/${route.route_id}`),
       write,
     },
-    repo
+    repo,
   );
 }

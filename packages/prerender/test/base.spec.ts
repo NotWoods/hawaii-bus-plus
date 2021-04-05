@@ -21,7 +21,7 @@ test.serial('render and run auth entry file', async (t) => {
 
   const render = module.exports.default as RenderFunction;
   const result = await render(
-    new URL('/auth/login', 'https://app.hawaiibusplus.com')
+    new URL('/auth/login', 'https://app.hawaiibusplus.com'),
   );
 
   t.deepEqual(Object.keys(result), ['html', 'head']);
@@ -30,7 +30,7 @@ test.serial('render and run auth entry file', async (t) => {
 
   t.true(
     result.head!.includes('<title>Login - Hawaii Bus Plus</title>'),
-    result.head
+    result.head,
   );
 });
 

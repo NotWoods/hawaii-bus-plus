@@ -16,7 +16,7 @@ export const clientFolder = new URL('../../client/', import.meta.url);
 
 export async function buildPrerenderCode(
   input: string,
-  args: Record<string, unknown> = {}
+  args: Record<string, unknown> = {},
 ) {
   const root = fileURLToPath(clientFolder);
   const external = ['preact', 'tailwindcss', 'fs/promises'];
@@ -55,7 +55,7 @@ export async function buildPrerenderCode(
   const module = { exports: {} as { [name: string]: unknown } };
   const require = createRequire(resolve(root, fileName));
   const params = ['module', 'exports', 'require', ...Object.keys(args)].concat(
-    code
+    code,
   );
 
   // eslint-disable-next-line @typescript-eslint/no-implied-eval
@@ -68,7 +68,7 @@ export async function buildPrerenderCode(
   }
 
   const assets = output.filter(
-    (chunk): chunk is OutputAsset => chunk.type === 'asset'
+    (chunk): chunk is OutputAsset => chunk.type === 'asset',
   );
 
   return { code, module, assets, error };
@@ -77,7 +77,7 @@ export async function buildPrerenderCode(
 export function renderTemplate(
   template: string,
   appHtml: string,
-  headHtml = ''
+  headHtml = '',
 ) {
   return template
     .replace(`<!--app-html-->`, appHtml)
@@ -115,6 +115,6 @@ export async function renderRoutes(
         await writeFile(destPath, rendered, 'utf8');
       }
       return { fileName: destPath.href, source: rendered };
-    })
+    }),
   );
 }

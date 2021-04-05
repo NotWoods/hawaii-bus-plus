@@ -19,7 +19,7 @@ export function BaseSheet(props: Props) {
         class={clsx(
           'animate-enter--sheet shadow-lg bg-gradient-to-br from-gray-50 to-gray-100 to:gray-100 dark:from-gray-750 dark:to-gray-800 text-black dark:text-white lg:mx-4',
           { 'min-h-[25vh]': !loadError },
-          props.loaded ? 'animate-run' : 'animate-pause'
+          props.loaded ? 'animate-run' : 'animate-pause',
         )}
         style={props.style}
       >

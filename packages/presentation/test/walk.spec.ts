@@ -7,7 +7,7 @@ test('formatWalkingTime', (t) => {
       time: { minutes: 1, string: 'PT1M' },
       distance: 1,
     }),
-    'Walk 1 minute'
+    'Walk 1 minute',
   );
 
   t.is(
@@ -15,7 +15,7 @@ test('formatWalkingTime', (t) => {
       time: { minutes: 1, string: 'PT1M' },
       distance: 1000,
     }),
-    'Walk 1,000 m'
+    'Walk 1,000 m',
   );
 
   t.is(
@@ -24,7 +24,7 @@ test('formatWalkingTime', (t) => {
       waitUntil: { minutes: 1, string: 'PT1M' },
       distance: 1,
     }),
-    'Wait for 1 minute'
+    'Wait for 1 minute',
   );
 
   t.is(
@@ -32,6 +32,6 @@ test('formatWalkingTime', (t) => {
       time: { minutes: 0, string: 'PT0M' },
       distance: 1,
     }),
-    ''
+    '',
   );
 });

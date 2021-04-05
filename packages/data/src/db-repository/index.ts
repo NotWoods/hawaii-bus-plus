@@ -32,7 +32,7 @@ export class DBRepository implements Repository {
   }
 
   loadRoutes(
-    routeIds: Iterable<Route['route_id']>
+    routeIds: Iterable<Route['route_id']>,
   ): Promise<Map<Route['route_id'], Route>> {
     return this.ready.then((db) => loadRoutes(db, routeIds));
   }
@@ -54,7 +54,7 @@ export class DBRepository implements Repository {
   }
 
   loadStops(
-    stopIds: Iterable<Stop['stop_id']>
+    stopIds: Iterable<Stop['stop_id']>,
   ): Promise<Map<Stop['stop_id'], Stop>> {
     return this.ready.then((db) => loadStops(db, stopIds));
   }
@@ -68,7 +68,7 @@ export class DBRepository implements Repository {
   }
 
   loadAgencies(
-    agencyIds: Iterable<Agency['agency_id']>
+    agencyIds: Iterable<Agency['agency_id']>,
   ): Promise<Map<Agency['agency_id'], Agency>> {
     return this.ready.then((db) => loadAgencies(db, agencyIds));
   }

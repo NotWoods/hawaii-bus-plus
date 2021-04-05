@@ -8,7 +8,7 @@ function simplify(str: string) {
 }
 
 export function colorVariables(
-  route: Pick<Route, 'route_color' | 'route_text_color'>
+  route: Pick<Route, 'route_color' | 'route_text_color'>,
 ) {
   return {
     '--route-color': simplify(route.route_color),

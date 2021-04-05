@@ -7,7 +7,7 @@ export function notNull<T>(item: T): item is NonNullable<T> {
 }
 
 export function valueNotNull<K, V>(
-  entry: readonly [K, V]
+  entry: readonly [K, V],
 ): entry is readonly [K, NonNullable<V>] {
   return entry[1] != undefined;
 }
@@ -15,7 +15,7 @@ export function valueNotNull<K, V>(
 export function findLastIndex<T>(
   array: readonly T[],
   predicate: (item: T) => boolean,
-  fromIndex: number = lastIndex(array)
+  fromIndex: number = lastIndex(array),
 ) {
   for (let i = fromIndex; i >= 0; i--) {
     if (predicate(array[i])) {

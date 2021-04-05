@@ -15,7 +15,7 @@ import { PointDetails } from '../stop/PointDetails';
 import { HomeOverlay } from './HomeOverlay';
 
 function pointDetailsOpen(
-  point: Point | undefined
+  point: Point | undefined,
 ): point is StopPoint | PlacePoint | BikeStationPoint {
   switch (point?.type) {
     case 'stop':
@@ -30,7 +30,7 @@ function pointDetailsOpen(
 export function MainContent() {
   const mdMatches = useScreens('md');
   const { JourneySheet } = useLazyComponent(
-    () => import('../directions/JourneySheet')
+    () => import('../directions/JourneySheet'),
   );
   const { point, main } = useContext(RouterContext);
   const sheetOpen = main != undefined;

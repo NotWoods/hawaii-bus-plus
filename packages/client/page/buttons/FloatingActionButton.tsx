@@ -14,7 +14,7 @@ export function FloatingActionButton({ mini, ...props }: Props) {
       class={clsx(
         'group text-white focus:ring-cyan',
         mini ? 'p-2' : 'p-4',
-        props.class
+        props.class,
       )}
     >
       <div class="absolute inset-0 bg-blue-500 group-hover:bg-blue-600 transition-colors transform rotate-45 shadow-lg" />

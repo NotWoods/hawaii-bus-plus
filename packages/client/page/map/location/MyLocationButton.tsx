@@ -40,7 +40,7 @@ export function MyLocationButton(props: Props) {
       onClick={handleClick}
       class={clsx(
         'fixed m-6 right-0 md:right-auto md:left-80',
-        props.shiftUp ? 'bottom-[25vh]' : 'bottom-0'
+        props.shiftUp ? 'bottom-[25vh]' : 'bottom-0',
       )}
     >
       <BaseIcon class="relative">
@@ -49,7 +49,7 @@ export function MyLocationButton(props: Props) {
         <circle
           class={clsx(
             'transition-opacity',
-            coords ? 'opacity-100' : 'opacity-0'
+            coords ? 'opacity-100' : 'opacity-0',
           )}
           cx="12"
           cy="12"
@@ -58,14 +58,14 @@ export function MyLocationButton(props: Props) {
         <path
           class={clsx(
             'transition-opacity',
-            error ? 'opacity-100' : 'opacity-0'
+            error ? 'opacity-100' : 'opacity-0',
           )}
           d="M19.7 21L3 4.3l1.4-1.4 16.7 16.7-1.4 1.4z"
         />
         <path
           class={clsx(
             'fill-blue-500 transition-opacity',
-            error ? 'opacity-100' : 'opacity-0'
+            error ? 'opacity-100' : 'opacity-0',
           )}
           d="M21.3 19.7L4.6 3 6 1.6l16.7 16.7-1.4 1.4z"
         />

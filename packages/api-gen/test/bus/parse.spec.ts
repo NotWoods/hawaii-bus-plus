@@ -11,7 +11,7 @@ test('zipFilesToObject', async (t) => {
   const input = new Map(
     Object.entries({
       routes: zip.file('routes.txt')!,
-    })
+    }),
   );
   const result = (await zipFilesToObject(input)) as JsonStreams;
 
@@ -27,6 +27,8 @@ test('zipFilesToObject', async (t) => {
     'route_color',
     'route_text_color',
     'route_sort_order',
+    'direction_0',
+    'direction_1',
   ];
   for await (const route of result.routes) {
     t.false(Array.isArray(route));

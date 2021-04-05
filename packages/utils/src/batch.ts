@@ -6,10 +6,12 @@ import { valueNotNull } from './sort.js';
  */
 export function batch<In, Out>(
   input: Iterable<In>,
-  cb: (item: In) => Out | null | undefined | PromiseLike<Out | null | undefined>
+  cb: (
+    item: In,
+  ) => Out | null | undefined | PromiseLike<Out | null | undefined>,
 ) {
   return Promise.all(
-    Array.from(input, async (item) => [item, await cb(item)] as const)
+    Array.from(input, async (item) => [item, await cb(item)] as const),
   )
     .then((output) => output.filter(valueNotNull))
     .then((output) => new Map(output));

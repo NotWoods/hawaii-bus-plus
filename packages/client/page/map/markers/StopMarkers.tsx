@@ -21,7 +21,7 @@ interface Props {
 
 const makeHighlightIcon = memoize(function highlightIcon(
   ringColor: ColorString,
-  dark?: boolean
+  dark?: boolean,
 ): google.maps.Icon {
   return ({
     path: 'M6,12a6,6 0 1,0 12,0a6,6 0 1,0 -12,0',
@@ -48,7 +48,7 @@ export function StopMarkers({
       const stop = this.get('extra');
       dispatch(setStopAction(stop.stop_id));
     },
-    [dispatch]
+    [dispatch],
   );
 
   return (

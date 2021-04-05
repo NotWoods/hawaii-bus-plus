@@ -7,7 +7,7 @@ function checkLoggedIn() {
     credentials: 'include',
   }).then(
     (res) => res.ok,
-    () => false
+    () => false,
   );
 }
 

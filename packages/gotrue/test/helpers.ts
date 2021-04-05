@@ -9,7 +9,7 @@ export const auth = new GoTrue({
 export function instanceOf<T extends new (...args: any) => any>(
   t: ExecutionContext,
   actual: unknown,
-  classType: T
+  classType: T,
 ): asserts actual is InstanceType<T> {
   t.true(actual instanceof classType);
 }

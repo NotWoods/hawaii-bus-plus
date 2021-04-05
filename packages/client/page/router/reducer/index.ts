@@ -45,7 +45,7 @@ export function initStateFromUrl(url: URL): RouterState {
 
 export function routerReducer(
   state: RouterState,
-  action: RouterAction
+  action: RouterAction,
 ): RouterState {
   switch (action.type) {
     case 'link': {
@@ -60,7 +60,7 @@ export function routerReducer(
       const newMain = mainRouterReducer(state.main, action as MainRouterAction);
       const newPoint = pointRouterReducer(
         state.point,
-        action as PointRouterAction
+        action as PointRouterAction,
       );
       if (newMain !== state.main || newPoint !== state.point) {
         return {

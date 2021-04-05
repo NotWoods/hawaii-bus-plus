@@ -24,7 +24,7 @@ export function SimpleSearch(props: Props) {
     async (signal) => {
       setSearchResults(await getSearchResults(search, signal));
     },
-    [search]
+    [search],
   );
 
   return (

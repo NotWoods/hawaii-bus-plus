@@ -23,7 +23,7 @@ export function SmallRouteIcon(props: Props) {
       class={clsx(
         ring,
         'font-display font-medium text-center text-route px-1 self-end justify-self-end',
-        props.class
+        props.class,
       )}
     />
   );

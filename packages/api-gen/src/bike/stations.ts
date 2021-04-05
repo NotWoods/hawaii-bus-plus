@@ -13,7 +13,7 @@ async function getFeeds() {
   const feeds = json as GbfsWrapper<{ [lang: string]: { feeds: JsonFeed[] } }>;
 
   return new Map(
-    feeds.data['en'].feeds.map((feed) => [feed.name, feed.url] as const)
+    feeds.data['en'].feeds.map((feed) => [feed.name, feed.url] as const),
   );
 }
 
@@ -40,6 +40,6 @@ export async function cacheStations() {
   } = json as GbfsWrapper<{ stations: JsonStationInformation[] }>;
 
   return Object.fromEntries(
-    stations.map((station) => [station.station_id, formatInfo(station)])
+    stations.map((station) => [station.station_id, formatInfo(station)]),
   );
 }

@@ -9,7 +9,7 @@ interface Props {
 }
 
 export function isJourneyTripSegment(
-  segment: object // eslint-disable-line @typescript-eslint/ban-types
+  segment: object, // eslint-disable-line @typescript-eslint/ban-types
 ): segment is JourneyTripSegment {
   return 'trip' in segment;
 }

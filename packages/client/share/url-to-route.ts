@@ -19,7 +19,7 @@ export function urlToRouteId(url: URL): Route['route_id'] {
 
 export async function loadRoute(
   repo: Repository,
-  routeId: Route['route_id']
+  routeId: Route['route_id'],
 ): Promise<AppProps> {
   const routesReady = repo.loadRoutes([routeId]);
   const stopIds = new Set<Stop['stop_id']>();

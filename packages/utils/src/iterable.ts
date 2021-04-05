@@ -4,7 +4,7 @@
  */
 export function* map<In, Out>(
   source: Iterable<In>,
-  mapper: (item: In) => Out
+  mapper: (item: In) => Out,
 ): IterableIterator<Out> {
   for (const item of source) {
     yield mapper(item);
@@ -16,15 +16,15 @@ export function* map<In, Out>(
  */
 export function filter<In, Out extends In>(
   source: Iterable<In>,
-  predicate: (item: In) => item is Out
+  predicate: (item: In) => item is Out,
 ): IterableIterator<Out>;
 export function filter<In>(
   source: Iterable<In>,
-  predicate: (item: In) => boolean
+  predicate: (item: In) => boolean,
 ): IterableIterator<In>;
 export function* filter<In>(
   source: Iterable<In>,
-  predicate: (item: In) => boolean
+  predicate: (item: In) => boolean,
 ) {
   for (const item of source) {
     if (predicate(item)) {
@@ -61,7 +61,7 @@ export function* skipUntil<T>(list: Iterable<T>, cb: (item: T) => boolean) {
  */
 export function* flatMap<In, Out>(
   source: Iterable<In>,
-  mapper: (item: In) => Iterable<Out>
+  mapper: (item: In) => Iterable<Out>,
 ): IterableIterator<Out> {
   for (const item of source) {
     for (const subItem of mapper(item)) {

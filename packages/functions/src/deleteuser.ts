@@ -14,7 +14,7 @@ export const handler = createHandler('POST', async (_event, context) => {
   if (!loggedInUser) {
     throw new TextHTTPError(
       { status: 401, statusText: 'Unauthorized' },
-      'Not logged in'
+      'Not logged in',
     );
   }
 

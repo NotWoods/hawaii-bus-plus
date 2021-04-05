@@ -12,7 +12,7 @@ export class PlainDaysTime {
 
   constructor(
     isoDay = 0,
-    private readonly time: Temporal.PlainTime = new Temporal.PlainTime()
+    private readonly time: Temporal.PlainTime = new Temporal.PlainTime(),
   ) {
     this.day = isoDay;
   }
@@ -38,7 +38,7 @@ export class PlainDaysTime {
 
   add(
     duration: Omit<Temporal.DurationLike, 'years' | 'months' | 'weeks'>,
-    options?: Temporal.ArithmeticOptions
+    options?: Temporal.ArithmeticOptions,
   ) {
     if (this.day === Infinity) return this;
 
