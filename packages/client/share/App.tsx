@@ -56,19 +56,27 @@ export function App({ route, agency, trips, stops }: AppProps) {
           <DetailButtons route={route} agency={agency} />
         </div>
 
-        <TableOfContents idToTrips={idToTrips} />
+        <TableOfContents
+          directionHeaders={route.directions}
+          idToTrips={idToTrips}
+        />
         <ExtendedFloatingActionButton />
         <div class="grid-area-timetable space-y-8">
-          {Array.from(idToTrips.values())
-            .flat()
-            .map((trip) => (
-              <StopTimeSegments
-                key={trip.trip_id}
-                trip={trip}
-                agency={agency}
-                stops={stops}
-              />
-            ))}
+          {Array.from(idToTrips.entries(), ([id, trips]) => (
+            <Fragment key={id}>
+              <h4 class="font-display font-medium text-2xl mx-6">
+                {route.directions[id]}
+              </h4>
+              {trips.map((trip) => (
+                <StopTimeSegments
+                  key={trip.trip_id}
+                  trip={trip}
+                  agency={agency}
+                  stops={stops}
+                />
+              ))}
+            </Fragment>
+          ))}
         </div>
         <footer class="bg-white dark:bg-gray-700 shadow-inner px-4 pt-6 pb-16 grid-area-footer">
           <RouteDescription

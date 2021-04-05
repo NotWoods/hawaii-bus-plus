@@ -1,6 +1,6 @@
 import { Opaque } from 'type-fest';
-import { StationInformation } from './gbfs-types';
 import { ColorString, DateString, TimeString } from './data-types';
+import { StationInformation } from './gbfs-types';
 
 export interface GTFSData {
   routes: { [route_id: string]: Route };
@@ -60,10 +60,17 @@ export interface CsvRoute {
   agency_id?: Agency['agency_id'];
   route_url: string;
   route_sort_order: number;
+  direction_0: string;
+  direction_1: string;
 }
 
-export interface Route extends Readonly<CsvRoute> {
+export interface Route
+  extends Readonly<Omit<CsvRoute, 'direction_0' | 'direction_1'>> {
   readonly agency_id: Agency['agency_id'];
+  readonly directions: {
+    0?: string;
+    1?: string;
+  };
 }
 
 export interface CsvTrip {

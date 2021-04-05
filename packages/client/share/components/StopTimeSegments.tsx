@@ -28,9 +28,9 @@ export function StopTimeSegments({ trip, agency, stops }: Props) {
   return (
     <article id={trip.trip_id}>
       <a class="hover:underline" href={`#${trip.trip_id}`}>
-        <h3 className="font-display font-medium text-xl mx-6 mb-2">
+        <h4 className="font-display font-medium text-xl mx-6 mb-2">
           {trip.trip_short_name}
-        </h3>
+        </h4>
       </a>
       <StopTimeSegmentList
         stopTimes={trip.stop_times.map((stopTime) => ({

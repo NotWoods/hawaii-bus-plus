@@ -87,9 +87,15 @@ export async function parseRoutes(
   const routes = await toArray(json.routes);
   routes.sort(compareAs((route) => route.route_sort_order));
   for (const csvRoute of routes) {
-    const route = csvRoute as Mutable<Route>;
-    route.agency_id = route.agency_id || defaultAgency;
-    variable.routes[route.route_id] = route;
+    const route = csvRoute as Partial<Mutable<Route>> & Partial<CsvRoute>;
+    route.agency_id = route.agency_id ?? defaultAgency;
+    route.directions = {
+      0: csvRoute.direction_0,
+      1: csvRoute.direction_1,
+    };
+    delete route.direction_0;
+    delete route.direction_1;
+    variable.routes[csvRoute.route_id] = route as Route;
   }
 }
 

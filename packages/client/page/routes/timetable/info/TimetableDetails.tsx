@@ -5,7 +5,6 @@ import { useContext, useEffect, useRef } from 'preact/hooks';
 import { useCallback } from 'react';
 import { DirectionDetails } from '../../../../worker-info/trip-details';
 import { RouteDetailContext } from '../context';
-import { DirectionIndicator } from './DirectionIndicator';
 import { SwitchDirectionButton } from './SwitchDirectionButton';
 import './TimetableDetails.css';
 import { TimetableDirectionsDetail } from './TimetableDirectionsDetail';
@@ -71,7 +70,6 @@ export function TimetableDetails(props: Props) {
           </TimetableDirectionsDetail>
         ))}
       </div>
-      <DirectionIndicator />
       <SwitchDirectionButton class="absolute bottom-0 right-4 m-4 bg-white dark:bg-gray-700" />
     </header>
   );

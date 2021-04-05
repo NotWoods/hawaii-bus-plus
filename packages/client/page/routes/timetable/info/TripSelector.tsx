@@ -1,4 +1,4 @@
-import { Trip } from '@hawaii-bus-plus/types';
+import { Route, Trip } from '@hawaii-bus-plus/types';
 import { h } from 'preact';
 import type { Temporal } from 'proposal-temporal';
 import type { DirectionDetails } from '../../../../worker-info/trip-details';
@@ -7,6 +7,7 @@ import { NOW } from '../../../time/input/symbol';
 import { TripDropdown } from './TripDropdown';
 
 interface Props {
+  directionHeaders: Route['directions'];
   directionsDetails: readonly DirectionDetails[];
   selectedTripId: Trip['trip_id'];
   tripDate: Temporal.PlainDate | NOW;
@@ -24,6 +25,7 @@ export function TripSelector(props: Props) {
         onChange={props.onChangeTripDate}
       />
       <TripDropdown
+        directionHeaders={props.directionHeaders}
         directionsDetails={props.directionsDetails}
         selectedTripId={props.selectedTripId}
         setSelectedTrip={props.setSelectedTrip}

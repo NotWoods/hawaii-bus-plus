@@ -70,6 +70,7 @@ export function Timetable(props: Props) {
     <>
       <div class="flex flex-wrap-reverse gap-4 m-4">
         <TripSelector
+          directionHeaders={details.route.directions}
           directionsDetails={directionsDetails}
           tripDate={tripDate}
           selectedTripId={selectedTripId}

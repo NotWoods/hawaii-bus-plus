@@ -41,7 +41,7 @@ export function Footer() {
           <clipPath id="i">
             <path d="M29 8v6h-3V8h3zm0-1h-3V5h3v2z" />
           </clipPath>
-          <g class="text" fill="none" stroke="currentColor">
+          <g class="text" fill="none" stroke="currentColor" opacity="0.7">
             <path d="M23.5 13V7l-.5-.5h-3l-.5-.5V5l.5-.5h7" />
             <path d="M28 13l-.5-.5V6" clip-path="url(#i)" />
             <path d="M32.5,12.5h-2.5l-.5,-.5v-4l.5,-.5h3l.5,.5v7l-.5,.5h-3l-.5,-.5" />
@@ -54,7 +54,7 @@ export function Footer() {
             <path d="M71,10h2l.5,-.5v-1.5l-.5,-.5h-2.5l-.5,.5v4l.5,.5h2.5l.5,-.5" />
             <path d="M75.5,12l.5,.5h3l.5,-.5v-1.5l-.5,-.5h-3l-.5,-.5v-1.5l.5,-.5h3l.5,.5" />
           </g>
-          <g class="text text-overlay" fill="none" stroke="#ebeeef">
+          <g class="text text-overlay" fill="none" stroke="currentColor">
             <path
               style="animation-delay:0.2s"
               d="M23.5 13V7l-.5-.5h-3l-.5-.5V5l.5-.5h7"
