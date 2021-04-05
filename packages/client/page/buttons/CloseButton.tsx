@@ -17,7 +17,7 @@ export function CloseButton(props: Props) {
       onClick={props.onClick}
       style={{ gridArea: 'close' }}
     >
-      <Icon src={clearIcon} alt="Close" class="dark:filter-invert" />
+      <Icon src={clearIcon} alt="Close" class="filter dark:invert" />
     </IconButton>
   );
 }

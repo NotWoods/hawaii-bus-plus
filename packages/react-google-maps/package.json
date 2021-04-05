@@ -14,7 +14,7 @@
   "dependencies": {
     "@googlemaps/js-api-loader": "^1.11.3",
     "@react-google-maps/api": "^2.1.1",
-    "tslib": "^2.1.0"
+    "tslib": "^2.2.0"
   },
   "peerDependencies": {
     "preact": "^10.5.13"

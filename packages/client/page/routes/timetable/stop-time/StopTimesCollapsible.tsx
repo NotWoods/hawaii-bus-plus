@@ -62,7 +62,7 @@ function TripCollapse({
     <details class="trip-collapse" open={open} onToggle={onToggle}>
       <summary class="flex -mx-2 overflow-hidden">
         <Icon
-          class="trip-collapse__icon transform transition-transform dark:filter-invert"
+          class="trip-collapse__icon transform transition-transform filter dark:invert"
           src={expandIcon}
           alt={toggleAlt(open)}
         />

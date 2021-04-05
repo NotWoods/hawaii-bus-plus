@@ -9,6 +9,7 @@ import { dbInitialized } from '../hooks/api';
 import { SearchBar } from '../search/SearchBar';
 import { emptyClosestResults } from '../search/simple/places-autocomplete';
 import { NearbyRoutes } from '../stop/NearbyRoutes';
+import { Greeting } from './Greeting';
 import { HomeErrorButtons } from './HomeButtons';
 import { HomeButtonsError, isHomeButtonsError, useHomeLocation } from './hooks';
 
@@ -65,9 +66,7 @@ export function Home(props: Props) {
 
   return (
     <>
-      <h2 class="mt-4 font-display font-medium text-xl text-center text-white">
-        Aloha kakahiaka
-      </h2>
+      <Greeting />
       <SearchBar onClick={props.onSearch} />
       {content}
     </>

@@ -23,7 +23,7 @@ export function SwitchDirectionButton(props: Props) {
     return (
       <Button
         class={props.class}
-        iconClass="dark:filter-invert"
+        iconClass="filter dark:invert"
         icon={swapIcon}
         onClick={() => setDirectionId(swapDirection)}
       >

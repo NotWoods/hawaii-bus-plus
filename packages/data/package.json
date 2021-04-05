@@ -22,7 +22,7 @@
     "@hawaii-bus-plus/utils": "workspace:*",
     "idb": "^6.0.0",
     "ix": "^4.3.1",
-    "tslib": "^2.1.0"
+    "tslib": "^2.2.0"
   },
   "devDependencies": {
     "@types/node": "^14.14.37",

@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@hawaii-bus-plus/types": "workspace:*",
-    "tslib": "^2.1.0"
+    "tslib": "^2.2.0"
   },
   "peerDependencies": {
     "jest": "^26.6.3"

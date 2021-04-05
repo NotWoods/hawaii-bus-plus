@@ -15,15 +15,6 @@
 }
 
 @layer utilities {
-  @variants dark {
-    .filter-none {
-      filter: invert(100%);
-    }
-    .filter-invert {
-      filter: invert(100%);
-    }
-  }
-
   .animate-run {
     animation-play-state: running;
   }

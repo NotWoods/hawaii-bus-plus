@@ -18,8 +18,8 @@
     "@aws-sdk/client-dynamodb": "^3.11.0",
     "@hawaii-bus-plus/gotrue": "workspace:^0.9.29",
     "cookie": "^0.4.1",
-    "stripe": "^8.141.0",
-    "tslib": "^2.1.0"
+    "stripe": "^8.142.0",
+    "tslib": "^2.2.0"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^18.0.0",
