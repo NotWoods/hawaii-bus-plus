@@ -390,9 +390,12 @@ importers:
     dependencies:
       '@babel/core': 7.13.14
       '@prefresh/babel-plugin': 0.4.1
-      '@prefresh/vite': 2.1.1_vite@2.1.5
+      '@prefresh/vite': 2.1.1_rollup@2.44.0+vite@2.1.5
+      mime: 2.5.2
+      rollup: 2.44.0
       tslib: 2.1.0
     devDependencies:
+      '@types/mime': 2.0.3
       '@types/node': 14.14.37
       ava: 3.15.0
       prettier: 2.2.1
@@ -402,9 +405,12 @@ importers:
       '@babel/core': ^7.13.14
       '@prefresh/babel-plugin': 0.4.1
       '@prefresh/vite': ^2.1.1
+      '@types/mime': ^2.0.3
       '@types/node': ^14.14.37
       ava: ^3.15.0
+      mime: ^2.5.2
       prettier: ^2.2.1
+      rollup: ^2.44.0
       tslib: ^2.1.0
       typescript: ^4.2.3
       vite: ^2.1.5
@@ -2261,17 +2267,18 @@ packages:
       vite: '>=2.0.0-beta.3'
     resolution:
       integrity: sha512-E/nSPUVJL3GBXSDFZimmS+fafx04Clb1bjqP/ZYNL+fVWTYo+dFMwd8VUUXJrrYzpBVwtq1EUz80u03iRcr12A==
-  /@prefresh/vite/2.1.1_vite@2.1.5:
+  /@prefresh/vite/2.1.1_rollup@2.44.0+vite@2.1.5:
     dependencies:
       '@babel/core': 7.13.14
       '@prefresh/babel-plugin': 0.4.1
       '@prefresh/core': 1.3.1
       '@prefresh/utils': 1.1.1
-      '@rollup/pluginutils': 4.1.0
+      '@rollup/pluginutils': 4.1.0_rollup@2.44.0
       vite: 2.1.5
     dev: false
     peerDependencies:
       preact: ^10.4.0
+      rollup: '*'
       vite: '>=2.0.0-beta.3'
     resolution:
       integrity: sha512-E/nSPUVJL3GBXSDFZimmS+fafx04Clb1bjqP/ZYNL+fVWTYo+dFMwd8VUUXJrrYzpBVwtq1EUz80u03iRcr12A==
@@ -2398,6 +2405,19 @@ packages:
     dependencies:
       estree-walker: 2.0.2
       picomatch: 2.2.2
+    dev: true
+    engines:
+      node: '>= 8.0.0'
+    peerDependencies:
+      rollup: ^1.20.0||^2.0.0
+    resolution:
+      integrity: sha512-TrBhfJkFxA+ER+ew2U2/fHbebhLT/l/2pRk0hfj9KusXUuRXd2v0R58AfaZK9VXDQ4TogOSEmICVrQAA3zFnHQ==
+  /@rollup/pluginutils/4.1.0_rollup@2.44.0:
+    dependencies:
+      estree-walker: 2.0.2
+      picomatch: 2.2.2
+      rollup: 2.44.0
+    dev: false
     engines:
       node: '>= 8.0.0'
     peerDependencies:
@@ -2569,6 +2589,10 @@ packages:
     dev: true
     resolution:
       integrity: sha512-cxWFQVseBm6O9Gbw1IWb8r6OS4OhSt3hPZLkFApLjM8TEXROBuQGLAH2i2gZpcXdLBIrpXuTDhH7Vbm1iXmNGA==
+  /@types/mime/2.0.3:
+    dev: true
+    resolution:
+      integrity: sha512-Jus9s4CDbqwocc5pOAnh8ShfrnMcPHuJYzVcSUU7lrh8Ni5HuIqX3oilL86p3dlTrk0LzHRCgA/GQ7uNCw6l2Q==
   /@types/minimatch/3.0.4:
     dev: true
     resolution:
@@ -6675,6 +6699,13 @@ packages:
       node: '>= 0.6'
     resolution:
       integrity: sha512-Y/jMt/S5sR9OaqteJtslsFZKWOIIqMACsJSiHghlCAyhf7jfVYjKBmLiX8OgpWeW+fjJ2b+Az69aPFPkUOY6xQ==
+  /mime/2.5.2:
+    dev: false
+    engines:
+      node: '>=4.0.0'
+    hasBin: true
+    resolution:
+      integrity: sha512-tqkh47FzKeCPD2PUiPB6pkbMzsCasjxAfC62/Wap5qrUWcb+sFasXUC5I3gYM5iBM8v/Qpn4UK0x+j0iHyFPDg==
   /mimic-fn/2.1.0:
     dev: true
     engines:

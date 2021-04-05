@@ -1,4 +1,4 @@
-import { NodeRepository } from '@hawaii-bus-plus/data/node/index.js';
+import { NodeRepository } from '@hawaii-bus-plus/data/node';
 import { mkdir } from 'fs/promises';
 import { URL } from 'url';
 import { distFolder, renderRoutes } from './base.js';

@@ -5,6 +5,10 @@
   "type": "module",
   "main": "./src/index.js",
   "module": "./src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./node": "./node/index.js"
+  },
   "scripts": {
     "build": "tsc --build src node",
     "format": "prettier **/*.ts --write --ignore-path ../../.prettierignore",
