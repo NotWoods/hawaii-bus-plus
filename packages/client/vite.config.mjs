@@ -42,9 +42,21 @@ export default defineConfig({
         theme_color: '#32383e',
         icons: [
           {
-            src: '/icon/transparent.png',
+            src: '/icon/favicon-512.png',
             type: 'image/png',
             sizes: '512x512',
+            purpose: 'any',
+          },
+          {
+            src: '/icon/favicon.png',
+            type: 'image/png',
+            sizes: '48x48',
+            purpose: 'any',
+          },
+          {
+            src: '/icon/favicon.svg',
+            type: 'image/svg+xml',
+            sizes: 'any',
             purpose: 'any',
           },
           {
@@ -54,10 +66,10 @@ export default defineConfig({
             purpose: 'maskable',
           },
           {
-            src: '/icon/small.png',
-            type: 'image/png',
-            sizes: '48x48',
-            purpose: 'any',
+            src: '/icon/maskable.svg',
+            type: 'image/svg+xml',
+            sizes: 'any',
+            purpose: 'maskable',
           },
           {
             src: '/icon/monochrome.png',
