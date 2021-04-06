@@ -35,7 +35,7 @@ export function LoginButtons() {
       <Button href="/auth/login" class="mb-1">
         Login
       </Button>
-      <Button href="https://eepurl.com/hqxfyb">Request an invite</Button>
+      <Button href="/auth/register">Sign up</Button>
     </HomeButtons>
   );
 }

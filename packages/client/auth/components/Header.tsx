@@ -29,8 +29,8 @@ function headerContent(type: HeaderType | undefined) {
         title: 'Welcome back!',
         subtitle: {
           prefix: 'Not registered? ',
-          href: 'https://eepurl.com/hqxfyb',
-          content: 'Sign up for early access.',
+          href: '/auth/register',
+          content: 'Sign up for a new account.',
         },
       };
     case 'acceptInvite':
