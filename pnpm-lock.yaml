@@ -31,10 +31,10 @@ importers:
       typescript: ^4.2.3
   packages/api-gen:
     dependencies:
-      '@hawaii-bus-plus/mnemonist': 'link:../mnemonist'
-      '@hawaii-bus-plus/temporal-utils': 'link:../temporal-utils'
-      '@hawaii-bus-plus/types': 'link:../types'
-      '@hawaii-bus-plus/utils': 'link:../utils'
+      '@hawaii-bus-plus/mnemonist': link:../mnemonist
+      '@hawaii-bus-plus/temporal-utils': link:../temporal-utils
+      '@hawaii-bus-plus/types': link:../types
+      '@hawaii-bus-plus/utils': link:../utils
       csv-parse: 4.15.3
       ix: 4.3.1
       jszip: 3.6.0
@@ -48,10 +48,10 @@ importers:
       type-fest: 1.0.1
       typescript: 4.2.3
     specifiers:
-      '@hawaii-bus-plus/mnemonist': 'workspace:^0.38.3'
-      '@hawaii-bus-plus/temporal-utils': 'workspace:*'
-      '@hawaii-bus-plus/types': 'workspace:*'
-      '@hawaii-bus-plus/utils': 'workspace:*'
+      '@hawaii-bus-plus/mnemonist': workspace:^0.38.3
+      '@hawaii-bus-plus/temporal-utils': workspace:*
+      '@hawaii-bus-plus/types': workspace:*
+      '@hawaii-bus-plus/utils': workspace:*
       '@types/node': ^14.14.37
       ava: ^3.15.0
       csv-parse: ^4.15.3
@@ -65,14 +65,14 @@ importers:
       typescript: ^4.2.3
   packages/client:
     dependencies:
-      '@hawaii-bus-plus/data': 'link:../data'
-      '@hawaii-bus-plus/mnemonist': 'link:../mnemonist'
-      '@hawaii-bus-plus/presentation': 'link:../presentation'
-      '@hawaii-bus-plus/promise-worker': 'link:../promise-worker'
-      '@hawaii-bus-plus/react-google-maps': 'link:../react-google-maps'
-      '@hawaii-bus-plus/temporal-utils': 'link:../temporal-utils'
-      '@hawaii-bus-plus/types': 'link:../types'
-      '@hawaii-bus-plus/utils': 'link:../utils'
+      '@hawaii-bus-plus/data': link:../data
+      '@hawaii-bus-plus/mnemonist': link:../mnemonist
+      '@hawaii-bus-plus/presentation': link:../presentation
+      '@hawaii-bus-plus/promise-worker': link:../promise-worker
+      '@hawaii-bus-plus/react-google-maps': link:../react-google-maps
+      '@hawaii-bus-plus/temporal-utils': link:../temporal-utils
+      '@hawaii-bus-plus/types': link:../types
+      '@hawaii-bus-plus/utils': link:../utils
       clsx: 1.1.1
       idb: 6.0.0
       insights-js: 1.2.10
@@ -83,8 +83,8 @@ importers:
       tslib: 2.2.0
     devDependencies:
       '@googlemaps/js-api-loader': 1.11.3
-      '@hawaii-bus-plus/jest-utils': 'link:../jest-utils'
-      '@hawaii-bus-plus/vite-plugins': 'link:../vite-plugins'
+      '@hawaii-bus-plus/jest-utils': link:../jest-utils
+      '@hawaii-bus-plus/vite-plugins': link:../vite-plugins
       '@prefresh/vite': 2.1.1_preact@10.5.13+vite@2.1.5
       '@tailwindcss/aspect-ratio': 0.2.0
       '@tailwindcss/forms': 0.3.2_tailwindcss@2.1.1
@@ -106,16 +106,16 @@ importers:
       vite-plugin-pwa: 0.6.5
     specifiers:
       '@googlemaps/js-api-loader': ^1.11.3
-      '@hawaii-bus-plus/data': 'workspace:*'
-      '@hawaii-bus-plus/jest-utils': 'workspace:*'
-      '@hawaii-bus-plus/mnemonist': 'workspace:^0.38.3'
-      '@hawaii-bus-plus/presentation': 'workspace:*'
-      '@hawaii-bus-plus/promise-worker': 'workspace:*'
-      '@hawaii-bus-plus/react-google-maps': 'workspace:*'
-      '@hawaii-bus-plus/temporal-utils': 'workspace:*'
-      '@hawaii-bus-plus/types': 'workspace:*'
-      '@hawaii-bus-plus/utils': 'workspace:*'
-      '@hawaii-bus-plus/vite-plugins': 'workspace:*'
+      '@hawaii-bus-plus/data': workspace:*
+      '@hawaii-bus-plus/jest-utils': workspace:*
+      '@hawaii-bus-plus/mnemonist': workspace:^0.38.3
+      '@hawaii-bus-plus/presentation': workspace:*
+      '@hawaii-bus-plus/promise-worker': workspace:*
+      '@hawaii-bus-plus/react-google-maps': workspace:*
+      '@hawaii-bus-plus/temporal-utils': workspace:*
+      '@hawaii-bus-plus/types': workspace:*
+      '@hawaii-bus-plus/utils': workspace:*
+      '@hawaii-bus-plus/vite-plugins': workspace:*
       '@prefresh/vite': ^2.1.1
       '@tailwindcss/aspect-ratio': ^0.2.0
       '@tailwindcss/forms': ^0.3.2
@@ -145,9 +145,9 @@ importers:
       vite-plugin-pwa: ^0.6.5
   packages/data:
     dependencies:
-      '@hawaii-bus-plus/mnemonist': 'link:../mnemonist'
-      '@hawaii-bus-plus/types': 'link:../types'
-      '@hawaii-bus-plus/utils': 'link:../utils'
+      '@hawaii-bus-plus/mnemonist': link:../mnemonist
+      '@hawaii-bus-plus/types': link:../types
+      '@hawaii-bus-plus/utils': link:../utils
       idb: 6.0.0
       ix: 4.3.1
       tslib: 2.2.0
@@ -157,9 +157,9 @@ importers:
       prettier: 2.2.1
       typescript: 4.2.3
     specifiers:
-      '@hawaii-bus-plus/mnemonist': 'workspace:^0.38.3'
-      '@hawaii-bus-plus/types': 'workspace:*'
-      '@hawaii-bus-plus/utils': 'workspace:*'
+      '@hawaii-bus-plus/mnemonist': workspace:^0.38.3
+      '@hawaii-bus-plus/types': workspace:*
+      '@hawaii-bus-plus/utils': workspace:*
       '@types/node': ^14.14.37
       ava: ^3.15.0
       idb: ^6.0.0
@@ -170,7 +170,7 @@ importers:
   packages/functions:
     dependencies:
       '@aws-sdk/client-dynamodb': 3.11.0
-      '@hawaii-bus-plus/gotrue': 'link:../gotrue'
+      '@hawaii-bus-plus/gotrue': link:../gotrue
       cookie: 0.4.1
       stripe: 8.142.0
       tslib: 2.2.0
@@ -189,7 +189,7 @@ importers:
       typescript: 4.2.3
     specifiers:
       '@aws-sdk/client-dynamodb': ^3.11.0
-      '@hawaii-bus-plus/gotrue': 'workspace:^0.9.29'
+      '@hawaii-bus-plus/gotrue': workspace:^0.9.29
       '@rollup/plugin-commonjs': ^18.0.0
       '@rollup/plugin-json': ^4.1.0
       '@rollup/plugin-node-resolve': ^11.2.1
@@ -230,14 +230,14 @@ importers:
       prettier: ^2.2.1
   packages/jest-utils:
     dependencies:
-      '@hawaii-bus-plus/types': 'link:../types'
+      '@hawaii-bus-plus/types': link:../types
       tslib: 2.2.0
     devDependencies:
       jest: 26.6.3
       prettier: 2.2.1
       typescript: 4.2.3
     specifiers:
-      '@hawaii-bus-plus/types': 'workspace:*'
+      '@hawaii-bus-plus/types': workspace:*
       jest: ^26.6.3
       prettier: ^2.2.1
       tslib: ^2.2.0
@@ -256,7 +256,7 @@ importers:
       typescript: ^4.2.3
   packages/prerender:
     dependencies:
-      '@hawaii-bus-plus/data': 'link:../data'
+      '@hawaii-bus-plus/data': link:../data
       preact-render-to-string: 5.1.19_preact@10.5.13
       rollup: 2.44.0
       tslib: 2.2.0
@@ -269,7 +269,7 @@ importers:
       tailwindcss: 2.1.1
       typescript: 4.2.3
     specifiers:
-      '@hawaii-bus-plus/data': 'workspace:*'
+      '@hawaii-bus-plus/data': workspace:*
       ava: ^3.15.0
       preact: ^10.5.13
       preact-render-to-string: ^5.1.19
@@ -282,9 +282,9 @@ importers:
       vite: ^2.1.5
   packages/presentation:
     dependencies:
-      '@hawaii-bus-plus/temporal-utils': 'link:../temporal-utils'
-      '@hawaii-bus-plus/types': 'link:../types'
-      '@hawaii-bus-plus/utils': 'link:../utils'
+      '@hawaii-bus-plus/temporal-utils': link:../temporal-utils
+      '@hawaii-bus-plus/types': link:../types
+      '@hawaii-bus-plus/utils': link:../utils
       proposal-temporal: 0.7.0
       spherical-geometry-js: 2.0.0
       tslib: 2.2.0
@@ -294,9 +294,9 @@ importers:
       type-fest: 1.0.1
       typescript: 4.2.3
     specifiers:
-      '@hawaii-bus-plus/temporal-utils': 'workspace:*'
-      '@hawaii-bus-plus/types': 'workspace:*'
-      '@hawaii-bus-plus/utils': 'workspace:*'
+      '@hawaii-bus-plus/temporal-utils': workspace:*
+      '@hawaii-bus-plus/types': workspace:*
+      '@hawaii-bus-plus/utils': workspace:*
       ava: ^3.15.0
       prettier: ^2.2.1
       proposal-temporal: ^0.7.0
@@ -342,8 +342,8 @@ importers:
       typescript: ^4.2.3
   packages/temporal-utils:
     dependencies:
-      '@hawaii-bus-plus/types': 'link:../types'
-      '@hawaii-bus-plus/utils': 'link:../utils'
+      '@hawaii-bus-plus/types': link:../types
+      '@hawaii-bus-plus/utils': link:../utils
       proposal-temporal: 0.7.0
       tslib: 2.2.0
     devDependencies:
@@ -351,8 +351,8 @@ importers:
       prettier: 2.2.1
       typescript: 4.2.3
     specifiers:
-      '@hawaii-bus-plus/types': 'workspace:*'
-      '@hawaii-bus-plus/utils': 'workspace:*'
+      '@hawaii-bus-plus/types': workspace:*
+      '@hawaii-bus-plus/utils': workspace:*
       ava: ^3.15.0
       prettier: ^2.2.1
       proposal-temporal: ^0.7.0
@@ -372,18 +372,40 @@ importers:
       typescript: ^4.2.3
   packages/utils:
     dependencies:
-      '@hawaii-bus-plus/types': 'link:../types'
+      '@hawaii-bus-plus/types': link:../types
       tslib: 2.2.0
     devDependencies:
       ava: 3.15.0
       prettier: 2.2.1
       typescript: 4.2.3
     specifiers:
-      '@hawaii-bus-plus/types': 'workspace:*'
+      '@hawaii-bus-plus/types': workspace:*
       ava: ^3.15.0
       prettier: ^2.2.1
       tslib: ^2.2.0
       typescript: ^4.2.3
+  packages/vite-plugin-react-helmet:
+    dependencies:
+      '@types/react-helmet': 6.1.0
+      node-html-parser: 3.1.3
+      tslib: 2.2.0
+    devDependencies:
+      '@types/node': 14.14.37
+      ava: 3.15.0
+      prettier: 2.2.1
+      react-helmet: 6.1.0
+      typescript: 4.2.3
+      vite: 2.1.5
+    specifiers:
+      '@types/node': ^14.14.37
+      '@types/react-helmet': ^6.1.0
+      ava: ^3.15.0
+      node-html-parser: ^3.1.3
+      prettier: ^2.2.1
+      react-helmet: ^6.1.0
+      tslib: ^2.2.0
+      typescript: ^4.2.3
+      vite: ^2.1.5
   packages/vite-plugins:
     dependencies:
       '@babel/core': 7.13.14
@@ -2597,15 +2619,19 @@ packages:
     resolution:
       integrity: sha512-PijRCG/K3s3w1We6ynUKdxEc5AcuuH3NBmMDP8uvKVp6X43UY7NQlTzczakXP3DJR0F4dfNQIGjU2cUeRYs2AA==
   /@types/prop-types/15.7.3:
-    dev: true
     resolution:
       integrity: sha512-KfRL3PuHmqQLOG+2tGpRO26Ctg+Cq1E01D2DMriKEATHgWLfeNDmq9e29Q9WIky0dQ3NPkd1mzYH8Lm936Z9qw==
+  /@types/react-helmet/6.1.0:
+    dependencies:
+      '@types/react': 17.0.3
+    dev: false
+    resolution:
+      integrity: sha512-PYRoU1XJFOzQ3BHvWL1T8iDNbRjdMDJMT5hFmZKGbsq09kbSqJy61uwEpTrbTNWDopVphUT34zUSVLK9pjsgYQ==
   /@types/react/17.0.3:
     dependencies:
       '@types/prop-types': 15.7.3
       '@types/scheduler': 0.16.1
       csstype: 3.0.7
-    dev: true
     resolution:
       integrity: sha512-wYOUxIgs2HZZ0ACNiIayItyluADNbONl7kt8lkLjVK8IitMH5QMyAh75Fwhmo37r1m7L2JaFj03sIfxBVDvRAg==
   /@types/resolve/1.17.1:
@@ -2615,7 +2641,6 @@ packages:
     resolution:
       integrity: sha512-yy7HuzQhj0dhGpD8RLXSZWEkLsV9ibvxvi6EiJ3bkqLAO1RGo0WbkWQiwpRlSFymTJRz0d3k5LM3kkx8ArDbLw==
   /@types/scheduler/0.16.1:
-    dev: true
     resolution:
       integrity: sha512-EaCxbanVeyxDRTQBkdLb3Bvl/HK7PBK6UJjsSixB0iHKoWxE5uu2Q/DgtpOhPIojN0Zl1whvOd7PoHs2P0s5eA==
   /@types/stack-utils/2.0.0:
@@ -3247,10 +3272,10 @@ packages:
       '@babel/core': ^7.0.0
     resolution:
       integrity: sha512-YvdtlVm9t3k777c5NPQIv6cxFFFapys25HiUmuSgHwIZhfifweR5c5Sf5nwE3MAbfu327CYSvps8Yx6ANLyleQ==
-  /balanced-match/1.0.0:
+  /balanced-match/1.0.2:
     dev: true
     resolution:
-      integrity: sha1-ibTRmasr7kneFk6gK4nORi1xt2c=
+      integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==
   /base/0.11.2:
     dependencies:
       cache-base: 1.0.1
@@ -3299,11 +3324,15 @@ packages:
     dev: true
     resolution:
       integrity: sha512-vE52okJvzsVWhcgUHOv+69OG3Mdg151xyn41aVQN/5W5S+S43qZhxECtYLAEHMSFWX6Mv5IZrzj3T5+JqXfj5Q==
+  /boolbase/1.0.0:
+    dev: false
+    resolution:
+      integrity: sha1-aN/1++YMUes3cl6p4+0xDcwed24=
   /bowser/2.11.0:
     dev: false
     resolution:
       integrity: sha512-AlcaJBi/pqqJBIQ8U9Mcpc9i8Aqxn88Skv5d+xBX006BY5u8N3mGLHa5Lgppa7L/HfwgwLgZ6NYs+Ag6uUmJRA==
-  /boxen/5.0.0:
+  /boxen/5.0.1:
     dependencies:
       ansi-align: 3.0.0
       camelcase: 6.2.0
@@ -3317,10 +3346,10 @@ packages:
     engines:
       node: '>=10'
     resolution:
-      integrity: sha512-5bvsqw+hhgUi3oYGK0Vf4WpIkyemp60WBInn7+WNfoISzAqk/HX4L7WNROq38E6UR/y3YADpv6pEm4BfkeEAdA==
+      integrity: sha512-49VBlw+PrWEF51aCmy7QIteYPIFZxSpvqBdP/2itCPPlJ49kj9zg/XPRFrdkne2W+CfwXUls8exMvu1RysZpKA==
   /brace-expansion/1.1.11:
     dependencies:
-      balanced-match: 1.0.0
+      balanced-match: 1.0.2
       concat-map: 0.0.1
     dev: true
     resolution:
@@ -3860,10 +3889,26 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-v1plID3y9r/lPhviJ1wrXpLeyUIGAZ2SHNYTEapm7/8A9nLPoyvVp3RK/EPFqn5kEznyWgYZNsRtYYIWbuG8KA==
+  /css-select/3.1.2:
+    dependencies:
+      boolbase: 1.0.0
+      css-what: 4.0.0
+      domhandler: 4.1.0
+      domutils: 2.5.1
+      nth-check: 2.0.0
+    dev: false
+    resolution:
+      integrity: sha512-qmss1EihSuBNWNNhHjxzxSfJoFBM/lERB/Q4EnsJQQC62R2evJDW481091oAdOr9uh46/0n4nrg0It5cAnj1RA==
   /css-unit-converter/1.1.2:
     dev: true
     resolution:
       integrity: sha512-IiJwMC8rdZE0+xiEZHeru6YoONC4rfPMqGm2W85jMIbkFvv5nFTwJVFHam2eFrN6txmoUYFAFXiv8ICVeTO0MA==
+  /css-what/4.0.0:
+    dev: false
+    engines:
+      node: '>= 6'
+    resolution:
+      integrity: sha512-teijzG7kwYfNVsUh2H/YN62xW3KK9YhXEgSlbxMlcyjPNvdKJqFx5lrwlJgoFP1ZHlB89iGDlo/JyshKeRhv5A==
   /cssesc/3.0.0:
     dev: true
     engines:
@@ -3888,7 +3933,6 @@ packages:
     resolution:
       integrity: sha512-AZL67abkUzIuvcHqk7c09cezpGNcxUxU4Ioi/05xHk4DQeTkWmGYftIE6ctU6AEt+Gn4n1lDStOtj7FKycP71A==
   /csstype/3.0.7:
-    dev: true
     resolution:
       integrity: sha512-KxnUB0ZMlnUWCsx2Z8MUsr6qV6ja1w9ArPErJaJaF8a5SOWoHLIszeCTKGRGRgtLgYrs1E8CHkNSP1VZTTPc9g==
   /csv-parse/4.15.3:
@@ -4170,6 +4214,18 @@ packages:
       node: '>=6.0.0'
     resolution:
       integrity: sha512-yS+Q5i3hBf7GBkd4KG8a7eBNNWNGLTaEwwYWUijIYM7zrlYDM0BFXHjjPWlWZ1Rg7UaddZeIDmi9jF3HmqiQ2w==
+  /dom-serializer/1.2.0:
+    dependencies:
+      domelementtype: 2.2.0
+      domhandler: 4.1.0
+      entities: 2.2.0
+    dev: false
+    resolution:
+      integrity: sha512-n6kZFH/KlCrqs/1GHMOd5i2fd/beQHuehKdWvNNffbGHTr/almdhuVvTVFb3V7fglz+nC50fFusu3lY33h12pA==
+  /domelementtype/2.2.0:
+    dev: false
+    resolution:
+      integrity: sha512-DtBMo82pv1dFtUmHyr48beiuq792Sxohr+8Hm9zoxklYPfa6n0Z3Byjj2IV7bmr2IyqClnqEQhfgHJJ5QF0R5A==
   /domexception/2.0.1:
     dependencies:
       webidl-conversions: 5.0.0
@@ -4178,6 +4234,22 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-yxJ2mFy/sibVQlu5qHjOkf9J3K6zgmCxgJ94u2EdvDOV09H+32LtRswEcUsmUWN72pVLOEnTSRaIVVzVQgS0dg==
+  /domhandler/4.1.0:
+    dependencies:
+      domelementtype: 2.2.0
+    dev: false
+    engines:
+      node: '>= 4'
+    resolution:
+      integrity: sha512-/6/kmsGlMY4Tup/nGVutdrK9yQi4YjWVcVeoQmixpzjOUK1U7pQkvAPHBJeUxOgxF0J8f8lwCJSlCfD0V4CMGQ==
+  /domutils/2.5.1:
+    dependencies:
+      dom-serializer: 1.2.0
+      domelementtype: 2.2.0
+      domhandler: 4.1.0
+    dev: false
+    resolution:
+      integrity: sha512-hO1XwHMGAthA/1KL7c83oip/6UWo3FlUNIuWiWKltoiQ5oCOiqths8KknvY2jpOohUoUgnwa/+Rm7UpwpSbY/Q==
   /dot-prop/5.3.0:
     dependencies:
       is-obj: 2.0.0
@@ -4255,6 +4327,10 @@ packages:
       node: '>=8.6'
     resolution:
       integrity: sha512-yjNnPr315/FjS4zIsUxYguYUPP2e1NK4d7E7ZOLiyYCcbFBiTMyID+2wvm2w6+pZ/odMA7cRkjhsPbltwBOrLg==
+  /entities/2.2.0:
+    dev: false
+    resolution:
+      integrity: sha512-p92if5Nz619I0w+akJrLZH0MX0Pb5DX39XOwQTtXSdQQOaYH03S1uIQp4mhOZtAXrxq4ViO67YTiLBo2638o9A==
   /equal-length/1.0.1:
     dev: true
     engines:
@@ -5149,6 +5225,11 @@ packages:
       node: '>= 0.4.0'
     resolution:
       integrity: sha512-f2dvO0VU6Oej7RkWJGrehjbzMAjFp5/VKPp5tTpWIV4JHHZK1/BxbFRtf/siA2SWTe09caDmVtYYzWEIbBS4zw==
+  /he/1.2.0:
+    dev: false
+    hasBin: true
+    resolution:
+      integrity: sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw==
   /hosted-git-info/2.8.8:
     dev: true
     resolution:
@@ -6813,6 +6894,13 @@ packages:
       node: ^10.17 || >=12.3
     resolution:
       integrity: sha512-RdbZCEynH2tH46+tj0ua9caUHVWrd/RHnRfvly2EVdqGmI3ndS1Vn/xjm5KuGejDt2RNDQsVRLPNd2QPwcewVg==
+  /node-html-parser/3.1.3:
+    dependencies:
+      css-select: 3.1.2
+      he: 1.2.0
+    dev: false
+    resolution:
+      integrity: sha512-pCE2I5UY5iOBnWdJQkbYZSk+fyq2zepw0nsELpHQjVFyCzOeZhkMhnvKqGceKgzWsWx7EG4KtMqsy9Eklf5Thw==
   /node-int64/0.4.0:
     dev: true
     resolution:
@@ -6890,6 +6978,12 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-S48WzZW777zhNIrn7gxOlISNAqi9ZC/uQFnRdbeIHhZhCA6UqpkOT8T1G7BvfdgP4Er8gF4sUbaS0i7QvIfCWw==
+  /nth-check/2.0.0:
+    dependencies:
+      boolbase: 1.0.0
+    dev: false
+    resolution:
+      integrity: sha512-i4sc/Kj8htBrAiH1viZ0TgU8Y5XqCaV/FziYK6TBczxmeKm3AEFWqqF3195yKudrarqy7Zu80Ra5dobFjn9X/Q==
   /nwsapi/2.2.0:
     dev: true
     resolution:
@@ -7565,6 +7659,21 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-y3bGgqKj3QBdxLbLkomlohkvsA8gdAiUQlSBJnBhfn+BPxg4bc62d8TcBW15wavDfgexCgccckhcZvywyQYPOw==
+  /react-fast-compare/3.2.0:
+    dev: true
+    resolution:
+      integrity: sha512-rtGImPZ0YyLrscKI9xTpV8psd6I8VAtjKCzQDlzyDvqJA8XOW78TXYQwNRNd8g8JZnDu8q9Fu/1v4HPAVwVdHA==
+  /react-helmet/6.1.0:
+    dependencies:
+      object-assign: 4.1.1
+      prop-types: 15.7.2
+      react-fast-compare: 3.2.0
+      react-side-effect: 2.1.1
+    dev: true
+    peerDependencies:
+      react: '>=16.3.0'
+    resolution:
+      integrity: sha512-4uMzEY9nlDlgxr61NL3XbKRy1hEkXmKNXhjbAIOVw5vcFrsdYbH2FEwcNyWvWinl103nXgzYNlns9ca+8kFiWw==
   /react-is/16.13.1:
     dev: true
     resolution:
@@ -7581,6 +7690,12 @@ packages:
       react-native: '>=0.56'
     resolution:
       integrity: sha512-sPTRTJk4bpuZeTBf6d7DldQGAOCi0GZh5NxzNI3eHXzxwHbNkV13Q22TehiSb3bsaVqwLC4UAa6QvYIucyyc+A==
+  /react-side-effect/2.1.1:
+    dev: true
+    peerDependencies:
+      react: ^16.3.0 || ^17.0.0
+    resolution:
+      integrity: sha512-2FoTQzRNTncBVtnzxFOk2mCpcfxQpenBMbk5kSVBg5UcPqV9fRbgY2zhb7GTWWOlpFmAxhClBDlIq8Rsubz1yQ==
   /read-pkg-up/7.0.1:
     dependencies:
       find-up: 4.1.0
@@ -7775,7 +7890,7 @@ packages:
       request-promise-core: 1.1.4_request@2.88.2
       stealthy-require: 1.1.1
       tough-cookie: 2.5.0
-    deprecated: 'request-promise-native has been deprecated because it extends the now deprecated request package, see https://github.com/request/request/issues/3142'
+    deprecated: request-promise-native has been deprecated because it extends the now deprecated request package, see https://github.com/request/request/issues/3142
     dev: true
     engines:
       node: '>=0.12.0'
@@ -7805,7 +7920,7 @@ packages:
       tough-cookie: 2.5.0
       tunnel-agent: 0.6.0
       uuid: 3.4.0
-    deprecated: 'request has been deprecated, see https://github.com/request/request/issues/3142'
+    deprecated: request has been deprecated, see https://github.com/request/request/issues/3142
     dev: true
     engines:
       node: '>= 6'
@@ -7848,7 +7963,7 @@ packages:
     resolution:
       integrity: sha512-qYg9KP24dD5qka9J47d0aVky0N+b4fTU89LN9iDnjB5waksiC49rvMB0PrUJQGoTmH50XPiqOvAjDfaijGxYZw==
   /resolve-url/0.2.1:
-    deprecated: 'https://github.com/lydell/resolve-url#deprecated'
+    deprecated: https://github.com/lydell/resolve-url#deprecated
     dev: true
     resolution:
       integrity: sha1-LGN/53yJOv0qZj/iGqkIAGjiBSo=
@@ -8876,7 +8991,7 @@ packages:
       integrity: sha512-aZwGpamFO61g3OlfT7OQCHqhGnW43ieH9WZeP7QxN/G/jS4jfqUkZxoryvJgVPEcrl5NL/ggHsSmLMHuH64Lhg==
   /update-notifier/5.1.0:
     dependencies:
-      boxen: 5.0.0
+      boxen: 5.0.1
       chalk: 4.1.0
       configstore: 5.0.1
       has-yarn: 2.1.0
@@ -8902,7 +9017,7 @@ packages:
     resolution:
       integrity: sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==
   /urix/0.1.0:
-    deprecated: 'Please see https://github.com/lydell/urix#deprecated'
+    deprecated: Please see https://github.com/lydell/urix#deprecated
     dev: true
     resolution:
       integrity: sha1-2pN/emLiH+wf0Y1Js1wpNQZ6bHI=

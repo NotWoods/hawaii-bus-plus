@@ -5,6 +5,7 @@ import type { OutputAsset } from 'rollup';
 import { Promisable } from 'type-fest';
 import { fileURLToPath, URL } from 'url';
 import { build } from 'vite';
+import { injectHelmet } from './helmet.js';
 
 export type RenderFunction = (
   url: URL,
@@ -105,7 +106,9 @@ export async function renderRoutes(
     routes.map(async (pathname) => {
       const url = new URL(pathname, 'https://app.hawaiibusplus.com');
       const { html, head } = await render(url, ...args);
-      const rendered = renderTemplate(await templateReady, html, head);
+      const rendered = injectHelmet(
+        renderTemplate(await templateReady, html, head),
+      );
 
       const withSuffix = pathname.endsWith('/')
         ? `${pathname}index.html`
