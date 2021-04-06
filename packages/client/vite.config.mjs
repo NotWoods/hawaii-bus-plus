@@ -4,7 +4,7 @@ import {
   webWorkerCodeSplit,
 } from '@hawaii-bus-plus/vite-plugins';
 import { defineConfig } from 'vite';
-import { VitePWA } from 'vite-plugin-pwa';
+// import { VitePWA } from 'vite-plugin-pwa';
 
 const productionMode = process.env.NETLIFY_CONTEXT === 'production';
 /** @type {import('vite').AliasOptions} */
@@ -23,7 +23,7 @@ export default defineConfig({
     webWorkerCodeSplit(),
     emptyPackage('preact/debug'),
     prefreshPlus(),
-    VitePWA({
+    /*VitePWA({
       mode: productionMode ? 'production' : 'development',
       minify: productionMode,
       injectRegister: 'inline',
@@ -85,7 +85,7 @@ export default defineConfig({
           },
         ],
       },
-    }),
+    }),*/
   ],
   resolve: { alias },
   optimizeDeps: {
