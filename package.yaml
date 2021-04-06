@@ -9,7 +9,7 @@ scripts:
     @hawaii-bus-plus/functions && pnpm run api:dist --filter
     @hawaii-bus-plus/api-gen
   clean: >-
-    del-cli packages/**/*.js packages/**/*.d.ts packages/**/*.map
+    del-cli dist/**/* packages/**/*.js packages/**/*.d.ts packages/**/*.map
     packages/**/*.tsbuildinfo
   dev: pnpm run dev --filter @hawaii-bus-plus/client
   format: prettier *.yaml *.cjs *.json .github/**/*.yaml --write

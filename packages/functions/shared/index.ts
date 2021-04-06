@@ -129,6 +129,7 @@ export function createHandler(
     const partialResponse: PartialResponse = {
       headers: {
         'Access-Control-Allow-Methods': Array.from(methods).join(', '),
+        'Cross-Origin-Resource-Policy': 'same-origin',
       },
       multiValueHeaders: {},
     };

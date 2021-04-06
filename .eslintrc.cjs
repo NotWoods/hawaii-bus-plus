@@ -5,7 +5,7 @@ const config = {
   parser: '@typescript-eslint/parser',
   parserOptions: {
     tsconfigRootDir: __dirname,
-    extraFileExtensions: ['.cjs'],
+    extraFileExtensions: ['.cjs', '.mjs'],
   },
   plugins: ['@typescript-eslint', 'ava'],
   extends: [
@@ -97,7 +97,7 @@ const config = {
       },
     },
     {
-      files: ['**/*.cjs'],
+      files: ['**/*.cjs', '**/*.mjs'],
       parserOptions: {
         project: [],
       },
