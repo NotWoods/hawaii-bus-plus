@@ -1,5 +1,5 @@
 import { Helmet } from '@hawaii-bus-plus/preact-helmet';
-import { parse } from 'node-html-parser';
+import parse from 'node-html-parser';
 
 export function injectHelmet(html: string) {
   const helmet = Helmet.renderStatic();

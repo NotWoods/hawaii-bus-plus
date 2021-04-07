@@ -1,8 +1,12 @@
 import test from 'ava';
 import { join, relative } from 'path';
 import { fileURLToPath } from 'url';
-import { buildPrerenderCode, distFolder, RenderFunction } from '../src/base.js';
-import { prerenderAuth } from '../src/prerender-auth.js';
+import {
+  buildPrerenderCode,
+  distFolder,
+  RenderFunction,
+  renderRoutes,
+} from '../src/base.js';
 
 test.serial('build code and assets', async (t) => {
   const { code, assets } = await buildPrerenderCode('./auth/entry-server.tsx');
@@ -29,15 +33,20 @@ test.serial('render and run auth entry file', async (t) => {
 test.serial('render auth routes', async (t) => {
   let rendered: { fileName: string; source: string }[];
   try {
-    rendered = await prerenderAuth(false);
+    rendered = await renderRoutes({
+      templatePath: './auth/index.html',
+      serverEntryPath: './auth/entry-server.tsx',
+      routes: ['/auth/login', '/auth/register'],
+      write: false,
+    });
   } catch (err: unknown) {
     // Workaround for race condition in GitHub Actions
     t.is((err as { code?: unknown }).code, 'ENOENT');
     return;
   }
 
-  t.is(rendered.length, 8);
-  const [_, login, register] = rendered;
+  t.is(rendered.length, 2);
+  const [login, register] = rendered;
 
   function normalizePath(path: string) {
     const relativeTo = fileURLToPath(distFolder);
