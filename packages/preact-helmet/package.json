@@ -4,6 +4,7 @@
   "private": true,
   "type": "commonjs",
   "main": "dist/helmet.cjs",
+  "module": "dist/helmet.mjs",
   "types": "src/index.d.ts",
   "scripts": {
     "build": "tsc --build src",

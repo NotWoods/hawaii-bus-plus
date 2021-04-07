@@ -11,6 +11,10 @@ const config = {
       file: 'dist/helmet.cjs',
       format: 'cjs',
     },
+    {
+      file: 'dist/helmet.mjs',
+      format: 'es',
+    },
   ],
   plugins: [
     alias({
