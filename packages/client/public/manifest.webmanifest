@@ -1,0 +1,51 @@
+{
+  "short_name": "Hawaii Bus+",
+  "name": "Hawaii Bus Plus",
+  "start_url": "/",
+  "background_color": "#f9fafb",
+  "theme_color": "#32383e",
+  "icons": [
+    {
+      "src": "/icon/favicon-512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon/favicon.png",
+      "type": "image/png",
+      "sizes": "48x48",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon/favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon/maskable.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icon/maskable.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icon/monochrome.png",
+      "type": "image/png",
+      "sizes": "48x48",
+      "purpose": "monochrome"
+    },
+    {
+      "src": "/icon/monochrome.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "monochrome"
+    }
+  ]
+}

@@ -3,10 +3,11 @@ import {
   webWorkerCodeSplit,
 } from '@hawaii-bus-plus/vite-plugins';
 import prefresh from '@prefresh/vite';
+import { readFileSync } from 'fs';
 import { defineConfig } from 'vite';
-import { VitePWA } from 'vite-plugin-pwa';
+// import { VitePWA } from 'vite-plugin-pwa';
 
-const productionMode = process.env.NETLIFY_CONTEXT === 'production';
+const productionMode = false && process.env.NETLIFY_CONTEXT === 'production';
 /** @type {import('vite').AliasOptions} */
 const alias = {
   'insights-js': 'insights-js/dist/esnext/index.js',
@@ -18,6 +19,13 @@ if (productionMode) {
   alias['proposal-temporal'] = 'proposal-temporal/lib/index.mjs';
 }
 
+/*const manifest = JSON.parse(
+  readFileSync(
+    new URL('./public/manifest.webmanifest', import.meta.url),
+    'utf8',
+  ),
+);*/
+
 export default defineConfig({
   plugins: [
     webWorkerCodeSplit(),
@@ -26,7 +34,7 @@ export default defineConfig({
       include: ['{auth,page,share,all-pages}/**/*'],
       exclude: ['worker-*/**'],
     }),
-    VitePWA({
+    /*VitePWA({
       mode: productionMode ? 'production' : 'development',
       minify: productionMode,
       injectRegister: 'inline',
@@ -37,58 +45,8 @@ export default defineConfig({
           new RegExp('^/directions'),
         ],
       },
-      manifest: {
-        short_name: 'Hawaii Bus+',
-        name: 'Hawaii Bus Plus',
-        start_url: '/',
-        background_color: '#f9fafb',
-        theme_color: '#32383e',
-        icons: [
-          {
-            src: '/icon/favicon-512.png',
-            type: 'image/png',
-            sizes: '512x512',
-            purpose: 'any',
-          },
-          {
-            src: '/icon/favicon.png',
-            type: 'image/png',
-            sizes: '48x48',
-            purpose: 'any',
-          },
-          {
-            src: '/icon/favicon.svg',
-            type: 'image/svg+xml',
-            sizes: 'any',
-            purpose: 'any',
-          },
-          {
-            src: '/icon/maskable.png',
-            type: 'image/png',
-            sizes: '512x512',
-            purpose: 'maskable',
-          },
-          {
-            src: '/icon/maskable.svg',
-            type: 'image/svg+xml',
-            sizes: 'any',
-            purpose: 'maskable',
-          },
-          {
-            src: '/icon/monochrome.png',
-            type: 'image/png',
-            sizes: '48x48',
-            purpose: 'monochrome',
-          },
-          {
-            src: '/icon/monochrome.svg',
-            type: 'image/svg+xml',
-            sizes: 'any',
-            purpose: 'monochrome',
-          },
-        ],
-      },
-    }),
+      manifest,
+    }),*/
   ],
   resolve: { alias },
   optimizeDeps: {
