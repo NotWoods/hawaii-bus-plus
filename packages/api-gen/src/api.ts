@@ -7,22 +7,6 @@ function writeJson(path: string, json: unknown) {
   return writeFile(path, str, { encoding: 'utf8' });
 }
 
-function fileAlreadyExists(err: unknown): err is Error {
-  return (err as { code?: string }).code === 'EEXIST';
-}
-
-async function mkdirIfNotExists(folder: string) {
-  try {
-    await mkdir(folder);
-  } catch (err: unknown) {
-    if (fileAlreadyExists(err)) {
-      // Folder already exists
-    } else {
-      throw err;
-    }
-  }
-}
-
 /**
  * Generate an API file from the given GTFS zip path.
  * @param gtfsZipPath
@@ -31,17 +15,19 @@ export async function generateApi(
   gtfsZipPath: string,
   apiFolder: string,
 ): Promise<void> {
+  const folderReady = mkdir(apiFolder, { recursive: true });
   const zipData = await readFile(gtfsZipPath);
   const [api, shapes] = await createApiData(zipData);
 
+  await folderReady;
   const jobs: Promise<unknown>[] = [
     writeJson(join(apiFolder, 'api.json'), api),
   ];
   const shapeFolder = join(apiFolder, 'shapes');
   const bikeFolder = join(apiFolder, 'bike');
   await Promise.all([
-    mkdirIfNotExists(shapeFolder),
-    mkdirIfNotExists(bikeFolder),
+    mkdir(shapeFolder, { recursive: true }),
+    mkdir(bikeFolder, { recursive: true }),
   ]);
 
   for (const shape of shapes.values()) {

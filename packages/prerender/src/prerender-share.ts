@@ -7,13 +7,7 @@ export async function prerenderShare(write: boolean) {
   const repo = new NodeRepository();
   const [routes] = await Promise.all([
     repo.loadAllRoutes(),
-    mkdir(new URL('./share/routes/', distFolder)).catch((err: unknown) => {
-      if ((err as { code?: unknown })?.code === 'EEXIST') {
-        // Folder exists, silent error
-      } else {
-        throw err;
-      }
-    }),
+    mkdir(new URL('./share/routes/', distFolder), { recursive: true }),
   ]);
 
   return await renderRoutes(

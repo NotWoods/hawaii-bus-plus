@@ -8,9 +8,7 @@ test.serial('build code and assets', async (t) => {
   const { code, assets } = await buildPrerenderCode('./auth/entry-server.tsx');
 
   t.is(typeof code, 'string');
-  t.is(assets.length, 2);
   t.like(assets[0], { name: 'style.css' });
-  t.like(assets[1], { fileName: 'manifest.webmanifest' });
 });
 
 test.serial('render and run auth entry file', async (t) => {
@@ -24,14 +22,8 @@ test.serial('render and run auth entry file', async (t) => {
     new URL('/auth/login', 'https://app.hawaiibusplus.com'),
   );
 
-  t.deepEqual(Object.keys(result), ['html', 'head']);
-  t.is(typeof result.head, 'string');
+  t.deepEqual(Object.keys(result), ['html']);
   t.is(typeof result.html, 'string');
-
-  t.true(
-    result.head!.includes('<title>Login - Hawaii Bus Plus</title>'),
-    result.head,
-  );
 });
 
 test.serial('render auth routes', async (t) => {
@@ -44,8 +36,8 @@ test.serial('render auth routes', async (t) => {
     return;
   }
 
-  t.is(rendered.length, 7);
-  const [login, register] = rendered;
+  t.is(rendered.length, 8);
+  const [_, login, register] = rendered;
 
   function normalizePath(path: string) {
     const relativeTo = fileURLToPath(distFolder);
@@ -71,9 +63,5 @@ test.serial('render and run page entry file', async (t) => {
   const render = module.exports.default as RenderFunction;
   const result = await render(new URL('/', 'https://app.hawaiibusplus.com'));
 
-  t.deepEqual(Object.keys(result), ['html', 'head']);
-  t.is(typeof result.head, 'string');
-  t.is(typeof result.html, 'string');
-
-  t.is(result.head, '');
+  t.deepEqual(Object.keys(result), ['html']);
 });

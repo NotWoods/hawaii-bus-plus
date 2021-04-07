@@ -86,7 +86,7 @@ importers:
       '@googlemaps/js-api-loader': 1.11.3
       '@hawaii-bus-plus/jest-utils': 'link:../jest-utils'
       '@hawaii-bus-plus/vite-plugins': 'link:../vite-plugins'
-      '@prefresh/vite': 2.1.1_preact@10.5.13+vite@2.1.5
+      '@prefresh/vite': 2.2.0_preact@10.5.13+vite@2.1.5
       '@tailwindcss/aspect-ratio': 0.2.0
       '@tailwindcss/forms': 0.3.2_tailwindcss@2.1.1
       '@tailwindcss/typography': 0.4.0_tailwindcss@2.1.1
@@ -119,7 +119,7 @@ importers:
       '@hawaii-bus-plus/types': 'workspace:*'
       '@hawaii-bus-plus/utils': 'workspace:*'
       '@hawaii-bus-plus/vite-plugins': 'workspace:*'
-      '@prefresh/vite': ^2.1.1
+      '@prefresh/vite': ^2.2.0
       '@tailwindcss/aspect-ratio': ^0.2.0
       '@tailwindcss/forms': ^0.3.2
       '@tailwindcss/typography': ^0.4.0
@@ -420,7 +420,7 @@ importers:
     dependencies:
       '@babel/core': 7.13.14
       '@prefresh/babel-plugin': 0.4.1
-      '@prefresh/vite': 2.1.1_rollup@2.44.0+vite@2.1.5
+      '@prefresh/vite': 2.2.0_rollup@2.44.0+vite@2.1.5
       mime: 2.5.2
       rollup: 2.44.0
       tslib: 2.2.0
@@ -434,7 +434,7 @@ importers:
     specifiers:
       '@babel/core': ^7.13.14
       '@prefresh/babel-plugin': 0.4.1
-      '@prefresh/vite': ^2.1.1
+      '@prefresh/vite': ^2.2.0
       '@types/mime': ^2.0.3
       '@types/node': ^14.14.37
       ava: ^3.15.0
@@ -2282,7 +2282,7 @@ packages:
   /@prefresh/utils/1.1.1:
     resolution:
       integrity: sha512-MUhT5m2XNN5NsZl4GnpuvlzLo6VSTa/+wBfBd3fiWUvHGhv0GF9hnA1pd//v0uJaKwUnVRQ1hYElxCV7DtYsCQ==
-  /@prefresh/vite/2.1.1_preact@10.5.13+vite@2.1.5:
+  /@prefresh/vite/2.2.0_preact@10.5.13+vite@2.1.5:
     dependencies:
       '@babel/core': 7.13.14
       '@prefresh/babel-plugin': 0.4.1
@@ -2296,8 +2296,8 @@ packages:
       preact: ^10.4.0
       vite: '>=2.0.0-beta.3'
     resolution:
-      integrity: sha512-E/nSPUVJL3GBXSDFZimmS+fafx04Clb1bjqP/ZYNL+fVWTYo+dFMwd8VUUXJrrYzpBVwtq1EUz80u03iRcr12A==
-  /@prefresh/vite/2.1.1_rollup@2.44.0+vite@2.1.5:
+      integrity: sha512-MDjbA9TwokPTyYSTFDIekwCoUnY+bQvbFtDB2M0DxGMsgqUdq+qAUC/4X6bu/no6TCiA7yjyAd0LizWF6nufbw==
+  /@prefresh/vite/2.2.0_rollup@2.44.0+vite@2.1.5:
     dependencies:
       '@babel/core': 7.13.14
       '@prefresh/babel-plugin': 0.4.1
@@ -2311,7 +2311,7 @@ packages:
       rollup: '*'
       vite: '>=2.0.0-beta.3'
     resolution:
-      integrity: sha512-E/nSPUVJL3GBXSDFZimmS+fafx04Clb1bjqP/ZYNL+fVWTYo+dFMwd8VUUXJrrYzpBVwtq1EUz80u03iRcr12A==
+      integrity: sha512-MDjbA9TwokPTyYSTFDIekwCoUnY+bQvbFtDB2M0DxGMsgqUdq+qAUC/4X6bu/no6TCiA7yjyAd0LizWF6nufbw==
   /@react-google-maps/api/2.1.1:
     dependencies:
       '@googlemaps/js-api-loader': 1.11.1
@@ -2957,7 +2957,7 @@ packages:
     dev: true
     resolution:
       integrity: sha512-5teOsQWABXHHBFP9y3skS5P3d/WfWXpv3FUpy+LorMrNYaT9pI4oLMQX7jzQ2KklNpGpWHzdCXTDT2Y3XGlZBw==
-  /anymatch/3.1.1:
+  /anymatch/3.1.2:
     dependencies:
       normalize-path: 3.0.0
       picomatch: 2.2.2
@@ -2965,7 +2965,7 @@ packages:
     engines:
       node: '>= 8'
     resolution:
-      integrity: sha512-mM8522psRCqzV+6LhomX5wgp25YVibjh8Wj23I5RPkPppSVSjyKD2A2mBJmWGa+KN7f2D6LNh9jkBCeyLktzjg==
+      integrity: sha512-P43ePfOAIupkguHUycrc4qJ9kz8ZiuOUijaETwX7THt0Y/GNK7v0aa8rY816xWjZ7rJdA5XdMcpVFTKMq+RvWg==
   /argparse/1.0.10:
     dependencies:
       sprintf-js: 1.0.3
@@ -3407,7 +3407,7 @@ packages:
     dependencies:
       caniuse-lite: 1.0.30001207
       colorette: 1.2.2
-      electron-to-chromium: 1.3.708
+      electron-to-chromium: 1.3.709
       escalade: 3.1.1
       node-releases: 1.1.71
     engines:
@@ -3561,7 +3561,7 @@ packages:
       integrity: sha512-kWWXztvZ5SBQV+eRgKFeh8q5sLuZY2+8WUIzlxWVTg+oGwY14qylx1KbKzHd8P6ZYkAg0xyIDU9JMHhyJMZ1jw==
   /chokidar/3.5.1:
     dependencies:
-      anymatch: 3.1.1
+      anymatch: 3.1.2
       braces: 3.0.2
       glob-parent: 5.1.2
       is-binary-path: 2.1.0
@@ -4302,9 +4302,9 @@ packages:
     requiresBuild: true
     resolution:
       integrity: sha512-7vmuyh5+kuUyJKePhQfRQBhXV5Ce+RnaeeQArKu1EAMpL3WbgMt5WG6uQZpEVvYSSsxMXRKOewtDk9RaTKXRlA==
-  /electron-to-chromium/1.3.708:
+  /electron-to-chromium/1.3.709:
     resolution:
-      integrity: sha512-+A8ggYZ5riOLMcVAuzHx6bforaPzaiLnW1QOMD2SlMYQVi7QQTyQ/WrlZoebIH9ikmgr+tLJGpNITFFCUiQcPw==
+      integrity: sha512-LolItk2/ikSGQ7SN8UkuKVNMBZp3RG7Itgaxj1npsHRzQobj9JjMneZOZfLhtwlYBe5fCJ75k+cVCiDFUs23oA==
   /emittery/0.7.2:
     dev: true
     engines:
@@ -5992,7 +5992,7 @@ packages:
       '@jest/types': 26.6.2
       '@types/graceful-fs': 4.1.5
       '@types/node': 14.14.37
-      anymatch: 3.1.1
+      anymatch: 3.1.2
       fb-watchman: 2.0.1
       graceful-fs: 4.2.6
       jest-regex-util: 26.0.0
@@ -8602,7 +8602,7 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-qpCAvRl9stuOHveKsn7HncJRvv501qIacKzQlO/+Lwxc9+0q2wLyv4Dfvt80/DPn2pqOBsJdDiogXGR9+OvwRw==
-  /supports-hyperlinks/2.1.0:
+  /supports-hyperlinks/2.2.0:
     dependencies:
       has-flag: 4.0.0
       supports-color: 7.2.0
@@ -8610,7 +8610,7 @@ packages:
     engines:
       node: '>=8'
     resolution:
-      integrity: sha512-zoE5/e+dnEijk6ASB6/qrK+oYdm2do1hjoLWrqUC/8WEIW1gbxFcKuBof7sW8ArN6e+AYvsE8HBGiVRWL/F5CA==
+      integrity: sha512-6sXEzV5+I5j8Bmq9/vUphGRM/RJNT9SCURJLjwfOg51heRtguGWDzcaBlgAzKhQa0EVNpPEKzQuBwZ8S8WaCeQ==
   /symbol-tree/3.2.4:
     dev: true
     resolution:
@@ -8696,7 +8696,7 @@ packages:
   /terminal-link/2.1.1:
     dependencies:
       ansi-escapes: 4.3.2
-      supports-hyperlinks: 2.1.0
+      supports-hyperlinks: 2.2.0
     dev: true
     engines:
       node: '>=8'
@@ -9456,16 +9456,18 @@ packages:
       node: '>=0.4'
     resolution:
       integrity: sha512-LKYU1iAXJXUgAXn9URjiu+MWhyUXHsvfp7mcuYm9dSUKK0/CjtrUwFAxD82/mCWbtLsGjFIad0wIsod4zrTAEQ==
-  /y18n/4.0.1:
-    dev: true
-    resolution:
-      integrity: sha512-wNcy4NvjMYL8gogWWYAO7ZFWFfHcbdbE57tZO8e4cbpj8tfUcwrwqSl3ad8HxpYWCdXcJUCeKKZS62Av1affwQ==
-  /y18n/5.0.6:
+  /y18n/4.0.2:
     dev: true
     engines:
       node: '>=10'
     resolution:
-      integrity: sha512-PlVX4Y0lDTN6E2V4ES2tEdyvXkeKzxa8c/vo0pxPr/TqbztddTP0yn7zZylIyiAuxerqj0Q5GhpJ1YJCP8LaZQ==
+      integrity: sha512-DnBDwcL54b5xWMM/7RfFg4xs5amYxq2ot49aUfLjQSAracXkGvlZq0txzqr3Pa6Q0ayuCxBcwTzrPUScKY0O8w==
+  /y18n/5.0.7:
+    dev: true
+    engines:
+      node: '>=10'
+    resolution:
+      integrity: sha512-oOhslryvNcA1lB9WYr+M6TMyLkLg81Dgmyb48ZDU0lvR+5bmNDTMz7iobM1QXooaLhbbrcHrlNaABhI6Vo6StQ==
   /yallist/4.0.0:
     dev: true
     resolution:
@@ -9496,7 +9498,7 @@ packages:
       set-blocking: 2.0.0
       string-width: 4.2.2
       which-module: 2.0.0
-      y18n: 4.0.1
+      y18n: 4.0.2
       yargs-parser: 18.1.3
     dev: true
     engines:
@@ -9510,7 +9512,7 @@ packages:
       get-caller-file: 2.0.5
       require-directory: 2.1.1
       string-width: 4.2.2
-      y18n: 5.0.6
+      y18n: 5.0.7
       yargs-parser: 20.2.7
     dev: true
     engines:
