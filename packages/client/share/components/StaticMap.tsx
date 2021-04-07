@@ -1,14 +1,20 @@
 import { Route, Stop } from '@hawaii-bus-plus/types';
 import { h } from 'preact';
 
-export interface Props {
+interface UrlProps {
   route: Route;
   stops: Iterable<Stop>;
   width: number;
   height: number;
 }
 
-export function StaticMap({ route, stops, width, height }: Props) {
+interface Props {
+  url: string;
+  width: number;
+  height: number;
+}
+
+export function staticMapUrl({ route, stops, width, height }: UrlProps) {
   const url = new URL('https://maps.googleapis.com/maps/api/staticmap');
 
   const markers = Array.from(
@@ -22,7 +28,11 @@ export function StaticMap({ route, stops, width, height }: Props) {
   url.searchParams.set('key', import.meta.env.VITE_GOOGLE_MAPS_KEY as string);
   url.searchParams.set('size', `${width}x${height}`);
 
-  const doubleSize = new URL(url.href);
+  return url.href;
+}
+
+export function StaticMap({ url, width, height }: Props) {
+  const doubleSize = new URL(url);
   doubleSize.searchParams.set('scale', '2');
 
   return (
@@ -30,8 +40,8 @@ export function StaticMap({ route, stops, width, height }: Props) {
       class="mx-auto py-6"
       width={width}
       height={height}
-      src={url.href}
-      srcset={`${doubleSize.href} 2x, ${url.href} 1x`}
+      src={url}
+      srcset={`${doubleSize.href} 2x, ${url} 1x`}
       alt="Map displaying bus stops in this route"
     />
   );

@@ -1,7 +1,7 @@
 {
   "extends": "../../tsconfig.base.json",
   "include": ["**/*", "**/*.json"],
-  "references": [],
+  "references": [{ "path": "../../preact-helmet/src" }],
   "compilerOptions": {
     "lib": ["esnext", "dom", "dom.iterable"],
     "types": ["vite/client"],

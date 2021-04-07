@@ -13,9 +13,9 @@
   },
   "dependencies": {
     "@hawaii-bus-plus/data": "workspace:*",
+    "@hawaii-bus-plus/preact-helmet": "workspace:^6.1.0",
     "node-html-parser": "^3.1.3",
     "preact-render-to-string": "^5.1.19",
-    "react-helmet": "^6.1.0",
     "rollup": "^2.44.0",
     "tslib": "^2.2.0",
     "type-fest": "^1.0.1",

@@ -4,8 +4,8 @@ import { JSXInternal } from 'preact/src/jsx';
 import { useFocusTrapped } from '../buttons/FocusTrap';
 import { linkAction, RouterAction } from './action';
 import { initStateFromUrl, routerReducer } from './reducer';
-import { DIRECTIONS_PATH, RouterState, ROUTES_PREFIX } from './state';
-import { directionsToParams } from './url';
+import { selectUrl } from './selector/main';
+import { RouterState } from './state';
 
 interface RouterContext extends RouterState {
   dispatch(action: RouterAction): void;
@@ -45,18 +45,7 @@ export function Router(props: {
   }, []);
 
   useEffect(() => {
-    const url = new URL('/', window.location.href);
-    if (state.main) {
-      if (state.main.path === ROUTES_PREFIX) {
-        const { routeId, tripId = '' } = state.main;
-        url.pathname = `${ROUTES_PREFIX}${routeId}/${tripId}`;
-      } else if (state.main.path === DIRECTIONS_PATH) {
-        url.pathname = DIRECTIONS_PATH;
-        directionsToParams(state.main, url.searchParams);
-      } else {
-        // url.pathname = state.main.path;
-      }
-    }
+    const url = selectUrl(state);
 
     if (state.point?.type === 'stop') {
       url.searchParams.set('stop', state.point.stopId);

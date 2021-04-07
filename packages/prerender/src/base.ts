@@ -10,7 +10,7 @@ import { injectHelmet } from './helmet.js';
 export type RenderFunction = (
   url: URL,
   ...args: unknown[]
-) => Promisable<{ html: string; head?: string }>;
+) => Promisable<{ html: string }>;
 
 export const distFolder = new URL('../../../dist/', import.meta.url);
 export const clientFolder = new URL('../../client/', import.meta.url);
@@ -20,7 +20,12 @@ export async function buildPrerenderCode(
   args: Record<string, unknown> = {},
 ) {
   const root = fileURLToPath(clientFolder);
-  const external = ['preact', 'tailwindcss', 'fs/promises'];
+  const external = [
+    'preact',
+    'tailwindcss',
+    'fs/promises',
+    '@hawaii-bus-plus/preact-helmet',
+  ];
 
   const buildResult = await build({
     root,
@@ -75,14 +80,8 @@ export async function buildPrerenderCode(
   return { code, module, assets, error };
 }
 
-export function renderTemplate(
-  template: string,
-  appHtml: string,
-  headHtml = '',
-) {
-  return template
-    .replace(`<!--app-html-->`, appHtml)
-    .replace(`<!--head-html-->`, headHtml);
+export function renderTemplate(template: string, appHtml: string) {
+  return template.replace(`<!--app-html-->`, appHtml);
 }
 
 interface RenderRoutesOptions {
@@ -92,32 +91,43 @@ interface RenderRoutesOptions {
   write?: boolean;
 }
 
+export interface RenderRoutesResult {
+  fileName: string;
+  source: string;
+}
+
 export async function renderRoutes(
   options: RenderRoutesOptions,
   ...args: unknown[]
-) {
+): Promise<RenderRoutesResult[]> {
+  console.log(`Render ${options.serverEntryPath}`);
   const { templatePath, serverEntryPath, routes, write } = options;
   const templateReady = readFile(new URL(templatePath, distFolder), 'utf8');
 
-  const { module } = await buildPrerenderCode(serverEntryPath);
+  const { module, error } = await buildPrerenderCode(serverEntryPath);
   const render = module.exports.default as RenderFunction;
+  if (error) {
+    throw error;
+  }
 
-  return await Promise.all(
-    routes.map(async (pathname) => {
-      const url = new URL(pathname, 'https://app.hawaiibusplus.com');
-      const { html, head } = await render(url, ...args);
-      const rendered = injectHelmet(
-        renderTemplate(await templateReady, html, head),
-      );
+  const writeJobs: Promise<RenderRoutesResult>[] = [];
+  for (const pathname of routes) {
+    const url = new URL(pathname, 'https://app.hawaiibusplus.com');
+    const { html } = await render(url, ...args);
+    const rendered = injectHelmet(renderTemplate(await templateReady, html));
 
-      const withSuffix = pathname.endsWith('/')
-        ? `${pathname}index.html`
-        : `${pathname}.html`;
-      const destPath = new URL(`.${withSuffix}`, distFolder);
-      if (write) {
-        await writeFile(destPath, rendered, 'utf8');
-      }
-      return { fileName: destPath.href, source: rendered };
-    }),
-  );
+    const withSuffix = pathname.endsWith('/')
+      ? `${pathname}index.html`
+      : `${pathname}.html`;
+    const destPath = new URL(`.${withSuffix}`, distFolder);
+
+    const result = { fileName: destPath.href, source: rendered };
+    if (write) {
+      writeJobs.push(writeFile(destPath, rendered, 'utf8').then(() => result));
+    } else {
+      writeJobs.push(Promise.resolve(result));
+    }
+  }
+
+  return await Promise.all(writeJobs);
 }

@@ -14,6 +14,7 @@
     { "path": "packages/gotrue/src" },
     { "path": "packages/jest-utils/src" },
     { "path": "packages/mnemonist/src" },
+    { "path": "packages/preact-helmet/src" },
     { "path": "packages/prerender/src" },
     { "path": "packages/presentation/src" },
     { "path": "packages/promise-worker/page" },

@@ -1,6 +1,5 @@
 import { Repository } from '@hawaii-bus-plus/data';
 import { Route, Stop, Trip } from '@hawaii-bus-plus/types';
-import { withAppName } from '../all-pages/components/PageTitle';
 import { AppProps } from './App';
 
 const ROUTES_PREFIX = '/share/routes/';
@@ -47,8 +46,4 @@ export async function loadRoute(
   const stops = await stopsReady;
 
   return { route, trips, agency, stops };
-}
-
-export function renderTitle(route: Route) {
-  return withAppName(`${route.route_short_name} · ${route.route_long_name}`);
 }

@@ -1,0 +1,34 @@
+{
+  "name": "@hawaii-bus-plus/preact-helmet",
+  "version": "6.1.0",
+  "private": true,
+  "type": "commonjs",
+  "main": "dist/helmet.cjs",
+  "types": "src/index.d.ts",
+  "scripts": {
+    "build": "tsc --build src",
+    "postbuild": "rollup -c",
+    "format": "prettier **/*.ts --write --ignore-path ../../.prettierignore",
+    "postformat": "eslint **/*.ts"
+  },
+  "dependencies": {
+    "@types/react-helmet": "^6.1.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-alias": "^3.1.2",
+    "@rollup/plugin-commonjs": "^18.0.0",
+    "@rollup/plugin-node-resolve": "^11.2.1",
+    "preact": "^10.5.13",
+    "prettier": "^2.2.1",
+    "react-helmet": "^6.1.0",
+    "rollup": "^2.44.0",
+    "typescript": "^4.2.3"
+  },
+  "eslintConfig": {
+    "parserOptions": {
+      "project": [
+        "./packages/preact-helmet/*/tsconfig.json"
+      ]
+    }
+  }
+}

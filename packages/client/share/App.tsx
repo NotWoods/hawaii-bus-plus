@@ -1,7 +1,6 @@
 import { MultiMap } from '@hawaii-bus-plus/mnemonist';
 import { Agency, Route, Stop, Trip } from '@hawaii-bus-plus/types';
 import { Fragment, h } from 'preact';
-import { PageTitle } from '../all-pages/components/PageTitle';
 import { colorVariables } from '../page/routes/props';
 import { RouteHeader } from '../page/routes/RouteHeader';
 import { DetailButtons } from '../page/routes/timetable/details/DetailButtons';
@@ -10,10 +9,10 @@ import { extractLinks } from '../worker-info/description';
 import { ExtendedFloatingActionButton } from './components/ExtendedFloatingActionButton';
 import { Footer } from './components/Footer';
 import { PageHeader } from './components/PageHeader';
-import { StaticMap } from './components/StaticMap';
+import { StaticMap, staticMapUrl } from './components/StaticMap';
 import { StopTimeSegments } from './components/StopTimeSegments';
 import { TableOfContents } from './components/TableOfContents';
-import { renderTitle } from './url-to-route';
+import { PageHead } from './PageHead';
 
 export interface AppProps {
   route: Route;
@@ -34,17 +33,16 @@ function groupByDirectionId(
 
 export function App({ route, agency, trips, stops }: AppProps) {
   const idToTrips = groupByDirectionId(trips);
+
+  const mapSize = { width: 640, height: 360 };
+  const mapUrl = staticMapUrl({ ...mapSize, route, stops: stops.values() });
+
   return (
     <>
-      <PageTitle>{renderTitle(route)}</PageTitle>
+      <PageHead route={route} mapUrl={mapUrl} />
       <div class="waves px-4 shadow-lg">
         <PageHeader />
-        <StaticMap
-          route={route}
-          stops={stops.values()}
-          width={640}
-          height={360}
-        />
+        <StaticMap {...mapSize} url={mapUrl} />
       </div>
       <article
         class="grid gap-y-4 share text-black dark:text-white max-w-5xl mx-auto mt-2"

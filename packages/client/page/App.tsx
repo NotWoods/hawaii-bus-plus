@@ -5,6 +5,7 @@ import { MainContent } from './home/MainContent';
 import { googleMapOptions } from './hooks/useLoadGoogleMaps';
 import { MyLocationProvider } from './map/location/context';
 import { MainMap } from './map/MainMap';
+import { PageHead } from './PageHead';
 import { Router } from './router/Router';
 import { RouteDetailProvider } from './routes/timetable/context';
 import { StickySnackbarProvider } from './snackbar/context';
@@ -28,6 +29,7 @@ export function App(props: { initialUrl?: URL }) {
           <StickySnackbarProvider>
             <FocusTrapProvider>
               <MapProvider options={googleMapOptions}>
+                <PageHead />
                 <Main />
               </MapProvider>
             </FocusTrapProvider>

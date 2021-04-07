@@ -1,8 +1,9 @@
 import { ComponentChildren, h } from 'preact';
+import { Head } from '../../all-pages/components/Head';
 import { Logo } from '../../all-pages/components/Logo';
 import { FormType } from './Form';
 import { MouseEventHandler } from './link';
-import { PageTitle } from './Title';
+import { titleContent } from './Title';
 
 export type HeaderType = FormType | 'success' | 'sentConfirmation' | undefined;
 
@@ -106,7 +107,9 @@ export function Header(props: Props) {
 
   return (
     <header class="text-center">
-      <PageTitle type={type} />
+      <Head>
+        <title>{titleContent(type)}</title>
+      </Head>
       <Logo class="justify-center" />
       <h2 class="mt-6 text-4xl font-display font-medium text-gray-100">
         {title}

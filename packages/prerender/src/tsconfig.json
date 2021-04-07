@@ -3,6 +3,7 @@
   "include": ["**/*"],
   "references": [
     { "path": "../../data/node" },
+    { "path": "../../preact-helmet/src" },
     { "path": "../../promise-worker/worker" }
   ],
   "compilerOptions": {

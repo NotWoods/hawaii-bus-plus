@@ -15,6 +15,7 @@ export const handler = createHandler('GET', async (event, context) => {
       ? requestOrigin
       : defaultOrigin,
     'Access-Control-Allow-Credentials': 'true',
+    'Cross-Origin-Resource-Policy': 'same-site',
     Vary: 'Origin',
   };
 

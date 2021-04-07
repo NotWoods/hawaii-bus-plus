@@ -31,10 +31,10 @@ importers:
       typescript: ^4.2.3
   packages/api-gen:
     dependencies:
-      '@hawaii-bus-plus/mnemonist': link:../mnemonist
-      '@hawaii-bus-plus/temporal-utils': link:../temporal-utils
-      '@hawaii-bus-plus/types': link:../types
-      '@hawaii-bus-plus/utils': link:../utils
+      '@hawaii-bus-plus/mnemonist': 'link:../mnemonist'
+      '@hawaii-bus-plus/temporal-utils': 'link:../temporal-utils'
+      '@hawaii-bus-plus/types': 'link:../types'
+      '@hawaii-bus-plus/utils': 'link:../utils'
       csv-parse: 4.15.3
       ix: 4.3.1
       jszip: 3.6.0
@@ -48,10 +48,10 @@ importers:
       type-fest: 1.0.1
       typescript: 4.2.3
     specifiers:
-      '@hawaii-bus-plus/mnemonist': workspace:^0.38.3
-      '@hawaii-bus-plus/temporal-utils': workspace:*
-      '@hawaii-bus-plus/types': workspace:*
-      '@hawaii-bus-plus/utils': workspace:*
+      '@hawaii-bus-plus/mnemonist': 'workspace:^0.38.3'
+      '@hawaii-bus-plus/temporal-utils': 'workspace:*'
+      '@hawaii-bus-plus/types': 'workspace:*'
+      '@hawaii-bus-plus/utils': 'workspace:*'
       '@types/node': ^14.14.37
       ava: ^3.15.0
       csv-parse: ^4.15.3
@@ -65,14 +65,15 @@ importers:
       typescript: ^4.2.3
   packages/client:
     dependencies:
-      '@hawaii-bus-plus/data': link:../data
-      '@hawaii-bus-plus/mnemonist': link:../mnemonist
-      '@hawaii-bus-plus/presentation': link:../presentation
-      '@hawaii-bus-plus/promise-worker': link:../promise-worker
-      '@hawaii-bus-plus/react-google-maps': link:../react-google-maps
-      '@hawaii-bus-plus/temporal-utils': link:../temporal-utils
-      '@hawaii-bus-plus/types': link:../types
-      '@hawaii-bus-plus/utils': link:../utils
+      '@hawaii-bus-plus/data': 'link:../data'
+      '@hawaii-bus-plus/mnemonist': 'link:../mnemonist'
+      '@hawaii-bus-plus/preact-helmet': 'link:../preact-helmet'
+      '@hawaii-bus-plus/presentation': 'link:../presentation'
+      '@hawaii-bus-plus/promise-worker': 'link:../promise-worker'
+      '@hawaii-bus-plus/react-google-maps': 'link:../react-google-maps'
+      '@hawaii-bus-plus/temporal-utils': 'link:../temporal-utils'
+      '@hawaii-bus-plus/types': 'link:../types'
+      '@hawaii-bus-plus/utils': 'link:../utils'
       clsx: 1.1.1
       idb: 6.0.0
       insights-js: 1.2.10
@@ -83,8 +84,8 @@ importers:
       tslib: 2.2.0
     devDependencies:
       '@googlemaps/js-api-loader': 1.11.3
-      '@hawaii-bus-plus/jest-utils': link:../jest-utils
-      '@hawaii-bus-plus/vite-plugins': link:../vite-plugins
+      '@hawaii-bus-plus/jest-utils': 'link:../jest-utils'
+      '@hawaii-bus-plus/vite-plugins': 'link:../vite-plugins'
       '@prefresh/vite': 2.1.1_preact@10.5.13+vite@2.1.5
       '@tailwindcss/aspect-ratio': 0.2.0
       '@tailwindcss/forms': 0.3.2_tailwindcss@2.1.1
@@ -92,6 +93,7 @@ importers:
       '@types/googlemaps': 3.43.3
       '@types/jest': 26.0.22
       '@types/react': 17.0.3
+      '@types/react-helmet': 6.1.0
       cross-env: 7.0.3
       esbuild: 0.11.5
       esbuild-jest: 0.5.0_esbuild@0.11.5
@@ -106,16 +108,17 @@ importers:
       vite-plugin-pwa: 0.6.5
     specifiers:
       '@googlemaps/js-api-loader': ^1.11.3
-      '@hawaii-bus-plus/data': workspace:*
-      '@hawaii-bus-plus/jest-utils': workspace:*
-      '@hawaii-bus-plus/mnemonist': workspace:^0.38.3
-      '@hawaii-bus-plus/presentation': workspace:*
-      '@hawaii-bus-plus/promise-worker': workspace:*
-      '@hawaii-bus-plus/react-google-maps': workspace:*
-      '@hawaii-bus-plus/temporal-utils': workspace:*
-      '@hawaii-bus-plus/types': workspace:*
-      '@hawaii-bus-plus/utils': workspace:*
-      '@hawaii-bus-plus/vite-plugins': workspace:*
+      '@hawaii-bus-plus/data': 'workspace:*'
+      '@hawaii-bus-plus/jest-utils': 'workspace:*'
+      '@hawaii-bus-plus/mnemonist': 'workspace:^0.38.3'
+      '@hawaii-bus-plus/preact-helmet': 'workspace:^6.1.0'
+      '@hawaii-bus-plus/presentation': 'workspace:*'
+      '@hawaii-bus-plus/promise-worker': 'workspace:*'
+      '@hawaii-bus-plus/react-google-maps': 'workspace:*'
+      '@hawaii-bus-plus/temporal-utils': 'workspace:*'
+      '@hawaii-bus-plus/types': 'workspace:*'
+      '@hawaii-bus-plus/utils': 'workspace:*'
+      '@hawaii-bus-plus/vite-plugins': 'workspace:*'
       '@prefresh/vite': ^2.1.1
       '@tailwindcss/aspect-ratio': ^0.2.0
       '@tailwindcss/forms': ^0.3.2
@@ -123,6 +126,7 @@ importers:
       '@types/googlemaps': ^3.43.3
       '@types/jest': ^26.0.22
       '@types/react': ^17.0.3
+      '@types/react-helmet': ^6.1.0
       clsx: ^1.1.1
       cross-env: ^7.0.3
       esbuild: ^0.11.5
@@ -145,9 +149,9 @@ importers:
       vite-plugin-pwa: ^0.6.5
   packages/data:
     dependencies:
-      '@hawaii-bus-plus/mnemonist': link:../mnemonist
-      '@hawaii-bus-plus/types': link:../types
-      '@hawaii-bus-plus/utils': link:../utils
+      '@hawaii-bus-plus/mnemonist': 'link:../mnemonist'
+      '@hawaii-bus-plus/types': 'link:../types'
+      '@hawaii-bus-plus/utils': 'link:../utils'
       idb: 6.0.0
       ix: 4.3.1
       tslib: 2.2.0
@@ -157,9 +161,9 @@ importers:
       prettier: 2.2.1
       typescript: 4.2.3
     specifiers:
-      '@hawaii-bus-plus/mnemonist': workspace:^0.38.3
-      '@hawaii-bus-plus/types': workspace:*
-      '@hawaii-bus-plus/utils': workspace:*
+      '@hawaii-bus-plus/mnemonist': 'workspace:^0.38.3'
+      '@hawaii-bus-plus/types': 'workspace:*'
+      '@hawaii-bus-plus/utils': 'workspace:*'
       '@types/node': ^14.14.37
       ava: ^3.15.0
       idb: ^6.0.0
@@ -170,7 +174,7 @@ importers:
   packages/functions:
     dependencies:
       '@aws-sdk/client-dynamodb': 3.11.0
-      '@hawaii-bus-plus/gotrue': link:../gotrue
+      '@hawaii-bus-plus/gotrue': 'link:../gotrue'
       cookie: 0.4.1
       stripe: 8.142.0
       tslib: 2.2.0
@@ -189,7 +193,7 @@ importers:
       typescript: 4.2.3
     specifiers:
       '@aws-sdk/client-dynamodb': ^3.11.0
-      '@hawaii-bus-plus/gotrue': workspace:^0.9.29
+      '@hawaii-bus-plus/gotrue': 'workspace:^0.9.29'
       '@rollup/plugin-commonjs': ^18.0.0
       '@rollup/plugin-json': ^4.1.0
       '@rollup/plugin-node-resolve': ^11.2.1
@@ -230,14 +234,14 @@ importers:
       prettier: ^2.2.1
   packages/jest-utils:
     dependencies:
-      '@hawaii-bus-plus/types': link:../types
+      '@hawaii-bus-plus/types': 'link:../types'
       tslib: 2.2.0
     devDependencies:
       jest: 26.6.3
       prettier: 2.2.1
       typescript: 4.2.3
     specifiers:
-      '@hawaii-bus-plus/types': workspace:*
+      '@hawaii-bus-plus/types': 'workspace:*'
       jest: ^26.6.3
       prettier: ^2.2.1
       tslib: ^2.2.0
@@ -254,23 +258,51 @@ importers:
       prettier: ^2.2.1
       tslib: ^2.2.0
       typescript: ^4.2.3
+  packages/preact-helmet:
+    dependencies:
+      '@types/react-helmet': 6.1.0
+    devDependencies:
+      '@rollup/plugin-alias': 3.1.2_rollup@2.44.0
+      '@rollup/plugin-commonjs': 18.0.0_rollup@2.44.0
+      '@rollup/plugin-node-resolve': 11.2.1_rollup@2.44.0
+      preact: 10.5.13
+      prettier: 2.2.1
+      react-helmet: 6.1.0
+      rollup: 2.44.0
+      typescript: 4.2.3
+    specifiers:
+      '@rollup/plugin-alias': ^3.1.2
+      '@rollup/plugin-commonjs': ^18.0.0
+      '@rollup/plugin-node-resolve': ^11.2.1
+      '@types/react-helmet': ^6.1.0
+      preact: ^10.5.13
+      prettier: ^2.2.1
+      react-helmet: ^6.1.0
+      rollup: ^2.44.0
+      typescript: ^4.2.3
   packages/prerender:
     dependencies:
-      '@hawaii-bus-plus/data': link:../data
+      '@hawaii-bus-plus/data': 'link:../data'
+      '@hawaii-bus-plus/preact-helmet': 'link:../preact-helmet'
+      node-html-parser: 3.1.3
       preact-render-to-string: 5.1.19_preact@10.5.13
       rollup: 2.44.0
       tslib: 2.2.0
       type-fest: 1.0.1
       vite: 2.1.5
     devDependencies:
+      '@types/react-helmet': 6.1.0
       ava: 3.15.0
       preact: 10.5.13
       prettier: 2.2.1
       tailwindcss: 2.1.1
       typescript: 4.2.3
     specifiers:
-      '@hawaii-bus-plus/data': workspace:*
+      '@hawaii-bus-plus/data': 'workspace:*'
+      '@hawaii-bus-plus/preact-helmet': 'workspace:^6.1.0'
+      '@types/react-helmet': ^6.1.0
       ava: ^3.15.0
+      node-html-parser: ^3.1.3
       preact: ^10.5.13
       preact-render-to-string: ^5.1.19
       prettier: ^2.2.1
@@ -282,9 +314,9 @@ importers:
       vite: ^2.1.5
   packages/presentation:
     dependencies:
-      '@hawaii-bus-plus/temporal-utils': link:../temporal-utils
-      '@hawaii-bus-plus/types': link:../types
-      '@hawaii-bus-plus/utils': link:../utils
+      '@hawaii-bus-plus/temporal-utils': 'link:../temporal-utils'
+      '@hawaii-bus-plus/types': 'link:../types'
+      '@hawaii-bus-plus/utils': 'link:../utils'
       proposal-temporal: 0.7.0
       spherical-geometry-js: 2.0.0
       tslib: 2.2.0
@@ -294,9 +326,9 @@ importers:
       type-fest: 1.0.1
       typescript: 4.2.3
     specifiers:
-      '@hawaii-bus-plus/temporal-utils': workspace:*
-      '@hawaii-bus-plus/types': workspace:*
-      '@hawaii-bus-plus/utils': workspace:*
+      '@hawaii-bus-plus/temporal-utils': 'workspace:*'
+      '@hawaii-bus-plus/types': 'workspace:*'
+      '@hawaii-bus-plus/utils': 'workspace:*'
       ava: ^3.15.0
       prettier: ^2.2.1
       proposal-temporal: ^0.7.0
@@ -342,8 +374,8 @@ importers:
       typescript: ^4.2.3
   packages/temporal-utils:
     dependencies:
-      '@hawaii-bus-plus/types': link:../types
-      '@hawaii-bus-plus/utils': link:../utils
+      '@hawaii-bus-plus/types': 'link:../types'
+      '@hawaii-bus-plus/utils': 'link:../utils'
       proposal-temporal: 0.7.0
       tslib: 2.2.0
     devDependencies:
@@ -351,8 +383,8 @@ importers:
       prettier: 2.2.1
       typescript: 4.2.3
     specifiers:
-      '@hawaii-bus-plus/types': workspace:*
-      '@hawaii-bus-plus/utils': workspace:*
+      '@hawaii-bus-plus/types': 'workspace:*'
+      '@hawaii-bus-plus/utils': 'workspace:*'
       ava: ^3.15.0
       prettier: ^2.2.1
       proposal-temporal: ^0.7.0
@@ -372,40 +404,18 @@ importers:
       typescript: ^4.2.3
   packages/utils:
     dependencies:
-      '@hawaii-bus-plus/types': link:../types
+      '@hawaii-bus-plus/types': 'link:../types'
       tslib: 2.2.0
     devDependencies:
       ava: 3.15.0
       prettier: 2.2.1
       typescript: 4.2.3
     specifiers:
-      '@hawaii-bus-plus/types': workspace:*
+      '@hawaii-bus-plus/types': 'workspace:*'
       ava: ^3.15.0
       prettier: ^2.2.1
       tslib: ^2.2.0
       typescript: ^4.2.3
-  packages/vite-plugin-react-helmet:
-    dependencies:
-      '@types/react-helmet': 6.1.0
-      node-html-parser: 3.1.3
-      tslib: 2.2.0
-    devDependencies:
-      '@types/node': 14.14.37
-      ava: 3.15.0
-      prettier: 2.2.1
-      react-helmet: 6.1.0
-      typescript: 4.2.3
-      vite: 2.1.5
-    specifiers:
-      '@types/node': ^14.14.37
-      '@types/react-helmet': ^6.1.0
-      ava: ^3.15.0
-      node-html-parser: ^3.1.3
-      prettier: ^2.2.1
-      react-helmet: ^6.1.0
-      tslib: ^2.2.0
-      typescript: ^4.2.3
-      vite: ^2.1.5
   packages/vite-plugins:
     dependencies:
       '@babel/core': 7.13.14
@@ -2322,6 +2332,17 @@ packages:
     dev: false
     resolution:
       integrity: sha512-LIqf1T2dVXRaf/gqk/7kEDpRvr1aQGlqOv/p5zwZus3qI6/3qK4jxNpc89gQ2WkCMrGwcI/fTQrnI55BZCxsLA==
+  /@rollup/plugin-alias/3.1.2_rollup@2.44.0:
+    dependencies:
+      rollup: 2.44.0
+      slash: 3.0.0
+    dev: true
+    engines:
+      node: '>=8.0.0'
+    peerDependencies:
+      rollup: ^1.20.0||^2.0.0
+    resolution:
+      integrity: sha512-wzDnQ6v7CcoRzS0qVwFPrFdYA4Qlr+ookA217Y2Z3DPZE1R8jrFNM3jvGgOf6o6DMjbnQIn5lCIJgHPe1Bt3uw==
   /@rollup/plugin-babel/5.3.0_5e7fd6efeecd0601cdf62a5dd59ff63a:
     dependencies:
       '@babel/core': 7.13.14
@@ -2624,7 +2645,6 @@ packages:
   /@types/react-helmet/6.1.0:
     dependencies:
       '@types/react': 17.0.3
-    dev: false
     resolution:
       integrity: sha512-PYRoU1XJFOzQ3BHvWL1T8iDNbRjdMDJMT5hFmZKGbsq09kbSqJy61uwEpTrbTNWDopVphUT34zUSVLK9pjsgYQ==
   /@types/react/17.0.3:
@@ -7890,7 +7910,7 @@ packages:
       request-promise-core: 1.1.4_request@2.88.2
       stealthy-require: 1.1.1
       tough-cookie: 2.5.0
-    deprecated: request-promise-native has been deprecated because it extends the now deprecated request package, see https://github.com/request/request/issues/3142
+    deprecated: 'request-promise-native has been deprecated because it extends the now deprecated request package, see https://github.com/request/request/issues/3142'
     dev: true
     engines:
       node: '>=0.12.0'
@@ -7920,7 +7940,7 @@ packages:
       tough-cookie: 2.5.0
       tunnel-agent: 0.6.0
       uuid: 3.4.0
-    deprecated: request has been deprecated, see https://github.com/request/request/issues/3142
+    deprecated: 'request has been deprecated, see https://github.com/request/request/issues/3142'
     dev: true
     engines:
       node: '>= 6'
@@ -7963,7 +7983,7 @@ packages:
     resolution:
       integrity: sha512-qYg9KP24dD5qka9J47d0aVky0N+b4fTU89LN9iDnjB5waksiC49rvMB0PrUJQGoTmH50XPiqOvAjDfaijGxYZw==
   /resolve-url/0.2.1:
-    deprecated: https://github.com/lydell/resolve-url#deprecated
+    deprecated: 'https://github.com/lydell/resolve-url#deprecated'
     dev: true
     resolution:
       integrity: sha1-LGN/53yJOv0qZj/iGqkIAGjiBSo=
@@ -9017,7 +9037,7 @@ packages:
     resolution:
       integrity: sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==
   /urix/0.1.0:
-    deprecated: Please see https://github.com/lydell/urix#deprecated
+    deprecated: 'Please see https://github.com/lydell/urix#deprecated'
     dev: true
     resolution:
       integrity: sha1-2pN/emLiH+wf0Y1Js1wpNQZ6bHI=

@@ -15,6 +15,7 @@
   "dependencies": {
     "@hawaii-bus-plus/data": "workspace:*",
     "@hawaii-bus-plus/mnemonist": "workspace:^0.38.3",
+    "@hawaii-bus-plus/preact-helmet": "workspace:^6.1.0",
     "@hawaii-bus-plus/presentation": "workspace:*",
     "@hawaii-bus-plus/promise-worker": "workspace:*",
     "@hawaii-bus-plus/react-google-maps": "workspace:*",
@@ -41,6 +42,7 @@
     "@types/googlemaps": "^3.43.3",
     "@types/jest": "^26.0.22",
     "@types/react": "^17.0.3",
+    "@types/react-helmet": "^6.1.0",
     "cross-env": "^7.0.3",
     "esbuild": "^0.11.5",
     "esbuild-jest": "^0.5.0",
