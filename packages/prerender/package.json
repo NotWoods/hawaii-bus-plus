@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "prebuild": "pnpm run build --filter @hawaii-bus-plus/preact-helmet",
     "build": "tsc --build src",
     "postbuild": "node src/build.js",
     "format": "prettier **/*.ts --write --ignore-path ../../.prettierignore",
