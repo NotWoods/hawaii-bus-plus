@@ -14,16 +14,21 @@ export function injectHelmet(html: string) {
   const helmet = Helmet.renderStatic();
   const root = parse(html);
 
-  root
-    .querySelector('html')
-    ?.setAttributes(
-      helmet.htmlAttributes.toComponent() as Record<string, string>,
-    );
-  root
-    .querySelector('body')
-    ?.setAttributes(
-      helmet.bodyAttributes.toComponent() as Record<string, string>,
-    );
+  function addAttributes(selector: string, attributes: Record<string, string>) {
+    const element = root.querySelector(selector);
+    if (element) {
+      element.setAttributes({ ...element.attributes, ...attributes });
+    }
+  }
+
+  addAttributes(
+    'html',
+    helmet.htmlAttributes.toComponent() as Record<string, string>,
+  );
+  addAttributes(
+    'body',
+    helmet.bodyAttributes.toComponent() as Record<string, string>,
+  );
 
   root.querySelector('title')?.remove();
   const head = root.querySelector('head');
