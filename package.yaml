@@ -4,7 +4,6 @@ version: 5.0.0
 scripts:
   api: 'pnpm run api:client --filter @hawaii-bus-plus/api-gen'
   build: >-
-    del-cli dist/**/*
     pnpm run build --filter @hawaii-bus-plus/preact-helmet &&
     pnpm run build --filter @hawaii-bus-plus/client &&
     pnpm run api:dist --filter @hawaii-bus-plus/api-gen &&
