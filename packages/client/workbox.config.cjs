@@ -1,7 +1,4 @@
-// @ts-check
-
-/** @type {import('workbox-build').GenerateSWConfig} */
-const config = {
+module.exports = {
   swDest: '../../dist/sw.js',
   globDirectory: '../../dist/',
   globPatterns: [
@@ -23,5 +20,3 @@ const config = {
   ],
   dontCacheBustURLsMatching: new RegExp('^assets/'),
 };
-
-module.exports = config;
