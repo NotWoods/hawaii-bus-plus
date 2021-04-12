@@ -12,7 +12,7 @@ import { selectOpenRoute } from '../../router/selector/main';
 import { NOW } from '../../time/input/symbol';
 import { RouteDetailContext } from './context';
 import { TimetableDetails } from './info/TimetableDetails';
-import { TripName } from './info/TimetableDirectionsDetail';
+import { TripName } from './info/TripName';
 import { TripSelector } from './info/TripSelector';
 import { RouteDetailsCard } from './RouteDetails';
 import { StopTimeSegmentList } from './stop-time/StopTimeSegmentList';

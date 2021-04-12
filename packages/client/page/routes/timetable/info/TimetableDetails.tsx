@@ -61,10 +61,12 @@ export function TimetableDetails(props: Props) {
         ref={scrollEl}
         onScroll={handleScroll}
       >
-        {directionsDetails.map((directionDetails) => (
+        {directionsDetails.map((directionDetails, id) => (
           <TimetableDirectionsDetail
+            key={id}
             directionDetails={directionDetails}
             agency={agency}
+            active={id === directionId}
           >
             <Spacer />
           </TimetableDirectionsDetail>

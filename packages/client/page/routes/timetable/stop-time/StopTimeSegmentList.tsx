@@ -1,6 +1,7 @@
 import { StopTimeData } from '@hawaii-bus-plus/presentation';
 import { Stop } from '@hawaii-bus-plus/types';
 import { h } from 'preact';
+import { useListKeyboardNav } from '../../../hooks/useListKeyboardNav';
 import { StopTimeSegment } from './StopTimeSegment';
 
 interface Props {
@@ -26,8 +27,18 @@ export function stopTimeKeys() {
 export function StopTimeSegmentList(props: Props) {
   const makeKey = stopTimeKeys();
 
+  const handleArrowKey = useListKeyboardNav((evt, listItem) => {
+    switch (evt.key) {
+      case 'ArrowUp':
+        return listItem.previousElementSibling;
+      case 'ArrowDown':
+        return listItem.nextElementSibling;
+    }
+    return undefined;
+  }, []);
+
   return (
-    <ul class="px-8">
+    <ul class="px-8" onKeyDown={handleArrowKey}>
       {props.stopTimes.map((stopTime) => (
         <li>
           <StopTimeSegment

@@ -3,49 +3,20 @@ import { last } from '@hawaii-bus-plus/utils';
 import { ComponentChildren, h } from 'preact';
 import { DirectionDetails } from '../../../../worker-info/trip-details';
 import timeIcon from '../../../icons/access_time.svg';
-import busIcon from '../../../icons/directions_bus.svg';
 import { Icon } from '../../../icons/Icon';
-import { BLANK } from '../../badge/RouteBadge';
 import { EndedAt, ReachesAt, StartedFrom } from './StartedFrom';
+import { BaseDetails } from './TripName';
 
 interface Props {
   directionDetails: DirectionDetails;
   agency: Agency;
   children?: ComponentChildren;
-}
-
-function BaseDetails(props: { children: ComponentChildren }) {
-  return (
-    <div class="px-4 snap-start">
-      <div class="shadow p-4 pl-12 bg-white dark:bg-gray-700 relative h-full">
-        {props.children}
-      </div>
-    </div>
-  );
-}
-
-export function TripName(props: {
-  tripShortName?: string;
-  serviceDays?: string;
-}) {
-  const { tripShortName = BLANK, serviceDays = BLANK } = props;
-  return (
-    <header>
-      <BaseDetails>
-        <Icon
-          src={busIcon}
-          alt=""
-          class="absolute top-5 left-3 filter dark:invert"
-        />
-        <p class="text-lg">{tripShortName}</p>
-        <p>{serviceDays}</p>
-      </BaseDetails>
-    </header>
-  );
+  active?: boolean;
 }
 
 export function TimetableDirectionsDetail(props: Props) {
   const { closestTrip } = props.directionDetails;
+  const tabIndex = props.active ? 0 : -1;
 
   return (
     <BaseDetails>
@@ -55,12 +26,13 @@ export function TimetableDirectionsDetail(props: Props) {
           alt=""
           class="absolute top-5 left-3 filter dark:invert"
         />
-        <ReachesAt closestTrip={closestTrip} />
+        <ReachesAt closestTrip={closestTrip} tabIndex={tabIndex} />
         <StartedFrom
           stopTime={closestTrip.stopTimes[0]}
           agency={props.agency}
+          tabIndex={tabIndex}
         />
-        <EndedAt stopTime={last(closestTrip.stopTimes)} />
+        <EndedAt stopTime={last(closestTrip.stopTimes)} tabIndex={tabIndex} />
       </div>
       {props.children}
     </BaseDetails>

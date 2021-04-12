@@ -6,7 +6,7 @@ import NearbyWorker from '../../worker-nearby/nearby?worker';
 import { LoadingBar } from '../buttons/LoadingBar';
 import { useDelay, usePromise, useWorker } from '../hooks';
 import { dbInitialized } from '../hooks/api';
-import { SearchBar } from '../search/SearchBar';
+import { SearchBarButton } from '../search/SearchBar';
 import { emptyClosestResults } from '../search/simple/places-autocomplete';
 import { NearbyRoutes } from '../stop/NearbyRoutes';
 import { Greeting } from './Greeting';
@@ -67,7 +67,7 @@ export function Home(props: Props) {
   return (
     <>
       <Greeting />
-      <SearchBar onClick={props.onSearch} />
+      <SearchBarButton onClick={props.onSearch} />
       {content}
     </>
   );

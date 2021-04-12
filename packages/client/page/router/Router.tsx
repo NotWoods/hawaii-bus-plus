@@ -72,9 +72,9 @@ interface LinkProps
 /**
  * Element that displays sticky alerts
  */
-export function Link({ action, ...props }: LinkProps) {
+export function Link({ action, tabIndex, ...props }: LinkProps) {
   const { dispatch } = useContext(RouterContext);
-  const trapped = useFocusTrapped();
+  const trapped = useFocusTrapped(tabIndex);
   return (
     <a
       {...props}

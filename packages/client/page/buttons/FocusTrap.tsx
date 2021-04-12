@@ -20,7 +20,7 @@ export function FocusTrapProvider(props: { children: ComponentChildren }) {
   );
 }
 
-export function useFocusTrapped() {
+export function useFocusTrapped(override?: number) {
   const { trapped } = useContext(FocusTrapContext);
-  return trapped;
+  return override != undefined ? override : trapped;
 }

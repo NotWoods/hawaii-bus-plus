@@ -10,13 +10,18 @@ const linkClass = 'hover:underline';
 
 interface ReachesProps {
   closestTrip: DirectionDetails['closestTrip'];
+  tabIndex?: number;
 }
 
-export function ReachesAt({ closestTrip }: ReachesProps) {
+export function ReachesAt({ closestTrip, tabIndex }: ReachesProps) {
   return (
     <p class="text-lg">
       {'Reaches '}
-      <Link href={`?stop=${closestTrip.stop}`} class={linkClass}>
+      <Link
+        href={`?stop=${closestTrip.stop}`}
+        class={linkClass}
+        tabIndex={tabIndex}
+      >
         {closestTrip.stopName}
       </Link>{' '}
       <RelativeDurationElement duration={closestTrip.offset} />
@@ -26,13 +31,18 @@ export function ReachesAt({ closestTrip }: ReachesProps) {
 
 interface EndProps {
   stopTime: StopTimeData;
+  tabIndex?: number;
 }
 
-export function EndedAt({ stopTime }: EndProps) {
+export function EndedAt({ stopTime, tabIndex }: EndProps) {
   return (
     <p>
       {'Last stop at '}
-      <Link href={`?stop=${stopTime.stop.stop_id}`} class={linkClass}>
+      <Link
+        href={`?stop=${stopTime.stop.stop_id}`}
+        class={linkClass}
+        tabIndex={tabIndex}
+      >
         {stopTime.stop.stop_name}
       </Link>
     </p>
@@ -43,11 +53,15 @@ interface StartProps extends EndProps {
   agency: Pick<Agency, 'agency_timezone'>;
 }
 
-export function StartedFrom({ stopTime, agency }: StartProps) {
+export function StartedFrom({ stopTime, agency, tabIndex }: StartProps) {
   return (
     <p>
       Started from{' '}
-      <Link href={`?stop=${stopTime.stop.stop_id}`} class={linkClass}>
+      <Link
+        href={`?stop=${stopTime.stop.stop_id}`}
+        class={linkClass}
+        tabIndex={tabIndex}
+      >
         {stopTime.stop.stop_name}
       </Link>{' '}
       at{' '}

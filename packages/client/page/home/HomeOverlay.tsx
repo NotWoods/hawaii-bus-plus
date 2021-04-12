@@ -22,7 +22,11 @@ export function HomeOverlay() {
       return (
         <SearchBase
           icon={<MenuIcon open={menuOpen} />}
-          logo={<Logo />}
+          logo={
+            <a href="/">
+              <Logo />
+            </a>
+          }
           onButtonClick={() => setMenuOpen(!menuOpen)}
         >
           {Menu ? <Menu open={menuOpen} labelledBy="appBarUp" /> : undefined}
