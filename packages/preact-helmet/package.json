@@ -13,7 +13,7 @@
     "postformat": "eslint **/*.ts"
   },
   "dependencies": {
-    "@types/react-helmet": "^6.1.0"
+    "@types/react-helmet": "^6.1.1"
   },
   "devDependencies": {
     "@rollup/plugin-alias": "^3.1.2",
@@ -22,8 +22,8 @@
     "preact": "^10.5.13",
     "prettier": "^2.2.1",
     "react-helmet": "^6.1.0",
-    "rollup": "^2.44.0",
-    "typescript": "^4.2.3"
+    "rollup": "^2.45.1",
+    "typescript": "^4.2.4"
   },
   "eslintConfig": {
     "parserOptions": {

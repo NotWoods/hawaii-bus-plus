@@ -5,7 +5,7 @@ import {
 import prefresh from '@prefresh/vite';
 import { readFileSync } from 'fs';
 import { defineConfig } from 'vite';
-// import { VitePWA } from 'vite-plugin-pwa';
+import { VitePWA } from 'vite-plugin-pwa';
 
 const productionMode = false && process.env.NETLIFY_CONTEXT === 'production';
 /** @type {import('vite').AliasOptions} */
@@ -19,22 +19,22 @@ if (productionMode) {
   alias['proposal-temporal'] = 'proposal-temporal/lib/index.mjs';
 }
 
-/*const manifest = JSON.parse(
+const manifest = JSON.parse(
   readFileSync(
     new URL('./public/manifest.webmanifest', import.meta.url),
     'utf8',
   ),
-);*/
+);
 
 export default defineConfig({
   plugins: [
-    webWorkerCodeSplit(),
+    // webWorkerCodeSplit(),
     emptyPackage('preact/debug'),
     prefresh({
       include: ['{auth,page,share,all-pages}/**/*'],
       exclude: ['worker-*/**'],
     }),
-    /*VitePWA({
+    VitePWA({
       mode: productionMode ? 'production' : 'development',
       minify: productionMode,
       injectRegister: 'inline',
@@ -46,7 +46,7 @@ export default defineConfig({
         ],
       },
       manifest,
-    }),*/
+    }),
   ],
   resolve: { alias },
   optimizeDeps: {
