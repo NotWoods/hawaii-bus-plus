@@ -1,5 +1,5 @@
 import { ComponentChildren, createContext, h } from 'preact';
-import { useState } from 'preact/hooks';
+import { useCallback, useMemo, useState } from 'preact/hooks';
 import { convertLatLng } from 'spherical-geometry-js';
 import {
   GeolocationErrorCode,
@@ -34,15 +34,26 @@ declare module 'preact/hooks' {
 export function MyLocationProvider(props: { children: ComponentChildren }) {
   const status = usePermission({ name: 'geolocation' });
   const [clicked, setClicked] = useState(false);
-  const [coords, setCoordinates] = useState<
-    google.maps.LatLngLiteral | undefined
-  >();
+  const [latitude, setLatitude] = useState<number | undefined>();
+  const [longitude, setLongitude] = useState<number | undefined>();
   const [error, setError] = useState<GeolocationErrorCode | undefined>(
     GeolocationErrorCode.NOT_YET_LOADED,
   );
 
+  const coords = useMemo<google.maps.LatLngLiteral | undefined>(() => {
+    if (latitude != undefined && longitude != undefined) {
+      return { lat: latitude, lng: longitude };
+    } else {
+      return undefined;
+    }
+  }, [latitude, longitude]);
+
+  const onButtonClick = useCallback(() => setClicked(true), []);
+
   function onFetchSuccess(coords: Coordinates) {
-    setCoordinates(convertLatLng(coords).toJSON());
+    const { lat, lng } = convertLatLng(coords).toJSON();
+    setLatitude(lat);
+    setLongitude(lng);
     setError(undefined);
     setClicked(false);
   }
@@ -56,7 +67,7 @@ export function MyLocationProvider(props: { children: ComponentChildren }) {
 
       function fallbackGeolocation(err?: GeolocationPositionError) {
         setClicked(false);
-        if (!coords) {
+        if (latitude == undefined || longitude == undefined) {
           locationFromIp(signal).then(onFetchSuccess, () =>
             setError((currentErr) => {
               if (err) {
@@ -88,7 +99,7 @@ export function MyLocationProvider(props: { children: ComponentChildren }) {
           }
           break;
         case 'denied':
-          if (!coords) {
+          if (latitude == undefined || longitude == undefined) {
             fallbackGeolocation();
             if (clicked) {
               // TODO tell user geolocation is denied
@@ -101,12 +112,8 @@ export function MyLocationProvider(props: { children: ComponentChildren }) {
 
       return () => navigator.geolocation.clearWatch(watchId);
     },
-    [clicked, status, coords],
+    [clicked, status, latitude, longitude],
   );
-
-  function onButtonClick() {
-    setClicked(true);
-  }
 
   return (
     <MyLocationContext.Provider value={{ coords, error, onButtonClick }}>

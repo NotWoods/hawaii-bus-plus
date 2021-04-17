@@ -6,7 +6,7 @@ import {
   mapTypeControlOptions,
 } from '@hawaii-bus-plus/react-google-maps';
 import { h } from 'preact';
-import { useContext, useMemo } from 'preact/hooks';
+import { useCallback, useContext, useMemo } from 'preact/hooks';
 import { useDarkMode, useScreens } from '../hooks';
 import { openPlace, setMarker } from '../router/action/point';
 import { RouterContext } from '../router/Router';
@@ -21,15 +21,18 @@ export function MapContent() {
   const darkMode = useDarkMode();
   const { dispatch } = useContext(RouterContext);
 
-  function handleClick(evt: MapMouseEvent) {
-    const event = evt as MapMouseEvent & Partial<google.maps.IconMouseEvent>;
-    event.stop();
-    if (event.placeId) {
-      dispatch(openPlace(event.placeId, event.latLng.toJSON()));
-    } else {
-      dispatch(setMarker(event.latLng.toJSON()));
-    }
-  }
+  const handleClick = useCallback(
+    (evt: MapMouseEvent) => {
+      const event = evt as MapMouseEvent & Partial<google.maps.IconMouseEvent>;
+      event.stop();
+      if (event.placeId) {
+        dispatch(openPlace(event.placeId, event.latLng.toJSON()));
+      } else {
+        dispatch(setMarker(event.latLng.toJSON()));
+      }
+    },
+    [dispatch],
+  );
 
   const options = useMemo<google.maps.MapOptions>(() => {
     const options: google.maps.MapOptions = {
