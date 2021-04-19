@@ -10,7 +10,7 @@ import type {
 } from '../../worker-nearby/directions/format';
 import { isJourneyTripSegment } from '../directions/JourneySegment';
 import { RouterContext } from '../router/Router';
-import { DIRECTIONS_PATH, RouterState } from '../router/state';
+import { selectJourney } from '../router/selector/main';
 import { RouteDetailContext } from '../routes/timetable/context';
 import { StopStationMarkers } from './markers/StopStationMarkers';
 import { ShapeLine } from './ShapeLine';
@@ -20,14 +20,6 @@ interface Props {
   journey?: Journey;
   details?: RouteDetails;
   directionId: 0 | 1;
-}
-
-function getJourney({ main }: Pick<RouterState, 'main'>) {
-  if (main?.path === DIRECTIONS_PATH) {
-    return main.journey;
-  } else {
-    return undefined;
-  }
 }
 
 const RouteGlyphsContent = memo(
@@ -92,7 +84,7 @@ const RouteGlyphsContent = memo(
 );
 
 export function RouteGlyphs(props: Pick<Props, 'darkMode'>) {
-  const journey = getJourney(useContext(RouterContext));
+  const journey = selectJourney(useContext(RouterContext));
   const { details, directionId } = useContext(RouteDetailContext);
 
   return (

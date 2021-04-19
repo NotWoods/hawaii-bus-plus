@@ -137,3 +137,8 @@ package = "@netlify/plugin-sitemap"
     manifest-src 'self';
     object-src 'none';
     base-uri 'none';'''
+    Permissions-Policy = '''geolocation=(self),
+    camera=(),
+    microphone=(),
+    usb=(),
+    interest-cohort=()'''

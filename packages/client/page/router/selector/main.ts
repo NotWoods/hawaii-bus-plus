@@ -9,6 +9,14 @@ export function selectOpenRoute({ main }: Pick<RouterState, 'main'>) {
   }
 }
 
+export function selectJourney({ main }: Pick<RouterState, 'main'>) {
+  if (main?.path === DIRECTIONS_PATH) {
+    return main.journey;
+  } else {
+    return undefined;
+  }
+}
+
 export function selectUrl(
   { main }: Pick<RouterState, 'main'>,
   base = window.location.href,

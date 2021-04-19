@@ -1,7 +1,7 @@
 import { readFile, writeFile } from 'fs/promises';
 import { createRequire } from 'module';
 import { resolve } from 'path';
-import type { OutputAsset } from 'rollup';
+import type { OutputAsset, RollupOutput } from 'rollup';
 import { Promisable } from 'type-fest';
 import { fileURLToPath, URL } from 'url';
 import { build } from 'vite';
@@ -55,7 +55,7 @@ export async function buildPrerenderCode(
   if (Array.isArray(buildResult)) {
     throw new Error(`output from vite is an array`);
   }
-  const { output } = buildResult;
+  const { output } = buildResult as RollupOutput;
 
   const [{ code, fileName }] = output;
   const module = { exports: {} as { [name: string]: unknown } };
