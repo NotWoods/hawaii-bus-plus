@@ -1,8 +1,9 @@
 import {
   BIKE_POINT_TYPE,
+  MARKER_POINT_TYPE,
   STOP_POINT_TYPE,
+  USER_POINT_TYPE,
 } from '@hawaii-bus-plus/presentation';
-import { StationInformation } from '@hawaii-bus-plus/types';
 import { RouterState } from '../state';
 
 export function selectPoint(state: Pick<RouterState, 'point'>) {
@@ -16,7 +17,7 @@ export function selectPoint(state: Pick<RouterState, 'point'>) {
 export function selectUserPoint({ point }: Pick<RouterState, 'point'>) {
   if (
     point != undefined &&
-    (point.type === 'marker' || point.type === 'user')
+    (point.type === MARKER_POINT_TYPE || point.type === USER_POINT_TYPE)
   ) {
     return point;
   } else {

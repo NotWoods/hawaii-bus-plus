@@ -2,22 +2,15 @@ import { h } from 'preact';
 import { useContext } from 'preact/hooks';
 import { Button } from '../../../buttons/Button';
 import swapIcon from '../../../icons/swap_horiz.svg';
-import { RouteDetailContext } from '../context';
+import { swapDirectionAction } from '../../reducer/action';
+import { RouteDetailContext } from '../../reducer/context';
 
 interface Props {
   class?: string;
 }
 
-function swapDirection(currentDirection: 0 | 1) {
-  if (currentDirection === 0) {
-    return 1;
-  } else {
-    return 0;
-  }
-}
-
 export function SwitchDirectionButton(props: Props) {
-  const { directionIds, setDirectionId } = useContext(RouteDetailContext);
+  const { directionIds, dispatch } = useContext(RouteDetailContext);
 
   if (directionIds.size >= 2) {
     return (
@@ -25,7 +18,7 @@ export function SwitchDirectionButton(props: Props) {
         class={props.class}
         iconClass="filter dark:invert"
         icon={swapIcon}
-        onClick={() => setDirectionId(swapDirection)}
+        onClick={() => dispatch(swapDirectionAction())}
       >
         Switch direction
       </Button>

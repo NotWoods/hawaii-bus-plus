@@ -4,7 +4,8 @@ import { h } from 'preact';
 import { useContext, useEffect, useRef } from 'preact/hooks';
 import { useCallback } from 'react';
 import { DirectionDetails } from '../../../../worker-info/trip-details';
-import { RouteDetailContext } from '../context';
+import { setDirectionAction } from '../../reducer/action';
+import { RouteDetailContext } from '../../reducer/context';
 import { SwitchDirectionButton } from './SwitchDirectionButton';
 import './TimetableDetails.css';
 import { TimetableDirectionsDetail } from './TimetableDirectionsDetail';
@@ -25,7 +26,7 @@ function Spacer() {
 }
 
 export function TimetableDetails(props: Props) {
-  const { directionId, setDirectionId } = useContext(RouteDetailContext);
+  const { directionId, dispatch } = useContext(RouteDetailContext);
   const { directionsDetails, agency } = props;
   const scrollEl = useRef<HTMLDivElement>();
 
@@ -37,9 +38,9 @@ export function TimetableDetails(props: Props) {
       const width = scrollEl.current.offsetWidth;
       const newDirectionId = Math.round(scrollPos / width) as 0 | 1;
 
-      setDirectionId(newDirectionId);
+      dispatch(setDirectionAction(newDirectionId));
     }, 300),
-    [setDirectionId],
+    [dispatch],
   );
 
   // Set the scroll position when the direction ID shifts

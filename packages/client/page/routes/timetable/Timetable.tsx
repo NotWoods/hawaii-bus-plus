@@ -10,7 +10,7 @@ import { resetTripAction, setTripAction } from '../../router/action/main';
 import { useDispatch, useSelector } from '../../router/hooks';
 import { selectOpenRoute } from '../../router/selector/main';
 import { NOW } from '../../time/input/symbol';
-import { RouteDetailContext } from './context';
+import { RouteDetailContext } from '../reducer/context';
 import { TimetableDetails } from './info/TimetableDetails';
 import { TripName } from './info/TripName';
 import { TripSelector } from './info/TripSelector';

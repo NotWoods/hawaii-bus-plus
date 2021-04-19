@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { h } from 'preact';
 import { useContext } from 'preact/hooks';
-import { RouteDetailContext } from '../context';
+import { RouteDetailContext } from '../../reducer/context';
 
 export function DirectionIndicator() {
   const { directionId, directionIds } = useContext(RouteDetailContext);

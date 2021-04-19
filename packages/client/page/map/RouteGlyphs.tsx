@@ -11,7 +11,7 @@ import type {
 import { isJourneyTripSegment } from '../directions/JourneySegment';
 import { useSelector } from '../router/hooks';
 import { selectJourney } from '../router/selector/main';
-import { RouteDetailContext } from '../routes/timetable/context';
+import { RouteDetailContext } from '../routes/reducer/context';
 import { StopStationMarkers } from './markers/StopStationMarkers';
 import { ShapeLine } from './ShapeLine';
 
