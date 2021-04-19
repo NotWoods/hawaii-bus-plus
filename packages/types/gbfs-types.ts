@@ -23,11 +23,13 @@ export interface JsonFeed {
   url: string;
 }
 
+export type StationId = Opaque<string, 'bike_station'>;
+
 /**
  * @see https://gbfs.mobilitydata.org/specification#h.jltap5k3s828
  */
 export interface JsonStationInformation {
-  station_id: Opaque<string, 'bike_station'>;
+  station_id: StationId;
   name: string;
   physical_configuration?: string;
   lat: number;

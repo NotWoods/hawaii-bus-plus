@@ -2,6 +2,14 @@ import { Opaque } from 'type-fest';
 import { ColorString, DateString, TimeString } from './data-types';
 import { StationInformation } from './gbfs-types';
 
+export type ServiceId = Opaque<string, 'calendar'>;
+export type RouteId = Opaque<string, 'route'>;
+export type TripId = Opaque<string, 'trip'>;
+export type BlockId = Opaque<string, 'block'>;
+export type StopId = Opaque<string, 'stop'>;
+export type AgencyId = Opaque<string, 'agency'>;
+export type ShapeId = Opaque<string, 'shape'>;
+
 export interface GTFSData {
   routes: { [route_id: string]: Route };
   stops: { [stop_id: string]: Stop };
@@ -13,7 +21,7 @@ export interface GTFSData {
 }
 
 export interface CsvCalendar {
-  service_id: Opaque<string, 'calendar'>;
+  service_id: ServiceId;
   service_name: string;
   monday: boolean;
   tuesday: boolean;
@@ -50,7 +58,7 @@ export interface CsvCalendarDates {
 }
 
 export interface CsvRoute {
-  route_id: Opaque<string, 'route'>;
+  route_id: RouteId;
   route_short_name: string;
   route_long_name: string;
   route_desc: string;
@@ -76,8 +84,8 @@ export interface Route
 export interface CsvTrip {
   route_id: Route['route_id'];
   service_id: Calendar['service_id'];
-  trip_id: Opaque<string, 'trip'>;
-  block_id: Opaque<string, 'block'>;
+  trip_id: TripId;
+  block_id: BlockId;
   shape_id?: Shape['shape_id'];
   direction_id: 0 | 1;
   trip_short_name: string;
@@ -94,7 +102,7 @@ export interface Trip extends TripWithoutTimes {
 }
 
 export interface CsvStop {
-  stop_id: Opaque<string, 'stop'>;
+  stop_id: StopId;
   stop_name: string;
   stop_desc: string;
   stop_lat: number;
@@ -149,7 +157,7 @@ export interface FeedInfo {
 }
 
 export interface CsvAgency {
-  agency_id: Opaque<string, 'agency'>;
+  agency_id: AgencyId;
   agency_name: string;
   agency_url: string;
   agency_timezone: string;
@@ -164,7 +172,7 @@ export interface Agency extends Readonly<CsvAgency> {
 }
 
 export interface CsvShape {
-  shape_id: Opaque<string, 'shape'>;
+  shape_id: ShapeId;
   shape_pt_lat: number;
   shape_pt_lon: number;
   shape_pt_sequence: number;

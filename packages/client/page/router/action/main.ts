@@ -9,17 +9,15 @@ export type MainRouterAction =
   | ReturnType<typeof resetTripAction>
   | ReturnType<typeof openJourney>;
 
-export function setRouteAction(
-  routeId: Route['route_id'],
-): { type: 'route'; routeId: Route['route_id'] } {
-  return { type: 'route', routeId };
+export function setRouteAction(routeId: Route['route_id']) {
+  return { type: 'route', routeId } as const;
 }
 
 export function setTripAction(
   routeId: Route['route_id'],
   tripId: Trip['trip_id'],
-): { type: 'trip'; routeId: Route['route_id']; tripId: Trip['trip_id'] } {
-  return { type: 'trip', routeId, tripId };
+) {
+  return { type: 'trip', routeId, tripId } as const;
 }
 
 export function closeMainAction() {

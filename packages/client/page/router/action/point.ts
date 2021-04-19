@@ -8,27 +8,20 @@ export type PointRouterAction =
   | ReturnType<typeof openPlace>
   | ReturnType<typeof updateUserLocation>;
 
-export function setStopAction(
-  stopId: Stop['stop_id'],
-): { type: 'stop'; stopId: Stop['stop_id'] } {
-  return { type: 'stop', stopId };
+export function setStopAction(stopId: Stop['stop_id']) {
+  return { type: 'stop', stopId } as const;
 }
 
 export function setBikeStationAction(
   stationId: StationInformation['station_id'],
   info: StationInformation,
-): {
-  type: 'bike-station';
-  stationId: StationInformation['station_id'];
-  name: string;
-  position: google.maps.LatLngLiteral;
-} {
+) {
   return {
     type: 'bike-station',
     stationId,
     name: info.name,
     position: info.position,
-  };
+  } as const;
 }
 
 export function closePointAction() {

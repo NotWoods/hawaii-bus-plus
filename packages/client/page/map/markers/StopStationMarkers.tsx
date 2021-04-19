@@ -6,8 +6,6 @@ import MapWorker from '../../../worker-map/map?worker';
 import type { MarkersResponse } from '../../../worker-map/markers';
 import { usePromise, useWorker } from '../../hooks';
 import { dbInitialized } from '../../hooks/api';
-import { useDispatch, useSelector } from '../../router/hooks';
-import { selectPoint } from '../../router/selector/point';
 import { BikeStationMarkers } from './BikeStationMarkers';
 import { StopMarkers } from './StopMarkers';
 
@@ -18,8 +16,6 @@ interface Props {
 }
 
 export function StopStationMarkers({ highlighted, focused, darkMode }: Props) {
-  const dispatch = useDispatch();
-  const point = useSelector(selectPoint);
   const [api, setApi] = useState<MarkersResponse>({
     stops: [],
     bikeStations: [],
@@ -39,14 +35,8 @@ export function StopStationMarkers({ highlighted, focused, darkMode }: Props) {
         highlighted={highlighted}
         focused={focused}
         darkMode={darkMode}
-        point={point}
-        dispatch={dispatch}
       />
-      <BikeStationMarkers
-        stations={api.bikeStations}
-        point={point}
-        dispatch={dispatch}
-      />
+      <BikeStationMarkers stations={api.bikeStations} />
     </>
   );
 }

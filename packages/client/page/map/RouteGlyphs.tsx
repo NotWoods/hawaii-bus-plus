@@ -10,7 +10,6 @@ import type {
 } from '../../worker-nearby/directions/format';
 import { isJourneyTripSegment } from '../directions/JourneySegment';
 import { useSelector } from '../router/hooks';
-import { RouterContext } from '../router/Router';
 import { selectJourney } from '../router/selector/main';
 import { RouteDetailContext } from '../routes/timetable/context';
 import { StopStationMarkers } from './markers/StopStationMarkers';

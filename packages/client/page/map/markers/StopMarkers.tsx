@@ -1,22 +1,24 @@
-import { Point } from '@hawaii-bus-plus/presentation';
 import { MarkerWithData } from '@hawaii-bus-plus/react-google-maps';
 import { ColorString, Stop } from '@hawaii-bus-plus/types';
 import { memoize } from '@hawaii-bus-plus/utils';
 import { Fragment, h } from 'preact';
+import { memo } from 'preact/compat';
 import { useCallback } from 'preact/hooks';
-import { PointRouterAction, setStopAction } from '../../router/action/point';
+import { setStopAction } from '../../router/action/point';
+import { useDispatch, useSelector } from '../../router/hooks';
+import { selectStop } from '../../router/selector/point';
 import { pinsIcon } from '../pins';
 import { SelectableMarker } from './SelectableMarker';
 
 const otherIcon = pinsIcon(0);
 
 interface Props {
+  stops: readonly Stop[];
+  selectedId?: Stop['stop_id'];
   highlighted?: ReadonlyMap<Stop['stop_id'], ColorString>;
   focused?: ReadonlySet<Stop['stop_id']>;
   darkMode?: boolean;
-  point?: Point;
-  stops: readonly Stop[];
-  dispatch(action: PointRouterAction): void;
+  onClick(this: MarkerWithData<Stop>): void;
 }
 
 const makeHighlightIcon = memoize(function highlightIcon(
@@ -33,15 +35,37 @@ const makeHighlightIcon = memoize(function highlightIcon(
   } as unknown) as google.maps.Icon;
 });
 
-export function StopMarkers({
-  point,
-  stops,
-  highlighted,
-  focused,
-  darkMode,
-  dispatch,
-}: Props) {
-  const selectedStopId = point?.type === 'stop' && point.stopId;
+const StopMarkersList = memo(
+  ({ stops, selectedId, highlighted, focused, darkMode, onClick }: Props) => {
+    return (
+      <>
+        {stops.map((stop) => {
+          const highlightColor = highlighted?.get(stop.stop_id);
+          const icon = highlightColor
+            ? makeHighlightIcon(highlightColor, darkMode)
+            : otherIcon;
+
+          return (
+            <SelectableMarker
+              key={stop.stop_id}
+              selected={stop.stop_id === selectedId}
+              focus={focused ? focused.has(stop.stop_id) : true}
+              position={stop.position}
+              icon={icon}
+              name={stop.stop_name}
+              extra={stop}
+              onClick={onClick}
+            />
+          );
+        })}
+      </>
+    );
+  },
+);
+
+export function StopMarkers(props: Omit<Props, 'selectedId' | 'onClick'>) {
+  const selectedStopId = useSelector(selectStop);
+  const dispatch = useDispatch();
 
   const handleClick = useCallback(
     function (this: MarkerWithData<Stop>) {
@@ -52,26 +76,10 @@ export function StopMarkers({
   );
 
   return (
-    <>
-      {stops.map((stop) => {
-        const highlightColor = highlighted?.get(stop.stop_id);
-        const icon = highlightColor
-          ? makeHighlightIcon(highlightColor, darkMode)
-          : otherIcon;
-
-        return (
-          <SelectableMarker
-            key={stop.stop_id}
-            selected={stop.stop_id === selectedStopId}
-            focus={focused ? focused.has(stop.stop_id) : true}
-            position={stop.position}
-            icon={icon}
-            name={stop.stop_name}
-            extra={stop}
-            onClick={handleClick}
-          />
-        );
-      })}
-    </>
+    <StopMarkersList
+      {...props}
+      selectedId={selectedStopId}
+      onClick={handleClick}
+    />
   );
 }

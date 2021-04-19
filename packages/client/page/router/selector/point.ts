@@ -1,4 +1,7 @@
-import { BIKE_POINT_TYPE } from '@hawaii-bus-plus/presentation';
+import {
+  BIKE_POINT_TYPE,
+  STOP_POINT_TYPE,
+} from '@hawaii-bus-plus/presentation';
 import { StationInformation } from '@hawaii-bus-plus/types';
 import { RouterState } from '../state';
 
@@ -21,9 +24,15 @@ export function selectUserPoint({ point }: Pick<RouterState, 'point'>) {
   }
 }
 
-export function selectBikeStation({
-  point,
-}: Pick<RouterState, 'point'>): StationInformation['station_id'] | undefined {
+export function selectStop({ point }: Pick<RouterState, 'point'>) {
+  if (point?.type === STOP_POINT_TYPE) {
+    return point.stopId;
+  } else {
+    return undefined;
+  }
+}
+
+export function selectBikeStation({ point }: Pick<RouterState, 'point'>) {
   if (point?.type === BIKE_POINT_TYPE) {
     return point.stationId;
   } else {
