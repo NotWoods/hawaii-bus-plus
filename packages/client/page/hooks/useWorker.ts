@@ -44,11 +44,15 @@ export function useWorker(workerConstructor: WorkerConstructor) {
       workerRef.current = generateWorker();
     }
 
-    console.info('WorkerRequest:', message);
+    if (import.meta.env.DEV) {
+      console.info('WorkerRequest:', message);
+    }
     const worker = workerRef.current;
     if (worker instanceof PromiseWorker) {
       const result = await worker.postMessage(message, signal);
-      console.info('WorkerResponse:', result);
+      if (import.meta.env.DEV) {
+        console.info('WorkerResponse:', result);
+      }
       return result;
     } else {
       throw worker;
