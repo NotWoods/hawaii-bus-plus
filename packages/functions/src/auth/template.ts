@@ -26,10 +26,7 @@ export async function renderTemplate(
 
   return {
     statusCode,
-    body: template.replace(
-      '<!--head-html-->',
-      `${metaRefresh}${globalContext}`,
-    ),
+    body: template.replace('</head>', `${metaRefresh}${globalContext}</head>`),
     headers,
   };
 }

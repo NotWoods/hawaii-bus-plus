@@ -10,7 +10,9 @@ interface Props extends Omit<FormProps, 'type'> {
 
 export function urlToType(url: URL): HeaderType | undefined {
   let path = url.pathname;
-  if (!path.startsWith('/auth/')) {
+  if (path === '.netlify/functions/auth') {
+    return 'success';
+  } else if (!path.startsWith('/auth/')) {
     return undefined;
   }
   path = path.slice('/auth/'.length);

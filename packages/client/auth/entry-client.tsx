@@ -4,13 +4,6 @@ import { App, urlToType } from './App';
 import { HeaderType } from './components/Header';
 import '../all-pages/main.css';
 
-if (window.location.hostname !== 'localhost') {
-  void import('insights-js').then((insights) => {
-    insights.init('KXNUdTJ9I4iYXHGo');
-    insights.trackPages();
-  });
-}
-
 declare global {
   interface Window {
     ctx?: {
