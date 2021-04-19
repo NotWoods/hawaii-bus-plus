@@ -1,11 +1,18 @@
-import { DIRECTIONS_PATH, RouterState, ROUTES_PREFIX } from '../state';
+import {
+  DIRECTIONS_PATH,
+  OpenRouteState,
+  RouterState,
+  ROUTES_PREFIX,
+} from '../state';
 import { directionsToParams } from '../url';
 
-export function selectOpenRoute({ main }: Pick<RouterState, 'main'>) {
+export function selectOpenRoute({
+  main,
+}: Pick<RouterState, 'main'>): Partial<OpenRouteState> {
   if (main?.path === ROUTES_PREFIX) {
     return main;
   } else {
-    return undefined;
+    return {};
   }
 }
 

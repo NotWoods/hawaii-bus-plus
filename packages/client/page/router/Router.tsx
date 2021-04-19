@@ -1,8 +1,9 @@
 import { ComponentChildren, createContext, h } from 'preact';
-import { useContext, useEffect, useReducer } from 'preact/hooks';
+import { useEffect, useReducer } from 'preact/hooks';
 import { JSXInternal } from 'preact/src/jsx';
 import { useFocusTrapped } from '../buttons/FocusTrap';
 import { linkAction, RouterAction } from './action';
+import { useDispatch } from './hooks';
 import { initStateFromUrl, routerReducer } from './reducer';
 import { selectUrl } from './selector/main';
 import { RouterState } from './state';
@@ -73,7 +74,7 @@ interface LinkProps
  * Element that displays sticky alerts
  */
 export function Link({ action, tabIndex, ...props }: LinkProps) {
-  const { dispatch } = useContext(RouterContext);
+  const dispatch = useDispatch();
   const trapped = useFocusTrapped(tabIndex);
   return (
     <a

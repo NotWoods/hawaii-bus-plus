@@ -1,13 +1,13 @@
 import { Marker } from '@hawaii-bus-plus/react-google-maps';
 import { h } from 'preact';
-import { useContext } from 'preact/hooks';
-import { RouterContext } from '../router/Router';
+import { useSelector } from '../router/hooks';
+import { selectPoint } from '../router/selector/point';
 import { pinsIcon } from './pins';
 
 const placeIcon = pinsIcon(3);
 
 export function PlaceMarker() {
-  const { point } = useContext(RouterContext);
+  const point = useSelector(selectPoint);
 
   switch (point?.type) {
     case 'place':

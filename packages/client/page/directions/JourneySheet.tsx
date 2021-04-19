@@ -1,8 +1,9 @@
 import { h } from 'preact';
-import { useContext } from 'preact/hooks';
+import { useCallback } from 'preact/hooks';
 import type { Journey } from '../../worker-nearby/directions/format';
 import { closeMainAction } from '../router/action/main';
-import { RouterContext } from '../router/Router';
+import { useDispatch, useSelector } from '../router/hooks';
+import { selectJourney } from '../router/selector/main';
 import { BaseSheet } from '../routes/BaseSheet';
 import { useTripBounds } from '../routes/timetable/useTripBounds';
 import { JourneyHeader } from './JourneyHeader';
@@ -11,11 +12,10 @@ import { isJourneyTripSegment, JourneySegment } from './JourneySegment';
 interface Props {
   journey: Journey;
   timeZone: string;
+  onClose?(): void;
 }
 
 export function JourneySheet(props: Props) {
-  const { dispatch } = useContext(RouterContext);
-
   useTripBounds(props.journey.bounds);
 
   return (
@@ -23,7 +23,7 @@ export function JourneySheet(props: Props) {
       <JourneyHeader
         journey={props.journey}
         timeZone={props.timeZone}
-        onClose={() => dispatch(closeMainAction())}
+        onClose={props.onClose}
       />
       <ul className="px-8">
         {props.journey.trips.map((segment, i) => {
@@ -39,4 +39,23 @@ export function JourneySheet(props: Props) {
       </ul>
     </BaseSheet>
   );
+}
+
+export function ConnectedJourneySheet(props: Pick<Props, 'timeZone'>) {
+  const journey = useSelector(selectJourney);
+  const dispatch = useDispatch();
+
+  const onClose = useCallback(() => dispatch(closeMainAction()), [dispatch]);
+
+  if (journey) {
+    return (
+      <JourneySheet
+        journey={journey}
+        timeZone={props.timeZone}
+        onClose={onClose}
+      />
+    );
+  } else {
+    return null;
+  }
 }

@@ -7,7 +7,7 @@ import { DirectionDetails } from '../../../worker-info/trip-details';
 import { LoadingBar } from '../../buttons/LoadingBar';
 import { useDelay } from '../../hooks';
 import { resetTripAction, setTripAction } from '../../router/action/main';
-import { RouterContext } from '../../router/Router';
+import { useDispatch, useSelector } from '../../router/hooks';
 import { selectOpenRoute } from '../../router/selector/main';
 import { NOW } from '../../time/input/symbol';
 import { RouteDetailContext } from './context';
@@ -25,9 +25,8 @@ interface Props {
 }
 
 function useOpenTrip() {
-  const state = useContext(RouterContext);
-  const { dispatch } = state;
-  const { routeId, tripId } = selectOpenRoute(state) ?? {};
+  const dispatch = useDispatch();
+  const { routeId, tripId } = useSelector(selectOpenRoute);
 
   return {
     tripId,

@@ -1,10 +1,9 @@
 import { Route } from '@hawaii-bus-plus/types';
 import { h } from 'preact';
-import { useContext } from 'preact/hooks';
 import { RouteIcon } from '../../all-pages/components/RouteIcon';
 import { CloseButton } from '../buttons/CloseButton';
 import { closeMainAction } from '../router/action/main';
-import { RouterContext } from '../router/Router';
+import { useDispatch } from '../router/hooks';
 import { BLANK } from './badge/RouteBadge';
 import './RouteHeader.css';
 
@@ -17,7 +16,7 @@ interface Props {
 }
 
 export function RouteHeader({ route, showClose }: Props) {
-  const { dispatch } = useContext(RouterContext);
+  const dispatch = useDispatch();
 
   return (
     <header class="route__header grid gap-x-4 items-center px-4 pb-2 md:pb-0 border-b">

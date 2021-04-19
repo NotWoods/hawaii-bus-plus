@@ -29,7 +29,7 @@ function pointDetailsOpen(
 
 export function MainContent() {
   const mdMatches = useScreens('md');
-  const { JourneySheet } = useLazyComponent(
+  const { ConnectedJourneySheet } = useLazyComponent(
     () => import('../directions/JourneySheet'),
   );
   const { point, main } = useContext(RouterContext);
@@ -44,10 +44,8 @@ export function MainContent() {
   }
 
   function renderSheet() {
-    if (JourneySheet && main?.path === DIRECTIONS_PATH && main.journey) {
-      return (
-        <JourneySheet journey={main.journey} timeZone="Pacific/Honolulu" />
-      );
+    if (ConnectedJourneySheet && main?.path === DIRECTIONS_PATH) {
+      return <ConnectedJourneySheet timeZone="Pacific/Honolulu" />;
     } else {
       return <RouteTimetable />;
     }

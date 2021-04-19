@@ -6,10 +6,10 @@ import {
   mapTypeControlOptions,
 } from '@hawaii-bus-plus/react-google-maps';
 import { h } from 'preact';
-import { useCallback, useContext, useMemo } from 'preact/hooks';
+import { useCallback, useMemo } from 'preact/hooks';
 import { useDarkMode, useScreens } from '../hooks';
 import { openPlace, setMarker } from '../router/action/point';
-import { RouterContext } from '../router/Router';
+import { useDispatch } from '../router/hooks';
 import { PlaceMarker } from './PlaceMarker';
 import { RouteGlyphs } from './RouteGlyphs';
 import { UserMarker } from './UserMarker';
@@ -19,7 +19,7 @@ type MapMouseEvent = google.maps.MapMouseEvent;
 export function MapContent() {
   const mdMatches = useScreens('md');
   const darkMode = useDarkMode();
-  const { dispatch } = useContext(RouterContext);
+  const dispatch = useDispatch();
 
   const handleClick = useCallback(
     (evt: MapMouseEvent) => {

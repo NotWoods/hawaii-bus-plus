@@ -8,3 +8,8 @@ export function useSelector<Selected>(
   const state = useContext(RouterContext);
   return selector(state);
 }
+
+export function useDispatch() {
+  const { dispatch } = useContext(RouterContext);
+  return dispatch;
+}

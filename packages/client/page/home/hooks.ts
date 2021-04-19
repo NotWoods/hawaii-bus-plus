@@ -1,6 +1,7 @@
 import { useContext } from 'preact/hooks';
 import { MyLocationContext } from '../map/location/context';
-import { RouterContext } from '../router/Router';
+import { useSelector } from '../router/hooks';
+import { selectUserPoint } from '../router/selector/point';
 
 export type HomeButtonsError = { code: 401 | 402 | 'worker_start_error' };
 
@@ -14,12 +15,8 @@ export function isHomeButtonsError(err: unknown): err is HomeButtonsError {
 }
 
 export function useHomeLocation(): google.maps.LatLngLiteral | undefined {
-  const { point } = useContext(RouterContext);
+  const point = useSelector(selectUserPoint);
   const { coords } = useContext(MyLocationContext);
 
-  if (point && (point.type === 'marker' || point.type === 'user')) {
-    return point.position;
-  } else {
-    return coords;
-  }
+  return point?.position ?? coords;
 }

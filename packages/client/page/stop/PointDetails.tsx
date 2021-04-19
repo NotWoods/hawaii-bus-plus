@@ -5,11 +5,10 @@ import {
 } from '@hawaii-bus-plus/presentation';
 import { memoize } from '@hawaii-bus-plus/utils';
 import { h } from 'preact';
-import { useContext } from 'preact/hooks';
 import { LoadingBar } from '../buttons/LoadingBar';
 import { useLazyComponent } from '../hooks';
 import { closePointAction } from '../router/action/point';
-import { RouterContext } from '../router/Router';
+import { useDispatch } from '../router/hooks';
 import { SearchBase } from '../search/SearchBase';
 
 interface Props {
@@ -19,7 +18,7 @@ interface Props {
 const cardImport = memoize(() => import('./card-lazy-entry'));
 
 export function PointDetails({ point }: Props) {
-  const { dispatch } = useContext(RouterContext);
+  const dispatch = useDispatch();
   const { StopCard, PlaceCard, BikeStationCard } = useLazyComponent(cardImport);
 
   function onClose() {

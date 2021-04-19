@@ -1,18 +1,19 @@
 import { h } from 'preact';
-import { useContext } from 'preact/hooks';
 import { Head } from '../all-pages/components/Head';
-import { RouterContext } from './router/Router';
+import { useSelector } from './router/hooks';
 import { selectUrl } from './router/selector/main';
+import { RouterState } from './router/state';
+
+function selectCanonical(state: Pick<RouterState, 'main'>) {
+  return selectUrl(state, 'https://app.hawaiibusplus.com').href;
+}
 
 export function PageHead() {
-  const state = useContext(RouterContext);
+  const url = useSelector(selectCanonical);
 
   return (
     <Head>
-      <link
-        rel="canonical"
-        href={selectUrl(state, 'https://app.hawaiibusplus.com').href}
-      />
+      <link rel="canonical" href={url} />
     </Head>
   );
 }

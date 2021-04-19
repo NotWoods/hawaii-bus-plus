@@ -2,6 +2,7 @@ import { Point } from '@hawaii-bus-plus/presentation';
 import { MarkerWithData } from '@hawaii-bus-plus/react-google-maps';
 import { StationInformation } from '@hawaii-bus-plus/types';
 import { Fragment, h } from 'preact';
+import { memo } from 'preact/compat';
 import { useCallback } from 'preact/hooks';
 import {
   PointRouterAction,

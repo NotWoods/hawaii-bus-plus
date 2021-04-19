@@ -7,7 +7,7 @@ import InfoWorker from '../../worker-info/info?worker';
 import { LoadingBar } from '../buttons/LoadingBar';
 import { useDelay, useLazyComponent, usePromise, useWorker } from '../hooks';
 import { dbInitialized } from '../hooks/api';
-import { RouterContext } from '../router/Router';
+import { useSelector } from '../router/hooks';
 import { selectOpenRoute } from '../router/selector/main';
 import { NOW, timeForWorker } from '../time/input/symbol';
 import { BaseSheet } from './BaseSheet';
@@ -18,25 +18,17 @@ import { RouteDetailContext } from './timetable/context';
 const lazyTimetable = import('./time-entry');
 
 /**
- * Returns the ID of the currently open route.
- * Also runs a timer to show a loading bar if it takes too long to load the full route data.
+ * runs a timer to show a loading bar if it takes too long to load the full route data.
  */
-function useOpenRouteId() {
-  const state = useContext(RouterContext);
-  const { routeId, tripId } = selectOpenRoute(state) ?? {};
-
+function useShowLoadingBar(routeId: unknown) {
   const delayDone = useDelay(500, [routeId]);
-
-  return {
-    routeId,
-    tripId,
-    showLoadingBar: routeId && delayDone,
-  };
+  return routeId && delayDone;
 }
 
 export function RouteTimetable() {
   const postToInfoWorker = useWorker(InfoWorker) as InfoWorkerHandler;
-  const { routeId, tripId, showLoadingBar } = useOpenRouteId();
+  const { routeId, tripId } = useSelector(selectOpenRoute);
+  const showLoadingBar = useShowLoadingBar(routeId);
 
   const { Timetable } = useLazyComponent(() => lazyTimetable);
 

@@ -9,6 +9,7 @@ import type {
   JourneyTripSegment,
 } from '../../worker-nearby/directions/format';
 import { isJourneyTripSegment } from '../directions/JourneySegment';
+import { useSelector } from '../router/hooks';
 import { RouterContext } from '../router/Router';
 import { selectJourney } from '../router/selector/main';
 import { RouteDetailContext } from '../routes/timetable/context';
@@ -84,7 +85,7 @@ const RouteGlyphsContent = memo(
 );
 
 export function RouteGlyphs(props: Pick<Props, 'darkMode'>) {
-  const journey = selectJourney(useContext(RouterContext));
+  const journey = useSelector(selectJourney);
   const { details, directionId } = useContext(RouteDetailContext);
 
   return (
