@@ -90,7 +90,6 @@ importers:
       '@types/jest': ^26.0.22
       '@types/react': ^17.0.3
       clsx: ^1.1.1
-      cross-env: ^7.0.3
       esbuild: ^0.11.12
       esbuild-jest: ^0.5.0
       idb: ^6.0.0
@@ -107,8 +106,7 @@ importers:
       tslib: ^2.2.0
       type-fest: ^1.0.2
       typescript: ^4.2.4
-      vite: ^2.2.0
-      vite-plugin-pwa: ^0.7.2
+      vite: ^2.2.1
       workbox-cli: ^6.1.5
     dependencies:
       '@hawaii-bus-plus/data': link:../data
@@ -132,14 +130,13 @@ importers:
       '@googlemaps/js-api-loader': 1.11.3
       '@hawaii-bus-plus/jest-utils': link:../jest-utils
       '@hawaii-bus-plus/vite-plugins': link:../vite-plugins
-      '@prefresh/vite': 2.2.1_preact@10.5.13+vite@2.2.0
+      '@prefresh/vite': 2.2.1_preact@10.5.13+vite@2.2.1
       '@tailwindcss/aspect-ratio': 0.2.0
       '@tailwindcss/forms': 0.3.2_tailwindcss@2.1.1
       '@tailwindcss/typography': 0.4.0_tailwindcss@2.1.1
       '@types/googlemaps': 3.43.3
       '@types/jest': 26.0.22
       '@types/react': 17.0.3
-      cross-env: 7.0.3
       esbuild: 0.11.12
       esbuild-jest: 0.5.0_esbuild@0.11.12
       jest: 26.6.3
@@ -149,8 +146,7 @@ importers:
       tailwindcss-scroll-snap: 1.1.0
       type-fest: 1.0.2
       typescript: 4.2.4
-      vite: 2.2.0
-      vite-plugin-pwa: 0.7.2_vite@2.2.0
+      vite: 2.2.1
       workbox-cli: 6.1.5
 
   packages/data:
@@ -308,7 +304,7 @@ importers:
       tslib: ^2.2.0
       type-fest: ^1.0.2
       typescript: ^4.2.4
-      vite: ^2.2.0
+      vite: ^2.2.1
     dependencies:
       '@hawaii-bus-plus/data': link:../data
       '@hawaii-bus-plus/preact-helmet': link:../preact-helmet
@@ -317,7 +313,7 @@ importers:
       rollup: 2.45.2
       tslib: 2.2.0
       type-fest: 1.0.2
-      vite: 2.2.0
+      vite: 2.2.1
     devDependencies:
       '@types/react-helmet': 6.1.1
       ava: 3.15.0
@@ -444,7 +440,7 @@ importers:
       rollup: ^2.45.2
       tslib: ^2.2.0
       typescript: ^4.2.4
-      vite: ^2.2.0
+      vite: ^2.2.1
     dependencies:
       rollup: 2.45.2
       tslib: 2.2.0
@@ -453,7 +449,7 @@ importers:
       ava: 3.15.0
       prettier: 2.2.1
       typescript: 4.2.4
-      vite: 2.2.0
+      vite: 2.2.1
 
 packages:
 
@@ -1948,7 +1944,7 @@ packages:
       babel-plugin-polyfill-corejs2: 0.2.0_@babel+core@7.13.15
       babel-plugin-polyfill-corejs3: 0.2.0_@babel+core@7.13.15
       babel-plugin-polyfill-regenerator: 0.2.0_@babel+core@7.13.15
-      core-js-compat: 3.10.1
+      core-js-compat: 3.10.2
       semver: 6.3.0
     transitivePeerDependencies:
       - supports-color
@@ -2343,7 +2339,7 @@ packages:
     resolution: {integrity: sha512-MUhT5m2XNN5NsZl4GnpuvlzLo6VSTa/+wBfBd3fiWUvHGhv0GF9hnA1pd//v0uJaKwUnVRQ1hYElxCV7DtYsCQ==}
     dev: true
 
-  /@prefresh/vite/2.2.1_preact@10.5.13+vite@2.2.0:
+  /@prefresh/vite/2.2.1_preact@10.5.13+vite@2.2.1:
     resolution: {integrity: sha512-37+19LWTgSZMgycKGvOrF7R0Ka4DOUMWNoNO5v/9JYvKCQrLfTzfR1eGBoegzGrmT7/jgEAQHRZ9mTvMvYl41g==}
     peerDependencies:
       preact: ^10.4.0
@@ -2355,7 +2351,7 @@ packages:
       '@prefresh/utils': 1.1.1
       '@rollup/pluginutils': 4.1.0
       preact: 10.5.13
-      vite: 2.2.0
+      vite: 2.2.1
     transitivePeerDependencies:
       - rollup
       - supports-color
@@ -3261,7 +3257,7 @@ packages:
     dependencies:
       '@babel/core': 7.13.15
       '@babel/helper-define-polyfill-provider': 0.2.0_@babel+core@7.13.15
-      core-js-compat: 3.10.1
+      core-js-compat: 3.10.2
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -3894,28 +3890,20 @@ packages:
       is-error: 2.2.2
     dev: true
 
-  /core-js-compat/3.10.1:
-    resolution: {integrity: sha512-ZHQTdTPkqvw2CeHiZC970NNJcnwzT6YIueDMASKt+p3WbZsLXOcoD392SkcWhkC0wBBHhlfhqGKKsNCQUozYtg==}
+  /core-js-compat/3.10.2:
+    resolution: {integrity: sha512-IGHnpuaM1N++gLSPI1F1wu3WXICPxSyj/Q++clcwsIOnUVp5uKUIPl/+6h0TQ112KU3fMiSxqJuM+OrCyKj5+A==}
     dependencies:
       browserslist: 4.16.4
       semver: 7.0.0
     dev: true
 
-  /core-js/3.10.1:
-    resolution: {integrity: sha512-pwCxEXnj27XG47mu7SXAwhLP3L5CrlvCB91ANUkIz40P27kUcvNfSdvyZJ9CLHiVoKSp+TTChMQMSKQEH/IQxA==}
+  /core-js/3.10.2:
+    resolution: {integrity: sha512-W+2oVYeNghuBr3yTzZFQ5rfmjZtYB/Ubg87R5YOmlGrIb+Uw9f7qjUbhsj+/EkXhcV7eOD3jiM4+sgraX3FZUw==}
     requiresBuild: true
     dev: true
 
   /core-util-is/1.0.2:
     resolution: {integrity: sha1-tf1UIgqivFq1eqtxQMlAdUUDwac=}
-
-  /cross-env/7.0.3:
-    resolution: {integrity: sha512-+/HKd6EgcQCJGh2PSjZuUitQBQynKor4wrFbRg4DtAgS1aWO+gU52xpH7M9ScGgXSYmAVS9bIJ8EzuaGw0oNAw==}
-    engines: {node: '>=10.14', npm: '>=6', yarn: '>=1'}
-    hasBin: true
-    dependencies:
-      cross-spawn: 7.0.3
-    dev: true
 
   /cross-spawn/6.0.5:
     resolution: {integrity: sha512-eTVLrBSt7fjbDygz805pMnstIs2VTBNkRm0qxZd+M7A5XDdxVRWO5MxGBXZhjY4cqLYLdtrGqRf8mBPmzwSpWQ==}
@@ -4032,18 +4020,6 @@ packages:
 
   /debug/4.3.1:
     resolution: {integrity: sha512-doEwdvm4PCeK4K3RQN2ZC2BYUBaxwLARCqZmMjtF8a51J2Rb0xpVloFRnCODwqjpwnAoao4pelN8l3RJdv3gRQ==}
-    engines: {node: '>=6.0'}
-    peerDependencies:
-      supports-color: '*'
-    peerDependenciesMeta:
-      supports-color:
-        optional: true
-    dependencies:
-      ms: 2.1.2
-    dev: true
-
-  /debug/4.3.2:
-    resolution: {integrity: sha512-mOp8wKcvj7XxC78zLgw/ZA+6TSgkoE2C/ienthhRD298T7UNwAg9diBpLRxC0mOezLl4B0xV7M0cCO6P/O0Xhw==}
     engines: {node: '>=6.0'}
     peerDependencies:
       supports-color: '*'
@@ -4501,7 +4477,7 @@ packages:
       ast-metadata-inferer: 0.4.0
       browserslist: 4.16.4
       caniuse-lite: 1.0.30001211
-      core-js: 3.10.1
+      core-js: 3.10.2
       eslint: 7.24.0
       find-up: 4.1.0
       lodash.memoize: 4.1.2
@@ -8968,25 +8944,8 @@ packages:
       extsprintf: 1.3.0
     dev: true
 
-  /vite-plugin-pwa/0.7.2_vite@2.2.0:
-    resolution: {integrity: sha512-F8yAH3lJxyXS9Qv8aThdqyB4zaMGad8rcdAJCj4c+ogKCmoQExA/2Acwd5nUq2g66mlXJYIRhMwMczCOdEjAIw==}
-    peerDependencies:
-      vite: ^2.0.0
-    dependencies:
-      debug: 4.3.2
-      fast-glob: 3.2.5
-      pretty-bytes: 5.6.0
-      rollup: 2.45.2
-      vite: 2.2.0
-      workbox-build: 6.1.5
-      workbox-window: 6.1.5
-    transitivePeerDependencies:
-      - '@types/babel__core'
-      - supports-color
-    dev: true
-
-  /vite/2.2.0:
-    resolution: {integrity: sha512-rO3KpAfIKHpaJJexkXhjPItexwtne0ca27VquGJ+Zx4lL/kmLB8Afwp+Efmixzp8XXSZtJTaCq1XnpqlZ3pteA==}
+  /vite/2.2.1:
+    resolution: {integrity: sha512-KIqK90EoJJpuqE86Y9DSkZjFNGgsyZX/4I1xENIitLRd3hgRtOlIGCJYrNnBD9/eqipz0OroAiIj9/R1JcOdFA==}
     engines: {node: '>=12.0.0'}
     hasBin: true
     dependencies:

@@ -5,6 +5,20 @@ export interface WorkerConstructor {
   new (): Worker;
 }
 
+function debugLog(type: 'req' | 'res', data: unknown) {
+  if (import.meta.env.DEV) {
+    const styles = [
+      `background: #${type === 'req' ? '3498db' : '2ecc71'}`,
+      `border-radius: 0.5em`,
+      `color: white`,
+      `font-weight: bold`,
+      `padding: 2px 0.5em`,
+    ];
+
+    console.log(`%cworker-${type}`, styles.join(';'), '\n', data);
+  }
+}
+
 /**
  * Set up a worker that lasts as long as the component is mounted.
  * The worker is terminated afterwards.
@@ -44,15 +58,11 @@ export function useWorker(workerConstructor: WorkerConstructor) {
       workerRef.current = generateWorker();
     }
 
-    if (import.meta.env.DEV) {
-      console.info('WorkerRequest:', message);
-    }
+    debugLog('req', message);
     const worker = workerRef.current;
     if (worker instanceof PromiseWorker) {
       const result = await worker.postMessage(message, signal);
-      if (import.meta.env.DEV) {
-        console.info('WorkerResponse:', result);
-      }
+      debugLog('res', result);
       return result;
     } else {
       throw worker;
