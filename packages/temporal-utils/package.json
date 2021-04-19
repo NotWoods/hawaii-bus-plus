@@ -16,7 +16,7 @@
   "dependencies": {
     "@hawaii-bus-plus/types": "workspace:*",
     "@hawaii-bus-plus/utils": "workspace:*",
-    "proposal-temporal": "^0.7.0",
+    "proposal-temporal": "^0.8.0",
     "tslib": "^2.2.0"
   },
   "devDependencies": {
