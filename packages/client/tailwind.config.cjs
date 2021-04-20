@@ -7,6 +7,7 @@ module.exports = {
     './auth/index.html',
     './page/**/*.tsx',
     './auth/**/*.tsx',
+    './settings/**/*.tsx',
     './share/**/*.tsx',
     './all-pages/**/*.tsx',
   ],

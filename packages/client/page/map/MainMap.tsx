@@ -9,7 +9,7 @@ export function MainMap() {
   const { MapContent } = useLazyComponent(() => lazyMap);
 
   return (
-    <section class="fixed sheet inset-0 md:top-0 md:ml-80">
+    <section class="fixed inset-0 md:top-0 md:ml-80">
       {isLoaded && MapContent ? <MapContent /> : undefined}
     </section>
   );

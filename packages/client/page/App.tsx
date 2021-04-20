@@ -13,7 +13,7 @@ import { StickySnackbars } from './snackbar/StickySnackbars';
 
 export function Main() {
   return (
-    <main class="main">
+    <main>
       <MainMap />
       <MainContent />
       <StickySnackbars />
