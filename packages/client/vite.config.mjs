@@ -5,7 +5,7 @@ import {
 import prefresh from '@prefresh/vite';
 import { defineConfig } from 'vite';
 
-const productionMode = true || process.env.NETLIFY_CONTEXT === 'production';
+const productionMode = process.env.NETLIFY_CONTEXT === 'production';
 /** @type {import('vite').AliasOptions} */
 const alias = {
   'insights-js': 'insights-js/dist/esnext/index.js',
@@ -46,7 +46,7 @@ export default defineConfig({
     outDir: '../../dist',
     emptyOutDir: true,
     cssCodeSplit: false,
-    minify: productionMode,
+    minify: false,
     rollupOptions: {
       input: {
         main: './index.html',
