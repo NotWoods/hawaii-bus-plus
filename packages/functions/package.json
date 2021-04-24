@@ -15,10 +15,10 @@
     "test": "ava"
   },
   "dependencies": {
-    "@aws-sdk/client-dynamodb": "^3.13.0",
+    "@aws-sdk/client-dynamodb": "^3.13.1",
     "@hawaii-bus-plus/gotrue": "workspace:^0.9.29",
     "cookie": "^0.4.1",
-    "stripe": "^8.144.0",
+    "stripe": "^8.145.0",
     "tslib": "^2.2.0"
   },
   "devDependencies": {
