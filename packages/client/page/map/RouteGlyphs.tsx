@@ -2,7 +2,6 @@ import { ColorString, Shape, Stop } from '@hawaii-bus-plus/types';
 import { last } from '@hawaii-bus-plus/utils';
 import { ComponentChildren, Fragment, h } from 'preact';
 import { memo } from 'preact/compat';
-import { useContext } from 'preact/hooks';
 import type { RouteDetails } from '../../worker-info/route-details';
 import type {
   Journey,
@@ -10,8 +9,7 @@ import type {
 } from '../../worker-nearby/directions/format';
 import { isJourneyTripSegment } from '../directions/JourneySegment';
 import { useSelector } from '../router/hooks';
-import { selectJourney } from '../router/selector/main';
-import { RouteDetailContext } from '../routes/reducer/context';
+import { selectJourney, selectLoadedDetails } from '../router/selector/main';
 import { AllMarkers } from './markers/AllMarkers';
 import { ShapeLine } from './ShapeLine';
 
@@ -85,7 +83,7 @@ const RouteGlyphsContent = memo(
 
 export function RouteGlyphs(props: Pick<Props, 'darkMode'>) {
   const journey = useSelector(selectJourney);
-  const { routeDetails, directionId } = useContext(RouteDetailContext);
+  const { routeDetails, directionId } = useSelector(selectLoadedDetails);
 
   return (
     <RouteGlyphsContent

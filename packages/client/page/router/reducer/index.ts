@@ -2,7 +2,14 @@ import { Route, Stop, Trip } from '@hawaii-bus-plus/types';
 import { RouterAction } from '../action';
 import { MainRouterAction } from '../action/main';
 import { PointRouterAction } from '../action/point';
-import { DIRECTIONS_PATH, RouterState, ROUTES_PREFIX } from '../state';
+import {
+  DIRECTIONS_PATH,
+  initialDetails,
+  OpenDirectionsState,
+  OpenRouteState,
+  RouterState,
+  ROUTES_PREFIX,
+} from '../state';
 import { queryToPoint } from '../url';
 import { mainRouterReducer } from './main';
 import { pointRouterReducer } from './point';
@@ -31,6 +38,7 @@ export function initStateFromUrl(url: URL): RouterState {
       path: ROUTES_PREFIX,
       routeId: routeId as Route['route_id'],
       tripId: tripId ? (tripId as Trip['trip_id']) : undefined,
+      details: initialDetails,
     };
   }
 
@@ -43,6 +51,31 @@ export function initStateFromUrl(url: URL): RouterState {
   return newState;
 }
 
+function injectLoadedData(state: RouterState, newState: RouterState) {
+  if (newState.main && newState.main.path === state.main?.path) {
+    switch (newState.main.path) {
+      case ROUTES_PREFIX: {
+        const oldMain = state.main as OpenRouteState;
+        if (oldMain.routeId === newState.main.routeId) {
+          newState.main.details = oldMain.details;
+          if (oldMain.tripId !== newState.main.tripId) {
+            newState.main.details.selectedTrip = undefined;
+          }
+        }
+        break;
+      }
+      case DIRECTIONS_PATH: {
+        const oldMain = state.main as OpenDirectionsState;
+        newState.main.journey = oldMain.journey;
+        break;
+      }
+    }
+  }
+
+  newState.freshLoad = false;
+  return newState;
+}
+
 export function routerReducer(
   state: RouterState,
   action: RouterAction,
@@ -52,10 +85,10 @@ export function routerReducer(
       const { url } = action;
       if (url.hostname !== window.location.hostname) return state;
 
-      const newState = initStateFromUrl(url);
-      newState.freshLoad = false;
-      return newState;
+      return injectLoadedData(state, initStateFromUrl(url));
     }
+    case 'reload-state':
+      return action.state;
     default: {
       const newMain = mainRouterReducer(state.main, action as MainRouterAction);
       const newPoint = pointRouterReducer(

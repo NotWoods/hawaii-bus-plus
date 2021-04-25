@@ -1,16 +1,18 @@
 import { Trip } from '@hawaii-bus-plus/types';
 import { Fragment, h } from 'preact';
-import { useContext } from 'preact/hooks';
 import type { Temporal } from 'proposal-temporal';
 import type { RouteDetails } from '../../../worker-info/route-details';
 import { DirectionDetails } from '../../../worker-info/trip-details';
 import { LoadingBar } from '../../buttons/LoadingBar';
 import { useDelay } from '../../hooks';
-import { resetTripAction, setTripAction } from '../../router/action/main';
+import { setTripAction } from '../../router/action/main';
+import { resetTripAction } from '../../router/action/routes';
 import { useDispatch, useSelector } from '../../router/hooks';
-import { selectOpenRoute } from '../../router/selector/main';
+import {
+  selectLoadedDetails,
+  selectOpenRoute,
+} from '../../router/selector/main';
 import { NOW } from '../../time/input/symbol';
-import { RouteDetailContext } from '../reducer/context';
 import { TimetableDetails } from './info/TimetableDetails';
 import { TripName } from './info/TripName';
 import { TripSelector } from './info/TripSelector';
@@ -55,7 +57,7 @@ function shortNameFromTripSlice(
 
 export function Timetable({ routeDetails, tripDate, onChangeTripDate }: Props) {
   const { tripId, setSelectedTrip } = useOpenTrip();
-  const { directionId, selectedTrip } = useContext(RouteDetailContext);
+  const { directionId, selectedTrip } = useSelector(selectLoadedDetails);
   const tripInfoLoading = useDelay(500, [tripId]);
 
   const directionsDetails = routeDetails.directions;

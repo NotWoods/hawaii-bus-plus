@@ -1,11 +1,12 @@
 import { Agency } from '@hawaii-bus-plus/types';
 import debounce from 'just-debounce';
 import { h } from 'preact';
-import { useContext, useEffect, useRef } from 'preact/hooks';
+import { useEffect, useRef } from 'preact/hooks';
 import { useCallback } from 'react';
 import { DirectionDetails } from '../../../../worker-info/trip-details';
-import { setDirectionAction } from '../../reducer/action';
-import { RouteDetailContext } from '../../reducer/context';
+import { setDirectionAction } from '../../../router/action/routes';
+import { useDispatch, useSelector } from '../../../router/hooks';
+import { selectLoadedDetails } from '../../../router/selector/main';
 import { SwitchDirectionButton } from './SwitchDirectionButton';
 import './TimetableDetails.css';
 import { TimetableDirectionsDetail } from './TimetableDirectionsDetail';
@@ -26,7 +27,8 @@ function Spacer() {
 }
 
 export function TimetableDetails(props: Props) {
-  const { directionId, dispatch } = useContext(RouteDetailContext);
+  const { directionId } = useSelector(selectLoadedDetails);
+  const dispatch = useDispatch();
   const { directionsDetails, agency } = props;
   const scrollEl = useRef<HTMLDivElement>();
 

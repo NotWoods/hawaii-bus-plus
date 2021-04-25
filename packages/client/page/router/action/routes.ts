@@ -1,13 +1,14 @@
-import { RouteDetails } from '../../../worker-info/route-details';
-import { TripDetails } from '../../../worker-info/trip-details';
+import type { RouteDetails } from '../../../worker-info/route-details';
+import type { TripDetails } from '../../../worker-info/trip-details';
 
-export type RouteDetailAction =
+export type OpenRouteAction =
   | ReturnType<typeof setRouteDetailsAction>
   | ReturnType<typeof closeRouteDetailsAction>
   | ReturnType<typeof setTripDetailsAction>
   | ReturnType<typeof setDefaultTripDetailsAction>
   | ReturnType<typeof swapDirectionAction>
-  | ReturnType<typeof setDirectionAction>;
+  | ReturnType<typeof setDirectionAction>
+  | ReturnType<typeof resetTripAction>;
 
 export function setRouteDetailsAction(details: RouteDetails) {
   return { type: 'route-details', details } as const;
@@ -31,4 +32,8 @@ export function swapDirectionAction() {
 
 export function setDirectionAction(id: 0 | 1) {
   return { type: 'direction', id } as const;
+}
+
+export function resetTripAction() {
+  return { type: 'close-trip' } as const;
 }

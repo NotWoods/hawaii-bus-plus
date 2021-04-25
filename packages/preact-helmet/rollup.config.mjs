@@ -2,6 +2,8 @@
 import alias from '@rollup/plugin-alias';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
+import { posix as path } from 'path';
+import { fileURLToPath } from 'url';
 
 /** @type {import('rollup').RollupOptions} */
 const config = {
@@ -23,7 +25,15 @@ const config = {
         { find: 'react-dom', replacement: 'preact/compat' },
         {
           find: 'prop-types',
-          replacement: 'prop-types/factoryWithThrowingShims.js',
+          replacement: '',
+          customResolver(source) {
+            if (!source) {
+              return path.resolve(
+                fileURLToPath(import.meta.url),
+                '../prop-types.cjs',
+              );
+            }
+          },
         },
       ],
     }),

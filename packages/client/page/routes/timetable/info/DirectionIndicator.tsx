@@ -1,10 +1,10 @@
 import clsx from 'clsx';
 import { h } from 'preact';
-import { useContext } from 'preact/hooks';
-import { RouteDetailContext } from '../../reducer/context';
+import { useSelector } from '../../../router/hooks';
+import { selectLoadedDetails } from '../../../router/selector/main';
 
 export function DirectionIndicator() {
-  const { directionId, directionIds } = useContext(RouteDetailContext);
+  const { directionId, directionIds } = useSelector(selectLoadedDetails);
 
   return (
     <div class="absolute bottom-0 inset-x-0 space-x-1 text-center">

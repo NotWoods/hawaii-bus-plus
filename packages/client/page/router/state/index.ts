@@ -10,3 +10,5 @@ export interface RouterState {
 
   freshLoad: boolean;
 }
+
+export const initialState: RouterState = { freshLoad: false };

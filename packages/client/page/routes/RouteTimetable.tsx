@@ -1,6 +1,6 @@
 import { DateString } from '@hawaii-bus-plus/types';
 import { h } from 'preact';
-import { useContext, useState } from 'preact/hooks';
+import { useState } from 'preact/hooks';
 import type { Temporal } from 'proposal-temporal';
 import type { InfoWorkerHandler } from '../../worker-info/info';
 import InfoWorker from '../../worker-info/info?worker';
@@ -9,18 +9,17 @@ import { TripDetails } from '../../worker-info/trip-details';
 import { LoadingBar } from '../buttons/LoadingBar';
 import { useDelay, useLazyComponent, usePromise, useWorker } from '../hooks';
 import { dbInitialized } from '../hooks/api';
-import { useSelector } from '../router/hooks';
-import { selectOpenRoute } from '../router/selector/main';
-import { NOW, timeForWorker } from '../time/input/symbol';
-import { BaseSheet } from './BaseSheet';
-import { colorVariables } from './props';
 import {
   closeRouteDetailsAction,
   setDefaultTripDetailsAction,
   setRouteDetailsAction,
   setTripDetailsAction,
-} from './reducer/action';
-import { RouteDetailContext } from './reducer/context';
+} from '../router/action/routes';
+import { useDispatch, useSelector } from '../router/hooks';
+import { selectOpenRoute, selectRouteDetails } from '../router/selector/main';
+import { NOW, timeForWorker } from '../time/input/symbol';
+import { BaseSheet } from './BaseSheet';
+import { colorVariables } from './props';
 import { RouteHeader } from './RouteHeader';
 
 const lazyTimetable = import('./time-entry');
@@ -40,7 +39,8 @@ export function RouteTimetable() {
 
   const { Timetable } = useLazyComponent(() => lazyTimetable);
 
-  const { routeDetails, dispatch } = useContext(RouteDetailContext);
+  const routeDetails = useSelector(selectRouteDetails);
+  const dispatch = useDispatch();
   const [tripDate, setTripDate] = useState<Temporal.PlainDate | NOW>(NOW);
 
   usePromise(

@@ -1,7 +1,7 @@
 import { h } from 'preact';
-import { Head } from '../all-pages/components/Head';
+import { Head, routeTitle } from '../all-pages/components/Head';
 import { useSelector } from './router/hooks';
-import { selectUrl } from './router/selector/main';
+import { selectRouteDetails, selectUrl } from './router/selector/main';
 import { RouterState } from './router/state';
 
 function selectCanonical(state: Pick<RouterState, 'main'>) {
@@ -10,9 +10,11 @@ function selectCanonical(state: Pick<RouterState, 'main'>) {
 
 export function PageHead() {
   const url = useSelector(selectCanonical);
+  const routeDetails = useSelector(selectRouteDetails);
 
   return (
     <Head>
+      {routeDetails ? <title>{routeTitle(routeDetails.route)}</title> : null}
       <link rel="canonical" href={url} />
     </Head>
   );

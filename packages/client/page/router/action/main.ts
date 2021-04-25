@@ -1,13 +1,14 @@
 import { Point } from '@hawaii-bus-plus/presentation';
 import { Route, Trip } from '@hawaii-bus-plus/types';
 import type { Journey } from '../../../worker-nearby/directions/format';
+import { OpenRouteAction } from './routes';
 
 export type MainRouterAction =
   | ReturnType<typeof setRouteAction>
   | ReturnType<typeof setTripAction>
   | ReturnType<typeof closeMainAction>
-  | ReturnType<typeof resetTripAction>
-  | ReturnType<typeof openJourney>;
+  | ReturnType<typeof openJourney>
+  | OpenRouteAction;
 
 export function setRouteAction(routeId: Route['route_id']) {
   return { type: 'route', routeId } as const;
@@ -22,10 +23,6 @@ export function setTripAction(
 
 export function closeMainAction() {
   return { type: 'close-main' } as const;
-}
-
-export function resetTripAction() {
-  return { type: 'close-trip' } as const;
 }
 
 export function openJourney(

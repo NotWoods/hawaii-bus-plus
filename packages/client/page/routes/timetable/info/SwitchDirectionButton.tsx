@@ -1,18 +1,19 @@
 import { h } from 'preact';
-import { useContext } from 'preact/hooks';
 import { Button } from '../../../buttons/Button';
 import swapIcon from '../../../icons/swap_horiz.svg';
-import { swapDirectionAction } from '../../reducer/action';
-import { RouteDetailContext } from '../../reducer/context';
+import { swapDirectionAction } from '../../../router/action/routes';
+import { useDispatch, useSelector } from '../../../router/hooks';
+import { selectHasMultipleDirections } from '../../../router/selector/main';
 
 interface Props {
   class?: string;
 }
 
 export function SwitchDirectionButton(props: Props) {
-  const { directionIds, dispatch } = useContext(RouteDetailContext);
+  const canSwap = useSelector(selectHasMultipleDirections);
+  const dispatch = useDispatch();
 
-  if (directionIds.size >= 2) {
+  if (canSwap) {
     return (
       <Button
         class={props.class}

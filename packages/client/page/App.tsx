@@ -7,7 +7,6 @@ import { MyLocationProvider } from './map/location/context';
 import { MainMap } from './map/MainMap';
 import { PageHead } from './PageHead';
 import { Router } from './router/Router';
-import { RouteDetailProvider } from './routes/reducer/context';
 import { StickySnackbarProvider } from './snackbar/context';
 import { StickySnackbars } from './snackbar/StickySnackbars';
 
@@ -25,16 +24,14 @@ export function App(props: { initialUrl?: URL }) {
   return (
     <Router initialUrl={props.initialUrl}>
       <MyLocationProvider>
-        <RouteDetailProvider>
-          <StickySnackbarProvider>
-            <FocusTrapProvider>
-              <MapProvider options={googleMapOptions}>
-                <PageHead />
-                <Main />
-              </MapProvider>
-            </FocusTrapProvider>
-          </StickySnackbarProvider>
-        </RouteDetailProvider>
+        <StickySnackbarProvider>
+          <FocusTrapProvider>
+            <MapProvider options={googleMapOptions}>
+              <PageHead />
+              <Main />
+            </MapProvider>
+          </FocusTrapProvider>
+        </StickySnackbarProvider>
       </MyLocationProvider>
     </Router>
   );

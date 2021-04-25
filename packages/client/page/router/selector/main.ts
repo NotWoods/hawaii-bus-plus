@@ -1,5 +1,6 @@
 import {
   DIRECTIONS_PATH,
+  initialDetails,
   OpenRouteState,
   RouterState,
   ROUTES_PREFIX,
@@ -41,4 +42,20 @@ export function selectUrl(
     }
   }
   return url;
+}
+
+export function selectLoadedDetails({ main }: Pick<RouterState, 'main'>) {
+  if (main?.path === ROUTES_PREFIX) {
+    return main.details;
+  } else {
+    return initialDetails;
+  }
+}
+
+export function selectRouteDetails(state: Pick<RouterState, 'main'>) {
+  return selectLoadedDetails(state).routeDetails;
+}
+
+export function selectHasMultipleDirections(state: Pick<RouterState, 'main'>) {
+  return selectLoadedDetails(state).directionIds.size >= 2;
 }
