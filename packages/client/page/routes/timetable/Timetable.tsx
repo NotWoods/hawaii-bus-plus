@@ -19,7 +19,7 @@ import { StopTimeSegmentList } from './stop-time/StopTimeSegmentList';
 import { useTripBounds } from './useTripBounds';
 
 interface Props {
-  details: RouteDetails;
+  routeDetails: RouteDetails;
   tripDate: Temporal.PlainDate | NOW;
   onChangeTripDate(time: Temporal.PlainDate): void;
 }
@@ -53,27 +53,28 @@ function shortNameFromTripSlice(
   return undefined;
 }
 
-export function Timetable(props: Props) {
-  const { details, tripDate } = props;
+export function Timetable({ routeDetails, tripDate, onChangeTripDate }: Props) {
   const { tripId, setSelectedTrip } = useOpenTrip();
   const { directionId, selectedTrip } = useContext(RouteDetailContext);
   const tripInfoLoading = useDelay(500, [tripId]);
 
-  const directionsDetails = details.directions;
+  const directionsDetails = routeDetails.directions;
   const directionDetails = directionsDetails[directionId];
   const selectedTripId = tripId ?? directionDetails.closestTrip.trip.trip_id;
 
-  useTripBounds(details.bounds);
+  useTripBounds(routeDetails.bounds);
+
+  const { route, agency } = routeDetails;
 
   return (
     <>
       <div class="flex flex-wrap-reverse gap-4 m-4">
         <TripSelector
-          directionHeaders={details.route.directions}
+          directionHeaders={route.directions}
           directionsDetails={directionsDetails}
           tripDate={tripDate}
           selectedTripId={selectedTripId}
-          onChangeTripDate={props.onChangeTripDate}
+          onChangeTripDate={onChangeTripDate}
           setSelectedTrip={setSelectedTrip}
         />
       </div>
@@ -89,18 +90,18 @@ export function Timetable(props: Props) {
       ) : (
         <TimetableDetails
           directionsDetails={directionsDetails}
-          agency={details.agency}
+          agency={agency}
         />
       )}
       {tripId && !selectedTrip && tripInfoLoading ? <LoadingBar /> : null}
       <StopTimeSegmentList
         stopTimes={(selectedTrip ?? directionDetails.closestTrip).stopTimes}
-        timeZone={details.agency.agency_timezone}
+        timeZone={agency.agency_timezone}
       />
       <RouteDetailsCard
-        route={details.route}
-        agency={details.agency}
-        descParts={details.descParts}
+        route={route}
+        agency={agency}
+        descParts={routeDetails.descParts}
         tripId={selectedTripId}
       />
     </>

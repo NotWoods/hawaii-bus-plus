@@ -2,7 +2,7 @@ import type { RouteDetails } from '../../../worker-info/route-details';
 import type { TripDetails } from '../../../worker-info/trip-details';
 
 export interface RouteDetailState {
-  details?: RouteDetails;
+  routeDetails?: RouteDetails;
   selectedTrip?: TripDetails;
   directionId: 0 | 1;
   directionIds: ReadonlySet<0 | 1>;

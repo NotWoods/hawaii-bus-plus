@@ -18,16 +18,17 @@ export function routeDetailReducer(
 ): RouteDetailState {
   switch (action.type) {
     case 'route-details': {
-      const directionIds = validDirectionIds(action.details.directions);
+      const { details } = action;
+      const directionIds = validDirectionIds(details.directions);
       const [firstValidId = 0] = directionIds;
 
       let selectedTrip = state.selectedTrip;
-      if (selectedTrip?.trip?.route_id !== action.details?.route?.route_id) {
+      if (selectedTrip?.trip?.route_id !== details.route.route_id) {
         selectedTrip = undefined;
       }
 
       return {
-        details: action.details,
+        routeDetails: details,
         selectedTrip,
         directionIds,
         directionId: firstValidId,

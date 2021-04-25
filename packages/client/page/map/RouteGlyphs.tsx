@@ -12,18 +12,18 @@ import { isJourneyTripSegment } from '../directions/JourneySegment';
 import { useSelector } from '../router/hooks';
 import { selectJourney } from '../router/selector/main';
 import { RouteDetailContext } from '../routes/reducer/context';
-import { StopStationMarkers } from './markers/StopStationMarkers';
+import { AllMarkers } from './markers/AllMarkers';
 import { ShapeLine } from './ShapeLine';
 
 interface Props {
   darkMode?: boolean;
   journey?: Journey;
-  details?: RouteDetails;
+  routeDetails?: RouteDetails;
   directionId: 0 | 1;
 }
 
 const RouteGlyphsContent = memo(
-  ({ darkMode, journey, details, directionId }: Props) => {
+  ({ darkMode, journey, routeDetails, directionId }: Props) => {
     let highlightedStops: ReadonlyMap<Stop['stop_id'], ColorString> | undefined;
     let stopsInTrip: ReadonlySet<Stop['stop_id']> | undefined;
     let shapes: ComponentChildren = null;
@@ -53,11 +53,11 @@ const RouteGlyphsContent = memo(
           />
         );
       });
-    } else if (details) {
-      const currentTrip = details.directions[directionId]?.closestTrip;
+    } else if (routeDetails) {
+      const currentTrip = routeDetails.directions[directionId]?.closestTrip;
       const shapeId = currentTrip?.trip?.shape_id;
 
-      highlightedStops = details.stops;
+      highlightedStops = routeDetails.stops;
       stopsInTrip =
         currentTrip &&
         new Set(currentTrip.stopTimes.map((st) => st.stop.stop_id));
@@ -65,14 +65,14 @@ const RouteGlyphsContent = memo(
         <ShapeLine
           key={shapeId}
           shapeId={shapeId}
-          routeColor={details.route.route_color}
+          routeColor={routeDetails.route.route_color}
         />,
       ];
     }
 
     return (
       <>
-        <StopStationMarkers
+        <AllMarkers
           highlighted={highlightedStops}
           focused={stopsInTrip}
           darkMode={darkMode}
@@ -85,13 +85,13 @@ const RouteGlyphsContent = memo(
 
 export function RouteGlyphs(props: Pick<Props, 'darkMode'>) {
   const journey = useSelector(selectJourney);
-  const { details, directionId } = useContext(RouteDetailContext);
+  const { routeDetails, directionId } = useContext(RouteDetailContext);
 
   return (
     <RouteGlyphsContent
       darkMode={props.darkMode}
       journey={journey}
-      details={details}
+      routeDetails={routeDetails}
       directionId={directionId}
     />
   );

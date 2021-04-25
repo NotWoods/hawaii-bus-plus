@@ -40,7 +40,7 @@ export function RouteTimetable() {
 
   const { Timetable } = useLazyComponent(() => lazyTimetable);
 
-  const { details, dispatch } = useContext(RouteDetailContext);
+  const { routeDetails, dispatch } = useContext(RouteDetailContext);
   const [tripDate, setTripDate] = useState<Temporal.PlainDate | NOW>(NOW);
 
   usePromise(
@@ -86,13 +86,13 @@ export function RouteTimetable() {
     [routeId, tripId, tripDate, dispatch],
   );
 
-  const route = details?.route;
+  const route = routeDetails?.route;
   if (route && Timetable) {
     return (
       <BaseSheet style={colorVariables(route)} loaded>
         <RouteHeader route={route} showClose />
         <Timetable
-          details={details!}
+          routeDetails={routeDetails!}
           tripDate={tripDate}
           onChangeTripDate={setTripDate}
         />

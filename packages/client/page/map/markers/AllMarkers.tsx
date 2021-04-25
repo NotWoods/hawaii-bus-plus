@@ -1,5 +1,6 @@
 import { ColorString, Stop } from '@hawaii-bus-plus/types';
 import { Fragment, h } from 'preact';
+import { memo } from 'preact/compat';
 import { useState } from 'react';
 import type { MapWorkerHandler } from '../../../worker-map/map';
 import MapWorker from '../../../worker-map/map?worker';
@@ -15,7 +16,10 @@ interface Props {
   darkMode?: boolean;
 }
 
-export function StopStationMarkers({ highlighted, focused, darkMode }: Props) {
+const StopMarkersMemo = memo(StopMarkers);
+const BikeStationMarkersMemo = memo(BikeStationMarkers);
+
+export function AllMarkers({ highlighted, focused, darkMode }: Props) {
   const [api, setApi] = useState<MarkersResponse>({
     stops: [],
     bikeStations: [],
@@ -30,13 +34,13 @@ export function StopStationMarkers({ highlighted, focused, darkMode }: Props) {
 
   return (
     <>
-      <StopMarkers
+      <StopMarkersMemo
         stops={api.stops}
         highlighted={highlighted}
         focused={focused}
         darkMode={darkMode}
       />
-      <BikeStationMarkers stations={api.bikeStations} />
+      <BikeStationMarkersMemo stations={api.bikeStations} />
     </>
   );
 }
