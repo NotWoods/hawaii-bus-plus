@@ -46,7 +46,8 @@ export default defineConfig({
     outDir: '../../dist',
     emptyOutDir: true,
     cssCodeSplit: false,
-    minify: false,
+    minify: 'esbuild',
+    logLevel: 'info',
     rollupOptions: {
       input: {
         main: './index.html',
