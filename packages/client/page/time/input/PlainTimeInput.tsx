@@ -1,6 +1,7 @@
 import { nowWithZone } from '@hawaii-bus-plus/temporal-utils';
 import clsx, { ClassValue } from 'clsx';
 import { h } from 'preact';
+import { useMemo } from 'preact/hooks';
 import { Temporal } from 'proposal-temporal';
 import { NOW } from './symbol';
 
@@ -12,14 +13,16 @@ interface InputProps<T> {
 }
 
 function PlainTimeInput(props: InputProps<Temporal.PlainTime>) {
-  let value: Temporal.PlainTime;
-  if (props.value === NOW) {
-    value = nowWithZone('Pacific/Honolulu').toPlainTime();
-  } else if (typeof props.value === 'string') {
-    value = Temporal.PlainTime.from(props.value);
-  } else {
-    value = props.value;
-  }
+  const value = useMemo(() => {
+    if (props.value === NOW) {
+      return nowWithZone('Pacific/Honolulu').toPlainTime();
+    } else if (typeof props.value === 'string') {
+      return Temporal.PlainTime.from(props.value);
+    } else {
+      return props.value;
+    }
+  }, [props.value]);
+
   return (
     <input
       type="time"
@@ -39,14 +42,16 @@ function PlainTimeInput(props: InputProps<Temporal.PlainTime>) {
 }
 
 export function PlainDateInput(props: InputProps<Temporal.PlainDate>) {
-  let value: Temporal.PlainDate;
-  if (props.value === NOW) {
-    value = nowWithZone('Pacific/Honolulu').toPlainDate();
-  } else if (typeof props.value === 'string') {
-    value = Temporal.PlainDate.from(props.value);
-  } else {
-    value = props.value;
-  }
+  const value = useMemo(() => {
+    if (props.value === NOW) {
+      return nowWithZone('Pacific/Honolulu').toPlainDate();
+    } else if (typeof props.value === 'string') {
+      return Temporal.PlainDate.from(props.value);
+    } else {
+      return props.value;
+    }
+  }, [props.value]);
+
   return (
     <input
       type="date"
@@ -66,14 +71,16 @@ export function PlainDateInput(props: InputProps<Temporal.PlainDate>) {
 }
 
 export function PlainDateTimeInput(props: InputProps<Temporal.PlainDateTime>) {
-  let value: Temporal.PlainDateTime;
-  if (props.value === NOW) {
-    value = nowWithZone('Pacific/Honolulu');
-  } else if (typeof props.value === 'string') {
-    value = Temporal.PlainDateTime.from(props.value);
-  } else {
-    value = props.value;
-  }
+  const value = useMemo(() => {
+    if (props.value === NOW) {
+      return nowWithZone('Pacific/Honolulu');
+    } else if (typeof props.value === 'string') {
+      return Temporal.PlainDateTime.from(props.value);
+    } else {
+      return props.value;
+    }
+  }, [props.value]);
+
   return (
     <div class="flex gap-1 mt-1">
       <PlainTimeInput

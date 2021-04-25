@@ -1,5 +1,6 @@
 import { Marker, MarkerWithData } from '@hawaii-bus-plus/react-google-maps';
 import { h } from 'preact';
+import { memo } from 'preact/compat';
 import { pinsIcon } from '../pins';
 
 const selectedStop = pinsIcon(1);
@@ -14,7 +15,7 @@ interface Props<T> {
   onClick(this: MarkerWithData<T>): void;
 }
 
-export function SelectableMarker<T>(props: Props<T>) {
+function SelectableMarker<T>(props: Props<T>) {
   const { selected, focus = true, name } = props;
 
   return (
@@ -28,3 +29,6 @@ export function SelectableMarker<T>(props: Props<T>) {
     />
   );
 }
+
+const SelectableMarkerMemo = memo(SelectableMarker);
+export { SelectableMarkerMemo as SelectableMarker };

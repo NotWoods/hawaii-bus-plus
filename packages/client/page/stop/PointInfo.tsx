@@ -1,5 +1,8 @@
 import { Agency, Route, Stop } from '@hawaii-bus-plus/types';
-import { ComponentChildren, h, Fragment } from 'preact';
+import { ComponentChildren, Fragment, h } from 'preact';
+import { useCallback } from 'preact/hooks';
+import { linkAction } from '../router/action';
+import { useDispatch } from '../router/hooks';
 import { StopSearchResultItem } from '../search/items/MarkerSearchResultItem';
 import { NearbyRoutes } from './NearbyRoutes';
 
@@ -28,6 +31,17 @@ interface InfoProps {
 }
 
 export function PointInfo(props: InfoProps) {
+  const dispatch = useDispatch();
+
+  const handleClick = useCallback(
+    (evt: MouseEvent) => {
+      const link = evt.currentTarget as HTMLAnchorElement;
+      evt.preventDefault();
+      dispatch(linkAction(link.href));
+    },
+    [dispatch],
+  );
+
   return (
     <>
       {props.stops.length > 0 && (
@@ -41,6 +55,7 @@ export function PointInfo(props: InfoProps) {
                 stopName={stop.stop_name}
                 stopDesc={stop.stop_desc}
                 routes={stop.routes.map((id) => props.routes.get(id)!)}
+                onClick={handleClick}
               />
             ))}
           </ul>

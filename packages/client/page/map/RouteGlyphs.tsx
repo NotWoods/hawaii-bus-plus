@@ -14,7 +14,7 @@ import { AllMarkers } from './markers/AllMarkers';
 import { ShapeLine } from './ShapeLine';
 
 interface Props {
-  darkMode?: boolean;
+  darkMode: boolean;
   journey?: Journey;
   routeDetails?: RouteDetails;
   directionId: 0 | 1;

@@ -13,7 +13,7 @@ import { StopMarkers } from './StopMarkers';
 interface Props {
   highlighted?: ReadonlyMap<Stop['stop_id'], ColorString>;
   focused?: ReadonlySet<Stop['stop_id']>;
-  darkMode?: boolean;
+  darkMode: boolean;
 }
 
 const StopMarkersMemo = memo(StopMarkers);
