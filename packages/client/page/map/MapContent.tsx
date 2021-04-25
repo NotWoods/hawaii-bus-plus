@@ -10,6 +10,7 @@ import { useCallback, useMemo } from 'preact/hooks';
 import { useDarkMode, useScreens } from '../hooks';
 import { openPlace, setMarker } from '../router/action/point';
 import { useDispatch } from '../router/hooks';
+import { MapBounds } from './MapBounds';
 import { PlaceMarker } from './PlaceMarker';
 import { RouteGlyphs } from './RouteGlyphs';
 import { UserMarker } from './UserMarker';
@@ -69,6 +70,7 @@ export function MapContent() {
       options={options}
       onClick={handleClick}
     >
+      <MapBounds />
       <RouteGlyphs darkMode={darkMode} />
       <PlaceMarker />
       <UserMarker />

@@ -35,33 +35,35 @@ function useShowLoadingBar(routeId: unknown) {
 export function RouteTimetable() {
   const postToInfoWorker = useWorker(InfoWorker) as InfoWorkerHandler;
   const { routeId, tripId } = useSelector(selectOpenRoute);
+  const routeDetails = useSelector(selectRouteDetails);
+  const [tripDate, setTripDate] = useState<Temporal.PlainDate | NOW>(NOW);
+
+  const dispatch = useDispatch();
   const showLoadingBar = useShowLoadingBar(routeId);
 
   const { Timetable } = useLazyComponent(() => lazyTimetable);
 
-  const routeDetails = useSelector(selectRouteDetails);
-  const dispatch = useDispatch();
-  const [tripDate, setTripDate] = useState<Temporal.PlainDate | NOW>(NOW);
-
   usePromise(
     async (signal) => {
-      let details: RouteDetails | undefined;
-      if (routeId) {
-        await dbInitialized;
-        details = await postToInfoWorker(signal, {
-          type: 'route',
-          routeId,
-          date: timeForWorker(tripDate) as DateString | undefined,
-        });
-      }
+      if (routeId !== routeDetails?.route?.route_id) {
+        let details: RouteDetails | undefined;
+        if (routeId) {
+          await dbInitialized;
+          details = await postToInfoWorker(signal, {
+            type: 'route',
+            routeId,
+            date: timeForWorker(tripDate) as DateString | undefined,
+          });
+        }
 
-      if (details) {
-        dispatch(setRouteDetailsAction(details));
-      } else {
-        dispatch(closeRouteDetailsAction());
+        if (details) {
+          dispatch(setRouteDetailsAction(details));
+        } else {
+          dispatch(closeRouteDetailsAction());
+        }
       }
     },
-    [routeId, tripDate, dispatch],
+    [routeId, tripDate, routeDetails, dispatch],
   );
 
   usePromise(

@@ -5,7 +5,6 @@ import { closeMainAction } from '../router/action/main';
 import { useDispatch, useSelector } from '../router/hooks';
 import { selectJourney } from '../router/selector/main';
 import { BaseSheet } from '../routes/BaseSheet';
-import { useTripBounds } from '../routes/timetable/useTripBounds';
 import { JourneyHeader } from './JourneyHeader';
 import { isJourneyTripSegment, JourneySegment } from './JourneySegment';
 
@@ -16,8 +15,6 @@ interface Props {
 }
 
 export function JourneySheet(props: Props) {
-  useTripBounds(props.journey.bounds);
-
   return (
     <BaseSheet loaded>
       <JourneyHeader

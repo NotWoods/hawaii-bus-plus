@@ -18,7 +18,6 @@ import { TripName } from './info/TripName';
 import { TripSelector } from './info/TripSelector';
 import { RouteDetailsCard } from './RouteDetails';
 import { StopTimeSegmentList } from './stop-time/StopTimeSegmentList';
-import { useTripBounds } from './useTripBounds';
 
 interface Props {
   routeDetails: RouteDetails;
@@ -63,8 +62,6 @@ export function Timetable({ routeDetails, tripDate, onChangeTripDate }: Props) {
   const directionsDetails = routeDetails.directions;
   const directionDetails = directionsDetails[directionId];
   const selectedTripId = tripId ?? directionDetails.closestTrip.trip.trip_id;
-
-  useTripBounds(routeDetails.bounds);
 
   const { route, agency } = routeDetails;
 
