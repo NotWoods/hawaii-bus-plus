@@ -21,11 +21,16 @@ const config = {
       entries: [
         { find: 'react', replacement: 'preact/compat' },
         { find: 'react-dom', replacement: 'preact/compat' },
+        {
+          find: 'prop-types',
+          replacement: 'prop-types/factoryWithThrowingShims.js',
+        },
       ],
     }),
     nodeResolve({ preferBuiltins: true }),
     commonjs(),
   ],
+  external: ['preact', 'preact/compat'],
 };
 
 export default config;
