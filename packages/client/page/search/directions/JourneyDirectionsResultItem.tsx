@@ -3,6 +3,7 @@ import { SmallRouteIcon } from '../../../all-pages/components/RouteIcon';
 import type { Journey } from '../../../worker-nearby/directions/format';
 import { JourneyHeader } from '../../directions/JourneyHeader';
 import { isJourneyTripSegment } from '../../directions/JourneySegment';
+import { useDuplicateKeys } from '../../hooks/useDuplicateKeys';
 import { openJourney } from '../../router/action/main';
 import { Link } from '../../router/Router';
 import { colorVariables } from '../../routes/props';
@@ -21,6 +22,7 @@ interface Props {
 
 export function JourneyDirectionsResultItem(props: Props) {
   const { journey } = props;
+  const makeKey = useDuplicateKeys();
 
   return (
     <Link
@@ -36,6 +38,7 @@ export function JourneyDirectionsResultItem(props: Props) {
           .map((segment) => segment.route)
           .map((route) => (
             <li
+              key={makeKey(route.route_id)}
               class="journey-item__route grid justify-end md:justify-start h-12 md:h-auto md:w-12 gap-x-3 pr-6 md:p-0 md:gap-x-0 md:gap-y-3"
               style={colorVariables(route)}
               title={route.route_long_name}
