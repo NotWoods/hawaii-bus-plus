@@ -465,17 +465,17 @@ packages:
       '@aws-crypto/ie11-detection': 1.0.0
       '@aws-crypto/sha256-js': 1.1.0
       '@aws-crypto/supports-web-crypto': 1.0.0
-      '@aws-sdk/types': 3.13.1
+      '@aws-sdk/types': 3.6.1
       '@aws-sdk/util-locate-window': 3.13.1
-      '@aws-sdk/util-utf8-browser': 3.13.1
+      '@aws-sdk/util-utf8-browser': 3.6.1
       tslib: 1.14.1
     dev: false
 
   /@aws-crypto/sha256-js/1.1.0:
     resolution: {integrity: sha512-VIhuqbPgXDVr8sZe2yhgQcDRRmzf4CI8fmC1A3bHiRfE6wlz1d8KpeemqbuoEHotz/Dch9yOxlshyQDNjNFeHA==}
     dependencies:
-      '@aws-sdk/types': 3.13.1
-      '@aws-sdk/util-utf8-browser': 3.13.1
+      '@aws-sdk/types': 3.6.1
+      '@aws-sdk/util-utf8-browser': 3.6.1
       tslib: 1.14.1
     dev: false
 
@@ -844,11 +844,6 @@ packages:
       tslib: 1.14.1
     dev: false
 
-  /@aws-sdk/types/3.13.1:
-    resolution: {integrity: sha512-4eHboRz3I8f0C85Ta1dJ1v1Y9T1zH9xpC4/DufSIfQcD1Imc2U2LM22Qgbz8/PoP4kyhp2nJpQpW0APD91ILfw==}
-    engines: {node: '>= 10.0.0'}
-    dev: false
-
   /@aws-sdk/types/3.6.1:
     resolution: {integrity: sha512-4Dx3eRTrUHLxhFdLJL8zdNGzVsJfAxtxPYYGmIddUkO2Gj3WA1TGjdfG4XN/ClI6e1XonCHafQX3UYO/mgnH3g==}
     engines: {node: '>= 10.0.0'}
@@ -943,12 +938,6 @@ packages:
       '@aws-sdk/node-config-provider': 3.8.0
       '@aws-sdk/types': 3.6.1
       tslib: 1.14.1
-    dev: false
-
-  /@aws-sdk/util-utf8-browser/3.13.1:
-    resolution: {integrity: sha512-+1FmtFOvDOYfoJnC6DEgjpcPKUERZA8VZ7JenY6SsEqVneWzHf4YVE2+KZM0DT9leLzgZBW/DKJWjeKxykaBEg==}
-    dependencies:
-      tslib: 2.2.0
     dev: false
 
   /@aws-sdk/util-utf8-browser/3.6.1:
@@ -6811,8 +6800,8 @@ packages:
     hasBin: true
     dev: true
 
-  /modern-normalize/1.0.0:
-    resolution: {integrity: sha512-1lM+BMLGuDfsdwf3rsgBSrxJwAZHFIrQ8YR61xIqdHo0uNKI9M52wNpHSrliZATJp51On6JD0AfRxd4YGSU0lw==}
+  /modern-normalize/1.1.0:
+    resolution: {integrity: sha512-2lMlY1Yc1+CUy0gw4H95uNN7vjbpoED7NNRSBHE25nWfLBdmMzFCsPshlzbxHz+gYMcBEUN8V4pU16prcdPSgA==}
     engines: {node: '>=6'}
     dev: true
 
@@ -8522,7 +8511,7 @@ packages:
       html-tags: 3.1.0
       lodash: 4.17.21
       lodash.topath: 4.5.2
-      modern-normalize: 1.0.0
+      modern-normalize: 1.1.0
       node-emoji: 1.10.0
       normalize-path: 3.0.0
       object-hash: 2.1.1

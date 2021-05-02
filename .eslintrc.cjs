@@ -94,6 +94,7 @@ const config = {
       rules: {
         'jest/expect-expect': 'off',
         'jest/no-test-callback': 'off',
+        'jest/no-export': 'off',
       },
     },
     {

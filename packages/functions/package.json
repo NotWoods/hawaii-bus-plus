@@ -45,5 +45,10 @@
         "./packages/functions/*/tsconfig.json"
       ]
     }
+  },
+  "ava": {
+    "files": [
+      "test/**/*.spec.{js,ts}"
+    ]
   }
 }
