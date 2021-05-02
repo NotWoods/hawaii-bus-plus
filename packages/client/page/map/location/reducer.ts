@@ -1,5 +1,5 @@
 import { LatLng } from 'spherical-geometry-js';
-import { GeolocationErrorCode } from '../../hooks';
+import { GeolocationErrorCode } from '../../hooks/useGeolocation';
 import { LocationAction } from './action';
 
 interface LocationState {

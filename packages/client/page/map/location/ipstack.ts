@@ -1,9 +1,5 @@
 import { memoize } from '@hawaii-bus-plus/utils';
-import { GeolocationErrorCode } from '../../hooks/useGeolocation';
-
-class NullPositionError extends Error {
-  code = GeolocationErrorCode.POSITION_UNAVAILABLE;
-}
+import { Coordinates } from './action';
 
 async function requesterLookup(signal?: AbortSignal) {
   let json: unknown;
@@ -21,15 +17,7 @@ async function requesterLookup(signal?: AbortSignal) {
     throw err;
   }
 
-  const coords = json as {
-    latitude?: number | null;
-    longitude?: number | null;
-  };
-  if (coords.latitude != undefined && coords.longitude != undefined) {
-    return coords as { latitude: number; longitude: number };
-  } else {
-    throw new NullPositionError();
-  }
+  return json as Coordinates;
 }
 
 export const locationFromIp = memoize(requesterLookup);
