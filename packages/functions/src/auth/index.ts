@@ -78,6 +78,7 @@ export const handler = createHandler(
         await admin.updateUser(body, attributes);
         return renderTemplate(successStatus, {
           type: 'sentConfirmation',
+          redirectTo: new URL('/auth/login', baseURL).href,
         });
       }
       // Login existing user
