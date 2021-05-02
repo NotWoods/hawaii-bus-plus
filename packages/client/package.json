@@ -34,7 +34,7 @@
     "tslib": "^2.2.0"
   },
   "devDependencies": {
-    "@googlemaps/js-api-loader": "^1.11.3",
+    "@googlemaps/js-api-loader": "^1.11.4",
     "@hawaii-bus-plus/jest-utils": "workspace:*",
     "@hawaii-bus-plus/vite-plugins": "workspace:*",
     "@prefresh/vite": "^2.2.1",
@@ -44,7 +44,7 @@
     "@types/googlemaps": "^3.43.3",
     "@types/jest": "^26.0.23",
     "@types/react": "^17.0.4",
-    "esbuild": "^0.11.15",
+    "esbuild": "^0.11.17",
     "esbuild-jest": "^0.5.0",
     "jest": "^26.6.3",
     "preact-render-to-string": "^5.1.19",
