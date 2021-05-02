@@ -1,5 +1,5 @@
 import { Admin, GoTrue, Token, User } from '@hawaii-bus-plus/gotrue';
-import { NetlifyIdentityContext } from '../types';
+import { NetlifyIdentityContext } from '../types.js';
 
 /**
  * `User` designed to be converted into an admin

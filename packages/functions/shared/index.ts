@@ -6,22 +6,22 @@ import {
   TextHTTPError,
   User,
 } from '@hawaii-bus-plus/gotrue';
-import { recoverSession } from './cookie/parse';
-import { removeCookie, setCookie } from './cookie/serialize';
-import { getAuth } from './identity/auth';
-import { jsonResponse } from './response';
-import { NetlifyContext, NetlifyEvent, NetlifyResponse } from './types';
+import { recoverSession } from './cookie/parse.js';
+import { removeCookie, setCookie } from './cookie/serialize.js';
+import { getAuth } from './identity/auth.js';
+import { jsonResponse } from './response/index.js';
+import { NetlifyContext, NetlifyEvent, NetlifyResponse } from './types.js';
 
 type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 
-interface AuthContext {
+export interface AuthContext {
   auth: GoTrue;
   admin: Admin;
   currentUser: User | undefined;
   user(): Promise<User | undefined>;
 }
 
-interface Context extends NetlifyContext {
+export interface Context extends NetlifyContext {
   authContext: AuthContext;
 }
 
@@ -107,6 +107,12 @@ function mergePartialResponse(
   );
 }
 
+export const MOCK_AUTH_CONTEXT = Symbol();
+
+export interface MockableNetlifyContext extends NetlifyContext {
+  [MOCK_AUTH_CONTEXT]?: AuthContext;
+}
+
 export function createHandler(
   httpMethods: HttpMethod | readonly HttpMethod[],
   handler: (
@@ -120,7 +126,7 @@ export function createHandler(
 
   return async (
     event: NetlifyEvent,
-    context: NetlifyContext,
+    context: MockableNetlifyContext,
   ): Promise<NetlifyResponse> => {
     if (!methods.has(event.httpMethod)) {
       return jsonResponse(405, { error: 'Method Not Allowed' });
@@ -133,7 +139,10 @@ export function createHandler(
       },
       multiValueHeaders: {},
     };
-    const authContext = createAuthContext(event, context, partialResponse);
+
+    const authContext =
+      context[MOCK_AUTH_CONTEXT] ??
+      createAuthContext(event, context, partialResponse);
 
     let response: NetlifyResponse;
     try {
