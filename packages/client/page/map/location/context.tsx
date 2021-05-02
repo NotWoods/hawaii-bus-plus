@@ -1,11 +1,12 @@
 import { ComponentChildren, createContext, h } from 'preact';
 import { useCallback, useMemo, useReducer, useState } from 'preact/hooks';
+import { useAbortEffect, usePermission } from '../../hooks';
 import {
+  Coordinates,
+  errorAction,
+  foundCoordinatesAction,
   GeolocationErrorCode,
-  useAbortEffect,
-  usePermission,
-} from '../../hooks';
-import { Coordinates, errorAction, foundCoordinatesAction } from './action';
+} from './action';
 import { locationFromIp } from './ipstack';
 import { locationReducer } from './reducer';
 

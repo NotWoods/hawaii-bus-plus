@@ -1,5 +1,8 @@
-import { GeolocationErrorCode } from '../../hooks';
-import { errorAction, foundCoordinatesAction } from './action';
+import {
+  errorAction,
+  foundCoordinatesAction,
+  GeolocationErrorCode,
+} from './action';
 import { locationReducer } from './reducer';
 
 test('found coordinates', () => {
