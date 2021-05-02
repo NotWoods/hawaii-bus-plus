@@ -1,10 +1,9 @@
-import { User } from '@hawaii-bus-plus/gotrue';
+import { JSONHTTPError, User } from '@hawaii-bus-plus/gotrue';
 import { URL, URLSearchParams } from 'url';
 import { createHandler } from '../../shared';
 import { setCookie } from '../../shared/cookie/serialize';
-import { jsonResponse, RequiredError } from '../../shared/response';
+import { RequiredError } from '../../shared/response';
 import { NetlifyEvent } from '../../shared/types';
-import allowList from './allowlist.json';
 import { createUserInDb } from './create';
 import { renderTemplate } from './template';
 
@@ -72,11 +71,6 @@ export const handler = createHandler(
       // Sign up new user
       case 'signup': {
         const email = formData.req('email').trim();
-        if (!allowList.includes(email)) {
-          return jsonResponse(403, {
-            error: `Unauthorized: ${email} is not on allowlist. Sign up at https://hawaiibusplus.com to request an invite.`,
-          });
-        }
         const body = await auth.signup(email, formData.req('password'), {
           full_name: formData.get('name')?.trim(),
         });
@@ -89,10 +83,25 @@ export const handler = createHandler(
       // Login existing user
       case 'login': {
         successStatus = 200;
-        user = await auth.login(
-          formData.req('email').trim(),
-          formData.req('password'),
-        );
+        try {
+          user = await auth.login(
+            formData.req('email').trim(),
+            formData.req('password'),
+          );
+        } catch (err: unknown) {
+          if (err instanceof JSONHTTPError) {
+            const json = err.json as {
+              error?: unknown;
+              error_description: string;
+            };
+            if (json.error === 'invalid_grant') {
+              // TODO: User does not exist
+              throw err;
+            }
+          }
+
+          throw err;
+        }
         break;
       }
       // Request a password recovery
