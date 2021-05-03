@@ -33,6 +33,7 @@ export function TimetableDirectionsDetail(props: Props) {
           tabIndex={tabIndex}
         />
         <EndedAt stopTime={last(closestTrip.stopTimes)} tabIndex={tabIndex} />
+        <p>{closestTrip.serviceDays}</p>
       </div>
       {props.children}
     </BaseDetails>
