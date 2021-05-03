@@ -23,11 +23,6 @@
   environment = { NETLIFY_CONTEXT = "branch-deploy" }
 
 [[plugins]]
-package = 'netlify-plugin-contextual-env'
-  [plugins.inputs]
-  mode = 'suffix'
-
-[[plugins]]
 package = "@netlify/plugin-sitemap"
   [plugins.inputs]
   exclude = [
