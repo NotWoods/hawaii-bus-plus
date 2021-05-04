@@ -12,7 +12,7 @@ export async function createUserInDb(user: SignupResponse) {
   // subscribe the new customer to the plus plan
   const subscription = await stripe.subscriptions.create({
     customer: customer.id,
-    items: [{ price: process.env.STRIPE_PLUS_PRICE_PLAN }],
+    items: [{ price: process.env['STRIPE_PLUS_PRICE_PLAN'] }],
     trial_period_days: 14,
   });
 

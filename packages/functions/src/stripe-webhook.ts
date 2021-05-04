@@ -30,7 +30,7 @@ export const handler = createHandler('POST', async (event, context) => {
   const stripeEvent = stripe.webhooks.constructEvent(
     event.body!,
     event.headers['stripe-signature']!,
-    process.env.STRIPE_WEBHOOK_SECRET!,
+    process.env['STRIPE_WEBHOOK_SECRET']!,
   );
 
   switch (stripeEvent.type) {

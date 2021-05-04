@@ -16,10 +16,10 @@
     "@hawaii-bus-plus/preact-helmet": "workspace:^6.1.0",
     "node-html-parser": "^3.2.0",
     "preact-render-to-string": "^5.1.19",
-    "rollup": "^2.46.0",
+    "rollup": "^2.47.0",
     "tslib": "^2.2.0",
     "type-fest": "^1.0.2",
-    "vite": "^2.2.3"
+    "vite": "^2.2.4"
   },
   "devDependencies": {
     "@types/react-helmet": "^6.1.1",
