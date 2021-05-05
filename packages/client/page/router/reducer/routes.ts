@@ -60,5 +60,7 @@ export function openRouteReducer(
           selectedTrip: undefined,
         },
       };
+    default:
+      return state;
   }
 }

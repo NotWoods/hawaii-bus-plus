@@ -15,7 +15,7 @@ import { mainRouterReducer } from './main';
 import { pointRouterReducer } from './point';
 
 export function initStateFromUrl(url: URL): RouterState {
-  const newState: RouterState = { freshLoad: true };
+  const newState: RouterState = { freshLoad: true, last: 'point' };
 
   if (url.pathname.startsWith(DIRECTIONS_PATH)) {
     const depart = queryToPoint(url.searchParams.get('from'));
@@ -28,6 +28,7 @@ export function initStateFromUrl(url: URL): RouterState {
         arrive,
         departureTime,
       };
+      newState.last = 'main';
     }
   } else if (url.pathname.startsWith(ROUTES_PREFIX)) {
     // If link opens route
@@ -40,12 +41,14 @@ export function initStateFromUrl(url: URL): RouterState {
       tripId: tripId ? (tripId as Trip['trip_id']) : undefined,
       details: initialDetails,
     };
+    newState.last = 'main';
   }
 
   // If link opens stop
   const stopId = url.searchParams.get('stop');
   if (stopId) {
     newState.point = { type: 'stop', stopId: stopId as Stop['stop_id'] };
+    newState.last = 'point';
   }
 
   return newState;
@@ -89,6 +92,38 @@ export function routerReducer(
     }
     case 'reload-state':
       return action.state;
+    case 'route':
+    case 'trip':
+    case 'open-journey':
+      return {
+        main: mainRouterReducer(state.main, action),
+        point: state.point,
+        freshLoad: false,
+        last: 'main',
+      };
+    case 'stop':
+    case 'bike-station':
+    case 'open-place':
+      return {
+        main: state.main,
+        point: pointRouterReducer(state.point, action),
+        freshLoad: false,
+        last: 'point',
+      };
+    case 'close-point':
+      return {
+        main: state.main,
+        point: undefined,
+        freshLoad: false,
+        last: 'main',
+      };
+    case 'close-main':
+      return {
+        main: undefined,
+        point: state.point,
+        freshLoad: false,
+        last: 'point',
+      };
     default: {
       const newMain = mainRouterReducer(state.main, action as MainRouterAction);
       const newPoint = pointRouterReducer(
@@ -100,6 +135,7 @@ export function routerReducer(
           main: newMain,
           point: newPoint,
           freshLoad: false,
+          last: state.last,
         };
       } else {
         return state;

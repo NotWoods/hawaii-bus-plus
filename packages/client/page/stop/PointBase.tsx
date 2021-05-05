@@ -26,7 +26,7 @@ export function PointBase(props: Props) {
   return (
     <>
       <div
-        className="aspect-w-16 aspect-h-9 mb-4"
+        className="aspect-w-16 aspect-h-9 mb-4 bg-black"
         hidden={status === 'ZERO_RESULTS'}
       >
         {position ? (

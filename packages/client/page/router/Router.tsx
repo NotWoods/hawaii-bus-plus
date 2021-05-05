@@ -6,14 +6,14 @@ import { linkAction, reloadStateAction, RouterAction } from './action';
 import { useDispatch } from './hooks';
 import { initStateFromUrl, routerReducer } from './reducer';
 import { selectUrl } from './selector/main';
-import { RouterState } from './state';
+import { initialState, RouterState } from './state';
 
 interface RouterContext extends RouterState {
   dispatch(action: RouterAction): void;
 }
 
 export const RouterContext = createContext<RouterContext>({
-  freshLoad: false,
+  ...initialState,
   dispatch() {},
 });
 

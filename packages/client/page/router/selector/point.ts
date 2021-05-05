@@ -1,6 +1,9 @@
 import {
+  BikeStationPoint,
   BIKE_POINT_TYPE,
   MARKER_POINT_TYPE,
+  PlacePoint,
+  StopPoint,
   STOP_POINT_TYPE,
   USER_POINT_TYPE,
 } from '@hawaii-bus-plus/presentation';
@@ -8,6 +11,23 @@ import { RouterState } from '../state';
 
 export function selectPoint(state: Pick<RouterState, 'point'>) {
   return state.point;
+}
+
+export function selectPointDetailsOpen({
+  point,
+}: Pick<RouterState, 'point'>):
+  | StopPoint
+  | PlacePoint
+  | BikeStationPoint
+  | undefined {
+  switch (point?.type) {
+    case 'stop':
+    case 'place':
+    case 'bike':
+      return point;
+    default:
+      return undefined;
+  }
 }
 
 /**

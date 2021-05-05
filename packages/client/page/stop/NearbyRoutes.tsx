@@ -40,7 +40,7 @@ export function NearbyRoutes(props: Props) {
   return (
     <ul
       class={clsx(
-        'grid grid-flow-col auto-cols-min md:grid-flow-row md:grid-cols-2 gap-4 px-4 snap snap-px-32 overscroll-contain',
+        'grid grid-flow-col auto-cols-min md:grid-flow-row md:grid-cols-2 gap-4 px-4 snap snap-px-32 overflow-auto overscroll-contain',
         props.class,
       )}
       onKeyDown={handleArrowKey}

@@ -17,7 +17,7 @@ export function SearchBase(props: Props) {
   return (
     <section
       class={clsx(
-        'waves overlay fixed flex flex-col shadow z-10 py-4 w-full md:w-80 max-h-screen md:h-screen overflow-y-auto',
+        'waves overlay fixed flex flex-col shadow z-10 py-4 w-full top-0 md:w-80 max-h-screen md:h-screen overflow-y-auto',
         { 'h-screen': loadError },
       )}
     >
@@ -26,6 +26,7 @@ export function SearchBase(props: Props) {
           id="appBarUp"
           class="w-12 h-12 p-3 text-white"
           forceDark
+          accessKey="s"
           disabled={props.icon === false}
           onClick={props.onButtonClick}
         >

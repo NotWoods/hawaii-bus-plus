@@ -1,63 +1,53 @@
-import {
-  BikeStationPoint,
-  PlacePoint,
-  Point,
-  StopPoint,
-} from '@hawaii-bus-plus/presentation';
 import { Fragment, h } from 'preact';
-import { useContext } from 'preact/hooks';
+import { useContext, useEffect } from 'preact/hooks';
 import { useLazyComponent, useScreens } from '../hooks';
 import { MyLocationButton } from '../map/location/MyLocationButton';
+import { useSelector } from '../router/hooks';
 import { RouterContext } from '../router/Router';
-import { DIRECTIONS_PATH } from '../router/state';
+import { selectPointDetailsOpen } from '../router/selector/point';
+import { DIRECTIONS_PATH, MainState } from '../router/state';
 import { RouteTimetable } from '../routes/RouteTimetable';
 import { PointDetails } from '../stop/PointDetails';
 import { HomeOverlay } from './HomeOverlay';
 
-function pointDetailsOpen(
-  point: Point | undefined,
-): point is StopPoint | PlacePoint | BikeStationPoint {
-  switch (point?.type) {
-    case 'stop':
-    case 'place':
-    case 'bike':
-      return true;
-    default:
-      return false;
+function MainOverlay() {
+  const openPoint = useSelector(selectPointDetailsOpen);
+
+  if (openPoint) {
+    return <PointDetails point={openPoint} />;
+  } else {
+    return <HomeOverlay />;
+  }
+}
+
+function MainSheet({ main }: { main?: MainState }) {
+  const { ConnectedJourneySheet } = useLazyComponent(
+    () => import('../directions/JourneySheet'),
+  );
+
+  if (ConnectedJourneySheet && main?.path === DIRECTIONS_PATH) {
+    return <ConnectedJourneySheet timeZone="Pacific/Honolulu" />;
+  } else {
+    return <RouteTimetable />;
   }
 }
 
 export function MainContent() {
   const mdMatches = useScreens('md');
-  const { ConnectedJourneySheet } = useLazyComponent(
-    () => import('../directions/JourneySheet'),
-  );
-  const { point, main } = useContext(RouterContext);
-  const sheetOpen = main != undefined;
+  const state = useContext(RouterContext);
+  const sheetOpen = state.main != undefined;
 
-  function renderOverlay() {
-    if (pointDetailsOpen(point)) {
-      return <PointDetails point={point} />;
-    } else {
-      return <HomeOverlay />;
-    }
-  }
-
-  function renderSheet() {
-    if (ConnectedJourneySheet && main?.path === DIRECTIONS_PATH) {
-      return <ConnectedJourneySheet timeZone="Pacific/Honolulu" />;
-    } else {
-      return <RouteTimetable />;
-    }
-  }
+  useEffect(() => {
+    console.log('state:', state);
+  }, [state]);
 
   if (mdMatches) {
     // Medium or bigger
     return (
       <>
         <MyLocationButton shiftUp={sheetOpen} />
-        {renderOverlay()}
-        {renderSheet()}
+        <MainOverlay />
+        <MainSheet />
       </>
     );
   } else {
@@ -65,9 +55,7 @@ export function MainContent() {
     return (
       <>
         <MyLocationButton shiftUp={sheetOpen} />
-        {pointDetailsOpen(point) || !sheetOpen
-          ? renderOverlay()
-          : renderSheet()}
+        {state.last === 'point' ? <MainOverlay /> : <MainSheet />}
       </>
     );
   }

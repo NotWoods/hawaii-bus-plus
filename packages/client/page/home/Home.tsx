@@ -57,7 +57,7 @@ export function Home(props: Props) {
     const { routes, agencies } = results ?? emptyClosestResults;
     content = (
       <NearbyRoutes
-        class="mt-12 overflow-auto"
+        class="mt-12"
         routes={Array.from(routes.values())}
         agencies={agencies}
       />
