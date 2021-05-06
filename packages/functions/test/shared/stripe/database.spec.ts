@@ -12,7 +12,10 @@ config({
 });
 
 let client: DatabaseClient | undefined;
-if (process.env.AMAZON_ACCESS_KEY_ID && process.env.AMAZON_SECRET_ACCESS_KEY) {
+if (
+  process.env['AMAZON_ACCESS_KEY_ID'] &&
+  process.env['AMAZON_SECRET_ACCESS_KEY']
+) {
   client = new DatabaseClient();
 }
 

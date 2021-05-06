@@ -11,8 +11,8 @@ export class DatabaseClient {
   dynamoDb = new DynamoDBClient({
     region: 'us-east-1',
     credentials: {
-      accessKeyId: process.env.AMAZON_ACCESS_KEY_ID!,
-      secretAccessKey: process.env.AMAZON_SECRET_ACCESS_KEY!,
+      accessKeyId: process.env['AMAZON_ACCESS_KEY_ID']!,
+      secretAccessKey: process.env['AMAZON_SECRET_ACCESS_KEY']!,
     },
   });
 
