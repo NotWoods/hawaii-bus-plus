@@ -10,19 +10,24 @@ export type MainRouterAction =
   | ReturnType<typeof openJourney>
   | OpenRouteAction;
 
+export const SET_ROUTE_TYPE = Symbol('route');
+export const SET_TRIP_TYPE = Symbol('trip');
+export const CLOSE_MAIN_TYPE = Symbol('close-main');
+export const OPEN_JOURNEY_TYPE = Symbol('journey');
+
 export function setRouteAction(routeId: Route['route_id']) {
-  return { type: 'route', routeId } as const;
+  return { type: SET_ROUTE_TYPE, routeId } as const;
 }
 
 export function setTripAction(
   routeId: Route['route_id'],
   tripId: Trip['trip_id'],
 ) {
-  return { type: 'trip', routeId, tripId } as const;
+  return { type: SET_TRIP_TYPE, routeId, tripId } as const;
 }
 
 export function closeMainAction() {
-  return { type: 'close-main' } as const;
+  return { type: CLOSE_MAIN_TYPE } as const;
 }
 
 export function openJourney(
@@ -32,7 +37,7 @@ export function openJourney(
   journey: Journey,
 ) {
   return {
-    type: 'open-journey',
+    type: OPEN_JOURNEY_TYPE,
     depart,
     arrive,
     departureTime,

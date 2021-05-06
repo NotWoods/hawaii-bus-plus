@@ -1,5 +1,5 @@
 import { Fragment, h } from 'preact';
-import { useContext, useEffect } from 'preact/hooks';
+import { useContext } from 'preact/hooks';
 import { useLazyComponent, useScreens } from '../hooks';
 import { MyLocationButton } from '../map/location/MyLocationButton';
 import { useSelector } from '../router/hooks';
@@ -36,10 +36,6 @@ export function MainContent() {
   const mdMatches = useScreens('md');
   const state = useContext(RouterContext);
   const sheetOpen = state.main != undefined;
-
-  useEffect(() => {
-    console.log('state:', state);
-  }, [state]);
 
   if (mdMatches) {
     // Medium or bigger

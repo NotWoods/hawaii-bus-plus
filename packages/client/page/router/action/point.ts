@@ -8,8 +8,15 @@ export type PointRouterAction =
   | ReturnType<typeof openPlace>
   | ReturnType<typeof updateUserLocation>;
 
+export const SET_STOP_TYPE = Symbol('stop');
+export const SET_BIKE_STATION_TYPE = Symbol('bike-station');
+export const SET_MARKER_TYPE = Symbol('set-marker');
+export const OPEN_PLACE_TYPE = Symbol('open-place');
+export const UPDATE_USER_LOCATION_TYPE = Symbol('user-location');
+export const CLOSE_POINT_TYPE = Symbol('close-point');
+
 export function setStopAction(stopId: Stop['stop_id']) {
-  return { type: 'stop', stopId } as const;
+  return { type: SET_STOP_TYPE, stopId } as const;
 }
 
 export function setBikeStationAction(
@@ -17,7 +24,7 @@ export function setBikeStationAction(
   info: StationInformation,
 ) {
   return {
-    type: 'bike-station',
+    type: SET_BIKE_STATION_TYPE,
     stationId,
     name: info.name,
     position: info.position,
@@ -25,23 +32,23 @@ export function setBikeStationAction(
 }
 
 export function closePointAction() {
-  return { type: 'close-point' } as const;
+  return { type: CLOSE_POINT_TYPE } as const;
 }
 
 export function setMarker(location: google.maps.LatLngLiteral) {
-  return { type: 'set-marker', location } as const;
+  return { type: SET_MARKER_TYPE, location } as const;
 }
 
 export function openPlace(
   placeId: string,
   position: google.maps.LatLngLiteral,
 ) {
-  return { type: 'open-place', placeId, position } as const;
+  return { type: OPEN_PLACE_TYPE, placeId, position } as const;
 }
 
 export function updateUserLocation(
   location: google.maps.LatLngLiteral,
   silent = false,
 ) {
-  return { type: 'update-user-location', location, silent } as const;
+  return { type: UPDATE_USER_LOCATION_TYPE, location, silent } as const;
 }

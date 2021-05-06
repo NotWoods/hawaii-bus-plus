@@ -50,7 +50,6 @@ export function Router(props: {
 
   useEffect(() => {
     function onPopState(evt: PopStateEvent) {
-      console.log('LOOP', evt.state);
       if (evt.state) {
         dispatch(reloadStateAction(evt.state));
       } else {

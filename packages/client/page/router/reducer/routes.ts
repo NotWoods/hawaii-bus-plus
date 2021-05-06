@@ -1,4 +1,12 @@
-import { OpenRouteAction } from '../action/routes';
+import {
+  CLOSE_ROUTE_DETAILS_TYPE,
+  OpenRouteAction,
+  RESET_TRIP_DETAILS_TYPE,
+  ROUTE_DETAILS_TYPE,
+  SET_DIRECTION_TYPE,
+  SWAP_DIRECTION_TYPE,
+  TRIP_DETAILS_TYPE,
+} from '../action/routes';
 import { initialDetails, OpenRouteState } from '../state/main';
 
 function validDirectionIds(directions: readonly unknown[]) {
@@ -18,7 +26,7 @@ export function openRouteReducer(
 ): OpenRouteState {
   const { details } = state;
   switch (action.type) {
-    case 'route-details': {
+    case ROUTE_DETAILS_TYPE: {
       const newDetails = action.details;
       const directionIds = validDirectionIds(newDetails.directions);
       const [firstValidId = 0] = directionIds;
@@ -38,20 +46,20 @@ export function openRouteReducer(
         },
       };
     }
-    case 'close-details':
+    case CLOSE_ROUTE_DETAILS_TYPE:
       return { ...state, details: initialDetails };
-    case 'trip-details':
+    case TRIP_DETAILS_TYPE:
       return {
         ...state,
         details: { ...details, selectedTrip: action.details },
       };
-    case 'swap-direction': {
+    case SWAP_DIRECTION_TYPE: {
       const directionId: 0 | 1 = details.directionId === 0 ? 1 : 0;
       return { ...state, details: { ...details, directionId } };
     }
-    case 'direction':
+    case SET_DIRECTION_TYPE:
       return { ...state, details: { ...details, directionId: action.id } };
-    case 'close-trip':
+    case RESET_TRIP_DETAILS_TYPE:
       return {
         ...state,
         tripId: undefined,

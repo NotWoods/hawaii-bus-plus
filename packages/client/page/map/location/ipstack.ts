@@ -1,5 +1,9 @@
 import { memoize } from '@hawaii-bus-plus/utils';
-import { Coordinates } from './action';
+
+export interface Coordinates {
+  latitude?: number | null;
+  longitude?: number | null;
+}
 
 async function requesterLookup(signal?: AbortSignal) {
   let json: unknown;

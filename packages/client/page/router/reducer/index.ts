@@ -1,7 +1,19 @@
 import { Route, Stop, Trip } from '@hawaii-bus-plus/types';
-import { RouterAction } from '../action';
-import { MainRouterAction } from '../action/main';
-import { PointRouterAction } from '../action/point';
+import { LINK_TYPE, RELOAD_STATE_TYPE, RouterAction } from '../action';
+import {
+  CLOSE_MAIN_TYPE,
+  MainRouterAction,
+  OPEN_JOURNEY_TYPE,
+  SET_ROUTE_TYPE,
+  SET_TRIP_TYPE,
+} from '../action/main';
+import {
+  CLOSE_POINT_TYPE,
+  OPEN_PLACE_TYPE,
+  PointRouterAction,
+  SET_BIKE_STATION_TYPE,
+  SET_STOP_TYPE,
+} from '../action/point';
 import {
   DIRECTIONS_PATH,
   initialDetails,
@@ -84,40 +96,40 @@ export function routerReducer(
   action: RouterAction,
 ): RouterState {
   switch (action.type) {
-    case 'link': {
+    case LINK_TYPE: {
       const { url } = action;
       if (url.hostname !== window.location.hostname) return state;
 
       return injectLoadedData(state, initStateFromUrl(url));
     }
-    case 'reload-state':
+    case RELOAD_STATE_TYPE:
       return action.state;
-    case 'route':
-    case 'trip':
-    case 'open-journey':
+    case SET_ROUTE_TYPE:
+    case SET_TRIP_TYPE:
+    case OPEN_JOURNEY_TYPE:
       return {
         main: mainRouterReducer(state.main, action),
         point: state.point,
         freshLoad: false,
         last: 'main',
       };
-    case 'stop':
-    case 'bike-station':
-    case 'open-place':
+    case SET_STOP_TYPE:
+    case SET_BIKE_STATION_TYPE:
+    case OPEN_PLACE_TYPE:
       return {
         main: state.main,
         point: pointRouterReducer(state.point, action),
         freshLoad: false,
         last: 'point',
       };
-    case 'close-point':
+    case CLOSE_POINT_TYPE:
       return {
         main: state.main,
         point: undefined,
         freshLoad: false,
         last: 'main',
       };
-    case 'close-main':
+    case CLOSE_MAIN_TYPE:
       return {
         main: undefined,
         point: state.point,

@@ -1,18 +1,12 @@
 import { ComponentChildren, createContext, h } from 'preact';
 import { useCallback, useMemo, useReducer, useState } from 'preact/hooks';
 import { useAbortEffect, usePermission } from '../../hooks';
-import {
-  Coordinates,
-  errorAction,
-  foundCoordinatesAction,
-  GeolocationErrorCode,
-} from './action';
-import { locationFromIp } from './ipstack';
+import { errorAction, foundCoordinatesAction } from './action';
+import { Coordinates, locationFromIp } from './ipstack';
 import { locationReducer } from './reducer';
+import { GeolocationErrorCode, LocationState } from './state';
 
-interface MyLocationContext {
-  coords?: google.maps.LatLngLiteral;
-  error?: GeolocationErrorCode;
+interface MyLocationContext extends LocationState {
   onButtonClick(): void;
 }
 

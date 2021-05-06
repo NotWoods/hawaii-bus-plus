@@ -1,9 +1,6 @@
-import {
-  errorAction,
-  foundCoordinatesAction,
-  GeolocationErrorCode,
-} from './action';
+import { errorAction, foundCoordinatesAction } from './action';
 import { locationReducer } from './reducer';
+import { GeolocationErrorCode } from './state';
 
 test('found coordinates', () => {
   expect(

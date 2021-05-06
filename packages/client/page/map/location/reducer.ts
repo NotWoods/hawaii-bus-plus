@@ -1,17 +1,13 @@
 import { LatLng } from 'spherical-geometry-js';
-import { GeolocationErrorCode, LocationAction } from './action';
-
-interface LocationState {
-  error?: GeolocationErrorCode;
-  coords?: google.maps.LatLngLiteral;
-}
+import { ERROR_TYPE, FOUND_TYPE, LocationAction } from './action';
+import { GeolocationErrorCode, LocationState } from './state';
 
 export function locationReducer(
   state: LocationState,
   action: LocationAction,
 ): LocationState {
   switch (action.type) {
-    case 'found': {
+    case FOUND_TYPE: {
       const { coords } = action;
       if (coords.latitude != undefined && coords.longitude != undefined) {
         const latLng = new LatLng(coords.latitude, coords.longitude);
@@ -29,7 +25,7 @@ export function locationReducer(
         };
       }
     }
-    case 'error':
+    case ERROR_TYPE:
       if (action.error) {
         return {
           coords: state.coords,
