@@ -12,9 +12,8 @@ const lazyMenu = import('./menu/Menu');
 
 export function HomeOverlay() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [screen, setScreen] = useState<'home' | 'search' | 'directions'>(
-    'home',
-  );
+  const [screen, setScreen] =
+    useState<'home' | 'search' | 'directions'>('home');
   const { Menu } = useLazyComponent(() => lazyMenu);
 
   switch (screen) {

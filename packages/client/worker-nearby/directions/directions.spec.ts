@@ -127,9 +127,8 @@ test.concurrent('directions', async () => {
     stopId: DA_STORE,
     type: 'stop',
   };
-  const departTime = Temporal.PlainDate.from('2021-02-04').toPlainDateTime(
-    '10:10:00',
-  );
+  const departTime =
+    Temporal.PlainDate.from('2021-02-04').toPlainDateTime('10:10:00');
 
   const { journeys } = await directions(repo, from, to, departTime);
   expect(journeys).toHaveLength(1);

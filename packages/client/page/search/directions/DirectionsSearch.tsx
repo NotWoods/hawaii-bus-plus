@@ -23,18 +23,16 @@ interface Props {
 export function DirectionsSearch(_props: Props) {
   const [depart, setDepart] = useState<Point | undefined>();
   const [arrive, setArrive] = useState<Point | undefined>();
-  const [departureTime, setDepartTime] = useState<
-    Temporal.PlainDateTime | string | NOW | undefined
-  >();
+  const [departureTime, setDepartTime] =
+    useState<Temporal.PlainDateTime | string | NOW | undefined>();
 
   const [searchResults, setSearchResults] = useState({
     field: 'depart' as 'depart' | 'arrive',
     results: emptyResults,
   });
   const [results, setResults] = useState<DirectionsResult | undefined>();
-  const { DirectionsPointResults, DirectionsJourneys } = useLazyComponent(
-    lazySearchResults,
-  );
+  const { DirectionsPointResults, DirectionsJourneys } =
+    useLazyComponent(lazySearchResults);
 
   const postToDirectionsWorker = useWorker(
     DirectionsWorker,

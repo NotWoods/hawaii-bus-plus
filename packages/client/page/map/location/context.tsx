@@ -88,10 +88,10 @@ export function MyLocationProvider(props: { children: ComponentChildren }) {
     [clicked, status, state.coords],
   );
 
-  const value = useMemo(() => ({ ...state, onButtonClick }), [
-    state,
-    onButtonClick,
-  ]);
+  const value = useMemo(
+    () => ({ ...state, onButtonClick }),
+    [state, onButtonClick],
+  );
 
   return (
     <MyLocationContext.Provider value={value}>

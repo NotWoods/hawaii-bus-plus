@@ -40,9 +40,10 @@ export function ShapeLine(props: Props) {
     [props.shapeId],
   );
 
-  const options = useMemo(() => ({ strokeColor: props.routeColor }), [
-    props.routeColor,
-  ]);
+  const options = useMemo(
+    () => ({ strokeColor: props.routeColor }),
+    [props.routeColor],
+  );
 
   if (!shape) return null;
 

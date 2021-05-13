@@ -17,7 +17,7 @@ function useWindowListener(eventName: string, callback: () => void) {
   }, [eventName]);
 }
 
-const ssr = import.meta.env.SSR as boolean;
+const ssr = import.meta.env.SSR;
 
 /**
  * @returns True if the user is currently connected to the internet

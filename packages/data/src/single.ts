@@ -3,7 +3,7 @@ import { Repository } from './repository';
 export async function getSingle<
   Repo extends Partial<Repository>,
   Id extends string,
-  Value
+  Value,
 >(
   repo: Repo,
   load: (this: Repo, ids: Iterable<Id>) => Promise<Map<Id, Value>>,

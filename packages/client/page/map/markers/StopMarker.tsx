@@ -18,11 +18,11 @@ function makeHighlightIcon(
   ringColor: ColorString,
   dark: boolean,
 ): google.maps.Icon {
-  return ({
+  return {
     ...baseHighlightIcon,
     fillColor: dark ? '#333' : '#fff',
     strokeColor: ringColor,
-  } as unknown) as google.maps.Icon;
+  } as unknown as google.maps.Icon;
 }
 
 const iconCache = new DefaultMap<

@@ -2,9 +2,7 @@ import { useEffect, useState } from 'preact/hooks';
 
 export function useMap<T>(
   map: google.maps.Map | null | undefined,
-  effect: (
-    map: google.maps.Map,
-  ) => {
+  effect: (map: google.maps.Map) => {
     instance: T;
     onUnmount(instance: T, map: google.maps.Map): void;
   },
