@@ -5,8 +5,8 @@ import {
 } from '@hawaii-bus-plus/presentation';
 import { memoize } from '@hawaii-bus-plus/utils';
 import { h } from 'preact';
-import { LoadingBar } from '../buttons/LoadingBar';
 import { useLazyComponent } from '../hooks';
+import { LoadingBusIcon } from '../loading/LoadingBusIcon';
 import { closePointAction } from '../router/action/point';
 import { useDispatch } from '../router/hooks';
 import { SearchBase } from '../search/SearchBase';
@@ -56,7 +56,7 @@ export function PointDetails({ point }: Props) {
   }
   return (
     <SearchBase onButtonClick={onClose}>
-      <LoadingBar />
+      <LoadingBusIcon />
     </SearchBase>
   );
 }

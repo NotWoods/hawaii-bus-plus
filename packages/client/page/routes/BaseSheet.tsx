@@ -14,7 +14,7 @@ interface Props {
 export function BaseSheet(props: Props) {
   const { loadError } = useLoadGoogleMaps();
   return (
-    <div class={clsx('relative md:ml-80', { 'top-[75vh]': !loadError })}>
+    <div class={clsx('relative z-10 md:ml-80', { 'top-[75vh]': !loadError })}>
       <article
         class={clsx(
           'animate-enter--sheet shadow-lg bg-gradient-to-br from-gray-50 to-gray-100 to:gray-100 dark:from-gray-750 dark:to-gray-800 text-black dark:text-white lg:mx-4',

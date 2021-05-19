@@ -6,9 +6,9 @@ import type { InfoWorkerHandler } from '../../worker-info/info';
 import InfoWorker from '../../worker-info/info?worker';
 import { RouteDetails } from '../../worker-info/route-details';
 import { TripDetails } from '../../worker-info/trip-details';
-import { LoadingBar } from '../buttons/LoadingBar';
 import { useDelay, useLazyComponent, usePromise, useWorker } from '../hooks';
 import { dbInitialized } from '../hooks/api';
+import { LoadingBusIcon } from '../loading/LoadingBusIcon';
 import {
   closeRouteDetailsAction,
   setDefaultTripDetailsAction,
@@ -104,7 +104,7 @@ export function RouteTimetable() {
     return (
       <BaseSheet>
         <RouteHeader />
-        <LoadingBar />
+        <LoadingBusIcon />
       </BaseSheet>
     );
   } else {

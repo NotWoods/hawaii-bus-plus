@@ -7,10 +7,10 @@ import type {
   NearbyWorkerHandler,
 } from '../../../worker-nearby/nearby';
 import DirectionsWorker from '../../../worker-nearby/nearby?worker';
-import { LoadingBar } from '../../buttons/LoadingBar';
 import { DirectionsTime } from '../../directions/DirectionsTime';
 import { useDelay, useLazyComponent, usePromise, useWorker } from '../../hooks';
 import { dbInitialized } from '../../hooks/api';
+import { LoadingBusIcon } from '../../loading/LoadingBusIcon';
 import { NOW, timeForWorker } from '../../time/input/symbol';
 import { emptyResults } from '../simple/places-autocomplete';
 import { lazySearchResults } from '../simple/SimpleSearch';
@@ -72,7 +72,7 @@ export function DirectionsSearch(_props: Props) {
           />
         );
       } else if (delayDone) {
-        return <LoadingBar />;
+        return <LoadingBusIcon />;
       } else {
         return null;
       }

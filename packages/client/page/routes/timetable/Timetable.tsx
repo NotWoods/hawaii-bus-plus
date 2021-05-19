@@ -3,7 +3,7 @@ import { Fragment, h } from 'preact';
 import type { Temporal } from 'proposal-temporal';
 import type { RouteDetails } from '../../../worker-info/route-details';
 import { DirectionDetails } from '../../../worker-info/trip-details';
-import { LoadingBar } from '../../buttons/LoadingBar';
+import { LoadingBar } from '../../loading/LoadingBar';
 import { useDelay } from '../../hooks';
 import { setTripAction } from '../../router/action/main';
 import { resetTripAction } from '../../router/action/routes';
