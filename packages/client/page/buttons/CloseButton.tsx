@@ -1,7 +1,6 @@
 import clsx, { ClassValue } from 'clsx';
 import { h } from 'preact';
-import clearIcon from '../icons/clear.svg';
-import { Icon } from '../icons/Icon';
+import { CloseIcon } from '../icons/MenuIcon';
 import { IconButton } from './IconButton';
 
 interface Props {
@@ -17,7 +16,7 @@ export function CloseButton(props: Props) {
       onClick={props.onClick}
       style={{ gridArea: 'close' }}
     >
-      <Icon src={clearIcon} alt="Close" class="filter dark:invert" />
+      <CloseIcon />
     </IconButton>
   );
 }

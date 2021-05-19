@@ -57,7 +57,7 @@ export function BrowserUnsupported() {
   return (
     <HomeButtons
       icon={errorSvg}
-      about="Your browser is not supported at this time. Try using Microsoft Edge or Google Chrome to access Hawaii Bus Plus."
+      about="Bus data failed to load, try refreshing or clearing your browser cache."
     />
   );
 }
