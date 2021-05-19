@@ -1,17 +1,13 @@
-import type {
-  APIGatewayEvent,
-  APIGatewayProxyResult,
-  Context,
-} from 'aws-lambda';
+import { HandlerContext, HandlerEvent, HandlerResponse } from '@netlify/functions';
 
-export type NetlifyEvent = APIGatewayEvent;
+export type NetlifyEvent = HandlerEvent;
 
 export interface NetlifyIdentityContext {
   url: string;
   token: string;
 }
 
-export interface NetlifyContext extends Omit<Context, 'clientContext'> {
+export interface NetlifyContext extends HandlerContext {
   clientContext: {
     custom: {
       netlify: string;
@@ -21,4 +17,4 @@ export interface NetlifyContext extends Omit<Context, 'clientContext'> {
   };
 }
 
-export type NetlifyResponse = APIGatewayProxyResult;
+export type NetlifyResponse = HandlerResponse;
