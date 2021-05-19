@@ -8,7 +8,7 @@ export const searchInputIconClass = 'absolute inset-y-0 h-full py-0 px-2';
 export const leadingInputClass = `${searchInputIconClass} left-0 w-10 opacity-60 filter invert`;
 
 export const searchInputClass =
-  'focus:ring-cyan focus:border-cyan block w-full bg-blue-700 text-white sm:text-sm border-gray-300';
+  'focus:ring-cyan focus:border-cyan block w-full bg-primary-700 text-white sm:text-sm border-gray-300';
 
 export function SearchInput(props: JSX.HTMLAttributes<HTMLInputElement>) {
   return (

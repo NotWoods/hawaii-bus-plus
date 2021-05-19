@@ -3,7 +3,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: theme('colors.blue.600');
+  background: theme('colors.primary.600');
 }
 .loading__linear::before {
   animation: linearProgressBar1 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395)

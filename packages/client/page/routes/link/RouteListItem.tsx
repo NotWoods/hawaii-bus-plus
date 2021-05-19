@@ -16,7 +16,7 @@ export function RouteLinkVertical(props: Props) {
   return (
     <Link
       href={`/routes/${route.route_id}/`}
-      class="flex flex-col snap-start w-32 shadow hover:shadow-lg p-2 h-full transition bg-blue-50 hover:bg-blue-100 dark:bg-blue-600 dark:hover:bg-blue-500 text-gray-800 dark:text-white"
+      class="flex flex-col snap-start w-32 shadow hover:shadow-lg p-2 h-full transition bg-primary-50 hover:bg-primary-100 dark:bg-primary-600 dark:hover:bg-primary-500 text-gray-800 dark:text-white"
       onClick={props.onClick}
       action={setRouteAction(route.route_id)}
     >

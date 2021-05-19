@@ -24,7 +24,7 @@ module.exports = {
         ...colors.trueGray,
         750: '#333',
       },
-      blue: {
+      primary: {
         50: 'hsl(212, 20%, 90%)',
         100: 'hsl(212, 10%, 72%)',
         200: 'hsl(212, 10%, 64%)',
@@ -56,8 +56,8 @@ module.exports = {
     },
     extend: {
       fill: (theme) => ({
-        'blue-500': theme('colors.blue.500'),
-        'blue-600': theme('colors.blue.600'),
+        'primary-500': theme('colors.primary.500'),
+        'primary-600': theme('colors.primary.600'),
       }),
       textColor: {
         route: 'var(--route-text-color)',

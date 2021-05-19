@@ -26,8 +26,8 @@ export function InputWithLabel({ children, theme, ...props }: Props) {
         class={clsx('input mt-1 shadow-sm block w-full focus:ring-cyan', {
           'opacity-60': props.readonly,
           'text-black': theme === 'light' || theme === 'auto',
-          'bg-blue-700 text-white': theme === 'dark',
-          'dark:bg-blue-700 dark:text-white': theme === 'auto',
+          'bg-primary-700 text-white': theme === 'dark',
+          'dark:bg-primary-700 dark:text-white': theme === 'auto',
         })}
       />
     </div>

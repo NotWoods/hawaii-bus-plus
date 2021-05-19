@@ -6,7 +6,7 @@ import './LoadingBar.css';
  */
 export function LoadingBar() {
   return (
-    <div class="loading__linear overflow-hidden m-4 bg-blue-100 relative h-1">
+    <div class="loading__linear overflow-hidden m-4 bg-primary-100 relative h-1">
       <progress class="sr-only">Loading</progress>
     </div>
   );

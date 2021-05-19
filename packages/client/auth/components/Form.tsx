@@ -85,7 +85,7 @@ export function Form({
           {type === 'login' ? (
             <a
               href="/auth/forgot"
-              class="font-medium text-blue-500 hover:underline"
+              class="font-medium text-primary-500 hover:underline"
               onClick={onLinkClick}
             >
               Forgot your password?

@@ -20,9 +20,9 @@ export function DirectionsTime(props: Props) {
   const selected = props.value != undefined ? 'leave-at' : 'now';
 
   return (
-    <div class="bg-blue-900 p-4 my-2">
+    <div class="bg-primary-900 p-4 my-2">
       <select
-        class="border-current bg-blue-900 w-full"
+        class="border-current bg-primary-900 w-full"
         value={selected}
         onChange={(evt) => {
           const mode = evt.currentTarget.value as Selected;
@@ -38,7 +38,7 @@ export function DirectionsTime(props: Props) {
       </select>
       {PlainDateTimeInput && selected === 'leave-at' ? (
         <PlainDateTimeInput
-          class="text-xs bg-blue-900 flex-1"
+          class="text-xs bg-primary-900 flex-1"
           value={props.value!}
           onChange={(dateTime) => props.onChange(dateTime)}
         />

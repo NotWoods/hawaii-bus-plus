@@ -18,7 +18,7 @@ export function Menu(props: Props) {
 
   return (
     <nav
-      class="fixed origin-top-right left-0 top-12 m-2 w-56 shadow-lg bg-blue-600 text-white ring-1 ring-black ring-opacity-50 z-10"
+      class="fixed origin-top-right left-0 top-12 m-2 w-56 shadow-lg bg-primary-600 text-white ring-1 ring-black ring-opacity-50 z-10"
       role="menu"
       aria-orientation="vertical"
       aria-labelledby={props.labelledBy}

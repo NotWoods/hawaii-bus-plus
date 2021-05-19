@@ -17,7 +17,7 @@ export function FloatingActionButton({ mini, ...props }: Props) {
         props.class,
       )}
     >
-      <div class="absolute inset-0 bg-blue-500 group-hover:bg-blue-600 transition-colors transform rotate-45 shadow-lg" />
+      <div class="absolute inset-0 bg-primary-500 group-hover:bg-primary-600 transition-colors transform rotate-45 shadow-lg" />
       {props.children}
     </button>
   );

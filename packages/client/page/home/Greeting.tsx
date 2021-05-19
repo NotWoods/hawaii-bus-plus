@@ -29,8 +29,8 @@ export function Greeting(props: Props) {
   }
 
   return (
-    <h2 class="mt-4 font-display font-medium text-xl text-center text-white">
+    <p class="mt-4 font-display font-medium text-xl text-center text-white">
       {greeting}
-    </h2>
+    </p>
   );
 }

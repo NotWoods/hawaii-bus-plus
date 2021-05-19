@@ -37,7 +37,7 @@ function MarkerSearchResultItem(props: MarkerProps) {
         style={{ gridTemplate }}
       >
         <span
-          class="rounded bg-blue-900 self-start p-1 mb-1"
+          class="rounded bg-primary-900 self-start p-1 mb-1"
           style={{ gridArea: 'icon' }}
         >
           {props.icon}
