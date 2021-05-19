@@ -1,38 +1,33 @@
-.loading__linear::before,
-.loading__linear::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: theme('colors.primary.600');
-}
-.loading__linear::before {
-  animation: linearProgressBar1 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395)
-    infinite;
-}
-.loading__linear::after {
-  animation: linearProgressBar2 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) 1.15s
-    infinite;
+.loading__linear:indeterminate {
+  @apply mx-4;
+  width: calc(100% - theme('spacing.8'));
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+  animation-name: moveIndeterminate;
+  animation-timing-function: linear;
+  background-color: theme('colors.primary.200');
+  background-image: linear-gradient(to right, theme('colors.primary.600') 30%, theme('colors.primary.600') 30%);
+  background-position: left top;
+  background-repeat: no-repeat;
+  background-size: 150% 150%;
 }
 
-@keyframes linearProgressBar1 {
-  0% {
-    transform: translateX(-35%) scaleX(0.35);
-  }
-  60% {
-    transform: translateX(100%) scaleX(0.9);
-  }
-  100% {
-    transform: translateX(100%) scaleX(0.9);
-  }
+.loading__linear:indeterminate::-webkit-progress-bar {
+  background-color: transparent;
 }
-@keyframes linearProgressBar2 {
-  0% {
-    transform: translateX(-200%) scaleX(1);
+.loading__linear:indeterminate::-moz-progress-bar {
+  background-color: transparent;
+}
+.loading__linear:indeterminate::-ms-fill {
+  animation-name: none;
+}
+
+@keyframes moveIndeterminate {
+  from {
+    background-position: 200% 0;
   }
-  60% {
-    transform: translateX(107%) scaleX(0.01);
-  }
-  100% {
-    transform: translateX(107%) scaleX(0.01);
+
+  to {
+    background-position: -200% 0;
   }
 }
