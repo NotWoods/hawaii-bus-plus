@@ -8,7 +8,6 @@ export function MainSheet({ main }: { main?: MainState }) {
     () => import('./directions/JourneySheet'),
   );
 
-  console.log(ConnectedJourneySheet, main, main?.main?.path === DIRECTIONS_PATH);
   if (ConnectedJourneySheet && main?.path === DIRECTIONS_PATH) {
     return <ConnectedJourneySheet timeZone="Pacific/Honolulu" />;
   } else {

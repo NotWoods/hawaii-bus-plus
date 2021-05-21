@@ -7,14 +7,19 @@ import type {
   DirectionsWorkerHandler,
 } from '../../../../worker-directions/worker-directions';
 import DirectionsWorker from '../../../../worker-directions/worker-directions?worker';
-import { DirectionsTime } from '../../../sheet/directions/DirectionsTime';
-import { useDelay, useLazyComponent, usePromise, useWorker } from '../../../hooks';
 import { dbInitialized } from '../../../api';
+import {
+  useDelay,
+  useLazyComponent,
+  usePromise,
+  useWorker,
+} from '../../../hooks';
 import { LoadingBusIcon } from '../../../loading/LoadingBusIcon';
+import { DirectionsTime } from '../../../sheet/directions/DirectionsTime';
 import { NOW, timeForWorker } from '../../../time/input/symbol';
 import { emptyResults } from '../simple/places-autocomplete';
 import { lazySearchResults } from '../simple/SimpleSearch';
-import { DirectionsField } from './DirectionsField';
+import { DirectionsFields, FieldsSearchResults } from './DirectionsFields';
 
 interface Props {
   onClose?(): void;
@@ -26,8 +31,8 @@ export function DirectionsSearch(_props: Props) {
   const [departureTime, setDepartTime] =
     useState<Temporal.PlainDateTime | string | NOW | undefined>();
 
-  const [searchResults, setSearchResults] = useState({
-    field: 'depart' as 'depart' | 'arrive',
+  const [searchResults, setSearchResults] = useState<FieldsSearchResults>({
+    field: 'depart',
     results: emptyResults,
   });
   const [results, setResults] = useState<DirectionsResult | undefined>();
@@ -68,7 +73,10 @@ export function DirectionsSearch(_props: Props) {
             depart={depart}
             arrive={arrive}
             departureTime={results.depatureTime}
-            onTomorrowClick={() => setDepartTime(results.tomorrow)}
+            onTomorrowClick={() => {
+              setResults(undefined);
+              setDepartTime(results.tomorrow)
+            }}
           />
         );
       } else if (delayDone) {
@@ -83,29 +91,12 @@ export function DirectionsSearch(_props: Props) {
 
   return (
     <>
-      <DirectionsField
-        id="directionsDepart"
-        label="Departing from"
-        point={depart}
-        onChange={setDepart}
-        onSearchResults={(results) =>
-          setSearchResults({
-            field: 'depart',
-            results,
-          })
-        }
-      />
-      <DirectionsField
-        id="directionsArrive"
-        label="Arriving at"
-        point={arrive}
-        onChange={setArrive}
-        onSearchResults={(results) =>
-          setSearchResults({
-            field: 'arrive',
-            results,
-          })
-        }
+      <DirectionsFields
+        depart={depart}
+        arrive={arrive}
+        setDepart={setDepart}
+        setArrive={setArrive}
+        onSearchResults={setSearchResults}
       />
       <DirectionsTime value={departureTime} onChange={setDepartTime} />
 

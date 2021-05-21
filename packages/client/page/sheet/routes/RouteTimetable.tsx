@@ -13,10 +13,13 @@ import {
   closeRouteDetailsAction,
   setDefaultTripDetailsAction,
   setRouteDetailsAction,
-  setTripDetailsAction
+  setTripDetailsAction,
 } from '../../router/action/routes';
 import { useDispatch, useSelector } from '../../router/hooks';
-import { selectOpenRoute, selectRouteDetails } from '../../router/selector/main';
+import {
+  selectOpenRoute,
+  selectRouteDetails,
+} from '../../router/selector/main';
 import { NOW, timeForWorker } from '../../time/input/symbol';
 import InfoWorker from '../../../worker-info/worker-info?worker';
 import { BaseSheet } from './BaseSheet';

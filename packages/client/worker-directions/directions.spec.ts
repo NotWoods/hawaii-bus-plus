@@ -8,10 +8,7 @@ import { PlainDaysTime } from '@hawaii-bus-plus/temporal-utils';
 import { Stop, StopTime, TimeString, Trip } from '@hawaii-bus-plus/types';
 import { last } from '@hawaii-bus-plus/utils';
 import { Temporal } from 'proposal-temporal';
-import {
-  directions,
-  traversePath,
-} from './directions';
+import { directions, traversePath } from './directions';
 import { JourneyTripSegment } from './format';
 import { Path } from './paths/raptor';
 

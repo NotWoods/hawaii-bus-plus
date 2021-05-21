@@ -1,8 +1,9 @@
+import { AbortError } from '@hawaii-bus-plus/promise-worker';
 import { useGoogleMap } from '@hawaii-bus-plus/react-google-maps';
 import type { SearchWorkerHandler } from '../../../../worker-search/worker-search';
 import SearchWorker from '../../../../worker-search/worker-search?worker';
-import { useWorker } from '../../../hooks';
 import { dbInitialized } from '../../../api';
+import { useWorker } from '../../../hooks';
 import {
   buildSessionToken,
   emptyResults,
@@ -36,6 +37,10 @@ export function useSearch() {
       : [];
 
     const [places, gtfs] = await Promise.all([placesReady, gtfsReady]);
+    if (signal.aborted) {
+      throw new AbortError();
+    }
+
     return { ...gtfs, places };
   };
 }

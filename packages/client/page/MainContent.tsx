@@ -27,7 +27,11 @@ export function MainContent() {
     return (
       <>
         {floatingActionButton}
-        {state.last === 'point' ? <MainOverlay /> : <MainSheet main={state.main}  />}
+        {state.last === 'point' ? (
+          <MainOverlay />
+        ) : (
+          <MainSheet main={state.main} />
+        )}
       </>
     );
   }

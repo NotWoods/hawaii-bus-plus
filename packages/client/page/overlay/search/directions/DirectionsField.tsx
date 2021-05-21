@@ -1,20 +1,18 @@
 import { Point } from '@hawaii-bus-plus/presentation';
 import clsx from 'clsx';
 import { ComponentChildren, h } from 'preact';
-import { useEffect, useRef, useState } from 'preact/hooks';
-import type { SearchResults } from '../../../../worker-search/worker-search';
+import { useEffect, useState } from 'preact/hooks';
 import stopIcon from '../../../icons/bus_stop.svg';
 import locationIcon from '../../../icons/gps_fixed.svg';
 import placeIcon from '../../../icons/place.svg';
 import { LeadingInputIcon, SearchInput } from '../SearchInput';
-import { useSearch } from '../simple/useSearch';
 
 interface Props {
   id: string;
   point?: Point;
   label: ComponentChildren;
   onChange(data: Point | undefined): void;
-  onSearchResults(results: SearchResults): void;
+  onSearch(value: string): void;
 }
 
 const icons = Object.freeze({
@@ -27,27 +25,15 @@ const icons = Object.freeze({
 
 export function DirectionsField(props: Props) {
   const { point, id } = props;
-  const aborter = useRef<AbortController>();
   const [value, setValue] = useState('');
   const [edited, setEdited] = useState(false);
-  const getSearchResults = useSearch();
   const invalid = !point && edited;
-
-  useEffect(() => {
-    aborter.current = new AbortController();
-    return () => aborter.current?.abort();
-  }, []);
 
   useEffect(() => {
     if (point) {
       setValue(point.name ?? '');
     }
   }, [point]);
-
-  async function performSearch(value: string) {
-    const results = await getSearchResults(value, aborter.current.signal);
-    props.onSearchResults(results);
-  }
 
   return (
     <div className="mx-4 mb-2">
@@ -60,15 +46,15 @@ export function DirectionsField(props: Props) {
           class={clsx({ 'pl-10': point, 'border-red-500': invalid })}
           placeholder="Stop or location"
           value={point?.name ?? value}
-          onInput={async (evt) => {
+          onInput={(evt) => {
             const newValue = evt.currentTarget.value;
             setValue(newValue);
             props.onChange(undefined);
-            await performSearch(newValue);
+            props.onSearch(newValue);
           }}
-          onFocus={async () => {
+          onFocus={() => {
             if (value && !point) {
-              await performSearch(value);
+              props.onSearch(value);
             }
           }}
           onBlur={() => setEdited(true)}

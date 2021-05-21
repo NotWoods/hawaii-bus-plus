@@ -9,7 +9,7 @@ import { JourneyHeader } from '../../../sheet/directions/JourneyHeader';
 import { isJourneyTripSegment } from '../../../sheet/directions/JourneySegment';
 import {
   TripDecorDot,
-  TripDecorLine
+  TripDecorLine,
 } from '../../../sheet/routes/timetable/stop-time/DecorLines';
 import './JourneyDirectionsResultItem.css';
 

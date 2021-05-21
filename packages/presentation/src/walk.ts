@@ -29,9 +29,15 @@ export function formatWalkingTime(walk: Walking) {
   if (walk.waitUntil) {
     const until = formatDuration(walk.waitUntil, 'long')!;
     if (walkTime) {
-      return `Walk ${walkTime}, then wait for ${until}`;
-    } else {
+      let result = `Walk ${walkTime}`;
+      if (until) {
+        result += `, then wait for ${until}`
+      }
+      return result;
+    } else if (until) {
       return `Wait for ${until}`;
+    } else {
+      return '';
     }
   }
 
