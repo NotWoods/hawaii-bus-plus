@@ -7,7 +7,7 @@ import { PlainDaysTime } from '@hawaii-bus-plus/temporal-utils';
 import { Stop, StopTime, TimeString, Trip } from '@hawaii-bus-plus/types';
 import { Temporal } from 'proposal-temporal';
 import { journeyToDirections, JourneyTripSegment } from './format';
-import { CompletePath } from './raptor';
+import { CompletePath } from './paths/raptor';
 
 const NOON = PlainDaysTime.from('12:00:00' as TimeString);
 const MONDAY = Temporal.PlainDate.from({ year: 2021, month: 1, day: 25 });

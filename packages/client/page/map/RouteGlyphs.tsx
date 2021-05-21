@@ -6,7 +6,7 @@ import type { RouteDetails } from '../../worker-info/route-details';
 import type {
   Journey,
   JourneyTripSegment,
-} from '../../worker-nearby/directions/format';
+} from '../../worker-directions/worker-directions';
 import { isJourneyTripSegment } from '../sheet/directions/JourneySegment';
 import { useSelector } from '../router/hooks';
 import { selectJourney, selectLoadedDetails } from '../router/selector/main';

@@ -3,11 +3,14 @@
   "include": ["**/*"],
   "references": [
     { "path": "../worker-shared" },
+    { "path": "../worker-nearby" },
     { "path": "../../data/src" },
     { "path": "../../data/node" },
     { "path": "../../jest-utils/src" },
-    { "path": "../../types" },
-    { "path": "../../utils/src" }
+    { "path": "../../mnemonist/src" },
+    { "path": "../../presentation/src" },
+    { "path": "../../temporal-utils/src" },
+    { "path": "../../types" }
   ],
   "compilerOptions": {
     "types": ["googlemaps", "jest"],

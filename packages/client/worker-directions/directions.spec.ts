@@ -8,9 +8,12 @@ import { PlainDaysTime } from '@hawaii-bus-plus/temporal-utils';
 import { Stop, StopTime, TimeString, Trip } from '@hawaii-bus-plus/types';
 import { last } from '@hawaii-bus-plus/utils';
 import { Temporal } from 'proposal-temporal';
-import { directions, traversePath } from './directions';
+import {
+  directions,
+  traversePath,
+} from './directions';
 import { JourneyTripSegment } from './format';
-import { Path } from './raptor';
+import { Path } from './paths/raptor';
 
 const LAKELAND = 'll' as Stop['stop_id'];
 const LAKELAND_ACROSS = 'll-across' as Stop['stop_id'];

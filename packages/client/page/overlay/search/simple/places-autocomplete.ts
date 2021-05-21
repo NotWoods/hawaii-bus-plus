@@ -1,5 +1,5 @@
 import { memoize } from '@hawaii-bus-plus/utils';
-import type { ClosestResults } from '../../../../worker-nearby/closest/closest';
+import type { ClosestResults } from '../../../../worker-nearby/worker-nearby';
 import type { SearchResults } from '../../../../worker-search/worker-search';
 
 export const buildSessionToken = memoize(

@@ -1,6 +1,6 @@
 import { Point } from '@hawaii-bus-plus/presentation';
 import { Route, Trip } from '@hawaii-bus-plus/types';
-import type { Journey } from '../../../worker-nearby/directions/format';
+import type { Journey } from '../../../worker-directions/worker-directions';
 import { OpenRouteAction } from './routes';
 
 export type MainRouterAction =

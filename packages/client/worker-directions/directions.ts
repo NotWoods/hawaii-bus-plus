@@ -4,7 +4,7 @@ import { PlainDaysTime } from '@hawaii-bus-plus/temporal-utils';
 import { Stop } from '@hawaii-bus-plus/types';
 import { notNull } from '@hawaii-bus-plus/utils';
 import { Temporal } from 'proposal-temporal';
-import { findClosestStops } from '../closest/closest-stops';
+import { findClosestStops } from '../worker-nearby/closest/closest-stops';
 import { Journey, journeyToDirections } from './format';
 import {
   CompletePath,
@@ -13,7 +13,7 @@ import {
   PathStart,
   raptorDirections,
   Source,
-} from './raptor';
+} from './paths/raptor';
 
 export interface DirectionsResult {
   journeys: readonly Journey[];

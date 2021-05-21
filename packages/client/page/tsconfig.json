@@ -3,6 +3,7 @@
   "include": ["**/*", "**/*.json"],
   "references": [
     { "path": "../all-pages" },
+    { "path": "../worker-directions" },
     { "path": "../worker-info" },
     { "path": "../worker-init-db" },
     { "path": "../worker-map" },

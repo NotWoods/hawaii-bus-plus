@@ -4,9 +4,9 @@ import { useState } from 'preact/hooks';
 import type { Temporal } from 'proposal-temporal';
 import type {
   DirectionsResult,
-  NearbyWorkerHandler,
-} from '../../../../worker-nearby/worker-nearby';
-import DirectionsWorker from '../../../../worker-nearby/worker-nearby?worker';
+  DirectionsWorkerHandler,
+} from '../../../../worker-directions/worker-directions';
+import DirectionsWorker from '../../../../worker-directions/worker-directions?worker';
 import { DirectionsTime } from '../../../sheet/directions/DirectionsTime';
 import { useDelay, useLazyComponent, usePromise, useWorker } from '../../../hooks';
 import { dbInitialized } from '../../../api';
@@ -36,7 +36,7 @@ export function DirectionsSearch(_props: Props) {
 
   const postToDirectionsWorker = useWorker(
     DirectionsWorker,
-  ) as NearbyWorkerHandler;
+  ) as DirectionsWorkerHandler;
   const delayDone = useDelay(300, [depart, arrive, departureTime]);
 
   usePromise(

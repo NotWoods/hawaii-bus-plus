@@ -18,8 +18,8 @@ import {
   LatLngBounds,
   LatLngBoundsLiteral,
 } from 'spherical-geometry-js';
-import { stopsLoader } from './footpaths';
-import { CompletePath, PathSegment, PathTripSegment } from './raptor';
+import { stopsLoader } from './paths/footpaths';
+import { CompletePath, PathSegment, PathTripSegment } from './paths/raptor';
 
 interface JourneyStopTime {
   readonly stop: Stop;
