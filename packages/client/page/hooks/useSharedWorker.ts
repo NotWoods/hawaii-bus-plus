@@ -1,63 +1,62 @@
 import { PromiseWorker } from '@hawaii-bus-plus/promise-worker';
-import { useCallback, useEffect, useRef } from 'preact/hooks';
+import { useCallback } from 'preact/hooks';
 import { WorkerConstructor } from './useWorker';
 
 interface WorkerEntry {
-  worker: PromiseWorker;
-  refs: number;
+  readonly worker: PromiseWorker;
+  timeoutId: number;
 }
 
 const workers = new WeakMap<WorkerConstructor, WorkerEntry>();
 
+const TIMEOUT = 10_000;
+
+function terminateSharedWorker(workerConstructor: WorkerConstructor) {
+  const entry = workers.get(workerConstructor);
+  if (entry) {
+    entry.worker.terminate();
+    workers.delete(workerConstructor);
+  }
+}
+
+function renewTimer(entry: WorkerEntry, workerConstructor: WorkerConstructor) {
+  clearTimeout(entry.timeoutId);
+  entry.timeoutId = setTimeout(
+    terminateSharedWorker,
+    TIMEOUT,
+    workerConstructor,
+  );
+}
+
+function getSharedWorker(workerConstructor: WorkerConstructor) {
+  let entry = workers.get(workerConstructor);
+  if (!entry) {
+    const worker = new PromiseWorker(new workerConstructor());
+    entry = { worker, timeoutId: -1 };
+    workers.set(workerConstructor, entry);
+  }
+
+  renewTimer(entry, workerConstructor);
+  return entry.worker;
+}
+
 /**
- * Set up a worker that lasts as long as the component is mounted.
- * The worker is terminated afterwards.
+ * Set up a worker that lasts for about 10 seconds and will be shared across components.
  *
  * Returns a postMessage function.
  */
 export function useSharedWorker(workerConstructor: { new (): Worker }) {
-  const workerRef = useRef<WorkerEntry | undefined>();
+  const postMessage = useCallback(
+    async (signal: AbortSignal, message: unknown): Promise<unknown> => {
+      const worker = getSharedWorker(workerConstructor);
 
-  const generateWorker = useCallback(() => {
-    if (workers.has(workerConstructor)) {
-      const entry = workers.get(workerConstructor)!;
-      entry.refs++;
-      return entry;
-    } else {
-      console.log('Open shared worker');
-      const worker = new PromiseWorker(new workerConstructor());
-      const entry = { worker, refs: 1 };
-      workers.set(workerConstructor, entry);
-      return entry;
-    }
-  }, [workerConstructor]);
-
-  useEffect(() => {
-    return () => {
-      const entry = workerRef.current;
-      if (entry) {
-        entry.refs--;
-        if (entry.refs <= 0) {
-          console.log('Close shared worker');
-          entry.worker.terminate();
-        }
-      }
-    };
-  }, []);
-
-  async function postMessage(
-    signal: AbortSignal,
-    message: unknown,
-  ): Promise<unknown> {
-    if (!workerRef.current) {
-      workerRef.current = generateWorker();
-    }
-
-    console.info('Shared WorkerRequest:', message);
-    const result = await workerRef.current.worker.postMessage(message, signal);
-    console.info('Shared WorkerResponse:', result);
-    return result;
-  }
+      console.info('Shared WorkerRequest:', message);
+      const result = await worker.postMessage(message, signal);
+      console.info('Shared WorkerResponse:', result);
+      return result;
+    },
+    [workerConstructor],
+  );
 
   return postMessage;
 }

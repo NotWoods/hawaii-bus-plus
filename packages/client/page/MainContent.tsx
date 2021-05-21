@@ -19,7 +19,7 @@ export function MainContent() {
       <>
         {floatingActionButton}
         <MainOverlay />
-        <MainSheet />
+        <MainSheet main={state.main} />
       </>
     );
   } else {
@@ -27,7 +27,7 @@ export function MainContent() {
     return (
       <>
         {floatingActionButton}
-        {state.last === 'point' ? <MainOverlay /> : <MainSheet />}
+        {state.last === 'point' ? <MainOverlay /> : <MainSheet main={state.main}  />}
       </>
     );
   }
