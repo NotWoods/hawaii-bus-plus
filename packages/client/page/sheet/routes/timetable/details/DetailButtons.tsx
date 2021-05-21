@@ -3,8 +3,8 @@ import { Fragment, h } from 'preact';
 import { useCallback } from 'preact/hooks';
 import { Button } from '../../../../buttons/Button';
 import { errorMessage } from '../../../../hooks';
-import fareIcon from '../../../icons/monetization_on.svg';
-import shareIcon from '../../../icons/share.svg';
+import fareIcon from '../../../../icons/monetization_on.svg';
+import shareIcon from '../../../../icons/share.svg';
 import { useSnackbar } from '../../../../snackbar/context';
 import { buildShareHandler } from './share';
 

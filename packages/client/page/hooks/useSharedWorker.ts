@@ -1,7 +1,5 @@
 import { PromiseWorker } from '@hawaii-bus-plus/promise-worker';
 import { useCallback, useEffect, useRef } from 'preact/hooks';
-import type { InfoWorkerHandler } from '../../worker-info/info';
-import InfoWorker from '../../worker-info/info?worker';
 import { WorkerConstructor } from './useWorker';
 
 interface WorkerEntry {
@@ -61,10 +59,5 @@ export function useSharedWorker(workerConstructor: { new (): Worker }) {
     return result;
   }
 
-  return postMessage;
-}
-
-export function useSharedInfoWorker() {
-  const postMessage = useSharedWorker(InfoWorker) as InfoWorkerHandler;
   return postMessage;
 }

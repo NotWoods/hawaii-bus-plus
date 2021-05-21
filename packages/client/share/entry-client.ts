@@ -1,5 +1,5 @@
 import '../all-pages/main.css';
-import { buildShareHandler } from '../page/routes/timetable/details/share';
+import { buildShareHandler } from '../page/sheet/routes/timetable/details/share';
 import './App.css';
 import './components/Footer.css';
 import { dynamicLoginButton } from './components/PageHeader';

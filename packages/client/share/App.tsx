@@ -1,10 +1,10 @@
 import { MultiMap } from '@hawaii-bus-plus/mnemonist';
 import { Agency, Route, Stop, Trip } from '@hawaii-bus-plus/types';
 import { Fragment, h } from 'preact';
-import { colorVariables } from '../page/routes/props';
-import { RouteHeader } from '../page/routes/RouteHeader';
-import { DetailButtons } from '../page/routes/timetable/details/DetailButtons';
-import { RouteDescription } from '../page/routes/timetable/details/RouteDescription';
+import { colorVariables } from '../all-pages/route-colors';
+import { RouteHeader } from '../page/sheet/routes/RouteHeader';
+import { DetailButtons } from '../page/sheet/routes/timetable/details/DetailButtons';
+import { RouteDescription } from '../page/sheet/routes/timetable/details/RouteDescription';
 import { extractLinks } from '../worker-info/description';
 import { ExtendedFloatingActionButton } from './components/ExtendedFloatingActionButton';
 import { Footer } from './components/Footer';

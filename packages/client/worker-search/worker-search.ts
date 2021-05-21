@@ -2,6 +2,8 @@ import { BaseMessageRequest, registerWorker } from '../worker-shared/register';
 import { SearchRequest } from './helpers';
 import { search, SearchResults } from './search-db';
 
+export type { SearchResults }
+
 interface SearchMessage extends BaseMessageRequest, SearchRequest {
   type: 'search';
 }

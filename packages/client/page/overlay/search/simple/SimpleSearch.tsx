@@ -3,7 +3,7 @@ import { Fragment, h } from 'preact';
 import { useState } from 'preact/hooks';
 import { Button } from '../../../buttons/Button';
 import { useLazyComponent, usePromise } from '../../../hooks';
-import directionsIcon from '../../icons/directions.svg';
+import directionsIcon from '../../../icons/directions.svg';
 import { SearchBar } from '../SearchBar';
 import { emptyResults } from './places-autocomplete';
 import { useSearch } from './useSearch';

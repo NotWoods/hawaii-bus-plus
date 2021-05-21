@@ -1,5 +1,5 @@
 import { PromiseWorker } from '@hawaii-bus-plus/promise-worker';
-import InitDBWorker from '../../worker-init-db/init-db?worker';
+import InitDBWorker from '../worker-init-db/worker-init-db?worker';
 
 declare global {
   interface ImportMetaEnv {

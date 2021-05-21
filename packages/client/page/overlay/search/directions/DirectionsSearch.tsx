@@ -5,11 +5,11 @@ import type { Temporal } from 'proposal-temporal';
 import type {
   DirectionsResult,
   NearbyWorkerHandler,
-} from '../../../../worker-nearby/nearby';
-import DirectionsWorker from '../../../worker-nearby/nearby?worker';
+} from '../../../../worker-nearby/worker-nearby';
+import DirectionsWorker from '../../../../worker-nearby/worker-nearby?worker';
 import { DirectionsTime } from '../../../sheet/directions/DirectionsTime';
 import { useDelay, useLazyComponent, usePromise, useWorker } from '../../../hooks';
-import { dbInitialized } from '../../../hooks/api';
+import { dbInitialized } from '../../../api';
 import { LoadingBusIcon } from '../../../loading/LoadingBusIcon';
 import { NOW, timeForWorker } from '../../../time/input/symbol';
 import { emptyResults } from '../simple/places-autocomplete';

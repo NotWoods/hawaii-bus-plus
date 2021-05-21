@@ -2,9 +2,9 @@ import { Route, Stop } from '@hawaii-bus-plus/types';
 import clsx, { ClassValue } from 'clsx';
 import { ComponentChildren, h } from 'preact';
 import { ButtonOrAnchor } from '../../../buttons/ButtonOrAnchor';
-import busStopIcon from '../../icons/bus_stop.svg';
+import busStopIcon from '../../../icons/bus_stop.svg';
 import { Icon } from '../../../icons/Icon';
-import placeIcon from '../../icons/place.svg';
+import placeIcon from '../../../icons/place.svg';
 import {
   BLANK,
   RouteBadgeKeys,

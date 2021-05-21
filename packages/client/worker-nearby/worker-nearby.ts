@@ -35,6 +35,7 @@ registerWorker(async (repo, message: Message) => {
 
       return directions(repo, message.from, message.to, departureTime);
     }
+    /* Find the closest stops to the given location */
     case 'closest-stop': {
       return findClosest(repo, message.location, message.fallbackToAll);
     }

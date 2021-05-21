@@ -1,9 +1,9 @@
 import { ComponentChildren, h } from 'preact';
 import { Button } from '../../buttons/Button';
 import { Icon } from '../../icons/Icon';
-import loginSvg from '../icons/login.svg';
-import paymentsSvg from '../icons/payments.svg';
-import errorSvg from '../icons/error.svg';
+import loginSvg from '../../icons/login.svg';
+import paymentsSvg from '../../icons/payments.svg';
+import errorSvg from '../../icons/error.svg';
 import { HomeButtonsError } from './hooks';
 
 function HomeButtons(props: {

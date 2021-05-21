@@ -1,5 +1,5 @@
 import { ComponentChildren, h } from 'preact';
-import busIcon from '../../../icons/directions_bus.svg';
+import busIcon from '../../../../icons/directions_bus.svg';
 import { Icon } from '../../../../icons/Icon';
 import { BLANK } from '../../badge/RouteBadge';
 

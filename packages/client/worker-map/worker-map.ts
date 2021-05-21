@@ -1,6 +1,8 @@
 import { BaseMessageRequest, registerWorker } from '../worker-shared/register';
 import { loadMarkers, MarkersResponse } from './markers';
 
+export type { MarkersResponse };
+
 interface MapMarkersMessage extends BaseMessageRequest {
   type: 'markers';
 }
@@ -13,6 +15,7 @@ export interface MapWorkerHandler {
 
 registerWorker((repo, message: Message) => {
   switch (message.type) {
+    /* Load a list of marker locations to display on the map */
     case 'markers':
       return loadMarkers(repo);
   }

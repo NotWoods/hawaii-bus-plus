@@ -1,7 +1,7 @@
 import { h } from 'preact';
-import feedbackIcon from '../../icons/feedback.svg';
-import logoutIcon from '../../icons/logout.svg';
-import paymentsIcon from '../../icons/payments.svg';
+import feedbackIcon from '../../../icons/feedback.svg';
+import logoutIcon from '../../../icons/logout.svg';
+import paymentsIcon from '../../../icons/payments.svg';
 import { MenuOption } from './MenuOption';
 
 interface Props {

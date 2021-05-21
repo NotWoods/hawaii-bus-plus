@@ -1,6 +1,6 @@
 import { memoize } from '@hawaii-bus-plus/utils';
 import type { ClosestResults } from '../../../../worker-nearby/closest/closest';
-import type { SearchResults } from '../../../../worker-search/search-db';
+import type { SearchResults } from '../../../../worker-search/worker-search';
 
 export const buildSessionToken = memoize(
   () => new google.maps.places.AutocompleteSessionToken(),

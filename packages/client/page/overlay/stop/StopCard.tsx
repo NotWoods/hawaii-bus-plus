@@ -1,11 +1,11 @@
 import { StopPoint } from '@hawaii-bus-plus/presentation';
 import { h } from 'preact';
 import { useState } from 'preact/hooks';
-import type { InfoWorkerHandler } from '../../../worker-info/info';
-import InfoWorker from '../../worker-info/info?worker';
+import type { InfoWorkerHandler } from '../../../worker-info/worker-info';
+import InfoWorker from '../../../worker-info/worker-info?worker';
 import type { StopDetails } from '../../../worker-info/stop-details';
 import { usePromise, useWorker } from '../../hooks';
-import { dbInitialized } from '../../hooks/api';
+import { dbInitialized } from '../../api';
 import { PointBase } from './PointBase';
 import { PointDescription, PointHeader } from './PointInfo';
 import { StopInfo } from './StopInfo';

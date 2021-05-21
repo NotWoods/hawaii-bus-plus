@@ -2,7 +2,7 @@ import { StopTimeData } from '@hawaii-bus-plus/presentation';
 import { Stop } from '@hawaii-bus-plus/types';
 import { Fragment, h } from 'preact';
 import { useDuplicateKeys } from '../../../../hooks/useDuplicateKeys';
-import expandIcon from '../../../icons/expand_more.svg';
+import expandIcon from '../../../../icons/expand_more.svg';
 import { Icon } from '../../../../icons/Icon';
 import { BaseSegment } from './BaseSegment';
 import { stopLink, StopTimeSegment } from './StopTimeSegment';

@@ -2,7 +2,7 @@ import { Agency } from '@hawaii-bus-plus/types';
 import { last } from '@hawaii-bus-plus/utils';
 import { ComponentChildren, h } from 'preact';
 import { DirectionDetails } from '../../../../../worker-info/trip-details';
-import timeIcon from '../../../icons/access_time.svg';
+import timeIcon from '../../../../icons/access_time.svg';
 import { Icon } from '../../../../icons/Icon';
 import { EndedAt, ReachesAt, StartedFrom } from './StartedFrom';
 import { BaseDetails } from './TripName';

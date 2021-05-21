@@ -3,7 +3,7 @@ import { PlainDaysTime } from '@hawaii-bus-plus/temporal-utils';
 import { Agency, Stop, TimeString, Trip } from '@hawaii-bus-plus/types';
 import { h } from 'preact';
 import { Temporal } from 'proposal-temporal';
-import { StopTimeSegmentList } from '../../page/routes/timetable/stop-time/StopTimeSegmentList';
+import { StopTimeSegmentList } from '../../page/sheet/routes/timetable/stop-time/StopTimeSegmentList';
 
 interface Props {
   trip: Trip;

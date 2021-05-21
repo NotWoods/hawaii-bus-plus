@@ -2,10 +2,10 @@ import { Point } from '@hawaii-bus-plus/presentation';
 import clsx from 'clsx';
 import { ComponentChildren, h } from 'preact';
 import { useEffect, useRef, useState } from 'preact/hooks';
-import type { SearchResults } from '../../../../worker-search/search-db';
-import stopIcon from '../../icons/bus_stop.svg';
-import locationIcon from '../../icons/gps_fixed.svg';
-import placeIcon from '../../icons/place.svg';
+import type { SearchResults } from '../../../../worker-search/worker-search';
+import stopIcon from '../../../icons/bus_stop.svg';
+import locationIcon from '../../../icons/gps_fixed.svg';
+import placeIcon from '../../../icons/place.svg';
 import { LeadingInputIcon, SearchInput } from '../SearchInput';
 import { useSearch } from '../simple/useSearch';
 
