@@ -7,7 +7,7 @@ import type {
   NearbyWorkerHandler,
 } from '../../../../worker-nearby/nearby';
 import DirectionsWorker from '../../../worker-nearby/nearby?worker';
-import { DirectionsTime } from '../../../directions/DirectionsTime';
+import { DirectionsTime } from '../../../sheet/directions/DirectionsTime';
 import { useDelay, useLazyComponent, usePromise, useWorker } from '../../../hooks';
 import { dbInitialized } from '../../../hooks/api';
 import { LoadingBusIcon } from '../../../loading/LoadingBusIcon';

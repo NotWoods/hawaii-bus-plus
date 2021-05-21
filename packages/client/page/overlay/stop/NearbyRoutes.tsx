@@ -3,7 +3,7 @@ import clsx, { ClassValue } from 'clsx';
 import { h } from 'preact';
 import { useScreens } from '../../hooks';
 import { useListKeyboardNav } from '../../hooks/useListKeyboardNav';
-import { RouteLinkVertical } from '../../routes/link/RouteListItem';
+import { RouteLinkVertical } from '../../sheet/routes/link/RouteListItem';
 
 interface Props {
   routes: readonly Route[];

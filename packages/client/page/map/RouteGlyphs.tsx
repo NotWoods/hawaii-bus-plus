@@ -7,7 +7,7 @@ import type {
   Journey,
   JourneyTripSegment,
 } from '../../worker-nearby/directions/format';
-import { isJourneyTripSegment } from '../directions/JourneySegment';
+import { isJourneyTripSegment } from '../sheet/directions/JourneySegment';
 import { useSelector } from '../router/hooks';
 import { selectJourney, selectLoadedDetails } from '../router/selector/main';
 import { AllMarkers } from './markers/AllMarkers';

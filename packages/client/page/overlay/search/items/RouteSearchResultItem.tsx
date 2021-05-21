@@ -3,7 +3,7 @@ import clsx, { ClassValue } from 'clsx';
 import { h } from 'preact';
 import { Link } from '../../../router/Router';
 import { RouteIcon } from '../../../../all-pages/components/RouteIcon';
-import { colorVariables } from '../../../routes/props';
+import { colorVariables } from '../../../sheet/routes/props';
 
 interface Props {
   route: Route;

@@ -1,0 +1,64 @@
+import { Agency, Route, Trip } from '@hawaii-bus-plus/types';
+import { Fragment, h } from 'preact';
+import { useCallback } from 'preact/hooks';
+import { Button } from '../../../../buttons/Button';
+import { errorMessage } from '../../../../hooks';
+import fareIcon from '../../../icons/monetization_on.svg';
+import shareIcon from '../../../icons/share.svg';
+import { useSnackbar } from '../../../../snackbar/context';
+import { buildShareHandler } from './share';
+
+interface Props {
+  route: Route;
+  agency: Agency;
+  tripId?: Trip['trip_id'];
+}
+
+function useShare(text: string) {
+  const toastAlert = useSnackbar();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const callback = useCallback(
+    buildShareHandler(text, (err) =>
+      toastAlert({
+        children: errorMessage(err),
+      }),
+    ),
+    [text, toastAlert],
+  );
+
+  if (!import.meta.env.SSR && navigator.share) {
+    return callback;
+  } else {
+    return undefined;
+  }
+}
+
+export function DetailButtons({ route, agency, tripId }: Props) {
+  const handleShare = useShare(route.route_long_name);
+
+  let shareHref = `https://hibus.plus/routes/${route.route_id}`;
+  if (tripId) {
+    shareHref += `#${tripId}`;
+  }
+
+  return (
+    <>
+      <Button
+        icon={shareIcon}
+        iconClass="filter dark:invert"
+        href={shareHref}
+        onClick={handleShare}
+        id="share"
+      >
+        Share
+      </Button>
+      <Button
+        icon={fareIcon}
+        iconClass="filter dark:invert"
+        href={agency.agency_fare_url}
+      >
+        Fare info
+      </Button>
+    </>
+  );
+}

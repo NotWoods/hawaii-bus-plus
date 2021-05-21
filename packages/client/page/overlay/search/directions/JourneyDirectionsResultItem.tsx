@@ -1,16 +1,16 @@
 import { h } from 'preact';
 import { SmallRouteIcon } from '../../../../all-pages/components/RouteIcon';
 import type { Journey } from '../../../../worker-nearby/directions/format';
-import { JourneyHeader } from '../../../directions/JourneyHeader';
-import { isJourneyTripSegment } from '../../../directions/JourneySegment';
+import { JourneyHeader } from '../../../sheet/directions/JourneyHeader';
+import { isJourneyTripSegment } from '../../../sheet/directions/JourneySegment';
 import { useDuplicateKeys } from '../../../hooks/useDuplicateKeys';
 import { openJourney } from '../../../router/action/main';
 import { Link } from '../../../router/Router';
-import { colorVariables } from '../../../routes/props';
+import { colorVariables } from '../../../sheet/routes/props';
 import {
   TripDecorDot,
   TripDecorLine,
-} from '../../../routes/timetable/stop-time/DecorLines';
+} from '../../../sheet/routes/timetable/stop-time/DecorLines';
 import './JourneyDirectionsResultItem.css';
 
 interface Props {
