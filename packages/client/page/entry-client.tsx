@@ -1,5 +1,8 @@
+import 'preact/debug';
+import '../all-pages/main.css';
+
 import('../all-pages/all');
 import('./hooks/api');
-import('./App-client');
+import('./entry-client-lazy');
 
 export {};
