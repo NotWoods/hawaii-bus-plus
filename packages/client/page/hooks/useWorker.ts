@@ -26,27 +26,17 @@ function debugLog(type: 'req' | 'res', data: unknown) {
  * Returns a postMessage function.
  */
 export function useWorker(workerConstructor: WorkerConstructor) {
-  const workerRef = useRef<PromiseWorker | Error | undefined>();
+  const workerRef = useRef<PromiseWorker | undefined>();
 
-  const generateWorker = useCallback(() => {
-    try {
-      return new PromiseWorker(new workerConstructor());
-    } catch (err: unknown) {
-      if (err instanceof Error) {
-        (err as { code?: unknown }).code = 'worker_start_error';
-        return err;
-      } else {
-        throw err;
-      }
-    }
-  }, [workerConstructor]);
+  const generateWorker = useCallback(
+    () => new PromiseWorker(new workerConstructor()),
+    [workerConstructor],
+  );
 
   useEffect(() => {
     return () => {
       const worker = workerRef.current;
-      if (worker instanceof PromiseWorker) {
-        worker.terminate();
-      }
+      worker?.terminate();
     };
   }, []);
 
@@ -60,13 +50,9 @@ export function useWorker(workerConstructor: WorkerConstructor) {
 
     debugLog('req', message);
     const worker = workerRef.current;
-    if (worker instanceof PromiseWorker) {
-      const result = await worker.postMessage(message, signal);
-      debugLog('res', result);
-      return result;
-    } else {
-      throw worker;
-    }
+    const result = await worker.postMessage(message, signal);
+    debugLog('res', result);
+    return result;
   }
 
   return postMessage;

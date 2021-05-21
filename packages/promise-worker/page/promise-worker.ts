@@ -36,14 +36,7 @@ export class PromiseWorker {
   constructor(private readonly worker: Worker) {
     worker.addEventListener('message', (evt) => this.onMessage(evt.data));
     worker.addEventListener('error', (evt) => {
-      const error = evt.error || new Error(evt.message);
-      (error as { code?: string }).code = 'worker_start_error';
-
-      this.syntaxError = error;
-      console.warn('Worker error', error);
-      for (const id of this.callbacks.keys()) {
-        this.onMessage([id, error]);
-      }
+      console.error('Worker error event', evt.error, evt);
     });
   }
 

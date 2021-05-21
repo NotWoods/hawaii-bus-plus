@@ -68,7 +68,5 @@ export function HomeErrorButtons(props: { error: HomeButtonsError }) {
       return <LoginButtons />;
     case 402:
       return <BillingButtons />;
-    case 'worker_start_error':
-      return <BrowserUnsupported />;
   }
 }
