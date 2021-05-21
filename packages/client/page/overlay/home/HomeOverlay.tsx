@@ -3,8 +3,8 @@ import { useState } from 'preact/hooks';
 import { Logo } from '../../../all-pages/components/Logo';
 import { useLazyComponent } from '../../hooks';
 import { MenuIcon } from '../../icons/MenuIcon';
+import { BaseOverlay } from '../BaseOverlay';
 import { DirectionsSearch } from '../search/directions/DirectionsSearch';
-import { SearchBase } from '../search/SearchBase';
 import { SimpleSearch } from '../search/simple/SimpleSearch';
 import { Home } from './Home';
 
@@ -19,7 +19,7 @@ export function HomeOverlay() {
   switch (screen) {
     case 'home':
       return (
-        <SearchBase
+        <BaseOverlay
           icon={<MenuIcon open={menuOpen} />}
           logo={
             <a href="/">
@@ -30,19 +30,19 @@ export function HomeOverlay() {
         >
           {Menu ? <Menu open={menuOpen} labelledBy="appBarUp" /> : undefined}
           <Home onSearch={() => setScreen('search')} />
-        </SearchBase>
+        </BaseOverlay>
       );
     case 'search':
       return (
-        <SearchBase title="Search" onButtonClick={() => setScreen('home')}>
+        <BaseOverlay title="Search" onButtonClick={() => setScreen('home')}>
           <SimpleSearch onDirections={() => setScreen('directions')} />
-        </SearchBase>
+        </BaseOverlay>
       );
     case 'directions':
       return (
-        <SearchBase title="Directions" onButtonClick={() => setScreen('home')}>
+        <BaseOverlay title="Directions" onButtonClick={() => setScreen('home')}>
           <DirectionsSearch onClose={() => setScreen('home')} />
-        </SearchBase>
+        </BaseOverlay>
       );
   }
 }

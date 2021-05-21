@@ -1,8 +1,8 @@
 import clsx from 'clsx';
 import { ComponentChildren, h } from 'preact';
-import { IconButton } from '../../buttons/IconButton';
-import { useLoadGoogleMaps } from '../../hooks/useLoadGoogleMaps';
-import { UpIcon } from '../../icons/MenuIcon';
+import { IconButton } from '../buttons/IconButton';
+import { useLoadGoogleMaps } from '../hooks/useLoadGoogleMaps';
+import { UpIcon } from '../icons/MenuIcon';
 
 interface Props {
   children: ComponentChildren;
@@ -12,7 +12,7 @@ interface Props {
   onButtonClick?(): void;
 }
 
-export function SearchBase(props: Props) {
+export function BaseOverlay(props: Props) {
   const { loadError } = useLoadGoogleMaps();
   return (
     <section

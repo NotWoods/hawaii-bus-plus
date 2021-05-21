@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { ComponentChildren, h } from 'preact';
-import { useLoadGoogleMaps } from '../../hooks/useLoadGoogleMaps';
+import { useLoadGoogleMaps } from '../hooks/useLoadGoogleMaps';
 import './BaseSheet.css';
 
 interface Props {

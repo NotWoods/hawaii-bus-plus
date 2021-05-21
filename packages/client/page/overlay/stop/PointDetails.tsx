@@ -9,7 +9,7 @@ import { useLazyComponent } from '../../hooks';
 import { LoadingBusIcon } from '../../loading/LoadingBusIcon';
 import { closePointAction } from '../../router/action/point';
 import { useDispatch } from '../../router/hooks';
-import { SearchBase } from '../search/SearchBase';
+import { BaseOverlay } from '../BaseOverlay';
 
 interface Props {
   point: StopPoint | PlacePointPartial | BikeStationPoint;
@@ -29,34 +29,34 @@ export function PointDetails({ point }: Props) {
     case 'stop':
       if (StopCard) {
         return (
-          <SearchBase onButtonClick={onClose}>
+          <BaseOverlay onButtonClick={onClose}>
             <StopCard point={point} />
-          </SearchBase>
+          </BaseOverlay>
         );
       }
       break;
     case 'place':
       if (PlaceCard) {
         return (
-          <SearchBase onButtonClick={onClose}>
+          <BaseOverlay onButtonClick={onClose}>
             <PlaceCard point={point} />
-          </SearchBase>
+          </BaseOverlay>
         );
       }
       break;
     case 'bike':
       if (BikeStationCard) {
         return (
-          <SearchBase onButtonClick={onClose}>
+          <BaseOverlay onButtonClick={onClose}>
             <BikeStationCard point={point} />
-          </SearchBase>
+          </BaseOverlay>
         );
       }
       break;
   }
   return (
-    <SearchBase onButtonClick={onClose}>
+    <BaseOverlay onButtonClick={onClose}>
       <LoadingBusIcon />
-    </SearchBase>
+    </BaseOverlay>
   );
 }
