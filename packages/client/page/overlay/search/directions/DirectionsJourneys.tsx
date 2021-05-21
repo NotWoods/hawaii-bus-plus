@@ -1,7 +1,7 @@
 import { Point } from '@hawaii-bus-plus/presentation';
 import clsx from 'clsx';
 import { h } from 'preact';
-import type { Journey } from '../../../../worker-nearby/directions/format';
+import type { Journey } from '../../../../worker-directions/worker-directions';
 import { SearchResultsSubList } from '../items/SearchResultsSubList';
 import { DirectionsJourneyItem } from './DirectionsJourneyItem';
 
