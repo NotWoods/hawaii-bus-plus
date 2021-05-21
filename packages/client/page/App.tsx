@@ -1,7 +1,7 @@
 import { MapProvider } from '@hawaii-bus-plus/react-google-maps';
 import { h } from 'preact';
 import { FocusTrapProvider } from './buttons/FocusTrap';
-import { MainContent } from './home/MainContent';
+import { MainContent } from './overlay/home/MainContent';
 import { googleMapOptions } from './hooks/useLoadGoogleMaps';
 import { MyLocationProvider } from './map/location/context';
 import { MainMap } from './map/MainMap';
