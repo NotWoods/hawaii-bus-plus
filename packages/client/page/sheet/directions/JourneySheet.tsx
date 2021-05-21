@@ -4,7 +4,7 @@ import type { Journey } from '../../../worker-directions/worker-directions';
 import { closeMainAction } from '../../router/action/main';
 import { useDispatch, useSelector } from '../../router/hooks';
 import { selectJourney } from '../../router/selector/main';
-import { BaseSheet } from '../routes/BaseSheet';
+import { BaseSheet } from '../BaseSheet';
 import { JourneyHeader } from './JourneyHeader';
 import { isJourneyTripSegment, JourneySegment } from './JourneySegment';
 

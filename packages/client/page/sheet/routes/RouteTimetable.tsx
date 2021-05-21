@@ -22,7 +22,7 @@ import {
 } from '../../router/selector/main';
 import { NOW, timeForWorker } from '../../time/input/symbol';
 import InfoWorker from '../../../worker-info/worker-info?worker';
-import { BaseSheet } from './BaseSheet';
+import { BaseSheet } from '../BaseSheet';
 import { RouteHeader } from './RouteHeader';
 
 const lazyTimetable = import('./time-entry');
