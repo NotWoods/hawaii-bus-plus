@@ -60,7 +60,7 @@ export class PromiseWorker {
     callback(error, result);
   }
 
-  postMessage(userMessage: unknown, signal?: AbortSignal): Promise<unknown> {
+  postMessage(userMessage?: unknown, signal?: AbortSignal): Promise<unknown> {
     if (this.syntaxError) {
       throw this.syntaxError;
     }

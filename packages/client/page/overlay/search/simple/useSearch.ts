@@ -21,19 +21,17 @@ export function useSearch() {
 
     const request = { input: query, offset: query.length };
     const gtfsReady = dbInitialized.then(() =>
-      postToSearchWorker(signal, {
-        ...request,
-        type: 'search',
-      }),
+      postToSearchWorker(signal, request),
     );
     const placesReady = map
-      ? getPlacePredictions({
-          ...request,
-          sessionToken: buildSessionToken(),
-          bounds: map.getBounds()!,
-          location: map.getCenter(),
-          componentRestrictions: { country: 'us' },
-        })
+      ? getPlacePredictions(
+          Object.assign({}, request, {
+            sessionToken: buildSessionToken(),
+            bounds: map.getBounds()!,
+            location: map.getCenter(),
+            componentRestrictions: { country: 'us' },
+          }),
+        )
       : [];
 
     const [places, gtfs] = await Promise.all([placesReady, gtfsReady]);

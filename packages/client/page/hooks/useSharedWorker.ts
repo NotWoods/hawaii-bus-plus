@@ -45,9 +45,9 @@ function getSharedWorker(workerConstructor: WorkerConstructor) {
  *
  * Returns a postMessage function.
  */
-export function useSharedWorker(workerConstructor: { new (): Worker }) {
+export function useSharedWorker(workerConstructor: { new(): Worker }) {
   const postMessage = useCallback(
-    async (signal: AbortSignal, message: unknown): Promise<unknown> => {
+    async (signal: AbortSignal, message?: unknown): Promise<unknown> => {
       const worker = getSharedWorker(workerConstructor);
 
       console.info('Shared WorkerRequest:', message);

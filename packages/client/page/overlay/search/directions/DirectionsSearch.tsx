@@ -53,7 +53,6 @@ export function DirectionsSearch(_props: Props) {
 
       await dbInitialized;
       const results = await postToDirectionsWorker(signal, {
-        type: 'directions',
         from: depart,
         to: arrive,
         departureTime: timeForWorker(departureTime),

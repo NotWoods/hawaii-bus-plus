@@ -19,7 +19,6 @@ export function PlaceInfo({ position }: Props) {
     async (signal) => {
       await dbInitialized;
       const results = await postToNearbyWorker(signal, {
-        type: 'closest-stop',
         location: position,
         fallbackToAll: false,
       });

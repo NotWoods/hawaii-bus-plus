@@ -6,7 +6,7 @@ export interface BaseMessageRequest {
 }
 
 let repo: Repository;
-export function registerWorker<T extends BaseMessageRequest>(
+export function registerWorker<T>(
   onMessage: (repo: Repository, message: T) => Promise<unknown>,
 ) {
   registerPromiseWorker((message: T) => {

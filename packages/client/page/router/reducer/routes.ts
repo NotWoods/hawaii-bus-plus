@@ -27,7 +27,6 @@ function validDirectionIds(directions: readonly unknown[]) {
 function setDetails(
   state: OpenRouteState,
   newDetails: Partial<RouteDetailState>,
-  merge = true,
 ): OpenRouteState {
   const newState = Object.assign({}, state);
   newState.details = Object.assign({}, state.details, newDetails);

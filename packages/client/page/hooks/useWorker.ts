@@ -2,7 +2,7 @@ import { PromiseWorker } from '@hawaii-bus-plus/promise-worker';
 import { useCallback, useEffect, useRef } from 'preact/hooks';
 
 export interface WorkerConstructor {
-  new (): Worker;
+  new(): Worker;
 }
 
 function debugLog(type: 'req' | 'res', data: unknown) {
@@ -42,7 +42,7 @@ export function useWorker(workerConstructor: WorkerConstructor) {
 
   async function postMessage(
     signal: AbortSignal,
-    message: unknown,
+    message?: unknown,
   ): Promise<unknown> {
     if (!workerRef.current) {
       workerRef.current = generateWorker();

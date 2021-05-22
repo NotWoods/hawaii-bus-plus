@@ -40,7 +40,6 @@ export function Home(props: Props) {
       }
 
       const results = await postToNearbyWorker(signal, {
-        type: 'closest-stop',
         location,
         fallbackToAll: true,
       });

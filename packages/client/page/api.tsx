@@ -12,7 +12,7 @@ if (import.meta.env.SSR) {
   dbInitialized = Promise.resolve();
 } else {
   const initWorker = new PromiseWorker(new InitDBWorker());
-  dbInitialized = initWorker.postMessage('').then(() => initWorker.terminate());
+  dbInitialized = initWorker.postMessage().then(() => initWorker.terminate());
 }
 
 export { dbInitialized };
