@@ -5,6 +5,9 @@ import commonjs from '@rollup/plugin-commonjs';
 import { posix as path } from 'path';
 import { fileURLToPath } from 'url';
 
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const mockFolder = path.join(__dirname, 'mock');
+
 /** @type {import('rollup').RollupOptions} */
 const config = {
   input: 'src/index.js',
@@ -28,10 +31,16 @@ const config = {
           replacement: '',
           customResolver(source) {
             if (!source) {
-              return path.resolve(
-                fileURLToPath(import.meta.url),
-                '../prop-types.cjs',
-              );
+              return path.join(mockFolder, 'prop-types.cjs');
+            }
+          },
+        },
+        {
+          find: 'object-assign',
+          replacement: '',
+          customResolver(source) {
+            if (!source) {
+              return path.join(mockFolder, 'object-assign.mjs');
             }
           },
         },

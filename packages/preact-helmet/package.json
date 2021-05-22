@@ -9,7 +9,7 @@
   "scripts": {
     "build": "tsc --build src",
     "postbuild": "rollup -c",
-    "format": "prettier **/*.ts --write --ignore-path ../../.prettierignore",
+    "format": "prettier **/*.{ts,cjs,mjs} --write --ignore-path ../../.prettierignore",
     "postformat": "eslint **/*.ts"
   },
   "dependencies": {
