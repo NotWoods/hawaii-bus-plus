@@ -46,7 +46,10 @@ export function Router(props: {
     initialUrl,
     initStateFromUrl,
   );
-  const value = useMemo(() => ({ ...state, dispatch }), [state, dispatch]);
+  const value = useMemo(
+    () => Object.assign({}, state, { dispatch }),
+    [state, dispatch],
+  );
 
   useEffect(() => {
     function onPopState(evt: PopStateEvent) {

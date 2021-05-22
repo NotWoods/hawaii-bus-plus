@@ -7,7 +7,11 @@ import {
   SWAP_DIRECTION_TYPE,
   TRIP_DETAILS_TYPE,
 } from '../action/routes';
-import { initialDetails, OpenRouteState } from '../state/main';
+import {
+  initialDetails,
+  OpenRouteState,
+  RouteDetailState,
+} from '../state/main';
 
 function validDirectionIds(directions: readonly unknown[]) {
   const result = new Set<0 | 1>();
@@ -18,6 +22,16 @@ function validDirectionIds(directions: readonly unknown[]) {
     result.add(1);
   }
   return result;
+}
+
+function setDetails(
+  state: OpenRouteState,
+  newDetails: Partial<RouteDetailState>,
+  merge = true,
+): OpenRouteState {
+  const newState = Object.assign({}, state);
+  newState.details = Object.assign({}, state.details, newDetails);
+  return newState;
 }
 
 export function openRouteReducer(
@@ -36,38 +50,30 @@ export function openRouteReducer(
         selectedTrip = undefined;
       }
 
-      return {
-        ...state,
+      return Object.assign({}, state, {
         details: {
           routeDetails: newDetails,
           selectedTrip,
           directionIds,
           directionId: firstValidId,
         },
-      };
+      });
     }
     case CLOSE_ROUTE_DETAILS_TYPE:
-      return { ...state, details: initialDetails };
+      return Object.assign({}, state, { details: initialDetails });
     case TRIP_DETAILS_TYPE:
-      return {
-        ...state,
-        details: { ...details, selectedTrip: action.details },
-      };
+      return setDetails(state, { selectedTrip: action.details });
     case SWAP_DIRECTION_TYPE: {
       const directionId: 0 | 1 = details.directionId === 0 ? 1 : 0;
-      return { ...state, details: { ...details, directionId } };
+      return setDetails(state, { directionId });
     }
     case SET_DIRECTION_TYPE:
-      return { ...state, details: { ...details, directionId: action.id } };
-    case RESET_TRIP_DETAILS_TYPE:
-      return {
-        ...state,
-        tripId: undefined,
-        details: {
-          ...details,
-          selectedTrip: undefined,
-        },
-      };
+      return setDetails(state, { directionId: action.id });
+    case RESET_TRIP_DETAILS_TYPE: {
+      const newState = setDetails(state, { selectedTrip: undefined });
+      newState.tripId = undefined;
+      return newState;
+    }
     default:
       return state;
   }

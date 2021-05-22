@@ -41,6 +41,6 @@ export function useSearch() {
       throw new AbortError();
     }
 
-    return { ...gtfs, places };
+    return Object.assign(gtfs, { places });
   };
 }

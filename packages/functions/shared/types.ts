@@ -1,4 +1,8 @@
-import { HandlerContext, HandlerEvent, HandlerResponse } from '@netlify/functions';
+import {
+  HandlerContext,
+  HandlerEvent,
+  HandlerResponse,
+} from '@netlify/functions';
 
 export type NetlifyEvent = HandlerEvent;
 

@@ -31,7 +31,7 @@ export function formatWalkingTime(walk: Walking) {
     if (walkTime) {
       let result = `Walk ${walkTime}`;
       if (until) {
-        result += `, then wait for ${until}`
+        result += `, then wait for ${until}`;
       }
       return result;
     } else if (until) {

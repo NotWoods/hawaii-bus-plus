@@ -28,7 +28,8 @@ export function mainRouterReducer(
     case SET_TRIP_TYPE: {
       let details: RouteDetailState;
       if (state?.path === ROUTES_PREFIX) {
-        details = { ...state.details, selectedTrip: undefined };
+        details = Object.assign({}, state.details);
+        details.selectedTrip = undefined;
       } else {
         details = initialDetails;
       }

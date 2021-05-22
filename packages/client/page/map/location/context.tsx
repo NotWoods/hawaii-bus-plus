@@ -89,7 +89,7 @@ export function MyLocationProvider(props: { children: ComponentChildren }) {
   );
 
   const value = useMemo(
-    () => ({ ...state, onButtonClick }),
+    () => Object.assign({}, state, { onButtonClick }),
     [state, onButtonClick],
   );
 

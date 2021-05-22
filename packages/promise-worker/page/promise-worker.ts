@@ -31,7 +31,7 @@ export class PromiseWorker {
     (error: Error | undefined, result: unknown) => void
   >();
 
-  private syntaxError?: unknown;
+  private readonly syntaxError?: unknown;
 
   constructor(private readonly worker: Worker) {
     worker.addEventListener('message', (evt) => this.onMessage(evt.data));

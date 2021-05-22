@@ -75,7 +75,7 @@ export function DirectionsSearch(_props: Props) {
             departureTime={results.depatureTime}
             onTomorrowClick={() => {
               setResults(undefined);
-              setDepartTime(results.tomorrow)
+              setDepartTime(results.tomorrow);
             }}
           />
         );

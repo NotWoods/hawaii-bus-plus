@@ -28,7 +28,12 @@ export function StopTimeSegment({
       href={link(stopTime.stop)}
       name={stopTime.stop.stop_name}
       desc={stopTime.stop.stop_desc}
-      time={{ ...stopTime, timeZone }}
+      time={{
+        arrivalTime: stopTime.arrivalTime,
+        departureTime: stopTime.departureTime,
+        timepoint: stopTime.timepoint,
+        timeZone,
+      }}
       gridArea={gridArea}
     />
   );

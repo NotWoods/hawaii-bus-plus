@@ -5,7 +5,10 @@ import { onUnmount } from './Marker';
 interface Props {
   options: google.maps.PolylineOptions;
   /** Sets the path. The ordered sequence of coordinates of the Polyline. This path may be specified using either a simple array of LatLngs, or an MVCArray of LatLngs. Note that if you pass a simple array, it will be converted to an MVCArray Inserting or removing LatLngs in the MVCArray will automatically update the polyline on the map. */
-  path: google.maps.MVCArray<google.maps.LatLng> | google.maps.LatLng[] | google.maps.LatLngLiteral[];
+  path:
+    | google.maps.MVCArray<google.maps.LatLng>
+    | google.maps.LatLng[]
+    | google.maps.LatLngLiteral[];
 }
 
 function createPolyline(map: google.maps.Map) {
