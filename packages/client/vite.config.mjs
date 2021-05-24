@@ -38,7 +38,7 @@ export default defineConfig({
     jsxFragment: 'Fragment',
   },
   define: {
-    // globalThis: 'self',
+    globalThis: 'self',
   },
   build: {
     manifest: true,

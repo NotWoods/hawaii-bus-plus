@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import { ComponentChildren, h } from 'preact';
+import { useEffect } from 'preact/hooks';
 import { IconButton } from '../buttons/IconButton';
 import { useLoadGoogleMaps } from '../hooks/useLoadGoogleMaps';
 import { UpIcon } from '../icons/MenuIcon';
@@ -14,6 +15,11 @@ interface Props {
 
 export function BaseOverlay(props: Props) {
   const { loadError } = useLoadGoogleMaps();
+
+  useEffect(() => {
+    console.log('GMaps load error:', loadError)
+  }, [loadError]);
+
   return (
     <section
       class={clsx(
