@@ -34,6 +34,8 @@ export const handler = createHandler('POST', async (event, context) => {
   );
 
   switch (stripeEvent.type) {
+    case 'customer.subscription.created':
+    case 'customer.subscription.deleted':
     case 'customer.subscription.updated': {
       // Update user role based on subscription status
       const subscription = stripeEvent.data.object as Stripe.Subscription;
