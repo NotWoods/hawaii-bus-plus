@@ -8,12 +8,12 @@
     "postbuild": "node src/build.js",
     "format": "prettier **/*.ts --write --ignore-path ../../.prettierignore",
     "postformat": "eslint **/*.ts",
-    "pretest": "pnpm run build --filter @hawaii-bus-plus/preact-helmet && tsc --build test",
+    "pretest": "tsc --build test",
     "test": "ava"
   },
   "dependencies": {
     "@hawaii-bus-plus/data": "workspace:*",
-    "@hawaii-bus-plus/preact-helmet": "workspace:^6.1.0",
+    "@notwoods/preact-helmet": "^6.1.0",
     "node-html-parser": "^3.3.3",
     "preact-render-to-string": "^5.1.19",
     "rollup": "^2.49.0",

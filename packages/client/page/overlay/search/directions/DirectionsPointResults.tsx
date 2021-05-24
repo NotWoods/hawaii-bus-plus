@@ -53,7 +53,7 @@ export function DirectionsPointResults(props: Props) {
           type: 'place',
           placeId: place.place_id,
           name: place.structured_formatting.main_text,
-          position: details.geometry!.location.toJSON(),
+          position: details.geometry!.location!.toJSON(),
         });
       }}
     />

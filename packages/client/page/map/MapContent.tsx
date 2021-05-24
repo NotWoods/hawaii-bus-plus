@@ -26,11 +26,13 @@ export function MapContent() {
   const handleClick = useCallback(
     (evt: MapMouseEvent) => {
       const event = evt as MapMouseEvent & Partial<google.maps.IconMouseEvent>;
-      event.stop();
-      if (event.placeId) {
-        dispatch(openPlace(event.placeId, event.latLng.toJSON()));
-      } else {
-        dispatch(setMarker(event.latLng.toJSON()));
+      if (event.latLng) {
+        event.stop();
+        if (event.placeId) {
+          dispatch(openPlace(event.placeId, event.latLng.toJSON()));
+        } else {
+          dispatch(setMarker(event.latLng.toJSON()));
+        }
       }
     },
     [dispatch],

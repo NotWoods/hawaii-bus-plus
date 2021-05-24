@@ -80,7 +80,7 @@ export function StopSearchResultItem({
 
 interface PlaceProps extends BaseProps {
   placeId: string;
-  text: google.maps.places.AutocompleteStructuredFormatting;
+  text: google.maps.places.StructuredFormatting;
 }
 
 export function PlaceSearchResultItem({ placeId, text, ...props }: PlaceProps) {

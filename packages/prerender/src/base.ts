@@ -24,7 +24,7 @@ export async function buildPrerenderCode(
     'preact',
     'tailwindcss',
     'fs/promises',
-    '@hawaii-bus-plus/preact-helmet',
+    '@notwoods/preact-helmet',
   ];
 
   const buildResult = await build({

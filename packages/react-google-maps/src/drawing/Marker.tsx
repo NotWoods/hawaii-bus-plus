@@ -7,7 +7,7 @@ interface Props {
   /** Marker position. */
   position: google.maps.LatLng | google.maps.LatLngLiteral;
   /** Rollover text */
-  title?: string;
+  title: string;
   /** Icon for the foreground. If a string is provided, it is treated as though it were an Icon with the string as url. */
   icon?: string | google.maps.Icon | google.maps.Symbol;
   /** This event is fired when the marker icon was clicked. */
@@ -31,7 +31,7 @@ export function onUnmount(instance: { setMap(map: null): void }) {
 }
 
 export function Marker<T>(props: Props | PropsWithData<T>) {
-  const { position, title = null, icon = null, opacity = null } = props;
+  const { position, title, icon = null, opacity = 1 } = props;
 
   const map = useGoogleMap();
   const marker = useMap<MarkerWithData<T>>(map, (map) => {

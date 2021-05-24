@@ -19,7 +19,7 @@ export function getPlacePredictions(
       service.getPlacePredictions(request, (result, status) => {
         switch (status) {
           case google.maps.places.PlacesServiceStatus.OK:
-            return resolve(result);
+            return resolve(result!);
           case google.maps.places.PlacesServiceStatus.ZERO_RESULTS:
             return resolve([]);
           default:
