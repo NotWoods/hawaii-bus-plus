@@ -74,7 +74,6 @@ importers:
       '@hawaii-bus-plus/data': workspace:*
       '@hawaii-bus-plus/jest-utils': workspace:*
       '@hawaii-bus-plus/mnemonist': workspace:^0.38.3
-      '@hawaii-bus-plus/preact-helmet': workspace:^6.1.0
       '@hawaii-bus-plus/presentation': workspace:*
       '@hawaii-bus-plus/promise-worker': workspace:*
       '@hawaii-bus-plus/react-google-maps': workspace:*
@@ -82,6 +81,7 @@ importers:
       '@hawaii-bus-plus/types': workspace:*
       '@hawaii-bus-plus/utils': workspace:*
       '@hawaii-bus-plus/vite-plugins': workspace:*
+      '@notwoods/preact-helmet': ^6.1.0
       '@prefresh/vite': ^2.2.2
       '@tailwindcss/aspect-ratio': ^0.2.1
       '@tailwindcss/forms': ^0.3.2
@@ -111,13 +111,13 @@ importers:
     dependencies:
       '@hawaii-bus-plus/data': link:../data
       '@hawaii-bus-plus/mnemonist': link:../mnemonist
-      '@hawaii-bus-plus/preact-helmet': link:../preact-helmet
       '@hawaii-bus-plus/presentation': link:../presentation
       '@hawaii-bus-plus/promise-worker': link:../promise-worker
       '@hawaii-bus-plus/react-google-maps': link:../react-google-maps
       '@hawaii-bus-plus/temporal-utils': link:../temporal-utils
       '@hawaii-bus-plus/types': link:../types
       '@hawaii-bus-plus/utils': link:../utils
+      '@notwoods/preact-helmet': 6.1.0_preact@10.5.13
       clsx: 1.1.1
       idb: 6.1.1
       insights-js: 1.2.10
@@ -2330,6 +2330,15 @@ packages:
       '@nodelib/fs.scandir': 2.1.4
       fastq: 1.11.0
     dev: true
+
+  /@notwoods/preact-helmet/6.1.0_preact@10.5.13:
+    resolution: {integrity: sha512-dnMmnI/y74Y1wfhIVunNqkF9gvP24fePpIJHIvZ2+hn6AEUgyQ360t/C7HXRQBesy55Ah8PVQ7903Z8DiC8KxQ==}
+    peerDependencies:
+      preact: '>=10.5.0'
+    dependencies:
+      '@types/react-helmet': 6.1.1
+      preact: 10.5.13
+    dev: false
 
   /@prefresh/babel-plugin/0.4.1:
     resolution: {integrity: sha512-gj3ekiYtHlZNz0zFI1z6a9mcYX80Qacw84+2++7V1skvO7kQoV2ux56r8bJkTBbKMVxwAgaYrxxIdUCYlclE7Q==}
