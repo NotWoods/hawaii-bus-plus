@@ -26,7 +26,7 @@ function useAbortController() {
     return () => aborter.current?.abort();
   }, []);
 
-  return aborter.current;
+  return aborter;
 }
 
 export function DirectionsFields(props: Props) {
@@ -34,7 +34,7 @@ export function DirectionsFields(props: Props) {
   const getSearchResults = useSearch();
 
   async function performSearch(field: 'depart' | 'arrive', value: string) {
-    const results = await getSearchResults(value, abort.signal);
+    const results = await getSearchResults(value, abort.current.signal);
     props.onSearchResults({ field, results });
   }
 

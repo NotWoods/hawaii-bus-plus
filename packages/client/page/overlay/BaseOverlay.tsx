@@ -24,7 +24,7 @@ export function BaseOverlay(props: Props) {
     <section
       class={clsx(
         'waves overlay fixed flex flex-col shadow z-10 py-4 w-full top-0 md:w-80 max-h-screen md:h-screen overflow-y-auto',
-        { 'h-screen': loadError != undefined },
+        { 'h-screen': loadError != undefined && !import.meta.env.SSR },
       )}
     >
       <header class="flex items-center">
