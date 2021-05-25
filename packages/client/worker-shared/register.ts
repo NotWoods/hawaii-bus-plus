@@ -9,8 +9,8 @@ let repo: Repository;
 export function registerWorker<T>(
   onMessage: (repo: Repository, message: T) => Promise<unknown>,
 ) {
+  repo = makeRepository();
   registerPromiseWorker((message: T) => {
-    repo = makeRepository();
     return onMessage(repo, message);
   });
 }

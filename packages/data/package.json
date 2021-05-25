@@ -5,6 +5,7 @@
   "type": "module",
   "main": "./src/index.js",
   "module": "./src/index.js",
+  "sideEffects": false,
   "exports": {
     ".": "./src/index.js",
     "./node": "./node/index.js"
