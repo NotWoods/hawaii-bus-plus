@@ -17,7 +17,7 @@ export function BaseOverlay(props: Props) {
   const { loadError } = useLoadGoogleMaps();
 
   useEffect(() => {
-    console.log('GMaps load error:', loadError)
+    console.log('GMaps load error:', loadError);
   }, [loadError]);
 
   return (

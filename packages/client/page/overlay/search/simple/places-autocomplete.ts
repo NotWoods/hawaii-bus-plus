@@ -2,6 +2,31 @@ import { memoize } from '@hawaii-bus-plus/utils';
 import type { ClosestResults } from '../../../../worker-nearby/worker-nearby';
 import type { SearchResults } from '../../../../worker-search/worker-search';
 
+declare global {
+  namespace google.maps.places {
+    interface AutocompleteService {
+      /**
+       * Retrieves place autocomplete predictions based on the supplied
+       * autocomplete request. <aside class="note">Note: <strong>For the beta
+       * release, <code>v=beta</code>, the callback is optional and a Promise is
+       * returned</strong>. More information is available in the <a
+       * href="https://developers.google.com/maps/documentation/javascript/promises">Promises
+       * guide</a>.</aside>
+       */
+      getPlacePredictions(
+        request: google.maps.places.AutocompletionRequest,
+        callback: (
+          a: google.maps.places.AutocompletePrediction[] | null,
+          b: google.maps.places.PlacesServiceStatus,
+        ) => void,
+      ): null;
+      getPlacePredictions(
+        request: google.maps.places.AutocompletionRequest,
+      ): Promise<google.maps.places.AutocompleteResponse>;
+    }
+  }
+}
+
 export const buildSessionToken = memoize(
   () => new google.maps.places.AutocompleteSessionToken(),
 );

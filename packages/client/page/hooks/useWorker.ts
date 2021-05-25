@@ -2,7 +2,7 @@ import { PromiseWorker } from '@hawaii-bus-plus/promise-worker';
 import { useCallback, useEffect, useRef } from 'preact/hooks';
 
 export interface WorkerConstructor {
-  new(): Worker;
+  new (): Worker;
 }
 
 function debugLog(type: 'req' | 'res', data: unknown) {
