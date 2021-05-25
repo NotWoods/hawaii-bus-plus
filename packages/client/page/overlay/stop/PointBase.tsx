@@ -4,13 +4,14 @@ import {
 } from '@hawaii-bus-plus/react-google-maps';
 import { ComponentChildren, Fragment, h } from 'preact';
 import { useState } from 'preact/hooks';
+import { LatLngLiteral } from 'spherical-geometry-js';
 import {
   googleMapsApiKey,
   useLoadGoogleMaps,
 } from '../../hooks/useLoadGoogleMaps';
 
 interface Props {
-  position?: google.maps.LatLngLiteral;
+  position?: LatLngLiteral;
   children: ComponentChildren;
 }
 

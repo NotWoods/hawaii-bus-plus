@@ -1,7 +1,7 @@
-import { computeDistanceBetween } from 'spherical-geometry-js';
 import { Repository } from '@hawaii-bus-plus/data';
 import { Stop } from '@hawaii-bus-plus/types';
 import { compareAs } from '@hawaii-bus-plus/utils';
+import { computeDistanceBetween, LatLngLiteral } from 'spherical-geometry-js';
 
 export interface StopWithDistance extends Stop {
   distance: number;
@@ -12,7 +12,7 @@ export interface StopWithDistance extends Stop {
  */
 export async function findClosestStops(
   repo: Pick<Repository, 'loadStopsSpatial'>,
-  location: google.maps.LatLngLiteral,
+  location: LatLngLiteral,
 ): Promise<StopWithDistance[]> {
   const stops = await repo.loadStopsSpatial(location);
   return stops

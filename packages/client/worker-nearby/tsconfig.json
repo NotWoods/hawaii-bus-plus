@@ -10,7 +10,7 @@
     { "path": "../../utils/src" }
   ],
   "compilerOptions": {
-    "types": ["google.maps", "jest"],
+    "types": ["jest"],
     "lib": ["esnext", "WebWorker"],
     "emitDeclarationOnly": true,
     "skipLibCheck": true

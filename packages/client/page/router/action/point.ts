@@ -1,4 +1,5 @@
 import { StationInformation, Stop } from '@hawaii-bus-plus/types';
+import { LatLngLiteral } from 'spherical-geometry-js';
 
 export type PointRouterAction =
   | ReturnType<typeof setStopAction>
@@ -35,20 +36,14 @@ export function closePointAction() {
   return { type: CLOSE_POINT_TYPE } as const;
 }
 
-export function setMarker(location: google.maps.LatLngLiteral) {
+export function setMarker(location: LatLngLiteral) {
   return { type: SET_MARKER_TYPE, location } as const;
 }
 
-export function openPlace(
-  placeId: string,
-  position: google.maps.LatLngLiteral,
-) {
+export function openPlace(placeId: string, position: LatLngLiteral) {
   return { type: OPEN_PLACE_TYPE, placeId, position } as const;
 }
 
-export function updateUserLocation(
-  location: google.maps.LatLngLiteral,
-  silent = false,
-) {
+export function updateUserLocation(location: LatLngLiteral, silent = false) {
   return { type: UPDATE_USER_LOCATION_TYPE, location, silent } as const;
 }

@@ -1,14 +1,15 @@
 import { h } from 'preact';
 import { useState } from 'preact/hooks';
+import { LatLngLiteral } from 'spherical-geometry-js';
 import type { NearbyWorkerHandler } from '../../../worker-nearby/worker-nearby';
 import NearbyWorker from '../../../worker-nearby/worker-nearby?worker';
-import { usePromise, useWorker } from '../../hooks';
 import { dbInitialized } from '../../api';
+import { usePromise, useWorker } from '../../hooks';
 import { emptyClosestResults } from '../search/simple/places-autocomplete';
 import { PointInfo } from './PointInfo';
 
 interface Props {
-  position: google.maps.LatLngLiteral;
+  position: LatLngLiteral;
 }
 
 export function PlaceInfo({ position }: Props) {

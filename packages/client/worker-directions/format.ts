@@ -17,6 +17,7 @@ import {
   computeDistanceBetween,
   LatLngBounds,
   LatLngBoundsLiteral,
+  LatLngLiteral,
 } from 'spherical-geometry-js';
 import { stopsLoader } from './paths/footpaths';
 import { CompletePath, PathSegment, PathTripSegment } from './paths/raptor';
@@ -68,7 +69,7 @@ const notableWait = Temporal.Duration.from({ minutes: 4 });
 
 function formatDepartArrive(
   point: Point,
-  walkToFrom: google.maps.LatLngLiteral,
+  walkToFrom: LatLngLiteral,
   waitUntil?: Temporal.Duration,
 ) {
   if (point.type === 'stop') return undefined;

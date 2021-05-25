@@ -1,10 +1,11 @@
+import { LatLngLiteral } from 'spherical-geometry-js';
 import { registerWorker } from '../worker-shared/register';
 import { ClosestResults, findClosest } from './closest/closest';
 
 export type { ClosestResults };
 
 interface ClosestStopsMessage {
-  location?: google.maps.LatLngLiteral;
+  location?: LatLngLiteral;
   fallbackToAll: boolean;
 }
 

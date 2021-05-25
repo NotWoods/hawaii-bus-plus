@@ -1,3 +1,5 @@
+import { LatLngLiteral } from 'spherical-geometry-js';
+
 export type GeolocationErrorCode =
   typeof GeolocationErrorCode[keyof typeof GeolocationErrorCode];
 export const GeolocationErrorCode = {
@@ -9,5 +11,5 @@ export const GeolocationErrorCode = {
 
 export interface LocationState {
   error?: GeolocationErrorCode;
-  coords?: google.maps.LatLngLiteral;
+  coords?: LatLngLiteral;
 }

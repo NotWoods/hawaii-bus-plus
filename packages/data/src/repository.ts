@@ -7,6 +7,7 @@ import {
   Trip,
 } from '@hawaii-bus-plus/types';
 import { memoize } from '@hawaii-bus-plus/utils';
+import { LatLngLiteral } from 'spherical-geometry-js';
 import { IDB_SUPPORT } from './database';
 import { DBRepository } from './db-repository';
 import { MemoryRepository } from './mem-repository';
@@ -35,7 +36,7 @@ export interface Repository {
     stopIds: Iterable<Stop['stop_id']>,
   ): Promise<Map<Stop['stop_id'], Stop>>;
 
-  loadStopsSpatial(center: google.maps.LatLngLiteral): Promise<Stop[]>;
+  loadStopsSpatial(center: LatLngLiteral): Promise<Stop[]>;
 
   loadCalendars(): Promise<Map<Calendar['service_id'], Calendar>>;
 

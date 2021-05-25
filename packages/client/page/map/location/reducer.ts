@@ -13,10 +13,7 @@ export function locationReducer(
         const latLng = new LatLng(coords.latitude, coords.longitude);
         return {
           error: undefined,
-          coords: {
-            lat: latLng.lat(),
-            lng: latLng.lng(),
-          },
+          coords: latLng.toJSON(),
         };
       } else {
         return {

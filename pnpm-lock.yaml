@@ -39,7 +39,7 @@ importers:
       '@hawaii-bus-plus/temporal-utils': workspace:*
       '@hawaii-bus-plus/types': workspace:*
       '@hawaii-bus-plus/utils': workspace:*
-      '@types/node': ^15.6.0
+      '@types/node': ^15.6.1
       ava: ^3.15.0
       csv-parse: ^4.15.4
       ix: ^4.3.1
@@ -62,7 +62,7 @@ importers:
       proposal-temporal: 0.8.0
       tslib: 2.2.0
     devDependencies:
-      '@types/node': 15.6.0
+      '@types/node': 15.6.1
       ava: 3.15.0
       prettier: 2.3.0
       type-fest: 1.1.3
@@ -100,7 +100,7 @@ importers:
       preact-render-to-string: ^5.1.19
       prettier: ~2.3.0
       proposal-temporal: ^0.8.0
-      spherical-geometry-js: ^2.0.0
+      spherical-geometry-js: ^2.1.0
       tailwindcss: ^2.1.2
       tailwindcss-scroll-snap: ^1.1.0
       tslib: ^2.2.0
@@ -124,7 +124,7 @@ importers:
       just-debounce: 1.1.0
       preact: 10.5.13
       proposal-temporal: 0.8.0
-      spherical-geometry-js: 2.0.0
+      spherical-geometry-js: 2.1.0
       tslib: 2.2.0
     devDependencies:
       '@googlemaps/js-api-loader': 1.11.4
@@ -154,11 +154,12 @@ importers:
       '@hawaii-bus-plus/mnemonist': workspace:^0.38.3
       '@hawaii-bus-plus/types': workspace:*
       '@hawaii-bus-plus/utils': workspace:*
-      '@types/node': ^15.6.0
+      '@types/node': ^15.6.1
       ava: ^3.15.0
       idb: ^6.1.1
       ix: ^4.3.1
       prettier: ~2.3.0
+      spherical-geometry-js: ^2.1.0
       tslib: ^2.2.0
       typescript: ^4.2.4
     dependencies:
@@ -167,9 +168,10 @@ importers:
       '@hawaii-bus-plus/utils': link:../utils
       idb: 6.1.1
       ix: 4.3.1
+      spherical-geometry-js: 2.1.0
       tslib: 2.2.0
     devDependencies:
-      '@types/node': 15.6.0
+      '@types/node': 15.6.1
       ava: 3.15.0
       prettier: 2.3.0
       typescript: 4.2.4
@@ -184,7 +186,7 @@ importers:
       '@rollup/plugin-node-resolve': ^13.0.0
       '@rollup/plugin-replace': ^2.4.2
       '@types/cookie': ^0.4.0
-      '@types/node': ^15.6.0
+      '@types/node': ^15.6.1
       ava: ^3.15.0
       cookie: ^0.4.1
       copyfiles: ^2.4.1
@@ -206,7 +208,7 @@ importers:
       '@rollup/plugin-node-resolve': 13.0.0_rollup@2.49.0
       '@rollup/plugin-replace': 2.4.2_rollup@2.49.0
       '@types/cookie': 0.4.0
-      '@types/node': 15.6.0
+      '@types/node': 15.6.1
       ava: 3.15.0
       copyfiles: 2.4.1
       prettier: 2.3.0
@@ -215,7 +217,7 @@ importers:
 
   packages/gotrue:
     specifiers:
-      '@types/node': ^15.6.0
+      '@types/node': ^15.6.1
       ava: ^3.15.0
       node-fetch: ^3.0.0-beta.9
       prettier: ~2.3.0
@@ -225,7 +227,7 @@ importers:
       node-fetch: 3.0.0-beta.9
       tslib: 2.2.0
     devDependencies:
-      '@types/node': 15.6.0
+      '@types/node': 15.6.1
       ava: 3.15.0
       prettier: 2.3.0
       typescript: 4.2.4
@@ -272,7 +274,7 @@ importers:
       '@notwoods/preact-helmet': ^6.1.0
       '@types/react-helmet': ^6.1.1
       ava: ^3.15.0
-      node-html-parser: ^3.3.3
+      node-html-parser: ^3.3.4
       preact: ^10.5.13
       preact-render-to-string: ^5.1.19
       prettier: ~2.3.0
@@ -285,7 +287,7 @@ importers:
     dependencies:
       '@hawaii-bus-plus/data': link:../data
       '@notwoods/preact-helmet': 6.1.0_preact@10.5.13
-      node-html-parser: 3.3.3
+      node-html-parser: 3.3.4
       preact-render-to-string: 5.1.19_preact@10.5.13
       rollup: 2.49.0
       tslib: 2.2.0
@@ -307,7 +309,7 @@ importers:
       ava: ^3.15.0
       prettier: ~2.3.0
       proposal-temporal: ^0.8.0
-      spherical-geometry-js: ^2.0.0
+      spherical-geometry-js: ^2.1.0
       tslib: ^2.2.0
       type-fest: ^1.1.3
       typescript: ^4.2.4
@@ -316,7 +318,7 @@ importers:
       '@hawaii-bus-plus/types': link:../types
       '@hawaii-bus-plus/utils': link:../utils
       proposal-temporal: 0.8.0
-      spherical-geometry-js: 2.0.0
+      spherical-geometry-js: 2.1.0
       tslib: 2.2.0
     devDependencies:
       ava: 3.15.0
@@ -326,7 +328,7 @@ importers:
 
   packages/promise-worker:
     specifiers:
-      '@types/node': ^15.6.0
+      '@types/node': ^15.6.1
       ava: ^3.15.0
       prettier: ~2.3.0
       pseudo-worker: ^1.3.0
@@ -335,7 +337,7 @@ importers:
     dependencies:
       tslib: 2.2.0
     devDependencies:
-      '@types/node': 15.6.0
+      '@types/node': 15.6.1
       ava: 3.15.0
       prettier: 2.3.0
       pseudo-worker: 1.3.0
@@ -409,7 +411,7 @@ importers:
 
   packages/vite-plugins:
     specifiers:
-      '@types/node': ^15.6.0
+      '@types/node': ^15.6.1
       ava: ^3.15.0
       prettier: ~2.3.0
       rollup: ^2.49.0
@@ -420,7 +422,7 @@ importers:
       rollup: 2.49.0
       tslib: 2.2.0
     devDependencies:
-      '@types/node': 15.6.0
+      '@types/node': 15.6.1
       ava: 3.15.0
       prettier: 2.3.0
       typescript: 4.2.4
@@ -2091,7 +2093,7 @@ packages:
     engines: {node: '>= 10.14.2'}
     dependencies:
       '@jest/types': 26.6.2
-      '@types/node': 15.6.0
+      '@types/node': 15.6.1
       chalk: 4.1.1
       jest-message-util: 26.6.2
       jest-util: 26.6.2
@@ -2107,7 +2109,7 @@ packages:
       '@jest/test-result': 26.6.2
       '@jest/transform': 26.6.2
       '@jest/types': 26.6.2
-      '@types/node': 15.6.0
+      '@types/node': 15.6.1
       ansi-escapes: 4.3.2
       chalk: 4.1.1
       exit: 0.1.2
@@ -2144,7 +2146,7 @@ packages:
     dependencies:
       '@jest/fake-timers': 26.6.2
       '@jest/types': 26.6.2
-      '@types/node': 15.6.0
+      '@types/node': 15.6.1
       jest-mock: 26.6.2
     dev: true
 
@@ -2154,7 +2156,7 @@ packages:
     dependencies:
       '@jest/types': 26.6.2
       '@sinonjs/fake-timers': 6.0.1
-      '@types/node': 15.6.0
+      '@types/node': 15.6.1
       jest-message-util: 26.6.2
       jest-mock: 26.6.2
       jest-util: 26.6.2
@@ -2268,7 +2270,7 @@ packages:
     dependencies:
       '@types/istanbul-lib-coverage': 2.0.3
       '@types/istanbul-reports': 3.0.0
-      '@types/node': 15.6.0
+      '@types/node': 15.6.1
       '@types/yargs': 15.0.13
       chalk: 4.1.1
     dev: true
@@ -2565,7 +2567,7 @@ packages:
     resolution: {integrity: sha512-SEYeGAIQIQX8NN6LDKprLjbrd5dARM5EXsd8GI/A5l0apYI1fGMWgPHSe4ZKL4eozlAyI+doUE9XbYS4xCkQ1w==}
     dependencies:
       '@types/minimatch': 3.0.4
-      '@types/node': 15.6.0
+      '@types/node': 15.6.1
     dev: true
 
   /@types/google.maps/3.44.6:
@@ -2575,7 +2577,7 @@ packages:
   /@types/graceful-fs/4.1.5:
     resolution: {integrity: sha512-anKkLmZZ+xm4p8JWBf4hElkM4XR+EZeA2M9BAkkTldmcyDY4mbdIJnRghDJH3Ov5ooY7/UAoENtmdMSkaAd7Cw==}
     dependencies:
-      '@types/node': 15.6.0
+      '@types/node': 15.6.1
     dev: true
 
   /@types/istanbul-lib-coverage/2.0.3:
@@ -2617,8 +2619,8 @@ packages:
     resolution: {integrity: sha512-s3nugnZumCC//n4moGGe6tkNMyYEdaDBitVjwPxXmR5lnMG5dHePinH2EdxkG3Rh1ghFHHixAG4NJhpJW1rthQ==}
     dev: false
 
-  /@types/node/15.6.0:
-    resolution: {integrity: sha512-gCYSfQpy+LYhOFTKAeE8BkyGqaxmlFxe+n4DKM6DR0wzw/HISUE/hAmkC/KT8Sw5PCJblqg062b3z9gucv3k0A==}
+  /@types/node/15.6.1:
+    resolution: {integrity: sha512-7EIraBEyRHEe7CH+Fm1XvgqU6uwZN8Q7jppJGcqjROMT29qhAuuOxYB1uEY5UMYQKEmA5D+5tBnhdaPXSsLONA==}
 
   /@types/normalize-package-data/2.4.0:
     resolution: {integrity: sha512-f5j5b/Gf71L+dbqxIpQ4Z2WlmI/mPJ0fOkGGmFgtb6sAu97EPczzbS3/tJKxmcYDj55OX6ssqwDAWOHIYDRDGA==}
@@ -2646,7 +2648,7 @@ packages:
   /@types/resolve/1.17.1:
     resolution: {integrity: sha512-yy7HuzQhj0dhGpD8RLXSZWEkLsV9ibvxvi6EiJ3bkqLAO1RGo0WbkWQiwpRlSFymTJRz0d3k5LM3kkx8ArDbLw==}
     dependencies:
-      '@types/node': 15.6.0
+      '@types/node': 15.6.1
     dev: true
 
   /@types/scheduler/0.16.1:
@@ -3410,7 +3412,7 @@ packages:
     dependencies:
       caniuse-lite: 1.0.30001228
       colorette: 1.2.2
-      electron-to-chromium: 1.3.736
+      electron-to-chromium: 1.3.737
       escalade: 3.1.1
       node-releases: 1.1.72
     dev: true
@@ -4226,8 +4228,8 @@ packages:
     requiresBuild: true
     dev: true
 
-  /electron-to-chromium/1.3.736:
-    resolution: {integrity: sha512-DY8dA7gR51MSo66DqitEQoUMQ0Z+A2DSXFi7tK304bdTVqczCAfUuyQw6Wdg8hIoo5zIxkU1L24RQtUce1Ioig==}
+  /electron-to-chromium/1.3.737:
+    resolution: {integrity: sha512-P/B84AgUSQXaum7a8m11HUsYL8tj9h/Pt5f7Hg7Ty6bm5DxlFq+e5+ouHUoNQMsKDJ7u4yGfI8mOErCmSH9wyg==}
     dev: true
 
   /emittery/0.7.2:
@@ -5855,7 +5857,7 @@ packages:
       '@jest/environment': 26.6.2
       '@jest/fake-timers': 26.6.2
       '@jest/types': 26.6.2
-      '@types/node': 15.6.0
+      '@types/node': 15.6.1
       jest-mock: 26.6.2
       jest-util: 26.6.2
       jsdom: 16.6.0
@@ -5873,7 +5875,7 @@ packages:
       '@jest/environment': 26.6.2
       '@jest/fake-timers': 26.6.2
       '@jest/types': 26.6.2
-      '@types/node': 15.6.0
+      '@types/node': 15.6.1
       jest-mock: 26.6.2
       jest-util: 26.6.2
     dev: true
@@ -5889,7 +5891,7 @@ packages:
     dependencies:
       '@jest/types': 26.6.2
       '@types/graceful-fs': 4.1.5
-      '@types/node': 15.6.0
+      '@types/node': 15.6.1
       anymatch: 3.1.2
       fb-watchman: 2.0.1
       graceful-fs: 4.2.6
@@ -5913,7 +5915,7 @@ packages:
       '@jest/source-map': 26.6.2
       '@jest/test-result': 26.6.2
       '@jest/types': 26.6.2
-      '@types/node': 15.6.0
+      '@types/node': 15.6.1
       chalk: 4.1.1
       co: 4.6.0
       expect: 26.6.2
@@ -5972,7 +5974,7 @@ packages:
     engines: {node: '>= 10.14.2'}
     dependencies:
       '@jest/types': 26.6.2
-      '@types/node': 15.6.0
+      '@types/node': 15.6.1
     dev: true
 
   /jest-pnp-resolver/1.2.2_jest-resolve@26.6.2:
@@ -6023,7 +6025,7 @@ packages:
       '@jest/environment': 26.6.2
       '@jest/test-result': 26.6.2
       '@jest/types': 26.6.2
-      '@types/node': 15.6.0
+      '@types/node': 15.6.1
       chalk: 4.1.1
       emittery: 0.7.2
       exit: 0.1.2
@@ -6091,7 +6093,7 @@ packages:
     resolution: {integrity: sha512-S5wqyz0DXnNJPd/xfIzZ5Xnp1HrJWBczg8mMfMpN78OJ5eDxXyf+Ygld9wX1DnUWbIbhM1YDY95NjR4CBXkb2g==}
     engines: {node: '>= 10.14.2'}
     dependencies:
-      '@types/node': 15.6.0
+      '@types/node': 15.6.1
       graceful-fs: 4.2.6
     dev: true
 
@@ -6122,7 +6124,7 @@ packages:
     engines: {node: '>= 10.14.2'}
     dependencies:
       '@jest/types': 26.6.2
-      '@types/node': 15.6.0
+      '@types/node': 15.6.1
       chalk: 4.1.1
       graceful-fs: 4.2.6
       is-ci: 2.0.0
@@ -6147,7 +6149,7 @@ packages:
     dependencies:
       '@jest/test-result': 26.6.2
       '@jest/types': 26.6.2
-      '@types/node': 15.6.0
+      '@types/node': 15.6.1
       ansi-escapes: 4.3.2
       chalk: 4.1.1
       jest-util: 26.6.2
@@ -6158,7 +6160,7 @@ packages:
     resolution: {integrity: sha512-KWYVV1c4i+jbMpaBC+U++4Va0cp8OisU185o73T1vo99hqi7w8tSJfUXYswwqqrjzwxa6KpRK54WhPvwf5w6PQ==}
     engines: {node: '>= 10.13.0'}
     dependencies:
-      '@types/node': 15.6.0
+      '@types/node': 15.6.1
       merge-stream: 2.0.0
       supports-color: 7.2.0
     dev: true
@@ -6781,8 +6783,8 @@ packages:
       - domexception
     dev: false
 
-  /node-html-parser/3.3.3:
-    resolution: {integrity: sha512-hyKoZ+qlr4/XFo9CUp6PKOkpBQ+28HXko7typIpPAoG9CIzAdVLbVON1etvoPXcr1dXKhApil4IVsrcTkKBb8w==}
+  /node-html-parser/3.3.4:
+    resolution: {integrity: sha512-u15i1OkGi/g9DVEvTWDChXp+a2ZdTdmEp2ECpMbmJ4NYNLWYQFDP84UOaLUYv+ozd3/cv46lcHf+tGLe618riw==}
     dependencies:
       css-select: 3.1.2
       he: 1.2.0
@@ -8091,8 +8093,8 @@ packages:
     resolution: {integrity: sha512-Ki212dKK4ogX+xDo4CtOZBVIwhsKBEfsEEcwmJfLQzirgc2jIWdzg40Unxz/HzEUqM1WFzVlQSMF9kZZ2HboLQ==}
     dev: true
 
-  /spherical-geometry-js/2.0.0:
-    resolution: {integrity: sha512-Bv15UFHk2Bd+kjzjcy8cbOVsEpe1cAUss4gPxUtaRMjfS109DvsXDimHwkvDrE/Vvcut+FoABDsfR5kEeYXOjw==}
+  /spherical-geometry-js/2.1.0:
+    resolution: {integrity: sha512-osIQKPLKIqvxm47yCZ8DyNitnRLWUYEpS1zRLCOYuP8RSVa0yeclIyM8iBDTP5EyLQ9wtHGpq/l6Ppteun3vbA==}
     dev: false
 
   /split-string/3.1.0:
@@ -8259,7 +8261,7 @@ packages:
     resolution: {integrity: sha512-lsIeVV9zBFb1Gb3t8UMJxD27x2VYjovOVi2Fc1V18lwZtWFa2ZdunNADVGfH14tb8QKmLjPON0WK+xc5iLK0kg==}
     engines: {node: ^8.1 || >=10.*}
     dependencies:
-      '@types/node': 15.6.0
+      '@types/node': 15.6.1
       qs: 6.10.1
     dev: false
 
