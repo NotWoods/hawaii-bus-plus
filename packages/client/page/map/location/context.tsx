@@ -55,6 +55,7 @@ export function MyLocationProvider(props: { children: ComponentChildren }) {
 
       switch (status) {
         case 'granted':
+        case 'unknown':
           // Already granted, just grab location
           watchId = navigator.geolocation.watchPosition(
             onGeolocationSuccess,
