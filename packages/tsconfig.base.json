@@ -23,7 +23,8 @@
     "jsxFragmentFactory": "Fragment",
     "skipDefaultLibCheck": true,
     "sourceMap": true,
-    "noPropertyAccessFromIndexSignature": true
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitOverride": true
   },
   "include": ["./src"]
 }

@@ -10,7 +10,7 @@ class AdminUser extends User {
     super(auth.api, { access_token: identity.token } as Token, auth.audience);
   }
 
-  _refreshToken() {
+  override _refreshToken() {
     // Override so we never refresh.
     return Promise.resolve(this.token.access_token);
   }

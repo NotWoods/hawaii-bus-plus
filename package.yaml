@@ -4,11 +4,11 @@ version: 5.0.0
 scripts:
   api: pnpm run api:client --filter @hawaii-bus-plus/api-gen
   build: >-
-    pnpm run build --filter @hawaii-bus-plus/client &&
-    pnpm run api:dist --filter @hawaii-bus-plus/api-gen &&
-    pnpm run build --filter @hawaii-bus-plus/prerender &&
-    pnpm run workbox --filter @hawaii-bus-plus/client &&
-    pnpm run build --filter @hawaii-bus-plus/functions
+    pnpm run build --filter @hawaii-bus-plus/client && pnpm run api:dist
+    --filter @hawaii-bus-plus/api-gen && pnpm run build --filter
+    @hawaii-bus-plus/prerender && pnpm run workbox --filter
+    @hawaii-bus-plus/client && pnpm run build --filter
+    @hawaii-bus-plus/functions
   clean: >-
     del-cli "dist/**/*" "packages/**/*.js" "packages/**/*.d.ts"
     "packages/**/*.map" "packages/**/*.tsbuildinfo"
@@ -29,4 +29,4 @@ devDependencies:
   eslint-plugin-react: ^7.23.2
   pnpm: ^6.4.0
   prettier: ~2.3.0
-  typescript: ^4.2.4
+  typescript: ^4.3.2

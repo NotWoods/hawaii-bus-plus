@@ -11,22 +11,22 @@ const baseHighlightIcon = {
   path: 'M6,12a6,6 0 1,0 12,0a6,6 0 1,0 -12,0',
   fillOpacity: 1,
   strokeWeight: 4,
-  anchor: { x: 12, y: 12 },
+  anchor: { x: 12, y: 12 } as google.maps.Point,
 };
 
 function makeHighlightIcon(
   ringColor: ColorString,
   dark: boolean,
-): google.maps.Icon {
+): google.maps.Symbol {
   return Object.assign({}, baseHighlightIcon, {
     fillColor: dark ? '#333' : '#fff',
     strokeColor: ringColor,
-  }) as unknown as google.maps.Icon;
+  });
 }
 
 const iconCache = new DefaultMap<
   boolean,
-  DefaultMap<ColorString, google.maps.Icon>
+  DefaultMap<ColorString, google.maps.Symbol>
 >((dark) => new DefaultMap((color) => makeHighlightIcon(color, dark)));
 
 interface Props {

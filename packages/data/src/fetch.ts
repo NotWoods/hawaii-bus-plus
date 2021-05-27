@@ -1,17 +1,17 @@
 import { GTFSData } from '@hawaii-bus-plus/types';
 
 export class UnauthorizedError extends Error {
-  name = 'UnauthorizedError';
+  override name = 'UnauthorizedError';
   code = 401;
 }
 
 export class PaymentRequiredError extends Error {
-  name = 'PaymentRequiredError';
+  override name = 'PaymentRequiredError';
   code = 402;
 }
 
 export class NotModifiedError extends Error {
-  name = 'NotModifiedError';
+  override name = 'NotModifiedError';
   code = 304;
 }
 
