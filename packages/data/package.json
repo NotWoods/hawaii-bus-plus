@@ -21,7 +21,7 @@
     "@hawaii-bus-plus/mnemonist": "workspace:^0.38.3",
     "@hawaii-bus-plus/types": "workspace:*",
     "@hawaii-bus-plus/utils": "workspace:*",
-    "idb": "^6.1.1",
+    "idb": "^6.1.2",
     "ix": "^4.3.1",
     "spherical-geometry-js": "^2.1.0",
     "tslib": "^2.2.0"

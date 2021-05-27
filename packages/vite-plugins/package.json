@@ -12,7 +12,7 @@
     "postformat": "eslint **/*.ts --fix"
   },
   "dependencies": {
-    "rollup": "^2.50.1",
+    "rollup": "^2.50.2",
     "tslib": "^2.2.0"
   },
   "peerDependencies": {
