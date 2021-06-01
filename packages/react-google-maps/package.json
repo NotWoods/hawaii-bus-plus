@@ -9,7 +9,7 @@
   "scripts": {
     "build": "tsc --build src",
     "format": "prettier **/*.{ts,tsx} **/*.json --write --ignore-path ../../.prettierignore",
-    "postformat": "eslint **/*.{ts,tsx} --fix"
+    "postformat": "eslint \"**/*.{ts,tsx}\" --fix"
   },
   "dependencies": {
     "@googlemaps/js-api-loader": "^1.11.4",

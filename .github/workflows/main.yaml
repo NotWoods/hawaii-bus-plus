@@ -39,3 +39,5 @@ jobs:
         run: pnpm run api
       - name: pnpm test
         run: pnpm recursive test --no-bail
+
+      - run: pnpm run build
