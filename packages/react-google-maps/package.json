@@ -19,7 +19,7 @@
     "preact": "^10.5.13"
   },
   "devDependencies": {
-    "@types/google.maps": "^3.44.6",
+    "@types/google.maps": "^3.45.1",
     "ava": "^3.15.0",
     "preact": "^10.5.13",
     "prettier": "~2.3.0",

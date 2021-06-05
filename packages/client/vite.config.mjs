@@ -11,17 +11,13 @@ import prefresh from '@prefresh/vite';
  * @param {'development' | 'production'} param1.mode
  * @returns {import('vite').UserConfig}
  */
-export default function vite({ mode }) {
+export default function vite({}) {
   /** @type {import('vite').AliasOptions} */
   const alias = {
     'insights-js': 'insights-js/dist/esnext/index.js',
     react: 'preact/compat',
     'react-dom': 'preact/compat',
   };
-
-  if (mode === 'production') {
-    alias['proposal-temporal'] = 'proposal-temporal/lib/index.mjs';
-  }
 
   return {
     plugins: [
