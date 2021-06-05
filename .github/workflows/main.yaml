@@ -37,7 +37,11 @@ jobs:
 
       - name: pnpm run api
         run: pnpm run api
+
       - name: pnpm test
         run: pnpm recursive test --no-bail
+        env:
+          AMAZON_ACCESS_KEY_ID: ${{ secrets.AMAZON_ACCESS_KEY_ID }}
+          AMAZON_SECRET_ACCESS_KEY: ${{ secrets.AMAZON_SECRET_ACCESS_KEY }}
 
       - run: pnpm run build
