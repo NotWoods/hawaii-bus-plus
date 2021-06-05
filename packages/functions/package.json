@@ -28,7 +28,7 @@
     "@rollup/plugin-node-resolve": "^13.0.0",
     "@rollup/plugin-replace": "^2.4.2",
     "@types/cookie": "^0.4.0",
-    "@types/node": "^15.12.1",
+    "@types/node": "^14.17.2",
     "ava": "^3.15.0",
     "copyfiles": "^2.4.1",
     "prettier": "~2.3.0",
@@ -50,5 +50,8 @@
     "files": [
       "test/**/*.spec.{js,ts}"
     ]
+  },
+  "engines": {
+    "node": ">=14"
   }
 }

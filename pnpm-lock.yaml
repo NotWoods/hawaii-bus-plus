@@ -186,7 +186,7 @@ importers:
       '@rollup/plugin-node-resolve': ^13.0.0
       '@rollup/plugin-replace': ^2.4.2
       '@types/cookie': ^0.4.0
-      '@types/node': ^15.12.1
+      '@types/node': ^14.17.2
       ava: ^3.15.0
       cookie: ^0.4.1
       copyfiles: ^2.4.1
@@ -208,7 +208,7 @@ importers:
       '@rollup/plugin-node-resolve': 13.0.0_rollup@2.50.6
       '@rollup/plugin-replace': 2.4.2_rollup@2.50.6
       '@types/cookie': 0.4.0
-      '@types/node': 15.12.1
+      '@types/node': 14.17.2
       ava: 3.15.0
       copyfiles: 2.4.1
       prettier: 2.3.0
@@ -2731,6 +2731,10 @@ packages:
   /@types/node/13.13.52:
     resolution: {integrity: sha512-s3nugnZumCC//n4moGGe6tkNMyYEdaDBitVjwPxXmR5lnMG5dHePinH2EdxkG3Rh1ghFHHixAG4NJhpJW1rthQ==}
     dev: false
+
+  /@types/node/14.17.2:
+    resolution: {integrity: sha512-sld7b/xmFum66AAKuz/rp/CUO8+98fMpyQ3SBfzzBNGMd/1iHBTAg9oyAvcYlAj46bpc74r91jSw2iFdnx29nw==}
+    dev: true
 
   /@types/node/15.12.1:
     resolution: {integrity: sha512-zyxJM8I1c9q5sRMtVF+zdd13Jt6RU4r4qfhTd7lQubyThvLfx6yYekWSQjGCGV2Tkecgxnlpl/DNlb6Hg+dmEw==}
