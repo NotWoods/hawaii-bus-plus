@@ -6,6 +6,38 @@ import {
   PutItemCommand,
   QueryCommand,
 } from '@aws-sdk/client-dynamodb';
+import { webcrypto } from 'crypto';
+
+// Web Crypto APIs, ported from lib.dom.d.ts
+declare module 'crypto' {
+  /** Basic cryptography features available in the current context. It allows access to a cryptographically strong random number generator and to cryptographic primitives. */
+  interface Crypto {
+    getRandomValues<
+      T extends
+        | Int8Array
+        | Int16Array
+        | Int32Array
+        | Uint8Array
+        | Uint16Array
+        | Uint32Array
+        | Uint8ClampedArray
+        | Float32Array
+        | Float64Array
+        | DataView
+        | null,
+    >(
+      array: T,
+    ): T;
+  }
+
+  export function webcrypto(): Crypto;
+}
+
+declare module globalThis {
+  let crypto: import('crypto').Crypto;
+}
+
+globalThis.crypto = webcrypto();
 
 export class DatabaseClient {
   dynamoDb = new DynamoDBClient({
