@@ -5,11 +5,10 @@
     { "path": "../worker-shared" },
     { "path": "../../data/src" },
     { "path": "../../data/node" },
-    { "path": "../../jest-utils/src" },
     { "path": "../../types" }
   ],
   "compilerOptions": {
-    "types": ["google.maps", "jest"],
+    "types": ["google.maps"],
     "lib": ["esnext", "WebWorker"],
     "emitDeclarationOnly": true,
     "skipLibCheck": true

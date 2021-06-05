@@ -5,12 +5,11 @@
     { "path": "../worker-shared" },
     { "path": "../../data/src" },
     { "path": "../../data/node" },
-    { "path": "../../jest-utils/src" },
     { "path": "../../types" },
     { "path": "../../utils/src" }
   ],
   "compilerOptions": {
-    "types": ["jest"],
+    "types": [],
     "lib": ["esnext", "WebWorker"],
     "emitDeclarationOnly": true,
     "skipLibCheck": true

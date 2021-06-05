@@ -13,7 +13,7 @@
     { "path": "../../types" }
   ],
   "compilerOptions": {
-    "types": ["jest"],
+    "types": [],
     "lib": ["esnext", "WebWorker"],
     "emitDeclarationOnly": true,
     "skipLibCheck": true

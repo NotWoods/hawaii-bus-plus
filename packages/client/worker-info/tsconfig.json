@@ -11,6 +11,7 @@
     { "path": "../../utils/src" }
   ],
   "compilerOptions": {
+    "types": [],
     "lib": ["esnext", "WebWorker"],
     "emitDeclarationOnly": true,
     "skipLibCheck": true

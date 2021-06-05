@@ -1,3 +1,4 @@
+import { expect, test } from '@jest/globals';
 import { extractLinks } from './description';
 
 test('extractLinks separates link', () => {

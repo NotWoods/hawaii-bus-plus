@@ -15,7 +15,7 @@
     "tslib": "^2.2.0"
   },
   "peerDependencies": {
-    "jest": "^26.6.3"
+    "jest": ">=26.6.3"
   },
   "devDependencies": {
     "jest": "^27.0.4",

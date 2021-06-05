@@ -81,6 +81,7 @@ importers:
       '@hawaii-bus-plus/types': workspace:*
       '@hawaii-bus-plus/utils': workspace:*
       '@hawaii-bus-plus/vite-plugins': workspace:*
+      '@jest/globals': ^27.0.3
       '@notwoods/preact-helmet': ^6.1.0
       '@prefresh/vite': ^2.2.2
       '@tailwindcss/aspect-ratio': ^0.2.1
@@ -99,7 +100,7 @@ importers:
       preact-render-to-string: ^5.1.19
       prettier: ~2.3.0
       proposal-temporal: ^0.8.0
-      spherical-geometry-js: ^3.0.0
+      spherical-geometry-js: ^2.1.0
       tailwindcss: ^2.1.4
       tailwindcss-scroll-snap: ^1.1.0
       tslib: ^2.2.0
@@ -123,12 +124,13 @@ importers:
       just-debounce: 1.1.0
       preact: 10.5.13
       proposal-temporal: 0.8.0
-      spherical-geometry-js: 3.0.0
+      spherical-geometry-js: 2.1.0
       tslib: 2.2.0
     devDependencies:
       '@googlemaps/js-api-loader': 1.11.4
       '@hawaii-bus-plus/jest-utils': link:../jest-utils
       '@hawaii-bus-plus/vite-plugins': link:../vite-plugins
+      '@jest/globals': 27.0.3
       '@prefresh/vite': 2.2.2_preact@10.5.13+vite@2.3.3
       '@tailwindcss/aspect-ratio': 0.2.1_tailwindcss@2.1.4
       '@tailwindcss/forms': 0.3.3_tailwindcss@2.1.4
@@ -8445,6 +8447,10 @@ packages:
   /spdx-license-ids/3.0.9:
     resolution: {integrity: sha512-Ki212dKK4ogX+xDo4CtOZBVIwhsKBEfsEEcwmJfLQzirgc2jIWdzg40Unxz/HzEUqM1WFzVlQSMF9kZZ2HboLQ==}
     dev: true
+
+  /spherical-geometry-js/2.1.0:
+    resolution: {integrity: sha512-osIQKPLKIqvxm47yCZ8DyNitnRLWUYEpS1zRLCOYuP8RSVa0yeclIyM8iBDTP5EyLQ9wtHGpq/l6Ppteun3vbA==}
+    dev: false
 
   /spherical-geometry-js/3.0.0:
     resolution: {integrity: sha512-PvfGTBRSyoAr3KGk/pTkqA7vCMO0lXilnmh6DfiTrO4RhRz++RTbMbUXKcmkmw8olh2wWVVY2qx8sl5hJ+JpVg==}
