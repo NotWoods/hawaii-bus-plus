@@ -55,6 +55,7 @@ export const handler = createHandler('GET', async (event, context) => {
       source,
       can_pay: Boolean(payment_method ?? source),
       status: subscription.status,
+      end: subscription.trial_end ?? subscription.cancel_at,
     }),
   };
 });

@@ -3,7 +3,6 @@
   command = ". scripts/app.sh"
   functions = "dist/functions/"
 [build.environment]
-  NODE_VERSION = "14"
   NODE_ENV = "development"
   NPM_FLAGS="--prefix=/"
 

@@ -9,7 +9,7 @@ export class Admin {
   }
 
   // Return a list of all users in an audience
-  listUsers(aud: string) {
+  listUsers(aud?: string) {
     return this.user._request('/admin/users', {
       method: 'GET',
       audience: aud,

@@ -4,6 +4,7 @@ import { useEffect } from 'preact/hooks';
 import { IconButton } from '../buttons/IconButton';
 import { useLoadGoogleMaps } from '../hooks/useLoadGoogleMaps';
 import { UpIcon } from '../icons/MenuIcon';
+import { TrialBanner } from './TrialBanner';
 
 interface Props {
   children: ComponentChildren;
@@ -23,11 +24,12 @@ export function BaseOverlay(props: Props) {
   return (
     <section
       class={clsx(
-        'waves overlay fixed flex flex-col shadow z-10 py-4 w-full top-0 md:w-80 max-h-screen md:h-screen overflow-y-auto',
+        'waves overlay fixed flex flex-col shadow z-10 pb-4 w-full top-0 md:w-80 max-h-screen md:h-screen overflow-y-auto',
         { 'h-screen': loadError != undefined },
       )}
     >
-      <header class="flex items-center">
+      <TrialBanner />
+      <header class="flex items-center pt-4">
         <IconButton
           id="appBarUp"
           class="w-12 h-12 p-3 text-white"
