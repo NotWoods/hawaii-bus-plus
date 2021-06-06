@@ -5,22 +5,19 @@ import { RelativeDurationElement } from '../time/DurationElement';
 
 interface PaymentResponse {
   can_pay: boolean;
-  status:
-    | 'active'
-    | 'canceled'
-    | 'incomplete'
-    | 'incomplete_expired'
-    | 'past_due'
-    | 'trialing'
-    | 'unpaid';
-  end: number | null;
+  status: string;
+  end: number | null | undefined;
 }
 
 const SECONDS_IN_DAY = 1000 * 60 * 60 * 24;
 
-const trialStatus = (async () => {
+const trialStatus = (async (): Promise<PaymentResponse> => {
   if (import.meta.env.SSR) {
-    return Promise.reject();
+    return {
+      can_pay: true,
+      status: 'unknown',
+      end: undefined,
+    };
   } else {
     const res = await fetch('/.netlify/functions/payment', {
       credentials: 'same-origin',
