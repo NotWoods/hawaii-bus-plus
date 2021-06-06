@@ -8,6 +8,7 @@ import { RouteLinkVertical } from '../../sheet/routes/link/RouteListItem';
 interface Props {
   routes: readonly Route[];
   agencies: ReadonlyMap<Agency['agency_id'], Agency>;
+  scroll?: boolean;
   class?: ClassValue;
 }
 
@@ -40,7 +41,8 @@ export function NearbyRoutes(props: Props) {
   return (
     <ul
       class={clsx(
-        'grid grid-flow-col auto-cols-min md:grid-flow-row md:grid-cols-2 gap-4 px-4 snap snap-px-32 overflow-auto overscroll-contain',
+        'grid grid-flow-col auto-cols-min md:grid-flow-row md:grid-cols-2 gap-4 px-4 snap snap-px-32 overscroll-contain',
+        { 'overflow-auto': props.scroll },
         props.class,
       )}
       onKeyDown={handleArrowKey}

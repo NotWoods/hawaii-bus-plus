@@ -61,6 +61,7 @@ export function Home(props: Props) {
         class="mt-12"
         routes={Array.from(routes.values())}
         agencies={agencies}
+        scroll
       />
     );
   }
