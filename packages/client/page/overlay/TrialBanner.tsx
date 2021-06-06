@@ -6,7 +6,7 @@ import { RelativeDurationElement } from '../time/DurationElement';
 interface PaymentResponse {
   can_pay: boolean;
   status: string;
-  end: number | null | undefined;
+  end: number | undefined;
 }
 
 const SECONDS_IN_DAY = 1000 * 60 * 60 * 24;

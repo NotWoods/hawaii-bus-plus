@@ -47,6 +47,7 @@ export const handler = createHandler('GET', async (event, context) => {
     subscription.default_payment_method ??
     customer.invoice_settings.default_payment_method;
   const source = subscription.default_source ?? customer.default_source;
+  const end_at = subscription.trial_end ?? subscription.cancel_at;
 
   return {
     statusCode: 200,
@@ -55,7 +56,7 @@ export const handler = createHandler('GET', async (event, context) => {
       source,
       can_pay: Boolean(payment_method ?? source),
       status: subscription.status,
-      end: subscription.trial_end ?? subscription.cancel_at,
+      end: end_at != undefined ? end_at * 1000 : undefined,
     }),
   };
 });
