@@ -18,11 +18,17 @@ interface PaymentResponse {
 
 const SECONDS_IN_DAY = 1000 * 60 * 60 * 24;
 
-const trialStatus = fetch('/.netlify/functions/payment', {
-  credentials: 'same-origin',
-})
-  .then((res) => res.json())
-  .then((json) => json as PaymentResponse);
+const trialStatus = (async () => {
+  if (import.meta.env.SSR) {
+    return Promise.reject();
+  } else {
+    const res = await fetch('/.netlify/functions/payment', {
+      credentials: 'same-origin',
+    });
+    const json = await res.json();
+    return json as PaymentResponse;
+  }
+})();
 
 export function TrialBanner() {
   const [visible, setVisible] = useState(false);
