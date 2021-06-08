@@ -1,4 +1,4 @@
-import { h, Fragment } from 'preact';
+import { h } from 'preact';
 import type { SearchResults } from '../../../../worker-search/worker-search';
 import {
   PlaceSearchResultItem,
@@ -8,15 +8,17 @@ import { RouteSearchResultItem } from './RouteSearchResultItem';
 import { SearchResultsSubList } from './SearchResultsSubList';
 
 interface Props extends SearchResults {
+  id?: string;
   forceTitles?: boolean;
+  onKeyDown?(event: KeyboardEvent): void;
   onStopClick?(stop: SearchResults['stops'][number]): void;
   onPlaceClick?(stop: SearchResults['places'][number]): void;
 }
 
 export function SearchResultsList(props: Props) {
-  const { forceTitles = true, routes, stops, places } = props;
+  const { id, forceTitles = true, routes, stops, places } = props;
   return (
-    <>
+    <div role="listbox" id={id} onKeyDown={props.onKeyDown}>
       <SearchResultsSubList
         forceTitles={forceTitles}
         title="Routes"
@@ -66,6 +68,6 @@ export function SearchResultsList(props: Props) {
           />
         )}
       />
-    </>
+    </div>
   );
 }

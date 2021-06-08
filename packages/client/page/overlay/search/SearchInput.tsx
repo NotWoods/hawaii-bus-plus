@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { h } from 'preact';
+import { h, Ref } from 'preact';
 import type { JSXInternal as JSX } from 'preact/src/jsx';
 import '../../../all-pages/Input.css';
 import { Icon } from '../../icons/Icon';
@@ -10,9 +10,14 @@ export const leadingInputClass = `${searchInputIconClass} left-0 w-10 opacity-60
 export const searchInputClass =
   'focus:ring-cyan focus:border-cyan block w-full bg-primary-700 text-white sm:text-sm border-gray-300';
 
-export function SearchInput(props: JSX.HTMLAttributes<HTMLInputElement>) {
+export interface SearchProps extends JSX.HTMLAttributes<HTMLInputElement> {
+  inputRef?: Ref<HTMLInputElement>;
+}
+
+export function SearchInput(props: SearchProps) {
   return (
     <input
+      ref={props.inputRef}
       {...props}
       type="search"
       class={clsx(
@@ -20,6 +25,7 @@ export function SearchInput(props: JSX.HTMLAttributes<HTMLInputElement>) {
         searchInputClass,
         props.class,
       )}
+      aria-role="combobox"
     />
   );
 }

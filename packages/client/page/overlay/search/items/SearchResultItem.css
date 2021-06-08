@@ -1,0 +1,7 @@
+.search__item--marker {
+  grid-template:
+    'icon title' auto
+    'icon subtitle' min-content
+    'icon badges' min-content
+    / 2rem auto;
+}

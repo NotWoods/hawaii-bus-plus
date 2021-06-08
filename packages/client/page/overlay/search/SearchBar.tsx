@@ -6,9 +6,10 @@ import {
   leadingInputClass,
   SearchInput,
   searchInputClass,
+  SearchProps,
 } from './SearchInput';
 
-export function SearchBar(props: JSX.HTMLAttributes<HTMLInputElement>) {
+export function SearchBar(props: SearchProps) {
   return (
     <form class="relative shadow-sm m-4">
       <SearchInput

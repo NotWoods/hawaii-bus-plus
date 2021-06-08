@@ -3,14 +3,14 @@ import { h } from 'preact';
 import type { SearchResults } from '../../../../worker-search/worker-search';
 import { getDetails, usePlacesService } from '../../../hooks/usePlacesService';
 import { SearchResultsList } from '../items/SearchResultsList';
-import { emptyResults } from '../simple/places-autocomplete';
 
 interface Props {
   field: 'depart' | 'arrive';
   results: SearchResults;
-  setResults(results: Pick<Props, 'field' | 'results'>): void;
+  clearResults(field: 'depart' | 'arrive'): void;
   setDepart(point: Point): void;
   setArrive(point: Point): void;
+  onKeyDown?(event: KeyboardEvent): void;
 }
 
 export function DirectionsPointResults(props: Props) {
@@ -23,27 +23,23 @@ export function DirectionsPointResults(props: Props) {
 
   return (
     <SearchResultsList
+      id={`searchResults_${props.field}`}
       forceTitles={false}
       favorites={props.results.favorites}
       routes={[]}
       stops={props.results.stops}
       places={props.results.places}
+      onKeyDown={props.onKeyDown}
       onStopClick={(stop) => {
         fieldSetter({
           type: 'stop',
           stopId: stop.stop_id,
           name: stop.stop_name,
         });
-        props.setResults({
-          field: props.field,
-          results: emptyResults,
-        });
+        props.clearResults(props.field);
       }}
       onPlaceClick={async (place) => {
-        props.setResults({
-          field: props.field,
-          results: emptyResults,
-        });
+        props.clearResults(props.field);
 
         const details = await getDetails(service!, {
           placeId: place.place_id,

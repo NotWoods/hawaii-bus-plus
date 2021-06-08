@@ -1,6 +1,6 @@
 import { Point } from '@hawaii-bus-plus/presentation';
 import { Fragment, h } from 'preact';
-import { useState } from 'preact/hooks';
+import { useCallback, useRef, useState } from 'preact/hooks';
 import type { Temporal } from 'proposal-temporal';
 import type {
   DirectionsResult,
@@ -19,6 +19,7 @@ import { DirectionsTime } from '../../../sheet/directions/DirectionsTime';
 import { NOW, timeForWorker } from '../../../time/input/symbol';
 import { emptyResults } from '../simple/places-autocomplete';
 import { lazySearchResults } from '../simple/SimpleSearch';
+import { useAutocompleteKeys } from '../useAutocompleteKeys';
 import { DirectionsFields, FieldsSearchResults } from './DirectionsFields';
 
 interface Props {
@@ -63,6 +64,16 @@ export function DirectionsSearch(_props: Props) {
     [depart, arrive, departureTime],
   );
 
+  const departRef = useRef<HTMLInputElement>();
+  const arriveRef = useRef<HTMLInputElement>();
+  const getInputRef = useCallback(() => {
+    return {
+      depart: departRef.current,
+      arrive: arriveRef.current,
+    }[searchResults.field];
+  }, [searchResults.field]);
+  const handleKeyDown = useAutocompleteKeys(getInputRef);
+
   function renderJourneys() {
     if (depart && arrive) {
       if (results && DirectionsJourneys) {
@@ -93,18 +104,28 @@ export function DirectionsSearch(_props: Props) {
       <DirectionsFields
         depart={depart}
         arrive={arrive}
+        field={searchResults.field}
+        departRef={departRef}
+        arriveRef={arriveRef}
         setDepart={setDepart}
         setArrive={setArrive}
         onSearchResults={setSearchResults}
+        onKeyDown={handleKeyDown}
       />
       <DirectionsTime value={departureTime} onChange={setDepartTime} />
 
       {DirectionsPointResults ? (
         <DirectionsPointResults
           {...searchResults}
-          setResults={setSearchResults}
+          onKeyDown={handleKeyDown}
           setDepart={setDepart}
           setArrive={setArrive}
+          clearResults={(field) => {
+            setSearchResults({
+              field,
+              results: emptyResults,
+            });
+          }}
         />
       ) : null}
 

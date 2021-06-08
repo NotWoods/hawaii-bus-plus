@@ -1,6 +1,6 @@
 import { Point } from '@hawaii-bus-plus/presentation';
 import clsx from 'clsx';
-import { ComponentChildren, h } from 'preact';
+import { ComponentChildren, h, Ref } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
 import stopIcon from '../../../icons/bus_stop.svg';
 import locationIcon from '../../../icons/gps_fixed.svg';
@@ -11,8 +11,12 @@ interface Props {
   id: string;
   point?: Point;
   label: ComponentChildren;
+  inputRef?: Ref<HTMLInputElement>;
+  'aria-owns': string;
+  'aria-expanded': boolean;
   onChange(data: Point | undefined): void;
   onSearch(value: string): void;
+  onKeyDown?(event: KeyboardEvent): void;
 }
 
 const icons = Object.freeze({
@@ -36,16 +40,20 @@ export function DirectionsField(props: Props) {
   }, [point]);
 
   return (
-    <div className="mx-4 mb-2">
+    <div class="mx-4 mb-2">
       <label class="block text-sm text-gray-50" htmlFor={id}>
         {props.label}
       </label>
-      <div className="relative shadow-sm">
+      <div class="relative shadow-sm">
         <SearchInput
           id={id}
+          inputRef={props.inputRef}
           class={clsx({ 'pl-10': point, 'border-red-500': invalid })}
+          aria-owns={props['aria-owns']}
+          aria-expanded={props['aria-expanded'].toString()}
           placeholder="Stop or location"
           value={point?.name ?? value}
+          onKeyDown={props.onKeyDown}
           onInput={(evt) => {
             const newValue = evt.currentTarget.value;
             setValue(newValue);

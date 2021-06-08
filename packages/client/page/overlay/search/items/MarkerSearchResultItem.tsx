@@ -10,6 +10,7 @@ import {
   RouteBadgeKeys,
   RouteBadges,
 } from '../../../sheet/routes/badge/RouteBadge';
+import './SearchResultItem.css';
 
 interface MarkerProps {
   href?: string;
@@ -21,20 +22,18 @@ interface MarkerProps {
   onClick?(evt: MouseEvent): void;
 }
 
-const gridTemplate = `
-  'icon title' auto
-  'icon subtitle' min-content
-  'icon badges' min-content
-  / 2rem auto`;
-
 function MarkerSearchResultItem(props: MarkerProps) {
   return (
-    <li>
+    <li role="option">
       <ButtonOrAnchor
         href={props.href}
-        class={clsx('group grid gap-x-2 py-1 text-white', props.class)}
+        class={clsx(
+          'search__item search__item--marker group grid gap-x-2 py-1 text-white',
+          props.class,
+        )}
+        role="option"
+        tabIndex={-1}
         onClick={props.onClick}
-        style={{ gridTemplate }}
       >
         <span
           class="rounded bg-primary-900 self-start p-1 mb-1"

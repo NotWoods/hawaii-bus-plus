@@ -17,8 +17,10 @@ export function RouteSearchResultItem(props: Props) {
   return (
     <Link
       href={`/routes/${route.route_id}/`}
-      class={clsx('group block p-2 text-white', props.class)}
+      class={clsx('search__item group block p-2 text-white', props.class)}
       onClick={props.onClick}
+      role="option"
+      tabIndex={-1}
     >
       <RouteIcon style={colorVariables(route)}>
         {route.route_short_name}
