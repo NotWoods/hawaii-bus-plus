@@ -1,8 +1,14 @@
 import { useCallback } from 'preact/hooks';
 
-const options = document.getElementsByClassName(
-  'search__item',
-) as HTMLCollectionOf<HTMLElement>;
+const options = (() => {
+  if (import.meta.env.SSR) {
+    return [] as readonly HTMLElement[];
+  }
+
+  return document.getElementsByClassName(
+    'search__item',
+  ) as HTMLCollectionOf<HTMLElement>;
+})();
 
 function isPrintableKeyCode(key: string) {
   if (key === 'Backspace') return true;
