@@ -38,7 +38,7 @@ export function PageHeader() {
       </a>
       <a
         id="login"
-        class="shadow transition-colors text-white border bg-black bg-opacity-0 hover:bg-opacity-20 px-4 py-2"
+        class="shadow motion-safe:transition-colors text-white border bg-black bg-opacity-0 hover:bg-opacity-20 px-4 py-2"
         href="/auth/login"
         hidden={loggedIn}
       >
@@ -46,7 +46,7 @@ export function PageHeader() {
       </a>
       <a
         id="openApp"
-        class="shadow transition-colors text-black bg-white hover:bg-gray-200 px-4 py-2 ml-2"
+        class="shadow motion-safe:transition-colors text-black bg-white hover:bg-gray-200 px-4 py-2 ml-2"
         href={loggedIn ? '/' : '/auth/register'}
       >
         {loggedIn ? 'Open app' : 'Create account'}

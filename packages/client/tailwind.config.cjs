@@ -54,6 +54,25 @@ module.exports = {
         dark: '#2d4859',
       },
     },
+    keyframes: {
+      enter: {
+        from: { transform: 'translateY(25vh)' },
+        to: { transform: 'translateY(0)' },
+      },
+      shake: {
+        from: { transform: 'translateY(-1%)' },
+        to: { transform: 'translateY(3%)' },
+      },
+      line: {
+        '0%, 25%': { 'stroke-dashoffset': 22 },
+        '50%, 51%': { 'stroke-dashoffset': 0 },
+        '80%, 100%': { 'stroke-dashoffset': -22 },
+      },
+    },
+    animation: {
+      shake: 'shake 0.2s ease-in-out infinite alternate',
+      line: 'line 0.8s ease-in-out infinite normal both',
+    },
     extend: {
       fill: (theme) => ({
         'primary-500': theme('colors.primary.500'),

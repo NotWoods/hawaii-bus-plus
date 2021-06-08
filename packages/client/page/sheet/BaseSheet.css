@@ -1,12 +1,9 @@
-.animate-enter--sheet {
-  animation: enterSheet 0.3s;
+.animate-enter {
+  animation: enter 0.3s;
 }
 
-@keyframes enterSheet {
-  from {
-    transform: translateY(25vh);
-  }
-  to {
-    transform: translateY(0);
+@media (prefers-reduced-motion: reduce) {
+  .animate-enter {
+    animation-duration: 0;
   }
 }

@@ -21,7 +21,7 @@ export function Button({ icon, iconClass, ...props }: Props) {
       {...props}
       tabIndex={trapped ? -1 : 0}
       class={clsx(
-        'flex p-2 font-medium border border-current hover:bg-red hover:bg-opacity-20 transition-colors',
+        'flex p-2 font-medium border border-current hover:bg-red hover:bg-opacity-20 motion-safe:transition-colors',
         props.class,
       )}
     >

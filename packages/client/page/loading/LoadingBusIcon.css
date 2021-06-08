@@ -1,12 +1,7 @@
-.loadbus__bus {
-  animation: shake 0.2s ease-in-out infinite alternate;
-}
-
 .loadbus__line {
+  @apply animate-line;
   transform-origin: center right;
   stroke-dasharray: 22;
-  animation: line 0.8s ease-in-out infinite;
-  animation-fill-mode: both;
 }
 .loadbus__line:nth-child(1) {
   animation-delay: 0s;
@@ -16,39 +11,4 @@
 }
 .loadbus__line:nth-child(3) {
   animation-delay: 0.4s;
-}
-
-@keyframes shake {
-	0% {
-		transform: translateY(-1%);
-	}
-	100% {
-		transform: translateY(3%);
-	}
-}
-
-@keyframes line {
-	0% {
-		stroke-dashoffset: 22;
-	}
-
-	25% {
-		stroke-dashoffset: 22;
-	}
-
-	50% {
-		stroke-dashoffset: 0;
-	}
-
-	51% {
-		stroke-dashoffset: 0;
-	}
-
-	80% {
-		stroke-dashoffset: -22;
-	}
-
-	100% {
-		stroke-dashoffset: -22;
-	}
 }

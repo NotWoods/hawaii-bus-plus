@@ -15,7 +15,7 @@ export function IconButton({ forceDark: dark, ...props }: Props) {
       type="button"
       {...props}
       class={clsx(
-        'block flex-shrink-0 rounded-full focus:ring-cyan focus:border-cyan border-transparent bg-opacity-0 dark:bg-opacity-0 hover:bg-opacity-10 transition-colors',
+        'block flex-shrink-0 rounded-full focus:ring-cyan focus:border-cyan border-transparent bg-opacity-0 dark:bg-opacity-0 hover:bg-opacity-10 motion-safe:transition-colors',
         props.disabled ? 'cursor-default' : hover,
         props.class,
       )}
