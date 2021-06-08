@@ -1,21 +1,20 @@
 import { Response } from 'node-fetch';
 
-interface Pagination {
+export interface Pagination {
   last: number;
   prev?: number;
   current: number;
-  next: number;
+  next?: number;
   first?: number;
   total: number | null;
 }
 
 export function getPagination(response: Response) {
   const linksStr = response.headers.get('Link');
-  const pagination: Partial<Pagination> = {};
-  //var link, url, rel, m, page;
   if (linksStr == undefined) {
     return undefined;
   }
+  const pagination: Partial<Pagination> = {};
   const links = linksStr.split(',');
   const total = response.headers.get('X-Total-Count');
 

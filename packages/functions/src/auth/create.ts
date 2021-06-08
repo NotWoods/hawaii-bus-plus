@@ -2,7 +2,7 @@ import { SignupResponse } from '@hawaii-bus-plus/gotrue';
 import { database, stripe } from '../../shared/stripe';
 
 export async function createUserInDb(user: SignupResponse) {
-  const metadata = user.user_metadata as { full_name?: string };
+  const metadata = user.user_metadata!;
 
   // create a new customer in Stripe
   const customer = await stripe.customers.create({
