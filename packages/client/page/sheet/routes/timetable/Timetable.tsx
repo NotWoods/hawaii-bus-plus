@@ -67,16 +67,14 @@ export function Timetable({ routeDetails, tripDate, onChangeTripDate }: Props) {
 
   return (
     <>
-      <div class="flex flex-wrap-reverse gap-4 m-4">
-        <TripSelector
-          directionHeaders={route.directions}
-          directionsDetails={directionsDetails}
-          tripDate={tripDate}
-          selectedTripId={selectedTripId}
-          onChangeTripDate={onChangeTripDate}
-          setSelectedTrip={setSelectedTrip}
-        />
-      </div>
+      <TripSelector
+        directionHeaders={route.directions}
+        directionsDetails={directionsDetails}
+        tripDate={tripDate}
+        selectedTripId={selectedTripId}
+        onChangeTripDate={onChangeTripDate}
+        setSelectedTrip={setSelectedTrip}
+      />
       {tripId ? (
         <TripName
           tripShortName={

@@ -9,12 +9,13 @@ interface Props {
   directionsDetails: readonly DirectionDetails[];
   selectedTripId: Trip['trip_id'];
   setSelectedTrip(tripId: Trip['trip_id'] | NOW): void;
+  class?: string;
 }
 
 export function TripDropdown(props: Props) {
   return (
     <select
-      class="border-current bg-gray-50 dark:bg-gray-800"
+      class={props.class}
       aria-label="Bus trip"
       value={props.selectedTripId}
       onChange={(evt) => {
