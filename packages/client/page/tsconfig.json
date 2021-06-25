@@ -4,6 +4,7 @@
   "references": [
     { "path": "../all-pages" },
     { "path": "../assets" },
+    { "path": "../services" },
     { "path": "../worker-directions" },
     { "path": "../worker-info" },
     { "path": "../worker-init-db" },
