@@ -20,7 +20,7 @@ export function SimpleSearch(props: Props) {
   const [searchResults, setSearchResults] = useState(emptyResults);
   const searchRef = useRef<HTMLInputElement>();
   const getSearchResults = useSearch();
-  const getRef = useCallback(() => searchRef.current, [])
+  const getRef = useCallback(() => searchRef.current, []);
   const handleKeyDown = useAutocompleteKeys(getRef);
   const { SearchResultsList } = useLazyComponent(lazySearchResults);
 
@@ -44,7 +44,7 @@ export function SimpleSearch(props: Props) {
       <Button
         icon={directionsIcon}
         class="mx-4 mb-4"
-        iconClass="filter invert"
+        iconClass="invert"
         onClick={props.onDirections}
       >
         Directions

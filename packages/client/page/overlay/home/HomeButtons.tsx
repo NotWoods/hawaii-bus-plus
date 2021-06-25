@@ -17,7 +17,7 @@ function HomeButtons(props: {
         <Icon
           src={props.icon}
           alt=""
-          class="w-6 h-6 mt-1 mr-2 filter invert opacity-60"
+          class="w-6 h-6 mt-1 mr-2 invert opacity-60"
         />
         {props.about}
       </p>

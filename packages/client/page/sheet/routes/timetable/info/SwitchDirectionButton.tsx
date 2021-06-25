@@ -17,7 +17,7 @@ export function SwitchDirectionButton(props: Props) {
     return (
       <Button
         class={props.class}
-        iconClass="filter dark:invert"
+        iconClass="dark:invert"
         icon={swapIcon}
         onClick={() => dispatch(swapDirectionAction())}
       >

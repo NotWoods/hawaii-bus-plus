@@ -17,7 +17,7 @@ export function Settings() {
       <div class="inline-block">
         <Button
           href="/.netlify/functions/billing"
-          iconClass="filter dark:invert"
+          iconClass="dark:invert"
           icon={paymentsIcon}
         >
           Open billing portal

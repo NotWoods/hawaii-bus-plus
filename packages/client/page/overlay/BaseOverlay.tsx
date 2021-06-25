@@ -24,7 +24,7 @@ export function BaseOverlay(props: Props) {
   return (
     <section
       class={clsx(
-        'waves overlay fixed flex flex-col shadow z-10 pb-4 w-full top-0 md:w-80 max-h-screen md:h-screen overflow-y-auto',
+        'waves overlay fixed flex flex-col shadow z-10 pb-4 w-full top-0 md:w-80 max-h-screen md:h-screen overflow-y-auto color-scheme-dark',
         { 'h-screen': loadError != undefined },
       )}
     >

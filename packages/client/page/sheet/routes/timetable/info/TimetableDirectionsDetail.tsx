@@ -24,7 +24,7 @@ export function TimetableDirectionsDetail(props: Props) {
         <Icon
           src={timeIcon}
           alt=""
-          class="absolute top-5 left-3 filter dark:invert"
+          class="absolute top-5 left-3 dark:invert"
         />
         <ReachesAt closestTrip={closestTrip} tabIndex={tabIndex} />
         <StartedFrom

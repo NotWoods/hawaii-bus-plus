@@ -45,7 +45,7 @@ export function DetailButtons({ route, agency, tripId }: Props) {
     <>
       <Button
         icon={shareIcon}
-        iconClass="filter dark:invert"
+        iconClass="dark:invert"
         href={shareHref}
         onClick={handleShare}
         id="share"
@@ -54,7 +54,7 @@ export function DetailButtons({ route, agency, tripId }: Props) {
       </Button>
       <Button
         icon={fareIcon}
-        iconClass="filter dark:invert"
+        iconClass="dark:invert"
         href={agency.agency_fare_url}
       >
         Fare info

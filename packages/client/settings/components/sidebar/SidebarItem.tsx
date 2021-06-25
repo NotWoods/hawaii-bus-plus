@@ -17,7 +17,7 @@ export function SidebarItem(props: Props) {
       >
         {props.children}
         {props.href.startsWith('#') ? null : (
-          <Icon class="ml-auto filter dark:invert" src={openInNewIcon} alt="" />
+          <Icon class="ml-auto dark:invert" src={openInNewIcon} alt="" />
         )}
       </a>
     </li>

@@ -24,7 +24,7 @@ export function TripName(props: {
         <Icon
           src={busIcon}
           alt=""
-          class="absolute top-5 left-3 filter dark:invert"
+          class="absolute top-5 left-3 dark:invert"
         />
         <p class="text-lg">{tripShortName}</p>
         <p>{serviceDays}</p>

@@ -30,4 +30,11 @@
   .font-display {
     @apply font-medium;
   }
+
+  .color-scheme-light {
+    color-scheme: light;
+  }
+  .color-scheme-dark {
+    color-scheme: dark;
+  }
 }

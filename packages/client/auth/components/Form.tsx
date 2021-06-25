@@ -52,7 +52,7 @@ export function Form({
 
   return (
     <form
-      class="mt-8 px-12 py-8 space-y-6 bg-gray-50 text-black"
+      class="mt-8 px-12 py-8 space-y-6 bg-gray-50 text-black color-scheme-light"
       action="/.netlify/functions/auth"
       method="POST"
     >

@@ -1,6 +1,5 @@
 import { ComponentChildren, h } from 'preact';
 import clsx from 'clsx';
-import '../Input.css';
 
 interface Props {
   children: ComponentChildren;
