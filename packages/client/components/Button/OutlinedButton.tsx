@@ -2,7 +2,6 @@ import clsx, { ClassValue } from 'clsx';
 import { ComponentChildren, h } from 'preact';
 import { Icon } from '../../assets/icons/Icon';
 import { ButtonOrAnchor } from './ButtonOrAnchor';
-import { useFocusTrapped } from './FocusTrap';
 
 interface Props {
   href?: string;
@@ -14,12 +13,13 @@ interface Props {
   onClick?(evt: MouseEvent): void;
 }
 
-export function Button({ icon, iconClass, ...props }: Props) {
-  const trapped = useFocusTrapped();
+/**
+ * Button styled with a white outline
+ */
+export function OutlinedButton({ icon, iconClass, ...props }: Props) {
   return (
     <ButtonOrAnchor
       {...props}
-      tabIndex={trapped ? -1 : 0}
       class={clsx(
         'flex p-2 font-medium border border-current hover:bg-red hover:bg-opacity-20 motion-safe:transition-colors',
         props.class,

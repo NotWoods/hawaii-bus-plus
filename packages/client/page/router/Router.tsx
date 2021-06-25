@@ -1,7 +1,6 @@
 import { ComponentChildren, createContext, h } from 'preact';
 import { Reducer, useEffect, useMemo, useReducer } from 'preact/hooks';
 import { JSXInternal } from 'preact/src/jsx';
-import { useFocusTrapped } from '../buttons/FocusTrap';
 import { linkAction, reloadStateAction, RouterAction } from './action';
 import { useDispatch } from './hooks';
 import { initStateFromUrl, routerReducer } from './reducer';
@@ -96,13 +95,11 @@ interface LinkProps
 /**
  * Element that displays sticky alerts
  */
-export function Link({ action, tabIndex, ...props }: LinkProps) {
+export function Link({ action, ...props }: LinkProps) {
   const dispatch = useDispatch();
-  const trapped = useFocusTrapped(tabIndex);
   return (
     <a
       {...props}
-      tabIndex={trapped ? -1 : 0}
       onClick={function (evt) {
         evt.preventDefault();
         props.onClick?.call(this, evt);

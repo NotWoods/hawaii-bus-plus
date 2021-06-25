@@ -1,7 +1,7 @@
 import { h } from 'preact';
-import { InputWithLabel } from '../../../components/InputWithLabel/InputWithLabel';
 import { payments } from '../../../assets/icons/paths';
-import { Button } from '../../../page/buttons/Button';
+import { OutlinedButton } from '../../../components/Button/OutlinedButton';
+import { InputWithLabel } from '../../../components/InputWithLabel/InputWithLabel';
 import { Header } from './Header';
 
 export function Settings() {
@@ -15,13 +15,13 @@ export function Settings() {
         Email address
       </InputWithLabel>
       <div class="inline-block">
-        <Button
+        <OutlinedButton
           href="/.netlify/functions/billing"
           iconClass="dark:invert"
           icon={payments}
         >
           Open billing portal
-        </Button>
+        </OutlinedButton>
       </div>
       <Header id="display">Accessibility and display</Header>
       <Header id="about">Additional resources</Header>

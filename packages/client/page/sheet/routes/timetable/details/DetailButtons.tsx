@@ -2,7 +2,7 @@ import { Agency, Route, Trip } from '@hawaii-bus-plus/types';
 import { Fragment, h } from 'preact';
 import { useCallback } from 'preact/hooks';
 import { monetization_on, share } from '../../../../../assets/icons/paths';
-import { Button } from '../../../../buttons/Button';
+import { OutlinedButton } from '../../../../../components/Button/OutlinedButton';
 import { errorMessage } from '../../../../hooks';
 import { useSnackbar } from '../../../../snackbar/context';
 import { buildShareHandler } from './share';
@@ -42,7 +42,7 @@ export function DetailButtons({ route, agency, tripId }: Props) {
 
   return (
     <>
-      <Button
+      <OutlinedButton
         icon={share}
         iconClass="dark:invert"
         href={shareHref}
@@ -50,14 +50,14 @@ export function DetailButtons({ route, agency, tripId }: Props) {
         id="share"
       >
         Share
-      </Button>
-      <Button
+      </OutlinedButton>
+      <OutlinedButton
         icon={monetization_on}
         iconClass="dark:invert"
         href={agency.agency_fare_url}
       >
         Fare info
-      </Button>
+      </OutlinedButton>
     </>
   );
 }

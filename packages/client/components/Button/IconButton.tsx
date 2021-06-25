@@ -6,6 +6,9 @@ interface Props extends JSX.HTMLAttributes<HTMLButtonElement> {
   forceDark?: boolean;
 }
 
+/**
+ * A button that only displays an icon.
+ */
 export function IconButton({ forceDark: dark, ...props }: Props) {
   const hover = dark
     ? 'text-white bg-white'

@@ -1,7 +1,7 @@
 import clsx, { ClassValue } from 'clsx';
 import { h } from 'preact';
 import { CloseIcon } from '../../assets/icons/MenuIcon';
-import { IconButton } from './IconButton';
+import { IconButton } from '../Button/IconButton';
 
 interface Props {
   class?: string;

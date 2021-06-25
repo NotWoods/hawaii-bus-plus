@@ -1,9 +1,9 @@
 import clsx from 'clsx';
 import { ComponentChildren, h } from 'preact';
 import { useEffect } from 'preact/hooks';
-import { IconButton } from '../buttons/IconButton';
-import { useLoadGoogleMaps } from '../hooks/useLoadGoogleMaps';
 import { UpIcon } from '../../assets/icons/MenuIcon';
+import { IconButton } from '../../components/Button/IconButton';
+import { useLoadGoogleMaps } from '../hooks/useLoadGoogleMaps';
 import { TrialBanner } from './TrialBanner';
 
 interface Props {

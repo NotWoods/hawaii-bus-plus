@@ -11,6 +11,10 @@ function isAnchor(
   return props.href != undefined;
 }
 
+/**
+ * Polymorphic component to use either a <button> or an <a>.
+ * @returns If `props.href` is used, an anchor. Otherwise a button.
+ */
 export function ButtonOrAnchor(props: Props) {
   if (isAnchor(props)) {
     return <a {...props} />;

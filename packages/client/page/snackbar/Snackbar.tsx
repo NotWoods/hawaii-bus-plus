@@ -1,7 +1,7 @@
 import clsx, { ClassValue } from 'clsx';
 import { ComponentChildren, h } from 'preact';
-import { Button } from '../buttons/Button';
-import { CloseButton } from '../buttons/CloseButton';
+import { OutlinedButton } from '../../components/Button/OutlinedButton';
+import { CloseButton } from '../../components/CloseButton/CloseButton';
 
 export interface SnackbarProps {
   children?: ComponentChildren;
@@ -20,7 +20,9 @@ export function Snackbar(props: SnackbarProps) {
       )}
     >
       <span class="mr-auto">{props.children}</span>
-      {props.action && <Button onClick={props.onAction}>{props.action}</Button>}
+      {props.action && (
+        <OutlinedButton onClick={props.onAction}>{props.action}</OutlinedButton>
+      )}
       <CloseButton class="self-start" onClick={props.onClose} />
     </div>
   );

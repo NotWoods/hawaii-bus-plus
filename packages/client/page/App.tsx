@@ -1,6 +1,5 @@
 import { MapProvider } from '@hawaii-bus-plus/react-google-maps';
 import { h } from 'preact';
-import { FocusTrapProvider } from './buttons/FocusTrap';
 import { googleMapOptions } from './hooks/useLoadGoogleMaps';
 import { MainContent } from './MainContent';
 import { MyLocationProvider } from './map/location/context';
@@ -25,12 +24,10 @@ export function App(props: { initialUrl?: URL }) {
     <Router initialUrl={props.initialUrl}>
       <MyLocationProvider>
         <StickySnackbarProvider>
-          <FocusTrapProvider>
-            <MapProvider options={googleMapOptions}>
-              <PageHead />
-              <Main />
-            </MapProvider>
-          </FocusTrapProvider>
+          <MapProvider options={googleMapOptions}>
+            <PageHead />
+            <Main />
+          </MapProvider>
         </StickySnackbarProvider>
       </MyLocationProvider>
     </Router>

@@ -1,6 +1,6 @@
 import { h } from 'preact';
 import { swap_horiz } from '../../../../../assets/icons/paths';
-import { Button } from '../../../../buttons/Button';
+import { OutlinedButton } from '../../../../../components/Button/OutlinedButton';
 import { swapDirectionAction } from '../../../../router/action/routes';
 import { useDispatch, useSelector } from '../../../../router/hooks';
 import { selectHasMultipleDirections } from '../../../../router/selector/main';
@@ -15,14 +15,14 @@ export function SwitchDirectionButton(props: Props) {
 
   if (canSwap) {
     return (
-      <Button
+      <OutlinedButton
         class={props.class}
         iconClass="dark:invert"
         icon={swap_horiz}
         onClick={() => dispatch(swapDirectionAction())}
       >
         Switch direction
-      </Button>
+      </OutlinedButton>
     );
   } else {
     return null;

@@ -1,7 +1,7 @@
 import { ComponentChildren, h } from 'preact';
 import { Icon } from '../../../assets/icons/Icon';
 import { error, login, payments } from '../../../assets/icons/paths';
-import { Button } from '../../buttons/Button';
+import { OutlinedButton } from '../../../components/Button/OutlinedButton';
 import { HomeButtonsError } from './hooks';
 
 function HomeButtons(props: {
@@ -30,10 +30,10 @@ export function LoginButtons() {
       icon={login}
       about="You need to have an account to use Hawaii Bus Plus."
     >
-      <Button href="/auth/login" class="mb-1">
+      <OutlinedButton href="/auth/login" class="mb-1">
         Login
-      </Button>
-      <Button href="/auth/register">Sign up</Button>
+      </OutlinedButton>
+      <OutlinedButton href="/auth/register">Sign up</OutlinedButton>
     </HomeButtons>
   );
 }
@@ -44,9 +44,9 @@ export function BillingButtons() {
       icon={payments}
       about="Your account has expired. Sign up for a new plan to use Hawaii Bus Plus."
     >
-      <Button href="/.netlify/functions/billing" class="mb-1">
+      <OutlinedButton href="/.netlify/functions/billing" class="mb-1">
         Billing
-      </Button>
+      </OutlinedButton>
     </HomeButtons>
   );
 }

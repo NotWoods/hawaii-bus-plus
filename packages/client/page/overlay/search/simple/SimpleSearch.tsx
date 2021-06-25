@@ -2,7 +2,7 @@ import { memoize } from '@hawaii-bus-plus/utils';
 import { Fragment, h } from 'preact';
 import { useCallback, useRef, useState } from 'preact/hooks';
 import { directions } from '../../../../assets/icons/paths';
-import { Button } from '../../../buttons/Button';
+import { OutlinedButton } from '../../../../components/Button/OutlinedButton';
 import { useLazyComponent, usePromise } from '../../../hooks';
 import { SearchBar } from '../SearchBar';
 import { useAutocompleteKeys } from '../useAutocompleteKeys';
@@ -41,14 +41,14 @@ export function SimpleSearch(props: Props) {
         aria-owns="searchResults"
         onKeyDown={handleKeyDown}
       />
-      <Button
+      <OutlinedButton
         icon={directions}
         class="mx-4 mb-4"
         iconClass="invert"
         onClick={props.onDirections}
       >
         Directions
-      </Button>
+      </OutlinedButton>
 
       {!SearchResultsList || searchResults === emptyResults ? null : (
         <SearchResultsList
