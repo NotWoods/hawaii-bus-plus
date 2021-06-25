@@ -1,10 +1,9 @@
 import { Agency, Route, Trip } from '@hawaii-bus-plus/types';
 import { Fragment, h } from 'preact';
 import { useCallback } from 'preact/hooks';
+import { monetization_on, share } from '../../../../../assets/icons/paths';
 import { Button } from '../../../../buttons/Button';
 import { errorMessage } from '../../../../hooks';
-import fareIcon from '../../../../icons/monetization_on.svg';
-import shareIcon from '../../../../icons/share.svg';
 import { useSnackbar } from '../../../../snackbar/context';
 import { buildShareHandler } from './share';
 
@@ -44,7 +43,7 @@ export function DetailButtons({ route, agency, tripId }: Props) {
   return (
     <>
       <Button
-        icon={shareIcon}
+        icon={share}
         iconClass="dark:invert"
         href={shareHref}
         onClick={handleShare}
@@ -53,7 +52,7 @@ export function DetailButtons({ route, agency, tripId }: Props) {
         Share
       </Button>
       <Button
-        icon={fareIcon}
+        icon={monetization_on}
         iconClass="dark:invert"
         href={agency.agency_fare_url}
       >

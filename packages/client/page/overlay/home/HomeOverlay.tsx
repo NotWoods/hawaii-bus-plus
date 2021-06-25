@@ -2,7 +2,7 @@ import { h } from 'preact';
 import { useState } from 'preact/hooks';
 import { Logo } from '../../../all-pages/components/Logo';
 import { useLazyComponent } from '../../hooks';
-import { MenuIcon } from '../../icons/MenuIcon';
+import { MenuIcon } from '../../../assets/icons/MenuIcon';
 import { BaseOverlay } from '../BaseOverlay';
 import { DirectionsSearch } from '../search/directions/DirectionsSearch';
 import { SimpleSearch } from '../search/simple/SimpleSearch';

@@ -5,7 +5,7 @@ import { memo } from 'preact/compat';
 import { useCallback, useContext, useEffect, useState } from 'preact/hooks';
 import { FloatingActionButton } from '../../buttons/FloatingActionButton';
 import { useLoadGoogleMaps } from '../../hooks/useLoadGoogleMaps';
-import { BaseIcon } from '../../icons/Icon';
+import { BaseIcon } from '../../../assets/icons/Icon';
 import { MyLocationContext } from './context';
 
 interface Props {

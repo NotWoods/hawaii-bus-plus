@@ -1,7 +1,5 @@
 import { h } from 'preact';
-import feedbackIcon from '../../../icons/feedback.svg';
-import logoutIcon from '../../../icons/logout.svg';
-import paymentsIcon from '../../../icons/payments.svg';
+import { feedback, logout, payments } from '../../../../assets/icons/paths';
 import { MenuOption } from './MenuOption';
 
 interface Props {
@@ -23,14 +21,14 @@ export function Menu(props: Props) {
       aria-orientation="vertical"
       aria-labelledby={props.labelledBy}
     >
-      <MenuOption href="/.netlify/functions/billing" icon={paymentsIcon}>
+      <MenuOption href="/.netlify/functions/billing" icon={payments}>
         Billing
       </MenuOption>
-      <MenuOption href="mailto:feedback@hawaiibusplus.com" icon={feedbackIcon}>
+      <MenuOption href="mailto:feedback@hawaiibusplus.com" icon={feedback}>
         Feedback
       </MenuOption>
       <Divider />
-      <MenuOption href="/.netlify/functions/logout" icon={logoutIcon}>
+      <MenuOption href="/.netlify/functions/logout" icon={logout}>
         Logout
       </MenuOption>
     </nav>

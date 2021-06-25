@@ -1,7 +1,7 @@
 import { h } from 'preact';
-import { Button } from '../../../page/buttons/Button';
-import paymentsIcon from '../../../page/icons/payments.svg';
 import { InputWithLabel } from '../../../all-pages/components/InputWithLabel';
+import { payments } from '../../../assets/icons/paths';
+import { Button } from '../../../page/buttons/Button';
 import { Header } from './Header';
 
 export function Settings() {
@@ -18,7 +18,7 @@ export function Settings() {
         <Button
           href="/.netlify/functions/billing"
           iconClass="dark:invert"
-          icon={paymentsIcon}
+          icon={payments}
         >
           Open billing portal
         </Button>

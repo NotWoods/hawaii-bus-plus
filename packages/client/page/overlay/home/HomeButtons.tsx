@@ -1,9 +1,7 @@
 import { ComponentChildren, h } from 'preact';
+import { Icon } from '../../../assets/icons/Icon';
+import { error, login, payments } from '../../../assets/icons/paths';
 import { Button } from '../../buttons/Button';
-import { Icon } from '../../icons/Icon';
-import loginSvg from '../../icons/login.svg';
-import paymentsSvg from '../../icons/payments.svg';
-import errorSvg from '../../icons/error.svg';
 import { HomeButtonsError } from './hooks';
 
 function HomeButtons(props: {
@@ -29,7 +27,7 @@ function HomeButtons(props: {
 export function LoginButtons() {
   return (
     <HomeButtons
-      icon={loginSvg}
+      icon={login}
       about="You need to have an account to use Hawaii Bus Plus."
     >
       <Button href="/auth/login" class="mb-1">
@@ -43,7 +41,7 @@ export function LoginButtons() {
 export function BillingButtons() {
   return (
     <HomeButtons
-      icon={paymentsSvg}
+      icon={payments}
       about="Your account has expired. Sign up for a new plan to use Hawaii Bus Plus."
     >
       <Button href="/.netlify/functions/billing" class="mb-1">
@@ -56,7 +54,7 @@ export function BillingButtons() {
 export function BrowserUnsupported() {
   return (
     <HomeButtons
-      icon={errorSvg}
+      icon={error}
       about="Bus data failed to load, try refreshing or clearing your browser cache."
     />
   );

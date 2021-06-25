@@ -1,9 +1,9 @@
 import { memoize } from '@hawaii-bus-plus/utils';
 import { Fragment, h } from 'preact';
 import { useCallback, useRef, useState } from 'preact/hooks';
+import { directions } from '../../../../assets/icons/paths';
 import { Button } from '../../../buttons/Button';
 import { useLazyComponent, usePromise } from '../../../hooks';
-import directionsIcon from '../../../icons/directions.svg';
 import { SearchBar } from '../SearchBar';
 import { useAutocompleteKeys } from '../useAutocompleteKeys';
 import { emptyResults } from './places-autocomplete';
@@ -42,7 +42,7 @@ export function SimpleSearch(props: Props) {
         onKeyDown={handleKeyDown}
       />
       <Button
-        icon={directionsIcon}
+        icon={directions}
         class="mx-4 mb-4"
         iconClass="invert"
         onClick={props.onDirections}

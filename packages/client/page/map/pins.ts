@@ -1,4 +1,4 @@
-import pinsUrl from '../icons/pins.png';
+import pinsUrl from '../../assets/icons/pins.png';
 
 const basePinsIcon = {
   url: pinsUrl,

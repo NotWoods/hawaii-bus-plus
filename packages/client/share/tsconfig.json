@@ -3,6 +3,7 @@
   "include": ["**/*", "**/*.json"],
   "references": [
     { "path": "../all-pages" },
+    { "path": "../assets" },
     { "path": "../page" },
     { "path": "../worker-info" },
     { "path": "../../data/src" },

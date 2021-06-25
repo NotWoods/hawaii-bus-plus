@@ -1,4 +1,4 @@
-import '../all-pages/main.css';
+import '../assets/main.css';
 import { buildShareHandler } from '../page/sheet/routes/timetable/details/share';
 import './App.css';
 import './components/Footer.css';

@@ -1,10 +1,9 @@
 import { Route, Stop } from '@hawaii-bus-plus/types';
 import clsx, { ClassValue } from 'clsx';
 import { ComponentChildren, h } from 'preact';
+import { Icon } from '../../../../assets/icons/Icon';
+import { bus_stop, place } from '../../../../assets/icons/paths';
 import { ButtonOrAnchor } from '../../../buttons/ButtonOrAnchor';
-import busStopIcon from '../../../icons/bus_stop.svg';
-import { Icon } from '../../../icons/Icon';
-import placeIcon from '../../../icons/place.svg';
 import {
   BLANK,
   RouteBadgeKeys,
@@ -69,7 +68,7 @@ export function StopSearchResultItem({
     <MarkerSearchResultItem
       {...props}
       href={`?stop=${stopId}`}
-      icon={<Icon src={busStopIcon} alt="Bus stop" class="invert" />}
+      icon={<Icon src={bus_stop} alt="Bus stop" class="invert" />}
       title={stopName}
       subtitle={stopDesc}
       badges={<RouteBadges routes={routes} />}
@@ -87,7 +86,7 @@ export function PlaceSearchResultItem({ placeId, text, ...props }: PlaceProps) {
     <MarkerSearchResultItem
       {...props}
       href={`?place=${placeId}`}
-      icon={<Icon src={placeIcon} alt="Place" class="invert" />}
+      icon={<Icon src={place} alt="Place" class="invert" />}
       title={text.main_text}
       subtitle={text.secondary_text}
     />

@@ -1,6 +1,6 @@
 import clsx, { ClassValue } from 'clsx';
 import { h } from 'preact';
-import { CloseIcon } from '../icons/MenuIcon';
+import { CloseIcon } from '../../assets/icons/MenuIcon';
 import { IconButton } from './IconButton';
 
 interface Props {

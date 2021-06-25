@@ -2,7 +2,7 @@ import 'preact/debug';
 import { h, render } from 'preact';
 import { App, urlToType } from './App';
 import { HeaderType } from './components/Header';
-import '../all-pages/main.css';
+import '../assets/main.css';
 
 declare global {
   interface Window {

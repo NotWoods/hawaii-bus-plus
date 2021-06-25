@@ -1,5 +1,5 @@
 import 'preact/debug';
-import '../all-pages/main.css';
+import '../assets/main.css';
 
 import('../all-pages/all');
 import('./api');

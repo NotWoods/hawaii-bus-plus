@@ -12,7 +12,7 @@ test.serial('build code and assets', async (t) => {
   const { code, assets } = await buildPrerenderCode('./auth/entry-server.tsx');
 
   t.is(typeof code, 'string');
-  t.like(assets[0], { name: 'style.css' });
+  t.deepEqual(assets, []);
 });
 
 test.serial('render and run auth entry file', async (t) => {

@@ -2,9 +2,7 @@ import { Point } from '@hawaii-bus-plus/presentation';
 import clsx from 'clsx';
 import { ComponentChildren, h, Ref } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
-import stopIcon from '../../../icons/bus_stop.svg';
-import locationIcon from '../../../icons/gps_fixed.svg';
-import placeIcon from '../../../icons/place.svg';
+import { bus_stop, gps_fixed, place } from '../../../../assets/icons/paths';
 import { LeadingInputIcon, SearchInput } from '../SearchInput';
 
 interface Props {
@@ -20,11 +18,11 @@ interface Props {
 }
 
 const icons = Object.freeze({
-  user: { src: locationIcon, alt: '' },
-  stop: { src: stopIcon, alt: 'Bus stop' },
-  place: { src: placeIcon, alt: 'Place' },
-  marker: { src: placeIcon, alt: 'Marker' },
-  bike: { src: placeIcon, alt: 'Bike station' },
+  user: { src: gps_fixed, alt: '' },
+  stop: { src: bus_stop, alt: 'Bus stop' },
+  place: { src: place, alt: 'Place' },
+  marker: { src: place, alt: 'Marker' },
+  bike: { src: place, alt: 'Bike station' },
 });
 
 export function DirectionsField(props: Props) {

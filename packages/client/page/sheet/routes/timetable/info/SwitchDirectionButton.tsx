@@ -1,6 +1,6 @@
 import { h } from 'preact';
+import { swap_horiz } from '../../../../../assets/icons/paths';
 import { Button } from '../../../../buttons/Button';
-import swapIcon from '../../../../icons/swap_horiz.svg';
 import { swapDirectionAction } from '../../../../router/action/routes';
 import { useDispatch, useSelector } from '../../../../router/hooks';
 import { selectHasMultipleDirections } from '../../../../router/selector/main';
@@ -18,7 +18,7 @@ export function SwitchDirectionButton(props: Props) {
       <Button
         class={props.class}
         iconClass="dark:invert"
-        icon={swapIcon}
+        icon={swap_horiz}
         onClick={() => dispatch(swapDirectionAction())}
       >
         Switch direction

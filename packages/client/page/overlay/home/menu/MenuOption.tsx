@@ -1,6 +1,6 @@
 import { ComponentChildren, h } from 'preact';
 import { ButtonOrAnchor } from '../../../buttons/ButtonOrAnchor';
-import { Icon } from '../../../icons/Icon';
+import { Icon } from '../../../../assets/icons/Icon';
 
 interface Props {
   children: ComponentChildren;

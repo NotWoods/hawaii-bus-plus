@@ -1,9 +1,9 @@
 import { StopTimeData } from '@hawaii-bus-plus/presentation';
 import { Stop } from '@hawaii-bus-plus/types';
 import { Fragment, h } from 'preact';
+import { Icon } from '../../../../../assets/icons/Icon';
+import { expand_more } from '../../../../../assets/icons/paths';
 import { useDuplicateKeys } from '../../../../hooks/useDuplicateKeys';
-import expandIcon from '../../../../icons/expand_more.svg';
-import { Icon } from '../../../../icons/Icon';
 import { BaseSegment } from './BaseSegment';
 import { stopLink, StopTimeSegment } from './StopTimeSegment';
 import './TripCollapse.css';
@@ -63,7 +63,7 @@ function TripCollapse({
       <summary class="flex -mx-2 overflow-hidden">
         <Icon
           class="trip-collapse__icon motion-safe:transition-transform dark:invert"
-          src={expandIcon}
+          src={expand_more}
           alt={toggleAlt(open)}
         />
         <p class="ml-2">{stopTimes.length} stops</p>

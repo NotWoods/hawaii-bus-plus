@@ -1,5 +1,5 @@
 import { h } from 'preact';
-import { BaseIcon } from '../../page/icons/Icon';
+import { BaseIcon } from '../../assets/icons/Icon';
 
 export function ExtendedFloatingActionButton() {
   return (

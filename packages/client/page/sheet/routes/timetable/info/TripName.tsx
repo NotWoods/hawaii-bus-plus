@@ -1,6 +1,6 @@
 import { ComponentChildren, h } from 'preact';
-import busIcon from '../../../../icons/directions_bus.svg';
-import { Icon } from '../../../../icons/Icon';
+import { directions_bus } from '../../../../../assets/icons/paths';
+import { Icon } from '../../../../../assets/icons/Icon';
 import { BLANK } from '../../badge/RouteBadge';
 
 export function BaseDetails(props: { children: ComponentChildren }) {
@@ -22,7 +22,7 @@ export function TripName(props: {
     <header>
       <BaseDetails>
         <Icon
-          src={busIcon}
+          src={directions_bus}
           alt=""
           class="absolute top-5 left-3 dark:invert"
         />

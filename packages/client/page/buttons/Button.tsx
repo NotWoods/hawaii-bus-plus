@@ -1,6 +1,6 @@
 import clsx, { ClassValue } from 'clsx';
 import { ComponentChildren, h } from 'preact';
-import { Icon } from '../icons/Icon';
+import { Icon } from '../../assets/icons/Icon';
 import { ButtonOrAnchor } from './ButtonOrAnchor';
 import { useFocusTrapped } from './FocusTrap';
 
