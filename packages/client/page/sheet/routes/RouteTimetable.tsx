@@ -1,14 +1,17 @@
-import { DateString } from '@hawaii-bus-plus/types';
+import { DateString, Route } from '@hawaii-bus-plus/types';
 import { h } from 'preact';
 import { useState } from 'preact/hooks';
 import type { Temporal } from 'proposal-temporal';
 import { colorVariables } from '../../../components/route-colors';
+import { RouteHeader } from '../../../components/RouteHeader/RouteHeader';
 import { RouteDetails } from '../../../worker-info/route-details';
 import { TripDetails } from '../../../worker-info/trip-details';
 import type { InfoWorkerHandler } from '../../../worker-info/worker-info';
-import { useDelay, useLazyComponent, usePromise, useWorker } from '../../hooks';
+import InfoWorker from '../../../worker-info/worker-info?worker';
 import { dbInitialized } from '../../api';
+import { useDelay, useLazyComponent, usePromise, useWorker } from '../../hooks';
 import { LoadingBusIcon } from '../../loading/LoadingBusIcon';
+import { closeMainAction } from '../../router/action/main';
 import {
   closeRouteDetailsAction,
   setDefaultTripDetailsAction,
@@ -21,9 +24,7 @@ import {
   selectRouteDetails,
 } from '../../router/selector/main';
 import { NOW, timeForWorker } from '../../time/input/symbol';
-import InfoWorker from '../../../worker-info/worker-info?worker';
 import { BaseSheet } from '../BaseSheet';
-import { RouteHeader } from './RouteHeader';
 
 const lazyTimetable = import('./time-entry');
 
@@ -33,6 +34,14 @@ const lazyTimetable = import('./time-entry');
 function useShowLoadingBar(routeId: unknown) {
   const delayDone = useDelay(500, [routeId]);
   return routeId && delayDone;
+}
+
+function Header({ route }: { route?: Route }) {
+  const dispatch = useDispatch();
+
+  return (
+    <RouteHeader route={route} onClose={() => dispatch(closeMainAction())} />
+  );
 }
 
 export function RouteTimetable() {
@@ -95,7 +104,7 @@ export function RouteTimetable() {
   if (route && Timetable) {
     return (
       <BaseSheet style={colorVariables(route)} loaded>
-        <RouteHeader route={route} showClose />
+        <Header route={route} />
         <Timetable
           routeDetails={routeDetails!}
           tripDate={tripDate}
@@ -106,7 +115,7 @@ export function RouteTimetable() {
   } else if (showLoadingBar) {
     return (
       <BaseSheet>
-        <RouteHeader />
+        <Header />
         <LoadingBusIcon />
       </BaseSheet>
     );

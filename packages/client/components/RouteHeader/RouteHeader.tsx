@@ -1,10 +1,8 @@
 import { Route } from '@hawaii-bus-plus/types';
 import { h } from 'preact';
-import { CloseButton } from '../../../components/CloseButton/CloseButton';
-import { RouteIcon } from '../../../components/RouteIcon/RouteIcon';
-import { closeMainAction } from '../../router/action/main';
-import { useDispatch } from '../../router/hooks';
-import { BLANK } from './badge/RouteBadge';
+import { CloseButton } from '../CloseButton/CloseButton';
+import { RouteIcon } from '../RouteIcon/RouteIcon';
+import { BLANK } from '../RouteBadge/constants';
 import './RouteHeader.css';
 
 interface Props {
@@ -12,21 +10,17 @@ interface Props {
     Route,
     'route_short_name' | 'route_long_name' | 'route_text_color' | 'route_color'
   >;
-  showClose?: boolean;
+  onClose?(event: MouseEvent): void;
 }
 
-export function RouteHeader({ route, showClose }: Props) {
-  const dispatch = useDispatch();
-
+export function RouteHeader({ route, onClose }: Props) {
   return (
     <header class="route__header grid gap-x-4 items-center px-4 pb-2 md:pb-0 border-b">
       <RouteIcon>{route?.route_short_name ?? BLANK}</RouteIcon>
       <h2 class="font-display text-3xl" style={{ gridArea: 'name' }}>
         {route?.route_long_name ?? BLANK}
       </h2>
-      {showClose ? (
-        <CloseButton onClick={() => dispatch(closeMainAction())} />
-      ) : null}
+      {onClose ? <CloseButton onClick={onClose} /> : null}
     </header>
   );
 }

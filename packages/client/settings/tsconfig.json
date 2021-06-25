@@ -1,11 +1,7 @@
 {
   "extends": "../../tsconfig.base.json",
   "include": ["**/*", "**/*.json"],
-  "references": [
-    { "path": "../assets" },
-    { "path": "../components" },
-    { "path": "../page" }
-  ],
+  "references": [{ "path": "../assets" }, { "path": "../components" }],
   "compilerOptions": {
     "lib": ["esnext", "dom", "dom.iterable"],
     "types": ["vite/client"],

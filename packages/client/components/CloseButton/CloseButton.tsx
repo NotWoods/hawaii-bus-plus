@@ -5,7 +5,7 @@ import { IconButton } from '../Button/IconButton';
 
 interface Props {
   class?: string;
-  onClick?(): void;
+  onClick?(event: MouseEvent): void;
   className?: ClassValue;
 }
 

@@ -5,7 +5,7 @@ import { ExtendedFloatingActionButton } from '../components/FloatingActionButton
 import { colorVariables } from '../components/route-colors';
 import { DetailButtons } from '../components/RouteDescription/DetailButtons';
 import { RouteDescription } from '../components/RouteDescription/RouteDescription';
-import { RouteHeader } from '../page/sheet/routes/RouteHeader';
+import { RouteHeader } from '../components/RouteHeader/RouteHeader';
 import { extractLinks } from '../worker-info/description';
 import { Footer } from './components/Footer';
 import { PageHeader } from './components/PageHeader';
