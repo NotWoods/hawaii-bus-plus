@@ -1,6 +1,6 @@
 import { h } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
-import { Logo } from '../../all-pages/components/Logo';
+import { Logo } from '../../components/Logo';
 
 function checkLoggedIn() {
   return fetch('https://app.hawaiibusplus.com/.netlify/functions/userdata', {

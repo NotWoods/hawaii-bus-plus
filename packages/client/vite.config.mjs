@@ -25,7 +25,7 @@ export default function vite({}) {
       emptyPackage('preact/debug'),
       prefresh({
         // @ts-expect-error prefresh type issues
-        include: ['{auth,page,share,all-pages}/**/*'],
+        include: ['{auth,page,share,assets,components}/**/*'],
         exclude: ['worker-*/**'],
       }),
     ],

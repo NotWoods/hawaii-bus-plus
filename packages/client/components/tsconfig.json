@@ -1,9 +1,7 @@
 {
   "extends": "../../tsconfig.base.json",
-  "include": ["**/*", "**/*.json"],
-  "references": [
-    { "path": "../../types" }
-  ],
+  "include": ["**/*"],
+  "references": [{ "path": "../../types" }],
   "compilerOptions": {
     "lib": ["esnext", "dom", "dom.iterable"],
     "types": ["vite/client"],

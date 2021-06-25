@@ -1,8 +1,8 @@
 import { h } from 'preact';
 import { useState } from 'preact/hooks';
-import { Logo } from '../../../all-pages/components/Logo';
-import { useLazyComponent } from '../../hooks';
 import { MenuIcon } from '../../../assets/icons/MenuIcon';
+import { Logo } from '../../../components/Logo';
+import { useLazyComponent } from '../../hooks';
 import { BaseOverlay } from '../BaseOverlay';
 import { DirectionsSearch } from '../search/directions/DirectionsSearch';
 import { SimpleSearch } from '../search/simple/SimpleSearch';
@@ -12,8 +12,9 @@ const lazyMenu = import('./menu/Menu');
 
 export function HomeOverlay() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [screen, setScreen] =
-    useState<'home' | 'search' | 'directions'>('home');
+  const [screen, setScreen] = useState<'home' | 'search' | 'directions'>(
+    'home',
+  );
   const { Menu } = useLazyComponent(() => lazyMenu);
 
   switch (screen) {

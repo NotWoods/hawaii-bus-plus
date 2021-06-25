@@ -9,7 +9,8 @@ module.exports = {
     './auth/**/*.tsx',
     './settings/**/*.tsx',
     './share/**/*.tsx',
-    './all-pages/**/*.tsx',
+    './assets/**/*.tsx',
+    './components/**/*.tsx',
   ],
   darkMode: 'media',
   theme: {

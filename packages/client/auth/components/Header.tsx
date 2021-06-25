@@ -1,6 +1,6 @@
 import { ComponentChildren, h } from 'preact';
-import { Head } from '../../all-pages/components/Head';
-import { Logo } from '../../all-pages/components/Logo';
+import { Head } from '../../components/Head/Head';
+import { Logo } from '../../components/Logo';
 import { FormType } from './Form';
 import { MouseEventHandler } from './link';
 import { titleContent } from './Title';

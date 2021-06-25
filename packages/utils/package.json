@@ -14,7 +14,6 @@
     "test": "ava"
   },
   "dependencies": {
-    "@hawaii-bus-plus/types": "workspace:*",
     "tslib": "^2.3.0"
   },
   "devDependencies": {

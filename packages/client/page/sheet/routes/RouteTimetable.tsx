@@ -2,7 +2,7 @@ import { DateString } from '@hawaii-bus-plus/types';
 import { h } from 'preact';
 import { useState } from 'preact/hooks';
 import type { Temporal } from 'proposal-temporal';
-import { colorVariables } from '../../../all-pages/route-colors';
+import { colorVariables } from '../../../components/route-colors';
 import { RouteDetails } from '../../../worker-info/route-details';
 import { TripDetails } from '../../../worker-info/trip-details';
 import type { InfoWorkerHandler } from '../../../worker-info/worker-info';

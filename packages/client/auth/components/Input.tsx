@@ -1,5 +1,5 @@
 import { ComponentChildren, h } from 'preact';
-import { InputWithLabel } from '../../all-pages/components/InputWithLabel';
+import { InputWithLabel } from '../../components/InputWithLabel/InputWithLabel';
 
 interface Props {
   children: ComponentChildren;

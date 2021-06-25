@@ -2,8 +2,8 @@
   "extends": "../../tsconfig.base.json",
   "include": ["**/*", "**/*.json"],
   "references": [
-    { "path": "../all-pages" },
     { "path": "../assets" },
+    { "path": "../components" },
     { "path": "../page" }
   ],
   "compilerOptions": {

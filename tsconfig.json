@@ -2,7 +2,9 @@
   "files": [],
   "references": [
     { "path": "packages/api-gen/src" },
-    { "path": "packages/client/all-pages" },
+    { "path": "packages/client/assets" },
+    { "path": "packages/client/components" },
+    { "path": "packages/client/services" },
     { "path": "packages/client/page" },
     { "path": "packages/client/worker-info" },
     { "path": "packages/client/worker-init-db" },

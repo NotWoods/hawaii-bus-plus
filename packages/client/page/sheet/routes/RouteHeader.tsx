@@ -1,6 +1,6 @@
 import { Route } from '@hawaii-bus-plus/types';
 import { h } from 'preact';
-import { RouteIcon } from '../../../all-pages/components/RouteIcon';
+import { RouteIcon } from '../../../components/RouteIcon/RouteIcon';
 import { CloseButton } from '../../buttons/CloseButton';
 import { closeMainAction } from '../../router/action/main';
 import { useDispatch } from '../../router/hooks';

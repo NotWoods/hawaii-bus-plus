@@ -1,5 +1,5 @@
 import { h } from 'preact';
-import { InputWithLabel } from '../../../all-pages/components/InputWithLabel';
+import { InputWithLabel } from '../../../components/InputWithLabel/InputWithLabel';
 import { payments } from '../../../assets/icons/paths';
 import { Button } from '../../../page/buttons/Button';
 import { Header } from './Header';
