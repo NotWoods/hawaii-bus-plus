@@ -3,9 +3,9 @@ import { Agency, Route, Stop, Trip } from '@hawaii-bus-plus/types';
 import { Fragment, h } from 'preact';
 import { ExtendedFloatingActionButton } from '../components/FloatingActionButton/ExtendedFloatingActionButton';
 import { colorVariables } from '../components/route-colors';
+import { DetailButtons } from '../components/RouteDescription/DetailButtons';
+import { RouteDescription } from '../components/RouteDescription/RouteDescription';
 import { RouteHeader } from '../page/sheet/routes/RouteHeader';
-import { DetailButtons } from '../page/sheet/routes/timetable/details/DetailButtons';
-import { RouteDescription } from '../page/sheet/routes/timetable/details/RouteDescription';
 import { extractLinks } from '../worker-info/description';
 import { Footer } from './components/Footer';
 import { PageHeader } from './components/PageHeader';
@@ -50,9 +50,11 @@ export function App({ route, agency, trips, stops }: AppProps) {
       >
         <RouteHeader route={route} />
 
-        <div class="flex flex-wrap gap-1 justify-center grid-area-buttons px-2">
-          <DetailButtons route={route} agency={agency} />
-        </div>
+        <DetailButtons
+          class="grid-area-buttons px-2"
+          route={route}
+          agency={agency}
+        />
 
         <TableOfContents
           directionHeaders={route.directions}

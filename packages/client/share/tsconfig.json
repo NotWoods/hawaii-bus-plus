@@ -1,9 +1,10 @@
 {
   "extends": "../../tsconfig.base.json",
-  "include": ["**/*", "**/*.json", "../components/FloatingActionButton/ExtendedFloatingActionButton.tsx"],
+  "include": ["**/*", "**/*.json"],
   "references": [
     { "path": "../assets" },
     { "path": "../components" },
+    { "path": "../services" },
     { "path": "../page" },
     { "path": "../worker-info" },
     { "path": "../../data/src" },

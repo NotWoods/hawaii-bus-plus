@@ -1,11 +1,10 @@
 import { Agency, Route, Trip } from '@hawaii-bus-plus/types';
-import { Fragment, h } from 'preact';
+import { h } from 'preact';
 import { useCallback } from 'preact/hooks';
-import { monetization_on, share } from '../../../../../assets/icons/paths';
-import { OutlinedButton } from '../../../../../components/Button/OutlinedButton';
+import { DetailButtons as BareDetailButtons } from '../../../../../components/RouteDescription/DetailButtons';
+import { buildShareHandler } from '../../../../../services/share/share-handler';
 import { errorMessage } from '../../../../hooks';
 import { useSnackbar } from '../../../../snackbar/context';
-import { buildShareHandler } from './share';
 
 interface Props {
   route: Route;
@@ -32,32 +31,8 @@ function useShare(text: string) {
   }
 }
 
-export function DetailButtons({ route, agency, tripId }: Props) {
-  const handleShare = useShare(route.route_long_name);
+export function DetailButtons(props: Props) {
+  const handleShare = useShare(props.route.route_long_name);
 
-  let shareHref = `https://hibus.plus/routes/${route.route_id}`;
-  if (tripId) {
-    shareHref += `#${tripId}`;
-  }
-
-  return (
-    <>
-      <OutlinedButton
-        icon={share}
-        iconClass="dark:invert"
-        href={shareHref}
-        onClick={handleShare}
-        id="share"
-      >
-        Share
-      </OutlinedButton>
-      <OutlinedButton
-        icon={monetization_on}
-        iconClass="dark:invert"
-        href={agency.agency_fare_url}
-      >
-        Fare info
-      </OutlinedButton>
-    </>
-  );
+  return <BareDetailButtons {...props} class="mb-4" onShare={handleShare} />;
 }

@@ -1,7 +1,11 @@
 import { Agency } from '@hawaii-bus-plus/types';
 import { ComponentChildren, Fragment, h } from 'preact';
-import type { DescriptionPart } from '../../../../../worker-info/description';
-import { ButtonOrAnchor } from '../../../../../components/Button/ButtonOrAnchor';
+import { ButtonOrAnchor } from '../Button/ButtonOrAnchor';
+
+export interface DescriptionPart {
+  type: 'text' | 'link';
+  value: string;
+}
 
 interface Props {
   agency: Agency;
