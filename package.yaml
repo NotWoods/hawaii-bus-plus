@@ -16,17 +16,17 @@ scripts:
   format: prettier *.yaml *.cjs *.json .github/**/*.yaml --write
   tsc: tsc --build .
 dependencies:
-  tslib: ^2.3.0
+  tslib: ^2.3.1
 devDependencies:
-  '@typescript-eslint/eslint-plugin': ^4.28.0
-  '@typescript-eslint/parser': ^4.28.0
+  '@typescript-eslint/eslint-plugin': ^4.29.2
+  '@typescript-eslint/parser': ^4.29.2
   del-cli: ^3.0.1
   dotenv: ^10.0.0
-  eslint: ^7.29.0
+  eslint: ^7.32.0
   eslint-config-preact: ^1.1.4
   eslint-config-prettier: ^8.3.0
   eslint-plugin-ava: ^12.0.0
   eslint-plugin-react: ^7.24.0
-  pnpm: ^6.9.1
-  prettier: ~2.3.1
-  typescript: ^4.3.4
+  pnpm: ^6.13.0
+  prettier: ~2.3.2
+  typescript: ^4.3.5

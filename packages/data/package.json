@@ -22,15 +22,15 @@
     "@hawaii-bus-plus/types": "workspace:*",
     "@hawaii-bus-plus/utils": "workspace:*",
     "idb": "^6.1.2",
-    "ix": "^4.4.0",
+    "ix": "^4.5.0",
     "spherical-geometry-js": "^3.0.0",
-    "tslib": "^2.3.0"
+    "tslib": "^2.3.1"
   },
   "devDependencies": {
-    "@types/node": "^15.12.4",
+    "@types/node": "^15.14.7",
     "ava": "^3.15.0",
-    "prettier": "~2.3.1",
-    "typescript": "^4.3.4"
+    "prettier": "~2.3.2",
+    "typescript": "^4.3.5"
   },
   "files": [
     "src",
