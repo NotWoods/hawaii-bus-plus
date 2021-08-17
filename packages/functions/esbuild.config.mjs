@@ -21,6 +21,7 @@ await Promise.all([
   defineConfig('auth/index'),
   defineConfig('billing'),
   defineConfig('edituser'),
+  defineConfig('greenroad-webhook/index'),
   defineConfig('logout'),
   defineConfig('payment'),
   defineConfig('stripe-webhook'),

@@ -151,6 +151,9 @@ export function createHandler(
     } catch (err: unknown) {
       response = errorToResponse(err);
     }
+    if (response.statusCode === 401) {
+      partialResponse.headers['WWW-Authenticate'] = 'Bearer';
+    }
     mergePartialResponse(response, partialResponse);
     return response;
   };
