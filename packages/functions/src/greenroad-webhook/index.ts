@@ -7,9 +7,14 @@ function atob(base64: string) {
   return Buffer.from(base64, 'base64').toString('utf-8');
 }
 
-const BASIC = /^\s*Basic\s+([A-Za-z0-9+\/=]+)\s*$/;
+const BASIC = /^\s*Basic\s+([A-Za-z0-9+/=]+)\s*$/;
+
+const corpHeaders = {
+  'Cross-Origin-Resource-Policy': 'cross-origin',
+};
 
 const forbiddenHeaders = {
+  ...corpHeaders,
   'WWW-Authenticate': 'Basic realm="GreenRoad Webhook"',
 };
 
@@ -33,7 +38,7 @@ function validatedBody(rawBody: string | null | undefined) {
  * Webhook for GreenRoad GPS API.
  */
 export const handler = createHandler('POST', (event, _context) => {
-  const headerMatch = event.headers?.['Authorization']?.match(BASIC);
+  const headerMatch = event.headers?.['authorization']?.match(BASIC);
   if (!headerMatch) {
     return jsonResponse(
       401,
@@ -63,8 +68,12 @@ export const handler = createHandler('POST', (event, _context) => {
   const body = validatedBody(event.body);
   console.log(body);
 
-  return jsonResponse(202, {
-    message: `Accepted ${body.length} messages`,
-    keys: body.map((message) => Object.keys(message).join(', ')),
-  });
+  return jsonResponse(
+    202,
+    {
+      message: `Accepted ${body.length} messages`,
+      keys: body.map((message) => Object.keys(message).join(', ')),
+    },
+    corpHeaders,
+  );
 });
