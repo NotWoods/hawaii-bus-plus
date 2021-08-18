@@ -1,6 +1,6 @@
 import { Trip } from '@hawaii-bus-plus/types';
 import { Fragment, h } from 'preact';
-import type { Temporal } from 'proposal-temporal';
+import type { Temporal } from '@js-temporal/polyfill';
 import type { RouteDetails } from '../../../../worker-info/route-details';
 import { DirectionDetails } from '../../../../worker-info/trip-details';
 import { LoadingBar } from '../../../loading/LoadingBar';

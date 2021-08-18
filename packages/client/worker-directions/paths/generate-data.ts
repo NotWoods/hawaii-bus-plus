@@ -9,7 +9,7 @@ import {
   Stop,
   Trip,
 } from '@hawaii-bus-plus/types';
-import { Temporal } from 'proposal-temporal';
+import { Temporal } from '@js-temporal/polyfill';
 
 /**
  * In RAPTOR, routes are distinct if they go in different directions or have different stops.

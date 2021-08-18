@@ -2,7 +2,7 @@ import { NodeRepository } from '@hawaii-bus-plus/data/node';
 import { PlainDaysTime } from '@hawaii-bus-plus/temporal-utils';
 import { Stop, TimeString } from '@hawaii-bus-plus/types';
 import { expect, test } from '@jest/globals';
-import { Temporal } from 'proposal-temporal';
+import { Temporal } from '@js-temporal/polyfill';
 import { raptorDirections } from './raptor';
 
 const LAKELAND = 'll' as Stop['stop_id'];

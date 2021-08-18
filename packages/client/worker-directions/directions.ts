@@ -3,7 +3,7 @@ import { Point } from '@hawaii-bus-plus/presentation';
 import { PlainDaysTime } from '@hawaii-bus-plus/temporal-utils';
 import { Stop } from '@hawaii-bus-plus/types';
 import { notNull } from '@hawaii-bus-plus/utils';
-import { Temporal } from 'proposal-temporal';
+import { Temporal } from '@js-temporal/polyfill';
 import { findClosestStops } from '../worker-nearby/closest/closest-stops';
 import { Journey, journeyToDirections } from './format';
 import {

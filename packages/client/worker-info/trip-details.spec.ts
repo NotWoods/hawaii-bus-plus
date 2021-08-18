@@ -1,7 +1,7 @@
 import { NodeRepository } from '@hawaii-bus-plus/data/node';
 import { Route } from '@hawaii-bus-plus/types';
 import { expect, test } from '@jest/globals';
-import { Temporal } from 'proposal-temporal';
+import { Temporal } from '@js-temporal/polyfill';
 import { findBestTrips } from './trip-details';
 
 const NEW_YEARS = Temporal.PlainDate.from({ year: 2021, month: 1, day: 1 });

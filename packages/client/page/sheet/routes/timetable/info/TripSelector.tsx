@@ -1,6 +1,6 @@
 import { Route, Trip } from '@hawaii-bus-plus/types';
 import { h } from 'preact';
-import type { Temporal } from 'proposal-temporal';
+import type { Temporal } from '@js-temporal/polyfill';
 import type { DirectionDetails } from '../../../../../worker-info/trip-details';
 import { PlainDateInput } from '../../../../time/input/PlainTimeInput';
 import { NOW } from '../../../../time/input/symbol';

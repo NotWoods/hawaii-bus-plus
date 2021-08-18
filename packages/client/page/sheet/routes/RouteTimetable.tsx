@@ -1,7 +1,7 @@
 import { DateString, Route } from '@hawaii-bus-plus/types';
 import { h } from 'preact';
 import { useState } from 'preact/hooks';
-import type { Temporal } from 'proposal-temporal';
+import type { Temporal } from '@js-temporal/polyfill';
 import { colorVariables } from '../../../components/route-colors';
 import { RouteHeader } from '../../../components/RouteHeader/RouteHeader';
 import { RouteDetails } from '../../../worker-info/route-details';

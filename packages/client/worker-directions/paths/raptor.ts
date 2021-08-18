@@ -6,7 +6,7 @@ import {
 } from '@hawaii-bus-plus/temporal-utils';
 import { Stop, StopTime, Trip } from '@hawaii-bus-plus/types';
 import { skipUntil } from '@hawaii-bus-plus/utils';
-import { Temporal } from 'proposal-temporal';
+import { Temporal } from '@js-temporal/polyfill';
 import { stopsLoader } from './footpaths';
 import { generateDirectionsData } from './generate-data';
 import { buildQueue } from './route-queue';

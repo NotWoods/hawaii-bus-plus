@@ -1,5 +1,5 @@
 import { h } from 'preact';
-import type { Temporal } from 'proposal-temporal';
+import type { Temporal } from '@js-temporal/polyfill';
 import { useLazyComponent } from '../../hooks';
 import { NOW } from '../../time/input/symbol';
 

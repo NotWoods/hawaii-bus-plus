@@ -1,5 +1,5 @@
 import { DateString, Route, Stop, Trip } from '@hawaii-bus-plus/types';
-import { Temporal } from 'proposal-temporal';
+import { Temporal } from '@js-temporal/polyfill';
 import { BaseMessageRequest, registerWorker } from '../worker-shared/register';
 import { getRouteDetails, RouteDetails } from './route-details';
 import { loadStop, StopDetails } from './stop-details';

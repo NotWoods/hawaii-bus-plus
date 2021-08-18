@@ -1,5 +1,5 @@
 import { Point } from '@hawaii-bus-plus/presentation';
-import { Temporal } from 'proposal-temporal';
+import { Temporal } from '@js-temporal/polyfill';
 import { registerWorker } from '../worker-shared/register';
 import { directions, DirectionsResult } from './directions';
 
@@ -19,7 +19,7 @@ export interface DirectionsWorkerHandler {
 registerWorker((repo, message: DirectionsMessage) => {
   const departureTime = message.departureTime
     ? Temporal.PlainDateTime.from(message.departureTime)
-    : Temporal.now.plainDateTimeISO();
+    : Temporal.Now.plainDateTimeISO();
 
   return directions(repo, message.from, message.to, departureTime);
 });

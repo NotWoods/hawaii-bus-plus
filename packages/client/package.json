@@ -29,7 +29,7 @@
     "insights-js": "^1.2.10",
     "just-debounce": "^1.1.0",
     "preact": "10.5.13",
-    "proposal-temporal": "^0.8.0",
+    "@js-temporal/polyfill": "^0.2.0",
     "spherical-geometry-js": "^2.1.0",
     "tslib": "^2.3.1"
   },

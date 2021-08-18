@@ -6,7 +6,7 @@ import {
 import { PlainDaysTime } from '@hawaii-bus-plus/temporal-utils';
 import { Route, Stop, StopTime, TimeString } from '@hawaii-bus-plus/types';
 import { notNull } from '@hawaii-bus-plus/utils';
-import { Temporal } from 'proposal-temporal';
+import { Temporal } from '@js-temporal/polyfill';
 
 export interface ZonedTimeOptions {
   serviceDate: Temporal.PlainDate;

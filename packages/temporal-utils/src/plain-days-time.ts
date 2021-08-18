@@ -1,6 +1,6 @@
 import { TimeString } from '@hawaii-bus-plus/types';
 import { toInt } from '@hawaii-bus-plus/utils';
-import { Temporal } from 'proposal-temporal';
+import { Temporal } from '@js-temporal/polyfill';
 
 const HOURS_IN_DAY = 24;
 

@@ -1,6 +1,6 @@
 import { Calendar, DateString } from '@hawaii-bus-plus/types';
 import test from 'ava';
-import { Temporal } from 'proposal-temporal';
+import { Temporal } from '@js-temporal/polyfill';
 import { calendarRunsOn } from '../src/calendar.js';
 
 const baseCalendar = {

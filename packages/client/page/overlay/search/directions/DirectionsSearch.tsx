@@ -1,7 +1,7 @@
 import { Point } from '@hawaii-bus-plus/presentation';
 import { Fragment, h } from 'preact';
 import { useCallback, useRef, useState } from 'preact/hooks';
-import type { Temporal } from 'proposal-temporal';
+import type { Temporal } from '@js-temporal/polyfill';
 import type {
   DirectionsResult,
   DirectionsWorkerHandler,
@@ -29,8 +29,9 @@ interface Props {
 export function DirectionsSearch(_props: Props) {
   const [depart, setDepart] = useState<Point | undefined>();
   const [arrive, setArrive] = useState<Point | undefined>();
-  const [departureTime, setDepartTime] =
-    useState<Temporal.PlainDateTime | string | NOW | undefined>();
+  const [departureTime, setDepartTime] = useState<
+    Temporal.PlainDateTime | string | NOW | undefined
+  >();
 
   const [searchResults, setSearchResults] = useState<FieldsSearchResults>({
     field: 'depart',

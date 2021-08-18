@@ -39,6 +39,7 @@ importers:
       '@hawaii-bus-plus/temporal-utils': workspace:*
       '@hawaii-bus-plus/types': workspace:*
       '@hawaii-bus-plus/utils': workspace:*
+      '@js-temporal/polyfill': ^0.2.0
       '@types/node': ^15.14.7
       ava: ^3.15.0
       csv-parse: ^4.16.0
@@ -46,7 +47,6 @@ importers:
       jszip: ^3.7.1
       node-fetch: 3.0.0-beta.9
       prettier: ~2.3.2
-      proposal-temporal: ^0.8.0
       tslib: ^2.3.1
       type-fest: ^1.4.0
       typescript: ^4.3.5
@@ -55,11 +55,11 @@ importers:
       '@hawaii-bus-plus/temporal-utils': link:../temporal-utils
       '@hawaii-bus-plus/types': link:../types
       '@hawaii-bus-plus/utils': link:../utils
+      '@js-temporal/polyfill': 0.2.0
       csv-parse: 4.16.0
       ix: 4.5.0
       jszip: 3.7.1
       node-fetch: 3.0.0-beta.9
-      proposal-temporal: 0.8.0
       tslib: 2.3.1
     devDependencies:
       '@types/node': 15.14.7
@@ -82,6 +82,7 @@ importers:
       '@hawaii-bus-plus/utils': workspace:*
       '@hawaii-bus-plus/vite-plugins': workspace:*
       '@jest/globals': ^27.0.6
+      '@js-temporal/polyfill': ^0.2.0
       '@notwoods/preact-helmet': ^6.1.0
       '@prefresh/vite': ^2.2.3
       '@tailwindcss/aspect-ratio': ^0.2.1
@@ -99,7 +100,6 @@ importers:
       preact: 10.5.13
       preact-render-to-string: ^5.1.19
       prettier: ~2.3.2
-      proposal-temporal: ^0.8.0
       spherical-geometry-js: ^2.1.0
       tailwindcss: ^2.2.7
       tailwindcss-scroll-snap: ^1.1.0
@@ -117,13 +117,13 @@ importers:
       '@hawaii-bus-plus/temporal-utils': link:../temporal-utils
       '@hawaii-bus-plus/types': link:../types
       '@hawaii-bus-plus/utils': link:../utils
+      '@js-temporal/polyfill': 0.2.0
       '@notwoods/preact-helmet': 6.1.0_preact@10.5.13
       clsx: 1.1.1
       idb: 6.1.2
       insights-js: 1.2.10
       just-debounce: 1.1.0
       preact: 10.5.13
-      proposal-temporal: 0.8.0
       spherical-geometry-js: 2.1.0
       tslib: 2.3.1
     devDependencies:
@@ -211,12 +211,12 @@ importers:
     specifiers:
       '@types/node': ^15.14.7
       ava: ^3.15.0
-      node-fetch: ^3.0.0-beta.10
+      node-fetch: 3.0.0-beta.9
       prettier: ~2.3.2
       tslib: ^2.3.1
       typescript: ^4.3.5
     dependencies:
-      node-fetch: 3.0.0-beta.10
+      node-fetch: 3.0.0-beta.9
       tslib: 2.3.1
     devDependencies:
       '@types/node': 15.14.7
@@ -296,9 +296,9 @@ importers:
       '@hawaii-bus-plus/temporal-utils': workspace:*
       '@hawaii-bus-plus/types': workspace:*
       '@hawaii-bus-plus/utils': workspace:*
+      '@js-temporal/polyfill': ^0.2.0
       ava: ^3.15.0
       prettier: ~2.3.2
-      proposal-temporal: ^0.8.0
       spherical-geometry-js: ^3.0.0
       tslib: ^2.3.1
       type-fest: ^1.4.0
@@ -307,7 +307,7 @@ importers:
       '@hawaii-bus-plus/temporal-utils': link:../temporal-utils
       '@hawaii-bus-plus/types': link:../types
       '@hawaii-bus-plus/utils': link:../utils
-      proposal-temporal: 0.8.0
+      '@js-temporal/polyfill': 0.2.0
       spherical-geometry-js: 3.0.0
       tslib: 2.3.1
     devDependencies:
@@ -356,15 +356,15 @@ importers:
     specifiers:
       '@hawaii-bus-plus/types': workspace:*
       '@hawaii-bus-plus/utils': workspace:*
+      '@js-temporal/polyfill': ^0.2.0
       ava: ^3.15.0
       prettier: ~2.3.2
-      proposal-temporal: ^0.8.0
       tslib: ^2.3.1
       typescript: ^4.3.5
     dependencies:
       '@hawaii-bus-plus/types': link:../types
       '@hawaii-bus-plus/utils': link:../utils
-      proposal-temporal: 0.8.0
+      '@js-temporal/polyfill': 0.2.0
       tslib: 2.3.1
     devDependencies:
       ava: 3.15.0
@@ -2373,6 +2373,14 @@ packages:
       '@types/yargs': 16.0.4
       chalk: 4.1.2
     dev: true
+
+  /@js-temporal/polyfill/0.2.0:
+    resolution: {integrity: sha512-GyjuWEUpK2i+hGIfFOEdA8iVS4xPNLupwCgU9CiQFbMH+QW8De/4egT1MSod3ZmPDLyuxvFJ1285Cg3QuZOVBQ==}
+    engines: {node: '>=12'}
+    dependencies:
+      big-integer: 1.6.48
+      es-abstract: 1.18.5
+    dev: false
 
   /@mdn/browser-compat-data/3.3.14:
     resolution: {integrity: sha512-n2RC9d6XatVbWFdHLimzzUJxJ1KY8LdjqrW6YvGPiRmsHkhOUx74/Ct10x5Yo7bC/Jvqx7cDEW8IMPv/+vwEzA==}
@@ -4900,13 +4908,6 @@ packages:
         optional: true
     dev: false
 
-  /fetch-blob/3.1.2:
-    resolution: {integrity: sha512-hunJbvy/6OLjCD0uuhLdp0mMPzP/yd2ssd1t2FCJsaA7wkWhpbp9xfuNVpv7Ll4jFhzp6T4LAupSiV9uOeg0VQ==}
-    engines: {node: ^12.20 || >= 14.13}
-    dependencies:
-      web-streams-polyfill: 3.1.0
-    dev: false
-
   /figures/3.2.0:
     resolution: {integrity: sha512-yaduQFRKLXYOGgEn6AZau90j3ggSOyiqXU0F9JZfeXYhNa+Jk4X+s45A2zg5jns87GAFa34BBm2kXw4XpNcbdg==}
     engines: {node: '>=8'}
@@ -7028,14 +7029,6 @@ packages:
       lodash: 4.17.21
     dev: true
 
-  /node-fetch/3.0.0-beta.10:
-    resolution: {integrity: sha512-gEHHLuUNaCHDv5TdC5+7lWlGPBgmSOWXsHvX6l64mnHH8C3V7ObLK5p5udbgc78Y19pPnCuKwwGE7o2yktGE1w==}
-    engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
-    dependencies:
-      data-uri-to-buffer: 3.0.1
-      fetch-blob: 3.1.2
-    dev: false
-
   /node-fetch/3.0.0-beta.9:
     resolution: {integrity: sha512-RdbZCEynH2tH46+tj0ua9caUHVWrd/RHnRfvly2EVdqGmI3ndS1Vn/xjm5KuGejDt2RNDQsVRLPNd2QPwcewVg==}
     engines: {node: ^10.17 || >=12.3}
@@ -7652,15 +7645,6 @@ packages:
       object-assign: 4.1.1
       react-is: 16.13.1
     dev: true
-
-  /proposal-temporal/0.8.0:
-    resolution: {integrity: sha512-Ho2uZqtuK310ptV//us50nJIe0Yja1g2LI9zDG9eNDV+oo5DmNqT+zXz6jEVbsZHMa+qSD/FfT776eI64bfuRA==}
-    engines: {node: '>=12'}
-    deprecated: See https://github.com/tc39/proposal-temporal#polyfills to polyfill Temporal in your own projects.
-    dependencies:
-      big-integer: 1.6.48
-      es-abstract: 1.18.5
-    dev: false
 
   /pseudo-worker/1.3.0:
     resolution: {integrity: sha512-ZvjwWUZM/D2O4fwEmZd8sI1svcTbtJHf90hKXOhuLJeX5QPn3s9/zK0GJkhxTEE+7mQnjquPT+SWxtkJGj0ayw==}
@@ -9065,11 +9049,6 @@ packages:
     dependencies:
       defaults: 1.0.3
     dev: true
-
-  /web-streams-polyfill/3.1.0:
-    resolution: {integrity: sha512-wO9r1YnYe7kFBLHyyVEhV1H8VRWoNiNnuP+v/HUUmSTaRF8F93Kmd3JMrETx0f11GXxRek6OcL2QtjFIdc5WYw==}
-    engines: {node: '>= 8'}
-    dev: false
 
   /webidl-conversions/4.0.2:
     resolution: {integrity: sha512-YQ+BmxuTgd6UXZW3+ICGfyqRyHXVlD5GtQr5+qjiNW7bF0cqrzX500HVXPBOvgXb5YnzDd+h0zqyv61KUD7+Sg==}

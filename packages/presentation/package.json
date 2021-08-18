@@ -17,7 +17,7 @@
     "@hawaii-bus-plus/temporal-utils": "workspace:*",
     "@hawaii-bus-plus/types": "workspace:*",
     "@hawaii-bus-plus/utils": "workspace:*",
-    "proposal-temporal": "^0.8.0",
+    "@js-temporal/polyfill": "^0.2.0",
     "spherical-geometry-js": "^3.0.0",
     "tslib": "^2.3.1"
   },

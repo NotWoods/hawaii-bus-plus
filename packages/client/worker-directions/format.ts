@@ -12,7 +12,7 @@ import {
 import { PlainDaysTime } from '@hawaii-bus-plus/temporal-utils';
 import { Agency, ColorString, Route, Stop, Trip } from '@hawaii-bus-plus/types';
 import { findLastIndex, last } from '@hawaii-bus-plus/utils';
-import { Temporal } from 'proposal-temporal';
+import { Temporal } from '@js-temporal/polyfill';
 import {
   computeDistanceBetween,
   LatLngBounds,

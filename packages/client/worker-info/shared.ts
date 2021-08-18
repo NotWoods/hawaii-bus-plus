@@ -1,7 +1,7 @@
 import { getSingle, Repository } from '@hawaii-bus-plus/data';
 import { nowWithZone } from '@hawaii-bus-plus/temporal-utils';
 import type { Agency, Calendar, Route, Stop } from '@hawaii-bus-plus/types';
-import { Temporal } from 'proposal-temporal';
+import { Temporal } from '@js-temporal/polyfill';
 
 interface CalendarAgencyResult {
   allCalendars: ReadonlyMap<Calendar['service_id'], Calendar>;

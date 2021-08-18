@@ -1,6 +1,6 @@
 import { NodeRepository } from '@hawaii-bus-plus/data/node';
 import { expect, test } from '@jest/globals';
-import { Temporal } from 'proposal-temporal';
+import { Temporal } from '@js-temporal/polyfill';
 import { generateDirectionsData } from './generate-data';
 
 test.concurrent('generateDirectionsData', async () => {
