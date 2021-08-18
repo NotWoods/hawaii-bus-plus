@@ -94,7 +94,6 @@ importers:
       esbuild: ^0.12.20
       esbuild-jest: ^0.5.0
       idb: ^6.1.2
-      insights-js: ^1.2.10
       jest: ^27.0.6
       just-debounce: ^1.1.0
       preact: 10.5.13
@@ -121,7 +120,6 @@ importers:
       '@notwoods/preact-helmet': 6.1.0_preact@10.5.13
       clsx: 1.1.1
       idb: 6.1.2
-      insights-js: 1.2.10
       just-debounce: 1.1.0
       preact: 10.5.13
       spherical-geometry-js: 2.1.0
@@ -5473,10 +5471,6 @@ packages:
       strip-ansi: 6.0.0
       through: 2.3.8
     dev: true
-
-  /insights-js/1.2.10:
-    resolution: {integrity: sha512-BFk00KuGKK9ri4hAC8CuP8ap1xvYfDtU+J6VU9tBhcMKFPIoLR9LTFkb7H0HLW2ltT232DAb8xIlAmZ1JVT7dA==}
-    dev: false
 
   /internal-slot/1.0.3:
     resolution: {integrity: sha512-O0DB1JC/sPyZl7cIo78n5dR7eUSwwpYPiXRhTzNxZVAMUuB8vlnRFyLxdrVToks6XPLVnFfbzaVd5WLjhgg+vA==}

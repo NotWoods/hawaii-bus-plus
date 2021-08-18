@@ -26,7 +26,6 @@
     "@notwoods/preact-helmet": "^6.1.0",
     "clsx": "^1.1.1",
     "idb": "^6.1.2",
-    "insights-js": "^1.2.10",
     "just-debounce": "^1.1.0",
     "preact": "10.5.13",
     "@js-temporal/polyfill": "^0.2.0",

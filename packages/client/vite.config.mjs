@@ -14,7 +14,6 @@ import prefresh from '@prefresh/vite';
 export default function vite({}) {
   /** @type {import('vite').AliasOptions} */
   const alias = {
-    'insights-js': 'insights-js/dist/esnext/index.js',
     react: 'preact/compat',
     'react-dom': 'preact/compat',
   };
