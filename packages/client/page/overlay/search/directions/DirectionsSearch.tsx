@@ -61,6 +61,7 @@ export function DirectionsSearch(_props: Props) {
       });
 
       setResults(results);
+      fathom?.trackGoal('directions', results.journeys.length);
     },
     [depart, arrive, departureTime],
   );
