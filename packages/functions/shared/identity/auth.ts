@@ -1,6 +1,6 @@
 import { Admin, GoTrue } from '@hawaii-bus-plus/gotrue';
-import { NetlifyIdentityContext } from '../types';
-import { getAdmin } from './admin';
+import { NetlifyIdentityContext } from '../types.js';
+import { getAdmin } from './admin.js';
 
 let cache: { auth: GoTrue; admin: Admin } | undefined;
 let url: string | undefined;

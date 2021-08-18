@@ -1,7 +1,6 @@
 import { ComponentChildren, h } from 'preact';
-import { Icon } from '../../../page/icons/Icon';
-// import arrowIcon from '../../../page/icons/arrow_right.svg';
-import openInNewIcon from '../../../page/icons/open_in_new.svg';
+import { Icon } from '../../../assets/icons/Icon';
+import { open_in_new } from '../../../assets/icons/paths';
 
 interface Props {
   href: string;
@@ -12,12 +11,12 @@ export function SidebarItem(props: Props) {
   return (
     <li>
       <a
-        class="flex p-2 mb-1 transition bg-blue-50 hover:bg-blue-100 dark:bg-blue-600 dark:hover:bg-blue-500 text-gray-800 dark:text-white shadow hover:shadow-lg"
+        class="flex p-2 mb-1 motion-safe:transition bg-primary-50 hover:bg-primary-100 dark:bg-primary-600 dark:hover:bg-primary-500 text-gray-800 dark:text-white shadow hover:shadow-lg"
         href={props.href}
       >
         {props.children}
         {props.href.startsWith('#') ? null : (
-          <Icon class="ml-auto filter dark:invert" src={openInNewIcon} alt="" />
+          <Icon class="ml-auto dark:invert" src={open_in_new} alt="" />
         )}
       </a>
     </li>

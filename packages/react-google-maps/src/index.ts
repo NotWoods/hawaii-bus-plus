@@ -11,4 +11,3 @@ export * from './streetview/StreetViewStatic';
 export * from './GoogleMap';
 export * from './MapProvider';
 export * from './hooks';
-export * from './options';

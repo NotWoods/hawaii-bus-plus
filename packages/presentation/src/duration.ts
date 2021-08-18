@@ -1,5 +1,5 @@
 import { pick, memoize } from '@hawaii-bus-plus/utils';
-import type { Temporal } from 'proposal-temporal';
+import type { Temporal } from '@js-temporal/polyfill';
 
 const units = ['days', 'hours', 'minutes', 'seconds'] as const;
 const relativeFormatter = new Intl.RelativeTimeFormat([], { numeric: 'auto' });

@@ -1,5 +1,6 @@
-import { IDBPDatabase } from 'idb';
 import { Stop } from '@hawaii-bus-plus/types';
+import { IDBPDatabase } from 'idb';
+import { LatLngLiteral } from 'spherical-geometry-js';
 import { GTFSSchema } from '../database';
 import { removeWords } from '../format';
 
@@ -8,7 +9,7 @@ const FIVE_KM_LAT_LNG = 0.05;
 
 export function loadStopsSpatial(
   db: IDBPDatabase<GTFSSchema>,
-  center: google.maps.LatLngLiteral,
+  center: LatLngLiteral,
 ): Promise<Stop[]> {
   const latKeyRange = IDBKeyRange.bound(
     center.lat - FIVE_KM_LAT_LNG,

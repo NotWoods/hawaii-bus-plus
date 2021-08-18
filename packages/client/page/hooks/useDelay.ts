@@ -9,7 +9,7 @@ export function useDelay(ms: number, deps?: unknown[]) {
 
   useEffect(() => {
     setDone(false);
-    const id = setTimeout(setDone, ms, true);
+    const id = setTimeout(() => setDone(true), ms);
     return () => clearTimeout(id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps);

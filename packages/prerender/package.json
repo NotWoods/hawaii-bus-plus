@@ -7,27 +7,26 @@
     "build": "tsc --build src",
     "postbuild": "node src/build.js",
     "format": "prettier **/*.ts --write --ignore-path ../../.prettierignore",
-    "postformat": "eslint **/*.ts",
-    "pretest": "pnpm run build --filter @hawaii-bus-plus/preact-helmet && tsc --build test",
+    "postformat": "eslint \"**/*.ts\" --fix",
+    "pretest": "tsc --build test",
     "test": "ava"
   },
   "dependencies": {
     "@hawaii-bus-plus/data": "workspace:*",
-    "@hawaii-bus-plus/preact-helmet": "workspace:^6.1.0",
-    "node-html-parser": "^3.2.0",
+    "@notwoods/preact-helmet": "^6.1.0",
+    "node-html-parser": "^3.3.6",
     "preact-render-to-string": "^5.1.19",
-    "rollup": "^2.45.2",
-    "tslib": "^2.2.0",
-    "type-fest": "^1.0.2",
-    "vite": "^2.2.3"
+    "tslib": "^2.3.1",
+    "type-fest": "^1.4.0",
+    "vite": "2.3.3"
   },
   "devDependencies": {
-    "@types/react-helmet": "^6.1.1",
     "ava": "^3.15.0",
-    "preact": "^10.5.13",
-    "prettier": "^2.2.1",
-    "tailwindcss": "^2.1.2",
-    "typescript": "^4.2.4"
+    "preact": "10.5.13",
+    "prettier": "~2.3.2",
+    "rollup": "^2.56.2",
+    "tailwindcss": "^2.2.7",
+    "typescript": "^4.3.5"
   },
   "eslintConfig": {
     "parserOptions": {

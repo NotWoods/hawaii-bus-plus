@@ -7,9 +7,9 @@
     "prebuild": "tsc --build tsconfig.build.json",
     "build": "vite build",
     "predev": "tsc --build page",
-    "dev": "vite",
-    "format": "prettier **/*.{ts,tsx} *.cjs *.html --write --ignore-path ../../.prettierignore",
-    "postformat": "eslint **/*.{ts,tsx} --fix",
+    "dev": "TAILWIND_MODE=watch vite",
+    "format": "prettier **/*.{ts,tsx} *.{cjs,mjs} *.html --write --ignore-path ../../.prettierignore",
+    "postformat": "eslint \"**/*.{ts,tsx}\" --fix",
     "pretest": "tsc --build page",
     "test": "jest",
     "workbox": "workbox generateSW workbox.config.cjs"
@@ -17,44 +17,43 @@
   "dependencies": {
     "@hawaii-bus-plus/data": "workspace:*",
     "@hawaii-bus-plus/mnemonist": "workspace:^0.38.3",
-    "@hawaii-bus-plus/preact-helmet": "workspace:^6.1.0",
     "@hawaii-bus-plus/presentation": "workspace:*",
     "@hawaii-bus-plus/promise-worker": "workspace:*",
     "@hawaii-bus-plus/react-google-maps": "workspace:*",
     "@hawaii-bus-plus/temporal-utils": "workspace:*",
     "@hawaii-bus-plus/types": "workspace:*",
     "@hawaii-bus-plus/utils": "workspace:*",
+    "@notwoods/preact-helmet": "^6.1.0",
     "clsx": "^1.1.1",
-    "idb": "^6.0.0",
-    "insights-js": "^1.2.10",
+    "idb": "^6.1.2",
     "just-debounce": "^1.1.0",
-    "preact": "^10.5.13",
-    "proposal-temporal": "^0.8.0",
-    "spherical-geometry-js": "^2.0.0",
-    "tslib": "^2.2.0"
+    "preact": "10.5.13",
+    "@js-temporal/polyfill": "^0.2.0",
+    "spherical-geometry-js": "^2.1.0",
+    "tslib": "^2.3.1"
   },
   "devDependencies": {
-    "@googlemaps/js-api-loader": "^1.11.3",
+    "@googlemaps/js-api-loader": "^1.12.2",
     "@hawaii-bus-plus/jest-utils": "workspace:*",
     "@hawaii-bus-plus/vite-plugins": "workspace:*",
-    "@prefresh/vite": "^2.2.1",
-    "@tailwindcss/aspect-ratio": "^0.2.0",
-    "@tailwindcss/forms": "^0.3.2",
-    "@tailwindcss/typography": "^0.4.0",
-    "@types/googlemaps": "^3.43.3",
-    "@types/jest": "^26.0.23",
-    "@types/react": "^17.0.4",
-    "esbuild": "^0.11.15",
+    "@jest/globals": "^27.0.6",
+    "@prefresh/vite": "^2.2.3",
+    "@tailwindcss/aspect-ratio": "^0.2.1",
+    "@tailwindcss/forms": "^0.3.3",
+    "@tailwindcss/typography": "^0.4.1",
+    "@types/google.maps": "^3.45.6",
+    "@types/jest": "^26.0.24",
+    "esbuild": "^0.12.20",
     "esbuild-jest": "^0.5.0",
-    "jest": "^26.6.3",
+    "jest": "^27.0.6",
     "preact-render-to-string": "^5.1.19",
-    "prettier": "^2.2.1",
-    "tailwindcss": "^2.1.2",
+    "prettier": "~2.3.2",
+    "tailwindcss": "^2.2.7",
     "tailwindcss-scroll-snap": "^1.1.0",
-    "type-fest": "^1.0.2",
-    "typescript": "^4.2.4",
-    "vite": "^2.2.3",
-    "workbox-cli": "^6.1.5"
+    "type-fest": "^1.4.0",
+    "typescript": "^4.3.5",
+    "vite": "2.3.3",
+    "workbox-cli": "^6.2.4"
   },
   "jest": {
     "transform": {
@@ -64,7 +63,7 @@
   "eslintConfig": {
     "parserOptions": {
       "project": [
-        "./packages/client/*/tsconfig.json",
+        "./packages/client/**/tsconfig.json",
         "./tsconfig.json"
       ]
     }

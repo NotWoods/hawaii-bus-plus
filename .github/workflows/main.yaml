@@ -14,7 +14,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
-          node-version: '14'
+          node-version: '16'
       - name: setup pnpm
         uses: pnpm/action-setup@v2
         with:
@@ -37,5 +37,11 @@ jobs:
 
       - name: pnpm run api
         run: pnpm run api
+
       - name: pnpm test
         run: pnpm recursive test --no-bail
+        env:
+          AMAZON_ACCESS_KEY_ID: ${{ secrets.AMAZON_ACCESS_KEY_ID }}
+          AMAZON_SECRET_ACCESS_KEY: ${{ secrets.AMAZON_SECRET_ACCESS_KEY }}
+
+      - run: pnpm run build

@@ -1,6 +1,6 @@
 import { Route } from '@hawaii-bus-plus/types';
 import { h } from 'preact';
-import { Head, routeTitle } from '../all-pages/components/Head';
+import { Head, routeTitle } from '../components/Head/Head';
 
 interface Props {
   route: Route;

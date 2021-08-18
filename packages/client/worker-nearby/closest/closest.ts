@@ -1,5 +1,6 @@
 import { Repository } from '@hawaii-bus-plus/data';
 import { Agency, Route, Stop } from '@hawaii-bus-plus/types';
+import { LatLngLiteral } from 'spherical-geometry-js';
 import { findClosestStops, StopWithDistance } from './closest-stops';
 
 export interface ClosestResults {
@@ -13,7 +14,7 @@ export async function findClosest(
     Repository,
     'loadStopsSpatial' | 'loadAllRoutes' | 'loadRoutes' | 'loadAgencies'
   >,
-  location?: google.maps.LatLngLiteral,
+  location?: LatLngLiteral,
   fallbackToAll?: boolean,
 ): Promise<ClosestResults> {
   let stops: readonly StopWithDistance[] = [];

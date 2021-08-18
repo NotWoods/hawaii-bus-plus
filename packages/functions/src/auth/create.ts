@@ -2,7 +2,7 @@ import { SignupResponse } from '@hawaii-bus-plus/gotrue';
 import { database, stripe } from '../../shared/stripe';
 
 export async function createUserInDb(user: SignupResponse) {
-  const metadata = user.user_metadata as { full_name?: string };
+  const metadata = user.user_metadata!;
 
   // create a new customer in Stripe
   const customer = await stripe.customers.create({
@@ -12,7 +12,7 @@ export async function createUserInDb(user: SignupResponse) {
   // subscribe the new customer to the plus plan
   const subscription = await stripe.subscriptions.create({
     customer: customer.id,
-    items: [{ price: process.env.STRIPE_PLUS_PRICE_PLAN }],
+    items: [{ price: process.env['STRIPE_PLUS_PRICE_PLAN'] }],
     trial_period_days: 14,
   });
 

@@ -9,20 +9,20 @@
   "scripts": {
     "build": "tsc --build src",
     "format": "prettier **/*.ts --write --ignore-path ../../.prettierignore",
-    "postformat": "eslint **/*.ts --fix",
+    "postformat": "eslint \"**/*.ts\" --fix",
     "pretest": "tsc --build test",
     "test": "ava"
   },
   "dependencies": {
     "@hawaii-bus-plus/types": "workspace:*",
     "@hawaii-bus-plus/utils": "workspace:*",
-    "proposal-temporal": "^0.8.0",
-    "tslib": "^2.2.0"
+    "@js-temporal/polyfill": "^0.2.0",
+    "tslib": "^2.3.1"
   },
   "devDependencies": {
     "ava": "^3.15.0",
-    "prettier": "^2.2.1",
-    "typescript": "^4.2.4"
+    "prettier": "~2.3.2",
+    "typescript": "^4.3.5"
   },
   "files": [
     "src"

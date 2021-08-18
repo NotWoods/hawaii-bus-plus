@@ -1,4 +1,10 @@
-import { MainRouterAction } from '../action/main';
+import {
+  CLOSE_MAIN_TYPE,
+  MainRouterAction,
+  OPEN_JOURNEY_TYPE,
+  SET_ROUTE_TYPE,
+  SET_TRIP_TYPE,
+} from '../action/main';
 import { MainState } from '../state';
 import {
   DIRECTIONS_PATH,
@@ -13,16 +19,17 @@ export function mainRouterReducer(
   action: MainRouterAction,
 ): MainState | undefined {
   switch (action.type) {
-    case 'route':
+    case SET_ROUTE_TYPE:
       return {
         path: ROUTES_PREFIX,
         routeId: action.routeId,
         details: initialDetails,
       };
-    case 'trip': {
+    case SET_TRIP_TYPE: {
       let details: RouteDetailState;
       if (state?.path === ROUTES_PREFIX) {
-        details = { ...state.details, selectedTrip: undefined };
+        details = Object.assign({}, state.details);
+        details.selectedTrip = undefined;
       } else {
         details = initialDetails;
       }
@@ -33,7 +40,7 @@ export function mainRouterReducer(
         details,
       };
     }
-    case 'open-journey':
+    case OPEN_JOURNEY_TYPE:
       return {
         path: DIRECTIONS_PATH,
         depart: action.depart,
@@ -41,7 +48,7 @@ export function mainRouterReducer(
         departureTime: action.departureTime,
         journey: action.journey,
       };
-    case 'close-main':
+    case CLOSE_MAIN_TYPE:
       return undefined;
     default:
       if (state?.path === ROUTES_PREFIX) {

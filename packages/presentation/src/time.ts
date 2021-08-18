@@ -1,6 +1,6 @@
 import type { PlainDaysTime } from '@hawaii-bus-plus/temporal-utils';
 import { memoize } from '@hawaii-bus-plus/utils';
-import type { Temporal } from 'proposal-temporal';
+import type { Temporal } from '@js-temporal/polyfill';
 
 export interface PlainTimeData {
   /** Milliseconds since epoch, used to build Date object. */

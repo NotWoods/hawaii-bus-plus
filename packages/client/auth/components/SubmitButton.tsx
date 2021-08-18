@@ -24,7 +24,7 @@ export function SubmitButton(props: Props) {
     <button
       id="submit"
       type="submit"
-      class="transition-colors w-full py-2 px-4 bg-ocean hover:bg-ocean-dark font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan"
+      class="motion-safe:transition-colors w-full py-2 px-4 bg-ocean hover:bg-ocean-dark font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan"
     >
       {buttonText(props.type)}
     </button>

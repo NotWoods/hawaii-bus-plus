@@ -1,3 +1,5 @@
+import { Page } from './index.js';
+
 export interface RequestMap {
   '/settings': SettingsResponse;
   '/signup': SignupResponse;
@@ -7,7 +9,7 @@ export interface RequestMap {
   '/verify': Token;
   '/user': UserData;
   '/logout': '';
-  '/admin/users': unknown;
+  '/admin/users': Page<UserData>;
   '/admin/users/:id': unknown;
 }
 
@@ -19,6 +21,15 @@ export type Provider =
   | 'facebook'
   | 'email'
   | 'saml';
+
+export interface AppMetadata {
+  provider?: Provider;
+  roles?: readonly string[];
+}
+
+export interface UserMetadata {
+  full_name?: string;
+}
 
 export interface Token {
   access_token: string;
@@ -37,10 +48,7 @@ export interface SettingsResponse {
 }
 
 export interface SignupResponse {
-  app_metadata: {
-    provider?: Provider;
-    roles?: readonly string[];
-  };
+  app_metadata: AppMetadata;
   aud: string;
   confirmed_at: string;
   created_at: string;
@@ -48,18 +56,14 @@ export interface SignupResponse {
   id: string;
   role: string;
   updated_at: string;
-  user_metadata: {
-    full_name?: string;
-  } | null;
+  user_metadata: UserMetadata | null;
 }
 
 export interface UserData extends SignupResponse {
   audience: string;
   token: Token;
   url: string;
-  user_metadata: {
-    full_name?: string;
-  };
+  user_metadata: UserMetadata;
 }
 
 export interface UserRequest extends Partial<UserData> {

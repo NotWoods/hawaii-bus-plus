@@ -2,7 +2,10 @@
   "extends": "../../tsconfig.base.json",
   "include": ["**/*", "**/*.json"],
   "references": [
-    { "path": "../all-pages" },
+    { "path": "../assets" },
+    { "path": "../components" },
+    { "path": "../services" },
+    { "path": "../worker-directions" },
     { "path": "../worker-info" },
     { "path": "../worker-init-db" },
     { "path": "../worker-map" },
@@ -17,7 +20,8 @@
   ],
   "compilerOptions": {
     "lib": ["esnext", "dom", "dom.iterable"],
-    "types": ["vite/client", "googlemaps"],
-    "emitDeclarationOnly": true
+    "types": ["vite/client", "google.maps"],
+    "emitDeclarationOnly": true,
+    "noPropertyAccessFromIndexSignature": false
   }
 }

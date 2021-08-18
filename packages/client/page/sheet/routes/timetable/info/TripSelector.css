@@ -1,0 +1,4 @@
+.trip-selector__input {
+  @apply bg-gray-50 dark:bg-gray-800 mr-1;
+  max-width: calc(100% - theme('spacing.1'));
+}

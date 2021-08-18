@@ -6,7 +6,8 @@ import {
   Stop,
   Trip,
 } from '@hawaii-bus-plus/types';
-import { dbReady } from '../database';
+import { LatLngLiteral } from 'spherical-geometry-js';
+import { openDatabase } from '../database';
 import { Repository, TripCursor } from '../repository';
 import { loadAllRoutes, loadAllStops, loadBikeStations } from './all';
 import { loadAgencies, loadRoutes, loadStops } from './batch';
@@ -19,7 +20,7 @@ export class DBRepository implements Repository {
   /**
    * Expects database to already be initialized
    */
-  private readonly ready = dbReady.then((db) => {
+  private readonly ready = openDatabase().then((db) => {
     if (db) {
       return db;
     } else {
@@ -59,7 +60,7 @@ export class DBRepository implements Repository {
     return this.ready.then((db) => loadStops(db, stopIds));
   }
 
-  loadStopsSpatial(center: google.maps.LatLngLiteral): Promise<Stop[]> {
+  loadStopsSpatial(center: LatLngLiteral): Promise<Stop[]> {
     return this.ready.then((db) => loadStopsSpatial(db, center));
   }
 

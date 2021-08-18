@@ -1,6 +1,12 @@
 import { memoize } from '@hawaii-bus-plus/utils';
 
+export interface Coordinates {
+  latitude?: number | null;
+  longitude?: number | null;
+}
+
 async function requesterLookup(signal?: AbortSignal) {
+  let json: unknown;
   try {
     const res = await fetch('/api/v1/lookup_location', {
       signal,
@@ -9,12 +15,13 @@ async function requesterLookup(signal?: AbortSignal) {
       throw new Error(res.statusText);
     }
 
-    const json = await res.json();
-    return json as Pick<GeolocationCoordinates, 'latitude' | 'longitude'>;
+    json = await res.json();
   } catch (err: unknown) {
     console.warn(err);
     throw err;
   }
+
+  return json as Coordinates;
 }
 
 export const locationFromIp = memoize(requesterLookup);

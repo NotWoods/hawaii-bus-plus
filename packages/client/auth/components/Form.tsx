@@ -14,7 +14,6 @@ export interface FormProps {
   type: FormType;
   token?: string;
   existingEmail?: string;
-  newEmail?: string;
   redirectTo?: string;
   onLinkClick?: MouseEventHandler;
 }
@@ -36,12 +35,24 @@ const passwordTypes: ReadonlySet<FormType> = new Set([
   'signup',
 ]);*/
 
-export function Form(props: FormProps) {
-  const { type, existingEmail } = props;
+export function Form({
+  type,
+  existingEmail,
+  redirectTo = '',
+  token = '',
+  onLinkClick,
+}: FormProps) {
   const readonlyEmail = readonlyEmailTypes.has(type);
+  let email: string | undefined;
+  if (readonlyEmail) {
+    email = existingEmail ?? '<hidden>';
+  } else if (type === 'signup') {
+    email = existingEmail;
+  }
+
   return (
     <form
-      class="mt-8 px-12 py-8 space-y-6 bg-gray-50 text-black"
+      class="mt-8 px-12 py-8 space-y-6 bg-gray-50 text-black color-scheme-light"
       action="/.netlify/functions/auth"
       method="POST"
     >
@@ -57,13 +68,7 @@ export function Form(props: FormProps) {
         key={readonlyEmail ? 'readonly' : 'edit'}
         autocomplete={readonlyEmail ? 'off' : 'email'}
         readonly={readonlyEmail}
-        value={
-          readonlyEmail
-            ? existingEmail ?? '<hidden>'
-            : type === 'signup'
-            ? existingEmail
-            : undefined
-        }
+        value={email}
       >
         Email address
       </Input>
@@ -80,8 +85,8 @@ export function Form(props: FormProps) {
           {type === 'login' ? (
             <a
               href="/auth/forgot"
-              class="font-medium text-blue-500 hover:underline"
-              onClick={props.onLinkClick}
+              class="font-medium text-primary-500 hover:underline"
+              onClick={onLinkClick}
             >
               Forgot your password?
             </a>
@@ -92,8 +97,8 @@ export function Form(props: FormProps) {
       <SubmitButton type={type} />
 
       <input type="hidden" name="type" required value={type} />
-      <input type="hidden" name="redirect_to" value={props.redirectTo} />
-      <input type="hidden" name="token" value={props.token} />
+      <input type="hidden" name="redirect_to" value={redirectTo} />
+      <input type="hidden" name="token" value={token} />
     </form>
   );
 }

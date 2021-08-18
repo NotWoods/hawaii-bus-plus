@@ -1,9 +1,7 @@
 import {
-  center,
   darkStyles,
   GoogleMap,
   lightStyles,
-  mapTypeControlOptions,
 } from '@hawaii-bus-plus/react-google-maps';
 import { h } from 'preact';
 import { useCallback, useMemo } from 'preact/hooks';
@@ -17,6 +15,9 @@ import { UserMarker } from './UserMarker';
 
 type MapMouseEvent = google.maps.MapMouseEvent;
 
+// Center of Big Island
+const center = { lat: 19.6, lng: -155.56 };
+
 export function MapContent() {
   const mdMatches = useScreens('md');
   const darkMode = useDarkMode();
@@ -25,11 +26,13 @@ export function MapContent() {
   const handleClick = useCallback(
     (evt: MapMouseEvent) => {
       const event = evt as MapMouseEvent & Partial<google.maps.IconMouseEvent>;
-      event.stop();
-      if (event.placeId) {
-        dispatch(openPlace(event.placeId, event.latLng.toJSON()));
-      } else {
-        dispatch(setMarker(event.latLng.toJSON()));
+      if (event.latLng) {
+        event.stop();
+        if (event.placeId) {
+          dispatch(openPlace(event.placeId, event.latLng.toJSON()));
+        } else {
+          dispatch(setMarker(event.latLng.toJSON()));
+        }
       }
     },
     [dispatch],
@@ -39,7 +42,9 @@ export function MapContent() {
     const options: google.maps.MapOptions = {
       streetViewControl: false,
       fullscreenControl: false,
-      mapTypeControlOptions,
+      mapTypeControlOptions: {
+        mapTypeIds: ['roadmap', 'hybrid'],
+      },
       controlSize: 32,
       gestureHandling: 'greedy',
     };

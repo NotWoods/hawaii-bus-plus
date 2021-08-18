@@ -1,8 +1,8 @@
 import { GoTrue, User } from '@hawaii-bus-plus/gotrue';
-import { APIGatewayProxyEventHeaders } from 'aws-lambda';
+import { HandlerEvent } from '@netlify/functions';
 import * as cookie from 'cookie';
-import { TokenUser } from '../identity/user';
-import { JWT_ACCESS_TOKEN_KEY, JWT_REFRESH_TOKEN_KEY } from './serialize';
+import { TokenUser } from '../identity/user.js';
+import { JWT_ACCESS_TOKEN_KEY, JWT_REFRESH_TOKEN_KEY } from './serialize.js';
 
 /**
  * Returns a user object corresponding to the logged in user.
@@ -11,7 +11,7 @@ import { JWT_ACCESS_TOKEN_KEY, JWT_REFRESH_TOKEN_KEY } from './serialize';
  */
 export function recoverSession(
   auth: GoTrue,
-  headers: APIGatewayProxyEventHeaders,
+  headers: HandlerEvent['headers'],
 ) {
   const cookies = cookie.parse(headers['cookie'] ?? '');
   const accessToken: string | undefined = cookies[JWT_ACCESS_TOKEN_KEY];

@@ -24,7 +24,7 @@ export async function buildPrerenderCode(
     'preact',
     'tailwindcss',
     'fs/promises',
-    '@hawaii-bus-plus/preact-helmet',
+    '@notwoods/preact-helmet',
   ];
 
   const buildResult = await build({
@@ -58,7 +58,9 @@ export async function buildPrerenderCode(
   const { output } = buildResult as RollupOutput;
 
   const [{ code, fileName }] = output;
-  const module = { exports: {} as { [name: string]: unknown } };
+  const module = {
+    exports: {} as { [name: string]: unknown; default?: unknown },
+  };
   const require = createRequire(resolve(root, fileName));
   const params = ['module', 'exports', 'require', ...Object.keys(args)].concat(
     code,

@@ -56,6 +56,7 @@ const config = {
     '@typescript-eslint/no-unsafe-assignment': 'off',
     '@typescript-eslint/no-unsafe-call': 'warn',
     '@typescript-eslint/no-unsafe-member-access': 'warn',
+    '@typescript-eslint/no-unsafe-return': 'warn',
     '@typescript-eslint/no-unused-vars': 'off',
     '@typescript-eslint/non-nullable-type-assertion-style': 'error',
     '@typescript-eslint/prefer-for-of': 'error',
@@ -94,6 +95,7 @@ const config = {
       rules: {
         'jest/expect-expect': 'off',
         'jest/no-test-callback': 'off',
+        'jest/no-export': 'off',
       },
     },
     {

@@ -21,7 +21,7 @@ export function SignInWithButton(props: Props) {
   return (
     <a
       href={`${apiUrl}/authorize?${params.toString()}`}
-      class="flex justify-center transition-colors w-full py-2 px-4 border border-current hover:bg-red hover:bg-opacity-20 font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan"
+      class="flex justify-center motion-safe:transition-colors w-full py-2 px-4 border border-current hover:bg-red hover:bg-opacity-20 font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"

@@ -2,7 +2,9 @@
   "files": [],
   "references": [
     { "path": "packages/api-gen/src" },
-    { "path": "packages/client/all-pages" },
+    { "path": "packages/client/assets" },
+    { "path": "packages/client/components" },
+    { "path": "packages/client/services" },
     { "path": "packages/client/page" },
     { "path": "packages/client/worker-info" },
     { "path": "packages/client/worker-init-db" },
@@ -14,7 +16,6 @@
     { "path": "packages/gotrue/src" },
     { "path": "packages/jest-utils/src" },
     { "path": "packages/mnemonist/src" },
-    { "path": "packages/preact-helmet/src" },
     { "path": "packages/prerender/src" },
     { "path": "packages/presentation/src" },
     { "path": "packages/promise-worker/page" },

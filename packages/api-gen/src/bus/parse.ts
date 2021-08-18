@@ -5,7 +5,7 @@ import parse from 'csv-parse';
 import { from, zip } from 'ix/iterable/index.js';
 import { filter, map } from 'ix/iterable/operators/index.js';
 import JSZip, { JSZipObject } from 'jszip';
-import type { Temporal } from 'proposal-temporal';
+import type { Temporal } from '@js-temporal/polyfill';
 import type { Mutable } from 'type-fest';
 import { cacheStations } from '../bike/stations.js';
 import { cast } from './cast.js';

@@ -5,14 +5,11 @@
     { "path": "../worker-shared" },
     { "path": "../../data/src" },
     { "path": "../../data/node" },
-    { "path": "../../jest-utils/src" },
-    { "path": "../../mnemonist/src" },
-    { "path": "../../presentation/src" },
-    { "path": "../../temporal-utils/src" },
-    { "path": "../../types" }
+    { "path": "../../types" },
+    { "path": "../../utils/src" }
   ],
   "compilerOptions": {
-    "types": ["googlemaps", "jest"],
+    "types": [],
     "lib": ["esnext", "WebWorker"],
     "emitDeclarationOnly": true,
     "skipLibCheck": true

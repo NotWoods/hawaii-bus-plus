@@ -12,9 +12,7 @@ async function getFeeds() {
   const json = await res.json();
   const feeds = json as GbfsWrapper<{ [lang: string]: { feeds: JsonFeed[] } }>;
 
-  return new Map(
-    feeds.data['en'].feeds.map((feed) => [feed.name, feed.url] as const),
-  );
+  return new Map(feeds.data['en'].feeds.map((feed) => [feed.name, feed.url]));
 }
 
 function formatInfo(station: JsonStationInformation): StationInformation {

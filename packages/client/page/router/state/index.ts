@@ -9,6 +9,7 @@ export interface RouterState {
   point?: Point;
 
   freshLoad: boolean;
+  last: 'main' | 'point';
 }
 
-export const initialState: RouterState = { freshLoad: false };
+export const initialState: RouterState = { freshLoad: false, last: 'point' };

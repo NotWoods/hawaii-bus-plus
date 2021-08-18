@@ -9,19 +9,19 @@
   "scripts": {
     "build": "tsc --build page worker",
     "format": "prettier **/*.ts --write --ignore-path ../../.prettierignore",
-    "postformat": "eslint **/*.ts --fix",
+    "postformat": "eslint \"**/*.ts\" --fix",
     "pretest": "tsc --build test",
     "test": "ava"
   },
   "dependencies": {
-    "tslib": "^2.2.0"
+    "tslib": "^2.3.1"
   },
   "devDependencies": {
-    "@types/node": "^14.14.42",
+    "@types/node": "^15.14.7",
     "ava": "^3.15.0",
-    "prettier": "^2.2.1",
+    "prettier": "~2.3.2",
     "pseudo-worker": "^1.3.0",
-    "typescript": "^4.2.4"
+    "typescript": "^4.3.5"
   },
   "files": [
     "page",

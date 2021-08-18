@@ -35,6 +35,8 @@ export function urlToType(url: URL): HeaderType | undefined {
       return 'success';
     case 'registered':
       return 'sentConfirmation';
+    case 'index.html':
+      return (url.searchParams.get('type') as HeaderType) ?? undefined;
     default:
       return undefined;
   }

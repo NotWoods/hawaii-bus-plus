@@ -100,7 +100,13 @@ export function webWorkerCodeSplit(workerQuery = 'worker'): Plugin {
                 return 'module'
               }
             }
-            const modWorker = new Worker(${JSON.stringify(url)}, options)
+            let modWorker
+            try {
+              modWorker = new Worker(${JSON.stringify(url)}, options)
+            } catch (err) {
+              supportsModuleWorker = false
+              console.warn('Falling back to legacy worker', err)
+            }
             if (supportsModuleWorker) {
               return modWorker
             } else {

@@ -1,5 +1,5 @@
 import { h } from 'preact';
-import { Head, routeTitle } from '../all-pages/components/Head';
+import { Head, routeTitle } from '../components/Head/Head';
 import { useSelector } from './router/hooks';
 import { selectRouteDetails, selectUrl } from './router/selector/main';
 import { RouterState } from './router/state';

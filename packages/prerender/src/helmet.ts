@@ -1,4 +1,4 @@
-import { Helmet } from '@hawaii-bus-plus/preact-helmet';
+import { Helmet } from '@notwoods/preact-helmet';
 import parser from 'node-html-parser';
 
 let parse: typeof parser;

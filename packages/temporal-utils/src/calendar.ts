@@ -1,5 +1,5 @@
 import { Calendar, DateString } from '@hawaii-bus-plus/types';
-import type { Temporal } from 'proposal-temporal';
+import type { Temporal } from '@js-temporal/polyfill';
 
 /**
  * Check if the given calendar is running on date.

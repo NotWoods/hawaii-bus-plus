@@ -3,9 +3,9 @@ import clsx from 'clsx';
 import { h } from 'preact';
 import { memo } from 'preact/compat';
 import { useCallback, useContext, useEffect, useState } from 'preact/hooks';
-import { FloatingActionButton } from '../../buttons/FloatingActionButton';
+import { BaseIcon } from '../../../assets/icons/Icon';
+import { FloatingActionButton } from '../../../components/FloatingActionButton/FloatingActionButton';
 import { useLoadGoogleMaps } from '../../hooks/useLoadGoogleMaps';
-import { BaseIcon } from '../../icons/Icon';
 import { MyLocationContext } from './context';
 
 interface Props {
@@ -33,7 +33,7 @@ const MyLocationButtonContent = memo((props: Props) => {
         <path d="M21 11a9 9 0 00-8-8V1h-2v2a9 9 0 00-8 8H1v2h2a9 9 0 008 8v2h2v-2a9 9 0 008-8h2v-2h-2zm-9 8a7 7 0 110-14 7 7 0 010 14z" />
         <circle
           class={clsx(
-            'transition-opacity',
+            'motion-safe:transition-opacity',
             mode === 'found' ? 'opacity-100' : 'opacity-0',
           )}
           cx="12"
@@ -42,14 +42,14 @@ const MyLocationButtonContent = memo((props: Props) => {
         />
         <path
           class={clsx(
-            'transition-opacity',
+            'motion-safe:transition-opacity',
             mode === 'disabled' ? 'opacity-100' : 'opacity-0',
           )}
           d="M19.7 21L3 4.3l1.4-1.4 16.7 16.7-1.4 1.4z"
         />
         <path
           class={clsx(
-            'fill-blue-500 transition-opacity',
+            'fill-primary-500 motion-safe:transition-opacity',
             mode === 'disabled' ? 'opacity-100' : 'opacity-0',
           )}
           d="M21.3 19.7L4.6 3 6 1.6l16.7 16.7-1.4 1.4z"

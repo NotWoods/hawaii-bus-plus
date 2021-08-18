@@ -1,4 +1,4 @@
-export { dbReady } from './database';
+export { IDB_SUPPORT, openDatabase } from './database';
 export type { GTFSSchema, SearchRoute, SearchStop } from './database';
 export { init } from './db-repository/init';
 export * from './fetch';

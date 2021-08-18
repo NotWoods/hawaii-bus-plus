@@ -1,5 +1,5 @@
 import { Admin, GoTrue, Token, User } from '@hawaii-bus-plus/gotrue';
-import { NetlifyIdentityContext } from '../types';
+import { NetlifyIdentityContext } from '../types.js';
 
 /**
  * `User` designed to be converted into an admin
@@ -10,7 +10,7 @@ class AdminUser extends User {
     super(auth.api, { access_token: identity.token } as Token, auth.audience);
   }
 
-  _refreshToken() {
+  override _refreshToken() {
     // Override so we never refresh.
     return Promise.resolve(this.token.access_token);
   }

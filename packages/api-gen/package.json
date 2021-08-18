@@ -14,7 +14,7 @@
     "api:dist": "node src/cli.js ../../google_transit.zip ../../dist/functions/api/",
     "build": "tsc --build src",
     "format": "prettier **/*.ts --write --ignore-path ../../.prettierignore",
-    "postformat": "eslint **/*.ts --fix",
+    "postformat": "eslint \"**/*.ts\" --fix",
     "pretest": "tsc --build test",
     "test": "ava"
   },
@@ -23,19 +23,19 @@
     "@hawaii-bus-plus/temporal-utils": "workspace:*",
     "@hawaii-bus-plus/types": "workspace:*",
     "@hawaii-bus-plus/utils": "workspace:*",
-    "csv-parse": "^4.15.4",
-    "ix": "^4.3.1",
-    "jszip": "^3.6.0",
-    "node-fetch": "^3.0.0-beta.9",
-    "proposal-temporal": "^0.8.0",
-    "tslib": "^2.2.0"
+    "csv-parse": "^4.16.0",
+    "ix": "^4.5.0",
+    "jszip": "^3.7.1",
+    "node-fetch": "3.0.0-beta.9",
+    "@js-temporal/polyfill": "^0.2.0",
+    "tslib": "^2.3.1"
   },
   "devDependencies": {
-    "@types/node": "^14.14.42",
+    "@types/node": "^15.14.7",
     "ava": "^3.15.0",
-    "prettier": "^2.2.1",
-    "type-fest": "^1.0.2",
-    "typescript": "^4.2.4"
+    "prettier": "~2.3.2",
+    "type-fest": "^1.4.0",
+    "typescript": "^4.3.5"
   },
   "files": [
     "src"

@@ -15,7 +15,7 @@ export class TokenUser extends User {
    * Refresh the access token using the refresh token.
    * If refresh token isn't set, an error is thrown early.
    */
-  _refreshToken(refreshToken?: string) {
+  override _refreshToken(refreshToken?: string) {
     if (!refreshToken) {
       throw new Error('Missing refresh token, cannot refresh expired JWT');
     }

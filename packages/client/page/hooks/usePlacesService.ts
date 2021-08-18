@@ -19,7 +19,7 @@ export function getDetails(
     service.getDetails(request, (result, status) => {
       switch (status) {
         case google.maps.places.PlacesServiceStatus.OK:
-          return resolve(result);
+          return resolve(result!);
         default:
           return reject(new PlacesServiceError(status));
       }

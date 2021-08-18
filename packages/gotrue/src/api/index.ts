@@ -1,8 +1,13 @@
 import fetch, { Response, RequestInit } from 'node-fetch';
 import { RequestMap } from './interface.js';
-import { getPagination } from './pagination.js';
+import { getPagination, Pagination } from './pagination.js';
 
 type ResponseData = Pick<Response, 'status' | 'statusText'>;
+
+export interface Page<T> {
+  pagination: Pagination;
+  items: T;
+}
 
 export class HTTPError extends Error {
   status: number;
@@ -69,14 +74,15 @@ export default class API {
     };
   }
 
-  parseJsonResponse(response: Response): any {
+  parseJsonResponse<T>(response: Response): Promise<T | Page<T>> {
     return response.json().then((json) => {
       if (!response.ok) {
         return Promise.reject(new JSONHTTPError(response, json));
       }
 
+      const items = json as T;
       const pagination = getPagination(response);
-      return pagination ? { pagination, items: json } : json;
+      return pagination ? { pagination, items } : items;
     });
   }
 

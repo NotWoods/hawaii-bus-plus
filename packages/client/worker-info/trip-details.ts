@@ -17,7 +17,7 @@ import type {
   Trip,
   TripWithoutTimes,
 } from '@hawaii-bus-plus/types';
-import { Temporal } from 'proposal-temporal';
+import { Temporal } from '@js-temporal/polyfill';
 import { loadCalendarAgency, routeStopDetails } from './shared';
 import { FormatOptions, formatStopTime } from './stop-time';
 

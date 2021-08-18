@@ -1,18 +1,18 @@
-import { GoogleMapProps as OrigGoogleMapProps } from '@react-google-maps/api';
-import { h } from 'preact';
+import { h, ComponentChildren } from 'preact';
 import { useContext, useEffect, useRef } from 'preact/hooks';
 import { useListener } from './apply-changes';
 import { MapContext } from './MapProvider';
 
-export interface GoogleMapProps
-  extends Pick<
-    OrigGoogleMapProps,
-    'children' | 'mapContainerClassName' | 'options' | 'onClick'
-  > {
+export interface GoogleMapProps {
+  children?: ComponentChildren;
+  mapContainerClassName?: string;
+  options?: google.maps.MapOptions;
   /** The initial Map center. */
   defaultCenter: google.maps.LatLng | google.maps.LatLngLiteral;
   /** The initial Map zoom level. Required. Valid values: Integers between zero, and up to the supported maximum zoom level. */
   defaultZoom: number;
+  /** This event is fired when the user clicks on the map. An ApiMouseEvent with properties for the clicked location is returned unless a place icon was clicked, in which case an IconMouseEvent with a placeId is returned. IconMouseEvent and ApiMouseEvent are identical, except that IconMouseEvent has the placeId field. The event can always be treated as an ApiMouseEvent when the placeId is not important. The click event is not fired if a Marker or InfoWindow was clicked. */
+  onClick?: (e: google.maps.MapMouseEvent) => void;
   /** This callback is called when the map instance has loaded. It is called with the map instance. */
   onLoad?(map: google.maps.Map): void;
 }

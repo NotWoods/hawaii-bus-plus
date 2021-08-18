@@ -28,18 +28,19 @@ export function search(
   //const placeSearchReady = getPlacePredictions(request);
 
   const searchTerm = applyOffset(request.input, request.offset);
-  const routeSearchReady = repo.searchRoutes(searchTerm, 3).then(
-    async (routes): Promise<RouteSearchResult[]> => {
+  const routeSearchReady = repo
+    .searchRoutes(searchTerm, 3)
+    .then(async (routes): Promise<RouteSearchResult[]> => {
       const agencyIds = routes.map((route) => route.agency_id);
       const agencies = await repo.loadAgencies(agencyIds);
       return routes.map((route) => ({
         ...route,
         agency: agencies.get(route.agency_id)!,
       }));
-    },
-  );
-  const stopSearchReady = repo.searchStops(searchTerm, 3).then(
-    async (stops): Promise<StopSearchResult[]> => {
+    });
+  const stopSearchReady = repo
+    .searchStops(searchTerm, 3)
+    .then(async (stops): Promise<StopSearchResult[]> => {
       const routeIds = new Set(stops.flatMap((stop) => stop.routes));
       const routes = await repo.loadRoutes(routeIds);
       return stops.map((stop) => ({
@@ -48,8 +49,7 @@ export function search(
         stop_desc: stop.stop_desc,
         routes: stop.routes.map((routeId) => routes.get(routeId)!),
       }));
-    },
-  );
+    });
 
   return Promise.all([
     [], // placeSearchReady,

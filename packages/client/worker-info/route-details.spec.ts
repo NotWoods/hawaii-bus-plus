@@ -1,7 +1,8 @@
 import { NodeRepository } from '@hawaii-bus-plus/data/node';
 import { expectPlainTimeData } from '@hawaii-bus-plus/jest-utils';
 import { Route } from '@hawaii-bus-plus/types';
-import { Temporal } from 'proposal-temporal';
+import { expect, test } from '@jest/globals';
+import { Temporal } from '@js-temporal/polyfill';
 import { getRouteDetails } from './route-details';
 
 test.concurrent('getRouteDetails when in service', async () => {

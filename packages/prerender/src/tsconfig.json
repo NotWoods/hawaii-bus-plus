@@ -3,12 +3,11 @@
   "include": ["**/*"],
   "references": [
     { "path": "../../data/node" },
-    { "path": "../../preact-helmet/src" },
     { "path": "../../promise-worker/worker" }
   ],
   "compilerOptions": {
     "lib": ["esnext", "dom"],
-    "types": ["node", "googlemaps"],
+    "types": ["node", "google.maps"],
     "skipLibCheck": true
   }
 }

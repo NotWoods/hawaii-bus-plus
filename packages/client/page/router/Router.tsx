@@ -1,19 +1,18 @@
 import { ComponentChildren, createContext, h } from 'preact';
 import { Reducer, useEffect, useMemo, useReducer } from 'preact/hooks';
 import { JSXInternal } from 'preact/src/jsx';
-import { useFocusTrapped } from '../buttons/FocusTrap';
 import { linkAction, reloadStateAction, RouterAction } from './action';
 import { useDispatch } from './hooks';
 import { initStateFromUrl, routerReducer } from './reducer';
 import { selectUrl } from './selector/main';
-import { RouterState } from './state';
+import { initialState, RouterState } from './state';
 
 interface RouterContext extends RouterState {
   dispatch(action: RouterAction): void;
 }
 
 export const RouterContext = createContext<RouterContext>({
-  freshLoad: false,
+  ...initialState,
   dispatch() {},
 });
 
@@ -46,11 +45,13 @@ export function Router(props: {
     initialUrl,
     initStateFromUrl,
   );
-  const value = useMemo(() => ({ ...state, dispatch }), [state, dispatch]);
+  const value = useMemo(
+    () => Object.assign({}, state, { dispatch }),
+    [state, dispatch],
+  );
 
   useEffect(() => {
     function onPopState(evt: PopStateEvent) {
-      console.log('LOOP', evt.state);
       if (evt.state) {
         dispatch(reloadStateAction(evt.state));
       } else {
@@ -94,13 +95,11 @@ interface LinkProps
 /**
  * Element that displays sticky alerts
  */
-export function Link({ action, tabIndex, ...props }: LinkProps) {
+export function Link({ action, ...props }: LinkProps) {
   const dispatch = useDispatch();
-  const trapped = useFocusTrapped(tabIndex);
   return (
     <a
       {...props}
-      tabIndex={trapped ? -1 : 0}
       onClick={function (evt) {
         evt.preventDefault();
         props.onClick?.call(this, evt);

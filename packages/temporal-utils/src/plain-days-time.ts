@@ -1,6 +1,6 @@
 import { TimeString } from '@hawaii-bus-plus/types';
 import { toInt } from '@hawaii-bus-plus/utils';
-import { Temporal } from 'proposal-temporal';
+import { Temporal } from '@js-temporal/polyfill';
 
 const HOURS_IN_DAY = 24;
 
@@ -59,7 +59,7 @@ export class PlainDaysTime {
   /**
    * Convert seconds value to PlainDaysTime.
    */
-  static from(value: TimeString | PlainDaysTime) {
+  static from(value: TimeString | PlainDaysTime): PlainDaysTime {
     if (typeof value !== 'string') {
       return value as PlainDaysTime;
     }

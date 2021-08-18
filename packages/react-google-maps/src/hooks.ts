@@ -1,9 +1,10 @@
 import { Loader, LoaderOptions } from '@googlemaps/js-api-loader';
 import { useEffect, useMemo, useState } from 'preact/hooks';
 
-export function useJsApiLoader(
-  options: LoaderOptions,
-): { isLoaded: boolean; loadError?: Error } {
+export function useJsApiLoader(options: LoaderOptions): {
+  isLoaded: boolean;
+  loadError?: Error;
+} {
   const [isLoaded, setLoaded] = useState(false);
   const [loadError, setLoadError] = useState<Error | undefined>(undefined);
 

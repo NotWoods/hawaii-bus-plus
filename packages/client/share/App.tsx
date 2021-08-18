@@ -1,12 +1,12 @@
 import { MultiMap } from '@hawaii-bus-plus/mnemonist';
 import { Agency, Route, Stop, Trip } from '@hawaii-bus-plus/types';
 import { Fragment, h } from 'preact';
-import { colorVariables } from '../page/routes/props';
-import { RouteHeader } from '../page/routes/RouteHeader';
-import { DetailButtons } from '../page/routes/timetable/details/DetailButtons';
-import { RouteDescription } from '../page/routes/timetable/details/RouteDescription';
+import { ExtendedFloatingActionButton } from '../components/FloatingActionButton/ExtendedFloatingActionButton';
+import { colorVariables } from '../components/route-colors';
+import { DetailButtons } from '../components/RouteDescription/DetailButtons';
+import { RouteDescription } from '../components/RouteDescription/RouteDescription';
+import { RouteHeader } from '../components/RouteHeader/RouteHeader';
 import { extractLinks } from '../worker-info/description';
-import { ExtendedFloatingActionButton } from './components/ExtendedFloatingActionButton';
 import { Footer } from './components/Footer';
 import { PageHeader } from './components/PageHeader';
 import { StaticMap, staticMapUrl } from './components/StaticMap';
@@ -50,9 +50,11 @@ export function App({ route, agency, trips, stops }: AppProps) {
       >
         <RouteHeader route={route} />
 
-        <div class="flex flex-wrap gap-1 justify-center grid-area-buttons px-2">
-          <DetailButtons route={route} agency={agency} />
-        </div>
+        <DetailButtons
+          class="grid-area-buttons px-2"
+          route={route}
+          agency={agency}
+        />
 
         <TableOfContents
           directionHeaders={route.directions}
