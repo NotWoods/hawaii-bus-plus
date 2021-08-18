@@ -1,6 +1,7 @@
 import { HTTPError } from '@hawaii-bus-plus/gotrue';
 import { createHandler } from '../../shared';
 import { jsonResponse } from '../../shared/response';
+import { NetlifyEvent } from '../../shared/types';
 import { GreenRoadMessage } from './interface';
 
 function btoa(string: string) {
@@ -9,12 +10,7 @@ function btoa(string: string) {
 
 const BASIC = /^\s*Basic\s+([A-Za-z0-9+/=]+)\s*$/;
 
-const corpHeaders = {
-  'Cross-Origin-Resource-Policy': 'cross-origin',
-};
-
 const forbiddenHeaders = {
-  ...corpHeaders,
   'WWW-Authenticate': 'Basic realm="GreenRoad Webhook"',
 };
 
@@ -34,10 +30,21 @@ function validatedBody(rawBody: string | null | undefined) {
   return body as GreenRoadMessage[];
 }
 
+function buildCorpHeaders(event: NetlifyEvent) {
+  return {
+    'Access-Control-Allow-Origin': event.headers['origin']!,
+    'Access-Control-Allow-Credentials': 'true',
+    'Cross-Origin-Resource-Policy': 'cross-origin',
+    Vary: 'Origin',
+  };
+}
+
 /**
  * Webhook for GreenRoad GPS API.
  */
 export const handler = createHandler('POST', (event, _context) => {
+  const corpHeaders = buildCorpHeaders(event);
+
   const expectedUsername = process.env['GREENROAD_USER_NAME'];
   const expectedPassword = process.env['GREENROAD_PASSWORD'];
   if (!expectedUsername || !expectedPassword) {
@@ -57,7 +64,7 @@ export const handler = createHandler('POST', (event, _context) => {
       {
         error: 'Missing required "Authorization" header',
       },
-      forbiddenHeaders,
+      { ...forbiddenHeaders, ...corpHeaders },
     );
   }
 
@@ -70,7 +77,7 @@ export const handler = createHandler('POST', (event, _context) => {
       {
         error: 'Incorrect username or password',
       },
-      forbiddenHeaders,
+      { ...forbiddenHeaders, ...corpHeaders },
     );
   }
 
