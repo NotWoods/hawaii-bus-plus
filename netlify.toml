@@ -123,12 +123,12 @@ package = "@netlify/plugin-sitemap"
     Content-Security-Policy = '''frame-ancestors 'none';
     form-action 'self';
     default-src 'self';
-    img-src 'self' data: blob: *.googleapis.com *.ggpht.com maps.gstatic.com https://hawaiibusplus.com;
+    img-src 'self' data: blob: *.googleapis.com *.ggpht.com maps.gstatic.com https://hawaiibusplus.com https://kite.oakes.software;
     script-src 'self' 'unsafe-eval' maps.googleapis.com;
     worker-src 'self';
     style-src 'self' 'unsafe-inline' fonts.googleapis.com;
     font-src 'self' fonts.gstatic.com;
-    connect-src 'self' getinsights.io *.googleapis.com *.ggpht.com maps.gstatic.com fonts.googleapis.com fonts.gstatic.com;
+    connect-src 'self' https://kite.oakes.software *.googleapis.com *.ggpht.com maps.gstatic.com fonts.googleapis.com fonts.gstatic.com;
     manifest-src 'self';
     object-src 'none';
     base-uri 'none';'''
