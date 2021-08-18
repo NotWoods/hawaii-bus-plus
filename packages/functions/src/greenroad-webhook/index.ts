@@ -3,8 +3,8 @@ import { createHandler } from '../../shared';
 import { jsonResponse } from '../../shared/response';
 import { GreenRoadMessage } from './interface';
 
-function atob(base64: string) {
-  return Buffer.from(base64, 'base64').toString('utf-8');
+function btoa(string: string) {
+  return Buffer.from(string).toString('base64');
 }
 
 const BASIC = /^\s*Basic\s+([A-Za-z0-9+/=]+)\s*$/;
@@ -38,6 +38,18 @@ function validatedBody(rawBody: string | null | undefined) {
  * Webhook for GreenRoad GPS API.
  */
 export const handler = createHandler('POST', (event, _context) => {
+  const expectedUsername = process.env['GREENROAD_USER_NAME'];
+  const expectedPassword = process.env['GREENROAD_PASSWORD'];
+  if (!expectedUsername || !expectedPassword) {
+    return jsonResponse(
+      501,
+      {
+        error: 'Login information not yet set up',
+      },
+      corpHeaders,
+    );
+  }
+
   const headerMatch = event.headers?.['authorization']?.match(BASIC);
   if (!headerMatch) {
     return jsonResponse(
@@ -50,12 +62,9 @@ export const handler = createHandler('POST', (event, _context) => {
   }
 
   const [, encodedAuth] = headerMatch;
-  const [username, password] = atob(encodedAuth).split(':', 2);
+  const encodedExpected = btoa(`${expectedUsername}:${expectedPassword}`);
 
-  if (
-    username !== process.env['GREENROAD_USER_NAME'] ||
-    password !== process.env['GREENROAD_PASSWORD']
-  ) {
+  if (encodedAuth !== encodedExpected) {
     return jsonResponse(
       401,
       {
