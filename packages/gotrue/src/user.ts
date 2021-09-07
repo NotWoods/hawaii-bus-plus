@@ -13,7 +13,7 @@ const forbiddenUpdateAttributes = { api: 1, token: 1, audience: 1, url: 1 };
 
 export interface RequestOptions extends RequestInit {
   headers?: Record<string, string>;
-  audience?: string;
+  audience?: string | undefined;
 }
 
 export function formatError(error: unknown) {

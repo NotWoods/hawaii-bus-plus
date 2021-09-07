@@ -7,8 +7,8 @@ export type { LoaderOptions };
 
 export interface MapContext {
   isLoaded: boolean;
-  map?: google.maps.Map;
-  loadError?: Error;
+  map?: google.maps.Map | undefined;
+  loadError?: Error | undefined;
   setMap(map: google.maps.Map): void;
 }
 

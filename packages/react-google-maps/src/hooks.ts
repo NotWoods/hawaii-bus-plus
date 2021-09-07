@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState } from 'preact/hooks';
 
 export function useJsApiLoader(options: LoaderOptions): {
   isLoaded: boolean;
-  loadError?: Error;
+  loadError: Error | undefined;
 } {
   const [isLoaded, setLoaded] = useState(false);
   const [loadError, setLoadError] = useState<Error | undefined>(undefined);
