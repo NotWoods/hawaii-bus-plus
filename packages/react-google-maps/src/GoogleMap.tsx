@@ -42,7 +42,7 @@ export function GoogleMap(props: GoogleMapProps) {
   useListener(map, 'click', props.onClick);
 
   return (
-    <div ref={mapRef} className={props.mapContainerClassName}>
+    <div ref={mapRef} class={props.mapContainerClassName}>
       {map !== null ? props.children : null}
     </div>
   );

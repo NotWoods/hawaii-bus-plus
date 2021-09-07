@@ -9,8 +9,8 @@ export class AbortError extends Error {
 }
 
 export class WorkerError extends Error {
-  status?: number;
-  code?: number | string;
+  status?: number | undefined;
+  code?: number | string | undefined;
 
   constructor(data: {
     name: string;
