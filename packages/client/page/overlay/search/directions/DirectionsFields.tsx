@@ -9,8 +9,8 @@ interface Props {
   depart?: Point;
   arrive?: Point;
   field: 'depart' | 'arrive';
-  departRef?: Ref<HTMLInputElement>;
-  arriveRef?: Ref<HTMLInputElement>;
+  departRef?: Ref<HTMLInputElement | undefined>;
+  arriveRef?: Ref<HTMLInputElement | undefined>;
   setDepart(depart: Point | undefined): void;
   setArrive(depart: Point | undefined): void;
   onSearchResults(results: FieldsSearchResults): void;
@@ -38,7 +38,7 @@ export function DirectionsFields(props: Props) {
   const getSearchResults = useSearch();
 
   async function performSearch(field: 'depart' | 'arrive', value: string) {
-    const results = await getSearchResults(value, abort.current.signal);
+    const results = await getSearchResults(value, abort.current!.signal);
     props.onSearchResults({ field, results });
   }
 

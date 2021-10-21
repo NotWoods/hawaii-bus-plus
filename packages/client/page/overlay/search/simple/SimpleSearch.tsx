@@ -20,7 +20,7 @@ export function SimpleSearch(props: Props) {
   const [searchResults, setSearchResults] = useState(emptyResults);
   const searchRef = useRef<HTMLInputElement>();
   const getSearchResults = useSearch();
-  const getRef = useCallback(() => searchRef.current, []);
+  const getRef = useCallback(() => searchRef.current!, []);
   const handleKeyDown = useAutocompleteKeys(getRef);
   const { SearchResultsList } = useLazyComponent(lazySearchResults);
 

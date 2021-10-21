@@ -9,7 +9,7 @@ interface Props {
   id: string;
   point?: Point;
   label: ComponentChildren;
-  inputRef?: Ref<HTMLInputElement>;
+  inputRef?: Ref<HTMLInputElement | undefined>;
   'aria-owns': string;
   'aria-expanded': boolean;
   onChange(data: Point | undefined): void;

@@ -70,8 +70,8 @@ export function DirectionsSearch(_props: Props) {
   const arriveRef = useRef<HTMLInputElement>();
   const getInputRef = useCallback(() => {
     return {
-      depart: departRef.current,
-      arrive: arriveRef.current,
+      depart: departRef.current!,
+      arrive: arriveRef.current!,
     }[searchResults.field];
   }, [searchResults.field]);
   const handleKeyDown = useAutocompleteKeys(getInputRef);

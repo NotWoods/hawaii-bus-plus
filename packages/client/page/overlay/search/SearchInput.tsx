@@ -10,13 +10,13 @@ export const searchInputClass =
   'focus:ring-cyan focus:border-cyan block w-full bg-primary-700 text-white sm:text-sm border-gray-300';
 
 export interface SearchProps extends JSX.HTMLAttributes<HTMLInputElement> {
-  inputRef?: Ref<HTMLInputElement>;
+  inputRef?: Ref<HTMLInputElement | undefined>;
 }
 
 export function SearchInput(props: SearchProps) {
   return (
     <input
-      ref={props.inputRef}
+      ref={props.inputRef as Ref<HTMLInputElement>}
       {...props}
       type="search"
       class={clsx(

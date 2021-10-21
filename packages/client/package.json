@@ -28,7 +28,7 @@
     "clsx": "^1.1.1",
     "idb": "^6.1.3",
     "just-debounce": "^1.1.0",
-    "preact": "10.5.13",
+    "preact": "^10.5.15",
     "spherical-geometry-js": "^2.1.0",
     "tslib": "^2.3.1"
   },

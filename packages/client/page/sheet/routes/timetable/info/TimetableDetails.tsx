@@ -1,6 +1,6 @@
 import { Agency } from '@hawaii-bus-plus/types';
 import debounce from 'just-debounce';
-import { h } from 'preact';
+import { h, Ref } from 'preact';
 import { useEffect, useRef } from 'preact/hooks';
 import { useCallback } from 'react';
 import { DirectionDetails } from '../../../../../worker-info/trip-details';
@@ -36,8 +36,8 @@ export function TimetableDetails(props: Props) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleScroll = useCallback(
     debounce(() => {
-      const scrollPos = scrollEl.current.scrollLeft;
-      const width = scrollEl.current.offsetWidth;
+      const scrollPos = scrollEl.current!.scrollLeft;
+      const width = scrollEl.current!.offsetWidth;
       const newDirectionId = Math.round(scrollPos / width) as 0 | 1;
 
       dispatch(setDirectionAction(newDirectionId));
@@ -47,8 +47,8 @@ export function TimetableDetails(props: Props) {
 
   // Set the scroll position when the direction ID shifts
   useEffect(() => {
-    const width = scrollEl.current.offsetWidth;
-    scrollEl.current.scrollTo({
+    const width = scrollEl.current!.offsetWidth;
+    scrollEl.current!.scrollTo({
       left: width * directionId,
       behavior: 'smooth',
     });
@@ -61,7 +61,7 @@ export function TimetableDetails(props: Props) {
         style={{
           gridTemplateColumns: directionsDetails.map(() => '100%').join(' '),
         }}
-        ref={scrollEl}
+        ref={scrollEl as Ref<HTMLDivElement>}
         onScroll={handleScroll}
       >
         {directionsDetails.map((directionDetails, id) => (
