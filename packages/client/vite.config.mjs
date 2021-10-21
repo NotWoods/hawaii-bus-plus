@@ -1,17 +1,9 @@
 // @ts-check
-import {
-  emptyPackage,
-  webWorkerCodeSplit,
-} from '@hawaii-bus-plus/vite-plugins';
+import { defineConfig } from 'vite';
+import { emptyPackage } from '@hawaii-bus-plus/vite-plugins';
 import prefresh from '@prefresh/vite';
 
-/**
- * @param {object} param1
- * @param {'serve' | 'build'} param1.command
- * @param {'development' | 'production'} param1.mode
- * @returns {import('vite').UserConfig}
- */
-export default function vite({}) {
+export default defineConfig(({ command }) => {
   /** @type {import('vite').AliasOptions} */
   const alias = {
     react: 'preact/compat',
@@ -20,14 +12,13 @@ export default function vite({}) {
 
   return {
     plugins: [
-      webWorkerCodeSplit(),
-      emptyPackage('preact/debug'),
+      command === 'build' && emptyPackage('preact/debug'),
       prefresh({
         // @ts-expect-error prefresh type issues
         include: ['{auth,page,share,assets,components}/**/*'],
         exclude: ['worker-*/**'],
       }),
-    ],
+    ].filter(Boolean),
     resolve: { alias },
     optimizeDeps: {
       include: ['preact', 'preact/debug', 'preact/hooks'],
@@ -74,4 +65,4 @@ export default function vite({}) {
       force: true,
     },
   };
-}
+});
