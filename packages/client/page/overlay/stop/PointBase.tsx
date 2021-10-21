@@ -19,8 +19,9 @@ const pov: Required<google.maps.StreetViewPov> = { heading: 34, pitch: 0 };
 
 export function PointBase(props: Props) {
   const { position } = props;
-  const [status, setStatus] =
-    useState<google.maps.StreetViewStatus | undefined>();
+  const [status, setStatus] = useState<
+    google.maps.StreetViewStatus | undefined
+  >();
   const { loadError } = useLoadGoogleMaps();
 
   return (

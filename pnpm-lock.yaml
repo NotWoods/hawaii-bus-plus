@@ -14,7 +14,7 @@ importers:
       eslint-plugin-ava: ^12.0.0
       eslint-plugin-react: ^7.26.1
       pnpm: ^6.18.0
-      prettier: ~2.3.2
+      prettier: ~2.4.1
       tslib: ^2.3.1
       typescript: ^4.4.4
     dependencies:
@@ -30,7 +30,7 @@ importers:
       eslint-plugin-ava: 12.0.0_eslint@7.32.0
       eslint-plugin-react: 7.26.1_eslint@7.32.0
       pnpm: 6.18.0
-      prettier: 2.3.2
+      prettier: 2.4.1
       typescript: 4.4.4
 
   packages/api-gen:
@@ -45,8 +45,8 @@ importers:
       csv-parse: ^4.16.3
       ix: ^4.5.2
       jszip: ^3.7.1
-      node-fetch: 3.0.0-beta.9
-      prettier: ~2.3.2
+      node-fetch: ^3.0.0
+      prettier: ~2.4.1
       tslib: ^2.3.1
       type-fest: ^2.5.1
       typescript: ^4.4.4
@@ -59,12 +59,12 @@ importers:
       csv-parse: 4.16.3
       ix: 4.5.2
       jszip: 3.7.1
-      node-fetch: 3.0.0-beta.9
+      node-fetch: 3.0.0
       tslib: 2.3.1
     devDependencies:
       '@types/node': 16.11.2
       ava: 3.15.0
-      prettier: 2.3.2
+      prettier: 2.4.1
       type-fest: 2.5.1
       typescript: 4.4.4
 
@@ -98,7 +98,7 @@ importers:
       just-debounce: ^1.1.0
       preact: ^10.5.15
       preact-render-to-string: ^5.1.19
-      prettier: ~2.3.2
+      prettier: ~2.4.1
       spherical-geometry-js: ^2.1.0
       tailwindcss: ^2.2.17
       tailwindcss-scroll-snap: ^1.1.0
@@ -139,7 +139,7 @@ importers:
       esbuild-jest: 0.5.0_esbuild@0.12.29
       jest: 27.3.1
       preact-render-to-string: 5.1.19_preact@10.5.15
-      prettier: 2.3.2
+      prettier: 2.4.1
       tailwindcss: 2.2.17
       tailwindcss-scroll-snap: 1.1.0
       type-fest: 2.5.1
@@ -156,7 +156,7 @@ importers:
       ava: ^3.15.0
       idb: ^6.1.5
       ix: ^4.5.2
-      prettier: ~2.3.2
+      prettier: ~2.4.1
       spherical-geometry-js: ^3.0.0
       tslib: ^2.3.1
       typescript: ^4.4.4
@@ -171,7 +171,7 @@ importers:
     devDependencies:
       '@types/node': 16.11.2
       ava: 3.15.0
-      prettier: 2.3.2
+      prettier: 2.4.1
       typescript: 4.4.4
 
   packages/functions:
@@ -185,7 +185,7 @@ importers:
       cookie: ^0.4.1
       copyfiles: ^2.4.1
       esbuild: ^0.12.29
-      prettier: ~2.3.2
+      prettier: ~2.4.1
       stripe: ^8.184.0
       tslib: ^2.3.1
       typescript: ^4.4.4
@@ -202,39 +202,39 @@ importers:
       ava: 3.15.0
       copyfiles: 2.4.1
       esbuild: 0.12.29
-      prettier: 2.3.2
+      prettier: 2.4.1
       typescript: 4.4.4
 
   packages/gotrue:
     specifiers:
       '@types/node': ^16.11.2
       ava: ^3.15.0
-      node-fetch: 3.0.0-beta.9
-      prettier: ~2.3.2
+      node-fetch: ^3.0.0
+      prettier: ~2.4.1
       tslib: ^2.3.1
       typescript: ^4.4.4
     dependencies:
-      node-fetch: 3.0.0-beta.9
+      node-fetch: 3.0.0
       tslib: 2.3.1
     devDependencies:
       '@types/node': 16.11.2
       ava: 3.15.0
-      prettier: 2.3.2
+      prettier: 2.4.1
       typescript: 4.4.4
 
   packages/identity-email:
     specifiers:
       copyfiles: ^2.4.1
-      prettier: ~2.3.2
+      prettier: ~2.4.1
     devDependencies:
       copyfiles: 2.4.1
-      prettier: 2.3.2
+      prettier: 2.4.1
 
   packages/jest-utils:
     specifiers:
       '@hawaii-bus-plus/types': workspace:*
       jest: ^27.3.1
-      prettier: ~2.3.2
+      prettier: ~2.4.1
       tslib: ^2.3.1
       typescript: ^4.4.4
     dependencies:
@@ -242,20 +242,20 @@ importers:
       tslib: 2.3.1
     devDependencies:
       jest: 27.3.1
-      prettier: 2.3.2
+      prettier: 2.4.1
       typescript: 4.4.4
 
   packages/mnemonist:
     specifiers:
       ava: ^3.15.0
-      prettier: ~2.3.2
+      prettier: ~2.4.1
       tslib: ^2.3.1
       typescript: ^4.4.4
     dependencies:
       tslib: 2.3.1
     devDependencies:
       ava: 3.15.0
-      prettier: 2.3.2
+      prettier: 2.4.1
       typescript: 4.4.4
 
   packages/prerender:
@@ -266,7 +266,7 @@ importers:
       node-html-parser: ^3.3.6
       preact: ^10.5.15
       preact-render-to-string: ^5.1.19
-      prettier: ~2.3.2
+      prettier: ~2.4.1
       rollup: ^2.58.0
       tailwindcss: ^2.2.17
       tslib: ^2.3.1
@@ -284,7 +284,7 @@ importers:
     devDependencies:
       ava: 3.15.0
       preact: 10.5.15
-      prettier: 2.3.2
+      prettier: 2.4.1
       rollup: 2.58.0
       tailwindcss: 2.2.17
       typescript: 4.4.4
@@ -296,7 +296,7 @@ importers:
       '@hawaii-bus-plus/utils': workspace:*
       '@js-temporal/polyfill': ^0.2.0
       ava: ^3.15.0
-      prettier: ~2.3.2
+      prettier: ~2.4.1
       spherical-geometry-js: ^3.0.0
       tslib: ^2.3.1
       type-fest: ^2.5.1
@@ -310,7 +310,7 @@ importers:
       tslib: 2.3.1
     devDependencies:
       ava: 3.15.0
-      prettier: 2.3.2
+      prettier: 2.4.1
       type-fest: 2.5.1
       typescript: 4.4.4
 
@@ -318,7 +318,7 @@ importers:
     specifiers:
       '@types/node': ^16.11.2
       ava: ^3.15.0
-      prettier: ~2.3.2
+      prettier: ~2.4.1
       pseudo-worker: ^1.3.0
       tslib: ^2.3.1
       typescript: ^4.4.4
@@ -327,7 +327,7 @@ importers:
     devDependencies:
       '@types/node': 16.11.2
       ava: 3.15.0
-      prettier: 2.3.2
+      prettier: 2.4.1
       pseudo-worker: 1.3.0
       typescript: 4.4.4
 
@@ -337,7 +337,7 @@ importers:
       '@types/google.maps': ^3.46.0
       ava: ^3.15.0
       preact: ^10.5.15
-      prettier: ~2.3.2
+      prettier: ~2.4.1
       tslib: ^2.3.1
       typescript: ^4.4.4
     dependencies:
@@ -347,7 +347,7 @@ importers:
       '@types/google.maps': 3.46.0
       ava: 3.15.0
       preact: 10.5.15
-      prettier: 2.3.2
+      prettier: 2.4.1
       typescript: 4.4.4
 
   packages/temporal-utils:
@@ -356,7 +356,7 @@ importers:
       '@hawaii-bus-plus/utils': workspace:*
       '@js-temporal/polyfill': ^0.2.0
       ava: ^3.15.0
-      prettier: ~2.3.2
+      prettier: ~2.4.1
       tslib: ^2.3.1
       typescript: ^4.4.4
     dependencies:
@@ -366,12 +366,12 @@ importers:
       tslib: 2.3.1
     devDependencies:
       ava: 3.15.0
-      prettier: 2.3.2
+      prettier: 2.4.1
       typescript: 4.4.4
 
   packages/types:
     specifiers:
-      prettier: ~2.3.2
+      prettier: ~2.4.1
       tslib: ^2.3.1
       type-fest: ^2.5.1
       typescript: ^4.4.4
@@ -379,27 +379,27 @@ importers:
       tslib: 2.3.1
       type-fest: 2.5.1
     devDependencies:
-      prettier: 2.3.2
+      prettier: 2.4.1
       typescript: 4.4.4
 
   packages/utils:
     specifiers:
       ava: ^3.15.0
-      prettier: ~2.3.2
+      prettier: ~2.4.1
       tslib: ^2.3.1
       typescript: ^4.4.4
     dependencies:
       tslib: 2.3.1
     devDependencies:
       ava: 3.15.0
-      prettier: 2.3.2
+      prettier: 2.4.1
       typescript: 4.4.4
 
   packages/vite-plugins:
     specifiers:
       '@types/node': ^16.11.2
       ava: ^3.15.0
-      prettier: ~2.3.2
+      prettier: ~2.4.1
       rollup: ^2.58.0
       tslib: ^2.3.1
       typescript: ^4.4.4
@@ -410,7 +410,7 @@ importers:
     devDependencies:
       '@types/node': 16.11.2
       ava: 3.15.0
-      prettier: 2.3.2
+      prettier: 2.4.1
       typescript: 4.4.4
       vite: 2.3.3
 
@@ -4833,14 +4833,11 @@ packages:
       bser: 2.1.1
     dev: true
 
-  /fetch-blob/2.1.2:
-    resolution: {integrity: sha512-YKqtUDwqLyfyMnmbw8XD6Q8j9i/HggKtPEI+pZ1+8bvheBu78biSmNaXWusx1TauGqtUUGx/cBb1mKdq2rLYow==}
-    engines: {node: ^10.17.0 || >=12.3.0}
-    peerDependencies:
-      domexception: '*'
-    peerDependenciesMeta:
-      domexception:
-        optional: true
+  /fetch-blob/3.1.2:
+    resolution: {integrity: sha512-hunJbvy/6OLjCD0uuhLdp0mMPzP/yd2ssd1t2FCJsaA7wkWhpbp9xfuNVpv7Ll4jFhzp6T4LAupSiV9uOeg0VQ==}
+    engines: {node: ^12.20 || >= 14.13}
+    dependencies:
+      web-streams-polyfill: 3.1.1
     dev: false
 
   /figures/3.2.0:
@@ -6919,14 +6916,12 @@ packages:
       lodash: 4.17.21
     dev: true
 
-  /node-fetch/3.0.0-beta.9:
-    resolution: {integrity: sha512-RdbZCEynH2tH46+tj0ua9caUHVWrd/RHnRfvly2EVdqGmI3ndS1Vn/xjm5KuGejDt2RNDQsVRLPNd2QPwcewVg==}
-    engines: {node: ^10.17 || >=12.3}
+  /node-fetch/3.0.0:
+    resolution: {integrity: sha512-bKMI+C7/T/SPU1lKnbQbwxptpCrG9ashG+VkytmXCPZyuM9jB6VU+hY0oi4lC8LxTtAeWdckNCTa3nrGsAdA3Q==}
+    engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     dependencies:
       data-uri-to-buffer: 3.0.1
-      fetch-blob: 2.1.2
-    transitivePeerDependencies:
-      - domexception
+      fetch-blob: 3.1.2
     dev: false
 
   /node-html-parser/3.3.6:
@@ -7456,8 +7451,8 @@ packages:
     engines: {node: '>=4'}
     dev: true
 
-  /prettier/2.3.2:
-    resolution: {integrity: sha512-lnJzDfJ66zkMy58OL5/NY5zp70S7Nz6KqcKkXYzn2tMVrNxvbqaBpg7H3qHaLxCJ5lNMsGuM8+ohS7cZrthdLQ==}
+  /prettier/2.4.1:
+    resolution: {integrity: sha512-9fbDAXSBcc6Bs1mZrDYb3XKzDLm4EXXL9sC1LqKP5rZkT6KRr/rf9amVUcODVXgguK/isJz0d0hP72WeaKWsvA==}
     engines: {node: '>=10.13.0'}
     hasBin: true
     dev: true
@@ -8905,6 +8900,11 @@ packages:
     dependencies:
       defaults: 1.0.3
     dev: true
+
+  /web-streams-polyfill/3.1.1:
+    resolution: {integrity: sha512-Czi3fG883e96T4DLEPRvufrF2ydhOOW1+1a6c3gNjH2aIh50DNFBdfwh2AKoOf1rXvpvavAoA11Qdq9+BKjE0Q==}
+    engines: {node: '>= 8'}
+    dev: false
 
   /webidl-conversions/4.0.2:
     resolution: {integrity: sha512-YQ+BmxuTgd6UXZW3+ICGfyqRyHXVlD5GtQr5+qjiNW7bF0cqrzX500HVXPBOvgXb5YnzDd+h0zqyv61KUD7+Sg==}

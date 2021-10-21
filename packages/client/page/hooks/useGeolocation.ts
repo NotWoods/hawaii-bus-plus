@@ -3,8 +3,9 @@ import { useEffect, useState } from 'preact/hooks';
 export function usePermission(
   permissionDesc: Parameters<Permissions['query']>[0],
 ) {
-  const [status, setStatus] =
-    useState<PermissionState | 'unknown' | undefined>();
+  const [status, setStatus] = useState<
+    PermissionState | 'unknown' | undefined
+  >();
 
   function handleChange(this: PermissionStatus) {
     setStatus(this.state);

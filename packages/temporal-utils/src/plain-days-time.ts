@@ -61,7 +61,7 @@ export class PlainDaysTime {
    */
   static from(value: TimeString | PlainDaysTime): PlainDaysTime {
     if (typeof value !== 'string') {
-      return value as PlainDaysTime;
+      return value;
     }
 
     let [hours, min, second] = value.split(':').map(toInt);

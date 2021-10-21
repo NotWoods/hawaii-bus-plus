@@ -106,7 +106,7 @@ export function RouteTimetable() {
       <BaseSheet style={colorVariables(route)} loaded>
         <Header route={route} />
         <Timetable
-          routeDetails={routeDetails!}
+          routeDetails={routeDetails}
           tripDate={tripDate}
           onChangeTripDate={setTripDate}
         />

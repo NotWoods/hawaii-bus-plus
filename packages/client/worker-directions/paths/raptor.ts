@@ -193,7 +193,7 @@ export async function raptorDirections(
           timeLabels.setPath(stopId, k, {
             time: arrival,
             trip: earliestTrip!.trip_id,
-            stopTime: stopTime!,
+            stopTime,
             transferFrom: hopOnStop.stop_id,
           });
           markedStops.add(stopId);
