@@ -35,7 +35,7 @@ export function StreetViewPano(props: Props) {
 
   const streetView = useMap<google.maps.StreetViewPanorama>(map, (map) => {
     const streetView = new google.maps.StreetViewPanorama(
-      divRef.current,
+      divRef.current!,
       options,
     );
 

@@ -18,7 +18,7 @@ export const lazySearchResults = memoize(() => import('../search-lazy-entry'));
 export function SimpleSearch(props: Props) {
   const [search, setSearch] = useState('');
   const [searchResults, setSearchResults] = useState(emptyResults);
-  const searchRef = useRef<HTMLInputElement>();
+  const searchRef = useRef<HTMLInputElement>(null);
   const getSearchResults = useSearch();
   const getRef = useCallback(() => searchRef.current!, []);
   const handleKeyDown = useAutocompleteKeys(getRef);

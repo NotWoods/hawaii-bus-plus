@@ -9,8 +9,8 @@ interface Props {
   depart?: Point;
   arrive?: Point;
   field: 'depart' | 'arrive';
-  departRef?: Ref<HTMLInputElement | undefined>;
-  arriveRef?: Ref<HTMLInputElement | undefined>;
+  departRef?: Ref<HTMLInputElement>;
+  arriveRef?: Ref<HTMLInputElement>;
   setDepart(depart: Point | undefined): void;
   setArrive(depart: Point | undefined): void;
   onSearchResults(results: FieldsSearchResults): void;

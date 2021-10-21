@@ -1,8 +1,7 @@
 import { Agency } from '@hawaii-bus-plus/types';
 import debounce from 'just-debounce';
-import { h, Ref } from 'preact';
-import { useEffect, useRef } from 'preact/hooks';
-import { useCallback } from 'react';
+import { h } from 'preact';
+import { useCallback, useEffect, useRef } from 'preact/hooks';
 import { DirectionDetails } from '../../../../../worker-info/trip-details';
 import { setDirectionAction } from '../../../../router/action/routes';
 import { useDispatch, useSelector } from '../../../../router/hooks';
@@ -30,7 +29,7 @@ export function TimetableDetails(props: Props) {
   const { directionId } = useSelector(selectLoadedDetails);
   const dispatch = useDispatch();
   const { directionsDetails, agency } = props;
-  const scrollEl = useRef<HTMLDivElement>();
+  const scrollEl = useRef<HTMLDivElement>(null);
 
   // Handle scroll events and update the direction ID when they happen
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -61,7 +60,7 @@ export function TimetableDetails(props: Props) {
         style={{
           gridTemplateColumns: directionsDetails.map(() => '100%').join(' '),
         }}
-        ref={scrollEl as Ref<HTMLDivElement>}
+        ref={scrollEl}
         onScroll={handleScroll}
       >
         {directionsDetails.map((directionDetails, id) => (

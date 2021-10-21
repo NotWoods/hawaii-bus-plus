@@ -22,10 +22,10 @@ export interface GoogleMapProps {
  */
 export function GoogleMap(props: GoogleMapProps) {
   const { map, setMap } = useContext(MapContext);
-  const mapRef = useRef<HTMLDivElement>();
+  const mapRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const map = new google.maps.Map(mapRef.current, {
+    const map = new google.maps.Map(mapRef.current!, {
       ...props.options,
       center: props.defaultCenter,
       zoom: props.defaultZoom,

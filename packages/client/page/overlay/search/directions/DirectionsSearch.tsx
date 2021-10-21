@@ -66,8 +66,8 @@ export function DirectionsSearch(_props: Props) {
     [depart, arrive, departureTime],
   );
 
-  const departRef = useRef<HTMLInputElement>();
-  const arriveRef = useRef<HTMLInputElement>();
+  const departRef = useRef<HTMLInputElement>(null);
+  const arriveRef = useRef<HTMLInputElement>(null);
   const getInputRef = useCallback(() => {
     return {
       depart: departRef.current!,
