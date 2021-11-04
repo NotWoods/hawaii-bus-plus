@@ -1,4 +1,4 @@
-import clsx, { ClassValue } from 'clsx';
+import clsx from 'clsx';
 import { ComponentChildren, h } from 'preact';
 
 interface Props {
@@ -25,14 +25,21 @@ export function Icon(props: Props) {
 
 export function BaseIcon(props: {
   children: ComponentChildren;
-  class?: ClassValue;
+  class?: string;
   fillBlack?: boolean;
 }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
-      class={clsx('w-6 h-6', { 'fill-current': !props.fillBlack }, props.class)}
+      class={clsx(
+        'w-6',
+        {
+          'h-6': !props.class?.includes('h-'),
+          'fill-current': !props.fillBlack,
+        },
+        props.class,
+      )}
       width="24px"
       height="24px"
     >
