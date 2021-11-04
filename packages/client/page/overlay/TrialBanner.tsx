@@ -2,6 +2,7 @@ import { ComponentChildren, Fragment, h } from 'preact';
 import { useState } from 'preact/hooks';
 import { usePromise } from '../hooks';
 import { RelativeDurationElement } from '../time/DurationElement';
+import { useTrialStatus } from './useTrialStatus';
 
 interface PaymentResponse {
   can_pay: boolean;
@@ -28,23 +29,7 @@ const trialStatus = (async (): Promise<PaymentResponse> => {
 })();
 
 export function TrialBanner() {
-  const [visible, setVisible] = useState(false);
-  const [trialEnd, setTrialEnd] = useState<number | undefined>();
-
-  usePromise(async () => {
-    try {
-      const { status, can_pay, end } = await trialStatus;
-
-      if (status === 'trialing' && !can_pay) {
-        if (end != undefined) {
-          setTrialEnd(end);
-        }
-        setVisible(true);
-      }
-    } catch {
-      setVisible(false);
-    }
-  }, []);
+  const { visible, trialEnd } = useTrialStatus();
 
   if (visible) {
     let endString: ComponentChildren = 'soon';

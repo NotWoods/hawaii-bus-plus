@@ -1,8 +1,8 @@
 import { h } from 'preact';
-import { useState } from 'preact/hooks';
 import { SmallRouteIcon } from '../../../../../components/RouteIcon/RouteIcon';
 import { colorVariables } from '../../../../../components/route-colors';
 import type { JourneyTripSegment } from '../../../../../worker-directions/worker-directions';
+import { useToggle } from '../../../../hooks/useToggle';
 import { StopTimesCollapsible } from './StopTimesCollapsible';
 
 interface Props {
@@ -11,7 +11,7 @@ interface Props {
 
 export function TripSegment(props: Props) {
   const { route, trip, agency } = props.segment;
-  const [open, setOpen] = useState(false);
+  const [open, toggleOpen] = useToggle();
 
   return (
     <section style={colorVariables(route)}>
@@ -30,7 +30,7 @@ export function TripSegment(props: Props) {
         stopTimes={props.segment.stopTimes}
         timeZone={agency.agency_timezone}
         open={open}
-        onToggle={() => setOpen(!open)}
+        onToggle={toggleOpen}
       />
     </section>
   );

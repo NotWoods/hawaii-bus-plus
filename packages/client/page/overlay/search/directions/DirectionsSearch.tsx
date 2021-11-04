@@ -1,6 +1,6 @@
 import { Point } from '@hawaii-bus-plus/presentation';
 import { Fragment, h } from 'preact';
-import { useCallback, useRef, useState } from 'preact/hooks';
+import { Ref, useCallback, useRef, useState } from 'preact/hooks';
 import type { Temporal } from '@js-temporal/polyfill';
 import type {
   DirectionsResult,
@@ -68,13 +68,13 @@ export function DirectionsSearch(_props: Props) {
 
   const departRef = useRef<HTMLInputElement>(null);
   const arriveRef = useRef<HTMLInputElement>(null);
-  const getInputRef = useCallback(() => {
+  function getInputRef() {
     return {
-      depart: departRef.current!,
-      arrive: arriveRef.current!,
-    }[searchResults.field];
-  }, [searchResults.field]);
-  const handleKeyDown = useAutocompleteKeys(getInputRef);
+      depart: departRef,
+      arrive: arriveRef,
+    }[searchResults.field] as Ref<HTMLInputElement>;
+  }
+  const handleKeyDown = useAutocompleteKeys(getInputRef());
 
   function renderJourneys() {
     if (depart && arrive) {

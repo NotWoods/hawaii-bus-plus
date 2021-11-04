@@ -10,16 +10,16 @@ interface Props {
   routeColor: ColorString;
 }
 
-export function ShapeLine(props: Props) {
+function useShape(shapeId: Shape['shape_id'] | undefined): Shape | undefined {
   const [shape, setShape] = useState<Shape | undefined>();
 
   usePromise(
     async (signal) => {
       setShape(undefined);
-      if (!props.shapeId) return;
+      if (!shapeId) return;
 
       try {
-        const res = await fetch(`/api/v1/shapes/${props.shapeId}.json`, {
+        const res = await fetch(`/api/v1/shapes/${shapeId}.json`, {
           signal,
           credentials: 'same-origin',
         });
@@ -37,8 +37,14 @@ export function ShapeLine(props: Props) {
         }
       }
     },
-    [props.shapeId],
+    [shapeId],
   );
+
+  return shape;
+}
+
+export function ShapeLine(props: Props) {
+  const shape = useShape(props.shapeId);
 
   const options = useMemo(
     () => ({ strokeColor: props.routeColor }),

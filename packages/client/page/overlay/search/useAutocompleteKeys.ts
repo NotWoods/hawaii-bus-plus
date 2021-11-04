@@ -1,4 +1,4 @@
-import { useCallback } from 'preact/hooks';
+import { Ref, useCallback } from 'preact/hooks';
 
 const options = (() => {
   if (import.meta.env.SSR) {
@@ -28,7 +28,7 @@ function isPrintableKeyCode(key: string) {
   }
 }
 
-export function useAutocompleteKeys(getSearchBar: () => HTMLInputElement) {
+export function useAutocompleteKeys(searchBar: Ref<HTMLInputElement>) {
   return useCallback(
     (event: KeyboardEvent) => {
       const currentFocusedItem = event.target as HTMLElement;
@@ -40,7 +40,7 @@ export function useAutocompleteKeys(getSearchBar: () => HTMLInputElement) {
 
         if (newIndex < 0) {
           // Focus on search bar
-          getSearchBar().focus();
+          searchBar.current.focus();
         } else if (newIndex < options.length) {
           // Focus on item in list
           options[newIndex].focus();
@@ -56,7 +56,7 @@ export function useAutocompleteKeys(getSearchBar: () => HTMLInputElement) {
           break;
         case 'Escape': {
           if (index >= 0) {
-            const search = getSearchBar();
+            const search = searchBar.current;
             search.focus();
             search.value = '';
           }
@@ -64,11 +64,11 @@ export function useAutocompleteKeys(getSearchBar: () => HTMLInputElement) {
         }
         default:
           if (index >= 0 && isPrintableKeyCode(event.key)) {
-            getSearchBar().focus();
+            searchBar.current.focus();
           }
           break;
       }
     },
-    [getSearchBar],
+    [searchBar],
   );
 }

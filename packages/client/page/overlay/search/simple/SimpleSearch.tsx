@@ -1,6 +1,6 @@
 import { memoize } from '@hawaii-bus-plus/utils';
 import { Fragment, h } from 'preact';
-import { useCallback, useRef, useState } from 'preact/hooks';
+import { Ref, useCallback, useRef, useState } from 'preact/hooks';
 import { directions } from '../../../../assets/icons/paths';
 import { OutlinedButton } from '../../../../components/Button/OutlinedButton';
 import { useLazyComponent, usePromise } from '../../../hooks';
@@ -13,16 +13,26 @@ interface Props {
   onDirections?(): void;
 }
 
+interface InputEvent {
+  currentTarget: { value: string };
+}
+
 export const lazySearchResults = memoize(() => import('../search-lazy-entry'));
 
-export function SimpleSearch(props: Props) {
-  const [search, setSearch] = useState('');
+function useInput(): [string, (event: InputEvent) => void] {
+  const [input, setInput] = useState('');
+
+  const handleInput = useCallback(
+    (event: InputEvent) => setInput(event.currentTarget.value),
+    [],
+  );
+
+  return [input, handleInput];
+}
+
+function useSearchResults(search: string) {
   const [searchResults, setSearchResults] = useState(emptyResults);
-  const searchRef = useRef<HTMLInputElement>(null);
   const getSearchResults = useSearch();
-  const getRef = useCallback(() => searchRef.current!, []);
-  const handleKeyDown = useAutocompleteKeys(getRef);
-  const { SearchResultsList } = useLazyComponent(lazySearchResults);
 
   usePromise(
     async (signal) => {
@@ -31,12 +41,22 @@ export function SimpleSearch(props: Props) {
     [search],
   );
 
+  return searchResults;
+}
+
+export function SimpleSearch(props: Props) {
+  const [search, setSearch] = useInput();
+  const searchResults = useSearchResults(search);
+  const searchRef = useRef<HTMLInputElement>(null);
+  const handleKeyDown = useAutocompleteKeys(searchRef as Ref<HTMLInputElement>);
+  const { SearchResultsList } = useLazyComponent(lazySearchResults);
+
   return (
     <>
       <SearchBar
         inputRef={searchRef}
         value={search}
-        onInput={(evt) => setSearch(evt.currentTarget.value)}
+        onInput={setSearch}
         aria-expanded={(searchResults === emptyResults).toString()}
         aria-owns="searchResults"
         onKeyDown={handleKeyDown}
