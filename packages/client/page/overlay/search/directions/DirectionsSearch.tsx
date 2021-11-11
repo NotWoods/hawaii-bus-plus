@@ -1,6 +1,6 @@
 import { Point } from '@hawaii-bus-plus/presentation';
 import { Fragment, h } from 'preact';
-import { Ref, useCallback, useRef, useState } from 'preact/hooks';
+import { Ref, useRef, useState } from 'preact/hooks';
 import type { Temporal } from '@js-temporal/polyfill';
 import type {
   DirectionsResult,

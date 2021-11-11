@@ -1,32 +1,8 @@
 import { ComponentChildren, Fragment, h } from 'preact';
-import { useState } from 'preact/hooks';
-import { usePromise } from '../hooks';
 import { RelativeDurationElement } from '../time/DurationElement';
 import { useTrialStatus } from './useTrialStatus';
 
-interface PaymentResponse {
-  can_pay: boolean;
-  status: string;
-  end: number | undefined;
-}
-
 const SECONDS_IN_DAY = 1000 * 60 * 60 * 24;
-
-const trialStatus = (async (): Promise<PaymentResponse> => {
-  if (import.meta.env.SSR) {
-    return {
-      can_pay: true,
-      status: 'unknown',
-      end: undefined,
-    };
-  } else {
-    const res = await fetch('/.netlify/functions/payment', {
-      credentials: 'same-origin',
-    });
-    const json = await res.json();
-    return json as PaymentResponse;
-  }
-})();
 
 export function TrialBanner() {
   const { visible, trialEnd } = useTrialStatus();
