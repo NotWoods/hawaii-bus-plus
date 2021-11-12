@@ -68,5 +68,3 @@ export const theme: TailwindTheme = {
     },
   },
 };
-
-exports.theme = theme;
