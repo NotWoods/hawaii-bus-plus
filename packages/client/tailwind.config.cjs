@@ -8,7 +8,6 @@ const config = {
     './auth/index.html',
     './page/**/*.tsx',
     './auth/**/*.tsx',
-    './settings/**/*.tsx',
     './share/**/*.tsx',
     './assets/**/*.tsx',
     './components/**/*.tsx',

@@ -7,10 +7,6 @@ interface Fathom {
 }
 
 declare global {
-  interface ImportMetaEnv {
-    SSR: boolean;
-  }
-
   let fathom: Fathom;
 }
 
