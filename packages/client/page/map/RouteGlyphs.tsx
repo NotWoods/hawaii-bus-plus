@@ -2,11 +2,8 @@ import { ColorString, Shape, Stop } from '@hawaii-bus-plus/types';
 import { last } from '@hawaii-bus-plus/utils';
 import { ComponentChildren, Fragment, h } from 'preact';
 import { memo } from 'preact/compat';
-import type { RouteDetails } from '../../worker-info/route-details';
-import type {
-  Journey,
-  JourneyTripSegment,
-} from '../../worker-directions/worker-directions';
+import type { RouteDetails } from '../../worker-info';
+import type { Journey, JourneyTripSegment } from '../../worker-directions';
 import { isJourneyTripSegment } from '../sheet/directions/JourneySegment';
 import { useSelector } from '../router/hooks';
 import { selectJourney, selectLoadedDetails } from '../router/selector/main';

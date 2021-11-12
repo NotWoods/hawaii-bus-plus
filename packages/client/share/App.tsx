@@ -6,7 +6,7 @@ import { colorVariables } from '../components/route-colors';
 import { DetailButtons } from '../components/RouteDescription/DetailButtons';
 import { RouteDescription } from '../components/RouteDescription/RouteDescription';
 import { RouteHeader } from '../components/RouteHeader/RouteHeader';
-import { extractLinks } from '../worker-info/description';
+import { extractLinks } from '../worker-info';
 import { Footer } from './components/Footer';
 import { PageHeader } from './components/PageHeader';
 import { StaticMap, staticMapUrl } from './components/StaticMap';

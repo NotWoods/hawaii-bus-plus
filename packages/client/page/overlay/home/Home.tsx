@@ -1,10 +1,10 @@
 import { ComponentChildren, Fragment, h } from 'preact';
 import { useState } from 'preact/hooks';
-import type {
-  NearbyWorkerHandler,
+import {
   ClosestResults,
-} from '../../../worker-nearby/worker-nearby';
-import NearbyWorker from '../../../worker-nearby/worker-nearby?worker';
+  NearbyWorker,
+  NearbyWorkerHandler,
+} from '../../../worker-nearby';
 import { useDelay, usePromise, useWorker } from '../../hooks';
 import { dbInitialized } from '../../api';
 import { LoadingBusIcon } from '../../loading/LoadingBusIcon';

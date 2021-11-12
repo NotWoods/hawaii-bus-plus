@@ -1,6 +1,6 @@
 import { h } from 'preact';
 import { useCallback } from 'preact/hooks';
-import type { Journey } from '../../../worker-directions/worker-directions';
+import type { Journey } from '../../../worker-directions';
 import { closeMainAction } from '../../router/action/main';
 import { useDispatch, useSelector } from '../../router/hooks';
 import { selectJourney } from '../../router/selector/main';

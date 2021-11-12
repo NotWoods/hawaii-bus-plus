@@ -1,5 +1,5 @@
 import { h } from 'preact';
-import type { StopDetails } from '../../../worker-info/stop-details';
+import type { StopDetails } from '../../../worker-info';
 import { PointInfo } from './PointInfo';
 
 export function StopInfo({ stop }: { stop: StopDetails }) {

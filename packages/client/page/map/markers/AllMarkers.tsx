@@ -2,11 +2,11 @@ import { ColorString, Stop } from '@hawaii-bus-plus/types';
 import { Fragment, h } from 'preact';
 import { memo } from 'preact/compat';
 import { useState } from 'react';
-import type {
+import {
+  MapWorker,
   MapWorkerHandler,
   MarkersResponse,
-} from '../../../worker-map/worker-map';
-import MapWorker from '../../../worker-map/worker-map?worker';
+} from '../../../worker-map';
 import { usePromise, useWorker } from '../../hooks';
 import { dbInitialized } from '../../api';
 import { BikeStationMarkers } from './BikeStationMarkers';

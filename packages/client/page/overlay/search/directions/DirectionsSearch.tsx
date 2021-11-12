@@ -2,11 +2,11 @@ import { Point } from '@hawaii-bus-plus/presentation';
 import { Fragment, h } from 'preact';
 import { Ref, useRef, useState } from 'preact/hooks';
 import type { Temporal } from '@js-temporal/polyfill';
-import type {
+import {
   DirectionsResult,
+  DirectionsWorker,
   DirectionsWorkerHandler,
-} from '../../../../worker-directions/worker-directions';
-import DirectionsWorker from '../../../../worker-directions/worker-directions?worker';
+} from '../../../../worker-directions';
 import { dbInitialized } from '../../../api';
 import {
   useDelay,

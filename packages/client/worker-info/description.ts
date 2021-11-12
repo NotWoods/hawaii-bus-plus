@@ -1,4 +1,7 @@
-import type { DescriptionPart } from '../components/RouteDescription/RouteDescription';
+export interface DescriptionPart {
+  readonly type: 'text' | 'link';
+  readonly value: string;
+}
 
 const LINK_REGEX = /(https?:)\s?(\/\/[.a-z/]+)/g;
 

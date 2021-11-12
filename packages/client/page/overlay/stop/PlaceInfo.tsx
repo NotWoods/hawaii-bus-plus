@@ -1,8 +1,7 @@
 import { h } from 'preact';
 import { useState } from 'preact/hooks';
 import { LatLngLiteral } from 'spherical-geometry-js';
-import type { NearbyWorkerHandler } from '../../../worker-nearby/worker-nearby';
-import NearbyWorker from '../../../worker-nearby/worker-nearby?worker';
+import { NearbyWorker, NearbyWorkerHandler } from '../../../worker-nearby';
 import { dbInitialized } from '../../api';
 import { usePromise, useWorker } from '../../hooks';
 import { emptyClosestResults } from '../search/simple/places-autocomplete';

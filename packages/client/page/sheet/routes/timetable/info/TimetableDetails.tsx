@@ -2,7 +2,7 @@ import { Agency } from '@hawaii-bus-plus/types';
 import debounce from 'just-debounce';
 import { h } from 'preact';
 import { useCallback, useEffect, useRef } from 'preact/hooks';
-import { DirectionDetails } from '../../../../../worker-info/trip-details';
+import { DirectionDetails } from '../../../../../worker-info';
 import { setDirectionAction } from '../../../../router/action/routes';
 import { useDispatch, useSelector } from '../../../../router/hooks';
 import { selectLoadedDetails } from '../../../../router/selector/main';

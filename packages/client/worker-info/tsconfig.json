@@ -2,7 +2,6 @@
   "extends": "../../tsconfig.base.json",
   "include": ["**/*"],
   "references": [
-    { "path": "../components" },
     { "path": "../worker-shared" },
     { "path": "../../data/src" },
     { "path": "../../data/node" },
@@ -12,7 +11,7 @@
     { "path": "../../utils/src" }
   ],
   "compilerOptions": {
-    "types": [],
+    "types": ["vite/client"],
     "lib": ["esnext", "WebWorker"],
     "emitDeclarationOnly": true,
     "skipLibCheck": true

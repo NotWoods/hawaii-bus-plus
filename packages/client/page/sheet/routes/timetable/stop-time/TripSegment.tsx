@@ -1,7 +1,7 @@
 import { h } from 'preact';
 import { SmallRouteIcon } from '../../../../../components/RouteIcon/RouteIcon';
 import { colorVariables } from '../../../../../components/route-colors';
-import type { JourneyTripSegment } from '../../../../../worker-directions/worker-directions';
+import type { JourneyTripSegment } from '../../../../../worker-directions';
 import { useToggle } from '../../../../hooks/useToggle';
 import { StopTimesCollapsible } from './StopTimesCollapsible';
 

@@ -1,8 +1,7 @@
 import { PlacePointPartial, Point } from '@hawaii-bus-plus/presentation';
 import { Route, Trip } from '@hawaii-bus-plus/types';
-import { RouteDetails } from '../../../worker-info/route-details';
-import { TripDetails } from '../../../worker-info/trip-details';
-import type { Journey } from '../../../worker-directions/worker-directions';
+import type { RouteDetails, TripDetails } from '../../../worker-info';
+import type { Journey } from '../../../worker-directions';
 
 export const ROUTES_PREFIX = '/routes/';
 export const DIRECTIONS_PATH = '/directions';

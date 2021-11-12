@@ -1,10 +1,10 @@
 import { AbortError } from '@hawaii-bus-plus/promise-worker';
 import { useGoogleMap } from '@hawaii-bus-plus/react-google-maps';
-import type {
-  SearchWorkerHandler,
+import {
   SearchRequest,
-} from '../../../../worker-search/worker-search';
-import SearchWorker from '../../../../worker-search/worker-search?worker';
+  SearchWorker,
+  SearchWorkerHandler,
+} from '../../../../worker-search';
 import { dbInitialized } from '../../../api';
 import { useWorker } from '../../../hooks';
 import {

@@ -9,7 +9,7 @@
     { "path": "../../utils/src" }
   ],
   "compilerOptions": {
-    "types": [],
+    "types": ["vite/client"],
     "lib": ["esnext", "WebWorker"],
     "emitDeclarationOnly": true,
     "skipLibCheck": true

@@ -4,6 +4,7 @@
   "references": [
     { "path": "../assets" },
     { "path": "../services" },
+    { "path": "../worker-info" },
     { "path": "../../types" }
   ],
   "compilerOptions": {

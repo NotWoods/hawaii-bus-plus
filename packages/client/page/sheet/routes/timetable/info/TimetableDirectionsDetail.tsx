@@ -3,7 +3,7 @@ import { last } from '@hawaii-bus-plus/utils';
 import { ComponentChildren, h } from 'preact';
 import { Icon } from '../../../../../assets/icons/Icon';
 import { access_time } from '../../../../../assets/icons/paths';
-import { DirectionDetails } from '../../../../../worker-info/trip-details';
+import { DirectionDetails } from '../../../../../worker-info';
 import { EndedAt, ReachesAt, StartedFrom } from './StartedFrom';
 import { BaseDetails } from './TripName';
 

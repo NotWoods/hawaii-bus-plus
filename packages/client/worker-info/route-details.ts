@@ -3,8 +3,7 @@ import { durationToData } from '@hawaii-bus-plus/presentation';
 import { Agency, ColorString, Route, Stop } from '@hawaii-bus-plus/types';
 import type { Temporal } from '@js-temporal/polyfill';
 import { LatLngBounds, LatLngBoundsLiteral } from 'spherical-geometry-js';
-import type { DescriptionPart } from '../components/RouteDescription/RouteDescription';
-import { extractLinks } from './description';
+import { DescriptionPart, extractLinks } from './description';
 import { loadCalendarAgency, routeStopDetails } from './shared';
 import { FormatOptions, zonedTime } from './stop-time';
 import {

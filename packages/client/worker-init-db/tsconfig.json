@@ -6,9 +6,9 @@
     { "path": "../../promise-worker/worker" }
   ],
   "compilerOptions": {
+    "types": ["vite/client"],
     "lib": ["esnext", "WebWorker"],
     "emitDeclarationOnly": true,
-    "types": [],
     "skipLibCheck": true
   }
 }

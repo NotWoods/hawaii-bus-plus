@@ -8,7 +8,7 @@
     { "path": "../../types" }
   ],
   "compilerOptions": {
-    "types": ["google.maps"],
+    "types": ["vite/client", "google.maps"],
     "lib": ["esnext", "dom", "WebWorker"],
     "emitDeclarationOnly": true,
     "skipLibCheck": true
