@@ -22,10 +22,7 @@ export class NodeRepository extends BaseMemoryRepository {
 
     const apiLocations = paths.map((relative) => {
       if (import.meta.url) {
-        return new URL(
-          relative instanceof URL ? relative.href : relative,
-          import.meta.url,
-        );
+        return new URL(relative.toString(), import.meta.url);
       } else {
         return resolve(__dirname, relative as string);
       }

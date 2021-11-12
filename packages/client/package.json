@@ -57,7 +57,12 @@
   },
   "jest": {
     "transform": {
-      "^.+\\.(j|t)sx?$": "esbuild-jest"
+      "^.+\\.(j|t)sx?$": [
+        "esbuild-jest",
+        {
+          "target": "node16"
+        }
+      ]
     }
   },
   "eslintConfig": {
