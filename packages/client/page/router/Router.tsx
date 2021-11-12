@@ -53,7 +53,7 @@ export function Router(props: {
   useEffect(() => {
     function onPopState(evt: PopStateEvent) {
       if (evt.state) {
-        dispatch(reloadStateAction(evt.state));
+        dispatch(reloadStateAction(evt.state as RouterState));
       } else {
         dispatch(linkAction(window.location.href));
       }

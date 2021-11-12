@@ -9,7 +9,7 @@ test('calls terminate', (t) => {
     },
     addEventListener() {},
   };
-  const promiseWorker = new PromiseWorker(worker as any);
+  const promiseWorker = new PromiseWorker(worker as unknown as Worker);
 
   t.is(called, false);
   promiseWorker.terminate();

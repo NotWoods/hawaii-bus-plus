@@ -36,23 +36,9 @@ export class NodeRepository extends BaseMemoryRepository {
   private async init(
     apiLocations: readonly (string | URL)[],
   ): Promise<GTFSData> {
-    let data: string | undefined;
-    const errors: unknown[] = [];
-    for (const apiLocation of apiLocations) {
-      try {
-        data = await readFile(apiLocation, 'utf8');
-      } catch (err: unknown) {
-        errors.push(err);
-      }
-
-      if (data) break;
-    }
-
-    if (!data) {
-      console.error(errors);
-      throw new Error(errors as any);
-      // throw new AggregateError(errors);
-    }
+    const data = await Promise.any(
+      apiLocations.map((apiLocation) => readFile(apiLocation, 'utf8')),
+    );
 
     return JSON.parse(data) as GTFSData;
   }

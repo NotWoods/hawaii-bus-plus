@@ -46,7 +46,11 @@ export class PromiseWorker {
       return;
     }
 
-    const [messageId, error, result] = message;
+    const [messageId, error, result] = message as [
+      number,
+      Error | undefined,
+      unknown,
+    ];
     const callback = this.callbacks.get(messageId);
 
     if (!callback) {
