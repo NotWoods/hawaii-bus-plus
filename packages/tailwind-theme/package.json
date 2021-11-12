@@ -3,10 +3,12 @@
   "version": "1.0.0",
   "private": false,
   "type": "commonjs",
-  "main": "theme.cjs",
+  "main": "src/index.js",
+  "types": "src/index.d.ts",
   "scripts": {
-    "format": "prettier *.{cjs,mjs} --write --ignore-path ../../.prettierignore",
-    "postformat": "eslint \"**/*.cjs\" --fix"
+    "build": "tsc --build src",
+    "format": "prettier **/*.ts --write --ignore-path ../../.prettierignore",
+    "postformat": "eslint \"**/*.ts\" --fix"
   },
   "peerDependencies": {
     "tailwindcss": "^2.2.19"
@@ -19,8 +21,10 @@
     "typescript": "^4.4.4"
   },
   "eslintConfig": {
-    "rules": {
-      "@typescript-eslint/no-unsafe-member-access": "off"
+    "parserOptions": {
+      "project": [
+        "./packages/tailwind-theme/*/tsconfig.json"
+      ]
     }
   }
 }

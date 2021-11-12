@@ -18,6 +18,7 @@
     { "path": "packages/promise-worker/page" },
     { "path": "packages/promise-worker/worker" },
     { "path": "packages/react-google-maps/src" },
+    { "path": "packages/tailwind-theme/src" },
     { "path": "packages/temporal-utils/src" },
     { "path": "packages/types" },
     { "path": "packages/utils/src" },

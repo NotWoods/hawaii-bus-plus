@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from 'vite';
-import { emptyPackage } from '@hawaii-bus-plus/vite-plugins';
+import { headHtml } from '@hawaii-bus-plus/tailwind-theme';
+import { emptyPackage, injectHtml } from '@hawaii-bus-plus/vite-plugins';
 import prefresh from '@prefresh/vite';
 
 export default defineConfig(({ command }) => {
@@ -13,8 +14,18 @@ export default defineConfig(({ command }) => {
   return {
     plugins: [
       command === 'build' && emptyPackage('preact/debug'),
+      injectHtml({
+        head: headHtml().then(
+          (html) =>
+            (html += `
+<link rel="icon" type="image/svg+xml" sizes="any" href="/icon/favicon.svg" />
+<link rel="icon" type="image/png" sizes="512x512" href="/icon/favicon-512.png" />
+<link rel="icon" type="image/png" sizes="48x48" href="/icon/favicon.png" />
+<link rel="apple-touch-icon" sizes="512x512" href="/icon/maskable.png" />
+<link rel="manifest" href="/manifest.webmanifest" />`),
+        ),
+      }),
       prefresh({
-        // @ts-expect-error prefresh type issues
         include: ['{auth,page,share,assets,components}/**/*'],
         exclude: ['worker-*/**'],
       }),

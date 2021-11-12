@@ -11,6 +11,7 @@
     { "path": "../../react-google-maps/src" },
     { "path": "../../types" },
     { "path": "../../utils/src" },
+    { "path": "../../tailwind-theme/src" },
     { "path": "../../vite-plugins/src" }
   ],
   "compilerOptions": {

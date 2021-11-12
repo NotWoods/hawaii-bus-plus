@@ -1,15 +1,7 @@
-// @ts-check
-const colors = require('tailwindcss/colors');
+import type { TailwindTheme } from 'tailwindcss/tailwind-config';
+import colors = require('tailwindcss/colors');
 
-/** @type {any} */
-const lineAnimation = {
-  '0%, 25%': { 'stroke-dashoffset': 22 },
-  '50%, 51%': { 'stroke-dashoffset': 0 },
-  '80%, 100%': { 'stroke-dashoffset': -22 },
-};
-
-/** @type {import('tailwindcss/tailwind-config').TailwindTheme} */
-const theme = {
+export const theme: TailwindTheme = {
   fontFamily: {
     display: ['Red Rose', 'Copperplate Gothic', 'Copperplate', 'serif'],
   },
@@ -60,7 +52,11 @@ const theme = {
       from: { transform: 'translateY(-1%)' },
       to: { transform: 'translateY(3%)' },
     },
-    line: lineAnimation,
+    line: {
+      '0%, 25%': { 'stroke-dashoffset': 22 } as any,
+      '50%, 51%': { 'stroke-dashoffset': 0 } as any,
+      '80%, 100%': { 'stroke-dashoffset': -22 } as any,
+    },
   },
   animation: {
     shake: 'shake 0.2s ease-in-out infinite alternate',
