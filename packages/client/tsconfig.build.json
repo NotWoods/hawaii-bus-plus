@@ -1,6 +1,6 @@
 {
   "extends": "../tsconfig.base.json",
-  "files": ["vite.config.mjs"],
+  "files": [],
   "references": [
     { "path": "./auth" },
     { "path": "./page" },
