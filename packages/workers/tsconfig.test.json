@@ -1,0 +1,15 @@
+{
+  "extends": "../tsconfig.base.json",
+  "include": ["**/*.spec.ts"],
+  "references": [
+    { "path": "./directions" },
+    { "path": "./info" },
+    { "path": "./init-db" },
+    { "path": "./map" },
+    { "path": "./nearby" },
+    { "path": "./search" }
+  ],
+  "compilerOptions": {
+    "noEmit": true
+  }
+}

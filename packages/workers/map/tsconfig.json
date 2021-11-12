@@ -3,9 +3,9 @@
   "include": ["**/*"],
   "references": [
     { "path": "../shared" },
-    { "path": "../../../data/src" },
-    { "path": "../../../data/node" },
-    { "path": "../../../types" }
+    { "path": "../../data/src" },
+    { "path": "../../data/node" },
+    { "path": "../../types" }
   ],
   "compilerOptions": {
     "types": ["vite/client", "google.maps"],
