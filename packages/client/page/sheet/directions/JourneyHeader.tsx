@@ -5,7 +5,7 @@ import {
 import clsx from 'clsx';
 import { h } from 'preact';
 import { CloseButton } from '../../../components/CloseButton/CloseButton';
-import type { Journey } from '../../../worker-directions';
+import type { Journey } from '../../../workers/directions';
 import { useScreens } from '../../hooks';
 import './JourneyHeader.css';
 

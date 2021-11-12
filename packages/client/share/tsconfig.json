@@ -6,7 +6,7 @@
     { "path": "../components" },
     { "path": "../services" },
     { "path": "../page" },
-    { "path": "../worker-info" },
+    { "path": "../workers/info" },
     { "path": "../../data/src" },
     { "path": "../../mnemonist/src" },
     { "path": "../../presentation/src" },

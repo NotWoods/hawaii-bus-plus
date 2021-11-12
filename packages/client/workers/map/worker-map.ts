@@ -1,4 +1,4 @@
-import { BaseMessageRequest, registerWorker } from '../worker-shared/register';
+import { BaseMessageRequest, registerWorker } from '../shared/register';
 import { loadMarkers, MarkersResponse } from './markers';
 
 export type { MarkersResponse };

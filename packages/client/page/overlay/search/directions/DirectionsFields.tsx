@@ -1,7 +1,7 @@
 import { Point } from '@hawaii-bus-plus/presentation';
 import { Fragment, h, Ref } from 'preact';
 import { useEffect, useRef } from 'preact/hooks';
-import type { SearchResults } from '../../../../worker-search';
+import type { SearchResults } from '../../../../workers/search';
 import { useSearch } from '../simple/useSearch';
 import { DirectionsField } from './DirectionsField';
 

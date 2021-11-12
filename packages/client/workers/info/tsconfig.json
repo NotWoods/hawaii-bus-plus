@@ -1,0 +1,19 @@
+{
+  "extends": "../../../tsconfig.base.json",
+  "include": ["**/*"],
+  "references": [
+    { "path": "../shared" },
+    { "path": "../../../data/src" },
+    { "path": "../../../data/node" },
+    { "path": "../../../jest-utils/src" },
+    { "path": "../../../presentation/src" },
+    { "path": "../../../types" },
+    { "path": "../../../utils/src" }
+  ],
+  "compilerOptions": {
+    "types": ["vite/client"],
+    "lib": ["esnext", "WebWorker"],
+    "emitDeclarationOnly": true,
+    "skipLibCheck": true
+  }
+}

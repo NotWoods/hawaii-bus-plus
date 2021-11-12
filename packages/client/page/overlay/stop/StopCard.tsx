@@ -5,7 +5,7 @@ import {
   InfoWorker,
   InfoWorkerHandler,
   StopDetails,
-} from '../../../worker-info';
+} from '../../../workers/info';
 import { usePromise, useWorker } from '../../hooks';
 import { dbInitialized } from '../../api';
 import { PointBase } from './PointBase';

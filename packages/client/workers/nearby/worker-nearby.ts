@@ -1,5 +1,5 @@
 import { LatLngLiteral } from 'spherical-geometry-js';
-import { registerWorker } from '../worker-shared/register';
+import { registerWorker } from '../shared/register';
 import { ClosestResults, findClosest } from './closest/closest';
 
 export type { ClosestResults };

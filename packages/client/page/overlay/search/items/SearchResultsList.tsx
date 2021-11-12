@@ -1,5 +1,5 @@
 import { h } from 'preact';
-import type { SearchResults } from '../../../../worker-search';
+import type { SearchResults } from '../../../../workers/search';
 import {
   PlaceSearchResultItem,
   StopSearchResultItem,

@@ -1,4 +1,4 @@
-import { registerWorker } from '../worker-shared/register';
+import { registerWorker } from '../shared/register';
 import { SearchRequest } from './helpers';
 import { search, SearchResults } from './search-db';
 

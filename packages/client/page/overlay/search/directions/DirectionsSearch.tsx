@@ -6,7 +6,7 @@ import {
   DirectionsResult,
   DirectionsWorker,
   DirectionsWorkerHandler,
-} from '../../../../worker-directions';
+} from '../../../../workers/directions';
 import { dbInitialized } from '../../../api';
 import {
   useDelay,

@@ -4,7 +4,7 @@ import { PlainDaysTime } from '@hawaii-bus-plus/temporal-utils';
 import { Stop } from '@hawaii-bus-plus/types';
 import { notNull } from '@hawaii-bus-plus/utils';
 import { Temporal } from '@js-temporal/polyfill';
-import { findClosestStops } from '../worker-nearby/closest/closest-stops';
+import { findClosestStops } from '../nearby/closest/closest-stops';
 import { Journey, journeyToDirections } from './format';
 import {
   CompletePath,

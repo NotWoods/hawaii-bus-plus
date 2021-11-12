@@ -1,7 +1,7 @@
 import { h } from 'preact';
 import { SmallRouteIcon } from '../../../../components/RouteIcon/RouteIcon';
 import { colorVariables } from '../../../../components/route-colors';
-import type { Journey } from '../../../../worker-directions';
+import type { Journey } from '../../../../workers/directions';
 import { useDuplicateKeys } from '../../../hooks/useDuplicateKeys';
 import { openJourney } from '../../../router/action/main';
 import { Link } from '../../../router/Router';

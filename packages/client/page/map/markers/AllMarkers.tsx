@@ -6,7 +6,7 @@ import {
   MapWorker,
   MapWorkerHandler,
   MarkersResponse,
-} from '../../../worker-map';
+} from '../../../workers/map';
 import { usePromise, useWorker } from '../../hooks';
 import { dbInitialized } from '../../api';
 import { BikeStationMarkers } from './BikeStationMarkers';

@@ -4,7 +4,7 @@ import {
   SearchRequest,
   SearchWorker,
   SearchWorkerHandler,
-} from '../../../../worker-search';
+} from '../../../../workers/search';
 import { dbInitialized } from '../../../api';
 import { useWorker } from '../../../hooks';
 import {

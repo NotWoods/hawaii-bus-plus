@@ -1,0 +1,21 @@
+{
+  "extends": "../../../tsconfig.base.json",
+  "include": ["**/*"],
+  "references": [
+    { "path": "../shared" },
+    { "path": "../nearby" },
+    { "path": "../../../data/src" },
+    { "path": "../../../data/node" },
+    { "path": "../../../jest-utils/src" },
+    { "path": "../../../mnemonist/src" },
+    { "path": "../../../presentation/src" },
+    { "path": "../../../temporal-utils/src" },
+    { "path": "../../../types" }
+  ],
+  "compilerOptions": {
+    "types": ["vite/client"],
+    "lib": ["esnext", "WebWorker"],
+    "emitDeclarationOnly": true,
+    "skipLibCheck": true
+  }
+}
