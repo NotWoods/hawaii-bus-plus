@@ -1,0 +1,26 @@
+{
+  "name": "@hawaii-bus-plus/tailwind-theme",
+  "version": "1.0.0",
+  "private": false,
+  "type": "commonjs",
+  "main": "theme.cjs",
+  "scripts": {
+    "format": "prettier *.{cjs,mjs} --write --ignore-path ../../.prettierignore",
+    "postformat": "eslint \"**/*.cjs\" --fix"
+  },
+  "peerDependencies": {
+    "tailwindcss": "^2.2.19"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/tailwindcss": "^2.2.4",
+    "prettier": "~2.4.1",
+    "tailwindcss": "^2.2.19",
+    "typescript": "^4.4.4"
+  },
+  "eslintConfig": {
+    "rules": {
+      "@typescript-eslint/no-unsafe-member-access": "off"
+    }
+  }
+}

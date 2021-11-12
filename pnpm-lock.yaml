@@ -77,6 +77,7 @@ importers:
       '@hawaii-bus-plus/presentation': workspace:*
       '@hawaii-bus-plus/promise-worker': workspace:*
       '@hawaii-bus-plus/react-google-maps': workspace:*
+      '@hawaii-bus-plus/tailwind-theme': workspace:*
       '@hawaii-bus-plus/temporal-utils': workspace:*
       '@hawaii-bus-plus/types': workspace:*
       '@hawaii-bus-plus/utils': workspace:*
@@ -91,6 +92,7 @@ importers:
       '@tailwindcss/typography': ^0.4.1
       '@types/google.maps': ^3.46.1
       '@types/jest': ^27.0.2
+      '@types/tailwindcss': ^2.2.4
       clsx: ^1.1.1
       esbuild: ^0.13.13
       esbuild-jest: ^0.5.0
@@ -129,6 +131,7 @@ importers:
     devDependencies:
       '@googlemaps/js-api-loader': 1.12.9
       '@hawaii-bus-plus/jest-utils': link:../jest-utils
+      '@hawaii-bus-plus/tailwind-theme': link:../tailwind-theme
       '@hawaii-bus-plus/vite-plugins': link:../vite-plugins
       '@jest/globals': 27.3.1
       '@prefresh/vite': 2.2.4_preact@10.5.15+vite@2.7.0-beta.3
@@ -137,6 +140,7 @@ importers:
       '@tailwindcss/typography': 0.4.1_tailwindcss@2.2.19
       '@types/google.maps': 3.46.1
       '@types/jest': 27.0.2
+      '@types/tailwindcss': 2.2.4
       esbuild: 0.13.13
       esbuild-jest: 0.5.0_esbuild@0.13.13
       jest: 27.3.1
@@ -350,6 +354,18 @@ importers:
       ava: 3.15.0
       preact: 10.5.15
       prettier: 2.4.1
+      typescript: 4.4.4
+
+  packages/tailwind-theme:
+    specifiers:
+      '@types/tailwindcss': ^2.2.4
+      prettier: ~2.4.1
+      tailwindcss: ^2.2.19
+      typescript: ^4.4.4
+    devDependencies:
+      '@types/tailwindcss': 2.2.4
+      prettier: 2.4.1
+      tailwindcss: 2.2.19
       typescript: 4.4.4
 
   packages/temporal-utils:
@@ -2813,6 +2829,10 @@ packages:
 
   /@types/stack-utils/2.0.1:
     resolution: {integrity: sha512-Hl219/BT5fLAaz6NDkSuhzasy49dwQS/DSdu4MdggFB8zcXv7vflBI3xp7FEmkmdDkBUI2bPUNeMttp2knYdxw==}
+    dev: true
+
+  /@types/tailwindcss/2.2.4:
+    resolution: {integrity: sha512-8mIk+0BoReKiaBI4e3hjaz9YDQto+rdZ2eEExHf6AfS38FZcALQ6s8mTd+74N8BtBaLnTzLdNe5GbkzObWlSXw==}
     dev: true
 
   /@types/trusted-types/2.0.2:

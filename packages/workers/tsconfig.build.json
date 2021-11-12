@@ -8,8 +8,5 @@
     { "path": "./map" },
     { "path": "./nearby" },
     { "path": "./search" }
-  ],
-  "compilerOptions": {
-    "noEmit": true
-  }
+  ]
 }
