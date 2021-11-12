@@ -1,12 +1,12 @@
 {
-  "extends": "../../../tsconfig.base.json",
+  "extends": "../../tsconfig.base.json",
   "include": ["**/*"],
   "references": [
     { "path": "../shared" },
-    { "path": "../../../data/src" },
-    { "path": "../../../data/node" },
-    { "path": "../../../types" },
-    { "path": "../../../utils/src" }
+    { "path": "../../data/src" },
+    { "path": "../../data/node" },
+    { "path": "../../types" },
+    { "path": "../../utils/src" }
   ],
   "compilerOptions": {
     "types": ["vite/client"],

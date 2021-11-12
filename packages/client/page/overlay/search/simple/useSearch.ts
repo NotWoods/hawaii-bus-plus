@@ -4,7 +4,7 @@ import {
   SearchRequest,
   SearchWorker,
   SearchWorkerHandler,
-} from '../../../../workers/search';
+} from '@hawaii-bus-plus/workers/search';
 import { dbInitialized } from '../../../api';
 import { useWorker } from '../../../hooks';
 import {

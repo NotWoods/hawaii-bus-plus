@@ -1,9 +1,9 @@
 {
-  "extends": "../../../tsconfig.base.json",
+  "extends": "../../tsconfig.base.json",
   "include": ["**/*"],
   "references": [
-    { "path": "../../../data/src" },
-    { "path": "../../../promise-worker/worker" }
+    { "path": "../../data/src" },
+    { "path": "../../promise-worker/worker" }
   ],
   "compilerOptions": {
     "types": ["vite/client"],

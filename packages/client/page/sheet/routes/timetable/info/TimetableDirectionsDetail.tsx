@@ -1,9 +1,9 @@
 import { Agency } from '@hawaii-bus-plus/types';
 import { last } from '@hawaii-bus-plus/utils';
+import { DirectionDetails } from '@hawaii-bus-plus/workers/info';
 import { ComponentChildren, h } from 'preact';
 import { Icon } from '../../../../../assets/icons/Icon';
 import { access_time } from '../../../../../assets/icons/paths';
-import { DirectionDetails } from '../../../../../workers/info';
 import { EndedAt, ReachesAt, StartedFrom } from './StartedFrom';
 import { BaseDetails } from './TripName';
 

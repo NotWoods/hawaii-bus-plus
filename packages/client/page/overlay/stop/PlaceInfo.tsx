@@ -1,7 +1,10 @@
+import {
+  NearbyWorker,
+  NearbyWorkerHandler,
+} from '@hawaii-bus-plus/workers/nearby';
 import { h } from 'preact';
 import { useState } from 'preact/hooks';
-import { LatLngLiteral } from 'spherical-geometry-js';
-import { NearbyWorker, NearbyWorkerHandler } from '../../../workers/nearby';
+import type { LatLngLiteral } from 'spherical-geometry-js';
 import { dbInitialized } from '../../api';
 import { usePromise, useWorker } from '../../hooks';
 import { emptyClosestResults } from '../search/simple/places-autocomplete';

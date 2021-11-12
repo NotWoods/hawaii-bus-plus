@@ -1,7 +1,7 @@
 import { StopTimeData } from '@hawaii-bus-plus/presentation';
 import { Agency } from '@hawaii-bus-plus/types';
 import { h } from 'preact';
-import type { DirectionDetails } from '../../../../../workers/info';
+import type { DirectionDetails } from '@hawaii-bus-plus/workers/info';
 import { Link } from '../../../../router/Router';
 import { RelativeDurationElement } from '../../../../time/DurationElement';
 import { PlainTimeElement } from '../../../../time/PlainTimeElement';

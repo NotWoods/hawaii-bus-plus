@@ -9,7 +9,7 @@ import {
   InfoWorkerHandler,
   RouteDetails,
   TripDetails,
-} from '../../../workers/info';
+} from '@hawaii-bus-plus/workers/info';
 import { dbInitialized } from '../../api';
 import { useDelay, useLazyComponent, usePromise, useWorker } from '../../hooks';
 import { LoadingBusIcon } from '../../loading/LoadingBusIcon';

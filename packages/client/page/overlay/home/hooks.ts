@@ -1,5 +1,5 @@
 import { useContext } from 'preact/hooks';
-import { LatLngLiteral } from 'spherical-geometry-js';
+import type { LatLngLiteral } from 'spherical-geometry-js';
 import { MyLocationContext } from '../../map/location/context';
 import { useSelector } from '../../router/hooks';
 import { selectUserPoint } from '../../router/selector/point';

@@ -6,8 +6,7 @@
   "scripts": {
     "prebuild": "tsc --build tsconfig.build.json",
     "build": "vite build",
-    "predev": "tsc --build page",
-    "dev": "TAILWIND_MODE=watch vite",
+    "dev": "vite",
     "format": "prettier **/*.{ts,tsx} *.{cjs,mjs} *.html --write --ignore-path ../../.prettierignore",
     "postformat": "eslint \"**/*.{ts,tsx}\" --fix",
     "pretest": "tsc --build page",
@@ -23,6 +22,7 @@
     "@hawaii-bus-plus/temporal-utils": "workspace:*",
     "@hawaii-bus-plus/types": "workspace:*",
     "@hawaii-bus-plus/utils": "workspace:*",
+    "@hawaii-bus-plus/workers": "workspace:*",
     "@js-temporal/polyfill": "^0.2.0",
     "@notwoods/preact-helmet": "^6.1.0",
     "clsx": "^1.1.1",

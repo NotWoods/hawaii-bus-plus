@@ -1,6 +1,6 @@
 import { Point } from '@hawaii-bus-plus/presentation';
 import { h } from 'preact';
-import type { SearchResults } from '../../../../workers/search';
+import type { SearchResults } from '@hawaii-bus-plus/workers/search';
 import { getDetails, usePlacesService } from '../../../hooks/usePlacesService';
 import { SearchResultsList } from '../items/SearchResultsList';
 

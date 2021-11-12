@@ -4,7 +4,7 @@ import {
   ClosestResults,
   NearbyWorker,
   NearbyWorkerHandler,
-} from '../../../workers/nearby';
+} from '@hawaii-bus-plus/workers/nearby';
 import { useDelay, usePromise, useWorker } from '../../hooks';
 import { dbInitialized } from '../../api';
 import { LoadingBusIcon } from '../../loading/LoadingBusIcon';

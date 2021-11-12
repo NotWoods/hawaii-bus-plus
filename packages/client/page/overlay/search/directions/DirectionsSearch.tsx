@@ -6,7 +6,7 @@ import {
   DirectionsResult,
   DirectionsWorker,
   DirectionsWorkerHandler,
-} from '../../../../workers/directions';
+} from '@hawaii-bus-plus/workers/directions';
 import { dbInitialized } from '../../../api';
 import {
   useDelay,

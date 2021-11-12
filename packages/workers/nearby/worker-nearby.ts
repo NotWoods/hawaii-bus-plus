@@ -1,4 +1,4 @@
-import { LatLngLiteral } from 'spherical-geometry-js';
+import type { LatLngLiteral } from 'spherical-geometry-js';
 import { registerWorker } from '../shared/register';
 import { ClosestResults, findClosest } from './closest/closest';
 

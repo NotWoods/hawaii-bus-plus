@@ -1,4 +1,4 @@
-import { LatLngLiteral } from 'spherical-geometry-js';
+import type { LatLngLiteral } from 'spherical-geometry-js';
 
 export type GeolocationErrorCode =
   typeof GeolocationErrorCode[keyof typeof GeolocationErrorCode];

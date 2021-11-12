@@ -1,7 +1,10 @@
 import { Trip } from '@hawaii-bus-plus/types';
 import { Fragment, h } from 'preact';
 import type { Temporal } from '@js-temporal/polyfill';
-import type { DirectionDetails, RouteDetails } from '../../../../workers/info';
+import type {
+  DirectionDetails,
+  RouteDetails,
+} from '@hawaii-bus-plus/workers/info';
 import { LoadingBar } from '../../../loading/LoadingBar';
 import { useDelay } from '../../../hooks';
 import { setTripAction } from '../../../router/action/main';

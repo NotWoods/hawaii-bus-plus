@@ -6,7 +6,7 @@ import {
   MapWorker,
   MapWorkerHandler,
   MarkersResponse,
-} from '../../../workers/map';
+} from '@hawaii-bus-plus/workers/map';
 import { usePromise, useWorker } from '../../hooks';
 import { dbInitialized } from '../../api';
 import { BikeStationMarkers } from './BikeStationMarkers';

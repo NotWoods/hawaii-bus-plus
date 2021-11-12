@@ -1,5 +1,5 @@
 import { PromiseWorker } from '@hawaii-bus-plus/promise-worker';
-import { InitDBWorker } from '../workers/init-db';
+import { InitDBWorker } from '@hawaii-bus-plus/workers/init-db';
 
 interface Fathom {
   trackPageview(opts?: { url?: string; referrer?: string }): void;

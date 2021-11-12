@@ -1,6 +1,6 @@
 import { memoize } from '@hawaii-bus-plus/utils';
-import type { ClosestResults } from '../../../../workers/nearby';
-import type { SearchResults } from '../../../../workers/search';
+import type { ClosestResults } from '@hawaii-bus-plus/workers/nearby';
+import type { SearchResults } from '@hawaii-bus-plus/workers/search';
 
 declare global {
   namespace google.maps.places {

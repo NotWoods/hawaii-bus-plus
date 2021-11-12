@@ -1,4 +1,4 @@
-import type { RouteDetails, TripDetails } from '../../../workers/info';
+import type { RouteDetails, TripDetails } from '@hawaii-bus-plus/workers/info';
 
 export type OpenRouteAction =
   | ReturnType<typeof setRouteDetailsAction>
