@@ -105,6 +105,7 @@ importers:
       spherical-geometry-js: ^2.1.0
       tailwindcss: ^2.2.19
       tailwindcss-scroll-snap: ^1.1.0
+      ts-jest-resolver: ^2.0.0
       tslib: ^2.3.1
       type-fest: ^2.5.3
       typescript: ^4.4.4
@@ -148,6 +149,7 @@ importers:
       prettier: 2.4.1
       tailwindcss: 2.2.19
       tailwindcss-scroll-snap: 1.1.0
+      ts-jest-resolver: 2.0.0
       type-fest: 2.5.3
       typescript: 4.4.4
       vite: 2.7.0-beta.3
@@ -453,6 +455,7 @@ importers:
       jest: ^27.3.1
       prettier: ~2.4.1
       spherical-geometry-js: ^2.1.0
+      ts-jest-resolver: ^2.0.0
       tslib: ^2.3.1
       typescript: ^4.4.4
       vite: 2.7.0-beta.3
@@ -476,6 +479,7 @@ importers:
       esbuild-jest: 0.5.0_esbuild@0.13.13
       jest: 27.3.1
       prettier: 2.4.1
+      ts-jest-resolver: 2.0.0
       typescript: 4.4.4
       vite: 2.7.0-beta.3
 
@@ -8857,6 +8861,12 @@ packages:
   /trim-off-newlines/1.0.3:
     resolution: {integrity: sha512-kh6Tu6GbeSNMGfrrZh6Bb/4ZEHV1QlB4xNDBeog8Y9/QwFlKTRyWvY3Fs9tRDAMZliVUwieMgEdIeL/FtqjkJg==}
     engines: {node: '>=0.10.0'}
+    dev: true
+
+  /ts-jest-resolver/2.0.0:
+    resolution: {integrity: sha512-yr/lgqJtVBUXhnaxD5Es0XFGHoIYT6NgbUW1VUiAPTEDINHByiUfcnfDf6VOK3CRibqaqWyTEAppBBcXeIuGAw==}
+    dependencies:
+      jest-resolve: 27.3.1
     dev: true
 
   /tslib/1.14.1:

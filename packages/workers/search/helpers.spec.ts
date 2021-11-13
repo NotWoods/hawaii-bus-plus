@@ -1,5 +1,5 @@
 import { expect, test } from '@jest/globals';
-import { applyOffset } from './helpers';
+import { applyOffset } from './helpers.js';
 
 test('applyOffset', () => {
   expect(applyOffset('Google abc', 3)).toBe('Goo abc');
