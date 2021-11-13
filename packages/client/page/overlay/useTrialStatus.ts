@@ -1,4 +1,5 @@
 import { useState } from 'preact/hooks';
+import { FEATURE_BILLING } from '../../services/env';
 import { usePromise } from '../hooks';
 
 interface PaymentResponse {
@@ -14,12 +15,18 @@ const trialStatus = (async (): Promise<PaymentResponse> => {
       status: 'unknown',
       end: undefined,
     };
-  } else {
+  } else if (FEATURE_BILLING) {
     const res = await fetch('/.netlify/functions/payment', {
       credentials: 'same-origin',
     });
     const json = await res.json();
     return json as PaymentResponse;
+  } else {
+    return {
+      can_pay: true,
+      status: 'active',
+      end: undefined,
+    };
   }
 })();
 
