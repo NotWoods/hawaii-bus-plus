@@ -48,8 +48,8 @@ importers:
       node-fetch: ^3.1.0
       prettier: ~2.4.1
       tslib: ^2.3.1
-      type-fest: ^2.5.3
-      typescript: ^4.4.4
+      type-fest: ^2.5.4
+      typescript: ^4.5.2
     dependencies:
       '@hawaii-bus-plus/mnemonist': link:../mnemonist
       '@hawaii-bus-plus/temporal-utils': link:../temporal-utils
@@ -65,8 +65,8 @@ importers:
       '@types/node': 16.11.7
       ava: 3.15.0
       prettier: 2.4.1
-      type-fest: 2.5.3
-      typescript: 4.4.4
+      type-fest: 2.5.4
+      typescript: 4.5.2
 
   packages/client:
     specifiers:
@@ -107,9 +107,9 @@ importers:
       tailwindcss-scroll-snap: ^1.1.0
       ts-jest-resolver: ^2.0.0
       tslib: ^2.3.1
-      type-fest: ^2.5.3
-      typescript: ^4.4.4
-      vite: 2.7.0-beta.4
+      type-fest: ^2.5.4
+      typescript: ^4.5.2
+      vite: 2.7.0-beta.7
       workbox-cli: ^6.3.0
     dependencies:
       '@hawaii-bus-plus/data': link:../data
@@ -135,7 +135,7 @@ importers:
       '@hawaii-bus-plus/tailwind-theme': link:../tailwind-theme
       '@hawaii-bus-plus/vite-plugins': link:../vite-plugins
       '@jest/globals': 27.3.1
-      '@prefresh/vite': 2.2.4_preact@10.5.15+vite@2.7.0-beta.4
+      '@prefresh/vite': 2.2.4_preact@10.5.15+vite@2.7.0-beta.7
       '@tailwindcss/aspect-ratio': 0.3.0_tailwindcss@2.2.19
       '@tailwindcss/forms': 0.3.4_tailwindcss@2.2.19
       '@tailwindcss/typography': 0.4.1_tailwindcss@2.2.19
@@ -150,9 +150,9 @@ importers:
       tailwindcss: 2.2.19
       tailwindcss-scroll-snap: 1.1.0
       ts-jest-resolver: 2.0.0
-      type-fest: 2.5.3
-      typescript: 4.4.4
-      vite: 2.7.0-beta.4
+      type-fest: 2.5.4
+      typescript: 4.5.2
+      vite: 2.7.0-beta.7
       workbox-cli: 6.3.0
 
   packages/data:
@@ -167,7 +167,7 @@ importers:
       prettier: ~2.4.1
       spherical-geometry-js: ^3.0.0
       tslib: ^2.3.1
-      typescript: ^4.4.4
+      typescript: ^4.5.2
     dependencies:
       '@hawaii-bus-plus/mnemonist': link:../mnemonist
       '@hawaii-bus-plus/types': link:../types
@@ -180,7 +180,7 @@ importers:
       '@types/node': 16.11.7
       ava: 3.15.0
       prettier: 2.4.1
-      typescript: 4.4.4
+      typescript: 4.5.2
 
   packages/functions:
     specifiers:
@@ -196,7 +196,7 @@ importers:
       prettier: ~2.4.1
       stripe: ^8.188.0
       tslib: ^2.3.1
-      typescript: ^4.4.4
+      typescript: ^4.5.2
     dependencies:
       '@aws-sdk/client-dynamodb': 3.9.0
       '@hawaii-bus-plus/gotrue': link:../gotrue
@@ -211,7 +211,7 @@ importers:
       copyfiles: 2.4.1
       esbuild: 0.13.13
       prettier: 2.4.1
-      typescript: 4.4.4
+      typescript: 4.5.2
 
   packages/gotrue:
     specifiers:
@@ -220,7 +220,7 @@ importers:
       node-fetch: ^3.1.0
       prettier: ~2.4.1
       tslib: ^2.3.1
-      typescript: ^4.4.4
+      typescript: ^4.5.2
     dependencies:
       node-fetch: 3.1.0
       tslib: 2.3.1
@@ -228,7 +228,7 @@ importers:
       '@types/node': 16.11.7
       ava: 3.15.0
       prettier: 2.4.1
-      typescript: 4.4.4
+      typescript: 4.5.2
 
   packages/identity-email:
     specifiers:
@@ -244,27 +244,27 @@ importers:
       jest: ^27.3.1
       prettier: ~2.4.1
       tslib: ^2.3.1
-      typescript: ^4.4.4
+      typescript: ^4.5.2
     dependencies:
       '@hawaii-bus-plus/types': link:../types
       tslib: 2.3.1
     devDependencies:
       jest: 27.3.1
       prettier: 2.4.1
-      typescript: 4.4.4
+      typescript: 4.5.2
 
   packages/mnemonist:
     specifiers:
       ava: ^3.15.0
       prettier: ~2.4.1
       tslib: ^2.3.1
-      typescript: ^4.4.4
+      typescript: ^4.5.2
     dependencies:
       tslib: 2.3.1
     devDependencies:
       ava: 3.15.0
       prettier: 2.4.1
-      typescript: 4.4.4
+      typescript: 4.5.2
 
   packages/prerender:
     specifiers:
@@ -278,24 +278,24 @@ importers:
       rollup: ^2.60.0
       tailwindcss: ^2.2.19
       tslib: ^2.3.1
-      type-fest: ^2.5.3
-      typescript: ^4.4.4
-      vite: 2.7.0-beta.4
+      type-fest: ^2.5.4
+      typescript: ^4.5.2
+      vite: 2.7.0-beta.7
     dependencies:
       '@hawaii-bus-plus/data': link:../data
       '@notwoods/preact-helmet': 6.1.0_preact@10.5.15
       node-html-parser: 5.1.0
       preact-render-to-string: 5.1.19_preact@10.5.15
       tslib: 2.3.1
-      type-fest: 2.5.3
-      vite: 2.7.0-beta.4
+      type-fest: 2.5.4
+      vite: 2.7.0-beta.7
     devDependencies:
       ava: 3.15.0
       preact: 10.5.15
       prettier: 2.4.1
       rollup: 2.60.0
       tailwindcss: 2.2.19
-      typescript: 4.4.4
+      typescript: 4.5.2
 
   packages/presentation:
     specifiers:
@@ -307,8 +307,8 @@ importers:
       prettier: ~2.4.1
       spherical-geometry-js: ^3.0.0
       tslib: ^2.3.1
-      type-fest: ^2.5.3
-      typescript: ^4.4.4
+      type-fest: ^2.5.4
+      typescript: ^4.5.2
     dependencies:
       '@hawaii-bus-plus/temporal-utils': link:../temporal-utils
       '@hawaii-bus-plus/types': link:../types
@@ -319,8 +319,8 @@ importers:
     devDependencies:
       ava: 3.15.0
       prettier: 2.4.1
-      type-fest: 2.5.3
-      typescript: 4.4.4
+      type-fest: 2.5.4
+      typescript: 4.5.2
 
   packages/promise-worker:
     specifiers:
@@ -329,7 +329,7 @@ importers:
       prettier: ~2.4.1
       pseudo-worker: ^1.3.0
       tslib: ^2.3.1
-      typescript: ^4.4.4
+      typescript: ^4.5.2
     dependencies:
       tslib: 2.3.1
     devDependencies:
@@ -337,7 +337,7 @@ importers:
       ava: 3.15.0
       prettier: 2.4.1
       pseudo-worker: 1.3.0
-      typescript: 4.4.4
+      typescript: 4.5.2
 
   packages/react-google-maps:
     specifiers:
@@ -347,7 +347,7 @@ importers:
       preact: ^10.5.15
       prettier: ~2.4.1
       tslib: ^2.3.1
-      typescript: ^4.4.4
+      typescript: ^4.5.2
     dependencies:
       '@googlemaps/js-api-loader': 1.12.9
       tslib: 2.3.1
@@ -356,19 +356,19 @@ importers:
       ava: 3.15.0
       preact: 10.5.15
       prettier: 2.4.1
-      typescript: 4.4.4
+      typescript: 4.5.2
 
   packages/tailwind-theme:
     specifiers:
       '@types/tailwindcss': ^2.2.4
       prettier: ~2.4.1
       tailwindcss: ^2.2.19
-      typescript: ^4.4.4
+      typescript: ^4.5.2
     devDependencies:
       '@types/tailwindcss': 2.2.4
       prettier: 2.4.1
       tailwindcss: 2.2.19
-      typescript: 4.4.4
+      typescript: 4.5.2
 
   packages/temporal-utils:
     specifiers:
@@ -378,7 +378,7 @@ importers:
       ava: ^3.15.0
       prettier: ~2.4.1
       tslib: ^2.3.1
-      typescript: ^4.4.4
+      typescript: ^4.5.2
     dependencies:
       '@hawaii-bus-plus/types': link:../types
       '@hawaii-bus-plus/utils': link:../utils
@@ -387,33 +387,33 @@ importers:
     devDependencies:
       ava: 3.15.0
       prettier: 2.4.1
-      typescript: 4.4.4
+      typescript: 4.5.2
 
   packages/types:
     specifiers:
       prettier: ~2.4.1
       tslib: ^2.3.1
-      type-fest: ^2.5.3
-      typescript: ^4.4.4
+      type-fest: ^2.5.4
+      typescript: ^4.5.2
     dependencies:
       tslib: 2.3.1
-      type-fest: 2.5.3
+      type-fest: 2.5.4
     devDependencies:
       prettier: 2.4.1
-      typescript: 4.4.4
+      typescript: 4.5.2
 
   packages/utils:
     specifiers:
       ava: ^3.15.0
       prettier: ~2.4.1
       tslib: ^2.3.1
-      typescript: ^4.4.4
+      typescript: ^4.5.2
     dependencies:
       tslib: 2.3.1
     devDependencies:
       ava: 3.15.0
       prettier: 2.4.1
-      typescript: 4.4.4
+      typescript: 4.5.2
 
   packages/vite-plugins:
     specifiers:
@@ -422,8 +422,8 @@ importers:
       ava: ^3.15.0
       prettier: ~2.4.1
       tslib: ^2.3.1
-      typescript: ^4.4.4
-      vite: 2.7.0-beta.4
+      typescript: ^4.5.2
+      vite: 2.7.0-beta.7
     dependencies:
       '@surma/rollup-plugin-off-main-thread': 2.2.3
       tslib: 2.3.1
@@ -431,8 +431,8 @@ importers:
       '@types/node': 16.11.7
       ava: 3.15.0
       prettier: 2.4.1
-      typescript: 4.4.4
-      vite: 2.7.0-beta.4
+      typescript: 4.5.2
+      vite: 2.7.0-beta.7
 
   packages/workers:
     specifiers:
@@ -455,8 +455,8 @@ importers:
       spherical-geometry-js: ^2.1.0
       ts-jest-resolver: ^2.0.0
       tslib: ^2.3.1
-      typescript: ^4.4.4
-      vite: 2.7.0-beta.4
+      typescript: ^4.5.2
+      vite: 2.7.0-beta.7
     dependencies:
       '@hawaii-bus-plus/data': link:../data
       '@hawaii-bus-plus/mnemonist': link:../mnemonist
@@ -478,8 +478,8 @@ importers:
       jest: 27.3.1
       prettier: 2.4.1
       ts-jest-resolver: 2.0.0
-      typescript: 4.4.4
-      vite: 2.7.0-beta.4
+      typescript: 4.5.2
+      vite: 2.7.0-beta.7
 
 packages:
 
@@ -2551,7 +2551,7 @@ packages:
     resolution: {integrity: sha512-MUhT5m2XNN5NsZl4GnpuvlzLo6VSTa/+wBfBd3fiWUvHGhv0GF9hnA1pd//v0uJaKwUnVRQ1hYElxCV7DtYsCQ==}
     dev: true
 
-  /@prefresh/vite/2.2.4_preact@10.5.15+vite@2.7.0-beta.4:
+  /@prefresh/vite/2.2.4_preact@10.5.15+vite@2.7.0-beta.7:
     resolution: {integrity: sha512-rBBb3tagdigz2ukSc5Rtg8PrbmdvEtJhE37FJRQdHISMcVdN1OkL4003eH2DEOA1231ydbGiKqpaKZisI+zSEg==}
     peerDependencies:
       preact: ^10.4.0
@@ -2563,7 +2563,7 @@ packages:
       '@prefresh/utils': 1.1.1
       '@rollup/pluginutils': 4.1.1
       preact: 10.5.15
-      vite: 2.7.0-beta.4
+      vite: 2.7.0-beta.7
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -8943,8 +8943,8 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /type-fest/2.5.3:
-    resolution: {integrity: sha512-7VNmE7FlsrdcWjKbtuRuynZz96Gmf35p5DvoR2tbceNP0vd58ISx87PvUUInlhtRC49vSX6qlxEKc7AoiHRirg==}
+  /type-fest/2.5.4:
+    resolution: {integrity: sha512-zyPomVvb6u7+gJ/GPYUH6/nLDNiTtVOqXVUHtxFv5PmZQh6skgfeRtFYzWC01T5KeNWNIx5/0P111rKFLlkFvA==}
     engines: {node: '>=12.20'}
 
   /typedarray-to-buffer/3.1.5:
@@ -8955,6 +8955,12 @@ packages:
 
   /typescript/4.4.4:
     resolution: {integrity: sha512-DqGhF5IKoBl8WNf8C1gu8q0xZSInh9j1kJJMqT3a94w1JzVaBU4EXOSMrz9yDqMT0xt3selp83fuFMQ0uzv6qA==}
+    engines: {node: '>=4.2.0'}
+    hasBin: true
+    dev: true
+
+  /typescript/4.5.2:
+    resolution: {integrity: sha512-5BlMof9H1yGt0P8/WF+wPNw6GfctgGjXp5hkblpyT+8rkASSmkUKMXrxR0Xg8ThVCi/JnHQiKXeBaEwCeQwMFw==}
     engines: {node: '>=4.2.0'}
     hasBin: true
     dev: true
@@ -9133,8 +9139,8 @@ packages:
       spdx-expression-parse: 3.0.1
     dev: true
 
-  /vite/2.7.0-beta.4:
-    resolution: {integrity: sha512-TP7y0OkRHrta0rMg62R5cEcynSScgeCeW9QW+kXX1s9MVW5jGHsbK0CEYZzKV1hMxHo3ULGcRjjQjl+AEUwfXw==}
+  /vite/2.7.0-beta.7:
+    resolution: {integrity: sha512-ev2ck1fbIyudor4yQx9ypUslkufiMlz7Mj0aCfQxpSeAEMcXs4ZdM+vhN+xYozXdF8hXnxTgUo/FbcdgSGq8Vw==}
     engines: {node: '>=12.2.0'}
     hasBin: true
     peerDependencies:

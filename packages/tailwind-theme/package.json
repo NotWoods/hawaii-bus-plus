@@ -1,6 +1,7 @@
 {
   "name": "@hawaii-bus-plus/tailwind-theme",
   "version": "1.0.0",
+  "description": "Tailwind theme for hawaiibusplus.com",
   "private": false,
   "type": "commonjs",
   "main": "src/index.js",
@@ -18,7 +19,7 @@
     "@types/tailwindcss": "^2.2.4",
     "prettier": "~2.4.1",
     "tailwindcss": "^2.2.19",
-    "typescript": "^4.4.4"
+    "typescript": "^4.5.2"
   },
   "eslintConfig": {
     "parserOptions": {
