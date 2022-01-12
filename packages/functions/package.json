@@ -28,7 +28,7 @@
     "@types/node": "^16.11.19",
     "ava": "^4.0.1",
     "copyfiles": "^2.4.1",
-    "esbuild": "^0.13.13",
+    "esbuild": "^0.14.11",
     "prettier": "~2.5.1",
     "typescript": "^4.5.4"
   },

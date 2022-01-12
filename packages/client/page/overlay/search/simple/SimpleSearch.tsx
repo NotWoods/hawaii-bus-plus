@@ -1,6 +1,6 @@
 import { memoize } from '@hawaii-bus-plus/utils';
 import { Fragment, h } from 'preact';
-import { Ref, useCallback, useRef, useState } from 'preact/hooks';
+import { useCallback, useRef, useState } from 'preact/hooks';
 import { directions } from '../../../../assets/icons/paths';
 import { OutlinedButton } from '../../../../components/Button/OutlinedButton';
 import { useLazyComponent, usePromise } from '../../../hooks';
@@ -48,7 +48,7 @@ export function SimpleSearch(props: Props) {
   const [search, setSearch] = useInput();
   const searchResults = useSearchResults(search);
   const searchRef = useRef<HTMLInputElement>(null);
-  const handleKeyDown = useAutocompleteKeys(searchRef as Ref<HTMLInputElement>);
+  const handleKeyDown = useAutocompleteKeys(searchRef);
   const { SearchResultsList } = useLazyComponent(lazySearchResults);
 
   return (

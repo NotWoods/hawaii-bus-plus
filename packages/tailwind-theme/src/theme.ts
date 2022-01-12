@@ -10,7 +10,7 @@ export const theme: TailwindTheme = {
     white: colors.white,
     route: 'var(--route-color)',
     gray: {
-      ...colors.trueGray,
+      ...colors.neutral,
       750: '#333',
     },
     primary: {

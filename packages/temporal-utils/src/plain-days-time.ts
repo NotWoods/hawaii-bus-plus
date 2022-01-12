@@ -21,7 +21,7 @@ export class PlainDaysTime {
     return this.time;
   }
 
-  toPlainDateTime(date: Temporal.PlainDate | Temporal.DateLike | string) {
+  toPlainDateTime(date: Temporal.PlainDate | Temporal.PlainDateLike | string) {
     return this.toPlainTime().toPlainDateTime(date).add({ days: this.day });
   }
 

@@ -16,7 +16,7 @@
   "dependencies": {
     "@hawaii-bus-plus/types": "workspace:*",
     "@hawaii-bus-plus/utils": "workspace:*",
-    "@js-temporal/polyfill": "^0.2.0",
+    "@js-temporal/polyfill": "^0.3.0",
     "tslib": "^2.3.1"
   },
   "devDependencies": {

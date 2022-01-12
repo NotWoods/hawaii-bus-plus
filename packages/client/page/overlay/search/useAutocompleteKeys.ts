@@ -40,7 +40,7 @@ export function useAutocompleteKeys(searchBar: Ref<HTMLInputElement>) {
 
         if (newIndex < 0) {
           // Focus on search bar
-          searchBar.current.focus();
+          searchBar.current?.focus();
         } else if (newIndex < options.length) {
           // Focus on item in list
           options[newIndex].focus();
@@ -57,14 +57,16 @@ export function useAutocompleteKeys(searchBar: Ref<HTMLInputElement>) {
         case 'Escape': {
           if (index >= 0) {
             const search = searchBar.current;
-            search.focus();
-            search.value = '';
+            if (search) {
+              search.focus();
+              search.value = '';
+            }
           }
           break;
         }
         default:
           if (index >= 0 && isPrintableKeyCode(event.key)) {
-            searchBar.current.focus();
+            searchBar.current?.focus();
           }
           break;
       }

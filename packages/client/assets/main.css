@@ -11,6 +11,12 @@
   }
 }
 
+@layer base {
+  .fill-current {
+    fill: currentColor;
+  }
+}
+
 @layer components {
   .waves {
     @apply bg-primary-700 text-white;
