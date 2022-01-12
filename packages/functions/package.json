@@ -23,9 +23,10 @@
     "tslib": "^2.3.1"
   },
   "devDependencies": {
+    "@ava/typescript": "^3.0.1",
     "@types/cookie": "^0.4.1",
     "@types/node": "^16.11.19",
-    "ava": "^3.15.0",
+    "ava": "^4.0.1",
     "copyfiles": "^2.4.1",
     "esbuild": "^0.13.13",
     "prettier": "~2.5.1",
@@ -41,11 +42,6 @@
         "./packages/functions/*/tsconfig.json"
       ]
     }
-  },
-  "ava": {
-    "files": [
-      "test/**/*.spec.{js,ts}"
-    ]
   },
   "engines": {
     "node": ">=14"

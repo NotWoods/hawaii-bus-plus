@@ -9,7 +9,7 @@ test('PlainDaysTime defaults to 0', (t) => {
   t.is(time.hour, 0);
   t.is(time.minute, 0);
   t.is(time.second, 0);
-  t.is(daysTime.toString(), '00:00:00');
+  t.is(daysTime.toString(), '00:00:00' as TimeString);
 });
 
 test('PlainDaysTime returns new object when adding', (t) => {
@@ -19,8 +19,8 @@ test('PlainDaysTime returns new object when adding', (t) => {
   t.is(nextDay.day, 2);
   t.is(daysTime.toPlainTime().hour, 0);
   t.is(nextDay.toPlainTime().hour, 0);
-  t.is(daysTime.toString(), '00:00:00');
-  t.is(nextDay.toString(), '48:00:00');
+  t.is(daysTime.toString(), '00:00:00' as TimeString);
+  t.is(nextDay.toString(), '48:00:00' as TimeString);
 });
 
 test('PlainDaysTime measures days and time until', (t) => {
