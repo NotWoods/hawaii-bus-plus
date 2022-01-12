@@ -1,7 +1,7 @@
 import { PlainDaysTime } from '@hawaii-bus-plus/temporal-utils';
 import type { Shape } from '@hawaii-bus-plus/types';
 import { compareAs, toInt, valueNotNull } from '@hawaii-bus-plus/utils';
-import parse from 'csv-parse';
+import { parse } from 'csv-parse';
 import { from, zip } from 'ix/iterable/index.js';
 import { filter, map } from 'ix/iterable/operators/index.js';
 import JSZip, { JSZipObject } from 'jszip';

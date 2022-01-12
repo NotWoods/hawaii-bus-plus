@@ -49,7 +49,7 @@ const MyLocationButtonContent = memo((props: Props) => {
         />
         <path
           class={clsx(
-            'fill-primary-500 motion-safe:transition-opacity',
+            'fill-current text-primary-500 motion-safe:transition-opacity',
             mode === 'disabled' ? 'opacity-100' : 'opacity-0',
           )}
           d="M21.3 19.7L4.6 3 6 1.6l16.7 16.7-1.4 1.4z"

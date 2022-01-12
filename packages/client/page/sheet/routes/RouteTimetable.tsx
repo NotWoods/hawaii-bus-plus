@@ -4,10 +4,12 @@ import { useState } from 'preact/hooks';
 import type { Temporal } from '@js-temporal/polyfill';
 import { colorVariables } from '../../../components/route-colors';
 import { RouteHeader } from '../../../components/RouteHeader/RouteHeader';
-import { RouteDetails } from '../../../worker-info/route-details';
-import { TripDetails } from '../../../worker-info/trip-details';
-import type { InfoWorkerHandler } from '../../../worker-info/worker-info';
-import InfoWorker from '../../../worker-info/worker-info?worker';
+import {
+  InfoWorker,
+  InfoWorkerHandler,
+  RouteDetails,
+  TripDetails,
+} from '@hawaii-bus-plus/workers/info';
 import { dbInitialized } from '../../api';
 import { useDelay, useLazyComponent, usePromise, useWorker } from '../../hooks';
 import { LoadingBusIcon } from '../../loading/LoadingBusIcon';
@@ -106,7 +108,7 @@ export function RouteTimetable() {
       <BaseSheet style={colorVariables(route)} loaded>
         <Header route={route} />
         <Timetable
-          routeDetails={routeDetails!}
+          routeDetails={routeDetails}
           tripDate={tripDate}
           onChangeTripDate={setTripDate}
         />

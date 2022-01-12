@@ -1,120 +1,42 @@
-import { createHash } from 'crypto';
-import path from 'path';
-import { rollup } from 'rollup';
-import { URL, URLSearchParams } from 'url';
-import { Plugin, ResolvedConfig } from 'vite';
+import type { Plugin } from 'vite';
+import { URLSearchParams } from 'url';
+import { basename } from 'path';
 
-const queryRE = /\?.*$/;
-const hashRE = /#.*$/;
-export const cleanUrl = (url: string) =>
-  url.replace(hashRE, '').replace(queryRE, '');
-
-export function getAssetHash(content: Buffer) {
-  return createHash('sha256').update(content).digest('hex').slice(0, 8);
+function parseWorkerRequest(id: string): [string, URLSearchParams] {
+  const [path, query = ''] = id.split('?');
+  return [path, new URLSearchParams(query)];
 }
 
-const ENV_PUBLIC_PATH = `/@vite/env`;
-
-function parseWorkerRequest(id: string): URLSearchParams {
-  return new URL(id, 'relative:///').searchParams;
-}
-
-const WorkerFileId = 'worker_file';
-
-export function webWorkerCodeSplit(workerQuery = 'worker'): Plugin {
-  let config: ResolvedConfig;
-
+/**
+ * Requires vite:worker and off-main-thread
+ */
+export function workerFallbackPlugin(flag = 'worker'): Plugin {
   return {
-    name: 'worker_code_split',
-
-    apply: 'build',
-
+    name: 'worker_fallback',
     load(id) {
-      if (parseWorkerRequest(id).has(workerQuery)) {
-        return '';
-      } else {
-        return undefined;
+      const [path, parsedQuery] = parseWorkerRequest(id);
+      if (parsedQuery.has(flag)) {
+        return `
+          import moduleUrl from 'omt:${path}'
+          import BundledWorker from '${path}?worker'
+
+          let supportsModuleWorker = false
+          const options = {
+            get type() {
+              supportsModuleWorker = true
+              return 'module'
+            },
+            name: ${JSON.stringify(basename(path))}
+          }
+          const modWorker = new Worker(moduleUrl, options)
+          if (supportsModuleWorker) {
+            return modWorker
+          } catch (err) {
+            return new BundledWorker()
+          }
+        `;
       }
-    },
-
-    configResolved(resolvedConfig) {
-      config = resolvedConfig;
-    },
-
-    async transform(_, id) {
-      const query = parseWorkerRequest(id);
-      if (query.has(WorkerFileId)) {
-        return {
-          code: `import '${ENV_PUBLIC_PATH}'\n${_}`,
-        };
-      }
-      if (!query.has(workerQuery)) {
-        return;
-      }
-
-      let url: string;
-      {
-        const bundle = await rollup({
-          input: cleanUrl(id),
-          plugins: config.plugins as Plugin[],
-        });
-
-        let code: string;
-        try {
-          const { output } = await bundle.generate({
-            format: 'es',
-            sourcemap: config.build.sourcemap,
-          });
-          code = output[0].code;
-        } finally {
-          void bundle.close();
-        }
-        const content = Buffer.from(code);
-
-        {
-          // emit as separate chunk
-          url = `__VITE_ASSET__${this.emitFile({
-            type: 'chunk',
-            id: cleanUrl(id),
-          })}__`;
-
-          // Build both script and module versions
-          const basename = path.basename(cleanUrl(id));
-          const ext = path.extname(basename);
-          const contentHash = getAssetHash(content);
-          const fileName = path.posix.join(
-            config.build.assetsDir,
-            `${basename.slice(0, -ext.length)}.${contentHash}.js`,
-          );
-          const legacyUrl = `__VITE_ASSET__${this.emitFile({
-            fileName,
-            type: 'asset',
-            source: code,
-          })}__`;
-
-          return `export default function WorkerWrapper() {
-            let supportsModuleWorker = false
-            const options = {
-              get type() {
-                supportsModuleWorker = true
-                return 'module'
-              }
-            }
-            let modWorker
-            try {
-              modWorker = new Worker(${JSON.stringify(url)}, options)
-            } catch (err) {
-              supportsModuleWorker = false
-              console.warn('Falling back to legacy worker', err)
-            }
-            if (supportsModuleWorker) {
-              return modWorker
-            } else {
-              return new Worker(${JSON.stringify(legacyUrl)})
-            }
-          }`;
-        }
-      }
+      return undefined;
     },
   };
 }

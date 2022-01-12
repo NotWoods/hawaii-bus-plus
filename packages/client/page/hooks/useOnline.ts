@@ -1,7 +1,9 @@
 import { useState, useEffect, useRef } from 'preact/hooks';
 
+const noop = () => {};
+
 function useWindowListener(eventName: string, callback: () => void) {
-  const savedHandler = useRef<() => void>();
+  const savedHandler = useRef<() => void>(noop);
 
   useEffect(() => {
     savedHandler.current = callback;

@@ -1,12 +1,12 @@
 import { Point } from '@hawaii-bus-plus/presentation';
 import { Fragment, h } from 'preact';
-import { useCallback, useRef, useState } from 'preact/hooks';
+import { Ref, useRef, useState } from 'preact/hooks';
 import type { Temporal } from '@js-temporal/polyfill';
-import type {
+import {
   DirectionsResult,
+  DirectionsWorker,
   DirectionsWorkerHandler,
-} from '../../../../worker-directions/worker-directions';
-import DirectionsWorker from '../../../../worker-directions/worker-directions?worker';
+} from '@hawaii-bus-plus/workers/directions';
 import { dbInitialized } from '../../../api';
 import {
   useDelay,
@@ -61,20 +61,20 @@ export function DirectionsSearch(_props: Props) {
       });
 
       setResults(results);
-      fathom?.trackGoal('directions', results.journeys.length);
+      fathom?.trackGoal('HQEUCTW2', results.journeys.length);
     },
     [depart, arrive, departureTime],
   );
 
-  const departRef = useRef<HTMLInputElement>();
-  const arriveRef = useRef<HTMLInputElement>();
-  const getInputRef = useCallback(() => {
+  const departRef = useRef<HTMLInputElement>(null);
+  const arriveRef = useRef<HTMLInputElement>(null);
+  function getInputRef() {
     return {
-      depart: departRef.current,
-      arrive: arriveRef.current,
-    }[searchResults.field];
-  }, [searchResults.field]);
-  const handleKeyDown = useAutocompleteKeys(getInputRef);
+      depart: departRef,
+      arrive: arriveRef,
+    }[searchResults.field] as Ref<HTMLInputElement>;
+  }
+  const handleKeyDown = useAutocompleteKeys(getInputRef());
 
   function renderJourneys() {
     if (depart && arrive) {

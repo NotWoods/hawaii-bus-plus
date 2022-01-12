@@ -3,6 +3,7 @@ import { BinaryLike, createHash } from 'crypto';
 import { readFile } from 'fs';
 import { promisify } from 'util';
 import { createHandler } from '../shared';
+import { FEATURE_BILLING } from '../shared/env';
 import { hasPaidAccess } from '../shared/role/paying';
 
 const readFileAsync = promisify(readFile);
@@ -32,7 +33,7 @@ export const handler = createHandler('GET', async (event, context) => {
   const userDetails = await loggedInUser?.getUserData();
   const payingOrTrialUser = userDetails && hasPaidAccess(userDetails);
 
-  if (payingOrTrialUser) {
+  if (!FEATURE_BILLING || payingOrTrialUser) {
     const path = require.resolve(event.path.replace('/api/v1/', './'));
     const file = await readFileAsync(path, 'utf8');
 

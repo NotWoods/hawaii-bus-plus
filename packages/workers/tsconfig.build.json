@@ -1,0 +1,12 @@
+{
+  "extends": "../tsconfig.base.json",
+  "files": [],
+  "references": [
+    { "path": "./directions" },
+    { "path": "./info" },
+    { "path": "./init-db" },
+    { "path": "./map" },
+    { "path": "./nearby" },
+    { "path": "./search" }
+  ]
+}

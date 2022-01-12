@@ -3,7 +3,7 @@ import { useEffect } from 'preact/hooks';
 import { useSelector } from '../router/hooks';
 import { selectBounds } from '../router/selector/map';
 
-export function MapBounds() {
+export function useMapBounds() {
   const map = useGoogleMap();
   const bounds = useSelector(selectBounds);
 
@@ -11,6 +11,10 @@ export function MapBounds() {
     map && bounds && map.fitBounds(bounds);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [map, bounds?.east, bounds?.north, bounds?.south, bounds?.west]);
+}
+
+export function MapBounds() {
+  useMapBounds();
 
   return null;
 }

@@ -4,7 +4,7 @@
   "references": [],
   "compilerOptions": {
     "lib": ["esnext", "dom", "dom.iterable"],
-    "types": [],
+    "types": ["vite/client"],
     "emitDeclarationOnly": true
   }
 }

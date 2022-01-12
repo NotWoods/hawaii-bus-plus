@@ -1,0 +1,27 @@
+@layer components {
+  .waves {
+    @apply bg-primary-700 text-white;
+    background-size: theme('spacing.96');
+    background-image: url('/waves.svg');
+  }
+}
+
+@layer utilities {
+  .animate-run {
+    animation-play-state: running;
+  }
+  .animate-pause {
+    animation-play-state: paused;
+  }
+
+  .font-display {
+    @apply font-medium;
+  }
+
+  .color-scheme-light {
+    color-scheme: light;
+  }
+  .color-scheme-dark {
+    color-scheme: dark;
+  }
+}

@@ -1,5 +1,6 @@
 import { Route, Stop } from '@hawaii-bus-plus/types';
 import { h } from 'preact';
+import { GOOGLE_MAPS_KEY } from '../../services/env';
 
 interface UrlProps {
   route: Route;
@@ -25,10 +26,7 @@ export function staticMapUrl({ route, stops, width, height }: UrlProps) {
     `size:tiny|color:0x${route.route_color.slice(1).toUpperCase()}`,
   );
   url.searchParams.set('markers', markers.join('|'));
-  url.searchParams.set(
-    'key',
-    import.meta.env['VITE_GOOGLE_MAPS_KEY'] as string,
-  );
+  url.searchParams.set('key', GOOGLE_MAPS_KEY);
   url.searchParams.set('size', `${width}x${height}`);
 
   return url.href;

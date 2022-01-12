@@ -9,10 +9,7 @@ import { JWT_ACCESS_TOKEN_KEY, JWT_REFRESH_TOKEN_KEY } from './serialize.js';
  * @example
  * const user = recoverSession(auth, event.headers)
  */
-export function recoverSession(
-  auth: GoTrue,
-  headers: HandlerEvent['headers'],
-) {
+export function recoverSession(auth: GoTrue, headers: HandlerEvent['headers']) {
   const cookies = cookie.parse(headers['cookie'] ?? '');
   const accessToken: string | undefined = cookies[JWT_ACCESS_TOKEN_KEY];
   const refreshToken: string | undefined = cookies[JWT_REFRESH_TOKEN_KEY];

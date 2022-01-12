@@ -1,9 +1,8 @@
 import { Agency } from '@hawaii-bus-plus/types';
 import debounce from 'just-debounce';
 import { h } from 'preact';
-import { useEffect, useRef } from 'preact/hooks';
-import { useCallback } from 'react';
-import { DirectionDetails } from '../../../../../worker-info/trip-details';
+import { useCallback, useEffect, useRef } from 'preact/hooks';
+import { DirectionDetails } from '@hawaii-bus-plus/workers/info';
 import { setDirectionAction } from '../../../../router/action/routes';
 import { useDispatch, useSelector } from '../../../../router/hooks';
 import { selectLoadedDetails } from '../../../../router/selector/main';
@@ -30,14 +29,14 @@ export function TimetableDetails(props: Props) {
   const { directionId } = useSelector(selectLoadedDetails);
   const dispatch = useDispatch();
   const { directionsDetails, agency } = props;
-  const scrollEl = useRef<HTMLDivElement>();
+  const scrollEl = useRef<HTMLDivElement>(null);
 
   // Handle scroll events and update the direction ID when they happen
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleScroll = useCallback(
     debounce(() => {
-      const scrollPos = scrollEl.current.scrollLeft;
-      const width = scrollEl.current.offsetWidth;
+      const scrollPos = scrollEl.current!.scrollLeft;
+      const width = scrollEl.current!.offsetWidth;
       const newDirectionId = Math.round(scrollPos / width) as 0 | 1;
 
       dispatch(setDirectionAction(newDirectionId));
@@ -47,8 +46,8 @@ export function TimetableDetails(props: Props) {
 
   // Set the scroll position when the direction ID shifts
   useEffect(() => {
-    const width = scrollEl.current.offsetWidth;
-    scrollEl.current.scrollTo({
+    const width = scrollEl.current!.offsetWidth;
+    scrollEl.current!.scrollTo({
       left: width * directionId,
       behavior: 'smooth',
     });
@@ -57,7 +56,7 @@ export function TimetableDetails(props: Props) {
   return (
     <header class="relative">
       <div
-        class="timetable__details grid scroll snap overflow-x-auto"
+        class="timetable__details grid scroll snap-both overflow-x-auto"
         style={{
           gridTemplateColumns: directionsDetails.map(() => '100%').join(' '),
         }}

@@ -21,7 +21,7 @@ function terminateSharedWorker(workerConstructor: WorkerConstructor) {
 
 function renewTimer(entry: WorkerEntry, workerConstructor: WorkerConstructor) {
   clearTimeout(entry.timeoutId);
-  entry.timeoutId = setTimeout(
+  entry.timeoutId = window.setTimeout(
     terminateSharedWorker,
     TIMEOUT,
     workerConstructor,

@@ -1,5 +1,5 @@
 import { StationInformation, Stop } from '@hawaii-bus-plus/types';
-import { LatLngLiteral } from 'spherical-geometry-js';
+import type { LatLngLiteral } from 'spherical-geometry-js';
 
 export type PointRouterAction =
   | ReturnType<typeof setStopAction>

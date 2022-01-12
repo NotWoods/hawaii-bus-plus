@@ -9,8 +9,8 @@ interface Props extends JSX.HTMLAttributes<HTMLButtonElement> {
 /**
  * A button that only displays an icon.
  */
-export function IconButton({ forceDark: dark, ...props }: Props) {
-  const hover = dark
+export function IconButton({ forceDark, ...props }: Props) {
+  const hover = forceDark
     ? 'text-white bg-white'
     : 'text-black bg-dark dark:text-white dark:bg-white';
   return (

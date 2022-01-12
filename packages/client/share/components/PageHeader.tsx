@@ -1,14 +1,19 @@
 import { h } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
 import { Logo } from '../../components/Logo';
+import { FEATURE_BILLING } from '../../services/env';
 
 function checkLoggedIn() {
-  return fetch('https://app.hawaiibusplus.com/.netlify/functions/userdata', {
-    credentials: 'include',
-  }).then(
-    (res) => res.ok,
-    () => false,
-  );
+  if (FEATURE_BILLING) {
+    return fetch('https://app.hawaiibusplus.com/.netlify/functions/userdata', {
+      credentials: 'include',
+    }).then(
+      (res) => res.ok,
+      () => false,
+    );
+  } else {
+    return Promise.resolve(true);
+  }
 }
 
 export function dynamicLoginButton() {
@@ -25,7 +30,7 @@ export function dynamicLoginButton() {
 }
 
 export function PageHeader() {
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(!FEATURE_BILLING);
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     checkLoggedIn().then(setLoggedIn);

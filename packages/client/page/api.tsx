@@ -1,5 +1,5 @@
 import { PromiseWorker } from '@hawaii-bus-plus/promise-worker';
-import InitDBWorker from '../worker-init-db/worker-init-db?worker';
+import { InitDBWorker } from '@hawaii-bus-plus/workers/init-db';
 
 interface Fathom {
   trackPageview(opts?: { url?: string; referrer?: string }): void;
@@ -7,10 +7,6 @@ interface Fathom {
 }
 
 declare global {
-  interface ImportMetaEnv {
-    SSR: boolean;
-  }
-
   let fathom: Fathom;
 }
 

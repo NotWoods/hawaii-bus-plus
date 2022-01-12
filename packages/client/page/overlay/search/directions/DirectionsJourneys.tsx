@@ -1,7 +1,7 @@
 import { Point } from '@hawaii-bus-plus/presentation';
 import clsx from 'clsx';
 import { h } from 'preact';
-import type { Journey } from '../../../../worker-directions/worker-directions';
+import type { Journey } from '@hawaii-bus-plus/workers/directions';
 import { SearchResultsSubList } from '../items/SearchResultsSubList';
 import { DirectionsJourneyItem } from './DirectionsJourneyItem';
 
@@ -39,7 +39,7 @@ export function DirectionsJourneys(props: Props) {
       <div
         class={clsx(
           sharedClasses,
-          'overflow-x-auto snap snap-px-32 overscroll-contain',
+          'overflow-x-auto snap-both scroll-px-32 overscroll-contain',
         )}
       >
         <SearchResultsSubList

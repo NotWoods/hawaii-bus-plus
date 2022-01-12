@@ -14,14 +14,15 @@
     "test": "ava"
   },
   "dependencies": {
-    "node-fetch": "3.0.0-beta.9",
+    "node-fetch": "^3.1.0",
     "tslib": "^2.3.1"
   },
   "devDependencies": {
-    "@types/node": "^16.7.12",
-    "ava": "^3.15.0",
-    "prettier": "~2.3.2",
-    "typescript": "^4.4.2"
+    "@ava/typescript": "^3.0.1",
+    "@types/node": "^16.11.19",
+    "ava": "^4.0.1",
+    "prettier": "~2.5.1",
+    "typescript": "^4.5.4"
   },
   "files": [
     "src"
@@ -39,10 +40,5 @@
       "@typescript-eslint/prefer-string-starts-ends-with": "off",
       "no-useless-escape": "off"
     }
-  },
-  "ava": {
-    "files": [
-      "test/**/*.spec.{js,ts}"
-    ]
   }
 }

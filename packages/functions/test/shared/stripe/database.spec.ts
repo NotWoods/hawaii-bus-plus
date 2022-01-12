@@ -1,8 +1,4 @@
-import test, {
-  ExecutionContext,
-  Implementation,
-  ImplementationResult,
-} from 'ava';
+import test, { ImplementationFn, TestFn } from 'ava';
 import { config } from 'dotenv';
 import { fileURLToPath } from 'url';
 import { DatabaseClient } from '../../../shared/stripe/dynamodb.js';
@@ -37,17 +33,17 @@ interface Context {
 
 function clientTest(
   title: string,
-  implementation: (t: ExecutionContext<Context>) => ImplementationResult,
+  implementation: ImplementationFn<[], Context>,
 ) {
+  const testWithContext = test as TestFn<Context>;
   if (client) {
-    test(title, (t) => {
-      const ctx = t.context as Context;
-      ctx.client = client!;
-      return implementation(t as ExecutionContext<Context>);
+    testWithContext(title, (t) => {
+      t.context.client = client!;
+      return implementation(t);
     });
   } else {
     // eslint-disable-next-line jest/no-disabled-tests
-    test.skip(title, implementation as Implementation);
+    testWithContext.skip(title, implementation);
   }
 }
 

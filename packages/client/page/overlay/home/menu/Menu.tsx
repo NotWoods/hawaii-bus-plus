@@ -1,5 +1,6 @@
 import { h } from 'preact';
 import { feedback, logout, payments } from '../../../../assets/icons/paths';
+import { FEATURE_BILLING } from '../../../../services/env';
 import { MenuOption } from './MenuOption';
 
 interface Props {
@@ -21,9 +22,11 @@ export function Menu(props: Props) {
       aria-orientation="vertical"
       aria-labelledby={props.labelledBy}
     >
-      <MenuOption href="/.netlify/functions/billing" icon={payments}>
-        Billing
-      </MenuOption>
+      {FEATURE_BILLING && (
+        <MenuOption href="/.netlify/functions/billing" icon={payments}>
+          Billing
+        </MenuOption>
+      )}
       <MenuOption href="mailto:feedback@hawaiibusplus.com" icon={feedback}>
         Feedback
       </MenuOption>

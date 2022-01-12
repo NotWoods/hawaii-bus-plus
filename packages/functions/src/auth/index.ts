@@ -10,7 +10,14 @@ import { renderTemplate } from './template';
 function parseFormData(event: NetlifyEvent) {
   let formData: URLSearchParams;
   if (event.httpMethod === 'GET') {
-    formData = new URLSearchParams(event.queryStringParameters ?? {});
+    const query = event.queryStringParameters ?? {};
+    formData = new URLSearchParams();
+    for (const key of Object.keys(query)) {
+      const value = query[key];
+      if (value) {
+        formData.append(key, value);
+      }
+    }
   } else {
     const { body } = event;
     if (!body) {

@@ -19,9 +19,9 @@ test('mock auth context', async (t) => {
 
   t.is(context, undefined);
 
-  await handler(mockEvent(), ({
+  await handler(mockEvent(), {
     [MOCK_AUTH_CONTEXT]: mockAuthContext,
-  } as unknown) as NetlifyContext);
+  } as unknown as NetlifyContext);
   t.truthy(context);
   t.is(context!.authContext, mockAuthContext);
 });

@@ -1,5 +1,5 @@
 import { h, Fragment } from 'preact';
-import { useEffect, useState } from 'preact/hooks';
+import { useCallback, useEffect, useState } from 'preact/hooks';
 import { Form, FormType, FormProps } from './components/Form';
 import { Header, HeaderType } from './components/Header';
 import { MouseEventHandler } from './components/link';
@@ -48,26 +48,39 @@ const headerTypes = new Set<HeaderType>([
   undefined,
 ]);
 
+function useRouteType(
+  defaultType?: HeaderType,
+): [HeaderType, (url: URL) => HeaderType] {
+  const [type, setType] = useState<HeaderType>(defaultType);
+
+  const setFromUrl = useCallback((url: URL) => {
+    const type = urlToType(url);
+    setType(type);
+    return type;
+  }, []);
+
+  return [type, setFromUrl];
+}
+
 export function App(props: Props) {
-  const [type, setType] = useState<HeaderType>(props.defaultType);
+  const [type, setType] = useRouteType(props.defaultType);
 
   const handleLink: MouseEventHandler = (evt) => {
     evt.preventDefault();
     const url = new URL(evt.currentTarget.href);
-    const type = urlToType(url);
-    setType(type);
+    const type = setType(url);
 
     history.pushState(type, '', url.pathname);
   };
 
   useEffect(() => {
     function listener() {
-      setType(urlToType(new URL(window.location.href)));
+      setType(new URL(window.location.href));
     }
 
     window.addEventListener('popstate', listener);
     return () => window.removeEventListener('popstate', listener);
-  }, []);
+  }, [setType]);
 
   return (
     <>

@@ -1,6 +1,7 @@
 import { TextHTTPError } from '@hawaii-bus-plus/gotrue';
 import { URL } from 'url';
 import { createHandler } from '../shared';
+import { FEATURE_BILLING } from '../shared/env';
 import { database, stripe } from '../shared/stripe';
 import { NetlifyEvent } from '../shared/types';
 
@@ -28,6 +29,13 @@ export const handler = createHandler('GET', async (event, context) => {
     throw new TextHTTPError(
       { status: 401, statusText: 'Unauthorized' },
       'Not logged in',
+    );
+  }
+
+  if (FEATURE_BILLING) {
+    throw new TextHTTPError(
+      { status: 500, statusText: 'Internal Server Error' },
+      `Billing disabled. Please contact support.`,
     );
   }
 

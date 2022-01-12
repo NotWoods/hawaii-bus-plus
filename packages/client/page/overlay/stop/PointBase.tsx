@@ -4,7 +4,7 @@ import {
 } from '@hawaii-bus-plus/react-google-maps';
 import { ComponentChildren, Fragment, h } from 'preact';
 import { useState } from 'preact/hooks';
-import { LatLngLiteral } from 'spherical-geometry-js';
+import type { LatLngLiteral } from 'spherical-geometry-js';
 import {
   googleMapsApiKey,
   useLoadGoogleMaps,
@@ -19,8 +19,9 @@ const pov: Required<google.maps.StreetViewPov> = { heading: 34, pitch: 0 };
 
 export function PointBase(props: Props) {
   const { position } = props;
-  const [status, setStatus] =
-    useState<google.maps.StreetViewStatus | undefined>();
+  const [status, setStatus] = useState<
+    google.maps.StreetViewStatus | undefined
+  >();
   const { loadError } = useLoadGoogleMaps();
 
   return (

@@ -1,7 +1,7 @@
 import { Point } from '@hawaii-bus-plus/presentation';
 import { Fragment, h, Ref } from 'preact';
 import { useEffect, useRef } from 'preact/hooks';
-import type { SearchResults } from '../../../../worker-search/worker-search';
+import type { SearchResults } from '@hawaii-bus-plus/workers/search';
 import { useSearch } from '../simple/useSearch';
 import { DirectionsField } from './DirectionsField';
 
@@ -38,7 +38,7 @@ export function DirectionsFields(props: Props) {
   const getSearchResults = useSearch();
 
   async function performSearch(field: 'depart' | 'arrive', value: string) {
-    const results = await getSearchResults(value, abort.current.signal);
+    const results = await getSearchResults(value, abort.current!.signal);
     props.onSearchResults({ field, results });
   }
 

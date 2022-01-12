@@ -2,7 +2,7 @@ import { h } from 'preact';
 import { useState } from 'preact/hooks';
 import { MenuIcon } from '../../../assets/icons/MenuIcon';
 import { Logo } from '../../../components/Logo';
-import { useLazyComponent } from '../../hooks';
+import { useLazyComponent, useToggle } from '../../hooks';
 import { BaseOverlay } from '../BaseOverlay';
 import { DirectionsSearch } from '../search/directions/DirectionsSearch';
 import { SimpleSearch } from '../search/simple/SimpleSearch';
@@ -11,7 +11,7 @@ import { Home } from './Home';
 const lazyMenu = import('./menu/Menu');
 
 export function HomeOverlay() {
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [menuOpen, toggleMenuOpen] = useToggle();
   const [screen, setScreen] = useState<'home' | 'search' | 'directions'>(
     'home',
   );
@@ -27,7 +27,7 @@ export function HomeOverlay() {
               <Logo />
             </a>
           }
-          onButtonClick={() => setMenuOpen(!menuOpen)}
+          onButtonClick={toggleMenuOpen}
         >
           {Menu ? <Menu open={menuOpen} labelledBy="appBarUp" /> : undefined}
           <Home onSearch={() => setScreen('search')} />

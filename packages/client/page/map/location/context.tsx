@@ -15,16 +15,6 @@ export const MyLocationContext = createContext<MyLocationContext>({
   onButtonClick() {},
 });
 
-declare module 'preact/hooks' {
-  export function useState<S>(
-    initialState: S | (() => S),
-  ): [S, StateUpdater<S>];
-  export function useState<S = undefined>(): [
-    S | undefined,
-    StateUpdater<S | undefined>,
-  ];
-}
-
 export function MyLocationProvider(props: { children: ComponentChildren }) {
   const status = usePermission({ name: 'geolocation' });
   const [clicked, setClicked] = useState(false);

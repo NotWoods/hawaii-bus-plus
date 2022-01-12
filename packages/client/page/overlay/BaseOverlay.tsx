@@ -32,7 +32,7 @@ export function BaseOverlay(props: Props) {
       <header class="flex items-center pt-4">
         <IconButton
           id="appBarUp"
-          class="w-12 h-12 p-3 text-white"
+          class="w-12 h-12 p-3"
           forceDark
           accessKey="s"
           disabled={props.icon === false}

@@ -30,11 +30,11 @@ export function registerPromiseWorker(
       return;
     }
 
-    const [messageId, message] = payload;
+    const [messageId, message] = payload as [number, unknown];
 
     Promise.resolve(callback(message)).then(
       (result) => postOutgoingMessage(messageId, undefined, result),
-      (error) => postOutgoingMessage(messageId, error),
+      (error: Error) => postOutgoingMessage(messageId, error),
     );
   };
 }

@@ -1,17 +1,10 @@
 // @ts-check
-import {
-  emptyPackage,
-  webWorkerCodeSplit,
-} from '@hawaii-bus-plus/vite-plugins';
+import { defineConfig } from 'vite';
+import { headHtml } from '@hawaii-bus-plus/tailwind-theme';
+import { emptyPackage, injectHtml } from '@hawaii-bus-plus/vite-plugins';
 import prefresh from '@prefresh/vite';
 
-/**
- * @param {object} param1
- * @param {'serve' | 'build'} param1.command
- * @param {'development' | 'production'} param1.mode
- * @returns {import('vite').UserConfig}
- */
-export default function vite({}) {
+export default defineConfig(({ command }) => {
   /** @type {import('vite').AliasOptions} */
   const alias = {
     react: 'preact/compat',
@@ -20,14 +13,23 @@ export default function vite({}) {
 
   return {
     plugins: [
-      webWorkerCodeSplit(),
-      emptyPackage('preact/debug'),
+      command === 'build' && emptyPackage('preact/debug'),
+      injectHtml({
+        head: headHtml().then(
+          (html) =>
+            (html += `
+<link rel="icon" type="image/svg+xml" sizes="any" href="/icon/favicon.svg" />
+<link rel="icon" type="image/png" sizes="512x512" href="/icon/favicon-512.png" />
+<link rel="icon" type="image/png" sizes="48x48" href="/icon/favicon.png" />
+<link rel="apple-touch-icon" sizes="512x512" href="/icon/maskable.png" />
+<link rel="manifest" href="/manifest.webmanifest" />`),
+        ),
+      }),
       prefresh({
-        // @ts-expect-error prefresh type issues
         include: ['{auth,page,share,assets,components}/**/*'],
         exclude: ['worker-*/**'],
       }),
-    ],
+    ].filter(Boolean),
     resolve: { alias },
     optimizeDeps: {
       include: ['preact', 'preact/debug', 'preact/hooks'],
@@ -74,4 +76,4 @@ export default function vite({}) {
       force: true,
     },
   };
-}
+});

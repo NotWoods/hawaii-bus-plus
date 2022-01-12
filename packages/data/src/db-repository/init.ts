@@ -100,6 +100,7 @@ export async function initDatabase(
     const name = storeName as StoreName;
     const store = tx.objectStore(name);
     for (const item of Object.values(api[name])) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       const transformed = transform(item);
       jobs.push(store.put(transformed));
     }
@@ -120,6 +121,7 @@ export async function initDatabase(
 
     for (const [storeName, removed] of removedKeys) {
       for (const key of removed) {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
         jobs.push(deleteTx.objectStore(storeName).delete(key as any));
       }
     }
