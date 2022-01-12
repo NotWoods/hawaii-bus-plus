@@ -21,6 +21,9 @@
 [context.branch-deploy]
   environment = { NETLIFY_CONTEXT = "branch-deploy" }
 
+[functions]
+  node_bundler = "esbuild"
+
 [[plugins]]
 package = "@netlify/plugin-sitemap"
   [plugins.inputs]
