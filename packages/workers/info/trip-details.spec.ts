@@ -94,16 +94,16 @@ test.concurrent(
     expect(directionDetails[0]).toBeDefined();
     expect(directionDetails[1]).toBeDefined();
 
-    expect(directionDetails[0].closestTrip.offset?.toString()).toEqual(
+    expect(directionDetails[0].closestTrip.offset?.toString()).toBe(
       'P1DT3H30M',
     );
-    expect(directionDetails[0].closestTrip.trip?.trip_short_name).toEqual(
+    expect(directionDetails[0].closestTrip.trip?.trip_short_name).toBe(
       '6:30AM WAIMEA AM',
     );
-    expect(directionDetails[1].closestTrip.offset?.toString()).toEqual(
+    expect(directionDetails[1].closestTrip.offset?.toString()).toBe(
       'P1DT4H',
     );
-    expect(directionDetails[1].closestTrip.trip?.trip_short_name).toEqual(
+    expect(directionDetails[1].closestTrip.trip?.trip_short_name).toBe(
       '7:00AM WAIMEA AM',
     );
   },
@@ -127,16 +127,16 @@ test.concurrent(
     expect(directionDetails[0]).toBeDefined();
     expect(directionDetails[1]).toBeDefined();
 
-    expect(directionDetails[0].closestTrip.offset?.toString()).toEqual(
+    expect(directionDetails[0].closestTrip.offset?.toString()).toBe(
       'P1DT30M',
     );
-    expect(directionDetails[0].closestTrip.trip?.trip_short_name).toEqual(
+    expect(directionDetails[0].closestTrip.trip?.trip_short_name).toBe(
       '6:30AM WAIMEA AM',
     );
-    expect(directionDetails[1].closestTrip.offset?.toString()).toEqual(
+    expect(directionDetails[1].closestTrip.offset?.toString()).toBe(
       'P1DT1H',
     );
-    expect(directionDetails[1].closestTrip.trip?.trip_short_name).toEqual(
+    expect(directionDetails[1].closestTrip.trip?.trip_short_name).toBe(
       '7:00AM WAIMEA AM',
     );
   },

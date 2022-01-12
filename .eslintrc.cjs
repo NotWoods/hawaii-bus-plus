@@ -94,8 +94,10 @@ const config = {
       files: ['packages/*/test/**/*.{ts,tsx}'],
       rules: {
         'jest/expect-expect': 'off',
+        'jest/no-done-callback': 'off',
         'jest/no-test-callback': 'off',
         'jest/no-export': 'off',
+        'jest/valid-title': 'off',
       },
     },
     {
