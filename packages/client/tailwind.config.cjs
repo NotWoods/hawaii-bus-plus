@@ -2,8 +2,7 @@ const { theme } = require('@hawaii-bus-plus/tailwind-theme');
 
 /** @type {import('tailwindcss/tailwind-config').TailwindConfig} */
 const config = {
-  mode: 'jit',
-  purge: [
+  content: [
     './index.html',
     './auth/index.html',
     './page/**/*.tsx',
@@ -17,7 +16,6 @@ const config = {
   plugins: [
     require('@tailwindcss/aspect-ratio'),
     require('@tailwindcss/forms'),
-    require('tailwindcss-scroll-snap'),
   ],
 };
 

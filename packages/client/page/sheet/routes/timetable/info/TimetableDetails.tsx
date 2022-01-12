@@ -56,7 +56,7 @@ export function TimetableDetails(props: Props) {
   return (
     <header class="relative">
       <div
-        class="timetable__details grid scroll snap overflow-x-auto"
+        class="timetable__details grid scroll snap-both overflow-x-auto"
         style={{
           gridTemplateColumns: directionsDetails.map(() => '100%').join(' '),
         }}

@@ -39,7 +39,7 @@ export function DirectionsJourneys(props: Props) {
       <div
         class={clsx(
           sharedClasses,
-          'overflow-x-auto snap snap-px-32 overscroll-contain',
+          'overflow-x-auto snap-both scroll-px-32 overscroll-contain',
         )}
       >
         <SearchResultsSubList
