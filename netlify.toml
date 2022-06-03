@@ -127,7 +127,7 @@ package = "@netlify/plugin-sitemap"
     form-action 'self';
     default-src 'self';
     img-src 'self' data: blob: *.googleapis.com *.ggpht.com maps.gstatic.com https://hawaiibusplus.com;
-    script-src 'self' 'unsafe-eval' maps.googleapis.com https://kite.oakes.software;
+    script-src 'self' 'unsafe-eval' maps.googleapis.com https://now-holiday.hawaiibusplus.com/script.js;
     worker-src 'self';
     style-src 'self' 'unsafe-inline' fonts.googleapis.com;
     font-src 'self' fonts.gstatic.com;
