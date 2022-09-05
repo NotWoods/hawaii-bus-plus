@@ -1,7 +1,10 @@
-import type { TailwindTheme } from 'tailwindcss/tailwind-config';
-import colors = require('tailwindcss/colors');
+// @ts-check
+const colors = require('tailwindcss/colors');
 
-export const theme: TailwindTheme = {
+/**
+ * @type {import('tailwindcss').Config['theme']}
+ */
+const theme = {
   fontFamily: {
     display: ['Red Rose', 'Copperplate Gothic', 'Copperplate', 'serif'],
   },
@@ -53,9 +56,9 @@ export const theme: TailwindTheme = {
       to: { transform: 'translateY(3%)' },
     },
     line: {
-      '0%, 25%': { 'stroke-dashoffset': 22 } as any,
-      '50%, 51%': { 'stroke-dashoffset': 0 } as any,
-      '80%, 100%': { 'stroke-dashoffset': -22 } as any,
+      '0%, 25%': { 'stroke-dashoffset': '22' },
+      '50%, 51%': { 'stroke-dashoffset': '0' },
+      '80%, 100%': { 'stroke-dashoffset': '-22' },
     },
   },
   animation: {
@@ -67,4 +70,14 @@ export const theme: TailwindTheme = {
       route: 'var(--route-text-color)',
     },
   },
+};
+
+/**
+ * Simple tailwind plugin that sets the theme.
+ */
+module.exports = {
+  config: {
+    theme,
+  },
+  handler() {},
 };
