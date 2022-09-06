@@ -6,9 +6,8 @@
   "main": "./src/index.js",
   "module": "./src/index.js",
   "scripts": {
-    "prebuild": "tsc --build src",
+    "prebuild": "tsc --build src && copyfiles ../../dist/auth/done.html src/auth/ --flat",
     "build": "node esbuild.config.mjs",
-    "postbuild": "copyfiles ../../dist/auth/done.html ../../dist/functions/auth/ --flat",
     "format": "prettier **/*.ts *.mjs --write --ignore-path ../../.prettierignore",
     "postformat": "eslint \"**/*.ts\" --fix",
     "pretest": "tsc --build test",
