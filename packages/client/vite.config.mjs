@@ -35,9 +35,7 @@ export default defineConfig(({ command, ssrBuild }) => {
       jsxFactory: 'h',
       jsxFragment: 'Fragment',
     },
-    define: {
-      globalThis: 'self',
-    },
+    define: ssrBuild === true ? undefined : { globalThis: 'self' },
     build: {
       manifest: true,
       ssrManifest: ssrBuild !== true,

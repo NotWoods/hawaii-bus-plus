@@ -27,7 +27,7 @@
     "@hawaii-bus-plus/types": "workspace:*",
     "@hawaii-bus-plus/utils": "workspace:*",
     "@js-temporal/polyfill": "^0.3.0",
-    "spherical-geometry-js": "^2.1.0",
+    "spherical-geometry-js": "^3.0.0",
     "tslib": "^2.3.1"
   },
   "devDependencies": {

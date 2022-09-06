@@ -104,7 +104,7 @@ importers:
       preact: ^10.6.4
       preact-render-to-string: ^5.1.19
       prettier: ~2.5.1
-      spherical-geometry-js: ^2.1.0
+      spherical-geometry-js: ^3.0.0
       tailwindcss: ^3.1.8
       ts-jest-resolver: ^2.0.0
       tslib: ^2.3.1
@@ -128,7 +128,7 @@ importers:
       idb: 7.0.0
       just-debounce: 1.1.0
       preact: 10.6.4
-      spherical-geometry-js: 2.1.0
+      spherical-geometry-js: 3.0.0
       tslib: 2.3.1
     devDependencies:
       '@googlemaps/js-api-loader': 1.13.1
@@ -283,12 +283,13 @@ importers:
       '@types/node': ^16.11.7
       ava: ^4.0.1
       idb: ^7.0.0
+      just-debounce: ^1.1.0
       node-html-parser: ^5.2.0
       preact: ^10.6.4
       preact-render-to-string: ^5.1.19
       prettier: ~2.5.1
       rollup: ^2.63.0
-      spherical-geometry-js: ^2.1.0
+      spherical-geometry-js: ^3.0.0
       tailwindcss: ^3.0.13
       tslib: ^2.3.1
       type-fest: ^2.9.0
@@ -299,9 +300,10 @@ importers:
       '@js-temporal/polyfill': 0.3.0
       '@notwoods/preact-helmet': 6.1.0_preact@10.6.4
       idb: 7.0.0
+      just-debounce: 1.1.0
       node-html-parser: 5.2.0
       preact-render-to-string: 5.1.19_preact@10.6.4
-      spherical-geometry-js: 2.1.0
+      spherical-geometry-js: 3.0.0
       tslib: 2.3.1
       type-fest: 2.9.0
       vite: 3.1.0
@@ -478,7 +480,7 @@ importers:
       esbuild-jest: ^0.5.0
       jest: ^27.4.7
       prettier: ~2.5.1
-      spherical-geometry-js: ^2.1.0
+      spherical-geometry-js: ^3.0.0
       ts-jest-resolver: ^2.0.0
       tslib: ^2.3.1
       typescript: ^4.5.4
@@ -492,7 +494,7 @@ importers:
       '@hawaii-bus-plus/types': link:../types
       '@hawaii-bus-plus/utils': link:../utils
       '@js-temporal/polyfill': 0.3.0
-      spherical-geometry-js: 2.1.0
+      spherical-geometry-js: 3.0.0
       tslib: 2.3.1
     devDependencies:
       '@hawaii-bus-plus/jest-utils': link:../jest-utils
@@ -8730,10 +8732,6 @@ packages:
   /spdx-license-ids/3.0.11:
     resolution: {integrity: sha512-Ctl2BrFiM0X3MANYgj3CkygxhRmr9mi6xhejbdO960nF6EDJApTYpn0BQnDKlnNBULKiCN1n3w9EBkHK8ZWg+g==}
     dev: true
-
-  /spherical-geometry-js/2.1.0:
-    resolution: {integrity: sha512-osIQKPLKIqvxm47yCZ8DyNitnRLWUYEpS1zRLCOYuP8RSVa0yeclIyM8iBDTP5EyLQ9wtHGpq/l6Ppteun3vbA==}
-    dev: false
 
   /spherical-geometry-js/3.0.0:
     resolution: {integrity: sha512-PvfGTBRSyoAr3KGk/pTkqA7vCMO0lXilnmh6DfiTrO4RhRz++RTbMbUXKcmkmw8olh2wWVVY2qx8sl5hJ+JpVg==}
