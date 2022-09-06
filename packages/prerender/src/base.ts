@@ -37,9 +37,11 @@ export async function renderRoutes(
   console.log(`Render ${serverEntryPath}`);
   const templateReady = readFile(new URL(templatePath, distFolder), 'utf8');
 
-  const { default: render } = await import(
-    new URL(serverEntryPath, builtSsrFolder).href
-  );
+  const module = await import(new URL(serverEntryPath, builtSsrFolder).href);
+  const render = (module as { default: unknown }).default as (
+    url: URL,
+    ...args: unknown[]
+  ) => Promise<{ html: string }>;
 
   const writeJobs: Promise<RenderRoutesResult>[] = [];
   for (const pathname of routes) {

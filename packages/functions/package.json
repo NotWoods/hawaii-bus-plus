@@ -28,7 +28,7 @@
     "@types/node": "^16.11.57",
     "ava": "^4.3.3",
     "copyfiles": "^2.4.1",
-    "prettier": "~2.5.1",
+    "prettier": "~2.7.1",
     "typescript": "^4.8.2"
   },
   "files": [

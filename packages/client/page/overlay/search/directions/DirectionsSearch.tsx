@@ -72,7 +72,7 @@ export function DirectionsSearch(_props: Props) {
     return {
       depart: departRef,
       arrive: arriveRef,
-    }[searchResults.field] as Ref<HTMLInputElement>;
+    }[searchResults.field];
   }
   const handleKeyDown = useAutocompleteKeys(getInputRef());
 

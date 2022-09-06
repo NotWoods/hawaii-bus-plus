@@ -4,24 +4,16 @@
   "description": "Tailwind theme for hawaiibusplus.com",
   "private": false,
   "type": "commonjs",
-  "main": "src/index.js",
+  "main": "src/index.cjs",
   "scripts": {
-    "format": "prettier **/*.js --write --ignore-path ../../.prettierignore",
-    "postformat": "eslint \"**/*.js\" --fix"
+    "format": "prettier **/*.cjs --write --ignore-path ../../.prettierignore",
+    "postformat": "eslint \"**/*.cjs\" --fix"
   },
   "peerDependencies": {
     "tailwindcss": "^3.0.13"
   },
-  "dependencies": {},
   "devDependencies": {
-    "prettier": "~2.5.1",
+    "prettier": "~2.7.1",
     "tailwindcss": "^3.1.8"
-  },
-  "eslintConfig": {
-    "parserOptions": {
-      "project": [
-        "./packages/tailwind-theme/*/tsconfig.json"
-      ]
-    }
   }
 }
