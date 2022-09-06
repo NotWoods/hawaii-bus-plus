@@ -4,6 +4,7 @@ version: 5.0.0
 scripts:
   api: pnpm run api:client --filter api-gen
   build: "pnpm run build --filter client && \
+    pnpm run build:ssr --filter client &&
     pnpm run api:dist --filter api-gen && \
     pnpm run build --filter prerender && \
     pnpm run workbox --filter client && \

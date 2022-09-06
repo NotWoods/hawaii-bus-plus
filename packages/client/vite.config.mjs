@@ -13,7 +13,8 @@ export default defineConfig(({ command, ssrBuild }) => {
     'react-dom': 'preact/compat',
   };
 
-  return {
+  /** @type {import('vite').UserConfig & { build: import('vite').BuildOptions }} */
+  const baseConfig = {
     plugins: [
       command === 'build' && emptyPackage('preact/debug'),
       injectHtml({
@@ -35,32 +36,23 @@ export default defineConfig(({ command, ssrBuild }) => {
       jsxFactory: 'h',
       jsxFragment: 'Fragment',
     },
-    define: ssrBuild === true ? undefined : { globalThis: 'self' },
+    define: { globalThis: 'self' },
     build: {
       manifest: true,
-      ssrManifest: ssrBuild !== true,
-      ssr: ssrBuild === true,
-      outDir: ssrBuild === true ? '../prerender/dist/' : '../../dist/',
+      ssrManifest: true,
+      outDir: '../../dist/',
       emptyOutDir: true,
       cssCodeSplit: false,
-      minify: ssrBuild === true ? false : 'esbuild',
-      polyfillDynamicImport: false,
+      minify: 'esbuild',
       rollupOptions: {
         treeshake: {
           // moduleSideEffects: false,
         },
-        input:
-          ssrBuild === true
-            ? {
-                main: './page/entry-server.tsx',
-                auth: './auth/entry-server.tsx',
-                share: './share/entry-server.tsx',
-              }
-            : {
-                main: './index.html',
-                auth: './auth/index.html',
-                share: './share/index.html',
-              },
+        input: {
+          main: './index.html',
+          auth: './auth/index.html',
+          share: './share/index.html',
+        },
         output: {
           manualChunks: undefined,
         },
@@ -85,4 +77,28 @@ export default defineConfig(({ command, ssrBuild }) => {
       force: true,
     },
   };
+
+  if (ssrBuild === true) {
+    return {
+      ...baseConfig,
+      define: undefined,
+      build: {
+        ...baseConfig.build,
+        ssrManifest: false,
+        ssr: true,
+        outDir: '../prerender/dist/',
+        minify: false,
+        rollupOptions: {
+          ...baseConfig.build.rollupOptions,
+          input: {
+            main: './page/entry-server.tsx',
+            auth: './auth/entry-server.tsx',
+            share: './share/entry-server.tsx',
+          },
+        },
+      },
+    };
+  } else {
+    return baseConfig;
+  }
 });
