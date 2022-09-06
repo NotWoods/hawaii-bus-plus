@@ -13,15 +13,15 @@
   },
   "dependencies": {
     "@surma/rollup-plugin-off-main-thread": "^2.2.3",
-    "tslib": "^2.3.1"
+    "tslib": "^2.4.0"
   },
   "peerDependencies": {
     "vite": ">3.0.0"
   },
   "devDependencies": {
     "@ava/typescript": "^3.0.1",
-    "@types/node": "^16.11.19",
-    "ava": "^4.0.1",
+    "@types/node": "^16.11.57",
+    "ava": "^4.3.3",
     "prettier": "~2.5.1",
     "typescript": "^4.8.2",
     "vite": "^3.1.0"

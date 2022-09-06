@@ -26,31 +26,30 @@
     "@hawaii-bus-plus/workers": "workspace:*",
     "@js-temporal/polyfill": "^0.3.0",
     "@notwoods/preact-helmet": "^6.1.0",
-    "clsx": "^1.1.1",
-    "idb": "^7.0.0",
+    "clsx": "^1.2.1",
+    "idb": "^7.0.2",
     "just-debounce": "^1.1.0",
-    "preact": "^10.6.4",
+    "preact": "^10.10.6",
     "spherical-geometry-js": "^3.0.0",
-    "tslib": "^2.3.1"
+    "tslib": "^2.4.0"
   },
   "devDependencies": {
-    "@googlemaps/js-api-loader": "^1.13.1",
+    "@googlemaps/js-api-loader": "^1.14.3",
     "@hawaii-bus-plus/tailwind-theme": "workspace:*",
     "@hawaii-bus-plus/vite-plugins": "workspace:*",
-    "@prefresh/vite": "^2.2.6",
-    "@tailwindcss/aspect-ratio": "^0.4.0",
-    "@tailwindcss/forms": "^0.4.0",
-    "@tailwindcss/typography": "^0.5.0",
-    "@types/google.maps": "^3.47.2",
-    "@types/tailwindcss": "^3.0.2",
-    "preact-render-to-string": "^5.1.19",
+    "@prefresh/vite": "^2.2.8",
+    "@tailwindcss/aspect-ratio": "^0.4.2",
+    "@tailwindcss/forms": "^0.4.1",
+    "@tailwindcss/typography": "^0.5.7",
+    "@types/google.maps": "^3.50.0",
+    "preact-render-to-string": "^5.2.2",
     "prettier": "~2.5.1",
     "tailwindcss": "^3.1.8",
     "type-fest": "^2.19.0",
     "typescript": "^4.8.2",
     "vite": "^3.1.0",
     "vitest": "^0.23.1",
-    "workbox-cli": "^6.4.2"
+    "workbox-cli": "^6.5.4"
   },
   "eslintConfig": {
     "parserOptions": {
