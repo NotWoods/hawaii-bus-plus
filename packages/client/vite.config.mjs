@@ -6,7 +6,7 @@ import prefresh from '@prefresh/vite';
 
 const headHtmlIncludeFile = new URL('./head.html', import.meta.url);
 
-export default defineConfig(({ command }) => {
+export default defineConfig(({ command, ssrBuild }) => {
   /** @type {import('vite').AliasOptions} */
   const alias = {
     react: 'preact/compat',
@@ -40,25 +40,42 @@ export default defineConfig(({ command }) => {
     },
     build: {
       manifest: true,
-      ssrManifest: true,
-      outDir: '../../dist',
+      ssrManifest: ssrBuild !== true,
+      ssr: ssrBuild === true,
+      outDir: ssrBuild === true ? '../prerender/dist/' : '../../dist/',
       emptyOutDir: true,
       cssCodeSplit: false,
-      minify: 'esbuild',
+      minify: ssrBuild === true ? false : 'esbuild',
       polyfillDynamicImport: false,
       rollupOptions: {
         treeshake: {
           // moduleSideEffects: false,
         },
-        input: {
-          main: './index.html',
-          auth: './auth/index.html',
-          share: './share/index.html',
-        },
+        input:
+          ssrBuild === true
+            ? {
+                main: './page/entry-server.tsx',
+                auth: './auth/entry-server.tsx',
+                share: './share/entry-server.tsx',
+              }
+            : {
+                main: './index.html',
+                auth: './auth/index.html',
+                share: './share/index.html',
+              },
         output: {
           manualChunks: undefined,
         },
       },
+    },
+    ssr: {
+      external: [
+        'preact',
+        'tailwindcss',
+        'fs/promises',
+        '@notwoods/preact-helmet',
+      ],
+      noExternal: ['clsx'],
     },
     server: {
       proxy: {

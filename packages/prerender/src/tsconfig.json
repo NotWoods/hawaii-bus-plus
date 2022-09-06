@@ -7,7 +7,7 @@
   ],
   "compilerOptions": {
     "lib": ["esnext", "dom"],
-    "types": ["node", "google.maps"],
+    "types": ["node"],
     "skipLibCheck": true
   }
 }

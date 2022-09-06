@@ -1,10 +1,6 @@
 import { readFile, writeFile } from 'fs/promises';
-import { createRequire } from 'module';
-import { resolve } from 'path';
-import type { OutputAsset, RollupOutput } from 'rollup';
 import { Promisable } from 'type-fest';
-import { fileURLToPath, URL } from 'url';
-import { build } from 'vite';
+import { URL } from 'url';
 import { injectHelmet } from './helmet.js';
 
 export type RenderFunction = (
@@ -13,74 +9,7 @@ export type RenderFunction = (
 ) => Promisable<{ html: string }>;
 
 export const distFolder = new URL('../../../dist/', import.meta.url);
-export const clientFolder = new URL('../../client/', import.meta.url);
-
-export async function buildPrerenderCode(
-  input: string,
-  args: Record<string, unknown> = {},
-) {
-  const root = fileURLToPath(clientFolder);
-  const external = [
-    'preact',
-    'tailwindcss',
-    'fs/promises',
-    '@notwoods/preact-helmet',
-  ];
-
-  const buildResult = await build({
-    root,
-    css: {
-      postcss: '',
-    },
-    define: {
-      globalThis: 'global',
-    },
-    build: {
-      minify: false,
-      write: false,
-      ssr: input,
-      manifest: false,
-      ssrManifest: false,
-      rollupOptions: {
-        input: resolve(root, input),
-        external,
-      },
-    },
-    // @ts-expect-error bug in vite type deps
-    ssr: {
-      external,
-    },
-  });
-
-  if (Array.isArray(buildResult)) {
-    throw new Error(`output from vite is an array`);
-  }
-  const { output } = buildResult as RollupOutput;
-
-  const [{ code, fileName }] = output;
-  const module = {
-    exports: {} as { [name: string]: unknown; default?: unknown },
-  };
-  const require = createRequire(resolve(root, fileName));
-  const params = ['module', 'exports', 'require', ...Object.keys(args)].concat(
-    code,
-  );
-
-  // eslint-disable-next-line @typescript-eslint/no-implied-eval
-  const func = new Function(...params);
-  let error: unknown;
-  try {
-    func(...[module, module.exports, require, ...Object.values(args)]);
-  } catch (err: unknown) {
-    error = err;
-  }
-
-  const assets = output.filter(
-    (chunk): chunk is OutputAsset => chunk.type === 'asset',
-  );
-
-  return { code, module, assets, error };
-}
+export const builtSsrFolder = new URL('../dist/', import.meta.url);
 
 export function renderTemplate(template: string, appHtml: string) {
   return template.replace(`<!--app-html-->`, appHtml);
@@ -88,6 +17,9 @@ export function renderTemplate(template: string, appHtml: string) {
 
 interface RenderRoutesOptions {
   templatePath: string;
+  /**
+   * Path to the build SSR entry file
+   */
   serverEntryPath: string;
   routes: string[];
   write?: boolean;
@@ -99,18 +31,15 @@ export interface RenderRoutesResult {
 }
 
 export async function renderRoutes(
-  options: RenderRoutesOptions,
+  { templatePath, serverEntryPath, routes, write }: RenderRoutesOptions,
   ...args: unknown[]
 ): Promise<RenderRoutesResult[]> {
-  console.log(`Render ${options.serverEntryPath}`);
-  const { templatePath, serverEntryPath, routes, write } = options;
+  console.log(`Render ${serverEntryPath}`);
   const templateReady = readFile(new URL(templatePath, distFolder), 'utf8');
 
-  const { module, error } = await buildPrerenderCode(serverEntryPath);
-  const render = module.exports.default as RenderFunction;
-  if (error) {
-    throw error;
-  }
+  const { default: render } = await import(
+    new URL(serverEntryPath, builtSsrFolder).href
+  );
 
   const writeJobs: Promise<RenderRoutesResult>[] = [];
   for (const pathname of routes) {
