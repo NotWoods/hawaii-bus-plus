@@ -6,6 +6,7 @@
     "lib": ["esnext"],
     "types": ["node"],
     "target": "es2019",
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "noEmit": true
   }
 }

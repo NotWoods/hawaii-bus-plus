@@ -1,17 +1,10 @@
-import { readFile } from 'fs';
-import { promisify } from 'util';
 import { NetlifyResponse } from '../../shared/types';
+import template from './done.html';
 
-const readFileAsync = promisify(readFile);
-
-const templatePath = require.resolve('./done.html');
-const templateReady = readFileAsync(templatePath, 'utf8');
-
-export async function renderTemplate(
+export function renderTemplate(
   statusCode: number,
   ctx: { type: string; redirectTo?: string; userData?: unknown },
-): Promise<NetlifyResponse> {
-  const template = await templateReady;
+): NetlifyResponse {
   const globalContext = `<script>window.ctx = ${JSON.stringify(ctx)}</script>`;
   const metaRefresh = ctx.redirectTo
     ? `<meta http-equiv="refresh" content="0; URL=${ctx.redirectTo}" />`

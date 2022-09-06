@@ -127,7 +127,7 @@ export const handler = createHandler(
         throw new Error(`Invalid type ${type} given`);
     }
 
-    const response = await renderTemplate(successStatus, {
+    const response = renderTemplate(successStatus, {
       type: 'success',
       redirectTo: redirectTo.href,
     });

@@ -5,14 +5,16 @@ import { build } from 'esbuild';
  */
 async function defineConfig(input, output = input) {
   await build({
-    entryPoints: [`src/${input}.js`],
+    entryPoints: [`src/${input}.ts`],
     outfile: `../../dist/functions/${output}.js`,
     bundle: true,
     sourcemap: true,
     platform: 'node',
     target: 'node14',
     format: 'cjs',
-    external: ['./done.html'],
+    loader: {
+      '.html': 'text',
+    },
   });
 }
 
