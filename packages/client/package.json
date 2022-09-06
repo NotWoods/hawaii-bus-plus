@@ -11,7 +11,7 @@
     "format": "prettier **/*.{ts,tsx} *.{cjs,mjs} *.html --write --ignore-path ../../.prettierignore",
     "postformat": "eslint \"**/*.{ts,tsx}\" --fix",
     "pretest": "tsc --build page",
-    "test": "jest",
+    "test": "vitest",
     "workbox": "workbox generateSW workbox.config.cjs"
   },
   "dependencies": {
@@ -35,7 +35,6 @@
   },
   "devDependencies": {
     "@googlemaps/js-api-loader": "^1.13.1",
-    "@hawaii-bus-plus/jest-utils": "workspace:*",
     "@hawaii-bus-plus/tailwind-theme": "workspace:*",
     "@hawaii-bus-plus/vite-plugins": "workspace:*",
     "@jest/globals": "^27.4.6",
@@ -56,6 +55,7 @@
     "type-fest": "^2.19.0",
     "typescript": "^4.8.2",
     "vite": "^3.1.0",
+    "vitest": "^0.23.1",
     "workbox-cli": "^6.4.2"
   },
   "jest": {

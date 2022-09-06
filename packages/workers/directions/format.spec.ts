@@ -2,10 +2,10 @@ import { NodeRepository } from '@hawaii-bus-plus/data/node';
 import {
   expectDurationData,
   expectPlainTimeData,
-} from '@hawaii-bus-plus/jest-utils';
+} from '@hawaii-bus-plus/test-utils';
 import { PlainDaysTime } from '@hawaii-bus-plus/temporal-utils';
 import { Stop, StopTime, TimeString, Trip } from '@hawaii-bus-plus/types';
-import { expect, test } from '@jest/globals';
+import { expect, test } from 'vitest';
 import { Temporal } from '@js-temporal/polyfill';
 import { journeyToDirections, JourneyTripSegment } from './format';
 import { CompletePath } from './paths/raptor';

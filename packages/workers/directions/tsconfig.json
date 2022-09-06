@@ -7,7 +7,6 @@
     { "path": "../nearby" },
     { "path": "../../data/src" },
     { "path": "../../data/node" },
-    { "path": "../../jest-utils/src" },
     { "path": "../../mnemonist/src" },
     { "path": "../../presentation/src" },
     { "path": "../../temporal-utils/src" },

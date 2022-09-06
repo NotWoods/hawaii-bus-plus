@@ -1,6 +1,6 @@
 import { NodeRepository } from '@hawaii-bus-plus/data/node';
 import { Route } from '@hawaii-bus-plus/types';
-import { expect, test } from '@jest/globals';
+import { expect, test } from 'vitest';
 import { Temporal } from '@js-temporal/polyfill';
 import { findBestTrips } from './trip-details';
 
@@ -100,9 +100,7 @@ test.concurrent(
     expect(directionDetails[0].closestTrip.trip?.trip_short_name).toBe(
       '6:30AM WAIMEA AM',
     );
-    expect(directionDetails[1].closestTrip.offset?.toString()).toBe(
-      'P1DT4H',
-    );
+    expect(directionDetails[1].closestTrip.offset?.toString()).toBe('P1DT4H');
     expect(directionDetails[1].closestTrip.trip?.trip_short_name).toBe(
       '7:00AM WAIMEA AM',
     );
@@ -127,15 +125,11 @@ test.concurrent(
     expect(directionDetails[0]).toBeDefined();
     expect(directionDetails[1]).toBeDefined();
 
-    expect(directionDetails[0].closestTrip.offset?.toString()).toBe(
-      'P1DT30M',
-    );
+    expect(directionDetails[0].closestTrip.offset?.toString()).toBe('P1DT30M');
     expect(directionDetails[0].closestTrip.trip?.trip_short_name).toBe(
       '6:30AM WAIMEA AM',
     );
-    expect(directionDetails[1].closestTrip.offset?.toString()).toBe(
-      'P1DT1H',
-    );
+    expect(directionDetails[1].closestTrip.offset?.toString()).toBe('P1DT1H');
     expect(directionDetails[1].closestTrip.trip?.trip_short_name).toBe(
       '7:00AM WAIMEA AM',
     );

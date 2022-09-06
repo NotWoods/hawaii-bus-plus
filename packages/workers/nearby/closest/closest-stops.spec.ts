@@ -1,5 +1,5 @@
 import { NodeRepository } from '@hawaii-bus-plus/data/node';
-import { expect, test } from '@jest/globals';
+import { expect, test } from 'vitest';
 import { findClosestStops } from './closest-stops.js';
 
 const WAIMEA = { lat: 20.022818482273284, lng: -155.67176568698534 };

@@ -6,7 +6,6 @@
     { "path": "../shared" },
     { "path": "../../data/src" },
     { "path": "../../data/node" },
-    { "path": "../../jest-utils/src" },
     { "path": "../../presentation/src" },
     { "path": "../../types" },
     { "path": "../../utils/src" }
