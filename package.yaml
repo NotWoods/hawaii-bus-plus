@@ -4,9 +4,12 @@ version: 5.0.0
 scripts:
   api: pnpm run api:client --filter api-gen
   build: >-
-    pnpm run build --filter client && pnpm run build:ssr --filter client && pnpm
-    run api:dist --filter api-gen && pnpm run build --filter prerender && pnpm
-    run workbox --filter client && pnpm run build --filter functions
+    pnpm --filter client run build &&
+    pnpm --filter client run build:ssr &&
+    pnpm --filter api-gen run api:dist &&
+    pnpm --filter prerender run build &&
+    pnpm --filter client run workbox &&
+    pnpm --filter functions run build
   clean: >-
     del-cli "dist/**/*" "packages/**/*.js" "packages/**/*.d.ts"
     "packages/**/*.map" "packages/**/*.tsbuildinfo"

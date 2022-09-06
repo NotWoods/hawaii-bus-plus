@@ -181,6 +181,7 @@ importers:
       ava: ^4.3.3
       cookie: ^0.4.2
       copyfiles: ^2.4.1
+      esbuild: ^0.15.7
       prettier: ~2.7.1
       stripe: ^8.195.0
       tslib: ^2.4.0
@@ -198,6 +199,7 @@ importers:
       '@types/node': 16.11.57
       ava: 4.3.3_@ava+typescript@3.0.1
       copyfiles: 2.4.1
+      esbuild: 0.15.7
       prettier: 2.7.1
       typescript: 4.8.2
 
