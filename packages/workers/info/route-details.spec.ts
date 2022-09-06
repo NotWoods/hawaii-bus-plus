@@ -1,7 +1,7 @@
 import { NodeRepository } from '@hawaii-bus-plus/data/node';
-import { expectPlainTimeData } from '@hawaii-bus-plus/jest-utils';
+import { expectPlainTimeData } from '@hawaii-bus-plus/test-utils';
 import { Route } from '@hawaii-bus-plus/types';
-import { expect, test } from '@jest/globals';
+import { expect, test } from 'vitest';
 import { Temporal } from '@js-temporal/polyfill';
 import { getRouteDetails } from './route-details';
 

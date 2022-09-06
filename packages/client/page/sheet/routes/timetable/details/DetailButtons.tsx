@@ -24,6 +24,7 @@ function useShare(text: string) {
     [text, toastAlert],
   );
 
+  // @ts-expect-error Testing for Share API
   if (!import.meta.env.SSR && navigator.share) {
     return callback;
   } else {

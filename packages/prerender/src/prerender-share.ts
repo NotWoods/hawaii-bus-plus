@@ -13,7 +13,7 @@ export async function prerenderShare(write: boolean) {
   return await renderRoutes(
     {
       templatePath: './share/index.html',
-      serverEntryPath: './share/entry-server.tsx',
+      serverEntryPath: './share.js',
       routes: routes.map((route) => `/share/routes/${route.route_id}`),
       write,
     },

@@ -14,7 +14,11 @@ export function offMainThread(): Plugin {
     outputOptions(options) {
       // SSR uses cjs but the output will never run.
       // Just fake the format here.
-      return base.outputOptions!.call(this, {
+      if (typeof base.outputOptions !== 'function') {
+        throw new Error('OMT outputOptions is not a function');
+      }
+
+      return base.outputOptions.call(this, {
         ...options,
         format: options.format === 'cjs' ? 'es' : options.format,
       });

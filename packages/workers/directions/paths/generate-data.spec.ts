@@ -1,5 +1,5 @@
 import { NodeRepository } from '@hawaii-bus-plus/data/node';
-import { expect, test } from '@jest/globals';
+import { expect, test } from 'vitest';
 import { Temporal } from '@js-temporal/polyfill';
 import { generateDirectionsData } from './generate-data';
 

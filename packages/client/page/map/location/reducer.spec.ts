@@ -1,4 +1,4 @@
-import { expect, test } from '@jest/globals';
+import { expect, test } from 'vitest';
 import { errorAction, foundCoordinatesAction } from './action';
 import { locationReducer } from './reducer';
 import { GeolocationErrorCode } from './state';

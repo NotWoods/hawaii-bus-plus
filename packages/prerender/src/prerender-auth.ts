@@ -3,7 +3,7 @@ import { renderRoutes } from './base.js';
 export async function prerenderAuth(write: boolean) {
   return await renderRoutes({
     templatePath: './auth/index.html',
-    serverEntryPath: './auth/entry-server.tsx',
+    serverEntryPath: './auth.js',
     routes: [
       '/404',
       '/auth/login',

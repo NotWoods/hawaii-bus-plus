@@ -2,6 +2,7 @@
   "extends": "../tsconfig.base.json",
   "include": ["**/*.spec.ts"],
   "references": [
+    { "path": "../test-utils/src" },
     { "path": "./directions" },
     { "path": "./info" },
     { "path": "./init-db" },

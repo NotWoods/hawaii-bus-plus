@@ -1,3 +1,5 @@
+import { expect } from 'vitest';
+
 export function expectPlainTimeData(iso?: string) {
   return {
     epochMilliseconds: expect.any(Number),

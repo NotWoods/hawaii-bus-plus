@@ -4,7 +4,7 @@ import {
   PlainDaysTime,
 } from '@hawaii-bus-plus/temporal-utils';
 import { Stop, TimeString } from '@hawaii-bus-plus/types';
-import { expect, test } from '@jest/globals';
+import { expect, test } from 'vitest';
 import { Temporal } from '@js-temporal/polyfill';
 import { generateDirectionsData } from './generate-data';
 import { getEarliestValidTrip } from './trip-times';

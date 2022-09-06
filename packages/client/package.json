@@ -6,11 +6,12 @@
   "scripts": {
     "prebuild": "tsc --build tsconfig.build.json",
     "build": "vite build",
+    "build:ssr": "vite build --ssr",
     "dev": "vite",
     "format": "prettier **/*.{ts,tsx} *.{cjs,mjs} *.html --write --ignore-path ../../.prettierignore",
     "postformat": "eslint \"**/*.{ts,tsx}\" --fix",
     "pretest": "tsc --build page",
-    "test": "jest",
+    "test": "vitest run",
     "workbox": "workbox generateSW workbox.config.cjs"
   },
   "dependencies": {
@@ -25,48 +26,30 @@
     "@hawaii-bus-plus/workers": "workspace:*",
     "@js-temporal/polyfill": "^0.3.0",
     "@notwoods/preact-helmet": "^6.1.0",
-    "clsx": "^1.1.1",
-    "idb": "^7.0.0",
+    "clsx": "^1.2.1",
+    "idb": "^7.0.2",
     "just-debounce": "^1.1.0",
-    "preact": "^10.6.4",
-    "spherical-geometry-js": "^2.1.0",
-    "tslib": "^2.3.1"
+    "preact": "^10.10.6",
+    "spherical-geometry-js": "^3.0.0",
+    "tslib": "^2.4.0"
   },
   "devDependencies": {
-    "@googlemaps/js-api-loader": "^1.13.1",
-    "@hawaii-bus-plus/jest-utils": "workspace:*",
+    "@googlemaps/js-api-loader": "^1.14.3",
     "@hawaii-bus-plus/tailwind-theme": "workspace:*",
     "@hawaii-bus-plus/vite-plugins": "workspace:*",
-    "@jest/globals": "^27.4.6",
-    "@prefresh/vite": "^2.2.6",
-    "@tailwindcss/aspect-ratio": "^0.4.0",
-    "@tailwindcss/forms": "^0.4.0",
-    "@tailwindcss/typography": "^0.5.0",
-    "@types/google.maps": "^3.47.2",
-    "@types/jest": "^27.4.0",
-    "@types/tailwindcss": "^3.0.2",
-    "esbuild": "^0.14.11",
-    "esbuild-jest": "^0.5.0",
-    "jest": "^27.4.7",
-    "preact-render-to-string": "^5.1.19",
-    "prettier": "~2.5.1",
-    "tailwindcss": "^3.0.13",
-    "ts-jest-resolver": "^2.0.0",
-    "type-fest": "^2.9.0",
-    "typescript": "^4.5.4",
-    "vite": "2.8.0-beta.1",
-    "workbox-cli": "^6.4.2"
-  },
-  "jest": {
-    "transform": {
-      "^.+\\.(j|t)sx?$": [
-        "esbuild-jest",
-        {
-          "target": "node16"
-        }
-      ]
-    },
-    "resolver": "ts-jest-resolver"
+    "@prefresh/vite": "^2.2.8",
+    "@tailwindcss/aspect-ratio": "^0.4.2",
+    "@tailwindcss/forms": "^0.4.1",
+    "@tailwindcss/typography": "^0.5.7",
+    "@types/google.maps": "^3.50.0",
+    "preact-render-to-string": "^5.2.2",
+    "prettier": "~2.7.1",
+    "tailwindcss": "^3.1.8",
+    "type-fest": "^2.19.0",
+    "typescript": "^4.8.2",
+    "vite": "^3.1.0",
+    "vitest": "^0.23.1",
+    "workbox-cli": "^6.5.4"
   },
   "eslintConfig": {
     "parserOptions": {
