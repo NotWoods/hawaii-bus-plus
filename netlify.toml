@@ -60,21 +60,6 @@ package = "@netlify/plugin-sitemap"
   status = 200
 
 [[redirects]]
-  from = "/api/v1/api.json"
-  to = "/.netlify/functions/api"
-  status = 200
-  # By default, redirects won’t be applied if there’s a file with the same
-  # path as the one defined in the `from` property. Setting `force` to `true`
-  # will make the redirect rule take precedence over any existing files.
-  force = true
-
-[[redirects]]
-  from = "/api/v1/shapes/*"
-  to = "/.netlify/functions/api"
-  status = 200
-  force = true
-
-[[redirects]]
   from = "/auth/index.html"
   to = "/404.html"
   status = 301
