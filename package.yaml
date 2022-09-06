@@ -6,7 +6,7 @@ scripts:
   build: >-
     pnpm --filter client run build &&
     pnpm --filter client run build:ssr &&
-    pnpm --filter api-gen run api:dist &&
+    pnpm --filter api-gen run api:client &&
     pnpm --filter prerender run build &&
     pnpm --filter client run workbox &&
     pnpm --filter functions run build
