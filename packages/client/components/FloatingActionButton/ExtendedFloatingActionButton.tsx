@@ -1,4 +1,3 @@
-import { h } from 'preact';
 import { BaseIcon } from '../../assets/icons/Icon';
 
 export function ExtendedFloatingActionButton() {

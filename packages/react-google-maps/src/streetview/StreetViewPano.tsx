@@ -1,4 +1,3 @@
-import { h } from 'preact';
 import { useRef } from 'preact/hooks';
 import { useListener, useMap, useSetter } from '../apply-changes';
 import { useGoogleMap } from '../MapProvider';

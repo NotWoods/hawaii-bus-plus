@@ -3,7 +3,7 @@ import {
   GoogleMap,
   lightStyles,
 } from '@hawaii-bus-plus/react-google-maps';
-import { h } from 'preact';
+
 import { useCallback, useMemo } from 'preact/hooks';
 import { useDarkMode, useScreens } from '../hooks';
 import { openPlace, setMarker } from '../router/action/point';

@@ -1,6 +1,6 @@
 import { StopTimeData } from '@hawaii-bus-plus/presentation';
 import { Stop } from '@hawaii-bus-plus/types';
-import { h } from 'preact';
+
 import { BaseSegment } from './BaseSegment';
 
 interface Props {

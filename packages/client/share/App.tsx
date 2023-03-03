@@ -1,7 +1,8 @@
 import { MultiMap } from '@hawaii-bus-plus/mnemonist';
 import { Agency, Route, Stop, Trip } from '@hawaii-bus-plus/types';
 import { extractLinks } from '@hawaii-bus-plus/workers/info';
-import { Fragment, h } from 'preact';
+import { Fragment } from 'preact';
+
 import { ExtendedFloatingActionButton } from '../components/FloatingActionButton/ExtendedFloatingActionButton';
 import { colorVariables } from '../components/route-colors';
 import { DetailButtons } from '../components/RouteDescription/DetailButtons';

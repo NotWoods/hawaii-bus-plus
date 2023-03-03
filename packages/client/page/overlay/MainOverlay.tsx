@@ -1,4 +1,3 @@
-import { h } from 'preact';
 import { useSelector } from '../router/hooks';
 import { selectPointDetailsOpen } from '../router/selector/point';
 import { PointDetails } from './stop/PointDetails';

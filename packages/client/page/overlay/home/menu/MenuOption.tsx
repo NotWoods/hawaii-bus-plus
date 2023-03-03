@@ -1,4 +1,4 @@
-import { ComponentChildren, h } from 'preact';
+import type { ComponentChildren } from 'preact';
 import { ButtonOrAnchor } from '../../../../components/Button/ButtonOrAnchor';
 import { Icon } from '../../../../assets/icons/Icon';
 

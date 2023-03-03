@@ -1,5 +1,5 @@
 import { memoize } from '@hawaii-bus-plus/utils';
-import { Fragment, h } from 'preact';
+
 import { useCallback, useRef, useState } from 'preact/hooks';
 import { directions } from '../../../../assets/icons/paths';
 import { OutlinedButton } from '../../../../components/Button/OutlinedButton';

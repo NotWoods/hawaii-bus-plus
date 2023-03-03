@@ -1,5 +1,5 @@
 import clsx, { ClassValue } from 'clsx';
-import { ComponentChildren, h } from 'preact';
+import type { ComponentChildren } from 'preact';
 import { Icon } from '../../assets/icons/Icon';
 import { ButtonOrAnchor } from './ButtonOrAnchor';
 

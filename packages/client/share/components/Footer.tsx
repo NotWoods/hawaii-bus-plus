@@ -1,5 +1,3 @@
-import { h } from 'preact';
-
 export function Footer() {
   return (
     <div class="flex text-gray-700 dark:text-gray-300 mt-8">

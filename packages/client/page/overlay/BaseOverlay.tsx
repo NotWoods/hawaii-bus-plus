@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { ComponentChildren, h } from 'preact';
+import type { ComponentChildren } from 'preact';
 import { useEffect } from 'preact/hooks';
 import { UpIcon } from '../../assets/icons/MenuIcon';
 import { IconButton } from '../../components/Button/IconButton';

@@ -1,6 +1,6 @@
 import { PlainTimeData } from '@hawaii-bus-plus/presentation';
 import clsx, { ClassValue } from 'clsx';
-import { Fragment, h } from 'preact';
+
 import { Link } from '../../../../router/Router';
 import { PlainTimeElement } from '../../../../time/PlainTimeElement';
 import './BaseSegment.css';

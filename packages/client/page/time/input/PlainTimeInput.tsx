@@ -1,5 +1,5 @@
 import { nowWithZone } from '@hawaii-bus-plus/temporal-utils';
-import { h } from 'preact';
+
 import { useMemo } from 'preact/hooks';
 import { Temporal } from '@js-temporal/polyfill';
 import { NOW } from './symbol';

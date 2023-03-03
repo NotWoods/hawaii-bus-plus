@@ -1,7 +1,7 @@
 import { plainTimeToData } from '@hawaii-bus-plus/presentation';
 import { PlainDaysTime } from '@hawaii-bus-plus/temporal-utils';
 import { Agency, Stop, TimeString, Trip } from '@hawaii-bus-plus/types';
-import { h } from 'preact';
+
 import { Temporal } from '@js-temporal/polyfill';
 import { StopTimeSegmentList } from '../../page/sheet/routes/timetable/stop-time/StopTimeSegmentList';
 

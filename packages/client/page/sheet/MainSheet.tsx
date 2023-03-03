@@ -1,4 +1,3 @@
-import { h } from 'preact';
 import { useLazyComponent } from '../hooks';
 import { DIRECTIONS_PATH, MainState } from '../router/state';
 import { RouteTimetable } from './routes/RouteTimetable';

@@ -1,5 +1,3 @@
-import { h, Fragment } from 'preact';
-
 interface Props {
   apiUrl?: string;
   provider: 'Google';

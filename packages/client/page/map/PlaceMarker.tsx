@@ -1,5 +1,5 @@
 import { Marker } from '@hawaii-bus-plus/react-google-maps';
-import { h } from 'preact';
+
 import { useSelector } from '../router/hooks';
 import { selectPoint } from '../router/selector/point';
 import { pinsIcon } from './pins';

@@ -1,5 +1,5 @@
 import { Route } from '@hawaii-bus-plus/types';
-import { h } from 'preact';
+
 import { BLANK } from './constants';
 import { RouteBadge, RouteBadgeKeys } from './RouteBadge';
 

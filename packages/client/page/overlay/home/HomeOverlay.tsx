@@ -1,4 +1,3 @@
-import { h } from 'preact';
 import { useState } from 'preact/hooks';
 import { MenuIcon } from '../../../assets/icons/MenuIcon';
 import { Logo } from '../../../components/Logo';

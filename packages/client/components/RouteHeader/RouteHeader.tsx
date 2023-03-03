@@ -1,5 +1,5 @@
 import { Route } from '@hawaii-bus-plus/types';
-import { h } from 'preact';
+
 import { CloseButton } from '../CloseButton/CloseButton';
 import { RouteIcon } from '../RouteIcon/RouteIcon';
 import { BLANK } from '../RouteBadge/constants';

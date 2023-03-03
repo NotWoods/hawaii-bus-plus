@@ -18,9 +18,8 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "importHelpers": true,
-    "jsx": "react",
-    "jsxFactory": "h",
-    "jsxFragmentFactory": "Fragment",
+    "jsx": "react-jsx",
+    "jsxImportSource": "preact",
     "skipDefaultLibCheck": true,
     "sourceMap": true,
     "noPropertyAccessFromIndexSignature": true

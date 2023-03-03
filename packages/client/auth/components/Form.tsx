@@ -1,4 +1,3 @@
-import { h } from 'preact';
 import { Input } from './Input';
 import { MouseEventHandler } from './link';
 import { SubmitButton } from './SubmitButton';

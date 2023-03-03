@@ -1,4 +1,4 @@
-import { ComponentChildren, h } from 'preact';
+import type { ComponentChildren } from 'preact';
 import { InputWithLabel } from '../../components/InputWithLabel/InputWithLabel';
 
 interface Props {

@@ -1,6 +1,6 @@
 import clsx from 'clsx';
-import { h, Ref } from 'preact';
-import type { JSXInternal as JSX } from 'preact/src/jsx';
+import type { Ref } from 'preact';
+import type { JSX } from 'preact';
 import { Icon } from '../../../assets/icons/Icon';
 
 export const searchInputIconClass = 'absolute inset-y-0 h-full py-0 px-2';

@@ -1,4 +1,3 @@
-import { h } from 'preact';
 import { FormType } from './Form';
 
 interface Props {

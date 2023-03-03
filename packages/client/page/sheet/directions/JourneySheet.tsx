@@ -1,4 +1,3 @@
-import { h } from 'preact';
 import { useCallback } from 'preact/hooks';
 import type { Journey } from '@hawaii-bus-plus/workers/directions';
 import { closeMainAction } from '../../router/action/main';

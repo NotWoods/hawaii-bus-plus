@@ -1,6 +1,6 @@
 import { StopTimeData } from '@hawaii-bus-plus/presentation';
 import { Stop } from '@hawaii-bus-plus/types';
-import { h } from 'preact';
+
 import { useDuplicateKeys } from '../../../../hooks/useDuplicateKeys';
 import { useListKeyboardNav } from '../../../../hooks/useListKeyboardNav';
 import { StopTimeSegment } from './StopTimeSegment';

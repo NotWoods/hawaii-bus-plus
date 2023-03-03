@@ -4,7 +4,7 @@ import {
   StopPoint,
 } from '@hawaii-bus-plus/presentation';
 import { memoize } from '@hawaii-bus-plus/utils';
-import { h } from 'preact';
+
 import { useLazyComponent } from '../../hooks';
 import { LoadingBusIcon } from '../../loading/LoadingBusIcon';
 import { closePointAction } from '../../router/action/point';

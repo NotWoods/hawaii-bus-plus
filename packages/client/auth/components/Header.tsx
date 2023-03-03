@@ -1,4 +1,4 @@
-import { ComponentChildren, h } from 'preact';
+import type { ComponentChildren } from 'preact';
 import { Head } from '../../components/Head/Head';
 import { Logo } from '../../components/Logo';
 import { FormType } from './Form';

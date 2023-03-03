@@ -1,5 +1,5 @@
 import clsx, { ClassValue } from 'clsx';
-import { ComponentChildren, h } from 'preact';
+import type { ComponentChildren } from 'preact';
 import { OutlinedButton } from '../../components/Button/OutlinedButton';
 import { CloseButton } from '../../components/CloseButton/CloseButton';
 

@@ -1,4 +1,4 @@
-import { ComponentChildren, h } from 'preact';
+import type { ComponentChildren } from 'preact';
 import { Icon } from '../../../assets/icons/Icon';
 import { error, login, payments } from '../../../assets/icons/paths';
 import { OutlinedButton } from '../../../components/Button/OutlinedButton';

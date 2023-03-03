@@ -1,4 +1,3 @@
-import { h } from 'preact';
 import { feedback, logout, payments } from '../../../../assets/icons/paths';
 import { FEATURE_BILLING } from '../../../../services/env';
 import { MenuOption } from './MenuOption';

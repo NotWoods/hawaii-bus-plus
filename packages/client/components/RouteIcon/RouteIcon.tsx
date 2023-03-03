@@ -1,5 +1,5 @@
 import clsx, { ClassValue } from 'clsx';
-import { ComponentChildren, h } from 'preact';
+import type { ComponentChildren } from 'preact';
 
 const ring = 'ring-1 ring-gray-500 bg-route';
 const line = `${ring} block w-8 h-2`;

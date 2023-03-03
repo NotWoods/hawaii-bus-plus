@@ -1,5 +1,4 @@
 import { ColorString, Stop } from '@hawaii-bus-plus/types';
-import { Fragment, h } from 'preact';
 import { memo } from 'preact/compat';
 import { useState } from 'preact/hooks';
 import {

@@ -1,4 +1,3 @@
-import { h } from 'preact';
 import { SmallRouteIcon } from '../../../../components/RouteIcon/RouteIcon';
 import { colorVariables } from '../../../../components/route-colors';
 import type { Journey } from '@hawaii-bus-plus/workers/directions';

@@ -1,5 +1,5 @@
 import type { StopDetails } from '@hawaii-bus-plus/workers/info';
-import { h } from 'preact';
+
 import { PointInfo } from './PointInfo';
 
 export function StopInfo({ stop }: { stop: StopDetails }) {

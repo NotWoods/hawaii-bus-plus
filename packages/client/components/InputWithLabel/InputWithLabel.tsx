@@ -1,4 +1,4 @@
-import { ComponentChildren, h } from 'preact';
+import type { ComponentChildren } from 'preact';
 import clsx from 'clsx';
 
 interface Props {

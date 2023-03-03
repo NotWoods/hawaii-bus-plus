@@ -1,3 +1,3 @@
-import { JSXInternal as JSX } from 'preact/src/jsx';
+import type { JSX } from 'preact';
 
 export type MouseEventHandler = JSX.MouseEventHandler<HTMLAnchorElement>;

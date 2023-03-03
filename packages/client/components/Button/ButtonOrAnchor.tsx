@@ -1,5 +1,4 @@
-import { h } from 'preact';
-import type { JSXInternal as JSX } from 'preact/src/jsx';
+import type { JSX } from 'preact';
 
 type Props =
   | JSX.HTMLAttributes<HTMLButtonElement>

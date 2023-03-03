@@ -1,6 +1,6 @@
 import { StopTimeData } from '@hawaii-bus-plus/presentation';
 import { Stop } from '@hawaii-bus-plus/types';
-import { Fragment, h } from 'preact';
+
 import { Icon } from '../../../../../assets/icons/Icon';
 import { expand_more } from '../../../../../assets/icons/paths';
 import { useDuplicateKeys } from '../../../../hooks/useDuplicateKeys';

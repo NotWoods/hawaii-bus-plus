@@ -2,7 +2,7 @@ import {
   NearbyWorker,
   NearbyWorkerHandler,
 } from '@hawaii-bus-plus/workers/nearby';
-import { h } from 'preact';
+
 import { useState } from 'preact/hooks';
 import type { LatLngLiteral } from 'spherical-geometry-js';
 import { dbInitialized } from '../../api';

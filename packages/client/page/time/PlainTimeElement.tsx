@@ -1,6 +1,5 @@
 import { formatPlainTime, PlainTimeData } from '@hawaii-bus-plus/presentation';
 import clsx, { ClassValue } from 'clsx';
-import { h } from 'preact';
 
 interface Props {
   time: PlainTimeData;

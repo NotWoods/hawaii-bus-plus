@@ -1,6 +1,6 @@
 import { Route, Stop } from '@hawaii-bus-plus/types';
 import clsx, { ClassValue } from 'clsx';
-import { ComponentChildren, h } from 'preact';
+import type { ComponentChildren } from 'preact';
 import { Icon } from '../../../../assets/icons/Icon';
 import { bus_stop, place } from '../../../../assets/icons/paths';
 import { ButtonOrAnchor } from '../../../../components/Button/ButtonOrAnchor';

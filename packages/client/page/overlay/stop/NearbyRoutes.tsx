@@ -1,6 +1,6 @@
 import { Agency, Route } from '@hawaii-bus-plus/types';
 import clsx, { ClassValue } from 'clsx';
-import { h } from 'preact';
+
 import { useScreens } from '../../hooks';
 import { useListKeyboardNav } from '../../hooks/useListKeyboardNav';
 import { RouteLinkVertical } from '../../sheet/routes/link/RouteListItem';

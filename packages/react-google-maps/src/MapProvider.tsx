@@ -1,5 +1,5 @@
 import { LoaderOptions } from '@googlemaps/js-api-loader';
-import { ComponentChildren, createContext, h } from 'preact';
+import { ComponentChildren, createContext } from 'preact';
 import { useState, useContext } from 'preact/hooks';
 import { useJsApiLoader } from './hooks';
 

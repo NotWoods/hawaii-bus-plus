@@ -1,5 +1,5 @@
 import { Agency, Route, Trip } from '@hawaii-bus-plus/types';
-import { h } from 'preact';
+
 import {
   DescriptionPart,
   RouteDescription,

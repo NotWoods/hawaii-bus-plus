@@ -1,6 +1,6 @@
 import { useGoogleMap } from '@hawaii-bus-plus/react-google-maps';
 import clsx from 'clsx';
-import { h } from 'preact';
+
 import { memo } from 'preact/compat';
 import { useCallback, useContext, useEffect, useState } from 'preact/hooks';
 import { BaseIcon } from '../../../assets/icons/Icon';

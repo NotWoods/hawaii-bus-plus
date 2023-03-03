@@ -1,5 +1,4 @@
 import clsx, { ClassValue } from 'clsx';
-import { h } from 'preact';
 
 interface Props {
   class?: ClassValue;

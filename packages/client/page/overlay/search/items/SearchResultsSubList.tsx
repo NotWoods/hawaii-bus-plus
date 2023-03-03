@@ -1,5 +1,5 @@
 import clsx, { ClassValue } from 'clsx';
-import { ComponentChildren, Fragment, h } from 'preact';
+import type { ComponentChildren } from 'preact';
 
 interface Props<T> {
   forceTitles: boolean;

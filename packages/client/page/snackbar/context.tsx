@@ -1,4 +1,4 @@
-import { ComponentChildren, createContext, h } from 'preact';
+import { ComponentChildren, createContext } from 'preact';
 import { useContext, useState } from 'preact/hooks';
 import { SnackbarProps } from './Snackbar';
 

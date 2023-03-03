@@ -1,5 +1,5 @@
 import { Agency, Route, Stop } from '@hawaii-bus-plus/types';
-import { ComponentChildren, Fragment, h } from 'preact';
+import type { ComponentChildren } from 'preact';
 import { useCallback } from 'preact/hooks';
 import { linkAction } from '../../router/action';
 import { useDispatch } from '../../router/hooks';

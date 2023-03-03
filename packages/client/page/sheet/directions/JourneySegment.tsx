@@ -1,6 +1,6 @@
 import { Walking } from '@hawaii-bus-plus/presentation';
 import type { JourneyTripSegment } from '@hawaii-bus-plus/workers/directions';
-import { h } from 'preact';
+
 import { TripSegment } from '../routes/timetable/stop-time/TripSegment';
 import { WalkSegment } from '../routes/timetable/stop-time/WalkSegment';
 
