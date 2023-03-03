@@ -1,5 +1,5 @@
 import { Agency, Route, Trip } from '@hawaii-bus-plus/types';
-import clsx, { ClassValue } from 'clsx';
+import clsx from 'clsx';
 
 import { monetization_on, share } from '../../assets/icons/paths';
 import { routeShareUrl } from '../../services/share/route-url';
@@ -9,7 +9,7 @@ interface Props {
   route: Route;
   agency: Agency;
   tripId?: Trip['trip_id'];
-  class?: ClassValue;
+  class?: string;
   onShare?(event: MouseEvent): void;
 }
 

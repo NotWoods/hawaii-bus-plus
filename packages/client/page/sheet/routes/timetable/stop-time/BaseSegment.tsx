@@ -1,5 +1,5 @@
 import { PlainTimeData } from '@hawaii-bus-plus/presentation';
-import clsx, { ClassValue } from 'clsx';
+import clsx from 'clsx';
 
 import { Link } from '../../../../router/Router';
 import { PlainTimeElement } from '../../../../time/PlainTimeElement';
@@ -45,7 +45,7 @@ function BaseSegmentContent(props: ContentProps) {
 
 interface Props extends ContentProps {
   href?: string;
-  class?: ClassValue;
+  class?: string;
   gridArea?: string;
 }
 

@@ -57,7 +57,7 @@ export function SimpleSearch(props: Props) {
         inputRef={searchRef}
         value={search}
         onInput={setSearch}
-        aria-expanded={(searchResults === emptyResults).toString()}
+        aria-expanded={searchResults === emptyResults}
         aria-owns="searchResults"
         onKeyDown={handleKeyDown}
       />

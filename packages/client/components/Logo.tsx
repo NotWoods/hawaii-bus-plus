@@ -1,7 +1,7 @@
-import clsx, { ClassValue } from 'clsx';
+import clsx from 'clsx';
 
 interface Props {
-  class?: ClassValue;
+  class?: string;
 }
 
 /**

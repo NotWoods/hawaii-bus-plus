@@ -1,14 +1,13 @@
-import clsx, { ClassValue } from 'clsx';
+import clsx from 'clsx';
 import type { ComponentChildren } from 'preact';
 import { Icon } from '../../assets/icons/Icon';
-import { ButtonOrAnchor } from './ButtonOrAnchor';
 
 interface Props {
   href?: string;
   icon?: string;
   id?: string;
-  class?: ClassValue;
-  iconClass?: ClassValue;
+  class?: string;
+  iconClass?: string;
   children: ComponentChildren;
   onClick?(evt: MouseEvent): void;
 }
@@ -17,8 +16,10 @@ interface Props {
  * Button styled with a white outline
  */
 export function OutlinedButton({ icon, iconClass, ...props }: Props) {
+  const Button = props.href ? 'a' : 'button';
   return (
-    <ButtonOrAnchor
+    <Button
+      type={props.href ? undefined : 'button'}
       {...props}
       class={clsx(
         'flex p-2 font-medium border border-current hover:bg-red hover:bg-opacity-20 motion-safe:transition-colors',
@@ -27,6 +28,6 @@ export function OutlinedButton({ icon, iconClass, ...props }: Props) {
     >
       {icon && <Icon class={clsx('mr-2', iconClass)} src={icon} alt="" />}
       {props.children}
-    </ButtonOrAnchor>
+    </Button>
   );
 }

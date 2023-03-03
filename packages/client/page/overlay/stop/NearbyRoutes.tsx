@@ -1,5 +1,5 @@
 import { Agency, Route } from '@hawaii-bus-plus/types';
-import clsx, { ClassValue } from 'clsx';
+import clsx from 'clsx';
 
 import { useScreens } from '../../hooks';
 import { useListKeyboardNav } from '../../hooks/useListKeyboardNav';
@@ -9,7 +9,7 @@ interface Props {
   routes: readonly Route[];
   agencies: ReadonlyMap<Agency['agency_id'], Agency>;
   scroll?: boolean;
-  class?: ClassValue;
+  class?: string;
 }
 
 export function NearbyRoutes(props: Props) {

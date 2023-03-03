@@ -1,5 +1,4 @@
 import type { ComponentChildren } from 'preact';
-import { ButtonOrAnchor } from '../../../../components/Button/ButtonOrAnchor';
 import { Icon } from '../../../../assets/icons/Icon';
 
 interface Props {
@@ -10,8 +9,10 @@ interface Props {
 }
 
 export function MenuOption(props: Props) {
+  const Button = props.href ? 'a' : 'button';
   return (
-    <ButtonOrAnchor
+    <Button
+      type={props.href ? undefined : 'button'}
       href={props.href}
       role="menuitem"
       onClick={props.onClick}
@@ -19,6 +20,6 @@ export function MenuOption(props: Props) {
     >
       <Icon src={props.icon} alt="" class="w-6 h-6 invert opacity-60" />
       {props.children}
-    </ButtonOrAnchor>
+    </Button>
   );
 }

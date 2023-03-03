@@ -1,14 +1,14 @@
 import { Agency, Route } from '@hawaii-bus-plus/types';
-import clsx, { ClassValue } from 'clsx';
+import clsx from 'clsx';
 
-import { RouteIcon } from '../../../../components/RouteIcon/RouteIcon';
 import { colorVariables } from '../../../../components/route-colors';
+import { RouteIcon } from '../../../../components/RouteIcon/RouteIcon';
 import { Link } from '../../../router/Router';
 
 interface Props {
   route: Route;
   agency: Pick<Agency, 'agency_name' | 'primary'>;
-  class?: ClassValue;
+  class?: string;
   onClick?(evt: MouseEvent): void;
 }
 

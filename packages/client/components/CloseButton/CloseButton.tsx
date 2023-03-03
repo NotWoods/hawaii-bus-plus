@@ -1,4 +1,4 @@
-import clsx, { ClassValue } from 'clsx';
+import clsx from 'clsx';
 
 import { CloseIcon } from '../../assets/icons/MenuIcon';
 import { IconButton } from '../Button/IconButton';
@@ -6,7 +6,7 @@ import { IconButton } from '../Button/IconButton';
 interface Props {
   class?: string;
   onClick?(event: MouseEvent): void;
-  className?: ClassValue;
+  className?: string;
 }
 
 export function CloseButton(props: Props) {

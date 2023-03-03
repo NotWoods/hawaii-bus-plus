@@ -1,7 +1,6 @@
 import { Agency } from '@hawaii-bus-plus/types';
 import { ComponentChildren, Fragment } from 'preact';
 import type { DescriptionPart } from '@hawaii-bus-plus/workers/info';
-import { ButtonOrAnchor } from '../Button/ButtonOrAnchor';
 
 export type { DescriptionPart };
 
@@ -11,7 +10,14 @@ interface Props {
 }
 
 function DetailsLink(props: { href: string; children: ComponentChildren }) {
-  return <ButtonOrAnchor {...props} class="text-current hover:underline" />;
+  const Button = props.href ? 'a' : 'button';
+  return (
+    <Button
+      type={props.href ? undefined : 'button'}
+      {...props}
+      class="text-current hover:underline"
+    />
+  );
 }
 
 function renderDescriptionPart(part: DescriptionPart, index: number) {

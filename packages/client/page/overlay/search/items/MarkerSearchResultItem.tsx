@@ -1,9 +1,8 @@
 import { Route, Stop } from '@hawaii-bus-plus/types';
-import clsx, { ClassValue } from 'clsx';
+import clsx from 'clsx';
 import type { ComponentChildren } from 'preact';
 import { Icon } from '../../../../assets/icons/Icon';
 import { bus_stop, place } from '../../../../assets/icons/paths';
-import { ButtonOrAnchor } from '../../../../components/Button/ButtonOrAnchor';
 import {
   BLANK,
   RouteBadgeKeys,
@@ -17,14 +16,16 @@ interface MarkerProps {
   title?: ComponentChildren;
   subtitle?: ComponentChildren;
   badges?: ComponentChildren;
-  class?: ClassValue;
+  class?: string;
   onClick?(evt: MouseEvent): void;
 }
 
 function MarkerSearchResultItem(props: MarkerProps) {
+  const Button = props.href ? 'a' : 'button';
   return (
     <li role="option">
-      <ButtonOrAnchor
+      <Button
+        type={props.href ? undefined : 'button'}
         href={props.href}
         class={clsx(
           'search__item search__item--marker group grid gap-x-2 py-1 text-white',
@@ -43,7 +44,7 @@ function MarkerSearchResultItem(props: MarkerProps) {
         <p className="text-sm group-hover:underline">{props.title}</p>
         <p className="text-xs">{props.subtitle}</p>
         {props.badges && <p className="text-xs mt-1">{props.badges}</p>}
-      </ButtonOrAnchor>
+      </Button>
     </li>
   );
 }

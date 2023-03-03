@@ -1,13 +1,11 @@
 import { formatPlainTime, PlainTimeData } from '@hawaii-bus-plus/presentation';
-import clsx, { ClassValue } from 'clsx';
+import clsx from 'clsx';
+import type { JSX } from 'preact';
 
-interface Props {
+interface Props
+  extends Pick<JSX.HTMLAttributes<HTMLTimeElement>, 'class' | 'style'> {
   time: PlainTimeData;
   approximate?: boolean;
-  class?: ClassValue;
-  style?: {
-    [key: string]: string | number | null | undefined;
-  };
   agencyTimezone: string;
 }
 

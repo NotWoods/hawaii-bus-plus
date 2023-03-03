@@ -1,18 +1,29 @@
-import type { ComponentChildren } from 'preact';
+import type { ComponentChildren, JSX } from 'preact';
 import clsx from 'clsx';
 
-interface Props {
+interface Props
+  extends Pick<
+    JSX.HTMLAttributes<HTMLInputElement>,
+    'type' | 'autocomplete' | 'readonly' | 'value'
+  > {
+  /**
+   * Text to display above the input.
+   */
   children: ComponentChildren;
+  /**
+   * ID for the input. Must be unique.
+   */
   id: string;
+  /**
+   * Theme to use for the input.
+   */
+  theme: 'light' | 'dark' | 'auto';
+
   name: string;
   type: 'text' | 'email' | 'password';
-  theme: 'light' | 'dark' | 'auto';
-  autocomplete?: string;
-  readonly?: boolean;
-  value?: string;
 }
 
-export function InputWithLabel({ children, theme, ...props }: Props) {
+export function InputField({ children, theme, ...props }: Props) {
   return (
     <div>
       <label class="flex justify-between" for={props.id}>

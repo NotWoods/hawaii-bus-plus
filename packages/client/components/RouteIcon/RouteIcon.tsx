@@ -1,16 +1,11 @@
-import clsx, { ClassValue } from 'clsx';
-import type { ComponentChildren } from 'preact';
+import clsx from 'clsx';
+import type { ComponentChildren, JSX } from 'preact';
 
 const ring = 'ring-1 ring-gray-500 bg-route';
 const line = `${ring} block w-8 h-2`;
 
-interface Props {
+interface Props extends Pick<JSX.HTMLAttributes, 'class' | 'title' | 'style'> {
   children: ComponentChildren;
-  class?: ClassValue;
-  title?: string;
-  style?: {
-    [key: string]: string | number | null | undefined;
-  };
 }
 
 /**

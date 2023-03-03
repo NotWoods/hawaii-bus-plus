@@ -1,11 +1,11 @@
-import clsx, { ClassValue } from 'clsx';
+import clsx from 'clsx';
 import type { ComponentChildren } from 'preact';
 
 interface Props<T> {
   forceTitles: boolean;
   list: readonly T[];
   title: ComponentChildren;
-  titleClass?: ClassValue;
+  titleClass?: string;
   child(item: T): ComponentChildren;
 }
 

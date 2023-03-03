@@ -2,14 +2,12 @@ import {
   DurationData,
   formatRelativeDuration,
 } from '@hawaii-bus-plus/presentation';
-import clsx, { ClassValue } from 'clsx';
+import clsx from 'clsx';
+import type { JSX } from 'preact';
 
-interface Props {
+interface Props
+  extends Pick<JSX.HTMLAttributes<HTMLTimeElement>, 'class' | 'style'> {
   duration: DurationData;
-  class?: ClassValue;
-  style?: {
-    [key: string]: string | number | null | undefined;
-  };
 }
 
 export function DurationElement(props: Props) {
