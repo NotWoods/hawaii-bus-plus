@@ -10,7 +10,7 @@ interface Props {
 
 export function TripSegment(props: Props) {
   const { route, trip, agency } = props.segment;
-  const [open, toggleOpen] = useToggle();
+  const [open, { toggle: toggleOpen }] = useToggle();
 
   return (
     <section style={colorVariables(route)}>

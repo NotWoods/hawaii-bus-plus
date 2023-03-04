@@ -10,7 +10,7 @@ import { Home } from './Home';
 const lazyMenu = import('./menu/Menu');
 
 export function HomeOverlay() {
-  const [menuOpen, toggleMenuOpen] = useToggle();
+  const [menuOpen, { toggle: toggleMenu, setFalse: dismissMenu }] = useToggle();
   const [screen, setScreen] = useState<'home' | 'search' | 'directions'>(
     'home',
   );
@@ -20,27 +20,31 @@ export function HomeOverlay() {
     case 'home':
       return (
         <BaseOverlay
-          icon={<MenuIcon open={menuOpen} />}
           logo={
             <a href="/">
               <Logo />
             </a>
           }
-          onButtonClick={toggleMenuOpen}
+          navigation={{
+            icon: <MenuIcon open={menuOpen} />,
+            onClick: toggleMenu,
+          }}
         >
-          {Menu ? <Menu open={menuOpen} labelledBy="appBarUp" /> : undefined}
+          {menuOpen && Menu ? (
+            <Menu labelledBy="appBarUp" onDismiss={dismissMenu} />
+          ) : undefined}
           <Home onSearch={() => setScreen('search')} />
         </BaseOverlay>
       );
     case 'search':
       return (
-        <BaseOverlay title="Search" onButtonClick={() => setScreen('home')}>
+        <BaseOverlay title="Search" onNavigate={() => setScreen('home')}>
           <SimpleSearch onDirections={() => setScreen('directions')} />
         </BaseOverlay>
       );
     case 'directions':
       return (
-        <BaseOverlay title="Directions" onButtonClick={() => setScreen('home')}>
+        <BaseOverlay title="Directions" onNavigate={() => setScreen('home')}>
           <DirectionsSearch onClose={() => setScreen('home')} />
         </BaseOverlay>
       );

@@ -29,7 +29,7 @@ export function PointDetails({ point }: Props) {
     case 'stop':
       if (StopCard) {
         return (
-          <BaseOverlay onButtonClick={onClose}>
+          <BaseOverlay onNavigate={onClose}>
             <StopCard point={point} />
           </BaseOverlay>
         );
@@ -38,7 +38,7 @@ export function PointDetails({ point }: Props) {
     case 'place':
       if (PlaceCard) {
         return (
-          <BaseOverlay onButtonClick={onClose}>
+          <BaseOverlay onNavigate={onClose}>
             <PlaceCard point={point} />
           </BaseOverlay>
         );
@@ -47,7 +47,7 @@ export function PointDetails({ point }: Props) {
     case 'bike':
       if (BikeStationCard) {
         return (
-          <BaseOverlay onButtonClick={onClose}>
+          <BaseOverlay onNavigate={onClose}>
             <BikeStationCard point={point} />
           </BaseOverlay>
         );
@@ -55,7 +55,7 @@ export function PointDetails({ point }: Props) {
       break;
   }
   return (
-    <BaseOverlay onButtonClick={onClose}>
+    <BaseOverlay onNavigate={onClose}>
       <LoadingBusIcon />
     </BaseOverlay>
   );

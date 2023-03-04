@@ -1,17 +1,40 @@
 import clsx from 'clsx';
-import type { ComponentChildren } from 'preact';
+import type { ComponentChildren, JSX } from 'preact';
 import { useEffect } from 'preact/hooks';
+import type { Merge } from 'type-fest';
 import { UpIcon } from '../../assets/icons/MenuIcon';
 import { IconButton } from '../../components/Button/IconButton';
 import { useLoadGoogleMaps } from '../hooks/useLoadGoogleMaps';
 import { TrialBanner } from './TrialBanner';
 
 interface Props {
+  /**
+   * Content displayed below the app bar.
+   */
   children: ComponentChildren;
-  icon?: ComponentChildren;
+  /**
+   * Slot for the title in the app bar.
+   * Shown inside a styled heading element.
+   */
   title?: ComponentChildren;
+  /**
+   * Slot for the logo in the app bar.
+   * Will replace the title if both are provided.
+   */
   logo?: ComponentChildren;
-  onButtonClick?(): void;
+  /**
+   * Slot for the navigation button in the app bar.
+   */
+  navigation?: Merge<
+    JSX.HTMLAttributes<HTMLButtonElement>,
+    {
+      icon?: ComponentChildren;
+    }
+  >;
+  /**
+   * Click handler for the navigation button.
+   */
+  onNavigate?: () => void;
 }
 
 export function BaseOverlay(props: Props) {
@@ -20,6 +43,8 @@ export function BaseOverlay(props: Props) {
   useEffect(() => {
     console.log('GMaps load error:', loadError);
   }, [loadError]);
+
+  const { icon, ...navigationSlot } = props.navigation ?? {};
 
   return (
     <section
@@ -33,12 +58,13 @@ export function BaseOverlay(props: Props) {
         <IconButton
           id="appBarUp"
           class="w-12 h-12 p-3"
+          onClick={props.onNavigate}
+          {...navigationSlot}
           forceDark
           accessKey="s"
-          disabled={props.icon === false}
-          onClick={props.onButtonClick}
+          disabled={icon === false}
         >
-          {props.icon ?? <UpIcon />}
+          {icon ?? <UpIcon />}
         </IconButton>
         {props.logo ? (
           props.logo
