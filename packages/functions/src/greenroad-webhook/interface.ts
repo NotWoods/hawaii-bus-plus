@@ -16,7 +16,7 @@ export const GreenRoadDeviceSource = {
   SmartOBDII: 3,
 } as const;
 export type GreenRoadDeviceSource =
-  typeof GreenRoadDeviceSource[keyof typeof GreenRoadDeviceSource];
+  (typeof GreenRoadDeviceSource)[keyof typeof GreenRoadDeviceSource];
 
 export interface GreenRoadVehicleData {
   DriverData: {

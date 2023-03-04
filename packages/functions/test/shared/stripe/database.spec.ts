@@ -42,7 +42,7 @@ function clientTest(
       return implementation(t);
     });
   } else {
-    // eslint-disable-next-line jest/no-disabled-tests
+    // eslint-disable-next-line vitest/no-disabled-tests
     testWithContext.skip(title, implementation);
   }
 }

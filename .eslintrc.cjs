@@ -4,20 +4,95 @@ const config = {
   root: true,
   parser: '@typescript-eslint/parser',
   parserOptions: {
+    // @ts-ignore
     tsconfigRootDir: __dirname,
     extraFileExtensions: ['.cjs', '.mjs'],
   },
-  plugins: ['@typescript-eslint', 'ava'],
+  plugins: ['@typescript-eslint', 'ava', 'vitest', 'react', 'react-hooks'],
   extends: [
     'eslint:recommended',
-    'preact',
+    'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
-    'plugin:jest/style',
+    'plugin:vitest/recommended',
     'plugin:ava/recommended',
     'prettier',
   ],
+  settings: {
+    react: {
+      pragma: 'h',
+      version: '16.0',
+    },
+  },
   ignorePatterns: ['**/*.d.ts'],
   rules: {
+    /**
+     * Preact / JSX rules
+     */
+    'react/no-deprecated': 'error',
+    'react/display-name': ['warn', { ignoreTranspilerName: false }],
+    'react/jsx-no-bind': [
+      'warn',
+      {
+        ignoreRefs: true,
+        allowFunctions: true,
+        allowArrowFunctions: true,
+      },
+    ],
+    'react/jsx-no-comment-textnodes': 'error',
+    'react/jsx-no-duplicate-props': 'error',
+    'react/jsx-no-target-blank': 'error',
+    'react/jsx-tag-spacing': ['error', { beforeSelfClosing: 'always' }],
+    'react/jsx-uses-react': 'error', // debatable
+    'react/jsx-uses-vars': 'error',
+    'react/jsx-key': ['error', { checkFragmentShorthand: true }],
+    'react/self-closing-comp': 'error',
+    'react/prefer-es6-class': 'error',
+    'react/prefer-stateless-function': 'warn',
+    'react/require-render-return': 'error',
+    'react/no-danger': 'warn',
+    // Legacy APIs not supported in Preact:
+    'react/no-did-mount-set-state': 'error',
+    'react/no-did-update-set-state': 'error',
+    'react/no-find-dom-node': 'error',
+    'react/no-is-mounted': 'error',
+    'react/no-string-refs': 'error',
+
+    /**
+     * Hooks
+     */
+    'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'warn',
+
+    /**
+     * General JavaScript error avoidance
+     */
+    'no-caller': 'error',
+    'no-delete-var': 'error',
+    'no-duplicate-imports': 'error',
+    'no-empty-pattern': 'off',
+    'no-empty': 'off',
+    'no-extra-parens': 'off',
+    'no-iterator': 'error',
+    'no-mixed-spaces-and-tabs': ['warn', 'smart-tabs'],
+    'no-multi-str': 'warn',
+    'no-new-wrappers': 'error',
+    'no-proto': 'error',
+    'no-redeclare': 'error',
+    'no-shadow-restricted-names': 'error',
+    'no-shadow': 0,
+    'no-spaced-func': 'error',
+    'no-this-before-super': 'error',
+    'no-undef-init': 'error',
+    'no-unneeded-ternary': 'error',
+    'no-useless-call': 'warn',
+    'no-useless-computed-key': 'warn',
+    'no-useless-concat': 'warn',
+    'no-useless-constructor': 'warn',
+    'no-useless-escape': 'warn',
+    'no-useless-rename': 'warn',
+    'no-var': 'error',
+    'no-with': 'error',
+
     '@typescript-eslint/array-type': [
       'error',
       {
@@ -62,7 +137,6 @@ const config = {
         extensions: ['ts', 'tsx'],
       },
     ],
-    'jest/prefer-todo': 'error',
     'prefer-arrow-callback': [
       'error',
       {
@@ -76,6 +150,7 @@ const config = {
       },
     ],
     'no-else-return': 'off',
+    'no-undef': 'off',
   },
   overrides: [
     {
@@ -104,11 +179,9 @@ const config = {
     {
       files: ['packages/*/test/**/*.{ts,tsx}'],
       rules: {
-        'jest/expect-expect': 'off',
-        'jest/no-done-callback': 'off',
-        'jest/no-test-callback': 'off',
-        'jest/no-export': 'off',
-        'jest/valid-title': 'off',
+        'vitest/expect-expect': 'off',
+        'vitest/no-done-callback': 'off',
+        'vitest/valid-title': 'off',
       },
     },
     {

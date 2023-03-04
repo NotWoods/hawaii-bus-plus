@@ -27,8 +27,7 @@ export class WorkerError extends Error {
 
 export class PromiseWorker {
   private readonly callbacks = new Map<
-    number,
-    (error: Error | undefined, result: unknown) => void
+    number,(error: Error | undefined, result: unknown) => void
   >();
 
   private readonly syntaxError?: unknown;

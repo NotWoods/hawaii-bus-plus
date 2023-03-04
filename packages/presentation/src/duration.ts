@@ -13,7 +13,7 @@ const numberFormatter = memoize(
 );
 
 type UnitDisplay = 'long' | 'short' | 'narrow';
-type Unit = typeof units[number];
+type Unit = (typeof units)[number];
 type NotPlural<Unit extends string> = Unit extends `${infer Single}s`
   ? Single
   : never;
@@ -26,7 +26,7 @@ function notPlural(unit: Unit): NotPlural<Unit> {
  * Balanced duration into
  */
 export interface DurationData
-  extends Partial<Record<typeof units[number], number>> {
+  extends Partial<Record<(typeof units)[number], number>> {
   string: string;
 }
 
