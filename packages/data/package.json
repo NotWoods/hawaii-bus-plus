@@ -22,7 +22,6 @@
     "@hawaii-bus-plus/types": "workspace:*",
     "@hawaii-bus-plus/utils": "workspace:*",
     "idb": "^7.0.2",
-    "ix": "^4.6.1",
     "spherical-geometry-js": "^3.0.0",
     "tslib": "^2.4.0"
   },

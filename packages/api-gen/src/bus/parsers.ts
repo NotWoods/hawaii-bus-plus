@@ -23,8 +23,8 @@ import type {
   Trip,
 } from '@hawaii-bus-plus/types';
 import { compareAs } from '@hawaii-bus-plus/utils';
-import { first, toArray } from 'ix/asynciterable/index.js';
 import type { Writable } from 'type-fest';
+import { arrayFromAsync } from './itertools.js';
 
 export interface StopTimeInflated
   extends Omit<StopTime, 'arrival_time' | 'departure_time'> {
@@ -58,8 +58,11 @@ export async function parseFeedInfo(
   json: Pick<JsonStreams, 'feed_info'>,
   variable: Partial<Pick<GTFSData, 'info'>>,
 ) {
-  const info = await first(json.feed_info);
-  variable.info = info;
+  for await (const info of json.feed_info) {
+    variable.info = info;
+    // Only use the first item
+    return;
+  }
 }
 
 export async function parseAgency(
@@ -84,7 +87,7 @@ export async function parseRoutes(
   variable: Pick<GTFSData, 'routes'>,
   defaultAgency: Agency['agency_id'],
 ) {
-  const routes = await toArray(json.routes);
+  const routes = await arrayFromAsync(json.routes);
   routes.sort(compareAs((route) => route.route_sort_order));
   for (const csvRoute of routes) {
     const route = csvRoute as Partial<Writable<Route>> & Partial<CsvRoute>;

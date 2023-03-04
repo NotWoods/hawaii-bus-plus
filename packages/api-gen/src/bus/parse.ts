@@ -2,8 +2,6 @@ import { PlainDaysTime } from '@hawaii-bus-plus/temporal-utils';
 import type { Shape } from '@hawaii-bus-plus/types';
 import { compareAs, toInt, valueNotNull } from '@hawaii-bus-plus/utils';
 import { parse } from 'csv-parse';
-import { from, zip } from 'ix/iterable/index.js';
-import { filter, map } from 'ix/iterable/operators/index.js';
 import JSZip, { JSZipObject } from 'jszip';
 import type { Temporal } from '@js-temporal/polyfill';
 import type { Writable } from 'type-fest';
@@ -22,6 +20,7 @@ import {
   ServerGTFSData,
   TripInflated,
 } from './parsers.js';
+import { zip } from './itertools.js';
 
 const STARTS_WITH_TIME = /^\d\d?:\d\d/;
 
@@ -33,22 +32,16 @@ function formatTime(time: Temporal.PlainTime) {
 
 export async function zipFilesToObject(
   zipFiles: ReadonlyMap<string, JSZipObject>,
-) {
-  const arrays = await from(zipFiles.values())
-    .pipe(
-      map((file) =>
+): Promise<Record<string, AsyncIterable<unknown>>> {
+  const arrays = await Promise.all(
+    Array.from(zipFiles.values())
+      .map((file) =>
         file.nodeStream('nodebuffer').pipe(parse({ cast, columns: true })),
-      ),
-      map((parser) => {
-        const iter: AsyncIterable<unknown> = parser;
-        return iter;
-      }),
-    )
-    .pipe((source) => Promise.all(source));
-
-  return zip(zipFiles.keys(), arrays).pipe((entry) =>
-    Object.fromEntries(entry),
+      )
+      .map((parser): AsyncIterable<unknown> => parser),
   );
+
+  return Object.fromEntries(zip(zipFiles.keys(), arrays));
 }
 
 /**
@@ -75,16 +68,15 @@ export async function createApiData(
   ];
 
   const zip = await JSZip.loadAsync(gtfsZipData);
-  const zipFiles = from(fileList)
-    .pipe(
-      map((fileName) => {
+  const zipFiles = new Map(
+    fileList
+      .map((fileName) => {
         const name = fileName.substring(0, fileName.length - 4);
         const file = zip.file(fileName);
         return [name, file] as const;
-      }),
-      filter(valueNotNull),
-    )
-    .pipe((source) => new Map(source));
+      })
+      .filter(valueNotNull),
+  );
 
   const json = (await zipFilesToObject(zipFiles)) as JsonStreams;
   const variable: ServerGTFSData = {
