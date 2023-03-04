@@ -26,7 +26,7 @@ interface Props {
    * Slot for the navigation button in the app bar.
    */
   navigation?: Merge<
-    JSX.HTMLAttributes<HTMLButtonElement>,
+    Pick<JSX.HTMLAttributes<HTMLButtonElement>, 'onClick' | 'class' | 'style'>,
     {
       icon?: ComponentChildren;
     }
@@ -41,7 +41,9 @@ export function BaseOverlay(props: Props) {
   const { loadError } = useLoadGoogleMaps();
 
   useEffect(() => {
-    console.log('GMaps load error:', loadError);
+    if (loadError) {
+      console.log('GMaps load error:', loadError);
+    }
   }, [loadError]);
 
   const { icon, ...navigationSlot } = props.navigation ?? {};

@@ -4,6 +4,7 @@
   "references": [{ "path": "../shared" }],
   "compilerOptions": {
     "target": "es2020",
-    "types": ["node"]
+    "types": ["node"],
+    "moduleResolution": "nodenext"
   }
 }

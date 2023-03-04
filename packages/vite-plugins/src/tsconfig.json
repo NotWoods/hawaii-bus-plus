@@ -5,6 +5,7 @@
   "compilerOptions": {
     "lib": ["esnext"],
     "types": ["node"],
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "moduleResolution": "nodenext"
   }
 }
