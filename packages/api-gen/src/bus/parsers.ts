@@ -24,7 +24,7 @@ import type {
 } from '@hawaii-bus-plus/types';
 import { compareAs } from '@hawaii-bus-plus/utils';
 import { first, toArray } from 'ix/asynciterable/index.js';
-import type { Mutable } from 'type-fest';
+import type { Writable } from 'type-fest';
 
 export interface StopTimeInflated
   extends Omit<StopTime, 'arrival_time' | 'departure_time'> {
@@ -87,7 +87,7 @@ export async function parseRoutes(
   const routes = await toArray(json.routes);
   routes.sort(compareAs((route) => route.route_sort_order));
   for (const csvRoute of routes) {
-    const route = csvRoute as Partial<Mutable<Route>> & Partial<CsvRoute>;
+    const route = csvRoute as Partial<Writable<Route>> & Partial<CsvRoute>;
     route.agency_id = route.agency_id ?? defaultAgency;
     route.directions = {
       0: csvRoute.direction_0,
@@ -105,7 +105,7 @@ export async function parseTrips(
 ): Promise<ReadonlyMap<Trip['trip_id'], TripInflated>> {
   const trips = new Map<Trip['trip_id'], TripInflated>();
   for await (const csvTrip of json.trips) {
-    const trip = csvTrip as Mutable<TripInflated>;
+    const trip = csvTrip as Writable<TripInflated>;
     trip.stop_times = [];
     variable.trips.push(trip);
     trips.set(trip.trip_id, trip);

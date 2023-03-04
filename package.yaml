@@ -23,7 +23,7 @@ devDependencies:
   '@typescript-eslint/parser': ^5.36.2
   del-cli: ^4.0.1
   dotenv: ^11.0.0
-  eslint: ^8.23.0
+  eslint: ^8.35.0
   eslint-config-prettier: ^8.5.0
   eslint-plugin-ava: ^14.0.0
   eslint-plugin-react: ^7.31.7

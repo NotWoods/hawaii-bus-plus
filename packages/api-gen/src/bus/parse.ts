@@ -6,7 +6,7 @@ import { from, zip } from 'ix/iterable/index.js';
 import { filter, map } from 'ix/iterable/operators/index.js';
 import JSZip, { JSZipObject } from 'jszip';
 import type { Temporal } from '@js-temporal/polyfill';
-import type { Mutable } from 'type-fest';
+import type { Writable } from 'type-fest';
 import { cacheStations } from '../bike/stations.js';
 import { cast } from './cast.js';
 import {
@@ -118,7 +118,7 @@ export async function createApiData(
   // Sorting and formatting at the end
   variable.trips = Array.from(trips.values())
     .map((t) => {
-      const trip = t as Mutable<TripInflated>;
+      const trip = t as Writable<TripInflated>;
       trip.stop_times.sort(compareAs((st) => st.stop_sequence));
       if (!STARTS_WITH_TIME.test(trip.trip_short_name)) {
         const start = trip.stop_times[0].arrival_time.toPlainTime();
