@@ -1,25 +1,49 @@
 import clsx from 'clsx';
-import { ComponentChildren, h } from 'preact';
+import type { ComponentChildren, JSX } from 'preact';
 import { useEffect } from 'preact/hooks';
 import { UpIcon } from '../../assets/icons/MenuIcon';
 import { IconButton } from '../../components/Button/IconButton';
+import { FEATURE_BILLING } from '../../services/env';
 import { useLoadGoogleMaps } from '../hooks/useLoadGoogleMaps';
 import { TrialBanner } from './TrialBanner';
 
 interface Props {
+  /**
+   * Content displayed below the app bar.
+   */
   children: ComponentChildren;
-  icon?: ComponentChildren;
+  /**
+   * Slot for the title in the app bar.
+   * Shown inside a styled heading element.
+   */
   title?: ComponentChildren;
+  /**
+   * Slot for the logo in the app bar.
+   * Will replace the title if both are provided.
+   */
   logo?: ComponentChildren;
-  onButtonClick?(): void;
+  /**
+   * Slot for the navigation button in the app bar.
+   */
+  navigation?: Omit<JSX.HTMLAttributes<HTMLButtonElement>, 'icon'> & {
+    icon?: ComponentChildren;
+  };
+  /**
+   * Click handler for the navigation button.
+   */
+  onNavigate?: () => void;
 }
 
 export function BaseOverlay(props: Props) {
   const { loadError } = useLoadGoogleMaps();
 
   useEffect(() => {
-    console.log('GMaps load error:', loadError);
+    if (loadError) {
+      console.log('GMaps load error:', loadError);
+    }
   }, [loadError]);
+
+  const { icon, ...navigationSlot } = props.navigation ?? {};
 
   return (
     <section
@@ -28,17 +52,17 @@ export function BaseOverlay(props: Props) {
         { 'h-screen': loadError != undefined },
       )}
     >
-      <TrialBanner />
+      {FEATURE_BILLING && <TrialBanner />}
       <header class="flex items-center pt-4">
         <IconButton
           id="appBarUp"
-          class="w-12 h-12 p-3"
+          onClick={props.onNavigate}
+          {...navigationSlot}
           forceDark
           accessKey="s"
-          disabled={props.icon === false}
-          onClick={props.onButtonClick}
+          disabled={icon === false}
         >
-          {props.icon ?? <UpIcon />}
+          {icon ?? <UpIcon />}
         </IconButton>
         {props.logo ? (
           props.logo

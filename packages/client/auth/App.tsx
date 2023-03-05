@@ -1,4 +1,3 @@
-import { h, Fragment } from 'preact';
 import { useCallback, useEffect, useState } from 'preact/hooks';
 import { Form, FormType, FormProps } from './components/Form';
 import { Header, HeaderType } from './components/Header';

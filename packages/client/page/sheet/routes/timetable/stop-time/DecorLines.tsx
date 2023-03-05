@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { h } from 'preact';
+
 import './DecorLines.css';
 
 export function TripDecorDot() {

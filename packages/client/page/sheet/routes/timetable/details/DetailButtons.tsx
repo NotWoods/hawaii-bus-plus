@@ -1,5 +1,5 @@
 import { Agency, Route, Trip } from '@hawaii-bus-plus/types';
-import { h } from 'preact';
+
 import { useCallback } from 'preact/hooks';
 import { DetailButtons as BareDetailButtons } from '../../../../../components/RouteDescription/DetailButtons';
 import { buildShareHandler } from '../../../../../services/share/share-handler';

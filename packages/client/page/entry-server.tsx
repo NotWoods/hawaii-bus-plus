@@ -1,4 +1,3 @@
-import { h } from 'preact';
 import render from 'preact-render-to-string';
 import { Main } from './App';
 import { PageHead } from './PageHead';

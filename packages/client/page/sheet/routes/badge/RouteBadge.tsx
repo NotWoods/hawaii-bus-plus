@@ -1,5 +1,5 @@
 import { Route } from '@hawaii-bus-plus/types';
-import { h } from 'preact';
+
 import { SmallRouteIcon } from '../../../../components/RouteIcon/RouteIcon';
 import { colorVariables } from '../../../../components/route-colors';
 

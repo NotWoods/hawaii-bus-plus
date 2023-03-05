@@ -2,7 +2,7 @@ import {
   StreetViewPano,
   StreetViewStatic,
 } from '@hawaii-bus-plus/react-google-maps';
-import { ComponentChildren, Fragment, h } from 'preact';
+import type { ComponentChildren } from 'preact';
 import { useState } from 'preact/hooks';
 import type { LatLngLiteral } from 'spherical-geometry-js';
 import {

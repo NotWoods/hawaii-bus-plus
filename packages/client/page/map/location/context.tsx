@@ -1,4 +1,4 @@
-import { ComponentChildren, createContext, h } from 'preact';
+import { ComponentChildren, createContext } from 'preact';
 import { useCallback, useMemo, useReducer, useState } from 'preact/hooks';
 import { useAbortEffect, usePermission } from '../../hooks';
 import { errorAction, foundCoordinatesAction } from './action';

@@ -1,4 +1,3 @@
-import { h } from 'preact';
 import { SmallRouteIcon } from '../../../../../components/RouteIcon/RouteIcon';
 import { colorVariables } from '../../../../../components/route-colors';
 import type { JourneyTripSegment } from '@hawaii-bus-plus/workers/directions';
@@ -11,7 +10,7 @@ interface Props {
 
 export function TripSegment(props: Props) {
   const { route, trip, agency } = props.segment;
-  const [open, toggleOpen] = useToggle();
+  const [open, { toggle: toggleOpen }] = useToggle();
 
   return (
     <section style={colorVariables(route)}>

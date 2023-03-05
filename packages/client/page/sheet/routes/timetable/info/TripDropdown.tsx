@@ -1,6 +1,6 @@
 import { Route, Trip } from '@hawaii-bus-plus/types';
 import type { DirectionDetails } from '@hawaii-bus-plus/workers/info';
-import { h } from 'preact';
+
 import { NOW } from '../../../../time/input/symbol';
 import { BLANK } from '../../badge/RouteBadge';
 

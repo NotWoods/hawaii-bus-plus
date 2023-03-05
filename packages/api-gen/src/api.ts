@@ -1,4 +1,4 @@
-import { mkdir, readFile, writeFile } from 'fs/promises';
+import { mkdir, writeFile } from 'fs/promises';
 import { join } from 'path';
 import { createApiData } from './bus/parse.js';
 
@@ -9,15 +9,13 @@ function writeJson(path: string, json: unknown) {
 
 /**
  * Generate an API file from the given GTFS zip path.
- * @param gtfsZipPath
  */
 export async function generateApi(
-  gtfsZipPath: string,
+  gtfsZipFile: Promise<Buffer | ArrayBuffer | Uint8Array>,
   apiFolder: string,
 ): Promise<void> {
   const folderReady = mkdir(apiFolder, { recursive: true });
-  const zipData = await readFile(gtfsZipPath);
-  const [api, shapes] = await createApiData(zipData);
+  const [api, shapes] = await createApiData(await gtfsZipFile);
 
   await folderReady;
   const jobs: Promise<unknown>[] = [

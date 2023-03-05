@@ -1,8 +1,7 @@
-import clsx, { ClassValue } from 'clsx';
-import { h } from 'preact';
+import clsx from 'clsx';
 
 interface Props {
-  class?: ClassValue;
+  class?: string;
 }
 
 /**
@@ -40,6 +39,7 @@ export function Logo(props: Props) {
         width="18"
         height="16"
         xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
       >
         <title>+</title>
         <path

@@ -1,6 +1,6 @@
 import { Agency } from '@hawaii-bus-plus/types';
 import debounce from 'just-debounce';
-import { h } from 'preact';
+
 import { useCallback, useEffect, useRef } from 'preact/hooks';
 import { DirectionDetails } from '@hawaii-bus-plus/workers/info';
 import { setDirectionAction } from '../../../../router/action/routes';

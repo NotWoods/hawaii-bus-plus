@@ -1,4 +1,3 @@
-import { h } from 'preact';
 import { BaseIcon } from './Icon';
 
 export function MenuIcon(props: { open?: boolean }) {

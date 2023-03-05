@@ -1,5 +1,5 @@
 import { MapProvider } from '@hawaii-bus-plus/react-google-maps';
-import { h } from 'preact';
+
 import { googleMapOptions } from './hooks/useLoadGoogleMaps';
 import { MainContent } from './MainContent';
 import { MyLocationProvider } from './map/location/context';

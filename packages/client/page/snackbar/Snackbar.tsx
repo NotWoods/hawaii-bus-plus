@@ -1,12 +1,12 @@
-import clsx, { ClassValue } from 'clsx';
-import { ComponentChildren, h } from 'preact';
+import clsx from 'clsx';
+import type { ComponentChildren } from 'preact';
 import { OutlinedButton } from '../../components/Button/OutlinedButton';
-import { CloseButton } from '../../components/CloseButton/CloseButton';
+import { CloseButton } from '../../components/Button/CloseButton';
 
 export interface SnackbarProps {
   children?: ComponentChildren;
   action?: ComponentChildren;
-  class?: ClassValue;
+  class?: string;
   onClose?(): void;
   onAction?(): void;
 }

@@ -1,4 +1,4 @@
-import { h, ComponentChildren } from 'preact';
+import type { ComponentChildren } from 'preact';
 import { useContext, useEffect, useRef } from 'preact/hooks';
 import { useListener } from './apply-changes';
 import { MapContext } from './MapProvider';

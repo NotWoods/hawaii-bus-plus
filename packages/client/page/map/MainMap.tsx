@@ -1,4 +1,3 @@
-import { h } from 'preact';
 import { useLazyComponent } from '../hooks';
 import { useLoadGoogleMaps } from '../hooks/useLoadGoogleMaps';
 

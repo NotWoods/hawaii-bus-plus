@@ -1,6 +1,5 @@
 import clsx from 'clsx';
-import { h } from 'preact';
-import type { JSXInternal as JSX } from 'preact/src/jsx';
+import type { JSX } from 'preact';
 
 interface Props extends JSX.HTMLAttributes<HTMLButtonElement> {
   mini?: boolean;

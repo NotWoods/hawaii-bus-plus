@@ -1,4 +1,6 @@
+import { readFile } from 'fs/promises';
 import { resolve } from 'path';
+import { fetch } from 'undici';
 import { generateApi } from './api.js';
 
 const args = process.argv.slice(2);
@@ -6,9 +8,17 @@ if (args.length !== 2) {
   throw new TypeError(`should pass 2 arguments, not ${args.length}.`);
 }
 
-const [gtfsZipPath, apiFolder] = args.map((path) => resolve(path));
+function downloadInput(path: string) {
+  if (/https?:\/\//.test(path)) {
+    return fetch(path).then((response) => response.arrayBuffer());
+  } else {
+    return readFile(resolve(path));
+  }
+}
 
-generateApi(gtfsZipPath, apiFolder)
+const [gtfsZipPath, apiFolder] = args;
+
+generateApi(downloadInput(gtfsZipPath), resolve(apiFolder))
   .then(() => {
     console.log('Wrote API files');
   })

@@ -2,11 +2,9 @@ import { PlainDaysTime } from '@hawaii-bus-plus/temporal-utils';
 import type { Shape } from '@hawaii-bus-plus/types';
 import { compareAs, toInt, valueNotNull } from '@hawaii-bus-plus/utils';
 import { parse } from 'csv-parse';
-import { from, zip } from 'ix/iterable/index.js';
-import { filter, map } from 'ix/iterable/operators/index.js';
 import JSZip, { JSZipObject } from 'jszip';
 import type { Temporal } from '@js-temporal/polyfill';
-import type { Mutable } from 'type-fest';
+import type { Writable } from 'type-fest';
 import { cacheStations } from '../bike/stations.js';
 import { cast } from './cast.js';
 import {
@@ -22,6 +20,8 @@ import {
   ServerGTFSData,
   TripInflated,
 } from './parsers.js';
+import { zip } from './itertools.js';
+import { removeHiddenCharacters } from './stream.js';
 
 const STARTS_WITH_TIME = /^\d\d?:\d\d/;
 
@@ -31,24 +31,22 @@ function formatTime(time: Temporal.PlainTime) {
     .replace(/\s/g, '');
 }
 
-export async function zipFilesToObject(
-  zipFiles: ReadonlyMap<string, JSZipObject>,
-) {
-  const arrays = await from(zipFiles.values())
-    .pipe(
-      map((file) =>
-        file.nodeStream('nodebuffer').pipe(parse({ cast, columns: true })),
-      ),
-      map((parser) => {
-        const iter: AsyncIterable<unknown> = parser;
-        return iter;
-      }),
-    )
-    .pipe((source) => Promise.all(source));
-
-  return zip(zipFiles.keys(), arrays).pipe((entry) =>
-    Object.fromEntries(entry),
+export async function zipFilesToObject<Keys extends string>(
+  zipFiles: ReadonlyMap<Keys, JSZipObject>,
+): Promise<Record<Keys, AsyncIterable<unknown>>> {
+  const arrays = await Promise.all(
+    Array.from(zipFiles.values())
+      .map((file) =>
+        file
+          .nodeStream('nodebuffer')
+          .pipe(removeHiddenCharacters())
+          .pipe(parse({ cast, columns: true, trim: true })),
+      )
+      .map((parser): AsyncIterable<unknown> => parser),
   );
+
+  const entries = zip(zipFiles.keys(), arrays);
+  return Object.fromEntries(entries) as Record<Keys, AsyncIterable<unknown>>;
 }
 
 /**
@@ -75,16 +73,15 @@ export async function createApiData(
   ];
 
   const zip = await JSZip.loadAsync(gtfsZipData);
-  const zipFiles = from(fileList)
-    .pipe(
-      map((fileName) => {
+  const zipFiles = new Map(
+    fileList
+      .map((fileName) => {
         const name = fileName.substring(0, fileName.length - 4);
         const file = zip.file(fileName);
         return [name, file] as const;
-      }),
-      filter(valueNotNull),
-    )
-    .pipe((source) => new Map(source));
+      })
+      .filter(valueNotNull),
+  );
 
   const json = (await zipFilesToObject(zipFiles)) as JsonStreams;
   const variable: ServerGTFSData = {
@@ -118,7 +115,7 @@ export async function createApiData(
   // Sorting and formatting at the end
   variable.trips = Array.from(trips.values())
     .map((t) => {
-      const trip = t as Mutable<TripInflated>;
+      const trip = t as Writable<TripInflated>;
       trip.stop_times.sort(compareAs((st) => st.stop_sequence));
       if (!STARTS_WITH_TIME.test(trip.trip_short_name)) {
         const start = trip.stop_times[0].arrival_time.toPlainTime();

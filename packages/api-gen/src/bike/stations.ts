@@ -4,7 +4,7 @@ import {
   JsonStationInformation,
   StationInformation,
 } from '@hawaii-bus-plus/types';
-import fetch from 'node-fetch';
+import { fetch } from 'undici';
 import { GBFS_URL } from '../env.js';
 
 async function getFeeds() {
@@ -31,8 +31,8 @@ function formatInfo(station: JsonStationInformation): StationInformation {
 
 export async function cacheStations() {
   const feeds = await getFeeds();
-  const res = await fetch(feeds.get('station_information')!);
-  const json = await res.json();
+  const response = await fetch(feeds.get('station_information')!);
+  const json = await response.json();
   const {
     data: { stations },
   } = json as GbfsWrapper<{ stations: JsonStationInformation[] }>;

@@ -1,4 +1,3 @@
-import { h } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
 import { Logo } from '../../components/Logo';
 import { FEATURE_BILLING } from '../../services/env';

@@ -1,11 +1,11 @@
-import { h } from 'preact';
+import { useEffect, useRef } from 'preact/hooks';
 import { feedback, logout, payments } from '../../../../assets/icons/paths';
 import { FEATURE_BILLING } from '../../../../services/env';
 import { MenuOption } from './MenuOption';
 
 interface Props {
-  open?: boolean;
   labelledBy?: string;
+  onDismiss: () => void;
 }
 
 function Divider() {
@@ -13,7 +13,10 @@ function Divider() {
 }
 
 export function Menu(props: Props) {
-  if (!props.open) return null;
+  const navRef = useRef<HTMLElement>(null);
+  useEffect(() => {
+    navRef.current?.querySelector<HTMLElement>('button, a')?.focus();
+  }, []);
 
   return (
     <nav
@@ -21,6 +24,32 @@ export function Menu(props: Props) {
       role="menu"
       aria-orientation="vertical"
       aria-labelledby={props.labelledBy}
+      ref={navRef}
+      onKeyDown={function trapFocus(event) {
+        if (event.key === 'Tab') {
+          const focusableElements =
+            event.currentTarget.querySelectorAll<HTMLElement>('button, a');
+          const firstFocusableElement = focusableElements[0];
+          const lastFocusableElement =
+            focusableElements[focusableElements.length - 1];
+
+          if (event.shiftKey) {
+            // When pressing shift + tab on the first option, go to the last option
+            if (document.activeElement === firstFocusableElement) {
+              lastFocusableElement.focus();
+              event.preventDefault();
+            }
+          } else {
+            // When pressing tab on the last option, go to the first option
+            if (document.activeElement === lastFocusableElement) {
+              firstFocusableElement.focus();
+              event.preventDefault();
+            }
+          }
+        } else if (event.key === 'Escape') {
+          props.onDismiss();
+        }
+      }}
     >
       {FEATURE_BILLING && (
         <MenuOption href="/.netlify/functions/billing" icon={payments}>

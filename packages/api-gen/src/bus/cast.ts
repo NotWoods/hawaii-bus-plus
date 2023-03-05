@@ -1,6 +1,10 @@
 import { toInt } from '@hawaii-bus-plus/utils';
 import { CastingContext } from 'csv-parse';
 
+/**
+ * Casting function for csv-parse, to convert string values depending on the column name.
+ * @see https://csv.js.org/parse/options/cast/
+ */
 export function cast(value: string, context: CastingContext) {
   switch (context.column) {
     case 'stop_lat':
@@ -47,9 +51,25 @@ export function cast(value: string, context: CastingContext) {
     case 'route_color':
     case 'route_text_color':
       return `#${value}`;
+    case 'route_long_name':
+      if (value === value.toUpperCase()) {
+        return toTitleCase(value.replace(/\s?LINE/, ' Line:'));
+      } else {
+        return value;
+      }
     default:
       return value;
   }
+}
+
+/**
+ * Format an all-caps string to title case.
+ */
+function toTitleCase(text: string) {
+  return text.replace(
+    /(\w)(\w*)/g,
+    (_, firstChar: string, rest: string) => firstChar + rest.toLowerCase(),
+  );
 }
 
 /**

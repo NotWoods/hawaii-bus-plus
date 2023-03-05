@@ -1,5 +1,5 @@
 import type { SearchResults } from '@hawaii-bus-plus/workers/search';
-import { h } from 'preact';
+
 import {
   PlaceSearchResultItem,
   StopSearchResultItem,

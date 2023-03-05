@@ -1,4 +1,3 @@
-import { Fragment, h } from 'preact';
 import { useContext } from 'preact/hooks';
 import { useScreens } from './hooks';
 import { MyLocationButton } from './map/location/MyLocationButton';

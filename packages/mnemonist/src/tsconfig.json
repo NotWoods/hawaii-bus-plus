@@ -3,6 +3,7 @@
   "include": ["**/*"],
   "references": [{ "path": "../../types" }],
   "compilerOptions": {
-    "types": []
+    "types": [],
+    "moduleResolution": "nodenext"
   }
 }

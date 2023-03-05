@@ -1,5 +1,3 @@
-import { h } from 'preact';
-
 interface Props {
   class?: string;
   position: google.maps.LatLngLiteral;

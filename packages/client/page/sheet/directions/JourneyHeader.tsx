@@ -4,8 +4,8 @@ import {
 } from '@hawaii-bus-plus/presentation';
 import type { Journey } from '@hawaii-bus-plus/workers/directions';
 import clsx from 'clsx';
-import { h } from 'preact';
-import { CloseButton } from '../../../components/CloseButton/CloseButton';
+
+import { CloseButton } from '../../../components/Button/CloseButton';
 import { useScreens } from '../../hooks';
 import './JourneyHeader.css';
 

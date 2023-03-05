@@ -1,5 +1,5 @@
 import { Repository } from '@hawaii-bus-plus/data';
-import { h } from 'preact';
+
 import render from 'preact-render-to-string';
 import { App } from './App';
 import { loadRoute, urlToRouteId } from './url-to-route';

@@ -1,5 +1,5 @@
 import { Route, Trip } from '@hawaii-bus-plus/types';
-import { Fragment, h } from 'preact';
+import { Fragment } from 'preact';
 
 interface Props {
   directionHeaders: Route['directions'];

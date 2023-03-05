@@ -1,4 +1,3 @@
-import { h } from 'preact';
 import './LoadingBusIcon.css';
 
 export function LoadingBusIcon() {

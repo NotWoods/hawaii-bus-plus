@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { ComponentChildren, h } from 'preact';
+import type { ComponentChildren } from 'preact';
 
 interface Props {
   src: string;

@@ -1,5 +1,5 @@
 import { Marker } from '@hawaii-bus-plus/react-google-maps';
-import { h } from 'preact';
+
 import { useContext } from 'preact/hooks';
 import { MyLocationContext } from './location/context';
 import { pinsIcon } from './pins';

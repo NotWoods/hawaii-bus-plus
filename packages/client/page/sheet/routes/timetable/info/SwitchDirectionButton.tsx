@@ -1,4 +1,3 @@
-import { h } from 'preact';
 import { swap_horiz } from '../../../../../assets/icons/paths';
 import { OutlinedButton } from '../../../../../components/Button/OutlinedButton';
 import { swapDirectionAction } from '../../../../router/action/routes';

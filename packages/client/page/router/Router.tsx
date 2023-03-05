@@ -1,4 +1,4 @@
-import { ComponentChildren, createContext, h } from 'preact';
+import { ComponentChildren, createContext } from 'preact';
 import { Reducer, useEffect, useMemo, useReducer } from 'preact/hooks';
 import { JSXInternal } from 'preact/src/jsx';
 import { linkAction, reloadStateAction, RouterAction } from './action';

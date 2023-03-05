@@ -1,5 +1,5 @@
 import { BikeStationPoint } from '@hawaii-bus-plus/presentation';
-import { h } from 'preact';
+
 import { PlaceInfo } from './PlaceInfo';
 import { PointBase } from './PointBase';
 import { PointDescription, PointHeader } from './PointInfo';

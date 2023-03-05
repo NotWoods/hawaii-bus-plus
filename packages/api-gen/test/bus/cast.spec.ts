@@ -1,19 +1,21 @@
 import test from 'ava';
 import { readFile } from 'fs/promises';
-import { parse } from 'csv-parse';
+import { CastingContext, parse } from 'csv-parse';
 import JSZip from 'jszip';
 import { cast } from '../../src/bus/cast.js';
-import { GTFS_ZIP_LOCATION } from '../../src/env.js';
 
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-
-async function* loadZipFile(path: string) {
-  const zipData = await readFile(GTFS_ZIP_LOCATION);
+async function* loadZipFile(
+  fileName: string,
+  fixtureName = 'big-island-buses.zip',
+) {
+  const zipData = await readFile(
+    new URL(`../fixtures/${fixtureName}`, import.meta.url),
+  );
   const zip = await JSZip.loadAsync(zipData);
 
-  const file = zip.file(path);
+  const file = zip.file(fileName);
   if (!file) {
-    throw new Error(`${path} is missing from zip`);
+    throw new Error(`${fileName} is missing from zip`);
   }
 
   const input = file.nodeStream('nodebuffer');
@@ -23,6 +25,8 @@ async function* loadZipFile(path: string) {
   });
   yield* input.pipe(parser);
 }
+
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 
 test('cast float', async (t) => {
   for await (const row of loadZipFile('stops.txt')) {
@@ -58,4 +62,21 @@ test('cast bool and date', async (t) => {
     t.is(month.length, 2);
     t.is(day.length, 2);
   }
+});
+
+test('cast route long name to format title case', (t) => {
+  const mockContext = (column: string) => ({ column } as CastingContext);
+
+  t.is(
+    cast('HILO / OCEAN VIEW', mockContext('route_long_name')),
+    'Hilo / Ocean View',
+  );
+  t.is(
+    cast('GREENLINE HONOKAA', mockContext('route_long_name')),
+    'Green Line: Honokaa',
+  );
+  t.is(
+    cast('Weird formatting', mockContext('route_long_name')),
+    'Weird formatting',
+  );
 });

@@ -23,8 +23,8 @@ import type {
   Trip,
 } from '@hawaii-bus-plus/types';
 import { compareAs } from '@hawaii-bus-plus/utils';
-import { first, toArray } from 'ix/asynciterable/index.js';
-import type { Mutable } from 'type-fest';
+import type { Writable } from 'type-fest';
+import { arrayFromAsync } from './itertools.js';
 
 export interface StopTimeInflated
   extends Omit<StopTime, 'arrival_time' | 'departure_time'> {
@@ -58,8 +58,11 @@ export async function parseFeedInfo(
   json: Pick<JsonStreams, 'feed_info'>,
   variable: Partial<Pick<GTFSData, 'info'>>,
 ) {
-  const info = await first(json.feed_info);
-  variable.info = info;
+  for await (const info of json.feed_info) {
+    variable.info = info;
+    // Only use the first item
+    return;
+  }
 }
 
 export async function parseAgency(
@@ -71,6 +74,7 @@ export async function parseAgency(
     variable.agency[csvAgency.agency_id] = {
       ...csvAgency,
       primary,
+      agency_short_name: csvAgency.agency_name.replace(/\s\([\w\s']+\)/, ''),
     };
     primary = false;
   }
@@ -84,10 +88,10 @@ export async function parseRoutes(
   variable: Pick<GTFSData, 'routes'>,
   defaultAgency: Agency['agency_id'],
 ) {
-  const routes = await toArray(json.routes);
+  const routes = await arrayFromAsync(json.routes);
   routes.sort(compareAs((route) => route.route_sort_order));
   for (const csvRoute of routes) {
-    const route = csvRoute as Partial<Mutable<Route>> & Partial<CsvRoute>;
+    const route = csvRoute as Partial<Writable<Route>> & Partial<CsvRoute>;
     route.agency_id = route.agency_id ?? defaultAgency;
     route.directions = {
       0: csvRoute.direction_0,
@@ -105,7 +109,7 @@ export async function parseTrips(
 ): Promise<ReadonlyMap<Trip['trip_id'], TripInflated>> {
   const trips = new Map<Trip['trip_id'], TripInflated>();
   for await (const csvTrip of json.trips) {
-    const trip = csvTrip as Mutable<TripInflated>;
+    const trip = csvTrip as Writable<TripInflated>;
     trip.stop_times = [];
     variable.trips.push(trip);
     trips.set(trip.trip_id, trip);
@@ -176,7 +180,7 @@ export async function parseCalendar(
     }
     const calendar: Calendar = {
       service_id: csvCalendar.service_id,
-      service_name: csvCalendar.service_name,
+      service_name: csvCalendar.service_name ?? csvCalendar.Package ?? '',
       start_date: csvCalendar.start_date,
       end_date: csvCalendar.end_date,
       days,
@@ -208,7 +212,12 @@ export async function parseStopTimes(
     };
 
     const stop = variable.stops[stopTime.stop_id];
-    const trip = trips.get(stopTime.trip_id)!;
+    const trip = trips.get(stopTime.trip_id);
+    if (!trip) {
+      throw new Error(
+        `Could not find trip ${stopTime.trip_id} in stop time with stop ${stopTime.stop_id}}`,
+      );
+    }
     const route = variable.routes[trip.route_id];
 
     trip.stop_times.push(stopTime);

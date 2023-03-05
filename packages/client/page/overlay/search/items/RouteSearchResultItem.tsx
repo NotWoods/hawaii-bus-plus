@@ -1,14 +1,14 @@
 import { Agency, Route } from '@hawaii-bus-plus/types';
-import clsx, { ClassValue } from 'clsx';
-import { h } from 'preact';
-import { RouteIcon } from '../../../../components/RouteIcon/RouteIcon';
+import clsx from 'clsx';
+
 import { colorVariables } from '../../../../components/route-colors';
+import { RouteIcon } from '../../../../components/RouteIcon/RouteIcon';
 import { Link } from '../../../router/Router';
 
 interface Props {
   route: Route;
-  agency: Pick<Agency, 'agency_name' | 'primary'>;
-  class?: ClassValue;
+  agency: Pick<Agency, 'agency_short_name' | 'primary'>;
+  class?: string;
   onClick?(evt: MouseEvent): void;
 }
 
@@ -29,7 +29,7 @@ export function RouteSearchResultItem(props: Props) {
         {route.route_long_name}
       </p>
       {agency.primary ? undefined : (
-        <p className="text-xs">{agency.agency_name}</p>
+        <p className="text-xs">{agency.agency_short_name}</p>
       )}
     </Link>
   );

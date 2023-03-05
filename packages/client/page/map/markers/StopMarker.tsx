@@ -1,7 +1,7 @@
 import { DefaultMap } from '@hawaii-bus-plus/mnemonist';
 import { MarkerWithData } from '@hawaii-bus-plus/react-google-maps';
 import { ColorString, Stop } from '@hawaii-bus-plus/types';
-import { h } from 'preact';
+
 import { pinsIcon } from '../pins';
 import { SelectableMarker } from './SelectableMarker';
 

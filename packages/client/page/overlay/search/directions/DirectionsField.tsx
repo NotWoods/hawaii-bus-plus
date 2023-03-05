@@ -1,6 +1,6 @@
 import { Point } from '@hawaii-bus-plus/presentation';
 import clsx from 'clsx';
-import { ComponentChildren, h, Ref } from 'preact';
+import type { ComponentChildren, Ref } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
 import { bus_stop, gps_fixed, place } from '../../../../assets/icons/paths';
 import { LeadingInputIcon, SearchInput } from '../SearchInput';
@@ -48,7 +48,7 @@ export function DirectionsField(props: Props) {
           inputRef={props.inputRef}
           class={clsx({ 'pl-10': point, 'border-red-500': invalid })}
           aria-owns={props['aria-owns']}
-          aria-expanded={props['aria-expanded'].toString()}
+          aria-expanded={props['aria-expanded']}
           placeholder="Stop or location"
           value={point?.name ?? value}
           onKeyDown={props.onKeyDown}

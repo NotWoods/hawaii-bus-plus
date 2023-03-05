@@ -1,5 +1,5 @@
 import { Point } from '@hawaii-bus-plus/presentation';
-import { Fragment, h, Ref } from 'preact';
+import type { Ref } from 'preact';
 import { useEffect, useRef } from 'preact/hooks';
 import type { SearchResults } from '@hawaii-bus-plus/workers/search';
 import { useSearch } from '../simple/useSearch';

@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { h } from 'preact';
+
 import { useSelector } from '../../../../router/hooks';
 import { selectLoadedDetails } from '../../../../router/selector/main';
 

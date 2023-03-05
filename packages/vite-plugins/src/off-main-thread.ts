@@ -1,4 +1,3 @@
-// @ts-expect-error missing types
 import OMT from '@surma/rollup-plugin-off-main-thread';
 import { Plugin } from 'vite';
 

@@ -1,5 +1,5 @@
-import { ComponentChildren, h } from 'preact';
-import { InputWithLabel } from '../../components/InputWithLabel/InputWithLabel';
+import type { ComponentChildren } from 'preact';
+import { InputField } from '../../components/Field/InputField';
 
 interface Props {
   children: ComponentChildren;
@@ -12,5 +12,5 @@ interface Props {
 }
 
 export function Input(props: Props) {
-  return <InputWithLabel theme="light" {...props} />;
+  return <InputField theme="light" {...props} />;
 }

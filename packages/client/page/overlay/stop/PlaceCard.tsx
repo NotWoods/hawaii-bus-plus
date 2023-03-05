@@ -1,5 +1,5 @@
 import { PlacePointPartial } from '@hawaii-bus-plus/presentation';
-import { h } from 'preact';
+
 import { useState } from 'preact/hooks';
 import type { LatLngLiteral } from 'spherical-geometry-js';
 import { usePromise } from '../../hooks';

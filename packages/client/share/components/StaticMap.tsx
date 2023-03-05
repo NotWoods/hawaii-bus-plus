@@ -1,5 +1,5 @@
 import { Route, Stop } from '@hawaii-bus-plus/types';
-import { h } from 'preact';
+
 import { GOOGLE_MAPS_KEY } from '../../services/env';
 
 interface UrlProps {

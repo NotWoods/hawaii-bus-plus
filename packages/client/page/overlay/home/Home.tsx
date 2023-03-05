@@ -1,4 +1,4 @@
-import { ComponentChildren, Fragment, h } from 'preact';
+import type { ComponentChildren } from 'preact';
 import { useState } from 'preact/hooks';
 import {
   ClosestResults,

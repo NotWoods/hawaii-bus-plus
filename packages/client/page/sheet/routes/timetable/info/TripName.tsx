@@ -1,4 +1,4 @@
-import { ComponentChildren, h } from 'preact';
+import type { ComponentChildren } from 'preact';
 import { directions_bus } from '../../../../../assets/icons/paths';
 import { Icon } from '../../../../../assets/icons/Icon';
 import { BLANK } from '../../badge/RouteBadge';
