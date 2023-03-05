@@ -1,7 +1,7 @@
 import { GTFSData } from '@hawaii-bus-plus/types';
-import { readFile } from 'fs/promises';
-import { resolve } from 'path';
-import { URL } from 'url';
+import { readFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
+import { URL } from 'node:url';
 import { BaseMemoryRepository } from '../src/mem-repository/index.js';
 
 export class NodeRepository extends BaseMemoryRepository {

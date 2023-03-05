@@ -1,6 +1,6 @@
 import test from 'ava';
-import { join, relative } from 'path';
-import { fileURLToPath } from 'url';
+import { join, relative } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { distFolder, renderRoutes } from '../src/base.js';
 
 test.serial('render auth routes', async (t) => {

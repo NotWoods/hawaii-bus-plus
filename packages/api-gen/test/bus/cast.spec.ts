@@ -1,5 +1,5 @@
 import test from 'ava';
-import { readFile } from 'fs/promises';
+import { readFile } from 'node:fs/promises';
 import { CastingContext, parse } from 'csv-parse';
 import JSZip from 'jszip';
 import { cast } from '../../src/bus/cast.js';

@@ -1,6 +1,6 @@
 import { NodeRepository } from '@hawaii-bus-plus/data/node';
-import { mkdir } from 'fs/promises';
-import { URL } from 'url';
+import { mkdir } from 'node:fs/promises';
+import { URL } from 'node:url';
 import { distFolder, renderRoutes } from './base.js';
 
 export async function prerenderShare(write: boolean) {

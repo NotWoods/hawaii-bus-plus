@@ -1,5 +1,5 @@
-import { mkdir, writeFile } from 'fs/promises';
-import { join } from 'path';
+import { mkdir, writeFile } from 'node:fs/promises';
+import { join } from 'node:path';
 import { createApiData } from './bus/parse.js';
 
 function writeJson(path: string, json: unknown) {

@@ -1,5 +1,5 @@
 import test from 'ava';
-import { readFile } from 'fs/promises';
+import { readFile } from 'node:fs/promises';
 import JSZip from 'jszip';
 import { zipFilesToObject } from '../../src/bus/parse.js';
 import { JsonStreams } from '../../src/bus/parsers.js';

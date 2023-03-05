@@ -1,5 +1,5 @@
 // @ts-check
-import { readFile } from 'fs/promises';
+import { readFile } from 'node:fs/promises';
 import { defineConfig } from 'vite';
 import { emptyPackage, injectHtml } from '@hawaii-bus-plus/vite-plugins';
 import prefresh from '@prefresh/vite';
@@ -62,7 +62,7 @@ export default defineConfig(({ command, ssrBuild }) => {
       external: [
         'preact',
         'tailwindcss',
-        'fs/promises',
+        'node:fs/promises',
         '@notwoods/preact-helmet',
       ],
       noExternal: ['clsx'],

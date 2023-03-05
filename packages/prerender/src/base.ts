@@ -1,6 +1,6 @@
-import { readFile, writeFile } from 'fs/promises';
+import { readFile, writeFile } from 'node:fs/promises';
 import { Promisable } from 'type-fest';
-import { URL } from 'url';
+import { URL } from 'node:url';
 import { injectHelmet } from './helmet.js';
 
 export type RenderFunction = (
