@@ -6,7 +6,7 @@
   "main": "./src/index.js",
   "module": "./src/index.js",
   "scripts": {
-    "format": "prettier **/*.ts *.mjs --write --ignore-path ../../.prettierignore"
+    "format": "prettier **/*.ts --write --ignore-path ../../.prettierignore"
   },
   "dependencies": {},
   "devDependencies": {
