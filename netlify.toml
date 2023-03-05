@@ -36,7 +36,6 @@ package = "@netlify/plugin-sitemap"
   [plugins.inputs]
   exclude = [
     './404.html',
-    './auth/index.html',
     './share/index.html',
     './email/**/*',
   ]
@@ -57,11 +56,6 @@ package = "@netlify/plugin-sitemap"
   status = 301
   force = true
 
-[[redirects]]
-  from = "/auth/index.html"
-  to = "/404.html"
-  status = 301
-  force = true
 [[redirects]]
   from = "/share/index.html"
   to = "/404.html"
@@ -128,11 +122,6 @@ package = "@netlify/plugin-sitemap"
 
 # The following redirects are intended for use with most SPAs that handle
 # routing internally.
-[[redirects]]
-  from = "/auth/*"
-  to = "/auth.html"
-  status = 200
-
 [[redirects]]
   from = "/directions/*"
   to = "/index.html"

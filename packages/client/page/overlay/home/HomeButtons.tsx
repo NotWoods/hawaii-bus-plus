@@ -1,8 +1,6 @@
 import type { ComponentChildren } from 'preact';
 import { Icon } from '../../../assets/icons/Icon';
-import { error, login, payments } from '../../../assets/icons/paths';
-import { OutlinedButton } from '../../../components/Button/OutlinedButton';
-import { HomeButtonsError } from './hooks';
+import { error } from '../../../assets/icons/paths';
 
 function HomeButtons(props: {
   children?: ComponentChildren;
@@ -24,33 +22,6 @@ function HomeButtons(props: {
   );
 }
 
-export function LoginButtons() {
-  return (
-    <HomeButtons
-      icon={login}
-      about="You need to have an account to use Hawaii Bus Plus."
-    >
-      <OutlinedButton href="/auth/login" class="mb-1">
-        Login
-      </OutlinedButton>
-      <OutlinedButton href="/auth/register">Sign up</OutlinedButton>
-    </HomeButtons>
-  );
-}
-
-export function BillingButtons() {
-  return (
-    <HomeButtons
-      icon={payments}
-      about="Your account has expired. Sign up for a new plan to use Hawaii Bus Plus."
-    >
-      <OutlinedButton href="/.netlify/functions/billing" class="mb-1">
-        Billing
-      </OutlinedButton>
-    </HomeButtons>
-  );
-}
-
 export function BrowserUnsupported() {
   return (
     <HomeButtons
@@ -58,13 +29,4 @@ export function BrowserUnsupported() {
       about="Bus data failed to load, try refreshing or clearing your browser cache."
     />
   );
-}
-
-export function HomeErrorButtons(props: { error: HomeButtonsError }) {
-  switch (props.error.code) {
-    case 401:
-      return <LoginButtons />;
-    case 402:
-      return <BillingButtons />;
-  }
 }
