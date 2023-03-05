@@ -19,6 +19,6 @@ export function* zip(
     if (results.some((result) => result.done)) {
       break;
     }
-    yield results.map((result) => result.value);
+    yield results.map((result): unknown => result.value);
   }
 }
