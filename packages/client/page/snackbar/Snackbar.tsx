@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import type { ComponentChildren } from 'preact';
 import { OutlinedButton } from '../../components/Button/OutlinedButton';
-import { CloseButton } from '../../components/CloseButton/CloseButton';
+import { CloseButton } from '../../components/Button/CloseButton';
 
 export interface SnackbarProps {
   children?: ComponentChildren;

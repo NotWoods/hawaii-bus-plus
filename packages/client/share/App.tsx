@@ -3,7 +3,7 @@ import { Agency, Route, Stop, Trip } from '@hawaii-bus-plus/types';
 import { extractLinks } from '@hawaii-bus-plus/workers/info';
 import { Fragment } from 'preact';
 
-import { ExtendedFloatingActionButton } from '../components/FloatingActionButton/ExtendedFloatingActionButton';
+import { ExtendedFloatingActionButton } from '../components/Button/ExtendedFloatingActionButton';
 import { colorVariables } from '../components/route-colors';
 import { DetailButtons } from '../components/RouteDescription/DetailButtons';
 import { RouteDescription } from '../components/RouteDescription/RouteDescription';

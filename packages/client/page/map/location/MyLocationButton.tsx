@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import { memo } from 'preact/compat';
 import { useCallback, useContext, useEffect, useState } from 'preact/hooks';
 import { BaseIcon } from '../../../assets/icons/Icon';
-import { FloatingActionButton } from '../../../components/FloatingActionButton/FloatingActionButton';
+import { FloatingActionButton } from '../../../components/Button/FloatingActionButton';
 import { useLoadGoogleMaps } from '../../hooks/useLoadGoogleMaps';
 import { MyLocationContext } from './context';
 

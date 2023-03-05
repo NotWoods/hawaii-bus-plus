@@ -1,7 +1,5 @@
-import clsx from 'clsx';
-
 import { CloseIcon } from '../../assets/icons/MenuIcon';
-import { IconButton } from '../Button/IconButton';
+import { IconButton } from './IconButton';
 
 interface Props {
   class?: string;
@@ -12,7 +10,7 @@ interface Props {
 export function CloseButton(props: Props) {
   return (
     <IconButton
-      class={clsx('w-12 h-12 p-3', props.class)}
+      class={props.class}
       onClick={props.onClick}
       style={{ gridArea: 'close' }}
     >
