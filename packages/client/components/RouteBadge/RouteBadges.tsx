@@ -18,8 +18,8 @@ export function RouteBadges({ routes, omit, clear }: Props) {
     ?.map((route) => <RouteBadge key={route.route_id} route={route} />);
 
   if (!badges || badges.length === 0) {
-    return clear ? null : <span class="flex gap-1">{BLANK}</span>;
+    return clear ? null : <span class="flex flex-wrap gap-1">{BLANK}</span>;
   } else {
-    return <span class="flex gap-1">{badges}</span>;
+    return <span class="flex flex-wrap gap-1">{badges}</span>;
   }
 }

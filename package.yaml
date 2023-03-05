@@ -2,7 +2,7 @@ name: hawaii-bus-plus
 private: true
 version: 5.0.0
 scripts:
-  api: pnpm run api:client --filter api-gen
+  api: pnpm --filter api-gen run api:client
   build: >-
     pnpm --filter client run build &&
     pnpm --filter client run build:ssr &&
@@ -13,7 +13,7 @@ scripts:
   clean: >-
     del-cli "dist/**/*" "packages/**/*.js" "packages/**/*.d.ts"
     "packages/**/*.map" "packages/**/*.tsbuildinfo"
-  dev: pnpm run dev --filter client
+  dev: pnpm --filter client run dev
   format: prettier *.yaml *.cjs *.json .github/**/*.yml --write
   tsc: tsc --build .
 dependencies:
