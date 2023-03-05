@@ -38,3 +38,15 @@ jobs:
           AMAZON_SECRET_ACCESS_KEY: ${{ secrets.AMAZON_SECRET_ACCESS_KEY }}
 
       - run: pnpm run build
+  test_deno:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-deno@v1
+        with:
+          deno-version: v1.x
+
+      - name: deno test
+        run: deno test
+        working-directory: ./packages/edge-functions/

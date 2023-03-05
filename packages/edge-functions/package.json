@@ -1,0 +1,30 @@
+{
+  "name": "@hawaii-bus-plus/edge-functions",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.js",
+  "module": "./src/index.js",
+  "scripts": {
+    "format": "prettier **/*.ts *.mjs --write --ignore-path ../../.prettierignore"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "prettier": "~2.8.4",
+    "typescript": "^4.9.5"
+  },
+  "files": [
+    "src",
+    "test"
+  ],
+  "eslintConfig": {
+    "parserOptions": {
+      "project": [
+        "./packages/functions/*/tsconfig.json"
+      ]
+    }
+  },
+  "engines": {
+    "node": ">=14"
+  }
+}

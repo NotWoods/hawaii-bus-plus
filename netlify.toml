@@ -1,7 +1,7 @@
 [build]
   publish = "dist/"
   command = ". scripts/app.sh"
-  functions = "dist/functions/"
+  edge_functions = "packages/edge-functions/src/"
 [build.environment]
   NODE_ENV = "development"
   NPM_FLAGS="--prefix=/dev/null"
@@ -21,8 +21,15 @@
 [context.branch-deploy]
   environment = { NETLIFY_CONTEXT = "branch-deploy" }
 
-[functions]
-  node_bundler = "esbuild"
+
+[[edge_functions]]
+  path = "/api/v1/lookup_location"
+  function = "lookup_location"
+
+[[edge_functions]]
+  path = "/api/v1/api.json"
+  function = "api"
+
 
 [[plugins]]
 package = "@netlify/plugin-sitemap"
@@ -32,7 +39,6 @@ package = "@netlify/plugin-sitemap"
     './auth/index.html',
     './share/index.html',
     './email/**/*',
-    './functions/**/*'
   ]
 
 # Redirects and headers are GLOBAL for all builds – they do not get scoped to
@@ -50,14 +56,6 @@ package = "@netlify/plugin-sitemap"
   to = "https://app.hawaiibusplus.com/:splat"
   status = 301
   force = true
-
-[[redirects]]
-  from = "/api/v1/lookup_location"
-  to = "http://api.ipstack.com/check?access_key={IPSTACK_KEY}&fields=latitude,longitude"
-  # When you assign an HTTP status code of 200 to a redirect rule, it becomes a rewrite.
-  # This means that the URL in the visitor’s address bar remains the same,
-  # while Netlify’s servers fetch the new location behind the scenes.
-  status = 200
 
 [[redirects]]
   from = "/auth/index.html"
@@ -166,18 +164,6 @@ package = "@netlify/plugin-sitemap"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin"
     Cross-Origin-Opener-Policy = "same-origin"
-    Content-Security-Policy = '''frame-ancestors 'none';
-    form-action 'self';
-    default-src 'self';
-    img-src 'self' data: blob: *.googleapis.com *.ggpht.com maps.gstatic.com https://hawaiibusplus.com;
-    script-src 'self' 'unsafe-eval' maps.googleapis.com https://kite.oakes.software;
-    worker-src 'self';
-    style-src 'self' 'unsafe-inline' fonts.googleapis.com;
-    font-src 'self' fonts.gstatic.com;
-    connect-src 'self' https://kite.oakes.software *.googleapis.com *.ggpht.com maps.gstatic.com fonts.googleapis.com fonts.gstatic.com;
-    manifest-src 'self';
-    object-src 'none';
-    base-uri 'none';'''
     Permissions-Policy = '''geolocation=(self),
     camera=(),
     microphone=(),

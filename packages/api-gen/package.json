@@ -9,9 +9,7 @@
   },
   "scripts": {
     "preapi:client": "pnpm run build",
-    "preapi:dist": "pnpm run build",
     "api:client": "node src/cli.js http://www.heleonbus.org/transit-info-and-statistics/MTA_FEED4.zip ../client/public/api/v1/",
-    "api:dist": "node src/cli.js http://www.heleonbus.org/transit-info-and-statistics/MTA_FEED4.zip ../../dist/functions/api/",
     "build": "tsc --build src",
     "format": "prettier **/*.ts --write --ignore-path ../../.prettierignore",
     "postformat": "eslint \"**/*.ts\" --fix",

@@ -16,8 +16,9 @@
   },
   "editor.formatOnSave": true,
   "typescript.tsc.autoDetect": "off",
-  "grunt.autoDetect": "off",
-  "jake.autoDetect": "off",
-  "gulp.autoDetect": "off",
-  "npm.autoDetect": "off"
+  "npm.autoDetect": "off",
+  "deno.enablePaths": [
+    "packages/edge-functions"
+  ],
+  "deno.lint": true
 }
