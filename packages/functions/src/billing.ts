@@ -32,7 +32,7 @@ export const handler = createHandler('GET', async (event, context) => {
     );
   }
 
-  if (FEATURE_BILLING) {
+  if (!FEATURE_BILLING) {
     throw new TextHTTPError(
       { status: 500, statusText: 'Internal Server Error' },
       `Billing disabled. Please contact support.`,

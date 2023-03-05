@@ -3,6 +3,7 @@ import type { ComponentChildren, JSX } from 'preact';
 import { useEffect } from 'preact/hooks';
 import { UpIcon } from '../../assets/icons/MenuIcon';
 import { IconButton } from '../../components/Button/IconButton';
+import { FEATURE_BILLING } from '../../services/env';
 import { useLoadGoogleMaps } from '../hooks/useLoadGoogleMaps';
 import { TrialBanner } from './TrialBanner';
 
@@ -51,7 +52,7 @@ export function BaseOverlay(props: Props) {
         { 'h-screen': loadError != undefined },
       )}
     >
-      <TrialBanner />
+      {FEATURE_BILLING && <TrialBanner />}
       <header class="flex items-center pt-4">
         <IconButton
           id="appBarUp"
