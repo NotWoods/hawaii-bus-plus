@@ -47,7 +47,6 @@ importers:
       ava: ^5.2.0
       csv-parse: ^5.3.6
       jszip: ^3.10.1
-      prettier: ~2.8.4
       ts-extras: ^0.11.0
       tslib: ^2.5.0
       type-fest: ^3.6.1
@@ -68,7 +67,6 @@ importers:
       '@ava/typescript': 3.0.1
       '@types/node': 16.18.14
       ava: 5.2.0_@ava+typescript@3.0.1
-      prettier: 2.8.4
       type-fest: 3.6.1
       typescript: 4.9.5
 
@@ -98,7 +96,6 @@ importers:
       just-debounce: ^1.1.0
       preact: ^10.13.0
       preact-render-to-string: ^5.2.2
-      prettier: ~2.8.4
       spherical-geometry-js: ^3.0.0
       tailwindcss: ^3.1.8
       tslib: ^2.5.0
@@ -135,7 +132,6 @@ importers:
       '@tailwindcss/typography': 0.5.7_tailwindcss@3.1.8
       '@types/google.maps': 3.50.0
       preact-render-to-string: 5.2.2_preact@10.13.0
-      prettier: 2.8.4
       tailwindcss: 3.1.8
       type-fest: 3.6.1
       typescript: 4.9.5
@@ -152,7 +148,6 @@ importers:
       '@types/node': ^16.18.14
       ava: ^5.2.0
       idb: ^7.0.2
-      prettier: ~2.8.4
       spherical-geometry-js: ^3.0.0
       tslib: ^2.5.0
       typescript: ^4.9.5
@@ -167,7 +162,6 @@ importers:
       '@ava/typescript': 3.0.1
       '@types/node': 16.18.14
       ava: 5.2.0_@ava+typescript@3.0.1
-      prettier: 2.8.4
       typescript: 4.9.5
 
   packages/edge-functions:
@@ -183,7 +177,6 @@ importers:
       '@ava/typescript': ^3.0.1
       '@types/node': ^16.18.14
       ava: ^5.2.0
-      prettier: ~2.8.4
       tslib: ^2.5.0
       typescript: ^4.9.5
       undici: ^5.20.0
@@ -194,7 +187,6 @@ importers:
       '@ava/typescript': 3.0.1
       '@types/node': 16.18.14
       ava: 5.2.0_@ava+typescript@3.0.1
-      prettier: 2.8.4
       typescript: 4.9.5
 
   packages/identity-email:
@@ -209,7 +201,6 @@ importers:
     specifiers:
       '@ava/typescript': ^3.0.1
       ava: ^5.2.0
-      prettier: ~2.8.4
       tslib: ^2.5.0
       typescript: ^4.9.5
     dependencies:
@@ -217,7 +208,6 @@ importers:
     devDependencies:
       '@ava/typescript': 3.0.1
       ava: 5.2.0_@ava+typescript@3.0.1
-      prettier: 2.8.4
       typescript: 4.9.5
 
   packages/prerender:
@@ -233,7 +223,6 @@ importers:
       node-html-parser: ^5.4.2
       preact: ^10.13.0
       preact-render-to-string: ^5.2.2
-      prettier: ~2.8.4
       spherical-geometry-js: ^3.0.0
       tailwindcss: ^3.1.8
       tslib: ^2.5.0
@@ -257,7 +246,6 @@ importers:
       '@types/node': 16.18.14
       ava: 5.2.0_@ava+typescript@3.0.1
       preact: 10.13.0
-      prettier: 2.8.4
       tailwindcss: 3.1.8
       typescript: 4.9.5
 
@@ -269,7 +257,6 @@ importers:
       '@hawaii-bus-plus/utils': workspace:*
       '@js-temporal/polyfill': ^0.4.3
       ava: ^5.2.0
-      prettier: ~2.8.4
       spherical-geometry-js: ^3.0.0
       tslib: ^2.5.0
       type-fest: ^3.6.1
@@ -284,7 +271,6 @@ importers:
     devDependencies:
       '@ava/typescript': 3.0.1
       ava: 5.2.0_@ava+typescript@3.0.1
-      prettier: 2.8.4
       type-fest: 3.6.1
       typescript: 4.9.5
 
@@ -293,7 +279,6 @@ importers:
       '@ava/typescript': ^3.0.1
       '@types/node': ^16.18.14
       ava: ^5.2.0
-      prettier: ~2.8.4
       pseudo-worker: ^1.3.0
       tslib: ^2.5.0
       typescript: ^4.9.5
@@ -303,7 +288,6 @@ importers:
       '@ava/typescript': 3.0.1
       '@types/node': 16.18.14
       ava: 5.2.0_@ava+typescript@3.0.1
-      prettier: 2.8.4
       pseudo-worker: 1.3.0
       typescript: 4.9.5
 
@@ -314,7 +298,6 @@ importers:
       '@types/google.maps': ^3.50.0
       ava: ^5.2.0
       preact: ^10.13.0
-      prettier: ~2.8.4
       tslib: ^2.5.0
       typescript: ^4.9.5
     dependencies:
@@ -325,7 +308,6 @@ importers:
       '@types/google.maps': 3.50.0
       ava: 5.2.0_@ava+typescript@3.0.1
       preact: 10.13.0
-      prettier: 2.8.4
       typescript: 4.9.5
 
   packages/tailwind-theme:
@@ -343,7 +325,6 @@ importers:
       '@hawaii-bus-plus/utils': workspace:*
       '@js-temporal/polyfill': ^0.4.3
       ava: ^5.2.0
-      prettier: ~2.8.4
       tslib: ^2.5.0
       typescript: ^4.9.5
     dependencies:
@@ -354,7 +335,6 @@ importers:
     devDependencies:
       '@ava/typescript': 3.0.1
       ava: 5.2.0_@ava+typescript@3.0.1
-      prettier: 2.8.4
       typescript: 4.9.5
 
   packages/test-utils:
@@ -389,7 +369,6 @@ importers:
     specifiers:
       '@ava/typescript': ^3.0.1
       ava: ^5.2.0
-      prettier: ~2.8.4
       tslib: ^2.5.0
       typescript: ^4.9.5
     dependencies:
@@ -397,7 +376,6 @@ importers:
     devDependencies:
       '@ava/typescript': 3.0.1
       ava: 5.2.0_@ava+typescript@3.0.1
-      prettier: 2.8.4
       typescript: 4.9.5
 
   packages/vite-plugins:
@@ -407,7 +385,6 @@ importers:
       '@types/node': ^16.18.14
       '@types/surma__rollup-plugin-off-main-thread': ^2.2.0
       ava: ^5.2.0
-      prettier: ~2.8.4
       tslib: ^2.5.0
       typescript: ^4.9.5
       vite: ^4.1.4
@@ -419,7 +396,6 @@ importers:
       '@types/node': 16.18.14
       '@types/surma__rollup-plugin-off-main-thread': 2.2.0
       ava: 5.2.0_@ava+typescript@3.0.1
-      prettier: 2.8.4
       typescript: 4.9.5
       vite: 4.1.4_@types+node@16.18.14
 
@@ -435,7 +411,6 @@ importers:
       '@hawaii-bus-plus/utils': workspace:*
       '@js-temporal/polyfill': ^0.4.3
       '@types/google.maps': ^3.50.0
-      prettier: ~2.8.4
       spherical-geometry-js: ^3.0.0
       tslib: ^2.5.0
       typescript: ^4.9.5
@@ -455,7 +430,6 @@ importers:
     devDependencies:
       '@hawaii-bus-plus/test-utils': link:../test-utils
       '@types/google.maps': 3.50.0
-      prettier: 2.8.4
       typescript: 4.9.5
       vite: 4.1.4
       vitest: 0.29.2
