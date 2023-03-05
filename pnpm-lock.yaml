@@ -172,23 +172,6 @@ importers:
       prettier: 2.8.4
       typescript: 4.9.5
 
-  packages/gotrue:
-    specifiers:
-      '@ava/typescript': ^3.0.1
-      '@types/node': ^16.18.14
-      ava: ^5.2.0
-      tslib: ^2.5.0
-      typescript: ^4.9.5
-      undici: ^5.20.0
-    dependencies:
-      tslib: 2.5.0
-      undici: 5.20.0
-    devDependencies:
-      '@ava/typescript': 3.0.1
-      '@types/node': 16.18.14
-      ava: 5.2.0_@ava+typescript@3.0.1
-      typescript: 4.9.5
-
   packages/identity-email:
     specifiers:
       copyfiles: ^2.4.1
