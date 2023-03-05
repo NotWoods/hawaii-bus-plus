@@ -1,4 +1,4 @@
-import { RequestInit } from 'node-fetch';
+import { RequestInit } from 'undici';
 import { Admin } from './admin.js';
 import API, { JSONHTTPError } from './api/index.js';
 import { RequestMap, UserData, Token, UserRequest } from './api/interface.js';

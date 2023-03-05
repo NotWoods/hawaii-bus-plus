@@ -7,7 +7,7 @@ import { Link } from '../../../router/Router';
 
 interface Props {
   route: Route;
-  agency: Pick<Agency, 'agency_name' | 'primary'>;
+  agency: Pick<Agency, 'agency_short_name' | 'primary'>;
   class?: string;
   onClick?(evt: MouseEvent): void;
 }
@@ -29,7 +29,7 @@ export function RouteSearchResultItem(props: Props) {
         {route.route_long_name}
       </p>
       {agency.primary ? undefined : (
-        <p className="text-xs">{agency.agency_name}</p>
+        <p className="text-xs">{agency.agency_short_name}</p>
       )}
     </Link>
   );

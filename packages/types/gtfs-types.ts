@@ -168,6 +168,7 @@ export interface CsvAgency {
 }
 
 export interface Agency extends Readonly<CsvAgency> {
+  readonly agency_short_name: string;
   readonly primary: boolean;
 }
 

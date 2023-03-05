@@ -21,6 +21,7 @@ import {
   TripInflated,
 } from './parsers.js';
 import { zip } from './itertools.js';
+import { removeHiddenCharacters } from './stream.js';
 
 const STARTS_WITH_TIME = /^\d\d?:\d\d/;
 
@@ -30,18 +31,22 @@ function formatTime(time: Temporal.PlainTime) {
     .replace(/\s/g, '');
 }
 
-export async function zipFilesToObject(
-  zipFiles: ReadonlyMap<string, JSZipObject>,
-): Promise<Record<string, AsyncIterable<unknown>>> {
+export async function zipFilesToObject<Keys extends string>(
+  zipFiles: ReadonlyMap<Keys, JSZipObject>,
+): Promise<Record<Keys, AsyncIterable<unknown>>> {
   const arrays = await Promise.all(
     Array.from(zipFiles.values())
       .map((file) =>
-        file.nodeStream('nodebuffer').pipe(parse({ cast, columns: true })),
+        file
+          .nodeStream('nodebuffer')
+          .pipe(removeHiddenCharacters())
+          .pipe(parse({ cast, columns: true, trim: true })),
       )
       .map((parser): AsyncIterable<unknown> => parser),
   );
 
-  return Object.fromEntries(zip(zipFiles.keys(), arrays));
+  const entries = zip(zipFiles.keys(), arrays);
+  return Object.fromEntries(entries) as Record<Keys, AsyncIterable<unknown>>;
 }
 
 /**

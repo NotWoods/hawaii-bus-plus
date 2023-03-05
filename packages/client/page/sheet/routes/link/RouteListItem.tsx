@@ -7,7 +7,7 @@ import { Link } from '../../../router/Router';
 
 interface Props {
   route: Route;
-  agency: Pick<Agency, 'agency_name' | 'primary'>;
+  agency: Pick<Agency, 'agency_short_name' | 'primary'>;
   current: boolean;
   onClick?(evt: MouseEvent): void;
 }
@@ -29,7 +29,7 @@ export function RouteLinkVertical({ route, agency, current, onClick }: Props) {
         {route.route_short_name}
       </RouteIcon>
       <p className="mt-2 text-sm">{route.route_long_name}</p>
-      <p className="mt-auto text-xs text-right">{agency.agency_name}</p>
+      <p className="mt-auto text-xs text-right">{agency.agency_short_name}</p>
     </Link>
   );
 }

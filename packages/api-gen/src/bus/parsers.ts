@@ -74,6 +74,7 @@ export async function parseAgency(
     variable.agency[csvAgency.agency_id] = {
       ...csvAgency,
       primary,
+      agency_short_name: csvAgency.agency_name.replace(/\s\([\w\s']+\)/, ''),
     };
     primary = false;
   }
@@ -211,7 +212,12 @@ export async function parseStopTimes(
     };
 
     const stop = variable.stops[stopTime.stop_id];
-    const trip = trips.get(stopTime.trip_id)!;
+    const trip = trips.get(stopTime.trip_id);
+    if (!trip) {
+      throw new Error(
+        `Could not find trip ${stopTime.trip_id} in stop time with stop ${stopTime.stop_id}}`,
+      );
+    }
     const route = variable.routes[trip.route_id];
 
     trip.stop_times.push(stopTime);

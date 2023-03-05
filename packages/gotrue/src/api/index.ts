@@ -1,4 +1,4 @@
-import fetch, { Response, RequestInit } from 'node-fetch';
+import { fetch, Response, RequestInit } from 'undici';
 import { RequestMap } from './interface.js';
 import { getPagination, Pagination } from './pagination.js';
 

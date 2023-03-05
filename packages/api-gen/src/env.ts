@@ -1,6 +1,5 @@
-export const GTFS_ZIP_LOCATION = new URL(
-  '../../../google_transit.zip',
-  import.meta.url,
+export const GTFS_URL = new URL(
+  'http://www.heleonbus.org/transit-info-and-statistics/MTA_FEED4.zip',
 );
 
 export const GBFS_URL = new URL(

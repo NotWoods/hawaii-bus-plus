@@ -10,8 +10,8 @@
   "scripts": {
     "preapi:client": "pnpm run build",
     "preapi:dist": "pnpm run build",
-    "api:client": "node src/cli.js ../../google_transit.zip ../client/public/api/v1/",
-    "api:dist": "node src/cli.js ../../google_transit.zip ../../dist/functions/api/",
+    "api:client": "node src/cli.js http://www.heleonbus.org/transit-info-and-statistics/MTA_FEED4.zip ../client/public/api/v1/",
+    "api:dist": "node src/cli.js http://www.heleonbus.org/transit-info-and-statistics/MTA_FEED4.zip ../../dist/functions/api/",
     "build": "tsc --build src",
     "format": "prettier **/*.ts --write --ignore-path ../../.prettierignore",
     "postformat": "eslint \"**/*.ts\" --fix",
@@ -26,7 +26,8 @@
     "@js-temporal/polyfill": "^0.4.3",
     "csv-parse": "^5.3.6",
     "jszip": "^3.10.1",
-    "node-fetch": "^3.1.0",
+    "undici": "^5.20.0",
+    "ts-extras": "^0.11.0",
     "tslib": "^2.5.0"
   },
   "devDependencies": {
