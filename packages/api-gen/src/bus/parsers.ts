@@ -180,7 +180,7 @@ export async function parseCalendar(
     }
     const calendar: Calendar = {
       service_id: csvCalendar.service_id,
-      service_name: csvCalendar.service_name,
+      service_name: csvCalendar.service_name ?? csvCalendar.Package ?? '',
       start_date: csvCalendar.start_date,
       end_date: csvCalendar.end_date,
       days,

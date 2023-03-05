@@ -22,7 +22,8 @@ export interface GTFSData {
 
 export interface CsvCalendar {
   service_id: ServiceId;
-  service_name: string;
+  service_name?: string;
+  Package?: string;
   monday: boolean;
   tuesday: boolean;
   wednesday: boolean;
@@ -36,8 +37,9 @@ export interface CsvCalendar {
 
 export interface Calendar
   extends Readonly<
-    Pick<CsvCalendar, 'service_id' | 'service_name' | 'start_date' | 'end_date'>
+    Pick<CsvCalendar, 'service_id' | 'start_date' | 'end_date'>
   > {
+  readonly service_name: string;
   readonly days: readonly [
     monday: boolean,
     tuesday: boolean,
