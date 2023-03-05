@@ -47,6 +47,10 @@ jobs:
         with:
           deno-version: v1.x
 
+      - name: deno lint
+        run: deno lint
+        working-directory: ./packages/edge-functions/
+
       - name: deno test
         run: deno test
         working-directory: ./packages/edge-functions/

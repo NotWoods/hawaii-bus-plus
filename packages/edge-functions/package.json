@@ -6,7 +6,7 @@
   "main": "./src/index.js",
   "module": "./src/index.js",
   "scripts": {
-    "format": "prettier **/*.ts *.mjs --write --ignore-path ../../.prettierignore"
+    "format": "prettier **/*.ts --write --ignore-path ../../.prettierignore"
   },
   "dependencies": {},
   "devDependencies": {
@@ -18,11 +18,10 @@
     "test"
   ],
   "eslintConfig": {
-    "parserOptions": {
-      "project": [
-        "./packages/functions/*/tsconfig.json"
-      ]
-    }
+    "ignorePatterns": [
+      "src/**/*.ts",
+      "test/**/*.ts"
+    ]
   },
   "engines": {
     "node": ">=14"
