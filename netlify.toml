@@ -70,6 +70,64 @@ package = "@netlify/plugin-sitemap"
   status = 301
   force = true
 
+# Redirect from old custom Route IDs to new Hele-On IDs
+[[redirects]]
+  from = "/routes/hilo-kona/"
+  to = "/routes/1/"
+  status = 301
+[[redirects]]
+  from = "/routes/hilo-volcano/"
+  to = "/routes/10/"
+  status = 301
+[[redirects]]
+  from = "/routes/hilo-pahala/"
+  to = "/routes/40/"
+  status = 301
+[[redirects]]
+  from = "/routes/hilo-honokaa/"
+  to = "/routes/60/"
+  status = 301
+[[redirects]]
+  from = "/routes/kohala-resort/"
+  to = "/routes/70/"
+  status = 301
+[[redirects]]
+  from = "/routes/kohala-kona/"
+  to = "/routes/75/"
+  status = 301
+[[redirects]]
+  from = "/routes/hilo-resort/"
+  to = "/routes/80/"
+  status = 301
+[[redirects]]
+  from = "/routes/pahala-kona/"
+  to = "/routes/90/"
+  status = 301
+[[redirects]]
+  from = "/routes/hilo-keaukaha/"
+  to = "/routes/101/"
+  status = 301
+[[redirects]]
+  from = "/routes/hilo-kaumana/"
+  to = "/routes/102/"
+  status = 301
+[[redirects]]
+  from = "/routes/hilo-waikea/"
+  to = "/routes/103/"
+  status = 301
+[[redirects]]
+  from = "/routes/hilo-waimea/"
+  to = "/routes/105/"
+  status = 301
+[[redirects]]
+  from = "/routes/kona/"
+  to = "/routes/201/"
+  status = 301
+[[redirects]]
+  from = "/routes/waimea/"
+  to = "/routes/301/"
+  status = 301
+
 # The following redirects are intended for use with most SPAs that handle
 # routing internally.
 [[redirects]]
