@@ -3,7 +3,6 @@ module.exports = {
   globDirectory: '../../dist/',
   globPatterns: [
     'assets/**/*',
-    'auth/!(index).html',
     'icon/**/*',
     'share/routes/*.html',
     '404.html',

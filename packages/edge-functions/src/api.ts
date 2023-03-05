@@ -30,7 +30,6 @@ export default async function handler(request: Request, context: Context) {
   const apiData = await apiResponse.arrayBuffer();
 
   const matchETag = matchEntityTags(
-    // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
     request.headers.get('if-none-match') ||
       request.headers.get('x-if-none-match'),
   );

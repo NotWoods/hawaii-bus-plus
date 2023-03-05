@@ -1,59 +1,17 @@
-import { useEffect, useState } from 'preact/hooks';
 import { Logo } from '../../components/Logo';
-import { FEATURE_BILLING } from '../../services/env';
-
-function checkLoggedIn() {
-  if (FEATURE_BILLING) {
-    return fetch('https://app.hawaiibusplus.com/.netlify/functions/userdata', {
-      credentials: 'include',
-    }).then(
-      (res) => res.ok,
-      () => false,
-    );
-  } else {
-    return Promise.resolve(true);
-  }
-}
-
-export function dynamicLoginButton() {
-  return checkLoggedIn().then((loggedIn) => {
-    if (loggedIn) {
-      const hide: HTMLElement = document.querySelector('#login')!;
-      hide.hidden = true;
-
-      const button: HTMLAnchorElement = document.querySelector('#openApp')!;
-      button.href = '/';
-      button.textContent = 'Open app';
-    }
-  });
-}
 
 export function PageHeader() {
-  const [loggedIn, setLoggedIn] = useState(!FEATURE_BILLING);
-  useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
-    checkLoggedIn().then(setLoggedIn);
-  }, []);
-
   return (
     <header class="flex pt-6 max-w-5xl items-center mx-auto">
       <a href="https://hawaiibusplus.com" class="mr-auto">
         <Logo />
       </a>
       <a
-        id="login"
-        class="shadow motion-safe:transition-colors text-white border bg-black bg-opacity-0 hover:bg-opacity-20 px-4 py-2"
-        href="/auth/login"
-        hidden={loggedIn}
-      >
-        Login
-      </a>
-      <a
         id="openApp"
         class="shadow motion-safe:transition-colors text-black bg-white hover:bg-gray-200 px-4 py-2 ml-2"
-        href={loggedIn ? '/' : '/auth/register'}
+        href="/"
       >
-        {loggedIn ? 'Open app' : 'Create account'}
+        Open app
       </a>
     </header>
   );

@@ -2,9 +2,8 @@
 const config = {
   content: [
     './index.html',
-    './auth/index.html',
+    './404.html',
     './page/**/*.tsx',
-    './auth/**/*.tsx',
     './share/**/*.tsx',
     './assets/**/*.tsx',
     './components/**/*.tsx',

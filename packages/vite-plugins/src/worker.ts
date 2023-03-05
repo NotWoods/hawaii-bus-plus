@@ -1,6 +1,6 @@
 import type { Plugin } from 'vite';
-import { URLSearchParams } from 'url';
-import { basename } from 'path';
+import { URLSearchParams } from 'node:url';
+import { basename } from 'node:path';
 
 function parseWorkerRequest(id: string): [string, URLSearchParams] {
   const [path, query = ''] = id.split('?');

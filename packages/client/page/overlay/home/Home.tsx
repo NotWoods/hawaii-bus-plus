@@ -12,8 +12,7 @@ import { SearchBarButton } from '../search/SearchBar';
 import { emptyClosestResults } from '../search/simple/places-autocomplete';
 import { NearbyRoutes } from '../stop/NearbyRoutes';
 import { Greeting } from './Greeting';
-import { HomeErrorButtons } from './HomeButtons';
-import { HomeButtonsError, isHomeButtonsError, useHomeLocation } from './hooks';
+import { useHomeLocation } from './hooks';
 
 interface Props {
   onSearch?(): void;
@@ -21,7 +20,6 @@ interface Props {
 
 export function Home(props: Props) {
   const [results, setResults] = useState<ClosestResults | undefined>();
-  const [error, setError] = useState<HomeButtonsError | undefined>();
   const location = useHomeLocation();
   const delayDone = useDelay(500, [location?.lat, location?.lng]);
 
@@ -31,11 +29,7 @@ export function Home(props: Props) {
       try {
         await dbInitialized;
       } catch (err: unknown) {
-        if (isHomeButtonsError(err)) {
-          setError(err);
-        } else {
-          console.error(err);
-        }
+        console.error(err);
         return;
       }
 
@@ -50,9 +44,7 @@ export function Home(props: Props) {
   );
 
   let content: ComponentChildren;
-  if (error) {
-    content = <HomeErrorButtons error={error} />;
-  } else if (delayDone && !results) {
+  if (delayDone && !results) {
     content = <LoadingBusIcon />;
   } else {
     const { routes, agencies } = results ?? emptyClosestResults;

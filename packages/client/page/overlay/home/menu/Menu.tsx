@@ -1,6 +1,5 @@
 import { useEffect, useRef } from 'preact/hooks';
-import { feedback, logout, payments } from '../../../../assets/icons/paths';
-import { FEATURE_BILLING } from '../../../../services/env';
+import { feedback, logout } from '../../../../assets/icons/paths';
 import { MenuOption } from './MenuOption';
 
 interface Props {
@@ -51,11 +50,6 @@ export function Menu(props: Props) {
         }
       }}
     >
-      {FEATURE_BILLING && (
-        <MenuOption href="/.netlify/functions/billing" icon={payments}>
-          Billing
-        </MenuOption>
-      )}
       <MenuOption href="mailto:feedback@hawaiibusplus.com" icon={feedback}>
         Feedback
       </MenuOption>

@@ -1,5 +1,5 @@
 // @ts-check
-import { readFile } from 'fs/promises';
+import { readFile } from 'node:fs/promises';
 import { defineConfig } from 'vite';
 import { emptyPackage, injectHtml } from '@hawaii-bus-plus/vite-plugins';
 import prefresh from '@prefresh/vite';
@@ -21,7 +21,7 @@ export default defineConfig(({ command, ssrBuild }) => {
         head: readFile(headHtmlIncludeFile, 'utf-8'),
       }),
       prefresh({
-        include: ['{auth,page,share,assets,components}/**/*'],
+        include: ['{page,share,assets,components}/**/*'],
         exclude: ['worker-*/**'],
       }),
     ].filter(Boolean),
@@ -50,7 +50,7 @@ export default defineConfig(({ command, ssrBuild }) => {
         },
         input: {
           main: './index.html',
-          auth: './auth/index.html',
+          404: './404.html',
           share: './share/index.html',
         },
         output: {
@@ -62,7 +62,7 @@ export default defineConfig(({ command, ssrBuild }) => {
       external: [
         'preact',
         'tailwindcss',
-        'fs/promises',
+        'node:fs/promises',
         '@notwoods/preact-helmet',
       ],
       noExternal: ['clsx'],
@@ -92,7 +92,6 @@ export default defineConfig(({ command, ssrBuild }) => {
           ...baseConfig.build.rollupOptions,
           input: {
             main: './page/entry-server.tsx',
-            auth: './auth/entry-server.tsx',
             share: './share/entry-server.tsx',
           },
         },
