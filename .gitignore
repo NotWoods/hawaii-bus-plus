@@ -11,3 +11,6 @@ dist-ssr
 
 !missing-types.d.ts
 .env
+
+# Local Netlify folder
+.netlify
