@@ -16,7 +16,7 @@ function getReferrer(event: NetlifyEvent) {
  */
 export const handler = createHandler('GET', async (event, context) => {
   const referrer = getReferrer(event);
-  if (!referrer || !referrer.host.endsWith('hawaiibusplus.com')) {
+  if (!referrer?.host.endsWith('hawaiibusplus.com')) {
     throw new TextHTTPError(
       { status: 403, statusText: 'Forbidden' },
       'Must log in on https://hawaiibusplus.com',

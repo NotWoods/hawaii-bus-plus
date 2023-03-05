@@ -4,7 +4,7 @@ const config = {
   root: true,
   parser: '@typescript-eslint/parser',
   parserOptions: {
-    // @ts-ignore
+    // @ts-expect-error nodejs types haven't been loaded in here
     tsconfigRootDir: __dirname,
     extraFileExtensions: ['.cjs', '.mjs'],
   },
@@ -165,6 +165,7 @@ const config = {
         ],
         '@typescript-eslint/no-unnecessary-boolean-literal-compare': 'error',
         '@typescript-eslint/no-unsafe-assignment': 'off',
+        '@typescript-eslint/no-unsafe-argument': 'warn',
         '@typescript-eslint/no-unsafe-call': 'warn',
         '@typescript-eslint/no-unsafe-member-access': 'warn',
         '@typescript-eslint/no-unsafe-return': 'warn',
@@ -173,6 +174,7 @@ const config = {
         '@typescript-eslint/prefer-nullish-coalescing': 'error',
         '@typescript-eslint/prefer-readonly': 'error',
         '@typescript-eslint/prefer-string-starts-ends-with': 'error',
+        '@typescript-eslint/restrict-template-expressions': 'off',
         '@typescript-eslint/unbound-method': 'off',
       },
     },
