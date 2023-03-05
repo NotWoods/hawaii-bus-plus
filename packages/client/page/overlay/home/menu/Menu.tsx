@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'preact/hooks';
 import { feedback, logout, payments } from '../../../../assets/icons/paths';
 import { FEATURE_BILLING } from '../../../../services/env';
 import { MenuOption } from './MenuOption';
@@ -12,12 +13,18 @@ function Divider() {
 }
 
 export function Menu(props: Props) {
+  const navRef = useRef<HTMLElement>(null);
+  useEffect(() => {
+    navRef.current?.querySelector<HTMLElement>('button, a')?.focus();
+  }, []);
+
   return (
     <nav
       class="fixed origin-top-right left-0 top-12 m-2 w-56 shadow-lg bg-primary-600 text-white ring-1 ring-black ring-opacity-50 z-10"
       role="menu"
       aria-orientation="vertical"
       aria-labelledby={props.labelledBy}
+      ref={navRef}
       onKeyDown={function trapFocus(event) {
         if (event.key === 'Tab') {
           const focusableElements =

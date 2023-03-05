@@ -8,16 +8,21 @@ import { Link } from '../../../router/Router';
 interface Props {
   route: Route;
   agency: Pick<Agency, 'agency_name' | 'primary'>;
+  current: boolean;
   onClick?(evt: MouseEvent): void;
 }
 
-export function RouteLinkVertical(props: Props) {
-  const { route, agency } = props;
+/**
+ * Displays a card representing a route.
+ * Shows a icon with route number, followed by route name and agency name.
+ */
+export function RouteLinkVertical({ route, agency, current, onClick }: Props) {
   return (
     <Link
       href={`/routes/${route.route_id}/`}
       class="flex flex-col snap-start w-32 shadow hover:shadow-lg p-2 h-full motion-safe:transition bg-primary-50 hover:bg-primary-100 dark:bg-primary-600 dark:hover:bg-primary-500 text-gray-800 dark:text-white"
-      onClick={props.onClick}
+      aria-current={current ? 'page' : undefined}
+      onClick={onClick}
       action={setRouteAction(route.route_id)}
     >
       <RouteIcon style={colorVariables(route)}>

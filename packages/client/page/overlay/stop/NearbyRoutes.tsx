@@ -3,6 +3,8 @@ import clsx from 'clsx';
 
 import { useScreens } from '../../hooks';
 import { useListKeyboardNav } from '../../hooks/useListKeyboardNav';
+import { useSelector } from '../../router/hooks';
+import { selectOpenRoute } from '../../router/selector/main';
 import { RouteLinkVertical } from '../../sheet/routes/link/RouteListItem';
 
 interface Props {
@@ -12,7 +14,11 @@ interface Props {
   class?: string;
 }
 
+/**
+ * Displays a list of nearby routes, as determined by the `routes array.
+ */
 export function NearbyRoutes(props: Props) {
+  const { routeId } = useSelector(selectOpenRoute);
   const twoColumns = useScreens('md');
 
   const handleArrowKey = useListKeyboardNav(
@@ -51,6 +57,7 @@ export function NearbyRoutes(props: Props) {
         <li key={route.route_id}>
           <RouteLinkVertical
             route={route}
+            current={route.route_id === routeId}
             agency={props.agencies.get(route.agency_id)!}
           />
         </li>

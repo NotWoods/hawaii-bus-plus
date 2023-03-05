@@ -22,7 +22,10 @@ import { RouteDetailsCard } from './RouteDetails';
 import { StopTimeSegmentList } from './stop-time/StopTimeSegmentList';
 
 interface Props {
-  routeDetails: RouteDetails;
+  routeDetails: Pick<
+    RouteDetails,
+    'route' | 'agency' | 'descParts' | 'directions'
+  >;
   tripDate: Temporal.PlainDate | NOW;
   onChangeTripDate(time: Temporal.PlainDate): void;
 }
@@ -61,11 +64,9 @@ export function Timetable({ routeDetails, tripDate, onChangeTripDate }: Props) {
   const { directionId, selectedTrip } = useSelector(selectLoadedDetails);
   const tripInfoLoading = useDelay(500, [tripId]);
 
-  const directionsDetails = routeDetails.directions;
+  const { route, agency, directions: directionsDetails } = routeDetails;
   const directionDetails = directionsDetails[directionId];
   const selectedTripId = tripId ?? directionDetails.closestTrip.trip.trip_id;
-
-  const { route, agency } = routeDetails;
 
   return (
     <>

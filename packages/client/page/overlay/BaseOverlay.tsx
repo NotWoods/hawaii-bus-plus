@@ -1,7 +1,6 @@
 import clsx from 'clsx';
 import type { ComponentChildren, JSX } from 'preact';
 import { useEffect } from 'preact/hooks';
-import type { Merge } from 'type-fest';
 import { UpIcon } from '../../assets/icons/MenuIcon';
 import { IconButton } from '../../components/Button/IconButton';
 import { useLoadGoogleMaps } from '../hooks/useLoadGoogleMaps';
@@ -25,12 +24,9 @@ interface Props {
   /**
    * Slot for the navigation button in the app bar.
    */
-  navigation?: Merge<
-    Pick<JSX.HTMLAttributes<HTMLButtonElement>, 'onClick' | 'class' | 'style'>,
-    {
-      icon?: ComponentChildren;
-    }
-  >;
+  navigation?: Omit<JSX.HTMLAttributes<HTMLButtonElement>, 'icon'> & {
+    icon?: ComponentChildren;
+  };
   /**
    * Click handler for the navigation button.
    */

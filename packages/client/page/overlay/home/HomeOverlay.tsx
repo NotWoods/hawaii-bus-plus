@@ -1,4 +1,4 @@
-import { useState } from 'preact/hooks';
+import { useCallback, useRef, useState } from 'preact/hooks';
 import { MenuIcon } from '../../../assets/icons/MenuIcon';
 import { Logo } from '../../../components/Logo';
 import { useLazyComponent, useToggle } from '../../hooks';
@@ -10,11 +10,17 @@ import { Home } from './Home';
 const lazyMenu = import('./menu/Menu');
 
 export function HomeOverlay() {
-  const [menuOpen, { toggle: toggleMenu, setFalse: dismissMenu }] = useToggle();
+  const [menuOpen, { toggle: toggleMenu, setFalse: closeMenu }] = useToggle();
   const [screen, setScreen] = useState<'home' | 'search' | 'directions'>(
     'home',
   );
   const { Menu } = useLazyComponent(() => lazyMenu);
+
+  const iconRef = useRef<HTMLButtonElement>(null);
+  const dismissMenu = useCallback(() => {
+    iconRef.current?.focus();
+    closeMenu();
+  }, [closeMenu]);
 
   switch (screen) {
     case 'home':
@@ -27,7 +33,9 @@ export function HomeOverlay() {
           }
           navigation={{
             icon: <MenuIcon open={menuOpen} />,
+            'aria-expanded': menuOpen,
             onClick: toggleMenu,
+            ref: iconRef,
           }}
         >
           {menuOpen && Menu ? (
