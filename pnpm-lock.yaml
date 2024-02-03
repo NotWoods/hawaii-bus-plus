@@ -533,6 +533,9 @@ importers:
       spherical-geometry-js:
         specifier: ^3.0.0
         version: 3.0.0
+      ts-extras:
+        specifier: ^0.11.0
+        version: 0.11.0
       tslib:
         specifier: ^2.5.0
         version: 2.5.0

@@ -5,8 +5,8 @@ import {
 } from '@hawaii-bus-plus/presentation';
 import { PlainDaysTime } from '@hawaii-bus-plus/temporal-utils';
 import { Route, Stop, StopTime, TimeString } from '@hawaii-bus-plus/types';
-import { notNull } from '@hawaii-bus-plus/utils';
 import { Temporal } from '@js-temporal/polyfill';
+import { isDefined } from 'ts-extras';
 
 export interface ZonedTimeOptions {
   serviceDate: Temporal.PlainDate;
@@ -40,7 +40,7 @@ export function formatStopTime(
     routes: stop.routes
       .filter((id) => id !== options.routeId)
       .map((routeId) => options.routes.get(routeId))
-      .filter(notNull),
+      .filter(isDefined),
     arrivalTime: zonedTime(stopTime.arrival_time, options),
     departureTime: zonedTime(stopTime.departure_time, options),
     timepoint: stopTime.timepoint,

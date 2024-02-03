@@ -2,7 +2,7 @@ import { Repository } from '@hawaii-bus-plus/data';
 import { Point } from '@hawaii-bus-plus/presentation';
 import { PlainDaysTime } from '@hawaii-bus-plus/temporal-utils';
 import { Stop } from '@hawaii-bus-plus/types';
-import { notNull } from '@hawaii-bus-plus/utils';
+import { isDefined } from 'ts-extras';
 import { Temporal } from '@js-temporal/polyfill';
 import { findClosestStops } from '../nearby/closest/closest-stops';
 import { Journey, journeyToDirections } from './format';
@@ -109,7 +109,7 @@ export async function directions(
   );
 
   return {
-    journeys: journeys.filter(notNull),
+    journeys: journeys.filter(isDefined),
     depatureTime: departureTime.toString(),
     tomorrow: departureTime
       .add({ days: 1 })
