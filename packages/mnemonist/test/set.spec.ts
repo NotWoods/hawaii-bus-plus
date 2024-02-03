@@ -1,16 +1,16 @@
-import test from 'ava';
+import { test, expect } from 'vitest';
 import * as functions from '../src/set.js';
 
-test('should properly compute the intersection of two sets.', (t) => {
+test('should properly compute the intersection of two sets.', () => {
   const A = new Set([1, 2, 3]),
     B = new Set([2, 3, 4]);
 
   const I = functions.intersection(A, B);
 
-  t.deepEqual(Array.from(I), [2, 3]);
+  expect(Array.from(I)).toEqual([2, 3]);
 });
 
-test('intersection should be variadic.', (t) => {
+test('intersection should be variadic.', () => {
   const A = new Set([1, 2, 3, 4]),
     B = new Set([2, 3, 4]),
     C = new Set([1, 4]),
@@ -18,19 +18,19 @@ test('intersection should be variadic.', (t) => {
 
   const I = functions.intersection(A, B, C, D);
 
-  t.deepEqual(Array.from(I), [4]);
+  expect(Array.from(I)).toEqual([4]);
 });
 
-test('should properly compute the union of two sets.', (t) => {
+test('should properly compute the union of two sets.', () => {
   const A = new Set([1, 2, 3]),
     B = new Set([2, 3, 4]);
 
   const U = functions.union(A, B);
 
-  t.deepEqual(Array.from(U), [1, 2, 3, 4]);
+  expect(Array.from(U)).toEqual([1, 2, 3, 4]);
 });
 
-test('union should be variadic.', (t) => {
+test('union should be variadic.', () => {
   const A = new Set([1, 2, 3, 4]),
     B = new Set([2, 3, 4]),
     C = new Set([1, 4]),
@@ -38,117 +38,117 @@ test('union should be variadic.', (t) => {
 
   const U = functions.union(A, B, C, D);
 
-  t.deepEqual(Array.from(U), [1, 2, 3, 4, 5, 6]);
+  expect(Array.from(U)).toEqual([1, 2, 3, 4, 5, 6]);
 });
 
-test('should properly compute the difference of two sets.', (t) => {
+test('should properly compute the difference of two sets.', () => {
   const A = new Set([1, 2, 3, 4, 5]),
     B = new Set([2, 3]);
 
   const D = functions.difference(A, B);
 
-  t.deepEqual(Array.from(D), [1, 4, 5]);
+  expect(Array.from(D)).toEqual([1, 4, 5]);
 });
 
-test('should properly compute the symmetric difference of two sets.', (t) => {
+test('should properly compute the symmetric difference of two sets.', () => {
   const A = new Set([1, 2, 3]),
     B = new Set([3, 4, 5]);
 
   const S = functions.symmetricDifference(A, B);
 
-  t.deepEqual(Array.from(S), [1, 2, 4, 5]);
+  expect(Array.from(S)).toEqual([1, 2, 4, 5]);
 });
 
-test('isSubset should properly return if the first set is a subset of the second.', (t) => {
+test('isSubset should properly return if the first set is a subset of the second.', () => {
   const A = new Set([1, 2]),
     B = new Set([1, 2, 3]),
     C = new Set([2, 4]);
 
-  t.is(functions.isSubset(A, B), true);
-  t.is(functions.isSubset(C, B), false);
+  expect(functions.isSubset(A, B)).toBe(true);
+  expect(functions.isSubset(C, B)).toBe(false);
 });
 
-test('isSuperset should properly return if the first set is a subset of the second.', (t) => {
+test('isSuperset should properly return if the first set is a subset of the second.', () => {
   const A = new Set([1, 2]),
     B = new Set([1, 2, 3]),
     C = new Set([2, 4]);
 
-  t.is(functions.isSuperset(B, A), true);
-  t.is(functions.isSuperset(B, C), false);
+  expect(functions.isSuperset(B, A)).toBe(true);
+  expect(functions.isSuperset(B, C)).toBe(false);
 });
 
-test('should properly add the second set to the first.', (t) => {
+test('should properly add the second set to the first.', () => {
   const A = new Set([1, 2]);
 
   functions.add(A, new Set([2, 3]));
 
-  t.deepEqual(Array.from(A), [1, 2, 3]);
+  expect(Array.from(A)).toEqual([1, 2, 3]);
 });
 
-test('should properly subtract the second set to the first.', (t) => {
+test('should properly subtract the second set to the first.', () => {
   const A = new Set([1, 2]);
 
   functions.subtract(A, new Set([2, 3]));
 
-  t.deepEqual(Array.from(A), [1]);
+  expect(Array.from(A)).toEqual([1]);
 });
 
-test('should properly intersect the second set to the first.', (t) => {
+test('should properly intersect the second set to the first.', () => {
   const A = new Set([1, 2]);
 
   functions.intersect(A, new Set([2, 3]));
 
-  t.deepEqual(Array.from(A), [2]);
+  expect(Array.from(A)).toEqual([2]);
 });
 
-test('should properly disjunct the second set to the first.', (t) => {
+test('should properly disjunct the second set to the first.', () => {
   const A = new Set([1, 2]);
 
   functions.disjunct(A, new Set([2, 3]));
 
-  t.deepEqual(Array.from(A), [1, 3]);
+  expect(Array.from(A)).toEqual([1, 3]);
 });
 
-test('should properly return the size of the intersection.', (t) => {
+test('should properly return the size of the intersection.', () => {
   const A = new Set([1, 2, 3]),
     B = new Set([2, 3, 4]);
 
   const N = new Set([]);
 
-  t.is(functions.intersectionSize(A, B), 2);
-  t.is(functions.intersectionSize(A, N), 0);
+  expect(functions.intersectionSize(A, B)).toBe(2);
+  expect(functions.intersectionSize(A, N)).toBe(0);
 });
 
-test('should properly return the size of the union.', (t) => {
+test('should properly return the size of the union.', () => {
   const A = new Set([1, 2, 3]),
     B = new Set([2, 3, 4]);
 
   const N = new Set([]);
 
-  t.is(functions.unionSize(A, B), 4);
-  t.is(functions.unionSize(A, N), 3);
+  expect(functions.unionSize(A, B)).toBe(4);
+  expect(functions.unionSize(A, N)).toBe(3);
 });
 
-test('should properly return the Jaccard similarity between two sets.', (t) => {
+test('should properly return the Jaccard similarity between two sets.', () => {
   const A = new Set([1, 2, 3]),
     B = new Set([2, 3, 4]);
 
   const N = new Set([]);
 
-  t.is(functions.jaccard(A, B), 2 / 4);
-  t.is(functions.jaccard(A, N), 0);
+  expect(functions.jaccard(A, B)).toBe(2 / 4);
+  expect(functions.jaccard(A, N)).toBe(0);
 
-  t.is(functions.jaccard(new Set('contact'), new Set('context')), 4 / 7);
+  expect(functions.jaccard(new Set('contact'), new Set('context'))).toBe(4 / 7);
 });
 
-test('should properly return the overlap coefficient between two sets.', (t) => {
+test('should properly return the overlap coefficient between two sets.', () => {
   const A = new Set([1, 2, 3]),
     B = new Set([2, 3, 4]);
 
   const N = new Set([]);
 
-  t.is(functions.overlap(A, B), 2 / 3);
-  t.is(functions.overlap(A, N), 0);
+  expect(functions.overlap(A, B)).toBe(2 / 3);
+  expect(functions.overlap(A, N)).toBe(0);
 
-  t.is(functions.overlap(new Set('contact'), new Set('context')), 4 / 5);
+  expect(functions.overlap(new Set('contact'), new Set('context'))).toBe(4 / 5);
 });
