@@ -371,21 +371,15 @@ importers:
         specifier: ^2.5.0
         version: 2.5.0
     devDependencies:
-      '@ava/typescript':
-        specifier: ^3.0.1
-        version: 3.0.1
       '@types/google.maps':
         specifier: ^3.50.0
         version: 3.50.0
-      ava:
-        specifier: ^5.2.0
-        version: 5.2.0(@ava/typescript@3.0.1)
       preact:
         specifier: ^10.13.0
         version: 10.13.0
       typescript:
-        specifier: ^4.9.5
-        version: 4.9.5
+        specifier: ^5.3.3
+        version: 5.3.3
 
   packages/tailwind-theme:
     devDependencies:
@@ -411,15 +405,12 @@ importers:
         specifier: ^2.5.0
         version: 2.5.0
     devDependencies:
-      '@ava/typescript':
-        specifier: ^3.0.1
-        version: 3.0.1
-      ava:
-        specifier: ^5.2.0
-        version: 5.2.0(@ava/typescript@3.0.1)
       typescript:
-        specifier: ^4.9.5
-        version: 4.9.5
+        specifier: ^5.3.3
+        version: 5.3.3
+      vitest:
+        specifier: ^1.2.2
+        version: 1.2.2(@types/node@20.11.16)
 
   packages/test-utils:
     dependencies:
@@ -462,15 +453,12 @@ importers:
         specifier: ^2.5.0
         version: 2.5.0
     devDependencies:
-      '@ava/typescript':
-        specifier: ^3.0.1
-        version: 3.0.1
-      ava:
-        specifier: ^5.2.0
-        version: 5.2.0(@ava/typescript@3.0.1)
       typescript:
-        specifier: ^4.9.5
-        version: 4.9.5
+        specifier: ^5.3.3
+        version: 5.3.3
+      vitest:
+        specifier: ^1.2.2
+        version: 1.2.2(@types/node@20.11.16)
 
   packages/vite-plugins:
     dependencies:

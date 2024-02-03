@@ -1,7 +1,7 @@
-import test from 'ava';
+import { test, expect } from 'vitest';
 import { toInt } from '../src/num.js';
 
-test('toInt', (t) => {
-  t.is(toInt(10), 10);
-  t.is(toInt('10'), 10);
+test('toInt', () => {
+  expect(toInt(10)).toBe(10);
+  expect(toInt('10')).toBe(10);
 });
