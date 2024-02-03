@@ -3,8 +3,8 @@
   "include": ["**/*"],
   "references": [{ "path": "../src" }],
   "compilerOptions": {
-    "target": "es2020",
-    "types": ["node"],
+    "noEmit": true,
+    "module": "nodenext",
     "moduleResolution": "nodenext"
   }
 }

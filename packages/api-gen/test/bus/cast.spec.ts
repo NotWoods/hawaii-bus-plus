@@ -1,4 +1,4 @@
-import test from 'ava';
+import { expect, test } from 'vitest';
 import { readFile } from 'node:fs/promises';
 import { CastingContext, parse } from 'csv-parse';
 import JSZip from 'jszip';
@@ -28,55 +28,52 @@ async function* loadZipFile(
 
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 
-test('cast float', async (t) => {
+test('cast float', async () => {
   for await (const row of loadZipFile('stops.txt')) {
-    t.is(typeof row.stop_id, 'string');
-    t.is(typeof row.stop_lat, 'number');
-    t.is(typeof row.stop_lon, 'number');
+    expect(row.stop_id).toBeTypeOf('string');
+    expect(row.stop_lat).toBeTypeOf('number');
+    expect(row.stop_lon).toBeTypeOf('number');
   }
 });
 
-test('cast int', async (t) => {
+test('cast int', async () => {
   for await (const row of loadZipFile('fare_attributes.txt')) {
-    t.is(typeof row.fare_id, 'string');
-    t.is(typeof row.payment_method, 'number');
-    t.is(typeof row.transfers, 'number');
+    expect(row.fare_id).toBeTypeOf('string');
+    expect(row.payment_method).toBeTypeOf('number');
+    expect(row.transfers).toBeTypeOf('number');
   }
 });
 
-test('cast bool and date', async (t) => {
+test('cast bool and date', async () => {
   for await (const row of loadZipFile('calendar.txt')) {
-    t.is(typeof row.service_id, 'string');
-    t.is(typeof row.monday, 'boolean');
-    t.is(typeof row.tuesday, 'boolean');
-    t.is(typeof row.wednesday, 'boolean');
-    t.is(typeof row.thursday, 'boolean');
-    t.is(typeof row.friday, 'boolean');
-    t.is(typeof row.saturday, 'boolean');
-    t.is(typeof row.sunday, 'boolean');
+    expect(row.service_id).toBeTypeOf('string');
+    expect(row.monday).toBeTypeOf('boolean');
+    expect(row.tuesday).toBeTypeOf('boolean');
+    expect(row.wednesday).toBeTypeOf('boolean');
+    expect(row.thursday).toBeTypeOf('boolean');
+    expect(row.friday).toBeTypeOf('boolean');
+    expect(row.saturday).toBeTypeOf('boolean');
+    expect(row.sunday).toBeTypeOf('boolean');
 
     const startDate = row.start_date as string;
     const date = startDate.split('-');
-    t.is(date.length, 3);
+    expect(date).toHaveLength(3);
     const [, month, day] = date;
-    t.is(month.length, 2);
-    t.is(day.length, 2);
+    expect(month).toHaveLength(2);
+    expect(day).toHaveLength(2);
   }
 });
 
-test('cast route long name to format title case', (t) => {
+test('cast route long name to format title case', () => {
   const mockContext = (column: string) => ({ column } as CastingContext);
 
-  t.is(
-    cast('HILO / OCEAN VIEW', mockContext('route_long_name')),
+  expect(cast('HILO / OCEAN VIEW', mockContext('route_long_name'))).toBe(
     'Hilo / Ocean View',
   );
-  t.is(
-    cast('GREENLINE HONOKAA', mockContext('route_long_name')),
+  expect(cast('GREENLINE HONOKAA', mockContext('route_long_name'))).toBe(
     'Green Line: Honokaa',
   );
-  t.is(
-    cast('Weird formatting', mockContext('route_long_name')),
+  expect(cast('Weird formatting', mockContext('route_long_name'))).toBe(
     'Weird formatting',
   );
 });

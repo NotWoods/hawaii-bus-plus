@@ -4,6 +4,7 @@
   "references": [{ "path": "../src" }],
   "compilerOptions": {
     "types": [],
+    "module": "nodenext",
     "moduleResolution": "nodenext"
   }
 }
