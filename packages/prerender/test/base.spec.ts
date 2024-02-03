@@ -1,10 +1,9 @@
-import test from 'ava';
+import { expect, test } from 'ava';
 import { join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { distFolder, renderRoutes } from '../src/base.js';
 
-// eslint-disable-next-line ava/no-skip-test
-test.serial.skip('render auth routes', async (t) => {
+test.serial.skip('render auth routes', async () => {
   let rendered: { fileName: string; source: string }[];
   try {
     rendered = await renderRoutes({
@@ -15,11 +14,11 @@ test.serial.skip('render auth routes', async (t) => {
     });
   } catch (err: unknown) {
     // Workaround for race condition in GitHub Actions
-    t.is((err as { code?: unknown }).code, 'ERR_MODULE_NOT_FOUND');
+    expect((err as { code?: unknown }).code).toBe('ERR_MODULE_NOT_FOUND');
     return;
   }
 
-  t.is(rendered.length, 2);
+  expect(rendered).toHaveLength(2);
   const [login, register] = rendered;
 
   function normalizePath(path: string) {
@@ -28,9 +27,9 @@ test.serial.skip('render auth routes', async (t) => {
     return relative(relativeTo, absPath);
   }
 
-  t.is(normalizePath(login.fileName), join('auth', 'login.html'));
-  t.is(normalizePath(register.fileName), join('auth', 'register.html'));
+  expect(normalizePath(login.fileName)).toBe(join('auth', 'login.html'));
+  expect(normalizePath(register.fileName)).toBe(join('auth', 'register.html'));
 
-  t.true(login.source.includes('Login'), 'Login');
-  t.true(register.source.includes('Register'), 'Register');
+  expect(login.source).toContain('Login');
+  expect(register.source).toContain('Register');
 });
