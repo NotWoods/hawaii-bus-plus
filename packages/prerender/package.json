@@ -17,7 +17,7 @@
     "@notwoods/preact-helmet": "^6.1.0",
     "idb": "^7.0.2",
     "just-debounce": "^1.1.0",
-    "node-html-parser": "^5.4.2",
+    "node-html-parser": "^6.1.12",
     "preact-render-to-string": "^5.2.2",
     "spherical-geometry-js": "^3.0.0",
     "tslib": "^2.5.0",

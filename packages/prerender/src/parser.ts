@@ -1,6 +1,6 @@
-import parser from 'node-html-parser';
+import parser, { type Options, type HTMLElement } from 'node-html-parser';
 
-let parse: typeof parser;
+let parse: (data: string, options?: Partial<Options>) => HTMLElement;
 if (typeof parser === 'function') {
   parse = parser;
 } else {
