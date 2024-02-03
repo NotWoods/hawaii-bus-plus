@@ -26,15 +26,18 @@ interface StopInfoMessage extends BaseMessageRequest {
 type Message = RouteInfoMessage | TripInfoMessage | StopInfoMessage;
 
 export interface InfoWorkerHandler {
-  (signal: AbortSignal, message: RouteInfoMessage): Promise<
-    RouteDetails | undefined
-  >;
-  (signal: AbortSignal, message: TripInfoMessage): Promise<
-    TripDetails | undefined
-  >;
-  (signal: AbortSignal, message: StopInfoMessage): Promise<
-    StopDetails | undefined
-  >;
+  (
+    signal: AbortSignal,
+    message: RouteInfoMessage,
+  ): Promise<RouteDetails | undefined>;
+  (
+    signal: AbortSignal,
+    message: TripInfoMessage,
+  ): Promise<TripDetails | undefined>;
+  (
+    signal: AbortSignal,
+    message: StopInfoMessage,
+  ): Promise<StopDetails | undefined>;
 }
 
 function extractDate(message: {

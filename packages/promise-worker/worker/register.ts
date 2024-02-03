@@ -1,6 +1,4 @@
-export function registerPromiseWorker(
-  callback: (message: any) => Promise<unknown> | unknown,
-) {
+export function registerPromiseWorker(callback: (message: any) => unknown) {
   function postOutgoingMessage(
     messageId: number,
     error: Error | undefined,

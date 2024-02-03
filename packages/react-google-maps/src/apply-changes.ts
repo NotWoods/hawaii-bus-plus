@@ -25,7 +25,7 @@ export function useMap<T>(
 export function useListener<T extends google.maps.MVCObject>(
   target: T | null | undefined,
   eventName: string,
-  handler: ((this: T, ...args: any[]) => void) | undefined,
+  handler: ((this: T, ...args: unknown[]) => void) | undefined,
 ) {
   useEffect(() => {
     if (target && handler) {

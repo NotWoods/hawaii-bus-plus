@@ -104,7 +104,6 @@ const config = {
         assertionStyle: 'as',
       },
     ],
-    '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-empty-function': [
       'error',
       {
@@ -117,7 +116,6 @@ const config = {
       },
     ],
     '@typescript-eslint/no-explicit-any': 'off',
-    '@typescript-eslint/no-implicit-any-catch': 'error',
     '@typescript-eslint/no-namespace': [
       'error',
       {
@@ -128,7 +126,6 @@ const config = {
     '@typescript-eslint/no-unused-vars': 'off',
     '@typescript-eslint/prefer-for-of': 'error',
     '@typescript-eslint/prefer-namespace-keyword': 'off',
-    '@typescript-eslint/prefer-optional-chain': 'error',
     '@typescript-eslint/unified-signatures': 'error',
     'prefer-arrow-callback': [
       'error',
@@ -148,7 +145,7 @@ const config = {
   overrides: [
     {
       extends: [
-        'plugin:@typescript-eslint/recommended-requiring-type-checking',
+        'plugin:@typescript-eslint/recommended-type-checked',
       ],
       files: ['**/*.ts', '**/*.tsx'],
       rules: {
@@ -156,15 +153,18 @@ const config = {
           'error',
           { checksVoidReturn: false },
         ],
+        '@typescript-eslint/no-explicit-any': 'off',
         '@typescript-eslint/no-unnecessary-boolean-literal-compare': 'error',
         '@typescript-eslint/no-unsafe-assignment': 'off',
         '@typescript-eslint/no-unsafe-argument': 'warn',
         '@typescript-eslint/no-unsafe-call': 'warn',
         '@typescript-eslint/no-unsafe-member-access': 'warn',
         '@typescript-eslint/no-unsafe-return': 'warn',
+        '@typescript-eslint/no-unused-vars': 'off',
         '@typescript-eslint/non-nullable-type-assertion-style': 'error',
         '@typescript-eslint/prefer-includes': 'error',
         '@typescript-eslint/prefer-nullish-coalescing': 'error',
+        '@typescript-eslint/prefer-optional-chain': 'error',
         '@typescript-eslint/prefer-readonly': 'error',
         '@typescript-eslint/prefer-string-starts-ends-with': 'error',
         '@typescript-eslint/restrict-template-expressions': 'off',

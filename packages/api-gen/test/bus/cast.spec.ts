@@ -65,7 +65,7 @@ test('cast bool and date', async () => {
 });
 
 test('cast route long name to format title case', () => {
-  const mockContext = (column: string) => ({ column } as CastingContext);
+  const mockContext = (column: string) => ({ column }) as CastingContext;
 
   expect(cast('HILO / OCEAN VIEW', mockContext('route_long_name'))).toBe(
     'Hilo / Ocean View',
