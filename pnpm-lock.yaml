@@ -219,18 +219,15 @@ importers:
         specifier: ^2.5.0
         version: 2.5.0
     devDependencies:
-      '@ava/typescript':
-        specifier: ^3.0.1
-        version: 3.0.1
       '@types/node':
         specifier: ^20.11.16
         version: 20.11.16
-      ava:
-        specifier: ^5.2.0
-        version: 5.2.0(@ava/typescript@3.0.1)
       typescript:
-        specifier: ^4.9.5
-        version: 4.9.5
+        specifier: ^5.3.3
+        version: 5.3.3
+      vitest:
+        specifier: ^1.2.2
+        version: 1.2.2(@types/node@20.11.16)
 
   packages/edge-functions:
     devDependencies:
