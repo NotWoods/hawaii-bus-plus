@@ -18,7 +18,7 @@
     "vitest": ">=0.23.1"
   },
   "devDependencies": {
-    "prettier": "~2.8.4",
+    "prettier": "~3.2.4",
     "typescript": "^5.3.3",
     "vitest": "^1.2.2"
   },

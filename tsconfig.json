@@ -19,10 +19,10 @@
     { "path": "packages/temporal-utils/src" },
     { "path": "packages/types" },
     { "path": "packages/utils/src" },
-    { "path": "packages/vite-plugins/src" }
+    { "path": "packages/vite-plugins/src" },
   ],
   "compilerOptions": {
     "noEmit": true,
-    "skipLibCheck": true
-  }
+    "skipLibCheck": true,
+  },
 }

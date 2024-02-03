@@ -144,9 +144,7 @@ const config = {
   },
   overrides: [
     {
-      extends: [
-        'plugin:@typescript-eslint/recommended-type-checked',
-      ],
+      extends: ['plugin:@typescript-eslint/recommended-type-checked'],
       files: ['**/*.ts', '**/*.tsx'],
       rules: {
         '@typescript-eslint/no-misused-promises': [
