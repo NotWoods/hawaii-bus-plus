@@ -1,5 +1,5 @@
+import { test, expect } from 'vitest';
 import { Calendar, DateString } from '@hawaii-bus-plus/types';
-import test from 'ava';
 import { Temporal } from '@js-temporal/polyfill';
 import { calendarRunsOn } from '../src/calendar.js';
 
@@ -12,7 +12,7 @@ const baseCalendar = {
   end_date: '2021-12-31' as DateString,
 };
 
-test('calendarRunsOn false for holiday', (t) => {
+test('calendarRunsOn false for holiday', () => {
   const monToFri: Calendar = {
     ...baseCalendar,
     days: [true, true, true, true, true, false, false],
@@ -27,6 +27,6 @@ test('calendarRunsOn false for holiday', (t) => {
     day: 1,
   });
 
-  t.true(calendarRunsOn(monToFri, newYearsFriday));
-  t.false(calendarRunsOn(withHoliday, newYearsFriday));
+  expect(calendarRunsOn(monToFri, newYearsFriday)).toBe(true);
+  expect(calendarRunsOn(withHoliday, newYearsFriday)).toBe(false);
 });
