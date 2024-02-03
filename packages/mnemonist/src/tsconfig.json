@@ -4,6 +4,7 @@
   "references": [{ "path": "../../types" }],
   "compilerOptions": {
     "types": [],
+    "module": "nodenext",
     "moduleResolution": "nodenext"
   }
 }

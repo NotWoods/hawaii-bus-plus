@@ -1,24 +1,30 @@
 {
-  "name": "@hawaii-bus-plus/test-utils",
+  "name": "@hawaii-bus-plus/data-fixture",
   "version": "1.0.0",
   "private": true,
   "type": "module",
+  "sideEffects": false,
   "main": "./src/index.js",
   "module": "./src/index.js",
+  "exports": {
+    ".": "./src/index.js"
+  },
   "scripts": {
     "build": "tsc --build src",
     "format": "prettier **/*.ts --write --ignore-path ../../.prettierignore",
-    "postformat": "eslint \"**/*.ts\" --fix"
+    "postformat": "eslint \"**/*.ts\" --fix",
+    "pretest": "tsc --build test",
+    "test": "vitest run"
   },
   "dependencies": {
+    "@hawaii-bus-plus/api-gen": "workspace:*",
+    "@hawaii-bus-plus/data": "workspace:*",
     "@hawaii-bus-plus/types": "workspace:*",
+    "@hawaii-bus-plus/utils": "workspace:*",
     "tslib": "^2.5.0"
   },
-  "peerDependencies": {
-    "vitest": ">=0.23.1"
-  },
   "devDependencies": {
-    "prettier": "~3.2.4",
+    "@types/node": "^20.11.16",
     "typescript": "^5.3.3",
     "vitest": "^1.2.2"
   },
@@ -28,7 +34,7 @@
   "eslintConfig": {
     "parserOptions": {
       "project": [
-        "./packages/test-utils/*/tsconfig.json"
+        "./packages/data-fixture/*/tsconfig.json"
       ]
     }
   }

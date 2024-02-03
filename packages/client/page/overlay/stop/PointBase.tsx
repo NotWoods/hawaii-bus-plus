@@ -28,7 +28,10 @@ export function PointBase(props: Props) {
     <>
       <div
         className="aspect-w-16 aspect-h-9 mb-4 bg-black"
-        hidden={status === 'ZERO_RESULTS'}
+        hidden={
+          status ===
+          ('ZERO_RESULTS' as google.maps.StreetViewStatus.ZERO_RESULTS)
+        }
       >
         {position ? (
           loadError ? (

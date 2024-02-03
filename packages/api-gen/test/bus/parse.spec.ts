@@ -1,4 +1,4 @@
-import test from 'ava';
+import { expect, test } from 'vitest';
 import { readFile } from 'node:fs/promises';
 import JSZip from 'jszip';
 import { zipFilesToObject } from '../../src/bus/parse.js';
@@ -12,11 +12,11 @@ async function getRoutesFileFromZip(fixtureName: string) {
   return new Map([['routes', zip.file('routes.txt')!]] as const);
 }
 
-test('zipFilesToObject big-island-buses.zip', async (t) => {
+test('zipFilesToObject big-island-buses.zip', async () => {
   const input = await getRoutesFileFromZip('big-island-buses.zip');
   const result = (await zipFilesToObject(input)) as JsonStreams;
 
-  t.deepEqual(Object.keys(result), ['routes']);
+  expect(Object.keys(result)).toEqual(['routes']);
 
   const expectedKeys = [
     'route_id',
@@ -32,16 +32,16 @@ test('zipFilesToObject big-island-buses.zip', async (t) => {
     'direction_1',
   ];
   for await (const route of result.routes) {
-    t.false(Array.isArray(route));
-    t.deepEqual(Object.keys(route), expectedKeys);
+    expect(Array.isArray(route)).toBe(false);
+    expect(Object.keys(route)).toEqual(expectedKeys);
   }
 });
 
-test('zipFilesToObject hele-on.zip', async (t) => {
+test('zipFilesToObject hele-on.zip', async () => {
   const input = await getRoutesFileFromZip('hele-on.zip');
   const result = (await zipFilesToObject(input)) as JsonStreams;
 
-  t.deepEqual(Object.keys(result), ['routes']);
+  expect(Object.keys(result)).toEqual(['routes']);
 
   const expectedKeys = [
     'route_id',
@@ -58,7 +58,7 @@ test('zipFilesToObject hele-on.zip', async (t) => {
     'continuous_drop_off',
   ];
   for await (const route of result.routes) {
-    t.false(Array.isArray(route));
-    t.deepEqual(Object.keys(route), expectedKeys);
+    expect(Array.isArray(route)).toBe(false);
+    expect(Object.keys(route)).toEqual(expectedKeys);
   }
 });

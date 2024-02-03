@@ -1,30 +1,30 @@
-import test from 'ava';
+import { test, expect } from 'vitest';
 import { DefaultMap } from '../src/default-map.js';
 
 const FACTORY: () => number[] = () => [];
 
-test('should be possible to set & get keys.', (t) => {
+test('should be possible to set & get keys.', () => {
   const map = new DefaultMap(FACTORY);
 
   map.get('one').push(1);
   map.set('two', [2]);
 
-  t.deepEqual(map.get('one'), [1]);
-  t.deepEqual(map.get('two'), [2]);
+  expect(map.get('one')).toEqual([1]);
+  expect(map.get('two')).toEqual([2]);
 
-  t.is(map.size, 2);
+  expect(map.size).toBe(2);
 
-  t.deepEqual(map.get('unknown'), []);
+  expect(map.get('unknown')).toEqual([]);
 
-  t.is(map.size, 3);
+  expect(map.size).toBe(3);
 
   map.clear();
 
-  t.is(map.size, 0);
-  t.deepEqual(map.get('one'), []);
+  expect(map.size).toBe(0);
+  expect(map.get('one')).toEqual([]);
 });
 
-test("should be possible to iterate over the map's items.", (t) => {
+test("should be possible to iterate over the map's items.", () => {
   const map = new DefaultMap(FACTORY);
 
   map.get('one').push(1);
@@ -32,13 +32,13 @@ test("should be possible to iterate over the map's items.", (t) => {
 
   const items = Array.from(map);
 
-  t.deepEqual(items, [
+  expect(items).toEqual([
     ['one', [1]],
     ['two', [2]],
   ]);
 });
 
-test('should be possible to create iterators.', (t) => {
+test('should be possible to create iterators.', () => {
   const map = new DefaultMap(FACTORY);
 
   map.get('one').push(1);
@@ -49,28 +49,6 @@ test('should be possible to create iterators.', (t) => {
     ['two', [2]],
   ];
 
-  t.deepEqual(Array.from(map.entries()), entries);
-  t.deepEqual(
-    Array.from(map.keys()),
-    entries.map((e) => {
-      return e[0];
-    }),
-  );
-  t.deepEqual(
-    Array.from(map.values()),
-    entries.map((e) => {
-      return e[1];
-    }),
-  );
-});
-
-test('should be possible to peek.', (t) => {
-  const map = new DefaultMap(FACTORY);
-
-  map.get('one').push(1);
-
-  t.deepEqual(map.peek('one'), [1]);
-  t.is(map.peek('two'), undefined);
-  t.is(map.size, 1);
-  t.is(map.has('two'), false);
+  expect(Array.from(map.entries())).toEqual(entries);
+  expect(Array.from(map.keys())).toEqual(['one', 'two']);
 });

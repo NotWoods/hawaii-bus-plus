@@ -55,8 +55,10 @@ export async function zipFilesToObject<Keys extends string>(
  * @param gtfsZipData Buffer data for the GTFS zip file.
  */
 export async function createApiData(
-  gtfsZipData: Buffer | ArrayBuffer | Uint8Array,
-): Promise<[ServerGTFSData, ReadonlyMap<Shape['shape_id'], Shape>]> {
+  gtfsZipData: ArrayBuffer | Uint8Array,
+): Promise<
+  [api: ServerGTFSData, shapes: ReadonlyMap<Shape['shape_id'], Shape>]
+> {
   const bikeStationsReady = cacheStations();
   const fileList = [
     'agency.txt',

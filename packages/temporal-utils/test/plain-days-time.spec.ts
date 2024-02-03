@@ -1,31 +1,31 @@
 import { TimeString } from '@hawaii-bus-plus/types';
-import test from 'ava';
+import { expect, test } from 'vitest';
 import { PlainDaysTime } from '../src/plain-days-time.js';
 
-test('PlainDaysTime defaults to 0', (t) => {
+test('PlainDaysTime defaults to 0', () => {
   const daysTime = new PlainDaysTime();
   const time = daysTime.toPlainTime();
-  t.is(daysTime.day, 0);
-  t.is(time.hour, 0);
-  t.is(time.minute, 0);
-  t.is(time.second, 0);
-  t.is(daysTime.toString(), '00:00:00' as TimeString);
+  expect(daysTime.day).toBe(0);
+  expect(time.hour).toBe(0);
+  expect(time.minute).toBe(0);
+  expect(time.second).toBe(0);
+  expect(daysTime.toString()).toBe('00:00:00');
 });
 
-test('PlainDaysTime returns new object when adding', (t) => {
+test('PlainDaysTime returns new object when adding', () => {
   const daysTime = new PlainDaysTime();
   const nextDay = daysTime.add({ days: 2 });
-  t.is(daysTime.day, 0);
-  t.is(nextDay.day, 2);
-  t.is(daysTime.toPlainTime().hour, 0);
-  t.is(nextDay.toPlainTime().hour, 0);
-  t.is(daysTime.toString(), '00:00:00' as TimeString);
-  t.is(nextDay.toString(), '48:00:00' as TimeString);
+  expect(daysTime.day).toBe(0);
+  expect(nextDay.day).toBe(2);
+  expect(daysTime.toPlainTime().hour).toBe(0);
+  expect(nextDay.toPlainTime().hour).toBe(0);
+  expect(daysTime.toString()).toBe('00:00:00');
+  expect(nextDay.toString()).toBe('48:00:00');
 });
 
-test('PlainDaysTime measures days and time until', (t) => {
+test('PlainDaysTime measures days and time until', () => {
   const first = PlainDaysTime.from('01:00:00' as TimeString);
   const second = PlainDaysTime.from('26:00:00' as TimeString);
   const duration = first.until(second);
-  t.is(duration.toString(), 'P1DT1H');
+  expect(duration.toString()).toBe('P1DT1H');
 });

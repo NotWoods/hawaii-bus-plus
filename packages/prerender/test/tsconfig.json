@@ -3,6 +3,9 @@
   "include": ["**/*"],
   "references": [{ "path": "../src" }],
   "compilerOptions": {
-    "types": ["node"]
+    "types": ["node"],
+    "noEmit": true,
+    "module": "nodenext",
+    "moduleResolution": "nodenext"
   }
 }

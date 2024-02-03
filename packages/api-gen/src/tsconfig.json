@@ -8,9 +8,10 @@
     { "path": "../../utils/src" }
   ],
   "compilerOptions": {
-    "target": "es2021",
     "types": ["node"],
+    "target": "es2021",
     "skipLibCheck": true,
+    "module": "nodenext",
     "moduleResolution": "nodenext"
   }
 }

@@ -6,10 +6,10 @@
     { "path": "packages/client/components" },
     { "path": "packages/client/services" },
     { "path": "packages/client/page" },
+    { "path": "packages/client/share" },
     { "path": "packages/workers/tsconfig.build.json" },
     { "path": "packages/data/src" },
-    { "path": "packages/data/node" },
-    { "path": "packages/gotrue/src" },
+    { "path": "packages/data-fixture/src" },
     { "path": "packages/mnemonist/src" },
     { "path": "packages/prerender/src" },
     { "path": "packages/presentation/src" },
@@ -19,10 +19,10 @@
     { "path": "packages/temporal-utils/src" },
     { "path": "packages/types" },
     { "path": "packages/utils/src" },
-    { "path": "packages/vite-plugins/src" }
+    { "path": "packages/vite-plugins/src" },
   ],
   "compilerOptions": {
     "noEmit": true,
-    "skipLibCheck": true
-  }
+    "skipLibCheck": true,
+  },
 }

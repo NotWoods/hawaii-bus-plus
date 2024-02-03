@@ -1,8 +1,8 @@
-import test from 'ava';
+import { test, expect } from 'vitest';
 import { getWords } from '../src/words.js';
 
-test('getWords', (t) => {
-  t.deepEqual(getWords('301', 'Intra-Hilo Waikea-Uka'), [
+test('getWords', () => {
+  expect(getWords('301', 'Intra-Hilo Waikea-Uka')).toEqual([
     '301',
     'intra-hilo',
     'intra',
@@ -11,5 +11,9 @@ test('getWords', (t) => {
     'waikea',
     'uka',
   ]);
-  t.deepEqual(getWords('301', 'Waimea Shuttle'), ['301', 'waimea', 'shuttle']);
+  expect(getWords('301', 'Waimea Shuttle')).toEqual([
+    '301',
+    'waimea',
+    'shuttle',
+  ]);
 });

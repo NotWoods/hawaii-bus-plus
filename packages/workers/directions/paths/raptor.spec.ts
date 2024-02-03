@@ -1,7 +1,7 @@
-import { NodeRepository } from '@hawaii-bus-plus/data/node';
+import { NodeFixtureRepository } from '@hawaii-bus-plus/data-fixture';
 import { PlainDaysTime } from '@hawaii-bus-plus/temporal-utils';
 import { Stop, TimeString } from '@hawaii-bus-plus/types';
-import { expect, test } from 'vitest';
+import { test } from 'vitest';
 import { Temporal } from '@js-temporal/polyfill';
 import { raptorDirections } from './raptor';
 
@@ -15,8 +15,8 @@ const PARKER_RANCH = 'pr' as Stop['stop_id'];
 const NOON = PlainDaysTime.from('12:00:00' as TimeString);
 const MONDAY = Temporal.PlainDate.from({ year: 2021, month: 1, day: 25 });
 
-test.concurrent('raptor', async () => {
-  const repo = new NodeRepository();
+test.concurrent('raptor', async ({ expect }) => {
+  const repo = new NodeFixtureRepository();
   const directions = await raptorDirections(
     repo,
     [{ stop_id: LAKELAND, departure_time: NOON }],
@@ -100,8 +100,8 @@ test.concurrent('raptor', async () => {
   expect(directions.get(HWY_INTERSECTON)![2]!.time.toString()).toBe('15:45:00');
 });
 
-test.concurrent('raptor weekend', async () => {
-  const repo = new NodeRepository();
+test.concurrent('raptor weekend', async ({ expect }) => {
+  const repo = new NodeFixtureRepository();
   const directions = await raptorDirections(
     repo,
     [{ stop_id: LAKELAND, departure_time: NOON }],

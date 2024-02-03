@@ -1,11 +1,11 @@
-import { NodeRepository } from '@hawaii-bus-plus/data/node';
+import { NodeFixtureRepository } from '@hawaii-bus-plus/data-fixture';
 import {
   expectDurationData,
   expectPlainTimeData,
 } from '@hawaii-bus-plus/test-utils';
 import { PlainDaysTime } from '@hawaii-bus-plus/temporal-utils';
 import { Stop, StopTime, TimeString, Trip } from '@hawaii-bus-plus/types';
-import { expect, test } from 'vitest';
+import { test } from 'vitest';
 import { Temporal } from '@js-temporal/polyfill';
 import { journeyToDirections, JourneyTripSegment } from './format';
 import { CompletePath } from './paths/raptor';
@@ -17,8 +17,8 @@ const LAKELAND = 'll' as Stop['stop_id'];
 const HWY_INTERSECTON = 'hw' as Stop['stop_id'];
 const PARKER_RANCH = 'pr' as Stop['stop_id'];
 
-test.concurrent('journeyToDirections no walking', async () => {
-  const repo = new NodeRepository();
+test.concurrent('journeyToDirections no walking', async ({ expect }) => {
+  const repo = new NodeFixtureRepository();
 
   const path: CompletePath = [
     { time: NOON },

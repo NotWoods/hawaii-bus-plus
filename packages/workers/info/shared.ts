@@ -51,9 +51,8 @@ export async function routeStopDetails(
   routeStops: Iterable<Stop['stop_id']>,
   loadedRoute: Route['route_id'],
 ): Promise<RouteStopDetails> {
-  const stops: ReadonlyMap<Stop['stop_id'], Stop> = await repo.loadStops(
-    routeStops,
-  );
+  const stops: ReadonlyMap<Stop['stop_id'], Stop> =
+    await repo.loadStops(routeStops);
 
   const routeIds = new Set(
     Array.from(stops.values()).flatMap((stop) => stop.routes),

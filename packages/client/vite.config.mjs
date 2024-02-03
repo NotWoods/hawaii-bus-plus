@@ -6,7 +6,7 @@ import prefresh from '@prefresh/vite';
 
 const headHtmlIncludeFile = new URL('./head.html', import.meta.url);
 
-export default defineConfig(({ command, ssrBuild }) => {
+export default defineConfig(({ command, isSsrBuild }) => {
   /** @type {import('vite').AliasOptions} */
   const alias = {
     react: 'preact/compat',
@@ -74,11 +74,10 @@ export default defineConfig(({ command, ssrBuild }) => {
           changeOrigin: true,
         },
       },
-      force: true,
     },
   };
 
-  if (ssrBuild === true) {
+  if (isSsrBuild === true) {
     return {
       ...baseConfig,
       define: undefined,

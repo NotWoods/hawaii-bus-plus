@@ -1,7 +1,7 @@
-import test from 'ava';
+import { test, expect } from 'vitest';
 import { memoize } from '../src/memoize.js';
 
-test('memoize should call func again if args change', (t) => {
+test('memoize should call func again if args change', () => {
   let calls = 0;
   function increase(_: string) {
     calls++;
@@ -9,8 +9,8 @@ test('memoize should call func again if args change', (t) => {
   }
   const memoized = memoize(increase);
 
-  t.is(calls, 0);
-  t.is(memoized('foo'), 1);
-  t.is(memoized('foo'), 1);
-  t.is(memoized('bar'), 2);
+  expect(calls).toBe(0);
+  expect(memoized('foo')).toBe(1);
+  expect(memoized('foo')).toBe(1);
+  expect(memoized('bar')).toBe(2);
 });

@@ -4,7 +4,6 @@ import {
   JsonStationInformation,
   StationInformation,
 } from '@hawaii-bus-plus/types';
-import { fetch } from 'undici';
 import { GBFS_URL } from '../env.js';
 
 async function getFeeds() {

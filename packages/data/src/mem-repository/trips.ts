@@ -1,5 +1,5 @@
 import { Trip } from '@hawaii-bus-plus/types';
-import { TripCursor } from '../repository';
+import { TripCursor } from '../repository.js';
 
 export function memTripCursor(trips: readonly Trip[]): TripCursor {
   const iter = trips[Symbol.iterator]();

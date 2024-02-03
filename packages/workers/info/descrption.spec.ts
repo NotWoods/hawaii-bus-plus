@@ -1,7 +1,7 @@
-import { expect, test } from 'vitest';
+import { test } from 'vitest';
 import { extractLinks } from './description';
 
-test('extractLinks separates link', () => {
+test('extractLinks separates link', ({ expect }) => {
   const routeDesc =
     'For more information go to the Park website at; https: //www.nps.gov/havo/planyourvisit/fees.htm';
   const links = extractLinks(routeDesc);
