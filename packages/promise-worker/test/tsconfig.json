@@ -4,6 +4,9 @@
   "references": [{ "path": "../page" }, { "path": "../worker" }],
   "compilerOptions": {
     "lib": ["esnext", "dom", "dom.iterable", "webworker"],
-    "types": ["node"]
+    "types": ["node"],
+    "noEmit": true,
+    "module": "nodenext",
+    "moduleResolution": "nodenext"
   }
 }

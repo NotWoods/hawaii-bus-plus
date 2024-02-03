@@ -1,17 +1,14 @@
-import test from 'ava';
+import { expect, test, vi } from 'vitest';
 import { PromiseWorker } from '../page/promise-worker.js';
 
-test('calls terminate', (t) => {
-  let called = false;
+test('calls terminate', () => {
   const worker = {
-    terminate() {
-      called = true;
-    },
+    terminate: vi.fn(),
     addEventListener() {},
-  };
+  } satisfies Partial<Worker>;
   const promiseWorker = new PromiseWorker(worker as unknown as Worker);
 
-  t.is(called, false);
+  expect(worker.terminate).not.toHaveBeenCalled();
   promiseWorker.terminate();
-  t.is(called, true);
+  expect(worker.terminate).toHaveBeenCalledTimes(1);
 });
