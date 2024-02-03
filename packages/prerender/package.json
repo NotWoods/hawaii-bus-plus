@@ -21,7 +21,7 @@
     "preact-render-to-string": "^5.2.2",
     "spherical-geometry-js": "^3.0.0",
     "tslib": "^2.5.0",
-    "type-fest": "^3.6.1",
+    "type-fest": "^4.10.2",
     "vite": "^5.0.12"
   },
   "devDependencies": {

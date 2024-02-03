@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "tslib": "^2.5.0",
-    "type-fest": "^3.6.1"
+    "type-fest": "^4.10.2"
   },
   "devDependencies": {
     "prettier": "~3.2.4",
