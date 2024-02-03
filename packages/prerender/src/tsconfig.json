@@ -2,7 +2,7 @@
   "extends": "../../tsconfig.base.json",
   "include": ["**/*"],
   "references": [
-    { "path": "../../data/node" },
+    { "path": "../../data-node/src" },
     { "path": "../../promise-worker/worker" }
   ],
   "compilerOptions": {

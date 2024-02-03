@@ -1,17 +1,16 @@
 {
   "name": "@hawaii-bus-plus/data",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
   "type": "module",
   "main": "./src/index.js",
   "module": "./src/index.js",
   "sideEffects": false,
   "exports": {
-    ".": "./src/index.js",
-    "./node": "./node/index.js"
+    ".": "./src/index.js"
   },
   "scripts": {
-    "build": "tsc --build src node",
+    "build": "tsc --build src",
     "format": "prettier **/*.ts --write --ignore-path ../../.prettierignore",
     "postformat": "eslint \"**/*.ts\" --fix",
     "pretest": "tsc --build test",
@@ -26,13 +25,11 @@
     "tslib": "^2.5.0"
   },
   "devDependencies": {
-    "@types/node": "^20.11.16",
     "typescript": "^5.3.3",
     "vitest": "^1.2.2"
   },
   "files": [
-    "src",
-    "node"
+    "src"
   ],
   "eslintConfig": {
     "parserOptions": {

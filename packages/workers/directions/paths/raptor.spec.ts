@@ -1,4 +1,4 @@
-import { NodeRepository } from '@hawaii-bus-plus/data/node';
+import { NodeFixtureRepository } from '@hawaii-bus-plus/data-node';
 import { PlainDaysTime } from '@hawaii-bus-plus/temporal-utils';
 import { Stop, TimeString } from '@hawaii-bus-plus/types';
 import { expect, test } from 'vitest';
@@ -16,7 +16,7 @@ const NOON = PlainDaysTime.from('12:00:00' as TimeString);
 const MONDAY = Temporal.PlainDate.from({ year: 2021, month: 1, day: 25 });
 
 test.concurrent('raptor', async () => {
-  const repo = new NodeRepository();
+  const repo = new NodeFixtureRepository();
   const directions = await raptorDirections(
     repo,
     [{ stop_id: LAKELAND, departure_time: NOON }],
@@ -101,7 +101,7 @@ test.concurrent('raptor', async () => {
 });
 
 test.concurrent('raptor weekend', async () => {
-  const repo = new NodeRepository();
+  const repo = new NodeFixtureRepository();
   const directions = await raptorDirections(
     repo,
     [{ stop_id: LAKELAND, departure_time: NOON }],

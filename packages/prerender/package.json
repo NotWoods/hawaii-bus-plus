@@ -12,7 +12,7 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@hawaii-bus-plus/data": "workspace:*",
+    "@hawaii-bus-plus/data-node": "workspace:*",
     "@js-temporal/polyfill": "^0.4.3",
     "@notwoods/preact-helmet": "^6.1.0",
     "idb": "^7.0.2",

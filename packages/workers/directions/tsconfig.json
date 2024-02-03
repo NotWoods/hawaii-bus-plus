@@ -6,7 +6,7 @@
     { "path": "../shared" },
     { "path": "../nearby" },
     { "path": "../../data/src" },
-    { "path": "../../data/node" },
+    { "path": "../../data-node/src" },
     { "path": "../../mnemonist/src" },
     { "path": "../../presentation/src" },
     { "path": "../../temporal-utils/src" },

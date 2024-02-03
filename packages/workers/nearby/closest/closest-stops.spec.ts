@@ -1,4 +1,4 @@
-import { NodeRepository } from '@hawaii-bus-plus/data/node';
+import { NodeFixtureRepository } from '@hawaii-bus-plus/data-node';
 import { expect, test } from 'vitest';
 import { findClosestStops } from './closest-stops.js';
 
@@ -6,7 +6,7 @@ const WAIMEA = { lat: 20.022818482273284, lng: -155.67176568698534 };
 const VANCOUVER = { lat: 49.0878967367812, lng: -123.01349642409956 };
 
 test.concurrent('findClosestStops to waimea', async () => {
-  const repo = new NodeRepository();
+  const repo = new NodeFixtureRepository();
   const stops = await findClosestStops(repo, WAIMEA);
 
   expect(stops).toHaveLength(5);
@@ -37,7 +37,7 @@ test.concurrent('findClosestStops to waimea', async () => {
 test.concurrent(
   'findClosestStops returns no results outside Hawaii',
   async () => {
-    const repo = new NodeRepository();
+    const repo = new NodeFixtureRepository();
     const stops = await findClosestStops(repo, VANCOUVER);
 
     expect(stops).toHaveLength(0);

@@ -1,4 +1,4 @@
-import { NodeRepository } from '@hawaii-bus-plus/data/node';
+import { NodeFixtureRepository } from '@hawaii-bus-plus/data-node';
 import {
   expectDurationData,
   expectPlainTimeData,
@@ -18,7 +18,7 @@ const HWY_INTERSECTON = 'hw' as Stop['stop_id'];
 const PARKER_RANCH = 'pr' as Stop['stop_id'];
 
 test.concurrent('journeyToDirections no walking', async () => {
-  const repo = new NodeRepository();
+  const repo = new NodeFixtureRepository();
 
   const path: CompletePath = [
     { time: NOON },

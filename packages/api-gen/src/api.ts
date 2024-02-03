@@ -11,7 +11,7 @@ function writeJson(path: string, json: unknown) {
  * Generate an API file from the given GTFS zip path.
  */
 export async function generateApi(
-  gtfsZipFile: Promise<Buffer | ArrayBuffer | Uint8Array>,
+  gtfsZipFile: Promise<ArrayBuffer | Uint8Array>,
   apiFolder: string,
 ): Promise<void> {
   const folderReady = mkdir(apiFolder, { recursive: true });

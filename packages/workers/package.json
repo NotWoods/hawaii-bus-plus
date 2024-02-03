@@ -31,6 +31,7 @@
     "tslib": "^2.5.0"
   },
   "devDependencies": {
+    "@hawaii-bus-plus/data-node": "workspace:*",
     "@hawaii-bus-plus/test-utils": "workspace:*",
     "@hawaii-bus-plus/vite-plugins": "workspace:*",
     "@types/google.maps": "^3.50.0",

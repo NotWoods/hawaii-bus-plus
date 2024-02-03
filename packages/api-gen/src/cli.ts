@@ -1,12 +1,16 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { fetch } from 'undici';
+import { parseArgs } from 'node:util';
 import { generateApi } from './api.js';
 
-const args = process.argv.slice(2);
-if (args.length !== 2) {
-  throw new TypeError(`should pass 2 arguments, not ${args.length}.`);
-}
+const { values } = parseArgs({
+  options: {
+    // Path to the GTFS zip file
+    input: { type: 'string' },
+    // Path to the folder to write the API files to
+    output: { type: 'string' },
+  },
+});
 
 function downloadInput(path: string) {
   if (/https?:\/\//.test(path)) {
@@ -16,13 +20,15 @@ function downloadInput(path: string) {
   }
 }
 
-const [gtfsZipPath, apiFolder] = args;
+const { input: gtfsZipPath, output: apiFolder } = values;
+if (!gtfsZipPath || !apiFolder) {
+  throw new TypeError(`missing input or output arguments`);
+}
 
-generateApi(downloadInput(gtfsZipPath), resolve(apiFolder))
-  .then(() => {
-    console.log('Wrote API files');
-  })
-  .catch((err) => {
-    console.error(err);
-    process.exit(1);
-  });
+try {
+  await generateApi(downloadInput(gtfsZipPath), resolve(apiFolder));
+  console.log('Wrote API files');
+} catch (err) {
+  console.error(err);
+  process.exit(1);
+}

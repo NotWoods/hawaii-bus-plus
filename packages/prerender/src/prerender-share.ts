@@ -1,10 +1,10 @@
-import { NodeRepository } from '@hawaii-bus-plus/data/node';
+import { NodeJsonRepository } from '@hawaii-bus-plus/data-node';
 import { mkdir } from 'node:fs/promises';
 import { URL } from 'node:url';
 import { distFolder, renderRoutes } from './base.js';
 
 export async function prerenderShare(write: boolean) {
-  const repo = new NodeRepository();
+  const repo = new NodeJsonRepository();
   const [routes] = await Promise.all([
     repo.loadAllRoutes(),
     mkdir(new URL('./share/routes/', distFolder), { recursive: true }),

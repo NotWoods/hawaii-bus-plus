@@ -1,4 +1,4 @@
-import { NodeRepository } from '@hawaii-bus-plus/data/node';
+import { NodeFixtureRepository } from '@hawaii-bus-plus/data-node';
 import {
   InfinityPlainDaysTime,
   PlainDaysTime,
@@ -14,7 +14,7 @@ const WAIMEA_WESTBOUND =
   'll,hh-kamamalu,hh-hiiaka,hh-hale,hh-kuhio,pr,wp,sc,ji,kv,kvo';
 
 test.concurrent('getEarliestValidTrip with infinity', async () => {
-  const repo = new NodeRepository();
+  const repo = new NodeFixtureRepository();
   const data = await generateDirectionsData(repo, MONDAY);
 
   const trip = getEarliestValidTrip(
@@ -26,7 +26,7 @@ test.concurrent('getEarliestValidTrip with infinity', async () => {
 });
 
 test.concurrent('getEarliestValidTrip with early time', async () => {
-  const repo = new NodeRepository();
+  const repo = new NodeFixtureRepository();
   const data = await generateDirectionsData(repo, MONDAY);
 
   const trip = getEarliestValidTrip(
@@ -40,7 +40,7 @@ test.concurrent('getEarliestValidTrip with early time', async () => {
 });
 
 test.concurrent('getEarliestValidTrip with mid time', async () => {
-  const repo = new NodeRepository();
+  const repo = new NodeFixtureRepository();
   const data = await generateDirectionsData(repo, MONDAY);
 
   const trip = getEarliestValidTrip(

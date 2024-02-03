@@ -1,19 +1,15 @@
 {
-  "name": "@hawaii-bus-plus/api-gen",
-  "version": "2.0.0",
+  "name": "@hawaii-bus-plus/data-node",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
+  "sideEffects": false,
   "main": "./src/index.js",
   "module": "./src/index.js",
   "exports": {
     ".": "./src/index.js"
   },
-  "bin": {
-    "hawaii-bus-plus-api-gen": "./src/cli.js"
-  },
   "scripts": {
-    "preapi:client": "pnpm run build",
-    "api:client": "node src/cli.js --input http://www.heleonbus.org/transit-info-and-statistics/MTA_FEED4.zip --output ../client/public/api/v1/",
     "build": "tsc --build src",
     "format": "prettier **/*.ts --write --ignore-path ../../.prettierignore",
     "postformat": "eslint \"**/*.ts\" --fix",
@@ -21,30 +17,23 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@hawaii-bus-plus/mnemonist": "workspace:^0.38.3",
-    "@hawaii-bus-plus/temporal-utils": "workspace:*",
+    "@hawaii-bus-plus/api-gen": "workspace:*",
+    "@hawaii-bus-plus/data": "workspace:*",
     "@hawaii-bus-plus/types": "workspace:*",
-    "@hawaii-bus-plus/utils": "workspace:*",
-    "@js-temporal/polyfill": "^0.4.3",
-    "csv-parse": "^5.3.6",
-    "jszip": "^3.10.1",
-    "ts-extras": "^0.11.0",
     "tslib": "^2.5.0"
   },
   "devDependencies": {
     "@types/node": "^20.11.16",
-    "type-fest": "^3.6.1",
     "typescript": "^5.3.3",
     "vitest": "^1.2.2"
   },
   "files": [
-    "src",
-    "test/fixtures"
+    "src"
   ],
   "eslintConfig": {
     "parserOptions": {
       "project": [
-        "./packages/api-gen/*/tsconfig.json"
+        "./packages/data-node/*/tsconfig.json"
       ]
     }
   }

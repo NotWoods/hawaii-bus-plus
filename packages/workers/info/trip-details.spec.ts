@@ -1,4 +1,4 @@
-import { NodeRepository } from '@hawaii-bus-plus/data/node';
+import { NodeFixtureRepository } from '@hawaii-bus-plus/data-node';
 import { Route } from '@hawaii-bus-plus/types';
 import { expect, test } from 'vitest';
 import { Temporal } from '@js-temporal/polyfill';
@@ -9,7 +9,7 @@ const SUNDAY = Temporal.PlainDate.from({ year: 2021, month: 1, day: 24 });
 const MONDAY = Temporal.PlainDate.from({ year: 2021, month: 1, day: 25 });
 
 test.concurrent('findBestTrips before route is running that day', async () => {
-  const repo = new NodeRepository();
+  const repo = new NodeFixtureRepository();
   const routeId = 'waimea' as Route['route_id'];
   const now = MONDAY.toPlainDateTime({ hour: 5 });
   const allCalendars = await repo.loadCalendars();
@@ -45,7 +45,7 @@ test.concurrent('findBestTrips before route is running that day', async () => {
 });
 
 test.concurrent('findBestTrips after route has run that day', async () => {
-  const repo = new NodeRepository();
+  const repo = new NodeFixtureRepository();
   const routeId = 'waimea' as Route['route_id'];
   const now = MONDAY.toPlainDateTime({ hour: 20 });
 
@@ -79,7 +79,7 @@ test.concurrent('findBestTrips after route has run that day', async () => {
 test.concurrent(
   'findBestTrips on a Sunday when the route is not in service',
   async () => {
-    const repo = new NodeRepository();
+    const repo = new NodeFixtureRepository();
     const routeId = 'waimea' as Route['route_id'];
     const now = SUNDAY.toPlainDateTime({ hour: 3 });
     const allCalendars = await repo.loadCalendars();
@@ -110,7 +110,7 @@ test.concurrent(
 test.concurrent(
   'findBestTrips on a holiday when the route is not in service',
   async () => {
-    const repo = new NodeRepository();
+    const repo = new NodeFixtureRepository();
     const routeId = 'waimea' as Route['route_id'];
     const now = NEW_YEARS.toPlainDateTime({ hour: 6 });
     const allCalendars = await repo.loadCalendars();

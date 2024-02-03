@@ -1,4 +1,4 @@
-import { NodeRepository } from '@hawaii-bus-plus/data/node';
+import { NodeFixtureRepository } from '@hawaii-bus-plus/data-node';
 import {
   expectDurationData,
   expectPlainTimeData,
@@ -117,7 +117,7 @@ test('traversePath', () => {
 });
 
 test.concurrent('directions', async () => {
-  const repo = new NodeRepository();
+  const repo = new NodeFixtureRepository();
   const from: Point = {
     name: 'Pomaikai Housing / St Joseph',
     stopId: ST_JOSEPH,
