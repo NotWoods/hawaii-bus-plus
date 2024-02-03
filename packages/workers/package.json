@@ -16,7 +16,7 @@
     "format": "prettier **/*.{ts,tsx} --write --ignore-path ../../.prettierignore",
     "postformat": "eslint \"**/*.{ts,tsx}\" --fix",
     "pretest": "tsc --build tsconfig.test.json",
-    "test": "vitest"
+    "test": "vitest run"
   },
   "dependencies": {
     "@hawaii-bus-plus/data": "workspace:*",

@@ -4,7 +4,6 @@ import { GTFSData } from '@hawaii-bus-plus/types';
 import { memoize } from '@hawaii-bus-plus/utils';
 import { readFile } from 'node:fs/promises';
 import { URL } from 'node:url';
-import { absolutePath } from './absolute-path.js';
 
 const fixtures = {
   'big-island-buses': '../../api-gen/test/fixtures/big-island-buses.zip',
@@ -31,7 +30,7 @@ export class NodeFixtureRepository extends BaseMemoryRepository {
 
   constructor(fixture: FixtureName = 'big-island-buses') {
     super();
-    const apiLocation = absolutePath(fixtures[fixture]);
+    const apiLocation = new URL(fixtures[fixture], import.meta.url);
     this.apiReady = cachedInit(apiLocation);
   }
 }
