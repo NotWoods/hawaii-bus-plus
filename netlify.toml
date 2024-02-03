@@ -4,6 +4,7 @@
   edge_functions = "packages/edge-functions/src/"
 [build.environment]
   NODE_ENV = "development"
+  NODE_VERSION = "20"
   NPM_FLAGS="--prefix=/dev/null"
 
 # Production context: all deploys from the Production branch set in your site’s
