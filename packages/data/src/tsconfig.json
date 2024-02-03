@@ -9,6 +9,8 @@
   "compilerOptions": {
     "lib": ["esnext", "dom", "webworker"],
     "types": [],
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
   }
 }

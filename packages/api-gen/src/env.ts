@@ -1,5 +1,5 @@
 export const GTFS_URL = new URL(
-  'http://www.heleonbus.org/transit-info-and-statistics/MTA_FEED4.zip',
+  'https://www.heleonbus.hawaiicounty.gov/home/showpublisheddocument/304851/638157643541400000',
 );
 
 export const GBFS_URL = new URL(

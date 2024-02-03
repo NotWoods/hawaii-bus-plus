@@ -8,9 +8,9 @@ import {
 } from '@hawaii-bus-plus/types';
 import { memoize } from '@hawaii-bus-plus/utils';
 import { LatLngLiteral } from 'spherical-geometry-js';
-import { IDB_SUPPORT } from './database';
-import { DBRepository } from './db-repository';
-import { MemoryRepository } from './mem-repository';
+import { IDB_SUPPORT } from './database.js';
+import { DBRepository } from './db-repository/index.js';
+import { MemoryRepository } from './mem-repository/index.js';
 
 export type TripCursor = {
   value: Trip;

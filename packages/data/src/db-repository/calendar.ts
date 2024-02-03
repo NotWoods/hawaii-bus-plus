@@ -1,6 +1,6 @@
 import { Calendar } from '@hawaii-bus-plus/types';
 import { IDBPDatabase } from 'idb';
-import { GTFSSchema } from '../database';
+import { GTFSSchema } from '../database.js';
 
 export async function loadCalendars(
   db: IDBPDatabase<GTFSSchema>,

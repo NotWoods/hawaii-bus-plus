@@ -7,14 +7,14 @@ import {
   Trip,
 } from '@hawaii-bus-plus/types';
 import { LatLngLiteral } from 'spherical-geometry-js';
-import { openDatabase } from '../database';
-import { Repository, TripCursor } from '../repository';
-import { loadAllRoutes, loadAllStops, loadBikeStations } from './all';
-import { loadAgencies, loadRoutes, loadStops } from './batch';
-import { loadCalendars } from './calendar';
-import { searchRoutes, searchStops } from './search';
-import { loadStopsSpatial } from './stops';
-import { loadTrip, loadTrips, loadTripsForRoute } from './trips';
+import { openDatabase } from '../database.js';
+import { Repository, TripCursor } from '../repository.js';
+import { loadAllRoutes, loadAllStops, loadBikeStations } from './all.js';
+import { loadAgencies, loadRoutes, loadStops } from './batch.js';
+import { loadCalendars } from './calendar.js';
+import { searchRoutes, searchStops } from './search.js';
+import { loadStopsSpatial } from './stops.js';
+import { loadTrip, loadTrips, loadTripsForRoute } from './trips.js';
 
 export class DBRepository implements Repository {
   /**

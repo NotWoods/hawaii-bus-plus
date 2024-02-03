@@ -1,8 +1,8 @@
 import { Stop } from '@hawaii-bus-plus/types';
 import { IDBPDatabase } from 'idb';
 import { LatLngLiteral } from 'spherical-geometry-js';
-import { GTFSSchema } from '../database';
-import { removeWords } from '../format';
+import { GTFSSchema } from '../database.js';
+import { removeWords } from '../format.js';
 
 /** Approximate 5 kilometers to latitude longitude offset */
 const FIVE_KM_LAT_LNG = 0.05;

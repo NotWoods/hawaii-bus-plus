@@ -13,7 +13,7 @@
   },
   "scripts": {
     "preapi:client": "pnpm run build",
-    "api:client": "node src/cli.js --input http://www.heleonbus.org/transit-info-and-statistics/MTA_FEED4.zip --output ../client/public/api/v1/",
+    "api:client": "node src/cli.js --input https://www.heleonbus.hawaiicounty.gov/home/showpublisheddocument/304851/638157643541400000 --output ../client/public/api/v1/",
     "build": "tsc --build src",
     "format": "prettier **/*.ts --write --ignore-path ../../.prettierignore",
     "postformat": "eslint \"**/*.ts\" --fix",
