@@ -1,37 +1,33 @@
-import test from 'ava';
+import { test, expect } from 'vitest';
 import { formatWalkingTime } from '../src/walk.js';
 
-test('formatWalkingTime', (t) => {
-  t.is(
+test('formatWalkingTime', () => {
+  expect(
     formatWalkingTime({
       time: { minutes: 1, string: 'PT1M' },
       distance: 1,
     }),
-    'Walk 1 minute',
-  );
+  ).toBe('Walk 1 minute');
 
-  t.is(
+  expect(
     formatWalkingTime({
       time: { minutes: 1, string: 'PT1M' },
       distance: 1000,
     }),
-    'Walk 1,000 m',
-  );
+  ).toBe('Walk 1,000 m');
 
-  t.is(
+  expect(
     formatWalkingTime({
       time: { minutes: 0, string: 'PT0M' },
       waitUntil: { minutes: 1, string: 'PT1M' },
       distance: 1,
     }),
-    'Wait for 1 minute',
-  );
+  ).toBe('Wait for 1 minute');
 
-  t.is(
+  expect(
     formatWalkingTime({
       time: { minutes: 0, string: 'PT0M' },
       distance: 1,
     }),
-    '',
-  );
+  ).toBe('');
 });
