@@ -1,11 +1,11 @@
 import { NodeFixtureRepository } from '@hawaii-bus-plus/data-node';
 import { expectPlainTimeData } from '@hawaii-bus-plus/test-utils';
 import { Route } from '@hawaii-bus-plus/types';
-import { expect, test } from 'vitest';
+import { test } from 'vitest';
 import { Temporal } from '@js-temporal/polyfill';
 import { getRouteDetails } from './route-details';
 
-test.concurrent('getRouteDetails when in service', async () => {
+test.concurrent('getRouteDetails when in service', async ({ expect }) => {
   const repo = new NodeFixtureRepository();
   const routeId = 'waimea' as Route['route_id'];
   const MONDAY = Temporal.PlainDate.from({ year: 2021, month: 1, day: 25 });

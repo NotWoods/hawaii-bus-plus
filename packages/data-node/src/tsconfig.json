@@ -4,7 +4,8 @@
   "references": [
     { "path": "../../api-gen/src" },
     { "path": "../../data/src" },
-    { "path": "../../types" }
+    { "path": "../../types" },
+    { "path": "../../utils/src" }
   ],
   "compilerOptions": {
     "lib": ["esnext"],

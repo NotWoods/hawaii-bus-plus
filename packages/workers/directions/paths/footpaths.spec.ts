@@ -1,12 +1,12 @@
 import { NodeFixtureRepository } from '@hawaii-bus-plus/data-node';
 import { Stop } from '@hawaii-bus-plus/types';
-import { expect, vi, test } from 'vitest';
+import { test, vi } from 'vitest';
 import { stopsLoader } from './footpaths';
 
 const WAIMEA_PARK = 'wp' as Stop['stop_id'];
 const HAWAIIAN_STYLE_CAFE = 'sc' as Stop['stop_id'];
 
-test.concurrent('stopsLoader', async () => {
+test.concurrent('stopsLoader', async ({ expect }) => {
   const repo = new NodeFixtureRepository();
   const spy = vi.spyOn(repo, 'loadStops');
   const loadStops = stopsLoader(repo);

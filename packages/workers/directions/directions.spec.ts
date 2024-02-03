@@ -7,7 +7,7 @@ import { Point } from '@hawaii-bus-plus/presentation';
 import { PlainDaysTime } from '@hawaii-bus-plus/temporal-utils';
 import { Stop, StopTime, TimeString, Trip } from '@hawaii-bus-plus/types';
 import { last } from '@hawaii-bus-plus/utils';
-import { expect, test } from 'vitest';
+import { test } from 'vitest';
 import { Temporal } from '@js-temporal/polyfill';
 import { directions, traversePath } from './directions';
 import { JourneyTripSegment } from './format';
@@ -24,7 +24,7 @@ const DA_STORE = 'kahakai-da-store' as Stop['stop_id'];
 
 const NOON = PlainDaysTime.from('12:00:00' as TimeString);
 
-test('traversePath', () => {
+test('traversePath', ({ expect }) => {
   const paths = new Map<Stop['stop_id'], Path>()
     .set(LAKELAND, [{ time: NOON }])
     .set(LAKELAND_ACROSS, [{ time: NOON, transferFrom: LAKELAND }])
@@ -116,7 +116,7 @@ test('traversePath', () => {
   ]);
 });
 
-test.concurrent('directions', async () => {
+test.concurrent('directions', async ({ expect }) => {
   const repo = new NodeFixtureRepository();
   const from: Point = {
     name: 'Pomaikai Housing / St Joseph',

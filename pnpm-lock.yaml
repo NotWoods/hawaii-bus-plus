@@ -231,6 +231,9 @@ importers:
       '@hawaii-bus-plus/types':
         specifier: workspace:*
         version: link:../types
+      '@hawaii-bus-plus/utils':
+        specifier: workspace:*
+        version: link:../utils
       tslib:
         specifier: ^2.5.0
         version: 2.5.0
