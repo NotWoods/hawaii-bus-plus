@@ -1,4 +1,4 @@
-import { NodeFixtureRepository } from '@hawaii-bus-plus/data-node';
+import { NodeFixtureRepository } from '@hawaii-bus-plus/data-fixture';
 import { PlainDaysTime } from '@hawaii-bus-plus/temporal-utils';
 import { Stop, TimeString } from '@hawaii-bus-plus/types';
 import { test } from 'vitest';

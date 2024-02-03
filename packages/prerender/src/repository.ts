@@ -1,8 +1,16 @@
 import { BaseMemoryRepository } from '@hawaii-bus-plus/data';
 import { GTFSData } from '@hawaii-bus-plus/types';
 import { readFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
 import { URL } from 'node:url';
-import { absolutePath } from './absolute-path.js';
+
+function absolutePath(relative: string): string | URL {
+  if (import.meta.url) {
+    return new URL(relative, import.meta.url);
+  } else {
+    return resolve(__dirname, relative);
+  }
+}
 
 export class NodeJsonRepository extends BaseMemoryRepository {
   /**
@@ -10,15 +18,12 @@ export class NodeJsonRepository extends BaseMemoryRepository {
    */
   protected readonly apiReady: Promise<GTFSData>;
 
-  constructor(jsonPath?: string | URL) {
+  constructor() {
     super();
-    const paths: (string | URL)[] = [
+    const paths: string[] = [
       '../../client/public/api/v1/api.json',
       '../../../dist/functions/api/api.json',
     ];
-    if (jsonPath) {
-      paths.unshift(jsonPath);
-    }
 
     const apiLocations = paths.map(absolutePath);
     this.apiReady = this.init(apiLocations);

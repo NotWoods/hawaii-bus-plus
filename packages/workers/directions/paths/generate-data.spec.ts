@@ -1,4 +1,4 @@
-import { NodeFixtureRepository } from '@hawaii-bus-plus/data-node';
+import { NodeFixtureRepository } from '@hawaii-bus-plus/data-fixture';
 import { test } from 'vitest';
 import { Temporal } from '@js-temporal/polyfill';
 import { generateDirectionsData } from './generate-data';

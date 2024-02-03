@@ -9,7 +9,7 @@
     { "path": "packages/client/share" },
     { "path": "packages/workers/tsconfig.build.json" },
     { "path": "packages/data/src" },
-    { "path": "packages/data-node/src" },
+    { "path": "packages/data-fixtureure/src" },
     { "path": "packages/mnemonist/src" },
     { "path": "packages/prerender/src" },
     { "path": "packages/presentation/src" },

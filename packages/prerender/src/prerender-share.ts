@@ -1,7 +1,7 @@
-import { NodeJsonRepository } from '@hawaii-bus-plus/data-node';
 import { mkdir } from 'node:fs/promises';
 import { URL } from 'node:url';
 import { distFolder, renderRoutes } from './base.js';
+import { NodeJsonRepository } from './repository.js';
 
 export async function prerenderShare(write: boolean) {
   const repo = new NodeJsonRepository();

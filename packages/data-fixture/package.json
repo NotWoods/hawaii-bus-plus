@@ -1,5 +1,5 @@
 {
-  "name": "@hawaii-bus-plus/data-node",
+  "name": "@hawaii-bus-plus/data-fixture",
   "version": "1.0.0",
   "private": true,
   "type": "module",
@@ -34,7 +34,7 @@
   "eslintConfig": {
     "parserOptions": {
       "project": [
-        "./packages/data-node/*/tsconfig.json"
+        "./packages/data-fixture/*/tsconfig.json"
       ]
     }
   }

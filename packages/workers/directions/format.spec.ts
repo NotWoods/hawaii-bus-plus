@@ -1,4 +1,4 @@
-import { NodeFixtureRepository } from '@hawaii-bus-plus/data-node';
+import { NodeFixtureRepository } from '@hawaii-bus-plus/data-fixture';
 import {
   expectDurationData,
   expectPlainTimeData,

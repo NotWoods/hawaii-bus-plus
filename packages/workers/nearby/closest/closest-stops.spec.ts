@@ -1,4 +1,4 @@
-import { NodeFixtureRepository } from '@hawaii-bus-plus/data-node';
+import { NodeFixtureRepository } from '@hawaii-bus-plus/data-fixture';
 import { expect, test } from 'vitest';
 import { findClosestStops } from './closest-stops.js';
 

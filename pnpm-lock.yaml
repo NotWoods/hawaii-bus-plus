@@ -220,7 +220,7 @@ importers:
         specifier: ^1.2.2
         version: 1.2.2(@types/node@20.11.16)
 
-  packages/data-node:
+  packages/data-fixture:
     dependencies:
       '@hawaii-bus-plus/api-gen':
         specifier: workspace:*
@@ -281,9 +281,9 @@ importers:
 
   packages/prerender:
     dependencies:
-      '@hawaii-bus-plus/data-node':
+      '@hawaii-bus-plus/data':
         specifier: workspace:*
-        version: link:../data-node
+        version: link:../data
       '@js-temporal/polyfill':
         specifier: ^0.4.3
         version: 0.4.3
@@ -315,6 +315,9 @@ importers:
         specifier: ^5.0.12
         version: 5.0.12(@types/node@20.11.16)
     devDependencies:
+      '@hawaii-bus-plus/types':
+        specifier: workspace:*
+        version: link:../types
       '@types/node':
         specifier: ^20.11.16
         version: 20.11.16
@@ -534,9 +537,9 @@ importers:
         specifier: ^2.5.0
         version: 2.5.0
     devDependencies:
-      '@hawaii-bus-plus/data-node':
+      '@hawaii-bus-plus/data-fixture':
         specifier: workspace:*
-        version: link:../data-node
+        version: link:../data-fixture
       '@hawaii-bus-plus/test-utils':
         specifier: workspace:*
         version: link:../test-utils
