@@ -254,8 +254,8 @@ importers:
         specifier: ~2.8.4
         version: 2.8.4
       typescript:
-        specifier: ^4.9.5
-        version: 4.9.5
+        specifier: ^5.3.3
+        version: 5.3.3
 
   packages/identity-email:
     devDependencies:
@@ -466,8 +466,8 @@ importers:
         specifier: ~2.8.4
         version: 2.8.4
       typescript:
-        specifier: ^4.9.5
-        version: 4.9.5
+        specifier: ^5.3.3
+        version: 5.3.3
 
   packages/utils:
     dependencies:
@@ -498,8 +498,8 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       typescript:
-        specifier: ^4.9.5
-        version: 4.9.5
+        specifier: ^5.3.3
+        version: 5.3.3
       vite:
         specifier: ^5.0.12
         version: 5.0.12(@types/node@20.11.16)
