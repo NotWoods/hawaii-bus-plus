@@ -1,4 +1,4 @@
-import { expect, test } from 'ava';
+import { expect, test } from 'vitest';
 import { parse } from '../src/parser.js';
 
 test('should parse html and return root element', () => {

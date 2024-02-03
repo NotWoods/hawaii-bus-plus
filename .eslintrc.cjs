@@ -8,13 +8,12 @@ const config = {
     tsconfigRootDir: __dirname,
     extraFileExtensions: ['.cjs', '.mjs'],
   },
-  plugins: ['@typescript-eslint', 'ava', 'vitest', 'react', 'react-hooks'],
+  plugins: ['@typescript-eslint', 'vitest', 'react', 'react-hooks'],
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:vitest/recommended',
-    'plugin:ava/recommended',
     'prettier',
   ],
   settings: {
@@ -131,12 +130,6 @@ const config = {
     '@typescript-eslint/prefer-namespace-keyword': 'off',
     '@typescript-eslint/prefer-optional-chain': 'error',
     '@typescript-eslint/unified-signatures': 'error',
-    'ava/no-ignored-test-files': [
-      'error',
-      {
-        extensions: ['ts', 'tsx'],
-      },
-    ],
     'prefer-arrow-callback': [
       'error',
       {

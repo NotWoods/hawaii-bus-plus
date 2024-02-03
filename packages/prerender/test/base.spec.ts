@@ -1,9 +1,9 @@
-import { expect, test } from 'ava';
+import { expect, test } from 'vitest';
 import { join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { distFolder, renderRoutes } from '../src/base.js';
 
-test.serial.skip('render auth routes', async () => {
+test.skip('render auth routes', async () => {
   let rendered: { fileName: string; source: string }[];
   try {
     rendered = await renderRoutes({
