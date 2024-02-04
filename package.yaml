@@ -4,14 +4,14 @@ version: 5.0.0
 scripts:
   api: pnpm --filter api-gen run api:client
   build: >-
+    pnpm --filter api-gen run api:client &&
     pnpm --filter client run build &&
     pnpm --filter client run build:ssr &&
-    pnpm --filter api-gen run api:client &&
     pnpm --filter prerender run build &&
     pnpm --filter client run workbox
   clean: >-
     del-cli "dist/**/*" "packages/**/*.js" "packages/**/*.d.ts"
-    "packages/**/*.map" "packages/**/*.tsbuildinfo"
+    "packages/**/*.map" "packages/**/*.tsbuildinfo" "packages/client/public/api/v1/**/*.json"
   dev: pnpm --filter client run dev
   format: prettier *.yaml *.cjs *.json .github/**/*.yml --write
   tsc: tsc --build .
