@@ -47,7 +47,10 @@ export function HomeOverlay() {
     case 'search':
       return (
         <BaseOverlay title="Search" onNavigate={() => setScreen('home')}>
-          <SimpleSearch onDirections={() => setScreen('directions')} />
+          <SimpleSearch
+            autoFocus
+            onDirections={() => setScreen('directions')}
+          />
         </BaseOverlay>
       );
     case 'directions':
