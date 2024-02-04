@@ -36,7 +36,10 @@ export function usePromise(
 
   useAbortEffect((signal) => {
     effect(signal).catch((err: unknown) => {
-      if (err instanceof AbortError) {
+      if (
+        err instanceof AbortError ||
+        (err as { name?: unknown }).name === 'AbortError'
+      ) {
         // Ignore abort errors
         return;
       }
