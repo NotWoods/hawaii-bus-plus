@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import type { ComponentChildren, JSX } from 'preact';
+import type { ComponentChildren } from 'preact';
 import { useEffect } from 'preact/hooks';
 import { UpIcon } from '../../assets/icons/MenuIcon';
 import { IconButton } from '../../components/Button/IconButton';
@@ -17,22 +17,16 @@ interface Props {
   title?: ComponentChildren;
   /**
    * Slot for the logo in the app bar.
-   * Will replace the title if both are provided.
+   * Will replace the title and navigation button if both are provided.
    */
   logo?: ComponentChildren;
-  /**
-   * Slot for the navigation button in the app bar.
-   */
-  navigation?: Omit<JSX.HTMLAttributes<HTMLButtonElement>, 'icon'> & {
-    icon?: ComponentChildren;
-  };
   /**
    * Click handler for the navigation button.
    */
   onNavigate?: () => void;
 }
 
-export function BaseOverlay(props: Props) {
+export function BaseOverlay({ children, title, logo, onNavigate }: Props) {
   const { loadError } = useLoadGoogleMaps();
 
   useEffect(() => {
@@ -41,8 +35,6 @@ export function BaseOverlay(props: Props) {
     }
   }, [loadError]);
 
-  const { icon, ...navigationSlot } = props.navigation ?? {};
-
   return (
     <section
       class={clsx(
@@ -50,24 +42,29 @@ export function BaseOverlay(props: Props) {
         { 'h-screen': loadError != undefined },
       )}
     >
-      <header class="flex items-center pt-4">
-        <IconButton
-          id="appBarUp"
-          onClick={props.onNavigate}
-          {...navigationSlot}
-          forceDark
-          accessKey="s"
-          disabled={icon === false}
-        >
-          {icon ?? <UpIcon />}
-        </IconButton>
-        {props.logo ? (
-          props.logo
-        ) : props.title ? (
-          <h2 class="font-display font-medium text-2xl">{props.title}</h2>
-        ) : null}
+      <header
+        class={clsx(
+          'flex items-center pt-4 min-h-16',
+          logo ? 'justify-center' : '',
+        )}
+      >
+        {logo ?? (
+          <>
+            <IconButton
+              id="appBarUp"
+              onClick={onNavigate}
+              forceDark
+              accessKey="s"
+            >
+              <UpIcon />
+            </IconButton>
+            {title ? (
+              <h2 class="font-display font-medium text-2xl">{title}</h2>
+            ) : null}
+          </>
+        )}
       </header>
-      {props.children}
+      {children}
     </section>
   );
 }

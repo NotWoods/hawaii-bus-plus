@@ -1,26 +1,14 @@
-import { useCallback, useRef, useState } from 'preact/hooks';
-import { MenuIcon } from '../../../assets/icons/MenuIcon';
+import { useState } from 'preact/hooks';
 import { Logo } from '../../../components/Logo';
-import { useLazyComponent, useToggle } from '../../hooks';
 import { BaseOverlay } from '../BaseOverlay';
 import { DirectionsSearch } from '../search/directions/DirectionsSearch';
 import { SimpleSearch } from '../search/simple/SimpleSearch';
 import { Home } from './Home';
 
-const lazyMenu = import('./menu/Menu');
-
 export function HomeOverlay() {
-  const [menuOpen, { toggle: toggleMenu, setFalse: closeMenu }] = useToggle();
   const [screen, setScreen] = useState<'home' | 'search' | 'directions'>(
     'home',
   );
-  const { Menu } = useLazyComponent(() => lazyMenu);
-
-  const iconRef = useRef<HTMLButtonElement>(null);
-  const dismissMenu = useCallback(() => {
-    iconRef.current?.focus();
-    closeMenu();
-  }, [closeMenu]);
 
   switch (screen) {
     case 'home':
@@ -31,16 +19,7 @@ export function HomeOverlay() {
               <Logo />
             </a>
           }
-          navigation={{
-            icon: <MenuIcon open={menuOpen} />,
-            'aria-expanded': menuOpen,
-            onClick: toggleMenu,
-            ref: iconRef,
-          }}
         >
-          {menuOpen && Menu ? (
-            <Menu labelledBy="appBarUp" onDismiss={dismissMenu} />
-          ) : undefined}
           <Home onSearch={() => setScreen('search')} />
         </BaseOverlay>
       );
