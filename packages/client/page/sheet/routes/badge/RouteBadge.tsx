@@ -51,6 +51,6 @@ export function RouteBadges({ routes, omit, clear }: RouteBadgesProps) {
   if (!badges || badges.length === 0) {
     return clear ? null : <span class="flex gap-1">{BLANK}</span>;
   } else {
-    return <span class="flex gap-1">{badges}</span>;
+    return <span class="flex gap-1 flex-wrap">{badges}</span>;
   }
 }

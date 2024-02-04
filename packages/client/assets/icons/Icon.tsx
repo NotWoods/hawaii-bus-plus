@@ -33,7 +33,7 @@ export function BaseIcon(props: {
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
       class={clsx(
-        'w-6',
+        'box-content w-6',
         {
           'h-6': !props.class?.includes('h-'),
           'fill-current': !props.fillBlack,

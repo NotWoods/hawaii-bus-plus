@@ -45,6 +45,7 @@ export function DirectionsFields(props: Props) {
   return (
     <>
       <DirectionsField
+        autoFocus
         id="directionsDepart"
         aria-owns="searchResults_depart"
         inputRef={props.departRef}

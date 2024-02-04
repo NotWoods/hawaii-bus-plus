@@ -7,6 +7,7 @@ import { LeadingInputIcon, SearchInput } from '../SearchInput';
 
 interface Props {
   id: string;
+  autoFocus?: boolean;
   point?: Point;
   label: ComponentChildren;
   inputRef?: Ref<HTMLInputElement>;
@@ -45,6 +46,7 @@ export function DirectionsField(props: Props) {
       <div class="relative shadow-sm">
         <SearchInput
           id={id}
+          autoFocus={props.autoFocus}
           inputRef={props.inputRef}
           class={clsx({ 'pl-10': point, 'border-red-500': invalid })}
           aria-owns={props['aria-owns']}

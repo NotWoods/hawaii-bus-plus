@@ -10,6 +10,7 @@ import { emptyResults } from './places-autocomplete';
 import { useSearch } from './useSearch';
 
 interface Props {
+  autoFocus?: boolean;
   onDirections?(): void;
 }
 
@@ -54,6 +55,7 @@ export function SimpleSearch(props: Props) {
   return (
     <>
       <SearchBar
+        autoFocus={props.autoFocus}
         inputRef={searchRef}
         value={search}
         onInput={setSearch}
