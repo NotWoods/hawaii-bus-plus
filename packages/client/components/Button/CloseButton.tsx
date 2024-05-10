@@ -11,6 +11,7 @@ export function CloseButton(props: Props) {
   return (
     <IconButton
       class={props.class}
+      title="Close"
       onClick={props.onClick}
       style={{ gridArea: 'close' }}
     >
