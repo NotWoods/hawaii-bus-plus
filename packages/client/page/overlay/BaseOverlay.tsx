@@ -55,6 +55,7 @@ export function BaseOverlay({ children, title, logo, onNavigate }: Props) {
               onClick={onNavigate}
               forceDark
               accessKey="s"
+              title="Up"
             >
               <UpIcon />
             </IconButton>

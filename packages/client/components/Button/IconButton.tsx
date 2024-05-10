@@ -3,6 +3,7 @@ import type { JSX } from 'preact';
 import { forwardRef } from 'preact/compat';
 
 interface Props extends JSX.HTMLAttributes<HTMLButtonElement> {
+  title?: string;
   forceDark?: boolean;
 }
 
@@ -17,6 +18,7 @@ export const IconButton = forwardRef<HTMLButtonElement, Props>(
     return (
       <button
         type="button"
+        aria-label={props.title}
         {...props}
         class={clsx(
           'block flex-shrink-0 rounded-full w-12 h-12 p-3 focus:ring-cyan focus:border-cyan border-transparent bg-opacity-0 dark:bg-opacity-0 hover:bg-opacity-10 motion-safe:transition-colors',
