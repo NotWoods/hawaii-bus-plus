@@ -4,7 +4,7 @@ export function routeShareUrl(
   routeId: Route['route_id'],
   tripId?: Trip['trip_id'],
 ) {
-  let shareHref = `https://hibus.plus/routes/${routeId}`;
+  let shareHref = `https://app.hawaiibusplus.com/share/routes/${routeId}`;
   if (tripId) {
     shareHref += `#${tripId}`;
   }

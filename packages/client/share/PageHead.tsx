@@ -27,11 +27,11 @@ export function PageHead({ route, mapUrl }: Props) {
       <meta property="og:image" content={mapUrl} />
       <meta
         property="og:url"
-        content={`https://hibus.plus/routes/${route.route_id}`}
+        content={`https://app.hawaiibusplus.com/share/routes/${route.route_id}`}
       />
       <link
         rel="canonical"
-        href={`https://hibus.plus/routes/${route.route_id}`}
+        href={`https://app.hawaiibusplus.com/share/routes/${route.route_id}`}
       />
     </Head>
   );
