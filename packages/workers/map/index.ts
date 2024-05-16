@@ -1,4 +1,4 @@
 import MapWorker from './worker-map?worker';
 
-export * from './worker-map';
+export type * from './worker-map';
 export { MapWorker };

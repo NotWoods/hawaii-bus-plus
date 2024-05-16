@@ -1,4 +1,4 @@
 import SearchWorker from './worker-search?worker';
 
-export * from './worker-search';
+export type * from './worker-search';
 export { SearchWorker };
