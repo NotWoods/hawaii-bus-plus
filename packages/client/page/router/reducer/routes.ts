@@ -1,16 +1,16 @@
 import {
   CLOSE_ROUTE_DETAILS_TYPE,
-  OpenRouteAction,
   RESET_TRIP_DETAILS_TYPE,
   ROUTE_DETAILS_TYPE,
   SET_DIRECTION_TYPE,
   SWAP_DIRECTION_TYPE,
   TRIP_DETAILS_TYPE,
+  type OpenRouteAction,
 } from '../action/routes';
 import {
   initialDetails,
-  OpenRouteState,
-  RouteDetailState,
+  type OpenRouteState,
+  type RouteDetailState,
 } from '../state/main';
 
 function validDirectionIds(directions: readonly unknown[]) {

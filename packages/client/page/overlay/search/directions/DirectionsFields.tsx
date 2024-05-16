@@ -1,4 +1,4 @@
-import { Point } from '@hawaii-bus-plus/presentation';
+import type { Point } from '@hawaii-bus-plus/presentation';
 import type { Ref } from 'preact';
 import { useEffect, useRef } from 'preact/hooks';
 import type { SearchResults } from '@hawaii-bus-plus/workers/search';

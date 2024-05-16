@@ -1,4 +1,4 @@
-import { Agency, Route, Trip } from '@hawaii-bus-plus/types';
+import type { Agency, Route, Trip } from '@hawaii-bus-plus/types';
 
 import { useCallback } from 'preact/hooks';
 import { DetailButtons as BareDetailButtons } from '../../../../../components/RouteDescription/DetailButtons';

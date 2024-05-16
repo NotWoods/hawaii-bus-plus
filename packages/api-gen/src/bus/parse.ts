@@ -1,26 +1,26 @@
 import { PlainDaysTime } from '@hawaii-bus-plus/temporal-utils';
 import type { Shape } from '@hawaii-bus-plus/types';
 import { compareAs, toInt, valueNotNull } from '@hawaii-bus-plus/utils';
-import { parse } from 'csv-parse';
-import JSZip, { JSZipObject } from 'jszip';
 import type { Temporal } from '@js-temporal/polyfill';
+import { parse } from 'csv-parse';
+import JSZip, { type JSZipObject } from 'jszip';
 import type { Writable } from 'type-fest';
 import { cacheStations } from '../bike/stations.js';
 import { cast } from './cast.js';
+import { zip } from './itertools.js';
 import {
-  JsonStreams,
   parseAgency,
   parseCalendar,
   parseFeedInfo,
   parseRoutes,
   parseShapes,
-  parseStops,
   parseStopTimes,
+  parseStops,
   parseTrips,
-  ServerGTFSData,
-  TripInflated,
+  type JsonStreams,
+  type ServerGTFSData,
+  type TripInflated,
 } from './parsers.js';
-import { zip } from './itertools.js';
 import { removeHiddenCharacters } from './stream.js';
 
 const STARTS_WITH_TIME = /^\d\d?:\d\d/;

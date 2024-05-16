@@ -1,4 +1,4 @@
-import { getSingle, Repository } from '@hawaii-bus-plus/data';
+import { getSingle, type Repository } from '@hawaii-bus-plus/data';
 import { nowWithZone } from '@hawaii-bus-plus/temporal-utils';
 import type { Agency, Calendar, Route, Stop } from '@hawaii-bus-plus/types';
 import { Temporal } from '@js-temporal/polyfill';

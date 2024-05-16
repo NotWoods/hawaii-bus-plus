@@ -1,6 +1,6 @@
-import { ComponentChildren, createContext } from 'preact';
+import { createContext, type ComponentChildren } from 'preact';
 import { useContext, useState } from 'preact/hooks';
-import { SnackbarProps } from './Snackbar';
+import { type SnackbarProps } from './Snackbar';
 
 type SnackbarData = Omit<SnackbarProps, 'class' | 'onClose'>;
 

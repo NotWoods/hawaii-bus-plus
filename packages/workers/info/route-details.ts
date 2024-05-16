@@ -1,15 +1,15 @@
-import { Repository } from '@hawaii-bus-plus/data';
+import type { Repository } from '@hawaii-bus-plus/data';
 import { durationToData } from '@hawaii-bus-plus/presentation';
-import { Agency, ColorString, Route, Stop } from '@hawaii-bus-plus/types';
+import type { Agency, ColorString, Route, Stop } from '@hawaii-bus-plus/types';
 import type { Temporal } from '@js-temporal/polyfill';
-import { LatLngBounds, LatLngBoundsLiteral } from 'spherical-geometry-js';
-import { DescriptionPart, extractLinks } from './description';
+import { LatLngBounds, type LatLngBoundsLiteral } from 'spherical-geometry-js';
+import { extractLinks, type DescriptionPart } from './description';
 import { loadCalendarAgency, routeStopDetails } from './shared';
-import { FormatOptions, zonedTime } from './stop-time';
+import { zonedTime, type FormatOptions } from './stop-time';
 import {
-  DirectionDetails,
   findBestTrips,
   formatTripDetails,
+  type DirectionDetails,
 } from './trip-details';
 
 export interface RouteDetails {

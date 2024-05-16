@@ -4,7 +4,7 @@ import {
   expectPlainTimeData,
 } from '@hawaii-bus-plus/test-utils';
 import { PlainDaysTime } from '@hawaii-bus-plus/temporal-utils';
-import { Stop, StopTime, TimeString, Trip } from '@hawaii-bus-plus/types';
+import type { Stop, StopTime, TimeString, Trip } from '@hawaii-bus-plus/types';
 import { test } from 'vitest';
 import { Temporal } from '@js-temporal/polyfill';
 import { journeyToDirections, JourneyTripSegment } from './format';

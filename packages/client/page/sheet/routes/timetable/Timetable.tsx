@@ -1,4 +1,4 @@
-import { Trip } from '@hawaii-bus-plus/types';
+import type { Trip } from '@hawaii-bus-plus/types';
 
 import type { Temporal } from '@js-temporal/polyfill';
 import type {

@@ -1,4 +1,4 @@
-import { Inputs, useCallback } from 'preact/hooks';
+import { useCallback, type Inputs } from 'preact/hooks';
 
 /**
  * Helps handle keyboard navigation for a list of links.

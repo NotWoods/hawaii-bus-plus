@@ -1,4 +1,4 @@
-import { ColorString, Shape, Stop } from '@hawaii-bus-plus/types';
+import type { ColorString, Shape, Stop } from '@hawaii-bus-plus/types';
 import { last } from '@hawaii-bus-plus/utils';
 import type { ComponentChildren } from 'preact';
 import { memo } from 'preact/compat';

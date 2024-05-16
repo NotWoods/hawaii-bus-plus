@@ -1,5 +1,5 @@
 import { test, expect } from 'vitest';
-import { Calendar, DateString } from '@hawaii-bus-plus/types';
+import type { Calendar, DateString } from '@hawaii-bus-plus/types';
 import { Temporal } from '@js-temporal/polyfill';
 import { calendarRunsOn } from '../src/calendar.js';
 

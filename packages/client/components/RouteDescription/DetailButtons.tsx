@@ -1,4 +1,4 @@
-import { Agency, Route, Trip } from '@hawaii-bus-plus/types';
+import type { Agency, Route, Trip } from '@hawaii-bus-plus/types';
 import clsx from 'clsx';
 
 import { monetization_on, share } from '../../assets/icons/paths';

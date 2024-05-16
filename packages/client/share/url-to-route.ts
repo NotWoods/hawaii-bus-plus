@@ -1,6 +1,6 @@
-import { Repository } from '@hawaii-bus-plus/data';
-import { Route, Stop, Trip } from '@hawaii-bus-plus/types';
-import { AppProps } from './App';
+import type { Repository } from '@hawaii-bus-plus/data';
+import type { Route, Stop, Trip } from '@hawaii-bus-plus/types';
+import type { AppProps } from './App';
 
 const ROUTES_PREFIX = '/share/routes/';
 

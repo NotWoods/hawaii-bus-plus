@@ -1,10 +1,10 @@
 import {
-  PlainTimeData,
   plainTimeToData,
-  StopTimeData,
+  type PlainTimeData,
+  type StopTimeData,
 } from '@hawaii-bus-plus/presentation';
 import { PlainDaysTime } from '@hawaii-bus-plus/temporal-utils';
-import { Route, Stop, StopTime, TimeString } from '@hawaii-bus-plus/types';
+import type { Route, Stop, StopTime, TimeString } from '@hawaii-bus-plus/types';
 import { Temporal } from '@js-temporal/polyfill';
 import { isDefined } from 'ts-extras';
 

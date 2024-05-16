@@ -1,7 +1,10 @@
-import { Repository } from '@hawaii-bus-plus/data';
-import { Stop } from '@hawaii-bus-plus/types';
+import type { Repository } from '@hawaii-bus-plus/data';
+import type { Stop } from '@hawaii-bus-plus/types';
 import { compareAs } from '@hawaii-bus-plus/utils';
-import { computeDistanceBetween, LatLngLiteral } from 'spherical-geometry-js';
+import {
+  computeDistanceBetween,
+  type LatLngLiteral,
+} from 'spherical-geometry-js';
 
 export interface StopWithDistance extends Stop {
   distance: number;

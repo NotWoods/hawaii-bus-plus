@@ -1,5 +1,5 @@
-import { StopTimeData } from '@hawaii-bus-plus/presentation';
-import { Agency } from '@hawaii-bus-plus/types';
+import type { StopTimeData } from '@hawaii-bus-plus/presentation';
+import type { Agency } from '@hawaii-bus-plus/types';
 
 import type { DirectionDetails } from '@hawaii-bus-plus/workers/info';
 import { Link } from '../../../../router/Router';

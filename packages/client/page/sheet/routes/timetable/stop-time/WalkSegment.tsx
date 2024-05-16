@@ -1,4 +1,4 @@
-import { formatWalkingTime, Walking } from '@hawaii-bus-plus/presentation';
+import { formatWalkingTime, type Walking } from '@hawaii-bus-plus/presentation';
 
 import { BaseSegment } from './BaseSegment';
 

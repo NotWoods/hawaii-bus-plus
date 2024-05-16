@@ -1,5 +1,5 @@
-import { Route } from '@hawaii-bus-plus/types';
-import { Helmet, HelmetProps } from '@notwoods/preact-helmet';
+import type { Route } from '@hawaii-bus-plus/types';
+import { Helmet, type HelmetProps } from '@notwoods/preact-helmet';
 import type { ComponentChildren } from 'preact';
 
 export function routeTitle(route: Route) {

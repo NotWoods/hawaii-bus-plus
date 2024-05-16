@@ -1,4 +1,4 @@
-import { Route, Trip } from '@hawaii-bus-plus/types';
+import type { Route, Trip } from '@hawaii-bus-plus/types';
 import { Fragment } from 'preact';
 
 interface Props {

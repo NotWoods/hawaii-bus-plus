@@ -1,9 +1,9 @@
-import { DateString, Route, Stop, Trip } from '@hawaii-bus-plus/types';
+import type { DateString, Route, Stop, Trip } from '@hawaii-bus-plus/types';
 import { Temporal } from '@js-temporal/polyfill';
-import { BaseMessageRequest, registerWorker } from '../shared/register';
-import { getRouteDetails, RouteDetails } from './route-details';
-import { loadStop, StopDetails } from './stop-details';
-import { getTripDetails, TripDetails } from './trip-details';
+import { registerWorker, type BaseMessageRequest } from '../shared/register';
+import { getRouteDetails, type RouteDetails } from './route-details';
+import { loadStop, type StopDetails } from './stop-details';
+import { getTripDetails, type TripDetails } from './trip-details';
 
 interface RouteInfoMessage extends BaseMessageRequest {
   type: 'route';

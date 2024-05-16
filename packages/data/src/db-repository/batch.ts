@@ -1,7 +1,7 @@
-import { Agency, Route, Stop } from '@hawaii-bus-plus/types';
+import type { Agency, Route, Stop } from '@hawaii-bus-plus/types';
 import { batch } from '@hawaii-bus-plus/utils';
-import { IDBPDatabase, StoreKey } from 'idb';
-import { GTFSSchema } from '../database.js';
+import type { IDBPDatabase, StoreKey } from 'idb';
+import type { GTFSSchema } from '../database.js';
 
 function batchLoad<Name extends 'routes' | 'agency' | 'stops'>(
   storeName: Name,

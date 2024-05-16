@@ -1,5 +1,5 @@
-import { Repository } from '@hawaii-bus-plus/data';
-import { StationInformation, Stop } from '@hawaii-bus-plus/types';
+import type { Repository } from '@hawaii-bus-plus/data';
+import type { StationInformation, Stop } from '@hawaii-bus-plus/types';
 
 export interface MarkersResponse {
   stops: readonly Stop[];

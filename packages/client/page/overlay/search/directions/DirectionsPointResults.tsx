@@ -1,4 +1,4 @@
-import { Point } from '@hawaii-bus-plus/presentation';
+import type { Point } from '@hawaii-bus-plus/presentation';
 
 import type { SearchResults } from '@hawaii-bus-plus/workers/search';
 import { getDetails, usePlacesService } from '../../../hooks/usePlacesService';

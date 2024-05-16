@@ -1,8 +1,8 @@
-import { Agency, Route, Trip } from '@hawaii-bus-plus/types';
+import type { Agency, Route, Trip } from '@hawaii-bus-plus/types';
 
 import {
-  DescriptionPart,
   RouteDescription,
+  type DescriptionPart,
 } from '../../../../components/RouteDescription/RouteDescription';
 import { DetailButtons } from './details/DetailButtons';
 

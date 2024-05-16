@@ -1,6 +1,6 @@
 import { PromiseWorker } from '@hawaii-bus-plus/promise-worker';
 import { useCallback } from 'preact/hooks';
-import { WorkerConstructor } from './useWorker';
+import type { WorkerConstructor } from './useWorker';
 
 interface WorkerEntry {
   readonly worker: PromiseWorker;

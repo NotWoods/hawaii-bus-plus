@@ -1,10 +1,10 @@
-import { ColorString, Stop } from '@hawaii-bus-plus/types';
+import type { ColorString, Stop } from '@hawaii-bus-plus/types';
 import { memo } from 'preact/compat';
 import { useState } from 'preact/hooks';
 import {
   MapWorker,
-  MapWorkerHandler,
-  MarkersResponse,
+  type MapWorkerHandler,
+  type MarkersResponse,
 } from '@hawaii-bus-plus/workers/map';
 import { usePromise, useWorker } from '../../hooks';
 import { dbInitialized } from '../../api';

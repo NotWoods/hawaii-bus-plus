@@ -1,4 +1,4 @@
-import { TimeString } from '@hawaii-bus-plus/types';
+import type { TimeString } from '@hawaii-bus-plus/types';
 import { toInt } from '@hawaii-bus-plus/utils';
 import { Temporal } from '@js-temporal/polyfill';
 

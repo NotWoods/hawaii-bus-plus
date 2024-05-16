@@ -1,4 +1,4 @@
-import { Calendar, DateString } from '@hawaii-bus-plus/types';
+import type { Calendar, DateString } from '@hawaii-bus-plus/types';
 import type { Temporal } from '@js-temporal/polyfill';
 
 /**

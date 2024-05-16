@@ -1,5 +1,5 @@
 import { BaseMemoryRepository } from '@hawaii-bus-plus/data';
-import { GTFSData } from '@hawaii-bus-plus/types';
+import type { GTFSData } from '@hawaii-bus-plus/types';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { URL } from 'node:url';

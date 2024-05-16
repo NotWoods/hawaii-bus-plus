@@ -1,4 +1,4 @@
-import { Route } from '@hawaii-bus-plus/types';
+import type { Route } from '@hawaii-bus-plus/types';
 
 import { SmallRouteIcon } from '../RouteIcon/RouteIcon';
 import { colorVariables } from '../route-colors';

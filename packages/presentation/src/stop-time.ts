@@ -1,5 +1,5 @@
-import { Route, Stop } from '@hawaii-bus-plus/types';
-import { PlainTimeData } from './time';
+import type { Route, Stop } from '@hawaii-bus-plus/types';
+import type { PlainTimeData } from './time';
 
 export interface StopTimeData {
   readonly stop: Stop;

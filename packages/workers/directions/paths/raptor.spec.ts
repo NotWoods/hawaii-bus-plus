@@ -1,6 +1,6 @@
 import { NodeFixtureRepository } from '@hawaii-bus-plus/data-fixture';
 import { PlainDaysTime } from '@hawaii-bus-plus/temporal-utils';
-import { Stop, TimeString } from '@hawaii-bus-plus/types';
+import type { Stop, TimeString } from '@hawaii-bus-plus/types';
 import { test } from 'vitest';
 import { Temporal } from '@js-temporal/polyfill';
 import { raptorDirections } from './raptor';

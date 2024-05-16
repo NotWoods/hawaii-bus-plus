@@ -1,5 +1,5 @@
-import { MarkerWithData } from '@hawaii-bus-plus/react-google-maps';
-import { ColorString, Stop } from '@hawaii-bus-plus/types';
+import type { MarkerWithData } from '@hawaii-bus-plus/react-google-maps';
+import type { ColorString, Stop } from '@hawaii-bus-plus/types';
 import { useCallback } from 'preact/hooks';
 import { setStopAction } from '../../router/action/point';
 import { useDispatch, useSelector } from '../../router/hooks';

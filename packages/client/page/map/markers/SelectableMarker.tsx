@@ -1,4 +1,7 @@
-import { Marker, MarkerWithData } from '@hawaii-bus-plus/react-google-maps';
+import {
+  Marker,
+  type MarkerWithData,
+} from '@hawaii-bus-plus/react-google-maps';
 
 import { memo } from 'preact/compat';
 import { pinsIcon } from '../pins';

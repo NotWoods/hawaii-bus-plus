@@ -1,5 +1,5 @@
 import { useLazyComponent } from '../hooks';
-import { DIRECTIONS_PATH, MainState } from '../router/state';
+import { DIRECTIONS_PATH, type MainState } from '../router/state';
 import { RouteTimetable } from './routes/RouteTimetable';
 
 export function MainSheet({ main }: { main?: MainState }) {

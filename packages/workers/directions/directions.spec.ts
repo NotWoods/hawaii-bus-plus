@@ -3,9 +3,9 @@ import {
   expectDurationData,
   expectPlainTimeData,
 } from '@hawaii-bus-plus/test-utils';
-import { Point } from '@hawaii-bus-plus/presentation';
+import type { Point } from '@hawaii-bus-plus/presentation';
 import { PlainDaysTime } from '@hawaii-bus-plus/temporal-utils';
-import { Stop, StopTime, TimeString, Trip } from '@hawaii-bus-plus/types';
+import type { Stop, StopTime, TimeString, Trip } from '@hawaii-bus-plus/types';
 import { last } from '@hawaii-bus-plus/utils';
 import { test } from 'vitest';
 import { Temporal } from '@js-temporal/polyfill';

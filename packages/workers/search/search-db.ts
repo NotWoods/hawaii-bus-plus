@@ -1,6 +1,6 @@
-import { Repository } from '@hawaii-bus-plus/data';
-import { Agency, Route, Stop } from '@hawaii-bus-plus/types';
-import { applyOffset, SearchRequest } from './helpers';
+import type { Repository } from '@hawaii-bus-plus/data';
+import type { Agency, Route, Stop } from '@hawaii-bus-plus/types';
+import { applyOffset, type SearchRequest } from './helpers';
 
 export interface RouteSearchResult extends Route {
   agency: Agency;

@@ -1,5 +1,5 @@
 import { difference } from '@hawaii-bus-plus/mnemonist';
-import {
+import type {
   Agency,
   Calendar,
   GTFSData,
@@ -9,8 +9,8 @@ import {
   Trip,
 } from '@hawaii-bus-plus/types';
 import { batch } from '@hawaii-bus-plus/utils';
-import { IDBPDatabase } from 'idb';
-import {
+import type { IDBPDatabase } from 'idb';
+import type {
   GTFSSchema,
   SearchBikeStation,
   SearchRoute,

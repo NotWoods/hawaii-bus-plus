@@ -1,6 +1,6 @@
 import {
-  LoaderOptions,
   useGoogleApiLoaded,
+  type LoaderOptions,
 } from '@hawaii-bus-plus/react-google-maps';
 import { useOnline } from './useOnline';
 

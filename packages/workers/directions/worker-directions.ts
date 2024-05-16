@@ -1,7 +1,7 @@
-import { Point } from '@hawaii-bus-plus/presentation';
+import type { Point } from '@hawaii-bus-plus/presentation';
 import { Temporal } from '@js-temporal/polyfill';
 import { registerWorker } from '../shared/register';
-import { directions, DirectionsResult } from './directions';
+import { directions, type DirectionsResult } from './directions';
 
 export type { Journey, JourneyTripSegment } from './format';
 export type { DirectionsResult };

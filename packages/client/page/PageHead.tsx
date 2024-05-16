@@ -1,7 +1,7 @@
 import { Head, routeTitle } from '../components/Head/Head';
 import { useSelector } from './router/hooks';
 import { selectRouteDetails, selectUrl } from './router/selector/main';
-import { RouterState } from './router/state';
+import type { RouterState } from './router/state';
 
 function selectCanonical(state: Pick<RouterState, 'main'>) {
   return selectUrl(state, 'https://app.hawaiibusplus.com').href;

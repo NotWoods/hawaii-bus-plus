@@ -1,5 +1,5 @@
-import { Point } from '@hawaii-bus-plus/presentation';
-import { MainState } from './main';
+import type { Point } from '@hawaii-bus-plus/presentation';
+import type { MainState } from './main';
 
 export * from './main';
 

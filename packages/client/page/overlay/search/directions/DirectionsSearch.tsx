@@ -1,11 +1,11 @@
-import { Point } from '@hawaii-bus-plus/presentation';
-import { useRef, useState } from 'preact/hooks';
-import type { Temporal } from '@js-temporal/polyfill';
+import type { Point } from '@hawaii-bus-plus/presentation';
 import {
-  DirectionsResult,
   DirectionsWorker,
-  DirectionsWorkerHandler,
+  type DirectionsResult,
+  type DirectionsWorkerHandler,
 } from '@hawaii-bus-plus/workers/directions';
+import type { Temporal } from '@js-temporal/polyfill';
+import { useRef, useState } from 'preact/hooks';
 import { dbInitialized } from '../../../api';
 import {
   useDelay,
@@ -16,10 +16,10 @@ import {
 import { LoadingBusIcon } from '../../../loading/LoadingBusIcon';
 import { DirectionsTime } from '../../../sheet/directions/DirectionsTime';
 import { NOW, timeForWorker } from '../../../time/input/symbol';
-import { emptyResults } from '../simple/places-autocomplete';
 import { lazySearchResults } from '../simple/SimpleSearch';
+import { emptyResults } from '../simple/places-autocomplete';
 import { useAutocompleteKeys } from '../useAutocompleteKeys';
-import { DirectionsFields, FieldsSearchResults } from './DirectionsFields';
+import { DirectionsFields, type FieldsSearchResults } from './DirectionsFields';
 
 interface Props {
   onClose?(): void;

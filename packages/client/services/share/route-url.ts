@@ -1,4 +1,4 @@
-import { Route, Trip } from '@hawaii-bus-plus/types';
+import type { Route, Trip } from '@hawaii-bus-plus/types';
 
 export function routeShareUrl(
   routeId: Route['route_id'],

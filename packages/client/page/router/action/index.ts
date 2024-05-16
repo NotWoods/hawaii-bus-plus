@@ -1,6 +1,6 @@
-import { RouterState } from '../state';
-import { MainRouterAction } from './main';
-import { PointRouterAction } from './point';
+import type { RouterState } from '../state';
+import type { MainRouterAction } from './main';
+import type { PointRouterAction } from './point';
 
 export type RouterAction =
   | ReturnType<typeof linkAction>

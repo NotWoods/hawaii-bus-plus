@@ -1,5 +1,5 @@
 import { memoize } from '@hawaii-bus-plus/utils';
-import { DurationData, formatDuration } from './duration.js';
+import { formatDuration, type DurationData } from './duration.js';
 
 export interface Walking {
   /** How long it takes to walk to a location */

@@ -1,6 +1,6 @@
 import { useContext } from 'preact/hooks';
 import { RouterContext } from './Router';
-import { RouterState } from './state';
+import type { RouterState } from './state';
 
 export function useSelector<Selected>(
   selector: (state: RouterState) => Selected,

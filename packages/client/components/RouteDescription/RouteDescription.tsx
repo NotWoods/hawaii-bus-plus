@@ -1,6 +1,6 @@
-import { Agency } from '@hawaii-bus-plus/types';
-import { ComponentChildren, Fragment } from 'preact';
+import type { Agency } from '@hawaii-bus-plus/types';
 import type { DescriptionPart } from '@hawaii-bus-plus/workers/info';
+import { Fragment, type ComponentChildren } from 'preact';
 
 export type { DescriptionPart };
 

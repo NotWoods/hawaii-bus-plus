@@ -1,5 +1,5 @@
 import { AbortError } from '@hawaii-bus-plus/promise-worker';
-import { Inputs, useEffect } from 'preact/hooks';
+import { useEffect, type Inputs } from 'preact/hooks';
 import { useSnackbar } from '../snackbar/context';
 
 export class Warning extends Error {}

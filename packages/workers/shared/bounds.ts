@@ -1,5 +1,5 @@
-import { Stop } from '@hawaii-bus-plus/types';
-import { LatLngBounds, LatLngBoundsLiteral } from 'spherical-geometry-js';
+import type { Stop } from '@hawaii-bus-plus/types';
+import { LatLngBounds, type LatLngBoundsLiteral } from 'spherical-geometry-js';
 
 export function boundsFromStops(
   stops: Iterable<Stop>,

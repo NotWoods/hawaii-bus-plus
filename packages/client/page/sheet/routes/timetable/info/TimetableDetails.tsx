@@ -1,8 +1,8 @@
-import { Agency } from '@hawaii-bus-plus/types';
+import type { Agency } from '@hawaii-bus-plus/types';
 import debounce from 'just-debounce';
 
 import { useCallback, useEffect, useRef } from 'preact/hooks';
-import { DirectionDetails } from '@hawaii-bus-plus/workers/info';
+import type { DirectionDetails } from '@hawaii-bus-plus/workers/info';
 import { setDirectionAction } from '../../../../router/action/routes';
 import { useDispatch, useSelector } from '../../../../router/hooks';
 import { selectLoadedDetails } from '../../../../router/selector/main';

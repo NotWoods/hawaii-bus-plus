@@ -1,4 +1,4 @@
-import { StationInformation, Stop } from '@hawaii-bus-plus/types';
+import type { StationInformation, Stop } from '@hawaii-bus-plus/types';
 
 interface LatLngLike {
   lat: number;

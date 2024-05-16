@@ -6,7 +6,7 @@ import {
   leadingInputClass,
   SearchInput,
   searchInputClass,
-  SearchProps,
+  type SearchProps,
 } from './SearchInput';
 
 export function SearchBar(props: SearchProps) {

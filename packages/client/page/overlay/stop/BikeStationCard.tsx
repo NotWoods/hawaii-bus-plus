@@ -1,4 +1,4 @@
-import { BikeStationPoint } from '@hawaii-bus-plus/presentation';
+import type { BikeStationPoint } from '@hawaii-bus-plus/presentation';
 
 import { PlaceInfo } from './PlaceInfo';
 import { PointBase } from './PointBase';

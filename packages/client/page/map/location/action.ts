@@ -1,4 +1,4 @@
-import { Coordinates } from './ipstack';
+import type { Coordinates } from './ipstack';
 
 export type LocationAction =
   | ReturnType<typeof foundCoordinatesAction>

@@ -1,4 +1,4 @@
-import { Route, Stop } from '@hawaii-bus-plus/types';
+import type { Route, Stop } from '@hawaii-bus-plus/types';
 
 import { GOOGLE_MAPS_KEY } from '../../services/env';
 

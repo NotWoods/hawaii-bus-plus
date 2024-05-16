@@ -1,5 +1,5 @@
-import { Repository } from '@hawaii-bus-plus/data';
-import { Stop, Transfer } from '@hawaii-bus-plus/types';
+import type { Repository } from '@hawaii-bus-plus/data';
+import type { Stop, Transfer } from '@hawaii-bus-plus/types';
 
 export type Footpaths = ReadonlyMap<Stop['stop_id'], readonly Transfer[]>;
 

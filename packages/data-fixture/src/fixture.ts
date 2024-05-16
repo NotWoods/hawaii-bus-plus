@@ -1,6 +1,6 @@
 import { createApiData } from '@hawaii-bus-plus/api-gen';
 import { BaseMemoryRepository } from '@hawaii-bus-plus/data';
-import { GTFSData } from '@hawaii-bus-plus/types';
+import type { GTFSData } from '@hawaii-bus-plus/types';
 import { memoize } from '@hawaii-bus-plus/utils';
 import { readFile } from 'node:fs/promises';
 import { URL } from 'node:url';

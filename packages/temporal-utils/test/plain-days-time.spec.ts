@@ -1,4 +1,4 @@
-import { TimeString } from '@hawaii-bus-plus/types';
+import type { TimeString } from '@hawaii-bus-plus/types';
 import { expect, test } from 'vitest';
 import { PlainDaysTime } from '../src/plain-days-time.js';
 

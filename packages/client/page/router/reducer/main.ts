@@ -1,16 +1,16 @@
 import {
   CLOSE_MAIN_TYPE,
-  MainRouterAction,
   OPEN_JOURNEY_TYPE,
   SET_ROUTE_TYPE,
   SET_TRIP_TYPE,
+  type MainRouterAction,
 } from '../action/main';
-import { MainState } from '../state';
+import type { MainState } from '../state';
 import {
   DIRECTIONS_PATH,
-  initialDetails,
-  RouteDetailState,
   ROUTES_PREFIX,
+  initialDetails,
+  type RouteDetailState,
 } from '../state/main';
 import { openRouteReducer } from './routes';
 

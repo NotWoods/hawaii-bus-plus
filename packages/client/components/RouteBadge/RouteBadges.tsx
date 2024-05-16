@@ -1,7 +1,7 @@
-import { Route } from '@hawaii-bus-plus/types';
+import type { Route } from '@hawaii-bus-plus/types';
 
 import { BLANK } from './constants';
-import { RouteBadge, RouteBadgeKeys } from './RouteBadge';
+import { RouteBadge, type RouteBadgeKeys } from './RouteBadge';
 
 interface Props {
   routes?: readonly Pick<Route, RouteBadgeKeys>[];

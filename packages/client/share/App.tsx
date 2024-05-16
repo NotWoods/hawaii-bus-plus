@@ -1,5 +1,5 @@
 import { MultiMap } from '@hawaii-bus-plus/mnemonist';
-import { Agency, Route, Stop, Trip } from '@hawaii-bus-plus/types';
+import type { Agency, Route, Stop, Trip } from '@hawaii-bus-plus/types';
 import { extractLinks } from '@hawaii-bus-plus/workers/info';
 import { Fragment } from 'preact';
 

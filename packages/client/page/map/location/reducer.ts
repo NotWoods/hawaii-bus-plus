@@ -1,6 +1,6 @@
 import { LatLng } from 'spherical-geometry-js';
-import { ERROR_TYPE, FOUND_TYPE, LocationAction } from './action';
-import { GeolocationErrorCode, LocationState } from './state';
+import { ERROR_TYPE, FOUND_TYPE, type LocationAction } from './action';
+import { GeolocationErrorCode, type LocationState } from './state';
 
 export function locationReducer(
   state: LocationState,

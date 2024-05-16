@@ -1,4 +1,4 @@
-import {
+import type {
   Agency,
   Calendar,
   Route,
@@ -6,9 +6,9 @@ import {
   Stop,
   Trip,
 } from '@hawaii-bus-plus/types';
-import { LatLngLiteral } from 'spherical-geometry-js';
+import type { LatLngLiteral } from 'spherical-geometry-js';
 import { openDatabase } from '../database.js';
-import { Repository, TripCursor } from '../repository.js';
+import type { Repository, TripCursor } from '../repository.js';
 import { loadAllRoutes, loadAllStops, loadBikeStations } from './all.js';
 import { loadAgencies, loadRoutes, loadStops } from './batch.js';
 import { loadCalendars } from './calendar.js';

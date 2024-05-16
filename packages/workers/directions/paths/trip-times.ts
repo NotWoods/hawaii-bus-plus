@@ -1,4 +1,4 @@
-import { DirectionRoute, Stop, Trip } from '@hawaii-bus-plus/types';
+import type { DirectionRoute, Stop, Trip } from '@hawaii-bus-plus/types';
 import { PlainDaysTime } from '@hawaii-bus-plus/temporal-utils';
 
 export function getStopTime(trip: Trip, stopId: Stop['stop_id']) {

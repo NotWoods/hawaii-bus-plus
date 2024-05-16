@@ -1,6 +1,6 @@
 import {
   NearbyWorker,
-  NearbyWorkerHandler,
+  type NearbyWorkerHandler,
 } from '@hawaii-bus-plus/workers/nearby';
 
 import { useState } from 'preact/hooks';

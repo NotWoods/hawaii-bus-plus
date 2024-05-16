@@ -1,13 +1,13 @@
-import { omitStopTimes, Repository } from '@hawaii-bus-plus/data';
-import {
+import { omitStopTimes, type Repository } from '@hawaii-bus-plus/data';
+import type {
   DurationData,
   PlainTimeData,
   StopTimeData,
 } from '@hawaii-bus-plus/presentation';
 import {
   InfinityPlainDaysTime,
-  nextServiceDay,
   PlainDaysTime,
+  nextServiceDay,
 } from '@hawaii-bus-plus/temporal-utils';
 import type {
   Calendar,
@@ -19,7 +19,7 @@ import type {
 } from '@hawaii-bus-plus/types';
 import { Temporal } from '@js-temporal/polyfill';
 import { loadCalendarAgency, routeStopDetails } from './shared';
-import { FormatOptions, formatStopTime } from './stop-time';
+import { formatStopTime, type FormatOptions } from './stop-time';
 
 interface TripSlice {
   tripId: Trip['trip_id'];

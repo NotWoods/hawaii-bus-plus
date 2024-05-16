@@ -1,5 +1,5 @@
 import { Polyline } from '@hawaii-bus-plus/react-google-maps';
-import { ColorString, Shape } from '@hawaii-bus-plus/types';
+import type { ColorString, Shape } from '@hawaii-bus-plus/types';
 
 import { useMemo, useState } from 'preact/hooks';
 import { usePromise, Warning } from '../hooks';

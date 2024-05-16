@@ -1,4 +1,7 @@
-import { formatPlainTime, PlainTimeData } from '@hawaii-bus-plus/presentation';
+import {
+  formatPlainTime,
+  type PlainTimeData,
+} from '@hawaii-bus-plus/presentation';
 import clsx from 'clsx';
 import type { JSX } from 'preact';
 

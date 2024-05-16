@@ -2,18 +2,18 @@ import {
   BIKE_POINT_TYPE,
   MARKER_POINT_TYPE,
   PLACE_POINT_TYPE,
-  Point,
   STOP_POINT_TYPE,
   USER_POINT_TYPE,
+  type Point,
 } from '@hawaii-bus-plus/presentation';
 import {
   CLOSE_POINT_TYPE,
   OPEN_PLACE_TYPE,
-  PointRouterAction,
   SET_BIKE_STATION_TYPE,
   SET_MARKER_TYPE,
   SET_STOP_TYPE,
   UPDATE_USER_LOCATION_TYPE,
+  type PointRouterAction,
 } from '../action/point';
 
 export function pointRouterReducer(

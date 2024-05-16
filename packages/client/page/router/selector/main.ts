@@ -1,9 +1,9 @@
 import {
   DIRECTIONS_PATH,
-  initialDetails,
-  OpenRouteState,
-  RouterState,
   ROUTES_PREFIX,
+  initialDetails,
+  type OpenRouteState,
+  type RouterState,
 } from '../state';
 import { directionsToParams } from '../url';
 

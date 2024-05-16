@@ -1,6 +1,6 @@
 import { NodeFixtureRepository } from '@hawaii-bus-plus/data-fixture';
 import { expectPlainTimeData } from '@hawaii-bus-plus/test-utils';
-import { Route } from '@hawaii-bus-plus/types';
+import type { Route } from '@hawaii-bus-plus/types';
 import { test } from 'vitest';
 import { Temporal } from '@js-temporal/polyfill';
 import { getRouteDetails } from './route-details';

@@ -1,26 +1,26 @@
-import { Route, Stop, Trip } from '@hawaii-bus-plus/types';
-import { LINK_TYPE, RELOAD_STATE_TYPE, RouterAction } from '../action';
+import type { Route, Stop, Trip } from '@hawaii-bus-plus/types';
+import { LINK_TYPE, RELOAD_STATE_TYPE, type RouterAction } from '../action';
 import {
   CLOSE_MAIN_TYPE,
-  MainRouterAction,
   OPEN_JOURNEY_TYPE,
   SET_ROUTE_TYPE,
   SET_TRIP_TYPE,
+  type MainRouterAction,
 } from '../action/main';
 import {
   CLOSE_POINT_TYPE,
   OPEN_PLACE_TYPE,
-  PointRouterAction,
   SET_BIKE_STATION_TYPE,
   SET_STOP_TYPE,
+  type PointRouterAction,
 } from '../action/point';
 import {
   DIRECTIONS_PATH,
-  initialDetails,
-  OpenDirectionsState,
-  OpenRouteState,
-  RouterState,
   ROUTES_PREFIX,
+  initialDetails,
+  type OpenDirectionsState,
+  type OpenRouteState,
+  type RouterState,
 } from '../state';
 import { queryToPoint } from '../url';
 import { mainRouterReducer } from './main';

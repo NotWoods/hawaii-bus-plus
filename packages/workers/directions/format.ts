@@ -1,26 +1,40 @@
-import { getSingle, omitStopTimes, Repository } from '@hawaii-bus-plus/data';
+import {
+  getSingle,
+  omitStopTimes,
+  type Repository,
+} from '@hawaii-bus-plus/data';
 import { add } from '@hawaii-bus-plus/mnemonist';
 import {
-  DurationData,
   durationToData,
-  PlainTimeData,
   plainTimeToData,
-  Point,
-  StopTimeData,
-  Walking,
+  type DurationData,
+  type PlainTimeData,
+  type Point,
+  type StopTimeData,
+  type Walking,
 } from '@hawaii-bus-plus/presentation';
 import { PlainDaysTime } from '@hawaii-bus-plus/temporal-utils';
-import { Agency, ColorString, Route, Stop, Trip } from '@hawaii-bus-plus/types';
+import type {
+  Agency,
+  ColorString,
+  Route,
+  Stop,
+  Trip,
+} from '@hawaii-bus-plus/types';
 import { findLastIndex, last } from '@hawaii-bus-plus/utils';
 import { Temporal } from '@js-temporal/polyfill';
 import {
-  computeDistanceBetween,
   LatLngBounds,
-  LatLngBoundsLiteral,
-  LatLngLiteral,
+  computeDistanceBetween,
+  type LatLngBoundsLiteral,
+  type LatLngLiteral,
 } from 'spherical-geometry-js';
 import { stopsLoader } from './paths/footpaths';
-import { CompletePath, PathSegment, PathTripSegment } from './paths/raptor';
+import type {
+  CompletePath,
+  PathSegment,
+  PathTripSegment,
+} from './paths/raptor';
 
 interface JourneyStopTime {
   readonly stop: Stop;

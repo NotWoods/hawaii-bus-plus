@@ -1,4 +1,4 @@
-import { DIRECTIONS_PATH, RouterState, ROUTES_PREFIX } from '../state';
+import { DIRECTIONS_PATH, ROUTES_PREFIX, type RouterState } from '../state';
 
 /**
  * Select bounding box for the map

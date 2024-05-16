@@ -1,5 +1,5 @@
-import { PlacePointPartial, Point } from '@hawaii-bus-plus/presentation';
-import { Route, Trip } from '@hawaii-bus-plus/types';
+import type { PlacePointPartial, Point } from '@hawaii-bus-plus/presentation';
+import type { Route, Trip } from '@hawaii-bus-plus/types';
 import type { RouteDetails, TripDetails } from '@hawaii-bus-plus/workers/info';
 import type { Journey } from '@hawaii-bus-plus/workers/directions';
 

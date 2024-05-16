@@ -1,4 +1,4 @@
-import { DateString, Route } from '@hawaii-bus-plus/types';
+import type { DateString, Route } from '@hawaii-bus-plus/types';
 
 import { useState } from 'preact/hooks';
 import type { Temporal } from '@js-temporal/polyfill';
@@ -6,9 +6,9 @@ import { colorVariables } from '../../../components/route-colors';
 import { RouteHeader } from '../../../components/RouteHeader/RouteHeader';
 import {
   InfoWorker,
-  InfoWorkerHandler,
-  RouteDetails,
-  TripDetails,
+  type InfoWorkerHandler,
+  type RouteDetails,
+  type TripDetails,
 } from '@hawaii-bus-plus/workers/info';
 import { dbInitialized } from '../../api';
 import { useDelay, useLazyComponent, usePromise, useWorker } from '../../hooks';

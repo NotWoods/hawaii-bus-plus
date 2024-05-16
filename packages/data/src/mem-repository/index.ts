@@ -1,4 +1,4 @@
-import {
+import type {
   Agency,
   Calendar,
   GTFSData,
@@ -8,7 +8,7 @@ import {
   Trip,
 } from '@hawaii-bus-plus/types';
 import { downloadScheduleData } from '../fetch.js';
-import { Repository, TripCursor } from '../repository.js';
+import type { Repository, TripCursor } from '../repository.js';
 import { memoryBatch } from './batch.js';
 import { searchArray } from './search.js';
 import { memTripCursor } from './trips.js';

@@ -1,4 +1,4 @@
-import { Agency, Route } from '@hawaii-bus-plus/types';
+import type { Agency, Route } from '@hawaii-bus-plus/types';
 import clsx from 'clsx';
 
 import { colorVariables } from '../../../../components/route-colors';

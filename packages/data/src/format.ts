@@ -1,4 +1,4 @@
-import { Trip, TripWithoutTimes } from '@hawaii-bus-plus/types';
+import type { Trip, TripWithoutTimes } from '@hawaii-bus-plus/types';
 
 export function removeWords<T extends { words: readonly string[] }>(
   value: T,

@@ -1,12 +1,12 @@
-import { Route, Stop } from '@hawaii-bus-plus/types';
+import type { Route, Stop } from '@hawaii-bus-plus/types';
 import clsx from 'clsx';
 import type { ComponentChildren } from 'preact';
 import { Icon } from '../../../../assets/icons/Icon';
 import { bus_stop, place } from '../../../../assets/icons/paths';
 import {
   BLANK,
-  RouteBadgeKeys,
   RouteBadges,
+  type RouteBadgeKeys,
 } from '../../../sheet/routes/badge/RouteBadge';
 import './SearchResultItem.css';
 

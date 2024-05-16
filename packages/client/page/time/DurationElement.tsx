@@ -1,6 +1,6 @@
 import {
-  DurationData,
   formatRelativeDuration,
+  type DurationData,
 } from '@hawaii-bus-plus/presentation';
 import clsx from 'clsx';
 import type { JSX } from 'preact';

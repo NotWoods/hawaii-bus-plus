@@ -1,4 +1,4 @@
-import { Route } from '@hawaii-bus-plus/types';
+import type { Route } from '@hawaii-bus-plus/types';
 
 /**
  * Ditch the opaque type by casting to string.

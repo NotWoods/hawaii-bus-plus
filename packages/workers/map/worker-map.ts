@@ -1,5 +1,5 @@
-import { BaseMessageRequest, registerWorker } from '../shared/register';
-import { loadMarkers, MarkersResponse } from './markers';
+import { registerWorker, type BaseMessageRequest } from '../shared/register';
+import { loadMarkers, type MarkersResponse } from './markers';
 
 export type { MarkersResponse };
 

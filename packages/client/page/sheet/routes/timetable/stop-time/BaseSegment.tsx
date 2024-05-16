@@ -1,4 +1,4 @@
-import { PlainTimeData } from '@hawaii-bus-plus/presentation';
+import type { PlainTimeData } from '@hawaii-bus-plus/presentation';
 import clsx from 'clsx';
 
 import { Link } from '../../../../router/Router';

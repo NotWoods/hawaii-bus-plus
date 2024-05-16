@@ -1,4 +1,4 @@
-import { Point } from '@hawaii-bus-plus/presentation';
+import type { Point } from '@hawaii-bus-plus/presentation';
 import clsx from 'clsx';
 
 import type { Journey } from '@hawaii-bus-plus/workers/directions';

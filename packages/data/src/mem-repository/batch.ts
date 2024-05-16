@@ -1,4 +1,4 @@
-import { GTFSData } from '@hawaii-bus-plus/types';
+import type { GTFSData } from '@hawaii-bus-plus/types';
 
 export function memoryBatch<
   Id extends string,

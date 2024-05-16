@@ -1,8 +1,8 @@
-import { StopPoint } from '@hawaii-bus-plus/presentation';
+import type { StopPoint } from '@hawaii-bus-plus/presentation';
 import {
   InfoWorker,
-  InfoWorkerHandler,
-  StopDetails,
+  type InfoWorkerHandler,
+  type StopDetails,
 } from '@hawaii-bus-plus/workers/info';
 
 import { useState } from 'preact/hooks';

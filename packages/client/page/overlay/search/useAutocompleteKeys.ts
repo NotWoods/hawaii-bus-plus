@@ -1,4 +1,4 @@
-import { Ref, useCallback } from 'preact/hooks';
+import { useCallback, type Ref } from 'preact/hooks';
 
 const options = (() => {
   if (import.meta.env.SSR) {

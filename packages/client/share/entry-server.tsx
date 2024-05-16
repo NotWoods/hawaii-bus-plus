@@ -1,4 +1,4 @@
-import { Repository } from '@hawaii-bus-plus/data';
+import type { Repository } from '@hawaii-bus-plus/data';
 
 import render from 'preact-render-to-string';
 import { App } from './App';

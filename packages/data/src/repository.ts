@@ -1,4 +1,4 @@
-import {
+import type {
   Agency,
   Calendar,
   Route,
@@ -7,7 +7,7 @@ import {
   Trip,
 } from '@hawaii-bus-plus/types';
 import { memoize } from '@hawaii-bus-plus/utils';
-import { LatLngLiteral } from 'spherical-geometry-js';
+import type { LatLngLiteral } from 'spherical-geometry-js';
 import { IDB_SUPPORT } from './database.js';
 import { DBRepository } from './db-repository/index.js';
 import { MemoryRepository } from './mem-repository/index.js';

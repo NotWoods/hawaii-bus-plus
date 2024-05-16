@@ -1,4 +1,4 @@
-import {
+import type {
   Agency,
   Calendar,
   Route,
@@ -7,7 +7,12 @@ import {
   TimeString,
   Trip,
 } from '@hawaii-bus-plus/types';
-import { DBSchema, IDBPDatabase, openDB, OpenDBCallbacks } from 'idb';
+import {
+  openDB,
+  type DBSchema,
+  type IDBPDatabase,
+  type OpenDBCallbacks,
+} from 'idb';
 
 export interface SearchRoute extends Route {
   words: readonly string[];

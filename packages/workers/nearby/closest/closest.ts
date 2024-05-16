@@ -1,7 +1,7 @@
-import { Repository } from '@hawaii-bus-plus/data';
-import { Agency, Route, Stop } from '@hawaii-bus-plus/types';
+import type { Repository } from '@hawaii-bus-plus/data';
+import type { Agency, Route, Stop } from '@hawaii-bus-plus/types';
 import type { LatLngLiteral } from 'spherical-geometry-js';
-import { findClosestStops, StopWithDistance } from './closest-stops';
+import { findClosestStops, type StopWithDistance } from './closest-stops';
 
 export interface ClosestResults {
   stops: readonly Stop[];

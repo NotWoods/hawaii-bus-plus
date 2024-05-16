@@ -1,5 +1,5 @@
-import { getSingle, Repository } from '@hawaii-bus-plus/data';
-import { Agency, Route, Stop } from '@hawaii-bus-plus/types';
+import { getSingle, type Repository } from '@hawaii-bus-plus/data';
+import type { Agency, Route, Stop } from '@hawaii-bus-plus/types';
 
 export interface StopDetails extends Omit<Stop, 'routes' | 'transfers'> {
   routes: ReadonlyMap<Route['route_id'], Route>;

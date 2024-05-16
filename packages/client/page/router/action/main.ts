@@ -1,7 +1,7 @@
-import { Point } from '@hawaii-bus-plus/presentation';
-import { Route, Trip } from '@hawaii-bus-plus/types';
+import type { Point } from '@hawaii-bus-plus/presentation';
+import type { Route, Trip } from '@hawaii-bus-plus/types';
 import type { Journey } from '@hawaii-bus-plus/workers/directions';
-import { OpenRouteAction } from './routes';
+import type { OpenRouteAction } from './routes';
 
 export type MainRouterAction =
   | ReturnType<typeof setRouteAction>

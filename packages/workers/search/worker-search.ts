@@ -1,6 +1,6 @@
 import { registerWorker } from '../shared/register';
-import { SearchRequest } from './helpers';
-import { search, SearchResults } from './search-db';
+import type { SearchRequest } from './helpers';
+import { search, type SearchResults } from './search-db';
 
 export type { SearchResults, SearchRequest };
 

@@ -1,13 +1,13 @@
 import {
-  BikeStationPoint,
   BIKE_POINT_TYPE,
   MARKER_POINT_TYPE,
-  PlacePoint,
-  StopPoint,
   STOP_POINT_TYPE,
   USER_POINT_TYPE,
+  type BikeStationPoint,
+  type PlacePoint,
+  type StopPoint,
 } from '@hawaii-bus-plus/presentation';
-import { RouterState } from '../state';
+import type { RouterState } from '../state';
 
 export function selectPoint(state: Pick<RouterState, 'point'>) {
   return state.point;

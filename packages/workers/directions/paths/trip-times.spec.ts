@@ -3,7 +3,7 @@ import {
   InfinityPlainDaysTime,
   PlainDaysTime,
 } from '@hawaii-bus-plus/temporal-utils';
-import { Stop, TimeString } from '@hawaii-bus-plus/types';
+import type { Stop, TimeString } from '@hawaii-bus-plus/types';
 import { test } from 'vitest';
 import { Temporal } from '@js-temporal/polyfill';
 import { generateDirectionsData } from './generate-data';

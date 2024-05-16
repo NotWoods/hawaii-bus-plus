@@ -1,18 +1,18 @@
-import { Repository } from '@hawaii-bus-plus/data';
-import { Point } from '@hawaii-bus-plus/presentation';
+import type { Repository } from '@hawaii-bus-plus/data';
+import type { Point } from '@hawaii-bus-plus/presentation';
 import { PlainDaysTime } from '@hawaii-bus-plus/temporal-utils';
-import { Stop } from '@hawaii-bus-plus/types';
-import { isDefined } from 'ts-extras';
+import type { Stop } from '@hawaii-bus-plus/types';
 import { Temporal } from '@js-temporal/polyfill';
+import { isDefined } from 'ts-extras';
 import { findClosestStops } from '../nearby/closest/closest-stops';
-import { Journey, journeyToDirections } from './format';
+import { journeyToDirections, type Journey } from './format';
 import {
-  CompletePath,
-  Path,
-  PathSegment,
-  PathStart,
   raptorDirections,
-  Source,
+  type CompletePath,
+  type Path,
+  type PathSegment,
+  type PathStart,
+  type Source,
 } from './paths/raptor';
 
 export interface DirectionsResult {

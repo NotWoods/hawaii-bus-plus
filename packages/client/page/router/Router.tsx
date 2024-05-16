@@ -1,11 +1,11 @@
-import { ComponentChildren, createContext } from 'preact';
-import { Reducer, useEffect, useMemo, useReducer } from 'preact/hooks';
-import { JSXInternal } from 'preact/src/jsx';
-import { linkAction, reloadStateAction, RouterAction } from './action';
+import { createContext, type ComponentChildren } from 'preact';
+import { useEffect, useMemo, useReducer, type Reducer } from 'preact/hooks';
+import type { JSXInternal } from 'preact/src/jsx';
+import { linkAction, reloadStateAction, type RouterAction } from './action';
 import { useDispatch } from './hooks';
 import { initStateFromUrl, routerReducer } from './reducer';
 import { selectUrl } from './selector/main';
-import { initialState, RouterState } from './state';
+import { initialState, type RouterState } from './state';
 
 interface RouterContext extends RouterState {
   dispatch(action: RouterAction): void;

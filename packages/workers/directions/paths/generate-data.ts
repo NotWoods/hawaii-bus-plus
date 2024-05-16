@@ -1,7 +1,7 @@
-import { Repository } from '@hawaii-bus-plus/data';
+import type { Repository } from '@hawaii-bus-plus/data';
 import { DefaultMap } from '@hawaii-bus-plus/mnemonist';
 import { serviceRunningOn } from '@hawaii-bus-plus/temporal-utils';
-import {
+import type {
   DirectionRoute,
   DirectionRouteMutable,
   DirectionsData,

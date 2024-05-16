@@ -1,4 +1,4 @@
-import { Route, Trip } from '@hawaii-bus-plus/types';
+import type { Route, Trip } from '@hawaii-bus-plus/types';
 import type { DirectionDetails } from '@hawaii-bus-plus/workers/info';
 
 import { NOW } from '../../../../time/input/symbol';

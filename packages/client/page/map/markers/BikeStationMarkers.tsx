@@ -1,5 +1,5 @@
-import { MarkerWithData } from '@hawaii-bus-plus/react-google-maps';
-import { StationInformation } from '@hawaii-bus-plus/types';
+import type { MarkerWithData } from '@hawaii-bus-plus/react-google-maps';
+import type { StationInformation } from '@hawaii-bus-plus/types';
 import { memo } from 'preact/compat';
 import { useCallback } from 'preact/hooks';
 import { setBikeStationAction } from '../../router/action/point';

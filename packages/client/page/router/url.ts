@@ -1,7 +1,7 @@
-import { PlacePointPartial, Point } from '@hawaii-bus-plus/presentation';
-import { Stop } from '@hawaii-bus-plus/types';
+import type { PlacePointPartial, Point } from '@hawaii-bus-plus/presentation';
+import type { Stop } from '@hawaii-bus-plus/types';
 import { toInt } from '@hawaii-bus-plus/utils';
-import { OpenDirectionsState } from './state/main';
+import type { OpenDirectionsState } from './state/main';
 
 export function pointToQuery(point: Point | PlacePointPartial) {
   switch (point.type) {

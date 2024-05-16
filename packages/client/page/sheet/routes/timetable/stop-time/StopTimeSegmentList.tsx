@@ -1,5 +1,5 @@
-import { StopTimeData } from '@hawaii-bus-plus/presentation';
-import { Stop } from '@hawaii-bus-plus/types';
+import type { StopTimeData } from '@hawaii-bus-plus/presentation';
+import type { Stop } from '@hawaii-bus-plus/types';
 
 import { useDuplicateKeys } from '../../../../hooks/useDuplicateKeys';
 import { useListKeyboardNav } from '../../../../hooks/useListKeyboardNav';

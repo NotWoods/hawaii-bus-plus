@@ -1,4 +1,4 @@
-import { makeRepository, Repository } from '@hawaii-bus-plus/data';
+import { makeRepository, type Repository } from '@hawaii-bus-plus/data';
 import { registerPromiseWorker } from '@hawaii-bus-plus/promise-worker/worker';
 
 export interface BaseMessageRequest {

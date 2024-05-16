@@ -1,12 +1,12 @@
+import {
+  NearbyWorker,
+  type ClosestResults,
+  type NearbyWorkerHandler,
+} from '@hawaii-bus-plus/workers/nearby';
 import type { ComponentChildren } from 'preact';
 import { useState } from 'preact/hooks';
-import {
-  ClosestResults,
-  NearbyWorker,
-  NearbyWorkerHandler,
-} from '@hawaii-bus-plus/workers/nearby';
-import { useDelay, usePromise, useWorker } from '../../hooks';
 import { dbInitialized } from '../../api';
+import { useDelay, usePromise, useWorker } from '../../hooks';
 import { LoadingBusIcon } from '../../loading/LoadingBusIcon';
 import { SearchBarButton } from '../search/SearchBar';
 import { emptyClosestResults } from '../search/simple/places-autocomplete';

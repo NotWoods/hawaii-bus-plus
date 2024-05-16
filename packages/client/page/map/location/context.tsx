@@ -1,10 +1,10 @@
-import { ComponentChildren, createContext } from 'preact';
+import { createContext, type ComponentChildren } from 'preact';
 import { useCallback, useMemo, useReducer, useState } from 'preact/hooks';
 import { useAbortEffect, usePermission } from '../../hooks';
 import { errorAction, foundCoordinatesAction } from './action';
-import { Coordinates, locationFromIp } from './ipstack';
+import { locationFromIp, type Coordinates } from './ipstack';
 import { locationReducer } from './reducer';
-import { GeolocationErrorCode, LocationState } from './state';
+import { GeolocationErrorCode, type LocationState } from './state';
 
 interface MyLocationContext extends LocationState {
   onButtonClick(): void;
