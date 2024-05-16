@@ -23,26 +23,6 @@ export function plainTimeToData(
   };
 }
 
-declare global {
-  namespace Intl {
-    interface DateTimeFormat {
-      formatRange(startDate: Date | number, endDate: Date | number): string;
-      formatRangeToParts(
-        startDate: Date | number,
-        endDate: Date | number,
-      ): DateTimeFormatRangePart[];
-    }
-
-    interface DateTimeFormatRangePart extends DateTimeFormatPart {
-      source: 'shared' | 'startRange' | 'endRange';
-    }
-
-    interface DateTimeFormatOptions {
-      timeStyle?: 'long' | 'short' | 'full' | 'medium' | undefined;
-    }
-  }
-}
-
 const localTimeFormatter = new Intl.DateTimeFormat([], { timeStyle: 'long' });
 
 const agencyTimeFormatter = memoize(

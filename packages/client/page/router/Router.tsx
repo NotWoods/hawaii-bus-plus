@@ -1,6 +1,5 @@
-import { createContext, type ComponentChildren } from 'preact';
+import { createContext, type ComponentChildren, type JSX } from 'preact';
 import { useEffect, useMemo, useReducer, type Reducer } from 'preact/hooks';
-import type { JSXInternal } from 'preact/src/jsx';
 import { linkAction, reloadStateAction, type RouterAction } from './action';
 import { useDispatch } from './hooks';
 import { initStateFromUrl, routerReducer } from './reducer';
@@ -88,7 +87,7 @@ export function Router(props: {
 }
 
 interface LinkProps
-  extends Omit<JSXInternal.HTMLAttributes<HTMLAnchorElement>, 'action'> {
+  extends Omit<JSX.HTMLAttributes<HTMLAnchorElement>, 'action'> {
   action?: RouterAction;
 }
 
