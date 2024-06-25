@@ -14,3 +14,4 @@ dist-ssr
 
 # Local Netlify folder
 .netlify
+*.afdesign~lock~

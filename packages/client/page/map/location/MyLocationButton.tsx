@@ -8,13 +8,13 @@ import { FloatingActionButton } from '../../../components/Button/FloatingActionB
 import { useLoadGoogleMaps } from '../../hooks/useLoadGoogleMaps';
 import { MyLocationContext } from './context';
 
-interface Props {
+export interface Props {
   shiftUp?: boolean;
   mode: 'searching' | 'disabled' | 'found';
   handleClick?(): void;
 }
 
-const MyLocationButtonContent = memo((props: Props) => {
+export const MyLocationButtonContent = memo((props: Props) => {
   const { mode } = props;
   const title = 'My location';
 
