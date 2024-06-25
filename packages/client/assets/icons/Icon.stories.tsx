@@ -5,7 +5,7 @@ import { Icon } from './Icon';
 
 function IconGrid() {
   return (
-    <div style="display:grid;grid-template-columns:repeat(auto-fill, 48px)">
+    <div style="display:grid;grid-template-columns:repeat(auto-fill, 48px);gap:4px">
       {Object.entries(iconPaths).map(([name, path]) => (
         <Icon class="invert" src={path} alt={name} key={name} />
       ))}
