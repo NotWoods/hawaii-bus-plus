@@ -5,8 +5,6 @@ export { default as directions } from './directions.svg';
 export { default as error } from './error.svg';
 export { default as expand_more } from './expand_more.svg';
 export { default as gps_fixed } from './gps_fixed.svg';
-export { default as login } from './login.svg';
-export { default as logout } from './logout.svg';
 export { default as map } from './map.svg';
 export { default as menu } from './menu.svg';
 export { default as monetization_on } from './monetization_on.svg';
