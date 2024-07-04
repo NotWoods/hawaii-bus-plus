@@ -39,9 +39,6 @@ importers:
       eslint-plugin-vitest:
         specifier: ^0.3.21
         version: 0.3.21(@typescript-eslint/eslint-plugin@6.20.0(@typescript-eslint/parser@6.20.0(eslint@8.56.0)(typescript@5.3.3))(eslint@8.56.0)(typescript@5.3.3))(eslint@8.56.0)(typescript@5.3.3)(vitest@1.2.2(@types/node@20.11.16)(terser@5.15.0))
-      pnpm:
-        specifier: ^8.0.0
-        version: 8.0.0
       prettier:
         specifier: ~3.2.4
         version: 3.2.4
@@ -4293,11 +4290,6 @@ packages:
 
   pkg-types@1.0.3:
     resolution: {integrity: sha512-nN7pYi0AQqJnoLPC9eHFQ8AcyaixBUOwvqc5TDnIKCMEE6I0y8P7OKA7fPexsXGCGxQDl/cmrLAp26LhcwxZ4A==}
-
-  pnpm@8.0.0:
-    resolution: {integrity: sha512-Crsvd8LKb+SoEB/bQxRZrtSt5Ri8g9jmPg6MKyexMTI1pdLd44gPwVV6cZLq2jYYPv5q+gADPkYTbYr8SeFCeA==}
-    engines: {node: '>=16.14'}
-    hasBin: true
 
   polished@4.3.1:
     resolution: {integrity: sha512-OBatVyC/N7SCW/FaDHrSd+vn0o5cS855TOmYi4OkdWUMSJCET/xip//ch8xGUvtr3i44X9LVyWwQlRMTN3pwSA==}
@@ -9856,8 +9848,6 @@ snapshots:
       jsonc-parser: 3.2.0
       mlly: 1.5.0
       pathe: 1.1.2
-
-  pnpm@8.0.0: {}
 
   polished@4.3.1:
     dependencies:
