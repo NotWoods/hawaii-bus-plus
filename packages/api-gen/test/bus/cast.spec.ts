@@ -1,7 +1,7 @@
-import { expect, test } from 'vitest';
-import { readFile } from 'node:fs/promises';
-import { CastingContext, parse } from 'csv-parse';
+import { parse, type CastingContext } from 'csv-parse';
 import JSZip from 'jszip';
+import { readFile } from 'node:fs/promises';
+import { expect, test } from 'vitest';
 import { cast } from '../../src/bus/cast.js';
 
 async function* loadZipFile(

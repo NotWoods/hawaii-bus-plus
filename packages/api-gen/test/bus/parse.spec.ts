@@ -1,8 +1,8 @@
-import { expect, test } from 'vitest';
-import { readFile } from 'node:fs/promises';
 import JSZip from 'jszip';
+import { readFile } from 'node:fs/promises';
+import { expect, test } from 'vitest';
 import { zipFilesToObject } from '../../src/bus/parse.js';
-import { JsonStreams } from '../../src/bus/parsers.js';
+import type { JsonStreams } from '../../src/bus/parsers.js';
 
 async function getRoutesFileFromZip(fixtureName: string) {
   const buffer = await readFile(

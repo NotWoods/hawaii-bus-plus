@@ -1,14 +1,14 @@
 import { NodeFixtureRepository } from '@hawaii-bus-plus/data-fixture';
+import { PlainDaysTime } from '@hawaii-bus-plus/temporal-utils';
 import {
   expectDurationData,
   expectPlainTimeData,
 } from '@hawaii-bus-plus/test-utils';
-import { PlainDaysTime } from '@hawaii-bus-plus/temporal-utils';
 import type { Stop, StopTime, TimeString, Trip } from '@hawaii-bus-plus/types';
-import { test } from 'vitest';
 import { Temporal } from '@js-temporal/polyfill';
-import { journeyToDirections, JourneyTripSegment } from './format';
-import { CompletePath } from './paths/raptor';
+import { test } from 'vitest';
+import { journeyToDirections, type JourneyTripSegment } from './format';
+import type { CompletePath } from './paths/raptor';
 
 const NOON = PlainDaysTime.from('12:00:00' as TimeString);
 const MONDAY = Temporal.PlainDate.from({ year: 2021, month: 1, day: 25 });

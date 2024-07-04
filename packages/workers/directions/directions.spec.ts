@@ -1,17 +1,17 @@
 import { NodeFixtureRepository } from '@hawaii-bus-plus/data-fixture';
+import type { Point } from '@hawaii-bus-plus/presentation';
+import { PlainDaysTime } from '@hawaii-bus-plus/temporal-utils';
 import {
   expectDurationData,
   expectPlainTimeData,
 } from '@hawaii-bus-plus/test-utils';
-import type { Point } from '@hawaii-bus-plus/presentation';
-import { PlainDaysTime } from '@hawaii-bus-plus/temporal-utils';
 import type { Stop, StopTime, TimeString, Trip } from '@hawaii-bus-plus/types';
 import { last } from '@hawaii-bus-plus/utils';
-import { test } from 'vitest';
 import { Temporal } from '@js-temporal/polyfill';
+import { test } from 'vitest';
 import { directions, traversePath } from './directions';
-import { JourneyTripSegment } from './format';
-import { Path } from './paths/raptor';
+import type { JourneyTripSegment } from './format';
+import type { Path } from './paths/raptor';
 
 const LAKELAND = 'll' as Stop['stop_id'];
 const LAKELAND_ACROSS = 'll-across' as Stop['stop_id'];
