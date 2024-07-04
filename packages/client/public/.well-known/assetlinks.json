@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.tigeroakes.hawaiibusplus",
+      "sha256_cert_fingerprints": [
+        "81:6A:45:F4:CF:B6:7D:79:31:EC:00:C3:CD:D7:59:CE:A8:F0:4C:9B:C9:62:98:9D:BC:D5:0C:E2:0B:72:14:82"
+      ]
+    }
+  }
+]
