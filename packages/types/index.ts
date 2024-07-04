@@ -1,4 +1,4 @@
-export * from './data-types';
-export * from './directions-types';
-export * from './gbfs-types';
-export * from './gtfs-types';
+export type * from './data-types';
+export type * from './directions-types';
+export type * from './gbfs-types';
+export type * from './gtfs-types';

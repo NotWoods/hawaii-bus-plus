@@ -2,8 +2,9 @@
   "short_name": "Hawaii Bus+",
   "name": "Hawaii Bus Plus",
   "start_url": "/",
-  "background_color": "#f9fafb",
+  "background_color": "#8bb9bd",
   "theme_color": "#32383e",
+  "display": "standalone",
   "icons": [
     {
       "src": "/icon/favicon-512.png",
@@ -34,6 +35,12 @@
       "type": "image/svg+xml",
       "sizes": "any",
       "purpose": "maskable"
+    },
+    {
+      "src": "/icon/monochrome-512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "monochrome"
     },
     {
       "src": "/icon/monochrome.png",

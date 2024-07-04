@@ -1,4 +1,4 @@
-import { Opaque } from 'type-fest';
+import type { Opaque } from 'type-fest';
 
 export type TimeString = Opaque<string, '00:00:00'>;
 

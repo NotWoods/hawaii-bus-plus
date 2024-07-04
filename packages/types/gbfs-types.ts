@@ -1,5 +1,5 @@
-import { Opaque } from 'type-fest';
-import { LatLngData } from './gtfs-types';
+import type { Opaque } from 'type-fest';
+import type { LatLngData } from './gtfs-types';
 
 export type RentalMethod =
   | 'KEY'

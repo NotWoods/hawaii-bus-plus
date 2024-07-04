@@ -1,5 +1,5 @@
 import OMT from '@surma/rollup-plugin-off-main-thread';
-import { Plugin } from 'vite';
+import type { Plugin } from 'vite';
 
 export function offMainThread(): Plugin {
   const base = OMT({

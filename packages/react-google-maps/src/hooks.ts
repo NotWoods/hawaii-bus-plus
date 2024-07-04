@@ -1,4 +1,4 @@
-import { Loader, LoaderOptions } from '@googlemaps/js-api-loader';
+import { Loader, type LoaderOptions } from '@googlemaps/js-api-loader';
 import { useEffect, useMemo, useState } from 'preact/hooks';
 
 export function useJsApiLoader(options: LoaderOptions): {
