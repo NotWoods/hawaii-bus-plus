@@ -1,0 +1,31 @@
+{
+  "name": "hawaii-bus-plus",
+  "private": true,
+  "version": "5.0.0",
+  "packageManager": "pnpm@9.0.6",
+  "scripts": {
+    "api": "pnpm --filter api-gen run api:client",
+    "build": "pnpm --filter api-gen run api:client && pnpm --filter client run build && pnpm --filter client run build:ssr && pnpm --filter prerender run build && pnpm --filter client run workbox",
+    "clean": "del-cli \"dist/**/*\" \"packages/**/*.js\" \"packages/**/*.d.ts\" \"packages/**/*.map\" \"packages/**/*.tsbuildinfo\" \"packages/client/public/api/v1/**/*.json\"",
+    "dev": "pnpm --filter client run dev",
+    "format": "prettier *.yaml *.cjs *.json .github/**/*.yml --write",
+    "tsc": "tsc --build ."
+  },
+  "dependencies": {
+    "tslib": "^2.5.0"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.20.0",
+    "@typescript-eslint/parser": "^6.20.0",
+    "del-cli": "^4.0.1",
+    "dotenv": "^16.0.3",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-react": "^7.31.7",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-vitest": "^0.3.21",
+    "pnpm": "^8.0.0",
+    "prettier": "~3.2.4",
+    "typescript": "^5.3.3"
+  }
+}
