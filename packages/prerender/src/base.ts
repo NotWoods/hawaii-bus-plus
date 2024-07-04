@@ -1,5 +1,5 @@
 import { readFile, writeFile } from 'node:fs/promises';
-import { Promisable } from 'type-fest';
+import type { Promisable } from 'type-fest';
 import { URL } from 'node:url';
 import { injectHelmet } from './helmet.js';
 

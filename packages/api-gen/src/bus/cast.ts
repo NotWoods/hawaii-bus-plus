@@ -1,5 +1,5 @@
 import { toInt } from '@hawaii-bus-plus/utils';
-import { CastingContext } from 'csv-parse';
+import type { CastingContext } from 'csv-parse';
 
 /**
  * Casting function for csv-parse, to convert string values depending on the column name.

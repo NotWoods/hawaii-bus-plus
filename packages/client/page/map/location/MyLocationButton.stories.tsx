@@ -3,7 +3,7 @@ import { fn } from '@storybook/test';
 
 import { MyLocationButtonContent, type Props } from './MyLocationButton';
 
-const meta = {
+const meta: Meta<Props> = {
   component: MyLocationButtonContent,
   args: {
     handleClick: fn(),
@@ -14,7 +14,7 @@ const meta = {
       options: ['searching', 'disabled', 'found'],
     },
   },
-} satisfies Meta<Props>;
+};
 
 export default meta;
 type Story = StoryObj<Props>;
