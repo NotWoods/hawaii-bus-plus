@@ -1,4 +1,3 @@
-import 'preact/debug';
 import '../assets/main.css';
 
 import('../services/setup');

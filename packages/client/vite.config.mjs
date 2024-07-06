@@ -1,40 +1,28 @@
 // @ts-check
 import { readFile } from 'node:fs/promises';
 import { defineConfig } from 'vite';
-import { emptyPackage, injectHtml } from '@hawaii-bus-plus/vite-plugins';
-import prefresh from '@prefresh/vite';
+import { injectHtml } from '@hawaii-bus-plus/vite-plugins';
+import preact from '@preact/preset-vite';
 
 const headHtmlIncludeFile = new URL('./head.html', import.meta.url);
 
 export default defineConfig(({ command, isSsrBuild }) => {
-  /** @type {import('vite').AliasOptions} */
-  const alias = {
-    react: 'preact/compat',
-    'react-dom': 'preact/compat',
-  };
-
   /** @type {import('vite').UserConfig & { build: import('vite').BuildOptions }} */
   const baseConfig = {
     plugins: [
-      command === 'build' && emptyPackage('preact/debug'),
       injectHtml({
         head: readFile(headHtmlIncludeFile, 'utf-8'),
       }),
-      prefresh({
+      preact({
         include: ['{page,share,assets,components}/**/*'],
         exclude: ['worker-*/**'],
       }),
-    ].filter(Boolean),
-    resolve: { alias },
+    ],
     optimizeDeps: {
-      include: ['preact', 'preact/debug', 'preact/hooks'],
+      include: ['preact', 'preact/hooks'],
     },
     json: {
       stringify: true,
-    },
-    esbuild: {
-      jsxFactory: 'h',
-      jsxFragment: 'Fragment',
     },
     define: command === 'build' ? { globalThis: 'self' } : undefined,
     build: {

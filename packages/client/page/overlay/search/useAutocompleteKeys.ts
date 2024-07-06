@@ -1,4 +1,5 @@
-import { useCallback, type Ref } from 'preact/hooks';
+import type { RefObject } from 'preact';
+import { useCallback } from 'preact/hooks';
 
 const options = (() => {
   if (import.meta.env.SSR) {
@@ -28,7 +29,7 @@ function isPrintableKeyCode(key: string) {
   }
 }
 
-export function useAutocompleteKeys(searchBar: Ref<HTMLInputElement>) {
+export function useAutocompleteKeys(searchBar: RefObject<HTMLInputElement>) {
   return useCallback(
     (event: KeyboardEvent) => {
       const currentFocusedItem = event.target as HTMLElement;

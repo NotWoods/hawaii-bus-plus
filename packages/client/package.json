@@ -30,7 +30,7 @@
     "clsx": "^2.1.0",
     "idb": "^7.0.2",
     "just-debounce": "^1.1.0",
-    "preact": "^10.13.0",
+    "preact": "^10.22.1",
     "spherical-geometry-js": "^3.0.0",
     "tslib": "^2.5.0"
   },
@@ -38,7 +38,7 @@
     "@googlemaps/js-api-loader": "^1.14.3",
     "@hawaii-bus-plus/tailwind-theme": "workspace:*",
     "@hawaii-bus-plus/vite-plugins": "workspace:*",
-    "@prefresh/vite": "^2.2.9",
+    "@preact/preset-vite": "^2.8.3",
     "@storybook/addon-essentials": "^8.1.10",
     "@storybook/addon-interactions": "^8.1.10",
     "@storybook/preact": "^8.1.10",

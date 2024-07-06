@@ -99,7 +99,7 @@ export function Link({ action, ...props }: LinkProps) {
   return (
     <a
       {...props}
-      onClick={function (evt) {
+      onClick={function (this: HTMLAnchorElement, evt) {
         evt.preventDefault();
         props.onClick?.call(this, evt);
         dispatch(action ?? linkAction(evt.currentTarget.href));
