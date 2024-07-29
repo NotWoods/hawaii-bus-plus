@@ -14,15 +14,22 @@ export default tseslint.config(
     ignores: ['dist', '**/*.d.ts', '**/*.js'],
   },
   { ...eslint.configs.recommended, name: 'eslint/recommended' },
-  tseslint.configs.eslintRecommended,
   ...tseslint.configs.recommended,
   { ...prettier, name: 'prettier' },
+  { ...react.configs.flat['recommended'], name: 'react/recommended' },
+  { ...react.configs.flat['jsx-runtime'], name: 'react/jsx-runtime' },
   {
-    name: 'main',
+    name: 'react-hooks/recommended',
     plugins: {
-      react,
       'react-hooks': reactHooks,
     },
+    rules:
+      /** @type {import('typescript-eslint').ConfigWithExtends['rules']} */ (
+        reactHooks.configs.recommended.rules
+      ),
+  },
+  {
+    name: 'main',
     languageOptions: {
       globals: {
         ...globals.node,
@@ -38,8 +45,6 @@ export default tseslint.config(
       /**
        * Preact / JSX rules
        */
-      'react/no-deprecated': 'error',
-      'react/display-name': ['warn', { ignoreTranspilerName: false }],
       'react/jsx-no-bind': [
         'warn',
         {
@@ -48,60 +53,33 @@ export default tseslint.config(
           allowArrowFunctions: true,
         },
       ],
-      'react/jsx-no-comment-textnodes': 'error',
-      'react/jsx-no-duplicate-props': 'error',
-      'react/jsx-no-target-blank': 'error',
-      'react/jsx-tag-spacing': ['error', { beforeSelfClosing: 'always' }],
-      'react/jsx-uses-react': 'error', // debatable
-      'react/jsx-uses-vars': 'error',
       'react/jsx-key': ['error', { checkFragmentShorthand: true }],
       'react/self-closing-comp': 'error',
       'react/prefer-es6-class': 'error',
       'react/prefer-stateless-function': 'warn',
-      'react/require-render-return': 'error',
       'react/no-danger': 'warn',
       // Legacy APIs not supported in Preact:
       'react/no-did-mount-set-state': 'error',
       'react/no-did-update-set-state': 'error',
-      'react/no-find-dom-node': 'error',
-      'react/no-is-mounted': 'error',
-      'react/no-string-refs': 'error',
-
-      /**
-       * Hooks
-       */
-      'react-hooks/rules-of-hooks': 'error',
-      'react-hooks/exhaustive-deps': 'warn',
 
       /**
        * General JavaScript error avoidance
        */
       'no-caller': 'error',
-      'no-delete-var': 'error',
       'no-duplicate-imports': 'error',
-      'no-empty-pattern': 'off',
       'no-empty': 'off',
-      'no-extra-parens': 'off',
       'no-iterator': 'error',
-      'no-mixed-spaces-and-tabs': ['warn', 'smart-tabs'],
       'no-multi-str': 'warn',
       'no-new-wrappers': 'error',
       'no-proto': 'error',
-      'no-redeclare': 'error',
-      'no-shadow-restricted-names': 'error',
-      'no-shadow': 0,
-      'no-spaced-func': 'error',
-      'no-this-before-super': 'error',
       'no-undef-init': 'error',
       'no-unneeded-ternary': 'error',
       'no-useless-call': 'warn',
       'no-useless-computed-key': 'warn',
       'no-useless-concat': 'warn',
       'no-useless-constructor': 'warn',
-      'no-useless-escape': 'warn',
       'no-useless-rename': 'warn',
       'no-var': 'error',
-      'no-with': 'error',
 
       '@typescript-eslint/array-type': [
         'error',
@@ -133,10 +111,8 @@ export default tseslint.config(
           allowDeclarations: true,
         },
       ],
-      '@typescript-eslint/no-non-null-assertion': 'off',
       '@typescript-eslint/no-unused-vars': 'off',
       '@typescript-eslint/prefer-for-of': 'error',
-      '@typescript-eslint/prefer-namespace-keyword': 'off',
       '@typescript-eslint/unified-signatures': 'error',
       'prefer-arrow-callback': [
         'error',
@@ -151,7 +127,6 @@ export default tseslint.config(
         },
       ],
       'no-else-return': 'off',
-      'no-undef': 'off',
     },
   },
   {
