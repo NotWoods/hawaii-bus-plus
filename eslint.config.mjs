@@ -1,5 +1,5 @@
-// @ts-check
 import eslint from '@eslint/js';
+import preact from '@notwoods/eslint-config-preact';
 import prettier from 'eslint-config-prettier';
 import react from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
@@ -16,29 +16,20 @@ export default tseslint.config(
   { ...eslint.configs.recommended, name: 'eslint/recommended' },
   ...tseslint.configs.recommended,
   { ...prettier, name: 'prettier' },
-  { ...react.configs.flat['recommended'], name: 'react/recommended' },
+  ...preact.configs.recommended,
   { ...react.configs.flat['jsx-runtime'], name: 'react/jsx-runtime' },
   {
     name: 'react-hooks/recommended',
     plugins: {
       'react-hooks': reactHooks,
     },
-    rules:
-      /** @type {import('typescript-eslint').ConfigWithExtends['rules']} */ (
-        reactHooks.configs.recommended.rules
-      ),
+    rules: reactHooks.configs.recommended.rules,
   },
   {
     name: 'main',
     languageOptions: {
       globals: {
         ...globals.node,
-      },
-    },
-    settings: {
-      react: {
-        pragma: 'h',
-        version: '16.0',
       },
     },
     rules: {
@@ -53,14 +44,9 @@ export default tseslint.config(
           allowArrowFunctions: true,
         },
       ],
-      'react/jsx-key': ['error', { checkFragmentShorthand: true }],
       'react/self-closing-comp': 'error',
-      'react/prefer-es6-class': 'error',
       'react/prefer-stateless-function': 'warn',
       'react/no-danger': 'warn',
-      // Legacy APIs not supported in Preact:
-      'react/no-did-mount-set-state': 'error',
-      'react/no-did-update-set-state': 'error',
 
       /**
        * General JavaScript error avoidance

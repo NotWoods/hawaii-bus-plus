@@ -18,6 +18,9 @@ importers:
       '@eslint/js':
         specifier: ^9.8.0
         version: 9.8.0
+      '@notwoods/eslint-config-preact':
+        specifier: ^1.0.0
+        version: 1.0.0(eslint@8.57.0)
       del-cli:
         specifier: ^4.0.1
         version: 4.0.1
@@ -1502,6 +1505,11 @@ packages:
   '@nodelib/fs.walk@1.2.8':
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
+
+  '@notwoods/eslint-config-preact@1.0.0':
+    resolution: {integrity: sha512-v4MKwXTsvN1gtnWwtee8ewuaeKY1+XHoBtFM0VZjEGZLIoysfARlL02BV5TzS8GiYNwoWgpJ66nERZVeagBbgA==}
+    peerDependencies:
+      eslint: '>=8.21.0 < 10'
 
   '@notwoods/preact-helmet@6.1.0':
     resolution: {integrity: sha512-dnMmnI/y74Y1wfhIVunNqkF9gvP24fePpIJHIvZ2+hn6AEUgyQ360t/C7HXRQBesy55Ah8PVQ7903Z8DiC8KxQ==}
@@ -6764,6 +6772,11 @@ snapshots:
     dependencies:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.13.0
+
+  '@notwoods/eslint-config-preact@1.0.0(eslint@8.57.0)':
+    dependencies:
+      eslint: 8.57.0
+      eslint-plugin-react: 7.35.0(eslint@8.57.0)
 
   '@notwoods/preact-helmet@6.1.0(preact@10.22.1)':
     dependencies:
