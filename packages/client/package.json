@@ -9,7 +9,6 @@
     "build:ssr": "vite build --ssr",
     "dev": "vite",
     "format": "prettier **/*.{ts,tsx} *.{cjs,mjs} *.html --write --ignore-path ../../.prettierignore",
-    "postformat": "eslint \"**/*.{ts,tsx}\" --fix",
     "pretest": "tsc --build page",
     "storybook": "storybook dev -p 6006",
     "test": "vitest run",
@@ -56,13 +55,5 @@
     "vite": "^5.0.12",
     "vitest": "^1.2.2",
     "workbox-cli": "^7.0.0"
-  },
-  "eslintConfig": {
-    "parserOptions": {
-      "project": [
-        "./packages/client/**/tsconfig.json",
-        "./tsconfig.json"
-      ]
-    }
   }
 }

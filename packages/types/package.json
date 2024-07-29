@@ -6,8 +6,7 @@
   "sideEffects": false,
   "scripts": {
     "build": "tsc --build .",
-    "format": "prettier **/*.ts --write --ignore-path ../../.prettierignore",
-    "postformat": "eslint \"**/*.ts\" --fix"
+    "format": "prettier **/*.ts --write --ignore-path ../../.prettierignore"
   },
   "dependencies": {
     "tslib": "^2.5.0",
@@ -16,12 +15,5 @@
   "devDependencies": {
     "prettier": "~3.2.4",
     "typescript": "^5.3.3"
-  },
-  "eslintConfig": {
-    "parserOptions": {
-      "project": [
-        "./packages/types/tsconfig.json"
-      ]
-    }
   }
 }

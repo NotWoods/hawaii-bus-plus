@@ -8,8 +8,7 @@
   "sideEffects": false,
   "scripts": {
     "build": "tsc --build src",
-    "format": "prettier **/*.ts --write --ignore-path ../../.prettierignore",
-    "postformat": "eslint \"**/*.ts\" --fix"
+    "format": "prettier **/*.ts --write --ignore-path ../../.prettierignore"
   },
   "dependencies": {
     "@surma/rollup-plugin-off-main-thread": "^2.2.3",
@@ -27,12 +26,5 @@
   "files": [
     "src",
     "node"
-  ],
-  "eslintConfig": {
-    "parserOptions": {
-      "project": [
-        "./packages/vite-plugins/*/tsconfig.json"
-      ]
-    }
-  }
+  ]
 }

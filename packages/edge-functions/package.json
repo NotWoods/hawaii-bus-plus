@@ -17,12 +17,6 @@
     "src",
     "test"
   ],
-  "eslintConfig": {
-    "ignorePatterns": [
-      "src/**/*.ts",
-      "test/**/*.ts"
-    ]
-  },
   "engines": {
     "node": ">=14"
   }

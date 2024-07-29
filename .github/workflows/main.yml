@@ -25,6 +25,8 @@ jobs:
       - run: pnpm run tsc
       - name: pnpm run format
         run: pnpm recursive run format --no-bail
+      - name: pnpm run postformat
+        run: pnpm -w run postformat --no-bail
 
       - name: pnpm run api
         run: pnpm run api

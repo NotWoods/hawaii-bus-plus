@@ -6,8 +6,7 @@
   "type": "commonjs",
   "main": "src/index.cjs",
   "scripts": {
-    "format": "prettier **/*.cjs --write --ignore-path ../../.prettierignore",
-    "postformat": "eslint \"**/*.cjs\" --fix"
+    "format": "prettier **/*.cjs --write --ignore-path ../../.prettierignore"
   },
   "peerDependencies": {
     "tailwindcss": "^3.0.13"

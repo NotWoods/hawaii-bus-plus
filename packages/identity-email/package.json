@@ -10,12 +10,5 @@
   "devDependencies": {
     "copyfiles": "^2.4.1",
     "prettier": "~3.2.4"
-  },
-  "eslintConfig": {
-    "parserOptions": {
-      "project": [
-        "./packages/identity-email/*/tsconfig.json"
-      ]
-    }
   }
 }

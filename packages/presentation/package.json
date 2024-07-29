@@ -9,7 +9,6 @@
   "scripts": {
     "build": "tsc --build src",
     "format": "prettier **/*.ts --write --ignore-path ../../.prettierignore",
-    "postformat": "eslint \"**/*.ts\" --fix",
     "pretest": "tsc --build test",
     "test": "vitest run"
   },
@@ -28,12 +27,5 @@
   },
   "files": [
     "src"
-  ],
-  "eslintConfig": {
-    "parserOptions": {
-      "project": [
-        "./packages/presentation/*/tsconfig.json"
-      ]
-    }
-  }
+  ]
 }

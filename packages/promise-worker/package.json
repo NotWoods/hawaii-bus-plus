@@ -9,7 +9,6 @@
   "scripts": {
     "build": "tsc --build page worker",
     "format": "prettier **/*.ts --write --ignore-path ../../.prettierignore",
-    "postformat": "eslint \"**/*.ts\" --fix",
     "pretest": "tsc --build test",
     "test": "vitest run"
   },
@@ -25,12 +24,5 @@
   "files": [
     "page",
     "worker"
-  ],
-  "eslintConfig": {
-    "parserOptions": {
-      "project": [
-        "./packages/promise-worker/*/tsconfig.json"
-      ]
-    }
-  }
+  ]
 }

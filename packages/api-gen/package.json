@@ -16,7 +16,6 @@
     "api:client": "node src/cli.js --input https://www.heleonbus.hawaiicounty.gov/home/showpublisheddocument/307470/638458319827900000 --output ../client/public/api/v1/",
     "build": "tsc --build src",
     "format": "prettier **/*.ts --write --ignore-path ../../.prettierignore",
-    "postformat": "eslint \"**/*.ts\" --fix",
     "pretest": "tsc --build test",
     "test": "vitest run"
   },
@@ -40,12 +39,5 @@
   "files": [
     "src",
     "test/fixtures"
-  ],
-  "eslintConfig": {
-    "parserOptions": {
-      "project": [
-        "./packages/api-gen/*/tsconfig.json"
-      ]
-    }
-  }
+  ]
 }

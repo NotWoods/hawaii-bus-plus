@@ -7,7 +7,6 @@
     "build": "tsc --build src",
     "postbuild": "node src/build.js",
     "format": "prettier **/*.ts --write --ignore-path ../../.prettierignore",
-    "postformat": "eslint \"**/*.ts\" --fix",
     "pretest": "tsc --build test",
     "test": "vitest run"
   },
@@ -31,12 +30,5 @@
     "tailwindcss": "^3.1.8",
     "typescript": "^5.3.3",
     "vitest": "^1.2.2"
-  },
-  "eslintConfig": {
-    "parserOptions": {
-      "project": [
-        "./packages/prerender/*/tsconfig.json"
-      ]
-    }
   }
 }

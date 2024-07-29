@@ -14,7 +14,6 @@
   "scripts": {
     "build": "tsc --build tsconfig.build.json",
     "format": "prettier **/*.{ts,tsx} --write --ignore-path ../../.prettierignore",
-    "postformat": "eslint \"**/*.{ts,tsx}\" --fix",
     "pretest": "tsc --build tsconfig.test.json",
     "test": "vitest run"
   },
@@ -39,13 +38,5 @@
     "typescript": "^5.3.3",
     "vite": "^5.0.12",
     "vitest": "^1.2.2"
-  },
-  "eslintConfig": {
-    "parserOptions": {
-      "project": [
-        "./packages/workers/**/tsconfig.json",
-        "./packages/workers/tsconfig.test.json"
-      ]
-    }
   }
 }
