@@ -20,7 +20,7 @@
   "devDependencies": {
     "@types/node": "^20.11.16",
     "@types/surma__rollup-plugin-off-main-thread": "^2.2.0",
-    "typescript": "^5.3.3",
+    "typescript": "^5.5.4",
     "vite": "^5.0.12"
   },
   "files": [
