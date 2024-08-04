@@ -16,6 +16,8 @@
   "compilerOptions": {
     "lib": ["esnext", "dom", "dom.iterable"],
     "types": ["vite/client"],
-    "noEmit": true
+    "noEmit": true,
+    "module": "Preserve",
+    "moduleResolution": "Bundler",
   }
 }

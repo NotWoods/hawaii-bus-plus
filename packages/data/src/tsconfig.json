@@ -10,7 +10,5 @@
     "lib": ["esnext", "dom", "webworker"],
     "types": [],
     "skipLibCheck": true,
-    "module": "nodenext",
-    "moduleResolution": "nodenext",
   }
 }

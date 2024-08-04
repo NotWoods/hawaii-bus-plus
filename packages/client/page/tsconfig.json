@@ -17,6 +17,8 @@
     "lib": ["esnext", "dom", "dom.iterable"],
     "types": ["vite/client", "google.maps"],
     "emitDeclarationOnly": true,
-    "noPropertyAccessFromIndexSignature": false
+    "noPropertyAccessFromIndexSignature": false,
+    "module": "Preserve",
+    "moduleResolution": "Bundler",
   }
 }

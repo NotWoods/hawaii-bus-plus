@@ -1,5 +1,5 @@
 {
-  "extends": "../../tsconfig.base.json",
+  "extends": "../tsconfig.worker-base.json",
   "include": ["**/*"],
   "exclude": ["**/*.spec.ts"],
   "references": [
@@ -10,12 +10,6 @@
     { "path": "../../mnemonist/src" },
     { "path": "../../presentation/src" },
     { "path": "../../temporal-utils/src" },
-    { "path": "../../types" }
+    { "path": "../../types" },
   ],
-  "compilerOptions": {
-    "types": ["vite/client"],
-    "lib": ["esnext", "WebWorker"],
-    "emitDeclarationOnly": true,
-    "skipLibCheck": true
-  }
 }

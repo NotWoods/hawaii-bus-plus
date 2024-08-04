@@ -1,6 +1,6 @@
 import type { Opaque } from 'type-fest';
-import type { ColorString, DateString, TimeString } from './data-types';
-import type { StationInformation } from './gbfs-types';
+import type { ColorString, DateString, TimeString } from './data-types.js';
+import type { StationInformation } from './gbfs-types.js';
 
 export type ServiceId = Opaque<string, 'calendar'>;
 export type RouteId = Opaque<string, 'route'>;

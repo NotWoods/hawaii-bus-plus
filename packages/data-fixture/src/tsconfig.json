@@ -11,7 +11,5 @@
     "lib": ["esnext"],
     "types": ["node"],
     "skipLibCheck": true,
-    "module": "nodenext",
-    "moduleResolution": "nodenext"
   }
 }

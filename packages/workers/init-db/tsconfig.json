@@ -1,14 +1,8 @@
 {
-  "extends": "../../tsconfig.base.json",
+  "extends": "../tsconfig.worker-base.json",
   "include": ["**/*"],
   "references": [
     { "path": "../../data/src" },
-    { "path": "../../promise-worker/worker" }
+    { "path": "../../promise-worker/worker" },
   ],
-  "compilerOptions": {
-    "types": ["vite/client"],
-    "lib": ["esnext", "WebWorker"],
-    "emitDeclarationOnly": true,
-    "skipLibCheck": true
-  }
 }

@@ -1,17 +1,15 @@
 {
-  "extends": "../../tsconfig.base.json",
+  "extends": "../tsconfig.worker-base.json",
   "include": ["**/*"],
   "exclude": ["**/*.spec.ts"],
   "references": [
     { "path": "../shared" },
     { "path": "../../data/src" },
     { "path": "../../data-fixture/src" },
-    { "path": "../../types" }
+    { "path": "../../types" },
   ],
   "compilerOptions": {
     "types": ["vite/client", "google.maps"],
     "lib": ["esnext", "dom", "WebWorker"],
-    "emitDeclarationOnly": true,
-    "skipLibCheck": true
-  }
+  },
 }

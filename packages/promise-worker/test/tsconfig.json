@@ -6,7 +6,5 @@
     "lib": ["esnext", "dom", "dom.iterable", "webworker"],
     "types": ["node"],
     "noEmit": true,
-    "module": "nodenext",
-    "moduleResolution": "nodenext"
   }
 }

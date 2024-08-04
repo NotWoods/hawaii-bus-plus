@@ -8,6 +8,8 @@
   ],
   "compilerOptions": {
     "lib": ["esnext"],
-    "types": []
+    "types": [],
+    "module": "Preserve",
+    "moduleResolution": "Bundler",
   }
 }

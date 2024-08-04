@@ -5,7 +5,5 @@
   "compilerOptions": {
     "types": ["node"],
     "noEmit": true,
-    "module": "nodenext",
-    "moduleResolution": "nodenext"
   }
 }

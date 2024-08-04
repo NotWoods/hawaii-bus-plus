@@ -1,5 +1,5 @@
 {
-  "extends": "../../tsconfig.base.json",
+  "extends": "../tsconfig.worker-base.json",
   "include": ["**/*"],
   "exclude": ["**/*.spec.ts"],
   "references": [
@@ -8,12 +8,6 @@
     { "path": "../../data-fixture/src" },
     { "path": "../../presentation/src" },
     { "path": "../../types" },
-    { "path": "../../utils/src" }
+    { "path": "../../utils/src" },
   ],
-  "compilerOptions": {
-    "types": ["vite/client"],
-    "lib": ["esnext", "WebWorker"],
-    "emitDeclarationOnly": true,
-    "skipLibCheck": true
-  }
 }

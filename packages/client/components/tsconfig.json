@@ -10,6 +10,8 @@
   "compilerOptions": {
     "lib": ["esnext", "dom", "dom.iterable"],
     "types": ["vite/client"],
-    "emitDeclarationOnly": true
+    "emitDeclarationOnly": true,
+    "module": "Preserve",
+    "moduleResolution": "Bundler",
   }
 }

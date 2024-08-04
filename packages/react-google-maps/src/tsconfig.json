@@ -6,5 +6,7 @@
     "lib": ["esnext", "dom", "dom.iterable"],
     "types": ["google.maps"],
     "skipLibCheck": true,
+    "module": "Preserve",
+    "moduleResolution": "Bundler",
   },
 }

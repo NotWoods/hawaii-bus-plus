@@ -4,6 +4,12 @@
   "private": true,
   "type": "module",
   "sideEffects": false,
+  "exports": {
+    ".": {
+      "import": "./index.ts",
+      "types": "./index.d.ts"
+    }
+  },
   "scripts": {
     "build": "tsc --build .",
     "format": "prettier **/*.ts --write --ignore-path ../../.prettierignore"
