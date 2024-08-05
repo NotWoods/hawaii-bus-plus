@@ -14,7 +14,7 @@ export default defineConfig(({ command, isSsrBuild }) => {
         head: readFile(headHtmlIncludeFile, 'utf-8'),
       }),
       preact({
-        include: ['{page,share,assets,components}/**/*'],
+        include: ['{page,share,assets,components}/**/*.{ts,tsx}'],
         exclude: ['worker-*/**', '**/*.css'],
       }),
     ],

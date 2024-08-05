@@ -6,6 +6,7 @@
   "scripts": {
     "prebuild": "tsc --build tsconfig.build.json",
     "build": "vite build",
+    "build:astro": "astro build",
     "build:ssr": "vite build --ssr",
     "dev": "vite",
     "dev:astro": "astro dev",
