@@ -66,6 +66,7 @@ export class PromiseWorker {
 
   postMessage(userMessage?: unknown, signal?: AbortSignal): Promise<unknown> {
     if (this.syntaxError) {
+      // eslint-disable-next-line @typescript-eslint/only-throw-error -- Rethrowing caught error
       throw this.syntaxError;
     }
 

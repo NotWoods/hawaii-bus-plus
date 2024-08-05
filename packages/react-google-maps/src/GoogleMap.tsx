@@ -36,7 +36,7 @@ export function GoogleMap(props: GoogleMapProps) {
   }, []);
 
   useEffect(() => {
-    map && props.options && map.setOptions(props.options);
+    if (map && props.options) map.setOptions(props.options);
   }, [map, props.options]);
 
   useListener(map, 'click', props.onClick);

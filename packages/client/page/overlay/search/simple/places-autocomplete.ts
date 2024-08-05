@@ -48,6 +48,7 @@ export function getPlacePredictions(
           case google.maps.places.PlacesServiceStatus.ZERO_RESULTS:
             return resolve([]);
           default:
+            // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors -- TODO: migrate to Promise API
             return reject(status);
         }
       }),

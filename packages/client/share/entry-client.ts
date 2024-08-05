@@ -4,7 +4,7 @@ import './App.css';
 import './components/Footer.css';
 
 if (import.meta.env.DEV) {
-  import('./entry-dev');
+  void import('./entry-dev');
 } else {
   const shareButton = document.getElementById('share')!;
   shareButton.addEventListener(

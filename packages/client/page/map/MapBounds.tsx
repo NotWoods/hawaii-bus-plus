@@ -8,7 +8,7 @@ export function useMapBounds() {
   const bounds = useSelector(selectBounds);
 
   useEffect(() => {
-    map && bounds && map.fitBounds(bounds);
+    if (map && bounds) map.fitBounds(bounds);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [map, bounds?.east, bounds?.north, bounds?.south, bounds?.west]);
 }

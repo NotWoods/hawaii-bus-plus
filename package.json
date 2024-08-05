@@ -9,7 +9,7 @@
     "clean": "del-cli \"dist/**/*\" \"packages/**/*.js\" \"packages/**/*.d.ts\" \"packages/**/*.map\" \"packages/**/*.tsbuildinfo\" \"packages/client/public/api/v1/**/*.json\"",
     "dev": "pnpm --filter client run dev",
     "format": "prettier *.yaml *.json .github/**/*.yml --write",
-    "postformat": "eslint --fix",
+    "postformat": "eslint --fix packages",
     "tsc": "tsc --build ."
   },
   "dependencies": {

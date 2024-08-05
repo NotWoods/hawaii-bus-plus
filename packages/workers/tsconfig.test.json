@@ -12,6 +12,8 @@
   ],
   "compilerOptions": {
     "noEmit": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "module": "Preserve",
+    "moduleResolution": "Bundler"
   }
 }

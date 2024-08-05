@@ -5,13 +5,18 @@ import react from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
 import vitest from 'eslint-plugin-vitest';
 import globals from 'globals';
-import { dirname } from 'node:path';
+import { dirname, join } from 'node:path';
 import tseslint from 'typescript-eslint';
 
 export default tseslint.config(
   {
     name: 'global-ignores',
-    ignores: ['dist', '**/*.d.ts', '**/*.js'],
+    ignores: [
+      'dist',
+      '**/*.d.ts',
+      '**/*.js',
+      'packages/edge-functions/**/*.ts',
+    ],
   },
   { ...eslint.configs.recommended, name: 'eslint/recommended' },
   ...tseslint.configs.recommended,
@@ -119,6 +124,7 @@ export default tseslint.config(
   {
     name: 'type-checked',
     files: ['**/*.ts', '**/*.tsx'],
+    ignores: ['packages/*/.storybook/*.ts'],
     languageOptions: {
       parserOptions: {
         project: true,
@@ -177,10 +183,23 @@ export default tseslint.config(
     },
   },
   {
+    name: 'tests/workers',
+    files: ['packages/workers/**/*.spec.{ts,tsx}'],
+    languageOptions: {
+      parserOptions: {
+        project: join(
+          import.meta.dirname,
+          './packages/workers/tsconfig.test.json',
+        ),
+      },
+    },
+  },
+  {
     name: 'config-files',
     files: ['**/*.cjs', '**/*.mjs'],
     rules: {
       '@typescript-eslint/no-var-requires': 'off',
+      '@typescript-eslint/no-require-imports': 'off',
     },
   },
 );
