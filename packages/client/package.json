@@ -8,6 +8,7 @@
     "build": "vite build",
     "build:ssr": "vite build --ssr",
     "dev": "vite",
+    "dev:astro": "astro dev",
     "format": "prettier **/*.{ts,tsx} *.{cjs,mjs} *.html --write --ignore-path ../../.prettierignore",
     "pretest": "tsc --build page",
     "storybook": "storybook dev -p 6006",

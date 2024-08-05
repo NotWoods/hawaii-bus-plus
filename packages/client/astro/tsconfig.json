@@ -6,6 +6,7 @@
     { "path": "../components" },
     { "path": "../page" },
     { "path": "../services" },
+    { "path": "../share" },
     { "path": "../../workers/tsconfig.build.json" },
     { "path": "../../data/src" },
     { "path": "../../promise-worker/page" },
