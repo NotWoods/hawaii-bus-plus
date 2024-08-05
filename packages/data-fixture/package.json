@@ -4,10 +4,11 @@
   "private": true,
   "type": "module",
   "sideEffects": false,
-  "main": "./src/index.js",
-  "module": "./src/index.js",
   "exports": {
-    ".": "./src/index.js"
+    ".": {
+      "import": "./src/index.js",
+      "types": "./src/index.d.ts"
+    }
   },
   "scripts": {
     "build": "tsc --build src",

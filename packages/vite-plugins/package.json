@@ -2,8 +2,12 @@
   "name": "@hawaii-bus-plus/vite-plugins",
   "version": "1.0.0",
   "private": true,
-  "main": "./src/index.js",
-  "module": "./src/index.js",
+  "exports": {
+    ".": {
+      "import": "./src/index.js",
+      "types": "./src/index.d.ts"
+    }
+  },
   "type": "module",
   "sideEffects": false,
   "scripts": {

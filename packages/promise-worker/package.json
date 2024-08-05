@@ -2,8 +2,16 @@
   "name": "@hawaii-bus-plus/promise-worker",
   "version": "1.0.0",
   "private": true,
-  "main": "page/promise-worker.js",
-  "module": "page/promise-worker.js",
+  "exports": {
+    ".": {
+      "import": "./page/promise-worker.js",
+      "types": "./page/promise-worker.d.ts"
+    },
+    "./worker": {
+      "import": "./worker/index.js",
+      "types": "./worker/index.d.ts"
+    }
+  },
   "type": "module",
   "sideEffects": false,
   "scripts": {

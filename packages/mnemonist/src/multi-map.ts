@@ -61,23 +61,19 @@ export class MultiMap<K, V> implements ReadonlyMap<K, readonly V[]> {
     return this.items.get(key);
   }
 
-  toJSON() {
-    return this.items;
-  }
-
-  [Symbol.iterator]() {
+  [Symbol.iterator](): IterableIterator<[K, readonly V[]]> {
     return this.items[Symbol.iterator]();
   }
 
-  keys() {
+  keys(): IterableIterator<K> {
     return this.items.keys();
   }
 
-  values() {
+  values(): IterableIterator<readonly V[]> {
     return this.items.values();
   }
 
-  entries() {
+  entries(): IterableIterator<[K, readonly V[]]> {
     return this.items.entries();
   }
 
@@ -88,7 +84,7 @@ export class MultiMap<K, V> implements ReadonlyMap<K, readonly V[]> {
       map: ReadonlyMap<K, readonly V[]>,
     ) => void,
     thisArg?: unknown,
-  ) {
+  ): void {
     this.items.forEach(callback, thisArg);
   }
 }

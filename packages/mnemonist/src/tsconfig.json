@@ -4,5 +4,6 @@
   "references": [{ "path": "../../types" }],
   "compilerOptions": {
     "types": [],
+    "isolatedDeclarations": true,
   }
 }

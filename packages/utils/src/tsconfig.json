@@ -3,6 +3,6 @@
   "include": ["**/*"],
   "references": [],
   "compilerOptions": {
-    "types": []
+    "types": [],
   }
 }

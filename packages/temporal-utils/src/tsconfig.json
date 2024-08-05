@@ -3,6 +3,6 @@
   "include": ["**/*"],
   "references": [{ "path": "../../types" }, { "path": "../../utils/src" }],
   "compilerOptions": {
-    "types": []
+    "types": [],
   }
 }

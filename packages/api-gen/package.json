@@ -3,10 +3,11 @@
   "version": "2.0.0",
   "private": true,
   "type": "module",
-  "main": "./src/index.js",
-  "module": "./src/index.js",
   "exports": {
-    ".": "./src/index.js"
+    ".": {
+      "import": "./src/index.js",
+      "types": "./src/index.d.ts"
+    }
   },
   "bin": {
     "hawaii-bus-plus-api-gen": "./src/cli.js"

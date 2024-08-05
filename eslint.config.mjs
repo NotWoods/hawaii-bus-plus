@@ -47,6 +47,7 @@ export default tseslint.config(
       'react/self-closing-comp': 'error',
       'react/prefer-stateless-function': 'warn',
       'react/no-danger': 'warn',
+      'react/no-unknown-property': 'off',
 
       /**
        * General JavaScript error avoidance
