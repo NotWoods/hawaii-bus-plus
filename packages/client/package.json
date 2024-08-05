@@ -34,6 +34,8 @@
     "tslib": "^2.5.0"
   },
   "devDependencies": {
+    "@astrojs/preact": "^3.5.1",
+    "@astrojs/tailwind": "^5.1.0",
     "@googlemaps/js-api-loader": "^1.14.3",
     "@hawaii-bus-plus/tailwind-theme": "workspace:*",
     "@hawaii-bus-plus/vite-plugins": "workspace:*",
@@ -47,6 +49,7 @@
     "@tailwindcss/forms": "^0.5.7",
     "@tailwindcss/typography": "^0.5.10",
     "@types/google.maps": "^3.50.0",
+    "astro": "^4.13.1",
     "preact-render-to-string": "^6.5.5",
     "storybook": "^8.1.10",
     "tailwindcss": "^3.4.1",
