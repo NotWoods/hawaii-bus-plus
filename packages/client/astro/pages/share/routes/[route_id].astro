@@ -44,3 +44,13 @@ const stops = await stopsReady;
 <BaseLayout>
   <App {route} {agency} {stops} {trips} />
 </BaseLayout>
+
+<script>
+  import { buildShareHandler } from '../../../../services/share/share-handler';
+
+  const shareButton = document.getElementById('share')!;
+  shareButton.addEventListener(
+    'click',
+    buildShareHandler(document.title, (err) => console.error(err)),
+  );
+</script>

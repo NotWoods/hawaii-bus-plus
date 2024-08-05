@@ -6,4 +6,12 @@ import tailwind from '@astrojs/tailwind';
 export default defineConfig({
   integrations: [preact(), tailwind()],
   srcDir: 'astro',
+  vite: {
+    resolve: {
+      alias: {
+        '@googlemaps/js-api-loader':
+          '@googlemaps/js-api-loader/dist/index.esm.js',
+      },
+    },
+  },
 });

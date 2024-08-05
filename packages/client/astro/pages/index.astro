@@ -1,0 +1,21 @@
+---
+import { Router } from '../../page/router/Router';
+import { PageHead } from '../../page/PageHead';
+import { Main } from '../../page/App';
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<Router initialUrl={Astro.url}>
+  <BaseLayout>
+    <PageHead slot="head" />
+    <Main />
+  </BaseLayout>
+</Router>
+
+<script>
+  void Promise.all([
+    import('../../services/setup'),
+    import('../../page/api'),
+    import('../../page/entry-client-lazy'),
+  ]);
+</script>
