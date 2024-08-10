@@ -1,13 +1,5 @@
 let messageIds = 0;
 
-export class AbortError extends Error {
-  code = 'abort';
-
-  constructor() {
-    super('Aborted');
-  }
-}
-
 export class WorkerError extends Error {
   status?: number | undefined;
   code?: number | string | undefined;
@@ -76,7 +68,8 @@ export class PromiseWorker {
     return new Promise((resolve, reject) => {
       const onAbort = () => {
         this.callbacks.delete(messageId);
-        reject(new AbortError());
+        // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors -- Rejecting with unknown error from AbortSignal
+        reject(signal!.reason);
       };
 
       if (signal?.aborted) {

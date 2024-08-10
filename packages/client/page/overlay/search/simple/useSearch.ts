@@ -1,4 +1,3 @@
-import { AbortError } from '@hawaii-bus-plus/promise-worker';
 import { useGoogleMap } from '@hawaii-bus-plus/react-google-maps';
 import {
   SearchWorker,
@@ -51,7 +50,7 @@ export function useSearch() {
 
     const [places, gtfs] = await Promise.all([placesReady, gtfsReady]);
     if (signal.aborted) {
-      throw new AbortError();
+      throw signal.reason;
     }
 
     return Object.assign(gtfs, { places });

@@ -1,4 +1,3 @@
-import { AbortError } from '@hawaii-bus-plus/promise-worker';
 import { useEffect, type Inputs } from 'preact/hooks';
 import { useSnackbar } from '../snackbar/context';
 
@@ -37,7 +36,7 @@ export function usePromise(
   useAbortEffect((signal) => {
     effect(signal).catch((err: unknown) => {
       if (
-        err instanceof AbortError ||
+        err === signal.reason ||
         (err as { name?: unknown }).name === 'AbortError'
       ) {
         // Ignore abort errors
