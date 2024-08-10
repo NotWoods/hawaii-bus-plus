@@ -1,6 +1,6 @@
 import type { Route } from '@hawaii-bus-plus/types';
 
-import { Head, routeTitle } from '../components/Head/Head';
+import { appName, Head, routeTitle } from '../components/Head/Head';
 
 interface Props {
   route: Route;
@@ -12,7 +12,9 @@ export function PageHead({ route, mapUrl }: Props) {
 
   return (
     <Head>
-      <title>{title}</title>
+      <title>
+        {title} - {appName}
+      </title>
       <meta name="twitter:card" content="summary_large_image" />
       <meta property="og:type" content="website" />
       <meta name="twitter:creator" content="@Not_Woods" />

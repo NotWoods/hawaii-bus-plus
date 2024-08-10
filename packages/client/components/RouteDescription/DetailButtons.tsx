@@ -5,8 +5,6 @@ import { monetization_on, share } from '../../assets/icons/paths';
 import { routeShareUrl } from '../../services/share/route-url';
 import { OutlinedButton } from '../Button/OutlinedButton';
 
-console.log(monetization_on);
-
 interface Props {
   route: Route;
   agency: Agency;
