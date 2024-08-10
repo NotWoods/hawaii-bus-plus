@@ -73,7 +73,6 @@ export default defineConfig(({ command, isSsrBuild }) => {
         ...baseConfig.build,
         ssrManifest: false,
         ssr: true,
-        outDir: '../prerender/dist/',
         minify: false,
         rollupOptions: {
           ...baseConfig.build.rollupOptions,

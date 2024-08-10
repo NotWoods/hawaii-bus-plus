@@ -315,61 +315,6 @@ importers:
         specifier: ^2.0.5
         version: 2.0.5(@types/node@20.11.16)(terser@5.15.0)
 
-  packages/prerender:
-    dependencies:
-      '@hawaii-bus-plus/data':
-        specifier: workspace:*
-        version: link:../data
-      '@js-temporal/polyfill':
-        specifier: ^0.4.3
-        version: 0.4.3
-      '@notwoods/preact-helmet':
-        specifier: ^6.1.0
-        version: 6.1.0(preact@10.22.1)
-      idb:
-        specifier: ^7.0.2
-        version: 7.0.2
-      just-debounce:
-        specifier: ^1.1.0
-        version: 1.1.0
-      node-html-parser:
-        specifier: ^6.1.12
-        version: 6.1.12
-      preact-render-to-string:
-        specifier: ^6.5.5
-        version: 6.5.5(preact@10.22.1)
-      spherical-geometry-js:
-        specifier: ^3.0.0
-        version: 3.0.0
-      tslib:
-        specifier: ^2.5.0
-        version: 2.5.0
-      type-fest:
-        specifier: ^4.10.2
-        version: 4.10.2
-      vite:
-        specifier: ^5.0.12
-        version: 5.0.12(@types/node@20.11.16)(terser@5.15.0)
-    devDependencies:
-      '@hawaii-bus-plus/types':
-        specifier: workspace:*
-        version: link:../types
-      '@types/node':
-        specifier: ^20.11.16
-        version: 20.11.16
-      preact:
-        specifier: ^10.22.1
-        version: 10.22.1
-      tailwindcss:
-        specifier: ^3.1.8
-        version: 3.4.1
-      typescript:
-        specifier: ^5.5.4
-        version: 5.5.4
-      vitest:
-        specifier: ^2.0.5
-        version: 2.0.5(@types/node@20.11.16)(terser@5.15.0)
-
   packages/presentation:
     dependencies:
       '@hawaii-bus-plus/temporal-utils':

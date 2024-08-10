@@ -1,11 +1,7 @@
 {
   "extends": "../tsconfig.base.json",
   "files": [],
-  "references": [
-    { "path": "./page" },
-    { "path": "./share" },
-    { "path": "../prerender/src" }
-  ],
+  "references": [{ "path": "./page" }, { "path": "./share" }],
   "compilerOptions": {
     "noEmit": true
   }
