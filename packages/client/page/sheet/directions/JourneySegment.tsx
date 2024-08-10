@@ -8,7 +8,9 @@ interface Props {
   segment: JourneyTripSegment | Walking;
 }
 
-export function isJourneyTripSegment(segment: object): segment is JourneyTripSegment {
+export function isJourneyTripSegment(
+  segment: object,
+): segment is JourneyTripSegment {
   return 'trip' in segment;
 }
 

@@ -8,7 +8,7 @@
     "build": "astro build",
     "dev": "astro dev",
     "check": "astro check",
-    "format": "prettier **/*.{ts,tsx} *.{cjs,mjs} *.html --write --ignore-path ../../.prettierignore",
+    "format": "prettier **/*.{ts,tsx,astro} *.{cjs,mjs} --write --ignore-path ../../.prettierignore",
     "pretest": "tsc --build page",
     "storybook": "storybook dev -p 6006",
     "test": "vitest run",

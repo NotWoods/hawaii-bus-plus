@@ -5,3 +5,5 @@ overrides:
     options:
       printWidth: 120
       tabWidth: 2
+plugins:
+  - prettier-plugin-astro
