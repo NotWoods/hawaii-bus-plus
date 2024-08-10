@@ -26,7 +26,7 @@ jobs:
       - name: pnpm run format
         run: pnpm recursive run format --no-bail
       - name: pnpm run postformat
-        run: pnpm -w run postformat --no-bail
+        run: pnpm -w run postformat
 
       - name: pnpm run api
         run: pnpm run api
