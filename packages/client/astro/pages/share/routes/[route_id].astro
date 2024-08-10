@@ -7,7 +7,7 @@ import { AstroJsonRepository } from '../../../repo';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 
 export async function getStaticPaths() {
-  const repo = new AstroJsonRepository();
+  const repo: Repository = new AstroJsonRepository();
   const routes: readonly Route[] = await repo.loadAllRoutes();
 
   return routes.map((route) => ({

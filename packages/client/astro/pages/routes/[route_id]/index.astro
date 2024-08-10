@@ -1,0 +1,16 @@
+---
+import type { Repository } from '@hawaii-bus-plus/data';
+import type { Route } from '@hawaii-bus-plus/types';
+import { AstroJsonRepository } from '../../../repo';
+
+export async function getStaticPaths() {
+  const repo: Repository = new AstroJsonRepository();
+  const routes: readonly Route[] = await repo.loadAllRoutes();
+
+  return routes.map((route) => ({
+    params: { route_id: route.route_id },
+  }));
+}
+
+return Astro.rewrite('/');
+---
