@@ -11,7 +11,6 @@
     { "path": "packages/data/src" },
     { "path": "packages/data-fixture/src" },
     { "path": "packages/mnemonist/src" },
-    { "path": "packages/prerender/src" },
     { "path": "packages/presentation/src" },
     { "path": "packages/promise-worker/page" },
     { "path": "packages/promise-worker/worker" },

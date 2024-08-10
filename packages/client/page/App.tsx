@@ -22,10 +22,10 @@ export function Main() {
 export function App(props: { initialUrl?: URL }) {
   return (
     <Router initialUrl={props.initialUrl}>
+      <PageHead />
       <MyLocationProvider>
         <StickySnackbarProvider>
           <MapProvider options={googleMapOptions}>
-            <PageHead />
             <Main />
           </MapProvider>
         </StickySnackbarProvider>

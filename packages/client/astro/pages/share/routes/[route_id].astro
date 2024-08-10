@@ -1,0 +1,56 @@
+---
+import type { Repository } from '@hawaii-bus-plus/data';
+import type { Route, Stop, Trip } from '@hawaii-bus-plus/types';
+import '../../../../share/App.css';
+import { App } from '../../../../share/App.tsx';
+import { AstroJsonRepository } from '../../../repo';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const repo: Repository = new AstroJsonRepository();
+  const routes: readonly Route[] = await repo.loadAllRoutes();
+
+  return routes.map((route) => ({
+    params: { route_id: route.route_id },
+    props: { route, repo },
+  }));
+}
+
+interface Props {
+  route: Route;
+  repo: Repository;
+}
+
+const { route, repo } = Astro.props;
+
+const stopIds = new Set<Stop['stop_id']>();
+const trips: Trip[] = [];
+
+let cursor = await repo.loadTripsForRoute(route.route_id);
+while (cursor) {
+  trips.push(cursor.value);
+  for (const stopTime of cursor.value.stop_times) {
+    stopIds.add(stopTime.stop_id);
+  }
+  cursor = await cursor.continue();
+}
+
+const stopsReady = repo.loadStops(stopIds);
+const agencies = await repo.loadAgencies([route.agency_id]);
+const agency = agencies.get(route.agency_id)!;
+const stops = await stopsReady;
+---
+
+<BaseLayout>
+  <App {route} {agency} {stops} {trips} />
+</BaseLayout>
+
+<script>
+  import { buildShareHandler } from '../../../../services/share/share-handler';
+
+  const shareButton = document.getElementById('share')!;
+  shareButton.addEventListener(
+    'click',
+    buildShareHandler(document.title, (err) => console.error(err)),
+  );
+</script>

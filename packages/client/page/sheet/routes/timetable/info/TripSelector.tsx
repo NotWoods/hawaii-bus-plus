@@ -5,7 +5,6 @@ import type { DirectionDetails } from '@hawaii-bus-plus/workers/info';
 import { PlainDateInput } from '../../../../time/input/PlainTimeInput';
 import { NOW } from '../../../../time/input/symbol';
 import { TripDropdown } from './TripDropdown';
-import './TripSelector.css';
 
 interface Props {
   directionHeaders: Route['directions'];
@@ -16,17 +15,19 @@ interface Props {
   setSelectedTrip(tripId: Trip['trip_id'] | NOW): void;
 }
 
+const tripSelectorClass = 'bg-gray-50 dark:bg-gray-800 max-w-full';
+
 export function TripSelector(props: Props) {
   return (
-    <div class="text-right m-4">
+    <div class="flex flex-wrap justify-end m-4 gap-1">
       <PlainDateInput
-        class="trip-selector__input mb-1"
+        class={tripSelectorClass}
         aria-label="Departure date"
         value={props.tripDate}
         onChange={props.onChangeTripDate}
       />
       <TripDropdown
-        class="trip-selector__input"
+        class={tripSelectorClass}
         directionHeaders={props.directionHeaders}
         directionsDetails={props.directionsDetails}
         selectedTripId={props.selectedTripId}

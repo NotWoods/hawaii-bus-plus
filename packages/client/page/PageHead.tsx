@@ -1,4 +1,4 @@
-import { Head, routeTitle } from '../components/Head/Head';
+import { appName, Head, routeTitle } from '../components/Head/Head';
 import { useSelector } from './router/hooks';
 import { selectRouteDetails, selectUrl } from './router/selector/main';
 import type { RouterState } from './router/state';
@@ -13,8 +13,12 @@ export function PageHead() {
 
   return (
     <Head>
-      {routeDetails ? <title>{routeTitle(routeDetails.route)}</title> : null}
-      <link rel="canonical" href={url} />
+      <title>
+        {routeDetails
+          ? `${routeTitle(routeDetails.route)} - ${appName}`
+          : appName}
+      </title>
+      {import.meta.env.SSR ? null : <link rel="canonical" href={url} />}
     </Head>
   );
 }

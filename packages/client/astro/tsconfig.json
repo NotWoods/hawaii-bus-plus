@@ -1,0 +1,26 @@
+{
+  "extends": ["astro/tsconfigs/base", "../../tsconfig.base.json"],
+  "include": ["**/*"],
+  "references": [
+    { "path": "../assets" },
+    { "path": "../components" },
+    { "path": "../page" },
+    { "path": "../services" },
+    { "path": "../share" },
+    { "path": "../../workers/tsconfig.build.json" },
+    { "path": "../../data/src" },
+    { "path": "../../promise-worker/page" },
+    { "path": "../../react-google-maps/src" },
+    { "path": "../../types" },
+    { "path": "../../utils/src" },
+    { "path": "../../vite-plugins/src" },
+  ],
+  "compilerOptions": {
+    "lib": ["esnext", "dom", "dom.iterable"],
+    "types": ["astro/client", "vite/client", "google.maps"],
+    "noEmit": true,
+    "noPropertyAccessFromIndexSignature": false,
+    "module": "Preserve",
+    "moduleResolution": "Bundler",
+  },
+}
