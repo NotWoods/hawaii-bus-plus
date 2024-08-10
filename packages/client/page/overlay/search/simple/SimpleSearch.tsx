@@ -1,9 +1,9 @@
-import { memoize } from '@hawaii-bus-plus/utils';
-
-import { useCallback, useRef, useState } from 'preact/hooks';
+import { lazy } from 'preact/compat';
+import { useCallback, useEffect, useRef, useState } from 'preact/hooks';
 import { directions } from '../../../../assets/icons/paths';
 import { OutlinedButton } from '../../../../components/Button/OutlinedButton';
-import { useLazyComponent, usePromise } from '../../../hooks';
+import { usePromise } from '../../../hooks';
+import { SnackbarSuspense } from '../../../loading/SnackbarErrorBoundary';
 import { SearchBar } from '../SearchBar';
 import { useAutocompleteKeys } from '../useAutocompleteKeys';
 import { emptyResults } from './places-autocomplete';
@@ -18,7 +18,10 @@ interface InputEvent {
   currentTarget: { value: string };
 }
 
-export const lazySearchResults = memoize(() => import('../search-lazy-entry'));
+export const lazySearchResults = () => import('../search-lazy-entry');
+const SearchResultsList = lazy(
+  async () => (await lazySearchResults()).SearchResultsList,
+);
 
 function useInput(): [string, (event: InputEvent) => void] {
   const [input, setInput] = useState('');
@@ -50,7 +53,11 @@ export function SimpleSearch(props: Props) {
   const searchResults = useSearchResults(search);
   const searchRef = useRef<HTMLInputElement>(null);
   const handleKeyDown = useAutocompleteKeys(searchRef);
-  const { SearchResultsList } = useLazyComponent(lazySearchResults);
+
+  useEffect(() => {
+    // prefetch layout
+    void lazySearchResults();
+  }, []);
 
   return (
     <>
@@ -72,13 +79,15 @@ export function SimpleSearch(props: Props) {
         Directions
       </OutlinedButton>
 
-      {!SearchResultsList || searchResults === emptyResults ? null : (
-        <SearchResultsList
-          {...searchResults}
-          id="searchResults"
-          forceTitles
-          onKeyDown={handleKeyDown}
-        />
+      {searchResults === emptyResults ? null : (
+        <SnackbarSuspense fallback={null}>
+          <SearchResultsList
+            {...searchResults}
+            id="searchResults"
+            forceTitles
+            onKeyDown={handleKeyDown}
+          />
+        </SnackbarSuspense>
       )}
     </>
   );

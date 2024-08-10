@@ -1,15 +1,18 @@
-import { useLazyComponent } from '../hooks';
+import { lazy } from 'preact/compat';
 import { useLoadGoogleMaps } from '../hooks/useLoadGoogleMaps';
+import { SnackbarSuspense } from '../loading/SnackbarErrorBoundary';
 
 const lazyMap = import('./MapContent');
+const LazyMapContent = lazy(async () => (await lazyMap).MapContent);
 
 export function MainMap() {
   const { isLoaded } = useLoadGoogleMaps();
-  const { MapContent } = useLazyComponent(() => lazyMap);
 
   return (
     <section class="fixed inset-0 md:top-0 md:ml-80">
-      {isLoaded && MapContent ? <MapContent /> : undefined}
+      <SnackbarSuspense fallback={null}>
+        {isLoaded ? <LazyMapContent /> : undefined}
+      </SnackbarSuspense>
     </section>
   );
 }

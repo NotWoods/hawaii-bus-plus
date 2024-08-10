@@ -5,15 +5,15 @@ import {
   type DirectionsWorkerHandler,
 } from '@hawaii-bus-plus/workers/directions';
 import type { Temporal } from '@js-temporal/polyfill';
-import { useRef, useState } from 'preact/hooks';
+import { lazy, Suspense } from 'preact/compat';
+import { useEffect, useRef, useState } from 'preact/hooks';
 import { dbInitialized } from '../../../api';
-import {
-  useDelay,
-  useLazyComponent,
-  usePromise,
-  useWorker,
-} from '../../../hooks';
+import { useDelay, usePromise, useWorker } from '../../../hooks';
 import { LoadingBusIcon } from '../../../loading/LoadingBusIcon';
+import {
+  SnackbarErrorBoundary,
+  SnackbarSuspense,
+} from '../../../loading/SnackbarErrorBoundary';
 import { DirectionsTime } from '../../../sheet/directions/DirectionsTime';
 import { NOW, timeForWorker } from '../../../time/input/symbol';
 import { lazySearchResults } from '../simple/SimpleSearch';
@@ -24,6 +24,13 @@ import { DirectionsFields, type FieldsSearchResults } from './DirectionsFields';
 interface Props {
   onClose?(): void;
 }
+
+const DirectionsPointResults = lazy(
+  async () => (await lazySearchResults()).DirectionsPointResults,
+);
+const DirectionsJourneys = lazy(
+  async () => (await lazySearchResults()).DirectionsJourneys,
+);
 
 export function DirectionsSearch(_props: Props) {
   const [depart, setDepart] = useState<Point | undefined>();
@@ -37,13 +44,16 @@ export function DirectionsSearch(_props: Props) {
     results: emptyResults,
   });
   const [results, setResults] = useState<DirectionsResult | undefined>();
-  const { DirectionsPointResults, DirectionsJourneys } =
-    useLazyComponent(lazySearchResults);
 
   const postToDirectionsWorker = useWorker(
     DirectionsWorker,
   ) as DirectionsWorkerHandler;
   const delayDone = useDelay(300, [depart, arrive, departureTime]);
+
+  useEffect(() => {
+    // prefetch layout
+    void lazySearchResults();
+  }, []);
 
   usePromise(
     async (signal) => {
@@ -77,18 +87,22 @@ export function DirectionsSearch(_props: Props) {
 
   function renderJourneys() {
     if (depart && arrive) {
-      if (results && DirectionsJourneys) {
+      if (results) {
         return (
-          <DirectionsJourneys
-            results={results.journeys}
-            depart={depart}
-            arrive={arrive}
-            departureTime={results.depatureTime}
-            onTomorrowClick={() => {
-              setResults(undefined);
-              setDepartTime(results.tomorrow);
-            }}
-          />
+          <SnackbarErrorBoundary fallback={null}>
+            <Suspense fallback={delayDone ? <LoadingBusIcon /> : null}>
+              <DirectionsJourneys
+                results={results.journeys}
+                depart={depart}
+                arrive={arrive}
+                departureTime={results.depatureTime}
+                onTomorrowClick={() => {
+                  setResults(undefined);
+                  setDepartTime(results.tomorrow);
+                }}
+              />
+            </Suspense>
+          </SnackbarErrorBoundary>
         );
       } else if (delayDone) {
         return <LoadingBusIcon />;
@@ -115,7 +129,7 @@ export function DirectionsSearch(_props: Props) {
       />
       <DirectionsTime value={departureTime} onChange={setDepartTime} />
 
-      {DirectionsPointResults ? (
+      <SnackbarSuspense fallback={null}>
         <DirectionsPointResults
           {...searchResults}
           onKeyDown={handleKeyDown}
@@ -128,7 +142,7 @@ export function DirectionsSearch(_props: Props) {
             });
           }}
         />
-      ) : null}
+      </SnackbarSuspense>
 
       {renderJourneys()}
     </>

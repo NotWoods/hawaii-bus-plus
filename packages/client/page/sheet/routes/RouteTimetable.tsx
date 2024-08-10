@@ -1,18 +1,20 @@
 import type { DateString, Route } from '@hawaii-bus-plus/types';
 
-import { useState } from 'preact/hooks';
-import type { Temporal } from '@js-temporal/polyfill';
-import { colorVariables } from '../../../components/route-colors';
-import { RouteHeader } from '../../../components/RouteHeader/RouteHeader';
 import {
   InfoWorker,
   type InfoWorkerHandler,
   type RouteDetails,
   type TripDetails,
 } from '@hawaii-bus-plus/workers/info';
+import type { Temporal } from '@js-temporal/polyfill';
+import { lazy, Suspense } from 'preact/compat';
+import { useState } from 'preact/hooks';
+import { colorVariables } from '../../../components/route-colors';
+import { RouteHeader } from '../../../components/RouteHeader/RouteHeader';
 import { dbInitialized } from '../../api';
-import { useDelay, useLazyComponent, usePromise, useWorker } from '../../hooks';
+import { useDelay, usePromise, useWorker } from '../../hooks';
 import { LoadingBusIcon } from '../../loading/LoadingBusIcon';
+import { SnackbarErrorBoundary } from '../../loading/SnackbarErrorBoundary';
 import { closeMainAction } from '../../router/action/main';
 import {
   closeRouteDetailsAction,
@@ -29,6 +31,7 @@ import { NOW, timeForWorker } from '../../time/input/symbol';
 import { BaseSheet } from '../BaseSheet';
 
 const lazyTimetable = import('./time-entry');
+const Timetable = lazy(async () => (await lazyTimetable).Timetable);
 
 /**
  * runs a timer to show a loading bar if it takes too long to load the full route data.
@@ -54,8 +57,6 @@ export function RouteTimetable() {
 
   const dispatch = useDispatch();
   const showLoadingBar = useShowLoadingBar(routeId);
-
-  const { Timetable } = useLazyComponent(() => lazyTimetable);
 
   usePromise(
     async (signal) => {
@@ -103,15 +104,19 @@ export function RouteTimetable() {
   );
 
   const route = routeDetails?.route;
-  if (route && Timetable) {
+  if (route) {
     return (
       <BaseSheet style={colorVariables(route)} loaded>
         <Header route={route} />
-        <Timetable
-          routeDetails={routeDetails}
-          tripDate={tripDate}
-          onChangeTripDate={setTripDate}
-        />
+        <SnackbarErrorBoundary fallback={null}>
+          <Suspense fallback={showLoadingBar ? <LoadingBusIcon /> : null}>
+            <Timetable
+              routeDetails={routeDetails}
+              tripDate={tripDate}
+              onChangeTripDate={setTripDate}
+            />
+          </Suspense>
+        </SnackbarErrorBoundary>
       </BaseSheet>
     );
   } else if (showLoadingBar) {

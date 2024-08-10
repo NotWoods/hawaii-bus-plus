@@ -1,5 +1,6 @@
 import type { Temporal } from '@js-temporal/polyfill';
-import { useLazyComponent } from '../../hooks';
+import { lazy } from 'preact/compat';
+import { SnackbarSuspense } from '../../loading/SnackbarErrorBoundary';
 import { NOW } from '../../time/input/symbol';
 
 interface Props {
@@ -12,10 +13,11 @@ interface Props {
 
 type Selected = 'now' | 'leave-at';
 
+const PlainDateTimeInput = lazy(
+  async () => (await import('../routes/time-entry')).PlainDateTimeInput,
+);
+
 export function DirectionsTime(props: Props) {
-  const { PlainDateTimeInput } = useLazyComponent(
-    () => import('../routes/time-entry'),
-  );
   const selected = props.value != undefined ? 'leave-at' : 'now';
 
   return (
@@ -35,12 +37,14 @@ export function DirectionsTime(props: Props) {
         <option value="now">Leave now</option>
         <option value="leave-at">Leave at</option>
       </select>
-      {PlainDateTimeInput && selected === 'leave-at' ? (
-        <PlainDateTimeInput
-          class="text-xs bg-primary-900 flex-1"
-          value={props.value!}
-          onChange={(dateTime) => props.onChange(dateTime)}
-        />
+      {selected === 'leave-at' ? (
+        <SnackbarSuspense fallback={null}>
+          <PlainDateTimeInput
+            class="text-xs bg-primary-900 flex-1"
+            value={props.value!}
+            onChange={(dateTime) => props.onChange(dateTime)}
+          />
+        </SnackbarSuspense>
       ) : undefined}
     </div>
   );
