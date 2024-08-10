@@ -1,20 +1,18 @@
 import type { DateString, Route } from '@hawaii-bus-plus/types';
 
+import { useState } from 'preact/hooks';
+import type { Temporal } from '@js-temporal/polyfill';
+import { colorVariables } from '../../../components/route-colors';
+import { RouteHeader } from '../../../components/RouteHeader/RouteHeader';
 import {
   InfoWorker,
   type InfoWorkerHandler,
   type RouteDetails,
   type TripDetails,
 } from '@hawaii-bus-plus/workers/info';
-import type { Temporal } from '@js-temporal/polyfill';
-import { lazy, Suspense } from 'preact/compat';
-import { useState } from 'preact/hooks';
-import { colorVariables } from '../../../components/route-colors';
-import { RouteHeader } from '../../../components/RouteHeader/RouteHeader';
 import { dbInitialized } from '../../api';
 import { useDelay, usePromise, useWorker } from '../../hooks';
 import { LoadingBusIcon } from '../../loading/LoadingBusIcon';
-import { SnackbarErrorBoundary } from '../../loading/SnackbarErrorBoundary';
 import { closeMainAction } from '../../router/action/main';
 import {
   closeRouteDetailsAction,
@@ -29,6 +27,8 @@ import {
 } from '../../router/selector/main';
 import { NOW, timeForWorker } from '../../time/input/symbol';
 import { BaseSheet } from '../BaseSheet';
+import { lazy, Suspense } from 'preact/compat';
+import { SnackbarErrorBoundary } from '../../loading/SnackbarErrorBoundary';
 
 const lazyTimetable = import('./time-entry');
 const Timetable = lazy(async () => (await lazyTimetable).Timetable);

@@ -7,7 +7,9 @@ interface Fathom {
 }
 
 declare global {
-  let fathom: Fathom;
+  interface Window {
+    fathom: Fathom;
+  }
 }
 
 let dbInitialized: Promise<void>;

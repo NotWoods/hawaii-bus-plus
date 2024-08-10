@@ -70,7 +70,7 @@ export function DirectionsSearch(_props: Props) {
       });
 
       setResults(results);
-      fathom?.trackGoal('HQEUCTW2', results.journeys.length);
+      window.fathom?.trackGoal('HQEUCTW2', results.journeys.length);
     },
     [depart, arrive, departureTime],
   );

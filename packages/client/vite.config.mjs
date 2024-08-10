@@ -15,7 +15,7 @@ export default defineConfig(({ command, isSsrBuild }) => {
       }),
       preact({
         include: ['{page,share,assets,components}/**/*'],
-        exclude: ['worker-*/**'],
+        exclude: ['worker-*/**', '**/*.css'],
       }),
     ],
     optimizeDeps: {
