@@ -3,6 +3,11 @@ import { defineConfig } from 'astro/config';
 import preact from '@astrojs/preact';
 import tailwind from '@astrojs/tailwind';
 
+const spaRouting = {
+  '/directions': '/',
+  '/routes/[...slug]': '/',
+};
+
 export default defineConfig({
   integrations: [preact(), tailwind()],
   srcDir: 'astro',
@@ -10,9 +15,15 @@ export default defineConfig({
   build: {
     format: 'preserve',
   },
+  redirects: {
+    // Use SPA routing in dev mode
+    // In build mode, netlify.toml handles this instead
+    ...(process.env.NODE_ENV === 'production' ? undefined : spaRouting),
+  },
   vite: {
     resolve: {
       alias: {
+        // Fix some weird build error
         '@googlemaps/js-api-loader':
           '@googlemaps/js-api-loader/dist/index.esm.js',
       },
@@ -24,6 +35,10 @@ export default defineConfig({
     json: {
       stringify: true,
     },
+    define:
+      process.env.NODE_ENV === 'production'
+        ? { globalThis: 'self' }
+        : undefined,
     ssr: {
       external: [
         'preact',
