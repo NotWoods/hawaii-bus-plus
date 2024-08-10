@@ -14,6 +14,7 @@ export default defineConfig({
   outDir: '../../dist/',
   build: {
     format: 'preserve',
+    assets: 'assets',
   },
   redirects: {
     // Use SPA routing in dev mode

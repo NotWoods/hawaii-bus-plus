@@ -170,9 +170,6 @@ importers:
       '@hawaii-bus-plus/vite-plugins':
         specifier: workspace:*
         version: link:../vite-plugins
-      '@preact/preset-vite':
-        specifier: ^2.8.3
-        version: 2.8.3(@babel/core@7.24.7)(preact@10.22.1)(vite@5.0.12(@types/node@20.11.16)(terser@5.15.0))
       '@storybook/addon-essentials':
         specifier: ^8.1.10
         version: 8.1.10(@types/react@17.0.38)(prettier@3.2.4)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -203,9 +200,6 @@ importers:
       astro:
         specifier: ^4.13.1
         version: 4.13.1(@types/node@20.11.16)(terser@5.15.0)(typescript@5.5.4)
-      preact-render-to-string:
-        specifier: ^6.5.5
-        version: 6.5.5(preact@10.22.1)
       storybook:
         specifier: ^8.1.10
         version: 8.1.10(@babel/preset-env@7.24.7(@babel/core@7.24.7))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -8282,6 +8276,7 @@ snapshots:
     transitivePeerDependencies:
       - preact
       - supports-color
+    optional: true
 
   '@preact/signals-core@1.8.0': {}
 
@@ -8477,6 +8472,7 @@ snapshots:
     dependencies:
       estree-walker: 2.0.2
       picomatch: 2.3.1
+    optional: true
 
   '@rollup/pluginutils@4.2.1':
     dependencies:
