@@ -3,7 +3,6 @@
   command = ". scripts/app.sh"
   edge_functions = "packages/edge-functions/src/"
 [build.environment]
-  NODE_ENV = "development"
   NPM_FLAGS="--prefix=/dev/null"
 
 # Production context: all deploys from the Production branch set in your site’s
