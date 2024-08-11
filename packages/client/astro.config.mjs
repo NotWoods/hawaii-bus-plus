@@ -23,6 +23,7 @@ export default defineConfig({
     ...(process.env.NODE_ENV === 'production' ? undefined : spaRouting),
   },
   vite: {
+    envDir: '../../',
     resolve: {
       alias: {
         // Fix some weird build error
