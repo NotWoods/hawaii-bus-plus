@@ -9,9 +9,6 @@
       "types": "./src/index.d.ts"
     }
   },
-  "bin": {
-    "hawaii-bus-plus-api-gen": "./src/cli.js"
-  },
   "scripts": {
     "preapi:client": "pnpm run build",
     "api:client": "node src/cli.js --input https://www.heleonbus.hawaiicounty.gov/home/showpublisheddocument/307470/638458319827900000 --output ../client/public/api/v1/",
