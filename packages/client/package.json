@@ -8,10 +8,12 @@
     "build": "astro build",
     "dev": "astro dev",
     "check": "astro check",
+    "preview": "astro preview",
     "format": "prettier **/*.{ts,tsx,astro} *.{cjs,mjs} --write --ignore-path ../../.prettierignore",
     "pretest": "tsc --build page",
     "storybook": "storybook dev -p 6006",
     "test": "vitest run",
+    "test:e2e": "playwright test --project chromium",
     "workbox": "workbox generateSW workbox.config.cjs"
   },
   "dependencies": {
@@ -26,6 +28,7 @@
     "@hawaii-bus-plus/workers": "workspace:*",
     "@js-temporal/polyfill": "^0.4.3",
     "@notwoods/preact-helmet": "^6.1.0",
+    "@playwright/test": "^1.46.0",
     "clsx": "^2.1.0",
     "idb": "^7.0.2",
     "just-debounce": "^1.1.0",

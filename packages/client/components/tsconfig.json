@@ -9,7 +9,7 @@
   ],
   "compilerOptions": {
     "lib": ["esnext", "dom", "dom.iterable"],
-    "types": ["vite/client"],
+    "types": ["astro/client"],
     "emitDeclarationOnly": true,
     "module": "Preserve",
     "moduleResolution": "Bundler",

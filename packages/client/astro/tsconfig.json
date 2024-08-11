@@ -16,7 +16,7 @@
   ],
   "compilerOptions": {
     "lib": ["esnext", "dom", "dom.iterable"],
-    "types": ["astro/client", "vite/client", "google.maps"],
+    "types": ["astro/client", "google.maps"],
     "noEmit": true,
     "noPropertyAccessFromIndexSignature": false,
     "module": "Preserve",
