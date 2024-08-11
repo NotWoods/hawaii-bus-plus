@@ -22,7 +22,7 @@
     "preact": "^10.5.15"
   },
   "devDependencies": {
-    "@types/google.maps": "^3.50.0",
+    "@types/google.maps": "^3.55.12",
     "preact": "^10.22.1",
     "typescript": "^5.5.4"
   },

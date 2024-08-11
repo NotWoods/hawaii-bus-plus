@@ -198,8 +198,8 @@ importers:
         specifier: ^0.5.10
         version: 0.5.10(tailwindcss@3.4.1)
       '@types/google.maps':
-        specifier: ^3.50.0
-        version: 3.50.0
+        specifier: ^3.55.12
+        version: 3.55.12
       astro:
         specifier: ^4.13.1
         version: 4.13.1(@types/node@20.11.16)(terser@5.15.0)(typescript@5.5.4)
@@ -372,8 +372,8 @@ importers:
         version: 2.5.0
     devDependencies:
       '@types/google.maps':
-        specifier: ^3.50.0
-        version: 3.50.0
+        specifier: ^3.55.12
+        version: 3.55.12
       preact:
         specifier: ^10.22.1
         version: 10.22.1
@@ -528,8 +528,8 @@ importers:
         specifier: workspace:*
         version: link:../vite-plugins
       '@types/google.maps':
-        specifier: ^3.50.0
-        version: 3.50.0
+        specifier: ^3.55.12
+        version: 3.55.12
       typescript:
         specifier: ^5.5.4
         version: 5.5.4
@@ -2509,8 +2509,8 @@ packages:
   '@types/find-cache-dir@3.2.1':
     resolution: {integrity: sha512-frsJrz2t/CeGifcu/6uRo4b+SzAwT4NYCVPu1GN8IB9XTzrpPkGuV0tmh9mN+/L0PklAlsC3u5Fxt0ju00LXIw==}
 
-  '@types/google.maps@3.50.0':
-    resolution: {integrity: sha512-8SQJKelTTt2ah7WDNWd2DZgUrqNaZw6sAFiTxmEtFql5Mzx2qfBIUdp5XwC4JbYy/AjJQT5wEBLwtwuOjBTOYg==}
+  '@types/google.maps@3.55.12':
+    resolution: {integrity: sha512-Q8MsLE+YYIrE1H8wdN69YHHAF8h7ApvF5MiMXh/zeCpP9Ut745mV9M0F4X4eobZ2WJe9k8tW2ryYjLa87IO2Sg==}
 
   '@types/hast@3.0.4':
     resolution: {integrity: sha512-WPs+bbQw5aCj+x6laNGWLH3wviHtoCv/P3+otBhbOhJgG8qtpdAMlTCxLtsTWA7LH1Oh/bFCHsBn0TPS5m30EQ==}
@@ -9307,7 +9307,7 @@ snapshots:
 
   '@types/find-cache-dir@3.2.1': {}
 
-  '@types/google.maps@3.50.0': {}
+  '@types/google.maps@3.55.12': {}
 
   '@types/hast@3.0.4':
     dependencies:
