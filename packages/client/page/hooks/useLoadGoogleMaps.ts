@@ -2,12 +2,11 @@ import {
   useGoogleApiLoaded,
   type LoaderOptions,
 } from '@hawaii-bus-plus/react-google-maps';
+import { GOOGLE_MAPS_KEY } from '../../services/env';
 import { useOnline } from './useOnline';
 
-export const googleMapsApiKey = import.meta.env.VITE_GOOGLE_MAPS_KEY as string;
-
 export const googleMapOptions: LoaderOptions = {
-  apiKey: googleMapsApiKey,
+  apiKey: GOOGLE_MAPS_KEY,
   id: 'gmaps-script',
   libraries: ['places' as const],
 };

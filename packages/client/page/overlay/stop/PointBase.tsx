@@ -5,10 +5,8 @@ import {
 import type { ComponentChildren } from 'preact';
 import { useState } from 'preact/hooks';
 import type { LatLngLiteral } from 'spherical-geometry-js';
-import {
-  googleMapsApiKey,
-  useLoadGoogleMaps,
-} from '../../hooks/useLoadGoogleMaps';
+import { GOOGLE_MAPS_KEY } from '../../../services/env';
+import { useLoadGoogleMaps } from '../../hooks/useLoadGoogleMaps';
 
 interface Props {
   position?: LatLngLiteral;
@@ -36,7 +34,7 @@ export function PointBase(props: Props) {
         {position ? (
           loadError ? (
             <StreetViewStatic
-              googleMapsApiKey={googleMapsApiKey}
+              googleMapsApiKey={GOOGLE_MAPS_KEY}
               size="474x266"
               class="bg-very-dark"
               position={position}
