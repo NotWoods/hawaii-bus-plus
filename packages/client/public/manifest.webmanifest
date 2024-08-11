@@ -56,5 +56,24 @@
       "sizes": "any",
       "purpose": "monochrome"
     }
-  ]
+  ],
+  "description": "Riding the bus shouldn't be a hassle. Make it positive with the best transit app on the Big Island.",
+  "screenshots": [
+    {
+      "src": "https://hawaiibusplus.com/screenshots/homescreen_light.png",
+      "sizes": "1125x2436",
+      "platform": "narrow"
+    },
+    {
+      "src": "https://hawaiibusplus.com/screenshots/schedule_light.png",
+      "sizes": "1125x2436",
+      "platform": "narrow"
+    },
+    {
+      "src": "https://hawaiibusplus.com/screenshots/tablet_schedule_dark.png",
+      "sizes": "1125x2436",
+      "platform": "wide"
+    }
+  ],
+  "categories": ["navigation", "travel"]
 }
