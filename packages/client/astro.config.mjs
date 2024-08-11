@@ -12,6 +12,7 @@ export default defineConfig({
   integrations: [preact(), tailwind()],
   srcDir: 'astro',
   outDir: '../../dist/',
+  output: 'static',
   build: {
     format: 'preserve',
     assets: 'assets',
