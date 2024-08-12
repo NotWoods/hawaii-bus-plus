@@ -9,6 +9,9 @@ const theme = {
     display: ['Red Rose', 'Copperplate Gothic', 'Copperplate', 'serif'],
   },
   colors: {
+    inherit: colors.inherit,
+    current: colors.current,
+    transparent: colors.transparent,
     black: colors.black,
     white: colors.white,
     route: 'var(--route-color)',
