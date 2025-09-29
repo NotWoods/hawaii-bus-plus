@@ -5,9 +5,8 @@ export const darkStyles = _darkStyles as google.maps.MapTypeStyle[];
 
 export type { MarkerWithData } from './drawing/Marker';
 export { Marker } from './drawing/Marker';
-export * from './drawing/Polyline';
-export * from './streetview/StreetViewPano';
-export * from './streetview/StreetViewStatic';
-export * from './GoogleMap';
+export { Polyline } from './drawing/Polyline';
+export { StreetViewPano } from './streetview/StreetViewPano';
+export { StreetViewStatic } from './streetview/StreetViewStatic';
+export { GoogleMap } from './GoogleMap';
 export * from './MapProvider';
-export * from './hooks';
