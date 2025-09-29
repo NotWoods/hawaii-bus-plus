@@ -102,14 +102,12 @@ export async function directions(
   const journeys = await Promise.all(
     arriveAt
       .map((arrival) => traversePath(paths, arrival))
-      .map(
-        (path) =>
-          path && journeyToDirections(repo, from, to, departureTime, path),
-      ),
+      .filter(isDefined)
+      .map((path) => journeyToDirections(repo, from, to, departureTime, path)),
   );
 
   return {
-    journeys: journeys.filter(isDefined),
+    journeys: journeys,
     depatureTime: departureTime.toString(),
     tomorrow: departureTime
       .add({ days: 1 })

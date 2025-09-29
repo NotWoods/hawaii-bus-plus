@@ -47,6 +47,6 @@ export function usePromise(
         children: errorMessage(err),
       });
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
   }, deps);
 }

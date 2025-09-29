@@ -107,8 +107,6 @@ export const IDB_SUPPORT = typeof globalThis.indexedDB !== 'undefined';
 
 let db: Promise<IDBPDatabase<GTFSSchema>> | undefined;
 export function openDatabase(): Promise<IDBPDatabase<GTFSSchema>> {
-  if (!db) {
-    db = openDB<GTFSSchema>('gtfs', 1, callbacks);
-  }
+  db ??= openDB<GTFSSchema>('gtfs', 1, callbacks);
   return db;
 }

@@ -180,12 +180,8 @@ export async function journeyToDirections(
       endEntry = last(formattedStopTimes);
       journeyEnd = endEntry.arrivalTime;
       // Set on first iteration
-      if (!startEntry) {
-        startEntry = formattedStopTimes[0];
-      }
-      if (!journeyStart) {
-        journeyStart = formattedStopTimes[0].departureTime;
-      }
+      startEntry ??= formattedStopTimes[0];
+      journeyStart ??= formattedStopTimes[0].departureTime;
 
       const routes = await repo.loadRoutes(routeIds);
       const route = routes.get(trip.route_id);
@@ -231,9 +227,7 @@ export async function journeyToDirections(
       const endStop = stops.get(endStopId)!;
 
       journeyEnd = lastDepartureTime.add(current.transferTime);
-      if (!journeyStart) {
-        journeyStart = reachedEndStop;
-      }
+      journeyStart ??= reachedEndStop;
 
       const distance = computeDistanceBetween(
         startStop.position,

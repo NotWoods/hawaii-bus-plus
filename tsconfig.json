@@ -17,10 +17,10 @@
     { "path": "packages/react-google-maps/src" },
     { "path": "packages/temporal-utils/src" },
     { "path": "packages/types" },
-    { "path": "packages/utils/src" },
+    { "path": "packages/utils/src" }
   ],
   "compilerOptions": {
     "noEmit": true,
-    "skipLibCheck": true,
-  },
+    "skipLibCheck": true
+  }
 }
