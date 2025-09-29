@@ -36,6 +36,6 @@
     "@types/google.maps": "^3.55.12",
     "typescript": "^5.5.4",
     "vite": "^5.0.12",
-    "vitest": "^2.0.5"
+    "vitest": "^3.2.4"
   }
 }

@@ -23,7 +23,7 @@
   "devDependencies": {
     "prettier": "~3.2.4",
     "typescript": "^5.5.4",
-    "vitest": "^2.0.5"
+    "vitest": "^3.2.4"
   },
   "files": [
     "src"
