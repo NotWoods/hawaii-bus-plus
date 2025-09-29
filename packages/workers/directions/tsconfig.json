@@ -7,7 +7,6 @@
     { "path": "../nearby" },
     { "path": "../../data/src" },
     { "path": "../../data-fixture/src" },
-    { "path": "../../mnemonist/src" },
     { "path": "../../polyfills/src" },
     { "path": "../../presentation/src" },
     { "path": "../../temporal-utils/src" },

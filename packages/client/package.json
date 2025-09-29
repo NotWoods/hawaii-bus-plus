@@ -18,7 +18,6 @@
   },
   "dependencies": {
     "@hawaii-bus-plus/data": "workspace:*",
-    "@hawaii-bus-plus/mnemonist": "workspace:^0.38.3",
     "@hawaii-bus-plus/polyfills": "workspace:*",
     "@hawaii-bus-plus/presentation": "workspace:*",
     "@hawaii-bus-plus/promise-worker": "workspace:*",

@@ -2,9 +2,9 @@
   "extends": "../../tsconfig.base.json",
   "include": ["**/*"],
   "references": [
-    { "path": "../../mnemonist/src" },
+    { "path": "../../polyfills/src" },
     { "path": "../../types" },
-    { "path": "../../utils/src" }
+    { "path": "../../utils/src" },
   ],
   "compilerOptions": {
     "lib": ["esnext", "dom", "webworker"],

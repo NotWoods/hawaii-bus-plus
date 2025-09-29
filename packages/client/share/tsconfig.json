@@ -8,7 +8,6 @@
     { "path": "../page" },
     { "path": "../../workers/info" },
     { "path": "../../data/src" },
-    { "path": "../../mnemonist/src" },
     { "path": "../../polyfills/src" },
     { "path": "../../presentation/src" },
     { "path": "../../temporal-utils/src" },

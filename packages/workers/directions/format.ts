@@ -3,7 +3,6 @@ import {
   omitStopTimes,
   type Repository,
 } from '@hawaii-bus-plus/data';
-import { add } from '@hawaii-bus-plus/mnemonist';
 import {
   durationToData,
   plainTimeToData,
@@ -164,7 +163,9 @@ export async function journeyToDirections(
       const routeIds = new Set([trip.route_id]);
       const formattedStopTimes: JourneyStopTime[] = rawStopTimes.map((st) => {
         const stop = stops.get(st.stop_id)!;
-        add(routeIds, stop.routes);
+        for (const routeId of stop.routes) {
+          routeIds.add(routeId);
+        }
 
         return {
           stop,

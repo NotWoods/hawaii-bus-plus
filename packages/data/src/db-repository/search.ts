@@ -1,18 +1,14 @@
 import type { Route, Stop } from '@hawaii-bus-plus/types';
 import { batch, take } from '@hawaii-bus-plus/utils';
 import type { IDBPDatabase } from 'idb';
-import { intersection } from '@hawaii-bus-plus/mnemonist';
+import '@hawaii-bus-plus/polyfills/intersection';
 import type { GTFSSchema } from '../database.js';
 import { removeWords } from '../format.js';
 
 function interset<T>(sets: readonly ReadonlySet<T>[]): ReadonlySet<T> {
-  if (sets.length === 0) {
-    return new Set();
-  } else if (sets.length === 1) {
-    return sets[0];
-  } else {
-    return intersection(...sets);
-  }
+  return sets
+    .slice(1)
+    .reduce((acc, set) => acc.intersection(set), sets[0] ?? new Set());
 }
 
 export async function searchWordsIndex<Name extends 'routes' | 'stops'>(

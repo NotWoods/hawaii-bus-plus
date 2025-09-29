@@ -10,14 +10,14 @@
     { "path": "packages/workers/tsconfig.build.json" },
     { "path": "packages/data/src" },
     { "path": "packages/data-fixture/src" },
-    { "path": "packages/mnemonist/src" },
+    { "path": "packages/polyfills/src" },
     { "path": "packages/presentation/src" },
     { "path": "packages/promise-worker/page" },
     { "path": "packages/promise-worker/worker" },
     { "path": "packages/react-google-maps/src" },
     { "path": "packages/temporal-utils/src" },
     { "path": "packages/types" },
-    { "path": "packages/utils/src" }
+    { "path": "packages/utils/src" },
   ],
   "compilerOptions": {
     "noEmit": true,
