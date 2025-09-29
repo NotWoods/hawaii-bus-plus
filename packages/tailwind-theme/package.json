@@ -3,10 +3,9 @@
   "version": "3.0.0",
   "description": "Tailwind theme for hawaiibusplus.com",
   "private": false,
-  "type": "commonjs",
-  "main": "src/index.cjs",
+  "main": "theme.css",
   "scripts": {
-    "format": "prettier **/*.cjs --write --ignore-path ../../.prettierignore"
+    "format": "prettier **/*.css --write --ignore-path ../../.prettierignore"
   },
   "peerDependencies": {
     "tailwindcss": "^4.0.0"

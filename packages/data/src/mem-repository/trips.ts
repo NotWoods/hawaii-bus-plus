@@ -5,8 +5,8 @@ export function memTripCursor(trips: readonly Trip[]): TripCursor {
   const iter = trips[Symbol.iterator]();
   let result = iter.next();
   return {
-    get value() {
-      return result.value as Trip;
+    get value(): Trip {
+      return result.value!;
     },
     continue() {
       result = iter.next();
