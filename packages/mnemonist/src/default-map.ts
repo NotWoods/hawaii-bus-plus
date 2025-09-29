@@ -90,16 +90,16 @@ export class DefaultMap<K, V> implements Iterable<[K, V]>, ReadonlyMap<K, V> {
     this.items.forEach(callback, scope);
   }
 
-  keys(): IterableIterator<K> {
+  keys(): MapIterator<K> {
     return this.items.keys();
   }
-  values(): IterableIterator<V> {
+  values(): MapIterator<V> {
     return this.items.values();
   }
-  entries(): IterableIterator<[K, V]> {
+  entries(): MapIterator<[K, V]> {
     return this.items.entries();
   }
-  [Symbol.iterator](): IterableIterator<[K, V]> {
+  [Symbol.iterator](): MapIterator<[K, V]> {
     return this.entries();
   }
 }

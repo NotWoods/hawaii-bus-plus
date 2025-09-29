@@ -9,6 +9,6 @@
   },
   "devDependencies": {
     "copyfiles": "^2.4.1",
-    "prettier": "~3.2.4"
+    "prettier": "~3.6.2"
   }
 }

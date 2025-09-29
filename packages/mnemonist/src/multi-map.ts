@@ -61,19 +61,19 @@ export class MultiMap<K, V> implements ReadonlyMap<K, readonly V[]> {
     return this.items.get(key);
   }
 
-  [Symbol.iterator](): IterableIterator<[K, readonly V[]]> {
+  [Symbol.iterator](): MapIterator<[K, readonly V[]]> {
     return this.items[Symbol.iterator]();
   }
 
-  keys(): IterableIterator<K> {
+  keys(): MapIterator<K> {
     return this.items.keys();
   }
 
-  values(): IterableIterator<readonly V[]> {
+  values(): MapIterator<readonly V[]> {
     return this.items.values();
   }
 
-  entries(): IterableIterator<[K, readonly V[]]> {
+  entries(): MapIterator<[K, readonly V[]]> {
     return this.items.entries();
   }
 

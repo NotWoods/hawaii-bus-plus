@@ -27,14 +27,14 @@
     "@hawaii-bus-plus/utils": "workspace:*",
     "@js-temporal/polyfill": "^0.4.3",
     "spherical-geometry-js": "^3.0.0",
-    "ts-extras": "^0.11.0",
-    "tslib": "^2.5.0"
+    "ts-extras": "^0.16.0",
+    "tslib": "^2.8.1"
   },
   "devDependencies": {
     "@hawaii-bus-plus/data-fixture": "workspace:*",
     "@hawaii-bus-plus/test-utils": "workspace:*",
     "@types/google.maps": "^3.55.12",
-    "typescript": "^5.5.4",
+    "typescript": "^5.9.2",
     "vite": "^5.0.12",
     "vitest": "^3.2.4"
   }

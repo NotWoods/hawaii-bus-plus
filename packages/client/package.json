@@ -34,7 +34,7 @@
     "just-debounce": "^1.1.0",
     "preact": "^10.22.1",
     "spherical-geometry-js": "^3.0.0",
-    "tslib": "^2.5.0"
+    "tslib": "^2.8.1"
   },
   "devDependencies": {
     "@astrojs/preact": "^3.5.1",
@@ -53,8 +53,8 @@
     "astro": "^4.13.1",
     "storybook": "^8.1.10",
     "tailwindcss": "^3.4.1",
-    "type-fest": "^4.10.2",
-    "typescript": "^5.5.4",
+    "type-fest": "^5.0.1",
+    "typescript": "^5.9.2",
     "vite": "^5.0.12",
     "vitest": "^3.2.4",
     "workbox-cli": "^7.0.0"

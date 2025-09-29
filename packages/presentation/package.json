@@ -22,11 +22,11 @@
     "@hawaii-bus-plus/utils": "workspace:*",
     "@js-temporal/polyfill": "^0.4.3",
     "spherical-geometry-js": "^3.0.0",
-    "tslib": "^2.5.0"
+    "tslib": "^2.8.1"
   },
   "devDependencies": {
-    "type-fest": "^4.10.2",
-    "typescript": "^5.5.4",
+    "type-fest": "^5.0.1",
+    "typescript": "^5.9.2",
     "vitest": "^3.2.4"
   },
   "files": [
