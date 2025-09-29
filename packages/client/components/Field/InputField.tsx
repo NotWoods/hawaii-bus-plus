@@ -33,7 +33,7 @@ export function InputField({ children, theme, ...props }: Props) {
         {...props}
         required
         tabIndex={props.readonly ? -1 : 0}
-        class={clsx('input mt-1 shadow-sm block w-full focus:ring-cyan', {
+        class={clsx('input mt-1 shadow-xs block w-full focus:ring-cyan', {
           'opacity-60': props.readonly,
           'text-black': theme === 'light' || theme === 'auto',
           'bg-primary-700 text-white': theme === 'dark',

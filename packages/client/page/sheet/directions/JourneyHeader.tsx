@@ -50,7 +50,7 @@ export function JourneyHeader({ journey, timeZone, onClose }: Props) {
   return (
     <header
       class={clsx(
-        'journey__header grid relative items-center bg-white bg-opacity-20 border-b',
+        'journey__header grid relative items-center bg-white/20 border-b',
         onClose && 'journey__header--close',
       )}
     >

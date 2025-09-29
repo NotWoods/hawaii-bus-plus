@@ -1,13 +1,10 @@
+@reference "../../assets/main.css";
+
 .loading__linear:indeterminate {
-  @apply mx-4;
-  width: calc(100% - theme('spacing.8'));
-  animation-duration: 1.5s;
-  animation-iteration-count: infinite;
-  animation-name: moveIndeterminate;
-  animation-timing-function: linear;
-  background-color: theme('colors.primary.200');
-  background-image: linear-gradient(to right, theme('colors.primary.600') 30%, theme('colors.primary.600') 30%);
-  background-position: left top;
+  @apply mx-4 animate-move bg-top-left;
+  width: calc(100% - calc(var(--spacing) * 8));
+  background-color: var(--color-primary-200);
+  background-image: linear-gradient(to right, var(--color-primary-600) 30%, var(--color-primary-600) 30%);
   background-repeat: no-repeat;
   background-size: 150% 150%;
 }
@@ -20,14 +17,4 @@
 }
 .loading__linear:indeterminate::-ms-fill {
   animation-name: none;
-}
-
-@keyframes moveIndeterminate {
-  from {
-    background-position: 200% 0;
-  }
-
-  to {
-    background-position: -200% 0;
-  }
 }

@@ -36,7 +36,7 @@ function MarkerSearchResultItem(props: MarkerProps) {
         onClick={props.onClick}
       >
         <span
-          class="rounded bg-primary-900 self-start p-1 mb-1"
+          class="rounded-sm bg-primary-900 self-start p-1 mb-1"
           style={{ gridArea: 'icon' }}
         >
           {props.icon}

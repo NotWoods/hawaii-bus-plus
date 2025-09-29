@@ -1,3 +1,5 @@
+@reference "../../assets/main.css";
+
 .route__header {
   grid-area: header;
   grid-template:
@@ -5,7 +7,7 @@
     'name name name' auto
     / 7.5rem 1fr 3rem;
 }
-@screen md {
+@variant md {
   .route__header {
     grid-template:
       'icon name close' minmax(3rem, auto)

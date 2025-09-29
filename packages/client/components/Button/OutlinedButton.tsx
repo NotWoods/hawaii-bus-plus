@@ -22,7 +22,7 @@ export function OutlinedButton({ icon, iconClass, ...props }: Props) {
       type={props.href ? undefined : 'button'}
       {...props}
       class={clsx(
-        'flex p-2 font-medium border border-current hover:bg-red hover:bg-opacity-20 motion-safe:transition-colors',
+        'flex p-2 font-medium border border-current hover:bg-red/20 motion-safe:transition-colors',
         props.class,
       )}
     >

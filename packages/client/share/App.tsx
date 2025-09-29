@@ -79,7 +79,7 @@ export function App({ route, agency, trips, stops }: AppProps) {
             </Fragment>
           ))}
         </div>
-        <footer class="bg-white dark:bg-gray-700 shadow-inner px-4 pt-6 pb-16 grid-area-footer">
+        <footer class="bg-white dark:bg-zinc-700 shadow-inner px-4 pt-6 pb-16 grid-area-footer">
           <RouteDescription
             agency={agency}
             descParts={extractLinks(route.route_desc)}

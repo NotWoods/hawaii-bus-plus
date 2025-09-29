@@ -6,5 +6,5 @@
 }
 
 .journey__header--close {
-  grid-template-columns: auto min-content theme('spacing.12');
+  grid-template-columns: auto min-content calc(var(--spacing) * 12);
 }

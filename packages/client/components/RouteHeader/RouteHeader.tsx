@@ -15,7 +15,7 @@ interface Props {
 
 export function RouteHeader({ route, onClose }: Props) {
   return (
-    <header class="route__header grid gap-x-4 items-center px-4 pb-2 md:pb-0 border-b border-gray-800 dark:border-gray-200">
+    <header class="route__header grid gap-x-4 items-center px-4 pb-2 md:pb-0 border-b border-zinc-800 dark:border-zinc-200">
       <RouteIcon>{route?.route_short_name ?? BLANK}</RouteIcon>
       <h2 class="font-display text-3xl" style={{ gridArea: 'name' }}>
         {route?.route_long_name ?? BLANK}

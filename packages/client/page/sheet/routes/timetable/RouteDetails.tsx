@@ -19,7 +19,7 @@ export function RouteDetailsCard({ route, agency, descParts, tripId }: Props) {
   }
 
   return (
-    <footer class="bg-white dark:bg-gray-700 shadow-inner px-4 pt-6 pb-8 grid-area-footer">
+    <footer class="bg-white dark:bg-zinc-700 shadow-inner px-4 pt-6 pb-8 grid-area-footer">
       <DetailButtons route={route} agency={agency} tripId={tripId} />
       <RouteDescription agency={agency} descParts={descParts} />
     </footer>

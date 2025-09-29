@@ -1,3 +1,5 @@
+@reference "../../assets/main.css";
+
 .loadbus__line {
   @apply animate-line;
   transform-origin: center right;

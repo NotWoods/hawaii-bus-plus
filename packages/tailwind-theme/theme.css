@@ -1,0 +1,97 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-display: 'Red Rose', 'Copperplate Gothic', Copperplate, serif;
+
+  --color-zinc-750: oklch(30% 0.01 286);
+
+  --color-primary-50: hsl(212, 20%, 90%);
+  --color-primary-100: hsl(212, 10%, 72%);
+  --color-primary-200: hsl(212, 10%, 64%);
+  --color-primary-300: hsl(212, 10%, 53%);
+  --color-primary-400: hsl(212, 10%, 42%);
+  --color-primary-500: hsl(212, 10%, 32%);
+  --color-primary-600: hsl(212, 10%, 28%);
+  --color-primary-700: hsl(212, 10%, 22%);
+  --color-primary-800: hsl(212, 10%, 18%);
+  --color-primary-900: hsl(212, 10%, 10%);
+  --color-red: #c67168;
+  --color-yellow: #e2c049;
+  --color-brown: #918381;
+  --color-cyan: #8bb9bd;
+  --color-ocean-light: #778a91;
+  --color-ocean: #335468;
+  --color-dark: #2d4859;
+
+  --animate-enter: enter 0.3s;
+  --animate-shake: shake 0.2s ease-in-out infinite alternate;
+  --animate-line: line 0.8s ease-in-out infinite normal both;
+  --animate-move: move 1.5s linear infinite;
+
+  @keyframes enter {
+    from {
+      transform: translateY(25vh);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes shake {
+    from {
+      transform: translateY(-1%);
+    }
+    to {
+      transform: translateY(3%);
+    }
+  }
+
+  @keyframes line {
+    0%,
+    25% {
+      stroke-dashoffset: 22;
+    }
+    50%,
+    51% {
+      stroke-dashoffset: 0;
+    }
+    80%,
+    100% {
+      stroke-dashoffset: -22;
+    }
+  }
+
+  @keyframes move {
+    from {
+      background-position: 200% 0;
+    }
+
+    to {
+      background-position: -200% 0;
+    }
+  }
+}
+
+@theme inline {
+  --color-route: var(--route-color);
+}
+
+@layer components {
+  .waves {
+    @apply bg-primary-700 text-white bg-size-[384px];
+    background-image: url('/waves.svg');
+  }
+}
+
+@layer utilities {
+  .font-display {
+    @apply font-medium;
+  }
+}
+
+@utility animate-run {
+  animation-play-state: running;
+}
+@utility animate-pause {
+  animation-play-state: paused;
+}

@@ -74,7 +74,7 @@ export function TimetableDetails(props: Props) {
           </TimetableDirectionsDetail>
         ))}
       </div>
-      <SwitchDirectionButton class="absolute bottom-0 right-4 m-4 bg-white dark:bg-gray-700" />
+      <SwitchDirectionButton class="absolute bottom-0 right-4 m-4 bg-white dark:bg-zinc-700" />
     </header>
   );
 }

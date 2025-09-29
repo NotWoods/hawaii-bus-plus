@@ -1,9 +1,10 @@
 .segment {
+  --spacing-2_5: calc(var(--spacing) * 2.5);
   grid-template:
-    'line-top .      .' var(--segment-padding, theme('spacing[2.5]'))
+    'line-top .      .' var(--segment-padding, var(--spacing-2_5))
     'line-top name   time' 0.5rem
     'dot      name   time' min-content
     'line     name   time' 1fr
-    'line     .      .' var(--segment-padding, theme('spacing[2.5]'))
+    'line     .      .' var(--segment-padding, var(--spacing-2_5))
     / 0.5rem auto min-content;
 }

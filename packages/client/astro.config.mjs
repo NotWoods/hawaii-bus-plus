@@ -1,7 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import preact from '@astrojs/preact';
-import tailwind from '@astrojs/tailwind';
+import tailwindcss from '@tailwindcss/vite';
 
 const spaRouting = {
   '/directions': '/',
@@ -9,7 +9,7 @@ const spaRouting = {
 };
 
 export default defineConfig({
-  integrations: [preact(), tailwind()],
+  integrations: [preact()],
   srcDir: 'astro',
   outDir: '../../dist/',
   output: 'static',
@@ -23,6 +23,7 @@ export default defineConfig({
     ...(process.env.NODE_ENV === 'production' ? undefined : spaRouting),
   },
   vite: {
+    plugins: [tailwindcss()],
     envDir: '../../',
     resolve: {
       alias: {

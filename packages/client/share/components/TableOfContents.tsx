@@ -10,7 +10,7 @@ export function TableOfContents({ idToTrips, directionHeaders }: Props) {
   return (
     <aside
       id="toc"
-      class="grid-area-toc mx-6 md:sticky top-4 text-gray-700 dark:text-gray-300"
+      class="grid-area-toc mx-6 md:sticky top-4 text-zinc-700 dark:text-zinc-300"
     >
       <h3 class="font-display font-medium text-lg text-black dark:text-white">
         Schedule index

@@ -40,10 +40,10 @@ export function DirectionsField(props: Props) {
 
   return (
     <div class="mx-4 mb-2">
-      <label class="block text-sm text-gray-50" htmlFor={id}>
+      <label class="block text-sm text-zinc-50" htmlFor={id}>
         {props.label}
       </label>
-      <div class="relative shadow-sm">
+      <div class="relative shadow-xs">
         <SearchInput
           id={id}
           autoFocus={props.autoFocus}

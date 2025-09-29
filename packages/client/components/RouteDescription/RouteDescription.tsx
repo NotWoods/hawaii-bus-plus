@@ -40,7 +40,7 @@ export function RouteDescription({ agency, descParts }: Props) {
         <DetailsLink href={agency.agency_url}>{agency.agency_name}</DetailsLink>
         .
       </p>
-      <p class="text-sm leading-relaxed max-w-none text-black dark:text-white text-opacity-75 break-words">
+      <p class="text-sm leading-relaxed max-w-none text-black/75 dark:text-white/75 break-words">
         {descParts?.map(renderDescriptionPart)}
       </p>
     </>

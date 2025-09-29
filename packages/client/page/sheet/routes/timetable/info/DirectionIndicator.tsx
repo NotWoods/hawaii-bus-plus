@@ -12,10 +12,8 @@ export function DirectionIndicator() {
         <span
           key={id}
           class={clsx(
-            'inline-block w-1 h-1 rounded motion-safe:transition',
-            directionId === id
-              ? 'bg-red'
-              : 'bg-opacity-50 dark:bg-opacity-50 bg-white dark:bg-white',
+            'inline-block w-1 h-1 rounded-sm motion-safe:transition',
+            directionId === id ? 'bg-red' : 'bg-white/50 dark:bg-white/50',
           )}
         />
       ))}
