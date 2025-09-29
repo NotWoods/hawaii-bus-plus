@@ -1,9 +1,9 @@
-import type { ComponentChildren, JSX } from 'preact';
+import type { ComponentChildren, InputHTMLAttributes } from 'preact';
 import clsx from 'clsx';
 
 interface Props
   extends Pick<
-    JSX.HTMLAttributes<HTMLInputElement>,
+    InputHTMLAttributes<HTMLInputElement>,
     'type' | 'autocomplete' | 'readonly' | 'value'
   > {
   /**

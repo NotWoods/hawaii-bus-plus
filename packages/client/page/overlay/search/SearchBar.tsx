@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 
-import type { JSX } from 'preact';
+import type { HTMLAttributes } from 'preact';
 import { SearchIcon } from '../../../assets/icons/MenuIcon';
 import {
   leadingInputClass,
@@ -24,7 +24,7 @@ export function SearchBar(props: SearchProps) {
   );
 }
 
-export function SearchBarButton(props: JSX.HTMLAttributes<HTMLButtonElement>) {
+export function SearchBarButton(props: HTMLAttributes<HTMLButtonElement>) {
   return (
     <div class="relative shadow-sm m-4">
       <button

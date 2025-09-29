@@ -1,8 +1,8 @@
 import clsx from 'clsx';
-import type { JSX } from 'preact';
+import type { ButtonHTMLAttributes } from 'preact';
 import { forwardRef } from 'preact/compat';
 
-interface Props extends JSX.HTMLAttributes<HTMLButtonElement> {
+interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   title?: string;
   forceDark?: boolean;
 }

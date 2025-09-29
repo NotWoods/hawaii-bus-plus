@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/preact';
-import { fn } from '@storybook/test';
+import { fn } from 'storybook/test';
 
 import { MyLocationButtonContent, type Props } from './MyLocationButton';
 

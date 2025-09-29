@@ -23,7 +23,7 @@
   },
   "devDependencies": {
     "@types/google.maps": "^3.55.12",
-    "preact": "^10.22.1",
+    "preact": "^10.27.2",
     "typescript": "^5.9.2"
   },
   "files": [
