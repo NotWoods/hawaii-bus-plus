@@ -1,4 +1,3 @@
-import { DefaultMap, MultiMap } from '@hawaii-bus-plus/mnemonist';
 import { PlainDaysTime } from '@hawaii-bus-plus/temporal-utils';
 import type {
   Agency,
@@ -23,6 +22,7 @@ import type {
   Trip,
 } from '@hawaii-bus-plus/types';
 import { compareAs } from '@hawaii-bus-plus/utils';
+import '@hawaii-bus-plus/polyfills';
 import type { Writable } from 'type-fest';
 import { arrayFromAsync } from './itertools.js';
 
@@ -121,10 +121,10 @@ export async function parseStops(
   json: Pick<JsonStreams, 'transfers' | 'stops'>,
   variable: Pick<GTFSData, 'stops'>,
 ) {
-  const transfers = new MultiMap<Stop['stop_id'], Transfer>();
+  const transfers = new Map<Stop['stop_id'], Transfer[]>();
   for await (const csvTransfer of json.transfers) {
     if (csvTransfer.transfer_type !== 3) {
-      transfers.set(csvTransfer.from_stop_id, csvTransfer);
+      transfers.getOrInsert(csvTransfer.from_stop_id, []).push(csvTransfer);
     }
   }
 
@@ -148,12 +148,11 @@ export async function parseCalendar(
   json: Pick<JsonStreams, 'calendar' | 'calendar_dates'>,
   variable: Pick<GTFSData, 'calendar'>,
 ) {
-  const calendarDates = new MultiMap<
-    Calendar['service_id'],
-    CsvCalendarDates
-  >();
+  const calendarDates = new Map<Calendar['service_id'], CsvCalendarDates[]>();
   for await (const csvCalendarDate of json.calendar_dates) {
-    calendarDates.set(csvCalendarDate.service_id, csvCalendarDate);
+    calendarDates
+      .getOrInsert(csvCalendarDate.service_id, [])
+      .push(csvCalendarDate);
   }
 
   for await (const csvCalendar of json.calendar) {
@@ -228,15 +227,17 @@ export async function parseStopTimes(
   }
 }
 
+const defaultShape = (shape_id: Shape['shape_id']): Shape => ({
+  shape_id,
+  points: [],
+});
 export async function parseShapes(
   json: Pick<JsonStreams, 'shapes'>,
 ): Promise<ReadonlyMap<Shape['shape_id'], Shape>> {
-  const shapes = new DefaultMap<Shape['shape_id'], Shape>((shape_id) => ({
-    shape_id,
-    points: [],
-  }));
+  const shapes = new Map<Shape['shape_id'], Shape>();
   for await (const shapePoint of json.shapes) {
-    const shape = shapes.get(shapePoint.shape_id);
+    const shapeId = shapePoint.shape_id;
+    const shape = shapes.getOrInsert(shapeId, defaultShape(shapeId));
     shape.points.push({
       position: { lat: shapePoint.shape_pt_lat, lng: shapePoint.shape_pt_lon },
       shape_dist_traveled: shapePoint.shape_dist_traveled,

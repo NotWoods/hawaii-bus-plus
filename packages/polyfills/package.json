@@ -1,0 +1,27 @@
+{
+  "name": "@hawaii-bus-plus/polyfills",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./src/index.js",
+      "types": "./src/index.d.ts"
+    }
+  },
+  "sideEffects": true,
+  "scripts": {
+    "build": "tsc --build src",
+    "format": "prettier **/*.ts --write --ignore-path ../../.prettierignore"
+  },
+  "dependencies": {
+    "map.prototype.getorinsert": "^1.0.1",
+    "tslib": "^2.8.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.2"
+  },
+  "files": [
+    "src"
+  ]
+}
