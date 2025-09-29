@@ -22,7 +22,7 @@ import type {
   Trip,
 } from '@hawaii-bus-plus/types';
 import { compareAs } from '@hawaii-bus-plus/utils';
-import '@hawaii-bus-plus/polyfills';
+import '@hawaii-bus-plus/polyfills/getorinsert';
 import type { Writable } from 'type-fest';
 import { arrayFromAsync } from './itertools.js';
 

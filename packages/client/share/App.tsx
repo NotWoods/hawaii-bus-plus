@@ -1,4 +1,4 @@
-import { MultiMap } from '@hawaii-bus-plus/mnemonist';
+import '@hawaii-bus-plus/polyfills/getorinsert';
 import type { Agency, Route, Stop, Trip } from '@hawaii-bus-plus/types';
 import { extractLinks } from '@hawaii-bus-plus/workers/info';
 import { Fragment } from 'preact';
@@ -25,9 +25,9 @@ export interface AppProps {
 function groupByDirectionId(
   trips: readonly Trip[],
 ): ReadonlyMap<Trip['direction_id'], readonly Trip[]> {
-  const idToTrips = new MultiMap<Trip['direction_id'], Trip>();
+  const idToTrips = new Map<Trip['direction_id'], Trip[]>();
   for (const trip of trips) {
-    idToTrips.set(trip.direction_id, trip);
+    idToTrips.getOrInsert(trip.direction_id, []).push(trip);
   }
   return idToTrips;
 }

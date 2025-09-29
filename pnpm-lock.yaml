@@ -106,6 +106,9 @@ importers:
       '@hawaii-bus-plus/mnemonist':
         specifier: workspace:^0.38.3
         version: link:../mnemonist
+      '@hawaii-bus-plus/polyfills':
+        specifier: workspace:*
+        version: link:../polyfills
       '@hawaii-bus-plus/presentation':
         specifier: workspace:*
         version: link:../presentation
@@ -466,6 +469,9 @@ importers:
       '@hawaii-bus-plus/mnemonist':
         specifier: workspace:^0.38.3
         version: link:../mnemonist
+      '@hawaii-bus-plus/polyfills':
+        specifier: workspace:*
+        version: link:../polyfills
       '@hawaii-bus-plus/presentation':
         specifier: workspace:*
         version: link:../presentation

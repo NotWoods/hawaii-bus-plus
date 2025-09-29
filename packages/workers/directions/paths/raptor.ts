@@ -1,5 +1,5 @@
 import type { Repository } from '@hawaii-bus-plus/data';
-import { DefaultMap } from '@hawaii-bus-plus/mnemonist';
+import '@hawaii-bus-plus/polyfills/getorinsert';
 import {
   InfinityPlainDaysTime,
   PlainDaysTime,
@@ -44,7 +44,7 @@ function buildTimeLabels(sources: Iterable<Source>) {
   // Each stop, p, is associated with a multi-label (t_0(p), t_1(p), ...)
   // where t_i(p) represents the earliest known arrival time at p with up to i trips.
   // Initially every value is set to infinity, and t_0(p_s) is set to t.
-  const multiLabel = new DefaultMap<Stop['stop_id'], Path>(() => [undefined]);
+  const multiLabel = new Map<Stop['stop_id'], Path>();
   for (const { stop_id, departure_time } of sources) {
     multiLabel.set(stop_id, [{ time: departure_time }]);
   }
@@ -61,11 +61,11 @@ function buildTimeLabels(sources: Iterable<Source>) {
       return earliestKnownArrival.get(stopId) ?? InfinityPlainDaysTime;
     },
     getArrival(stopId: Stop['stop_id'], round: number) {
-      const existingLabels = multiLabel.get(stopId);
+      const existingLabels = multiLabel.getOrInsert(stopId, [undefined]);
       return existingLabels[round]?.time ?? InfinityPlainDaysTime;
     },
     setPath(stopId: Stop['stop_id'], round: number, path: PathSegment) {
-      const existingLabels = multiLabel.get(stopId);
+      const existingLabels = multiLabel.getOrInsert(stopId, [undefined]);
       existingLabels[round] = path;
       earliestKnownArrival.set(stopId, path.time);
     },

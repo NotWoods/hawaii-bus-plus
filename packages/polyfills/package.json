@@ -4,9 +4,9 @@
   "private": true,
   "type": "module",
   "exports": {
-    ".": {
-      "import": "./src/index.js",
-      "types": "./src/index.d.ts"
+    "./getorinsert": {
+      "import": "./src/getorinsert.js",
+      "types": "./src/getorinsert.d.ts"
     }
   },
   "sideEffects": true,
