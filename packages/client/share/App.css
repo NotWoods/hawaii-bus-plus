@@ -1,3 +1,5 @@
+@reference "../assets/main.css";
+
 html {
   scroll-behavior: smooth;
 }
@@ -11,7 +13,7 @@ html {
     'footer' auto
     / 1fr;
 }
-@screen md {
+@variant md {
   .share {
     grid:
       'header header' minmax(3rem, min-content)

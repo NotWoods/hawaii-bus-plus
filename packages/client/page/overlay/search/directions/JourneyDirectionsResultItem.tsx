@@ -10,7 +10,7 @@ import {
   TripDecorDot,
   TripDecorLine,
 } from '../../../sheet/routes/timetable/stop-time/DecorLines';
-import './JourneyDirectionsResultItem.css';
+import styles from './JourneyDirectionsResultItem.module.css';
 
 interface Props {
   journey: Journey;
@@ -38,11 +38,13 @@ export function JourneyDirectionsResultItem(props: Props) {
           .map((route) => (
             <li
               key={makeKey(route.route_id)}
-              class="journey-item__route grid justify-end md:justify-start h-12 md:h-auto md:w-12 gap-x-3 pr-6 md:p-0 md:gap-x-0 md:gap-y-3"
+              class={`${styles['journey-item__route']} grid justify-end md:justify-start h-12 md:h-auto md:w-12 gap-x-3 pr-6 md:p-0 md:gap-x-0 md:gap-y-3`}
               style={colorVariables(route)}
               title={route.route_long_name}
             >
-              <SmallRouteIcon class="journey-item__badge self-start justify-self-start">
+              <SmallRouteIcon
+                class={`${styles['journey-item__badge']} self-start justify-self-start`}
+              >
                 {route.route_short_name}
               </SmallRouteIcon>
               <TripDecorDot />

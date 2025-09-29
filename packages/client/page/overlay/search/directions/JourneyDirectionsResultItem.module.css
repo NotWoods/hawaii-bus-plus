@@ -1,9 +1,4 @@
-.journey-item__header {
-  grid-template:
-    'short fare' auto
-    'long long' auto
-    / auto min-content;
-}
+@reference "../../../../assets/main.css";
 
 .journey-item__route {
   grid-template:
@@ -14,7 +9,7 @@
 .journey-item__badge {
   grid-area: badge;
 }
-@screen md {
+@variant md {
   .journey-item__route {
     grid-template:
       'badge badge' auto

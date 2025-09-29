@@ -8,7 +8,7 @@ import {
   RouteBadges,
   type RouteBadgeKeys,
 } from '../../../sheet/routes/badge/RouteBadge';
-import './SearchResultItem.css';
+import styles from './SearchResultItem.module.css';
 
 interface MarkerProps {
   href?: string;
@@ -28,7 +28,9 @@ function MarkerSearchResultItem(props: MarkerProps) {
         type={props.href ? undefined : 'button'}
         href={props.href}
         class={clsx(
-          'search__item search__item--marker group grid gap-x-2 py-1 text-white',
+          styles['search__item--marker'],
+          'search__item', // used by useAutocompleteKeys
+          'group grid gap-x-2 py-1 text-white',
           props.class,
         )}
         role="option"

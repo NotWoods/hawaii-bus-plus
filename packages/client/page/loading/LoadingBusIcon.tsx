@@ -1,4 +1,4 @@
-import './LoadingBusIcon.css';
+import styles from './LoadingBusIcon.module.css';
 
 export function LoadingBusIcon() {
   return (
@@ -28,9 +28,9 @@ export function LoadingBusIcon() {
           />
         </g>
         <g stroke-width="1.3">
-          <path class="loadbus__line" d="M22.5 14.5h-20" />
-          <path class="loadbus__line" d="M20.5 21.5H.5" />
-          <path class="loadbus__line" d="M25.5 7.5h-19" />
+          <path class={styles['loadbus__line']} d="M22.5 14.5h-20" />
+          <path class={styles['loadbus__line']} d="M20.5 21.5H.5" />
+          <path class={styles['loadbus__line']} d="M25.5 7.5h-19" />
         </g>
         <g stroke-width="1.3">
           <circle cx="49.5" cy="24.5" r="5.9" />

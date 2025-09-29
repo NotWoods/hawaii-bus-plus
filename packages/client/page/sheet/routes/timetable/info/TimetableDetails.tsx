@@ -7,7 +7,7 @@ import { setDirectionAction } from '../../../../router/action/routes';
 import { useDispatch, useSelector } from '../../../../router/hooks';
 import { selectLoadedDetails } from '../../../../router/selector/main';
 import { SwitchDirectionButton } from './SwitchDirectionButton';
-import './TimetableDetails.css';
+import styles from './TimetableDetails.module.css';
 import { TimetableDirectionsDetail } from './TimetableDirectionsDetail';
 
 interface Props {
@@ -56,7 +56,7 @@ export function TimetableDetails(props: Props) {
   return (
     <header class="relative">
       <div
-        class="timetable__details grid scroll snap-both overflow-x-auto"
+        class={`${styles['timetable__details']} grid scroll snap-both overflow-x-auto`}
         style={{
           gridTemplateColumns: directionsDetails.map(() => '100%').join(' '),
         }}
