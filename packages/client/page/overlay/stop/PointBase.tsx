@@ -36,13 +36,13 @@ export function PointBase(props: Props) {
             <StreetViewStatic
               googleMapsApiKey={GOOGLE_MAPS_KEY}
               size="474x266"
-              class="bg-very-dark"
+              class="bg-very-dark h-full"
               position={position}
               pov={pov}
             />
           ) : (
             <StreetViewPano
-              class="bg-very-dark"
+              class="bg-very-dark h-full"
               position={position}
               pov={pov}
               onStatusChange={function () {
