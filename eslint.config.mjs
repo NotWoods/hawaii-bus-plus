@@ -13,7 +13,7 @@ export default tseslint.config(
     ignores: [
       'dist',
       '**/*.d.ts',
-      '**/*.ts',
+      '**/*.js',
       'packages/edge-functions/**/*.ts',
     ],
   },
