@@ -1,4 +1,4 @@
-import { registerPromiseWorker } from '../../worker/register.js';
+import { registerPromiseWorker } from '../../worker/register.ts';
 
 registerPromiseWorker(() => {
   throw new Error('busted!');

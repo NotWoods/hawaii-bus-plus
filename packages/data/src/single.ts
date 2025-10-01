@@ -1,4 +1,4 @@
-import type { Repository } from './repository.js';
+import type { Repository } from './repository.ts';
 
 export async function getSingle<
   Repo extends Partial<Repository>,

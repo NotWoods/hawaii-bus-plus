@@ -7,11 +7,11 @@ import type {
   Stop,
   Trip,
 } from '@hawaii-bus-plus/types';
-import { downloadScheduleData } from '../fetch.js';
-import type { Repository, TripCursor } from '../repository.js';
-import { memoryBatch } from './batch.js';
-import { searchArray } from './search.js';
-import { memTripCursor } from './trips.js';
+import { downloadScheduleData } from '../fetch.ts';
+import type { Repository, TripCursor } from '../repository.ts';
+import { memoryBatch } from './batch.ts';
+import { searchArray } from './search.ts';
+import { memTripCursor } from './trips.ts';
 
 export abstract class BaseMemoryRepository implements Repository {
   protected abstract readonly apiReady: Promise<GTFSData>;

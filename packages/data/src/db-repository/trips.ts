@@ -1,6 +1,6 @@
 import type { Route, Trip } from '@hawaii-bus-plus/types';
 import type { IDBPDatabase } from 'idb';
-import type { GTFSSchema } from '../database.js';
+import type { GTFSSchema } from '../database.ts';
 
 export function loadTrip(
   db: IDBPDatabase<GTFSSchema>,

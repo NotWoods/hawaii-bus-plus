@@ -5,15 +5,15 @@
   "type": "module",
   "exports": {
     "./difference": {
-      "import": "./src/difference.js",
+      "import": "./src/difference.ts",
       "types": "./src/difference.d.ts"
     },
     "./getorinsert": {
-      "import": "./src/getorinsert.js",
+      "import": "./src/getorinsert.ts",
       "types": "./src/getorinsert.d.ts"
     },
     "./intersection": {
-      "import": "./src/intersection.js",
+      "import": "./src/intersection.ts",
       "types": "./src/intersection.d.ts"
     }
   },

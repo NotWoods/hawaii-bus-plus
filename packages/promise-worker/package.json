@@ -4,11 +4,11 @@
   "private": true,
   "exports": {
     ".": {
-      "import": "./page/promise-worker.js",
+      "import": "./page/promise-worker.ts",
       "types": "./page/promise-worker.d.ts"
     },
     "./worker": {
-      "import": "./worker/index.js",
+      "import": "./worker/index.ts",
       "types": "./worker/index.d.ts"
     }
   },

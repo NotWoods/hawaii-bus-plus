@@ -2,7 +2,7 @@ import { parse, type CastingContext } from 'csv-parse';
 import JSZip from 'jszip';
 import { readFile } from 'node:fs/promises';
 import { expect, test } from 'vitest';
-import { cast } from '../../src/bus/cast.js';
+import { cast } from '../../src/bus/cast.ts';
 
 async function* loadZipFile(
   fileName: string,

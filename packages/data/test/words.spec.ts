@@ -1,5 +1,5 @@
 import { test, expect } from 'vitest';
-import { getWords } from '../src/words.js';
+import { getWords } from '../src/words.ts';
 
 test('getWords', () => {
   expect(getWords('301', 'Intra-Hilo Waikea-Uka')).toEqual([

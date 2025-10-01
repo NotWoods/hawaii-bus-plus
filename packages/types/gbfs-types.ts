@@ -1,5 +1,5 @@
 import type { Opaque } from 'type-fest';
-import type { LatLngData } from './gtfs-types.js';
+import type { LatLngData } from './gtfs-types.ts';
 
 export type RentalMethod =
   | 'KEY'

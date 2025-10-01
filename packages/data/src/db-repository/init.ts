@@ -16,9 +16,9 @@ import type {
   SearchRoute,
   SearchStop,
   SearchTrip,
-} from '../database.js';
-import { downloadScheduleData, NotModifiedError } from '../fetch.js';
-import { getWords } from '../words.js';
+} from '../database.ts';
+import { downloadScheduleData, NotModifiedError } from '../fetch.ts';
+import { getWords } from '../words.ts';
 
 export async function init(db: IDBPDatabase<GTFSSchema>) {
   const storedTag = (await db.get('keyval', 'etag')) as string | undefined;

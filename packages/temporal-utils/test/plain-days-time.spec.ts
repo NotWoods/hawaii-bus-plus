@@ -1,6 +1,6 @@
 import type { TimeString } from '@hawaii-bus-plus/types';
 import { expect, test } from 'vitest';
-import { PlainDaysTime } from '../src/plain-days-time.js';
+import { PlainDaysTime } from '../src/plain-days-time.ts';
 
 test('PlainDaysTime defaults to 0', () => {
   const daysTime = new PlainDaysTime();

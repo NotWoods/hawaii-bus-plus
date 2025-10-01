@@ -1,4 +1,4 @@
-import { valueNotNull } from './sort.js';
+import { valueNotNull } from './sort.ts';
 
 /**
  * Run `cb` on all values in `input`.

@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest';
-import { applyOffset } from './helpers.js';
+import { applyOffset } from './helpers.ts';
 
 test('applyOffset', () => {
   expect(applyOffset('Google abc', 3)).toBe('Goo abc');

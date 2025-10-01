@@ -4,7 +4,7 @@ import type {
   JsonStationInformation,
   StationInformation,
 } from '@hawaii-bus-plus/types';
-import { GBFS_URL } from '../env.js';
+import { GBFS_URL } from '../env.ts';
 
 async function getFeeds() {
   const res = await fetch(GBFS_URL.href);

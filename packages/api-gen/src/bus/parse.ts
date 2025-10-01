@@ -5,9 +5,9 @@ import type { Temporal } from '@js-temporal/polyfill';
 import { parse } from 'csv-parse';
 import JSZip, { type JSZipObject } from 'jszip';
 import type { Writable } from 'type-fest';
-import { cacheStations } from '../bike/stations.js';
-import { cast } from './cast.js';
-import { zip } from './itertools.js';
+import { cacheStations } from '../bike/stations.ts';
+import { cast } from './cast.ts';
+import { zip } from './itertools.ts';
 import {
   parseAgency,
   parseCalendar,
@@ -20,8 +20,8 @@ import {
   type JsonStreams,
   type ServerGTFSData,
   type TripInflated,
-} from './parsers.js';
-import { removeHiddenCharacters } from './stream.js';
+} from './parsers.ts';
+import { removeHiddenCharacters } from './stream.ts';
 
 const STARTS_WITH_TIME = /^\d\d?:\d\d/;
 
