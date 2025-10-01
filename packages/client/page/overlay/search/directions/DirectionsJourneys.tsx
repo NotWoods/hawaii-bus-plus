@@ -23,7 +23,7 @@ export function DirectionsJourneys(props: Props) {
     return (
       <div class={clsx(sharedClasses, 'mx-4 mb-2 inset-x-0')}>
         <button
-          class="block group m-auto px-8 py-4 shadow-xl text-black dark:text-white bg-primary-200 dark:bg-primary-700"
+          class="block cursor-pointer group m-auto px-8 py-4 shadow-xl text-black dark:text-white bg-primary-200 dark:bg-primary-700"
           onClick={props.onTomorrowClick}
         >
           <p>No results found.</p>

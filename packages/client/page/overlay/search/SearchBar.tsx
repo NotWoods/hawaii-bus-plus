@@ -31,7 +31,7 @@ export function SearchBarButton(props: HTMLAttributes<HTMLButtonElement>) {
         {...props}
         type="button"
         class={clsx(
-          'pl-10 py-2 border text-left text-white/30',
+          'cursor-pointer pl-10 py-2 border text-left text-white/30',
           searchInputClass,
         )}
         accessKey="f"

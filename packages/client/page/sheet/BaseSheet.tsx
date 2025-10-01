@@ -19,6 +19,7 @@ export function BaseSheet(props: Props) {
           'animate-enter motion-reduce:animate-duration-0 shadow-lg bg-gradient-to-br from-zinc-100 to-primary-50 dark:from-zinc-750 dark:to-zinc-800 text-black dark:text-white lg:mx-4',
           { 'min-h-[25vh]': !loadError },
           props.loaded ? 'animate-run' : 'animate-pause',
+          props.style?.['--route-color'] && 'accent-route',
         )}
         style={props.style}
       >

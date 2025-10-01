@@ -15,7 +15,8 @@ interface Props {
   setSelectedTrip(tripId: Trip['trip_id'] | NOW): void;
 }
 
-const tripSelectorClass = 'bg-zinc-50 dark:bg-zinc-800 max-w-full';
+const tripSelectorClass =
+  'bg-zinc-50 dark:bg-zinc-800 max-w-full ring-route focus:border-route';
 
 export function TripSelector(props: Props) {
   return (
