@@ -18,6 +18,7 @@ export class WorkerError extends Error {
 }
 
 export class PromiseWorker {
+  private readonly worker: Worker;
   private readonly callbacks = new Map<
     number,
     (error: Error | undefined, result: unknown) => void
@@ -25,7 +26,8 @@ export class PromiseWorker {
 
   private readonly syntaxError?: unknown;
 
-  constructor(private readonly worker: Worker) {
+  constructor(worker: Worker) {
+    this.worker = worker;
     worker.addEventListener('message', (evt) => this.onMessage(evt.data));
     worker.addEventListener('error', (evt) => {
       console.error('Worker error event', evt.error, evt);

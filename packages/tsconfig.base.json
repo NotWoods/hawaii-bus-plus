@@ -23,7 +23,8 @@
     "jsxImportSource": "preact",
     "skipDefaultLibCheck": true,
     "sourceMap": true,
-    "noPropertyAccessFromIndexSignature": true
+    "noPropertyAccessFromIndexSignature": true,
+    "erasableSyntaxOnly": true
   },
   "include": ["./src"]
 }
