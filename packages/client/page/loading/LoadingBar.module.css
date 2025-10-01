@@ -1,0 +1,20 @@
+@reference "../../assets/main.css";
+
+.loading__linear:indeterminate {
+  @apply mx-4 animate-move bg-top-left;
+  width: calc(100% - calc(var(--spacing) * 8));
+  background-color: var(--color-primary-200);
+  background-image: linear-gradient(to right, var(--color-primary-600) 30%, var(--color-primary-600) 30%);
+  background-repeat: no-repeat;
+  background-size: 150% 150%;
+}
+
+.loading__linear:indeterminate::-webkit-progress-bar {
+  background-color: transparent;
+}
+.loading__linear:indeterminate::-moz-progress-bar {
+  background-color: transparent;
+}
+.loading__linear:indeterminate::-ms-fill {
+  animation-name: none;
+}

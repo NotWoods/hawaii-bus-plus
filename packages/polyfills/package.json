@@ -1,0 +1,37 @@
+{
+  "name": "@hawaii-bus-plus/polyfills",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./difference": {
+      "import": "./src/difference.js",
+      "types": "./src/difference.d.ts"
+    },
+    "./getorinsert": {
+      "import": "./src/getorinsert.js",
+      "types": "./src/getorinsert.d.ts"
+    },
+    "./intersection": {
+      "import": "./src/intersection.js",
+      "types": "./src/intersection.d.ts"
+    }
+  },
+  "sideEffects": true,
+  "scripts": {
+    "build": "tsc --build src",
+    "format": "prettier **/*.ts --write --ignore-path ../../.prettierignore"
+  },
+  "dependencies": {
+    "map.prototype.getorinsert": "^1.0.1",
+    "set.prototype.difference": "^1.1.7",
+    "set.prototype.intersection": "^1.1.7",
+    "tslib": "^2.8.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.2"
+  },
+  "files": [
+    "src"
+  ]
+}

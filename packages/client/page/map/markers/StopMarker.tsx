@@ -1,4 +1,3 @@
-import { DefaultMap } from '@hawaii-bus-plus/mnemonist';
 import type { MarkerWithData } from '@hawaii-bus-plus/react-google-maps';
 import type { ColorString, Stop } from '@hawaii-bus-plus/types';
 
@@ -24,10 +23,7 @@ function makeHighlightIcon(
   });
 }
 
-const iconCache = new DefaultMap<
-  boolean,
-  DefaultMap<ColorString, google.maps.Symbol>
->((dark) => new DefaultMap((color) => makeHighlightIcon(color, dark)));
+const iconCache = new Map<boolean, Map<ColorString, google.maps.Symbol>>();
 
 interface Props {
   stop: Stop;
@@ -47,7 +43,12 @@ export function StopMarker({
   onClick,
 }: Props) {
   const icon = highlightColor
-    ? iconCache.get(darkMode).get(highlightColor)
+    ? iconCache
+        .getOrInsert(darkMode, new Map())
+        .getOrInsert(
+          highlightColor,
+          makeHighlightIcon(highlightColor, darkMode),
+        )
     : otherIcon;
 
   return (

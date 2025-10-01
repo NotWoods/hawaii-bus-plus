@@ -2,11 +2,13 @@
   "compilerOptions": {
     "composite": true,
     "incremental": true,
+    "emitDeclarationOnly": true,
     "target": "esnext",
     "allowJs": false,
     "skipLibCheck": true,
     "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
+    "allowImportingTsExtensions": true,
     "strict": true,
     "verbatimModuleSyntax": true,
     "noUnusedLocals": true,
@@ -23,7 +25,8 @@
     "jsxImportSource": "preact",
     "skipDefaultLibCheck": true,
     "sourceMap": true,
-    "noPropertyAccessFromIndexSignature": true
+    "noPropertyAccessFromIndexSignature": true,
+    "erasableSyntaxOnly": true
   },
   "include": ["./src"]
 }

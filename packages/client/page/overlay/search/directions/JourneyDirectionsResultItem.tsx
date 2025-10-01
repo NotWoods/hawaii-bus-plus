@@ -10,7 +10,7 @@ import {
   TripDecorDot,
   TripDecorLine,
 } from '../../../sheet/routes/timetable/stop-time/DecorLines';
-import './JourneyDirectionsResultItem.css';
+import styles from './JourneyDirectionsResultItem.module.css';
 
 interface Props {
   journey: Journey;
@@ -27,7 +27,7 @@ export function JourneyDirectionsResultItem(props: Props) {
     <Link
       action={props.action}
       href={props.href}
-      class="flex flex-col snap-start w-32 md:w-auto shadow-xl h-full motion-safe:transition-colors text-gray-800 dark:text-white bg-primary-100 hover:bg-primary-200 dark:bg-primary-700 dark:hover:bg-primary-600"
+      class="flex flex-col snap-start w-32 md:w-auto shadow-xl h-full motion-safe:transition-colors text-zinc-800 dark:text-white bg-primary-100 hover:bg-primary-200 dark:bg-primary-700 dark:hover:bg-primary-600"
       onClick={props.onClick}
     >
       <JourneyHeader journey={journey} timeZone="Pacific/Honolulu" />
@@ -38,11 +38,13 @@ export function JourneyDirectionsResultItem(props: Props) {
           .map((route) => (
             <li
               key={makeKey(route.route_id)}
-              class="journey-item__route grid justify-end md:justify-start h-12 md:h-auto md:w-12 gap-x-3 pr-6 md:p-0 md:gap-x-0 md:gap-y-3"
+              class={`${styles['journey-item__route']} grid justify-end md:justify-start h-12 md:h-auto md:w-12 gap-x-3 pr-6 md:p-0 md:gap-x-0 md:gap-y-3`}
               style={colorVariables(route)}
               title={route.route_long_name}
             >
-              <SmallRouteIcon class="journey-item__badge self-start justify-self-start">
+              <SmallRouteIcon
+                class={`${styles['journey-item__badge']} self-start justify-self-start`}
+              >
                 {route.route_short_name}
               </SmallRouteIcon>
               <TripDecorDot />

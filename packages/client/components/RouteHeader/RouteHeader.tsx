@@ -3,7 +3,7 @@ import type { Route } from '@hawaii-bus-plus/types';
 import { CloseButton } from '../Button/CloseButton';
 import { RouteIcon } from '../RouteIcon/RouteIcon';
 import { BLANK } from '../RouteBadge/constants';
-import './RouteHeader.css';
+import styles from './RouteHeader.module.css';
 
 interface Props {
   route?: Pick<
@@ -15,7 +15,9 @@ interface Props {
 
 export function RouteHeader({ route, onClose }: Props) {
   return (
-    <header class="route__header grid gap-x-4 items-center px-4 pb-2 md:pb-0 border-b">
+    <header
+      class={`${styles['route__header']} grid gap-x-4 items-center px-4 pb-2 md:pb-0 border-b border-zinc-800 dark:border-zinc-200`}
+    >
       <RouteIcon>{route?.route_short_name ?? BLANK}</RouteIcon>
       <h2 class="font-display text-3xl" style={{ gridArea: 'name' }}>
         {route?.route_long_name ?? BLANK}

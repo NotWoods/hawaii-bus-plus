@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 
-import type { JSX } from 'preact';
+import type { HTMLAttributes } from 'preact';
 import { SearchIcon } from '../../../assets/icons/MenuIcon';
 import {
   leadingInputClass,
@@ -11,7 +11,7 @@ import {
 
 export function SearchBar(props: SearchProps) {
   return (
-    <form class="relative shadow-sm m-4">
+    <form class="relative shadow-xs m-4">
       <SearchInput
         {...props}
         class="pl-10"
@@ -24,14 +24,14 @@ export function SearchBar(props: SearchProps) {
   );
 }
 
-export function SearchBarButton(props: JSX.HTMLAttributes<HTMLButtonElement>) {
+export function SearchBarButton(props: HTMLAttributes<HTMLButtonElement>) {
   return (
-    <div class="relative shadow-sm m-4">
+    <div class="relative shadow-xs m-4">
       <button
         {...props}
         type="button"
         class={clsx(
-          'pl-10 py-2 border text-left text-opacity-30',
+          'pl-10 py-2 border text-left text-white/30',
           searchInputClass,
         )}
         accessKey="f"

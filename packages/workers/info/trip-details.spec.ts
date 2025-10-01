@@ -1,4 +1,4 @@
-import { NodeFixtureRepository } from '@hawaii-bus-plus/data-fixture';
+import { NodeFixtureRepository } from '@hawaii-bus-plus/data/fixture';
 import type { Route } from '@hawaii-bus-plus/types';
 import { test } from 'vitest';
 import { Temporal } from '@js-temporal/polyfill';

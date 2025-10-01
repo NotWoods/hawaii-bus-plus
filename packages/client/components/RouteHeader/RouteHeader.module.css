@@ -1,0 +1,16 @@
+@reference "../../assets/main.css";
+
+.route__header {
+  grid-area: header;
+  grid-template:
+    'icon . close' 3rem
+    'name name name' auto
+    / 7.5rem 1fr 3rem;
+}
+@variant md {
+  .route__header {
+    grid-template:
+      'icon name close' minmax(3rem, auto)
+      / 7.5rem 1fr 3rem;
+  }
+}

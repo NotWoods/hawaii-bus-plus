@@ -2,7 +2,7 @@ import './Footer.css';
 
 export function Footer() {
   return (
-    <div class="flex text-gray-700 dark:text-gray-300 mt-8">
+    <div class="flex text-zinc-700 dark:text-zinc-300 mt-8">
       <span>
         Data provided by{' '}
         <a class="mr-8 hover:underline" href="https://hawaiibusplus.com">

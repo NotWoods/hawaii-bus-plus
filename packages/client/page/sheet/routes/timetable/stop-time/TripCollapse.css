@@ -1,3 +1,5 @@
+@reference "../../../../../assets/main.css";
+
 details > summary {
   list-style: none;
   cursor: pointer;

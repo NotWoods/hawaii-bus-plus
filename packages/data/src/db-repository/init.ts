@@ -1,4 +1,4 @@
-import { difference } from '@hawaii-bus-plus/mnemonist';
+import '@hawaii-bus-plus/polyfills/difference';
 import type {
   Agency,
   Calendar,
@@ -109,7 +109,7 @@ export async function initDatabase(
   // Await here to load the stores that need to be deleted
   const removedKeys = Array.from(await existingKeysReady)
     .map(([storeName, keys]) => {
-      const removed = difference(keys, keySet(api, storeName));
+      const removed = keys.difference(keySet(api, storeName));
       return [storeName, removed] as const;
     })
     .filter(([, keys]) => keys.size > 0);

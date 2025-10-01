@@ -7,7 +7,7 @@ import clsx from 'clsx';
 
 import { CloseButton } from '../../../components/Button/CloseButton';
 import { useScreens } from '../../hooks';
-import './JourneyHeader.css';
+import styles from './JourneyHeader.module.css';
 
 interface Props {
   journey: Journey;
@@ -50,8 +50,9 @@ export function JourneyHeader({ journey, timeZone, onClose }: Props) {
   return (
     <header
       class={clsx(
-        'journey__header grid relative items-center bg-white bg-opacity-20 border-b',
-        onClose && 'journey__header--close',
+        styles['journey__header'],
+        'grid relative items-center bg-white/20 border-b',
+        onClose && styles['journey__header--close'],
       )}
     >
       <JourneyDuration duration={journey.duration} unitDisplay={unitDisplay} />

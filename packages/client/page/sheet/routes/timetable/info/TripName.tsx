@@ -6,7 +6,7 @@ import { BLANK } from '../../badge/RouteBadge';
 export function BaseDetails(props: { children: ComponentChildren }) {
   return (
     <div class="px-4 snap-start">
-      <div class="shadow p-4 pl-12 bg-white dark:bg-gray-700 relative h-full">
+      <div class="shadow-sm p-4 pl-12 bg-white dark:bg-zinc-700 relative h-full">
         {props.children}
       </div>
     </div>

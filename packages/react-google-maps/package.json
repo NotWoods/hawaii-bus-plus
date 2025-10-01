@@ -16,15 +16,15 @@
   },
   "dependencies": {
     "@googlemaps/js-api-loader": "^1.14.3",
-    "tslib": "^2.5.0"
+    "tslib": "^2.8.1"
   },
   "peerDependencies": {
     "preact": "^10.5.15"
   },
   "devDependencies": {
-    "@types/google.maps": "^3.50.0",
-    "preact": "^10.22.1",
-    "typescript": "^5.5.4"
+    "@types/google.maps": "^3.55.12",
+    "preact": "^10.27.2",
+    "typescript": "^5.9.2"
   },
   "files": [
     "src"

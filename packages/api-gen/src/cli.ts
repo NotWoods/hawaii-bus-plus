@@ -12,9 +12,14 @@ const { values } = parseArgs({
   },
 });
 
-function downloadInput(path: string) {
+async function downloadInput(path: string) {
   if (/https?:\/\//.test(path)) {
-    return fetch(path).then((response) => response.arrayBuffer());
+    const response = await fetch(path);
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
+
+    return await response.arrayBuffer();
   } else {
     return readFile(resolve(path));
   }

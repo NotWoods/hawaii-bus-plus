@@ -3,7 +3,7 @@ import clsx from 'clsx';
 
 import { Link } from '../../../../router/Router';
 import { PlainTimeElement } from '../../../../time/PlainTimeElement';
-import './BaseSegment.css';
+import styles from './BaseSegment.module.css';
 import { TripDecorDot, TripDecorLine } from './DecorLines';
 
 interface ContentProps {
@@ -51,7 +51,7 @@ interface Props extends ContentProps {
 
 export function BaseSegment(props: Props) {
   const { gridArea } = props;
-  const linkClasses = clsx('segment grid gap-x-4', props.class);
+  const linkClasses = clsx(styles['segment'], 'grid gap-x-4', props.class);
   const style = { gridArea };
 
   if (props.href) {

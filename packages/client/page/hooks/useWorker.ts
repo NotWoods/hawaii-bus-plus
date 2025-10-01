@@ -44,9 +44,7 @@ export function useWorker(workerConstructor: WorkerConstructor) {
     signal: AbortSignal,
     message?: unknown,
   ): Promise<unknown> {
-    if (!workerRef.current) {
-      workerRef.current = generateWorker();
-    }
+    workerRef.current ??= generateWorker();
 
     debugLog('req', message);
     const worker = workerRef.current;

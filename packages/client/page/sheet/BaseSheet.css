@@ -1,9 +1,0 @@
-.animate-enter {
-  animation: enter 0.3s;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .animate-enter {
-    animation-duration: 0;
-  }
-}

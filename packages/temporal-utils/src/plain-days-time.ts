@@ -10,11 +10,11 @@ const HOURS_IN_DAY = 24;
 export class PlainDaysTime {
   readonly day: number;
 
-  constructor(
-    isoDay = 0,
-    private readonly time: Temporal.PlainTime = new Temporal.PlainTime(),
-  ) {
+  private readonly time: Temporal.PlainTime;
+
+  constructor(isoDay = 0, time: Temporal.PlainTime = new Temporal.PlainTime()) {
     this.day = isoDay;
+    this.time = time;
   }
 
   toPlainTime() {

@@ -3,10 +3,10 @@ import {
   type PlainTimeData,
 } from '@hawaii-bus-plus/presentation';
 import clsx from 'clsx';
-import type { JSX } from 'preact';
+import type { HTMLAttributes } from 'preact';
 
 interface Props
-  extends Pick<JSX.HTMLAttributes<HTMLTimeElement>, 'class' | 'style'> {
+  extends Pick<HTMLAttributes<HTMLTimeElement>, 'class' | 'style'> {
   time: PlainTimeData;
   approximate?: boolean;
   agencyTimezone: string;

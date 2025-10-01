@@ -1,46 +1,13 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "@hawaii-bus-plus/tailwind-theme/theme.css";
+
+@plugin "@tailwindcss/forms";
+@plugin "@tailwindcss/typography";
 
 :root {
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    color-scheme: dark;
-  }
-}
-
-@layer base {
-  .fill-current {
-    fill: currentColor;
-  }
-}
-
-@layer components {
-  .waves {
-    @apply bg-primary-700 text-white;
-    background-size: theme('spacing.96');
-    background-image: url('/waves.svg');
-  }
-}
-
-@layer utilities {
-  .animate-run {
-    animation-play-state: running;
-  }
-  .animate-pause {
-    animation-play-state: paused;
-  }
-
-  .font-display {
-    @apply font-medium;
-  }
-
-  .color-scheme-light {
-    color-scheme: light;
-  }
-  .color-scheme-dark {
     color-scheme: dark;
   }
 }

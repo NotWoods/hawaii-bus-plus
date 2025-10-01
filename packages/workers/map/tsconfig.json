@@ -4,7 +4,6 @@
   "references": [
     { "path": "../shared" },
     { "path": "../../data/src" },
-    { "path": "../../data-fixture/src" },
-    { "path": "../../types" },
+    { "path": "../../types" }
   ],
 }

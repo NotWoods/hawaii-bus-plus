@@ -3,9 +3,9 @@ import preact from '@notwoods/eslint-config-preact';
 import prettier from 'eslint-config-prettier';
 import react from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
-import vitest from 'eslint-plugin-vitest';
+import vitest from '@vitest/eslint-plugin';
 import globals from 'globals';
-import { dirname, join } from 'node:path';
+import { join } from 'node:path';
 import tseslint from 'typescript-eslint';
 
 export default tseslint.config(
@@ -22,13 +22,7 @@ export default tseslint.config(
   { ...prettier, name: 'prettier' },
   ...preact.configs.recommended,
   { ...react.configs.flat['jsx-runtime'], name: 'react/jsx-runtime' },
-  {
-    name: 'react-hooks/recommended',
-    plugins: {
-      'react-hooks': reactHooks,
-    },
-    rules: reactHooks.configs.recommended.rules,
-  },
+  reactHooks.configs['recommended-latest'],
   {
     name: 'main',
     languageOptions: {
@@ -127,7 +121,7 @@ export default tseslint.config(
     languageOptions: {
       parserOptions: {
         project: true,
-        tsconfigRootDir: dirname(import.meta.url),
+        tsconfigRootDir: import.meta.dirname,
       },
     },
     rules: {

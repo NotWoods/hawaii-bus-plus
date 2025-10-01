@@ -16,5 +16,6 @@ interface Props extends HelmetProps {
  * Set the window title
  */
 export function Head(props: Props) {
+  // @ts-expect-error Type differences in newer minor preact versions
   return <Helmet {...props} />;
 }

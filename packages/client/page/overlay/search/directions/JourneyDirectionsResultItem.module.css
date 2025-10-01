@@ -1,0 +1,19 @@
+@reference "../../../../assets/main.css";
+
+.journey-item__route {
+  grid-template:
+    'badge dot' 0.5rem
+    'badge line' auto
+    / auto min-content;
+}
+.journey-item__badge {
+  grid-area: badge;
+}
+@variant md {
+  .journey-item__route {
+    grid-template:
+      'badge badge' auto
+      'dot line' min-content
+      / 0.5rem 1fr;
+  }
+}

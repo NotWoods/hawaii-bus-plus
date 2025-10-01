@@ -13,11 +13,10 @@
     { "path": "../../react-google-maps/src" },
     { "path": "../../types" },
     { "path": "../../utils/src" },
-    { "path": "../../vite-plugins/src" },
   ],
   "compilerOptions": {
     "lib": ["esnext", "dom", "dom.iterable"],
-    "types": ["astro/client", "vite/client", "google.maps"],
+    "types": ["astro/client", "google.maps"],
     "noEmit": true,
     "noPropertyAccessFromIndexSignature": false,
     "module": "Preserve",

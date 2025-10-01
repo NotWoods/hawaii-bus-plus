@@ -2,8 +2,11 @@ import { useGoogleMap } from '@hawaii-bus-plus/react-google-maps';
 import { memoize } from '@hawaii-bus-plus/utils';
 
 export class PlacesServiceError extends Error {
-  constructor(readonly code: google.maps.places.PlacesServiceStatus) {
+  readonly code: google.maps.places.PlacesServiceStatus;
+
+  constructor(code: google.maps.places.PlacesServiceStatus) {
     super(code);
+    this.code = code;
   }
 }
 

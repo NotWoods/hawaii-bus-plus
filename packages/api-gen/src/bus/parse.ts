@@ -35,6 +35,7 @@ export async function zipFilesToObject<Keys extends string>(
   zipFiles: ReadonlyMap<Keys, JSZipObject>,
 ): Promise<Record<Keys, AsyncIterable<unknown>>> {
   const arrays = await Promise.all(
+    // eslint-disable-next-line @typescript-eslint/await-thenable -- TODO test if Promise.all can be removed
     Array.from(zipFiles.values())
       .map((file) =>
         file

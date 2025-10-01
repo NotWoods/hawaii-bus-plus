@@ -8,7 +8,7 @@ export function PageHeader() {
       </a>
       <a
         id="openApp"
-        class="shadow motion-safe:transition-colors text-black bg-white hover:bg-gray-200 px-4 py-2 ml-2"
+        class="shadow-sm motion-safe:transition-colors text-black bg-white hover:bg-zinc-200 px-4 py-2 ml-2"
         href="/"
       >
         Open app

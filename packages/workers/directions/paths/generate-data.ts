@@ -1,5 +1,5 @@
 import type { Repository } from '@hawaii-bus-plus/data';
-import { DefaultMap } from '@hawaii-bus-plus/mnemonist';
+import '@hawaii-bus-plus/polyfills/getorinsert';
 import { serviceRunningOn } from '@hawaii-bus-plus/temporal-utils';
 import type {
   DirectionRoute,
@@ -22,23 +22,24 @@ export function uniqueRouteId(trip: Trip): DirectionRoute['id'] {
     .join(',') as DirectionRoute['id'];
 }
 
+const defaultRoute = (id: DirectionRoute['id']): DirectionRouteMutable => ({
+  id,
+  trips: [],
+  stops: new Set(),
+});
+const defaultStop = (id: Stop['stop_id']): DirectionStop => ({
+  id,
+  routes: [],
+});
+
 export async function generateDirectionsData(
   repo: Pick<Repository, 'loadCalendars' | 'loadTrips'>,
   date: Temporal.PlainDate,
 ): Promise<DirectionsData> {
   const allCalendars = await repo.loadCalendars();
 
-  const routes = new DefaultMap<DirectionRoute['id'], DirectionRouteMutable>(
-    (id) => ({
-      id,
-      trips: [],
-      stops: new Set(),
-    }),
-  );
-  const stops = new DefaultMap<Stop['stop_id'], DirectionStop>((id) => ({
-    id,
-    routes: [],
-  }));
+  const routes = new Map<DirectionRoute['id'], DirectionRouteMutable>();
+  const stops = new Map<Stop['stop_id'], DirectionStop>();
 
   let cursor = await repo.loadTrips();
   while (cursor) {
@@ -46,11 +47,14 @@ export async function generateDirectionsData(
 
     if (serviceRunningOn(allCalendars, trip.service_id, date)) {
       const routeId = uniqueRouteId(trip);
-      const route = routes.get(routeId);
+      const route = routes.getOrInsert(routeId, defaultRoute(routeId));
       route.trips.push(trip);
 
       for (const stopTime of trip.stop_times) {
-        const stop = stops.get(stopTime.stop_id);
+        const stop = stops.getOrInsert(
+          stopTime.stop_id,
+          defaultStop(stopTime.stop_id),
+        );
         if (
           !stop.routes.find(
             (r) =>

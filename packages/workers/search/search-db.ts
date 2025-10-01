@@ -52,7 +52,7 @@ export function search(
     });
 
   return Promise.all([
-    [], // placeSearchReady,
+    Promise.resolve([]), // placeSearchReady,
     routeSearchReady,
     stopSearchReady,
   ]).then(([placeSearch, routeSearch, stopSearch]) => {

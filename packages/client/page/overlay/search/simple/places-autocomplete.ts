@@ -35,24 +35,12 @@ const buildService = memoize(
   () => new google.maps.places.AutocompleteService(),
 );
 
-export function getPlacePredictions(
+export async function getPlacePredictions(
   request: google.maps.places.AutocompletionRequest,
-) {
+): Promise<google.maps.places.AutocompletePrediction[]> {
   const service = buildService();
-  return new Promise<google.maps.places.AutocompletePrediction[]>(
-    (resolve, reject) =>
-      service.getPlacePredictions(request, (result, status) => {
-        switch (status) {
-          case google.maps.places.PlacesServiceStatus.OK:
-            return resolve(result!);
-          case google.maps.places.PlacesServiceStatus.ZERO_RESULTS:
-            return resolve([]);
-          default:
-            // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors -- TODO: migrate to Promise API
-            return reject(status);
-        }
-      }),
-  );
+  const response = await service.getPlacePredictions(request);
+  return response.predictions;
 }
 
 export const emptyResults: SearchResults = {

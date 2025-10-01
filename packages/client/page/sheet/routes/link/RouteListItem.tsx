@@ -20,7 +20,7 @@ export function RouteLinkVertical({ route, agency, current, onClick }: Props) {
   return (
     <Link
       href={`/routes/${route.route_id}/`}
-      class="flex flex-col snap-start w-32 shadow hover:shadow-lg p-2 h-full motion-safe:transition bg-primary-50 hover:bg-primary-100 dark:bg-primary-600 dark:hover:bg-primary-500 text-gray-800 dark:text-white"
+      class="flex flex-col snap-start w-32 shadow-sm hover:shadow-lg p-2 h-full motion-safe:transition bg-primary-50 hover:bg-primary-100 dark:bg-primary-600 dark:hover:bg-primary-500 text-zinc-800 dark:text-white"
       aria-current={current ? 'page' : undefined}
       onClick={onClick}
       action={setRouteAction(route.route_id)}
