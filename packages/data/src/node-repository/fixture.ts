@@ -6,8 +6,8 @@ import { readFile } from 'node:fs/promises';
 import { URL } from 'node:url';
 
 const fixtures = {
-  'big-island-buses': '../../api-gen/test/fixtures/big-island-buses.zip',
-  'hele-on-2023-03': '../../api-gen/test/fixtures/hele-on.zip',
+  'big-island-buses': '../../../api-gen/test/fixtures/big-island-buses.zip',
+  'hele-on-2023-03': '../../../api-gen/test/fixtures/hele-on.zip',
 };
 
 export type FixtureName = keyof typeof fixtures;

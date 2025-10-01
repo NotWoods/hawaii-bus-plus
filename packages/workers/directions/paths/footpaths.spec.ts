@@ -1,4 +1,4 @@
-import { NodeFixtureRepository } from '@hawaii-bus-plus/data-fixture';
+import { NodeFixtureRepository } from '@hawaii-bus-plus/data/fixture';
 import type { Stop } from '@hawaii-bus-plus/types';
 import { test, vi } from 'vitest';
 import { stopsLoader } from './footpaths';

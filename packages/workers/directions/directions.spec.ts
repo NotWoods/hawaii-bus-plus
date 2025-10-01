@@ -1,4 +1,4 @@
-import { NodeFixtureRepository } from '@hawaii-bus-plus/data-fixture';
+import { NodeFixtureRepository } from '@hawaii-bus-plus/data/fixture';
 import type { Point } from '@hawaii-bus-plus/presentation';
 import { PlainDaysTime } from '@hawaii-bus-plus/temporal-utils';
 import {

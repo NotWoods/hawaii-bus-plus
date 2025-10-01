@@ -9,7 +9,6 @@
     { "path": "packages/client/share" },
     { "path": "packages/workers/tsconfig.build.json" },
     { "path": "packages/data/src" },
-    { "path": "packages/data-fixture/src" },
     { "path": "packages/polyfills/src" },
     { "path": "packages/presentation/src" },
     { "path": "packages/promise-worker/page" },

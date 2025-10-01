@@ -1,5 +1,8 @@
 import { describe, test } from 'vitest';
-import { FixtureName, NodeFixtureRepository } from '../src/fixture.js';
+import {
+  FixtureName,
+  NodeFixtureRepository,
+} from '../../src/node-repository/fixture.ts';
 
 describe.each(FixtureName)('fixture %s', (fixture) => {
   test('NodeFixtureRepository loads without error', async ({ expect }) => {
