@@ -21,7 +21,7 @@ export const IconButton = forwardRef<HTMLButtonElement, Props>(
         aria-label={props.title}
         {...props}
         class={clsx(
-          'block shrink-0 rounded-full w-12 h-12 p-3 focus:ring-cyan focus:border-cyan border-transparent motion-safe:transition-colors',
+          'block cursor-pointer shrink-0 rounded-full w-12 h-12 p-3 focus:ring-cyan focus:border-cyan border-transparent motion-safe:transition-colors',
           props.disabled ? 'cursor-default' : hover,
           props.class,
         )}

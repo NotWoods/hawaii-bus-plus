@@ -12,7 +12,7 @@ export function FloatingActionButton({ mini, ...props }: Props) {
       aria-label={props.title}
       {...props}
       class={clsx(
-        'group text-white focus:ring-cyan',
+        'cursor-pointer group text-white focus:ring-cyan',
         mini ? 'p-2' : 'p-4',
         props.class,
       )}
