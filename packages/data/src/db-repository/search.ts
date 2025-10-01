@@ -2,8 +2,8 @@ import type { Route, Stop } from '@hawaii-bus-plus/types';
 import { batch, take } from '@hawaii-bus-plus/utils';
 import type { IDBPDatabase } from 'idb';
 import '@hawaii-bus-plus/polyfills/intersection';
-import type { GTFSSchema } from '../database.js';
-import { removeWords } from '../format.js';
+import type { GTFSSchema } from '../database.ts';
+import { removeWords } from '../format.ts';
 
 function interset<T>(sets: readonly ReadonlySet<T>[]): ReadonlySet<T> {
   return sets

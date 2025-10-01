@@ -1,5 +1,5 @@
-export * from './duration.js';
-export * from './point.js';
-export type { StopTimeData } from './stop-time.js';
-export * from './time.js';
-export * from './walk.js';
+export * from './duration.ts';
+export * from './point.ts';
+export type { StopTimeData } from './stop-time.ts';
+export * from './time.ts';
+export * from './walk.ts';

@@ -1,5 +1,5 @@
 module.exports = {
-  swDest: '../../dist/sw.js',
+  swDest: '../../dist/sw.ts',
   globDirectory: '../../dist/',
   globPatterns: [
     'assets/**/*',

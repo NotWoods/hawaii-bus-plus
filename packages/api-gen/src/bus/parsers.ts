@@ -24,7 +24,7 @@ import type {
 import { compareAs } from '@hawaii-bus-plus/utils';
 import '@hawaii-bus-plus/polyfills/getorinsert';
 import type { Writable } from 'type-fest';
-import { arrayFromAsync } from './itertools.js';
+import { arrayFromAsync } from './itertools.ts';
 
 export interface StopTimeInflated
   extends Omit<StopTime, 'arrival_time' | 'departure_time'> {

@@ -1,1 +1,1 @@
-export { createApiData } from './bus/parse.js';
+export { createApiData } from './bus/parse.ts';

@@ -1,5 +1,5 @@
 import type { Opaque } from 'type-fest';
-import type { Stop, Trip } from './gtfs-types.js';
+import type { Stop, Trip } from './gtfs-types.ts';
 
 export interface DirectionsData {
   routes: { [id: string]: DirectionRoute };

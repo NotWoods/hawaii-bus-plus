@@ -1,5 +1,5 @@
 import { expect, test, vi } from 'vitest';
-import { PromiseWorker } from '../page/promise-worker.js';
+import { PromiseWorker } from '../page/promise-worker.ts';
 
 test('calls terminate', () => {
   const worker = {

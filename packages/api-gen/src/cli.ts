@@ -1,7 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { parseArgs } from 'node:util';
-import { generateApi } from './api.js';
+import { generateApi } from './api.ts';
 
 const { values } = parseArgs({
   options: {

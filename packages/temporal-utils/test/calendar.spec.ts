@@ -1,7 +1,7 @@
 import { test, expect } from 'vitest';
 import type { Calendar, DateString } from '@hawaii-bus-plus/types';
 import { Temporal } from '@js-temporal/polyfill';
-import { calendarRunsOn } from '../src/calendar.js';
+import { calendarRunsOn } from '../src/calendar.ts';
 
 const baseCalendar = {
   service_id: '' as Calendar['service_id'],

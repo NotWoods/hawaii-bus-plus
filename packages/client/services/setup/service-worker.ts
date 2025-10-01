@@ -1,3 +1,3 @@
 export function registerServiceWorker() {
-  return navigator.serviceWorker?.register('/sw.js');
+  return navigator.serviceWorker?.register('/sw.ts');
 }

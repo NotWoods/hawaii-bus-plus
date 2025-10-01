@@ -1,6 +1,6 @@
 import type { Route, StationInformation, Stop } from '@hawaii-bus-plus/types';
 import type { IDBPDatabase } from 'idb';
-import type { GTFSSchema } from '../database.js';
+import type { GTFSSchema } from '../database.ts';
 
 export function loadAllRoutes(db: IDBPDatabase<GTFSSchema>): Promise<Route[]> {
   return db.getAll('routes');

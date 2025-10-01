@@ -1,5 +1,5 @@
 import { test, expect } from 'vitest';
-import { memoize } from '../src/memoize.js';
+import { memoize } from '../src/memoize.ts';
 
 test('memoize should call func again if args change', () => {
   let calls = 0;

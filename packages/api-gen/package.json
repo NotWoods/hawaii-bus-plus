@@ -5,13 +5,13 @@
   "type": "module",
   "exports": {
     ".": {
-      "import": "./src/index.js",
+      "import": "./src/index.ts",
       "types": "./src/index.d.ts"
     }
   },
   "scripts": {
     "preapi:client": "pnpm run build",
-    "api:client": "node src/cli.js --input https://www.heleonbus.hawaiicounty.gov/home/showpublisheddocument/307470/638458319827900000 --output ../client/public/api/v1/",
+    "api:client": "node --experimental-strip-types src/cli.ts --input https://www.heleonbus.hawaiicounty.gov/home/showpublisheddocument/307470/638458319827900000 --output ../client/public/api/v1/",
     "build": "tsc --build src",
     "format": "prettier **/*.ts --write --ignore-path ../../.prettierignore",
     "pretest": "tsc --build test",

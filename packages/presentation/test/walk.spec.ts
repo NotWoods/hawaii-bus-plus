@@ -1,5 +1,5 @@
 import { test, expect } from 'vitest';
-import { formatWalkingTime } from '../src/walk.js';
+import { formatWalkingTime } from '../src/walk.ts';
 
 test('formatWalkingTime', () => {
   expect(
