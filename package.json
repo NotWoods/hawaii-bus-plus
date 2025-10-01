@@ -10,6 +10,7 @@
     "dev": "pnpm --filter client run dev",
     "format": "prettier *.yaml *.json .github/**/*.yml --write",
     "postformat": "eslint --fix packages",
+    "test": "vitest",
     "tsc": "tsc --build ."
   },
   "dependencies": {
@@ -29,7 +30,8 @@
     "prettier": "~3.6.2",
     "prettier-plugin-astro": "^0.14.1",
     "typescript": "^5.9.2",
-    "typescript-eslint": "^8.44.1"
+    "typescript-eslint": "^8.44.1",
+    "vitest": "^3.2.4"
   },
   "pnpm": {
     "patchedDependencies": {
